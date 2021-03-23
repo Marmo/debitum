@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import org.ebur.debitum.database.TransactionRepository;
-import org.ebur.debitum.model.Transaction;
+import org.ebur.debitum.database.Transaction;
 
 import java.util.List;
 

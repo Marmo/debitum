@@ -7,16 +7,12 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import org.ebur.debitum.model.Transaction;
-
 import java.util.List;
-import java.util.Map;
 
 @Dao
 public interface TransactionDAO {
 
     // TODO reintroduce separate person table/entity,
-    //  https://stackoverflow.com/questions/47511750/how-to-use-foreign-key-in-room-persistence-library
     //  https://developer.android.com/training/data-storage/room/relationships#java
     //get all transactions
     @Query("select * from txn ")

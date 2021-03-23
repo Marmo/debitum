@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
 
+import java.util.Date;
+
 class TransactionListViewHolder extends RecyclerView.ViewHolder {
     private final TextView txnNameView;
     private final TextView txnDescriptionView;
@@ -23,11 +25,11 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder {
         txnTimestampView = itemView.findViewById(R.id.list_item_timestamp);
     }
 
-    public void bind(String name, String description, String amount, String timestamp) {
+    public void bind(String name, String description, String amount, Date timestamp) {
         txnNameView.setText(name);
         txnDescriptionView.setText(description);
         txnAmountView.setText(amount);
-        txnTimestampView.setText(timestamp);
+        txnTimestampView.setText(Long.toString(timestamp.getTime()));
     }
 
     static TransactionListViewHolder create(ViewGroup parent) {

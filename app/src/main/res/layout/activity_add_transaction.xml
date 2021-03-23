@@ -18,11 +18,11 @@
         android:id="@+id/edit_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="10dp"
+        android:layout_margin="@dimen/big_padding"
         android:fontFamily="sans-serif-light"
         android:hint="hint amount"
-        android:inputType="number"
-        android:layout_margin="@dimen/big_padding"
+        android:inputType="numberSigned"
+        android:minHeight="10dp"
         android:textSize="18sp" />
 
     <EditText
@@ -41,11 +41,11 @@
         android:id="@+id/edit_timestamp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="10dp"
+        android:layout_margin="@dimen/big_padding"
         android:fontFamily="sans-serif-light"
         android:hint="hint timestamp"
-        android:inputType="textAutoComplete"
-        android:layout_margin="@dimen/big_padding"
+        android:inputType="number"
+        android:minHeight="10dp"
         android:textSize="18sp" />
 
     <Button

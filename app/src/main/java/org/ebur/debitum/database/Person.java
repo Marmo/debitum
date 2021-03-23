@@ -1,4 +1,4 @@
-package org.ebur.debitum.model;
+package org.ebur.debitum.database;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

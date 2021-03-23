@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import org.ebur.debitum.model.Transaction;
+import org.ebur.debitum.database.Transaction;
 
 public class TransactionListAdapter extends ListAdapter<Transaction, TransactionListViewHolder> {
 

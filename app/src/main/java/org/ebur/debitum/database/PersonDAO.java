@@ -5,8 +5,6 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import org.ebur.debitum.model.Person;
-
 import java.util.List;
 
 @Dao

@@ -1,14 +1,16 @@
-package org.ebur.debitum.model;
+package org.ebur.debitum.database;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 // TODO create TransactionRaw with the contents of this Entity (without name but id_person) and remake Transaction as Relationship including Person's name
 
 @Entity(tableName = "txn")
 public class Transaction {
-    public Transaction(String name, int amount, String description, String timestamp) {
+    public Transaction(String name, int amount, String description, Date timestamp) {
         this.name = name;
         this.amount = amount;
         this.description = description;
@@ -22,7 +24,7 @@ public class Transaction {
     @ColumnInfo(name= "name") public String name;
     @ColumnInfo(name = "description") public String description;
     @ColumnInfo(name = "is_monetary") public boolean isMonetary;
-    @ColumnInfo(name = "timestamp") public String timestamp;
+    @ColumnInfo(name = "timestamp") public Date timestamp;
 
     public String getAmount() {
         // TODO differentiate by isMonetary

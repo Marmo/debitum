@@ -6,16 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import org.ebur.debitum.model.Transaction;
-import org.ebur.debitum.model.Person;
-
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 // TODO set exportSchema to true and define export location
 @Database(entities = {Transaction.class, Person.class}, version = 1, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class TransactionDatabase extends RoomDatabase {
     public abstract TransactionDAO transactionDao();
     public abstract PersonDAO personDao();
@@ -55,10 +55,8 @@ public abstract class TransactionDatabase extends RoomDatabase {
                 TransactionDAO dao = INSTANCE.transactionDao();
                 dao.deleteAll();
 
-                Transaction tr = new Transaction("Haushaltskasse", 799, "Netflix", "2021-02-09T22:31:01");
-                dao.insert(tr);
-                tr = new Transaction("Natalie", -1000, "Pralinen", "2021-03-22T10:07:45");
-                dao.insert(tr);
+                dao.insert(new Transaction("Haushaltskasse", 799, "Netflix", new Date(1616493107)));
+                dao.insert(new Transaction("Natalie", -1000, "Pralinen", new Date(1610293082)));
             });
         }
     };

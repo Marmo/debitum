@@ -4,8 +4,6 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import org.ebur.debitum.model.Transaction;
-
 import java.util.List;
 
 public class TransactionRepository {

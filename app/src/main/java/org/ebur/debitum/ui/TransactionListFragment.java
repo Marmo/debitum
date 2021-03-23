@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.model.Transaction;
+import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
+
+import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -77,7 +79,7 @@ public class TransactionListFragment extends Fragment {
             Transaction transaction = new Transaction(extras.getString("NAME"),
                     extras.getInt("AMOUNT"),
                     extras.getString("DESC"),
-                    extras.getString("TIMESTAMP"));
+                    new Date(extras.getLong("TIMESTAMP")));
             transactionListViewModel.insert(transaction);
         } else {
             Toast.makeText(
@@ -86,27 +88,4 @@ public class TransactionListFragment extends Fragment {
                     Toast.LENGTH_LONG).show();
         }
     }
-
- /*   private ArrayList<TransactionListItem> getListData() {
-        ArrayList<TransactionListItem> results = new ArrayList<>();
-        TransactionListItem txn1 = new TransactionListItem();
-        txn1.setName("Haushaltskasse");
-        txn1.setDescription("Gebana");
-        txn1.setAmount(5674);
-        txn1.setTimestamp("2020-10-02T10:03:01");
-        results.add(txn1);
-        TransactionListItem txn2 = new TransactionListItem();
-        txn2.setName("Natalie");
-        txn2.setDescription("Lowa-Schuhe");
-        txn2.setAmount(16000);
-        txn2.setTimestamp("2021-01-02T16:23:00");
-        results.add(txn2);
-        TransactionListItem txn3 = new TransactionListItem();
-        txn3.setName("Ingo");
-        txn3.setDescription("Fahrschein");
-        txn3.setAmount(-1000);
-        txn3.setTimestamp("2020-12-17T10:13:01");
-        results.add(txn3);
-        return results;
-    }*/
 }

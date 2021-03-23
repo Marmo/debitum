@@ -3,19 +3,13 @@ package org.ebur.debitum.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.model.Transaction;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
@@ -54,7 +48,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 // TODO handle different input possibilities, including not parseable ones
                 extras.putInt("AMOUNT", Integer.parseInt(editAmountView.getText().toString()));
                 extras.putString("DESC", editDescView.getText().toString());
-                extras.putString("TIMESTAMP", editTimestampView.getText().toString());
+                extras.putLong("TIMESTAMP", Long.parseLong(editTimestampView.getText().toString()));
                 replyIntent.putExtras(extras);
                 setResult(RESULT_OK, replyIntent);
             }
