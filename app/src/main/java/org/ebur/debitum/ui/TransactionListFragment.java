@@ -60,10 +60,10 @@ public class TransactionListFragment extends Fragment {
             }
         });
 
-        // attach to LiveData
+        // observe ViewModel's LiveData
         transactionListViewModel = new ViewModelProvider(this).get(TransactionListViewModel.class);
         transactionListViewModel.getTransactions().observe(requireActivity(), transactions -> {
-            // Update the cached copy of the words in the adapter.
+            // Update the cached copy of the words in the MainTabPagerAdapter.
             adapter.submitList(transactions);
         });
 
