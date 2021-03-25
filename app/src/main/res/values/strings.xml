@@ -5,4 +5,9 @@
     <string name="title_activity_add_transaction">Add Transaction</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="hint_amount">Amount</string>
+    <string name="hint_desc">Description</string>
+    <string name="add_transaction_date_format">%1$d-%2$d-%3$d</string>
+    <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
+    <string name="switch_monetary_label">Monetary</string>
 </resources>

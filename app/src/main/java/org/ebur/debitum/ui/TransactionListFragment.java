@@ -78,14 +78,10 @@ public class TransactionListFragment extends Fragment {
             Bundle extras = data.getExtras();
             Transaction transaction = new Transaction(extras.getString("NAME"),
                     extras.getInt("AMOUNT"),
+                    extras.getBoolean("ISMONETARY"),
                     extras.getString("DESC"),
                     new Date(extras.getLong("TIMESTAMP")));
             transactionListViewModel.insert(transaction);
-        } else {
-            Toast.makeText(
-                    getActivity().getApplicationContext(),
-                    "missing data, not saved",
-                    Toast.LENGTH_LONG).show();
         }
     }
 }

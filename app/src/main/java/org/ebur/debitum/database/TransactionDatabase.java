@@ -55,8 +55,9 @@ public abstract class TransactionDatabase extends RoomDatabase {
                 TransactionDAO dao = INSTANCE.transactionDao();
                 dao.deleteAll();
 
-                dao.insert(new Transaction("Haushaltskasse", 799, "Netflix", new Date(1616493107)));
-                dao.insert(new Transaction("Natalie", -1000, "Pralinen", new Date(1610293082)));
+                dao.insert(new Transaction("Haushaltskasse", 799, true, "Netflix", new Date(1616493107)));
+                dao.insert(new Transaction("Natalie", -1000, true, "Pralinen", new Date(1610293082)));
+                dao.insert(new Transaction("Natalie", 1, false, "Buch", new Date(1609293082)));
             });
         }
     };

@@ -10,12 +10,12 @@ import java.util.Date;
 
 @Entity(tableName = "txn")
 public class Transaction {
-    public Transaction(String name, int amount, String description, Date timestamp) {
+    public Transaction(String name, int amount, boolean isMonetary, String description, Date timestamp) {
         this.name = name;
         this.amount = amount;
         this.description = description;
         this.timestamp = timestamp;
-        this.isMonetary = true;
+        this.isMonetary = isMonetary;
     }
 
     @PrimaryKey(autoGenerate = true)
