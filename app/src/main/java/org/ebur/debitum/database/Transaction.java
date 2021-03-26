@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
+import java.util.Locale;
 
 // TODO create TransactionRaw with the contents of this Entity (without name but id_person) and remake Transaction as Relationship including Person's name
 
@@ -27,10 +28,8 @@ public class Transaction {
     @ColumnInfo(name = "timestamp") public Date timestamp;
 
     public String getAmount() {
-        // TODO differentiate by isMonetary
-        // TODO use locale's decimal separator
-        String str =  String.valueOf(amount);
-        return new StringBuilder(str).insert(str.length()-2, ".").toString();
+        if (isMonetary) return Integer.toString(amount);
+        else            return  String.format(Locale.getDefault(),"%.2f", amount/100.0);
     }
 
     public boolean equals(Transaction t) { return this.idTransaction == t.idTransaction; }
