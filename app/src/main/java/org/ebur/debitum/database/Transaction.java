@@ -10,8 +10,8 @@ import java.util.Date;
 
 @Entity(tableName = "txn")
 public class Transaction {
-    public Transaction(String name, int amount, boolean isMonetary, String description, Date timestamp) {
-        this.name = name;
+    public Transaction(int idPerson, int amount, boolean isMonetary, String description, Date timestamp) {
+        this.idPerson = idPerson;
         this.amount = amount;
         this.description = description;
         this.timestamp = timestamp;
@@ -21,7 +21,7 @@ public class Transaction {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_transaction") public int idTransaction;
     @ColumnInfo(name = "amount") public int amount;
-    @ColumnInfo(name= "name") public String name;
+    @ColumnInfo(name= "id_person") public int idPerson;
     @ColumnInfo(name = "description") public String description;
     @ColumnInfo(name = "is_monetary") public boolean isMonetary;
     @ColumnInfo(name = "timestamp") public Date timestamp;

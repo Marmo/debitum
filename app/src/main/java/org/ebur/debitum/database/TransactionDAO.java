@@ -12,27 +12,28 @@ import java.util.List;
 @Dao
 public interface TransactionDAO {
 
-    // TODO reintroduce separate person table/entity,
-    //  https://developer.android.com/training/data-storage/room/relationships#java
     //get all transactions
     @Query("select * from txn ")
     LiveData<List<Transaction>> getAllTransactions();
 
     //get all transactions of one person
-    @Query("select * from txn " +
+    @Query("select txn.* from txn " +
+            "inner join person on txn.id_person = person.id_person " +
             "where name = :name")
     List<Transaction> getTransactionsByName(String name);
 
     //get sum of all transactions of one person
-    @Query("select sum(amount) from txn " +
-            "where name = :name " +
-            "group by name")
+    @Query("select sum(txn.amount) from txn " +
+            "join person on txn.id_person = person.id_person " +
+            "where person.name = :name and txn.is_monetary " +
+            "group by person.name")
     int getSumByName(String name);
 
     //get sum of all transactions grouped by person
-    @Query("select name, sum(txn.amount) as sum from txn " +
-            "where is_monetary " +
-            "group by name")
+    @Query("select person.name, sum(txn.amount) as sum from txn " +
+            "join person on txn.id_person = person.id_person " +
+            "where txn.is_monetary " +
+            "group by person.name")
     List<PersonWithSum> getSumByName();
 
     static class PersonWithSum {
