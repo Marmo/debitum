@@ -2,14 +2,21 @@ package org.ebur.debitum.database;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 import java.util.Locale;
 
-// TODO create TransactionRaw with the contents of this Entity (without name but id_person) and remake Transaction as Relationship including Person's name
 
-@Entity(tableName = "txn")
+@Entity(tableName = "txn",
+        foreignKeys = {
+                @ForeignKey(entity = Person.class,
+                            parentColumns = "id_person",
+                            childColumns= "id_person")
+        },
+        indices = { @Index("id_person") })
 public class Transaction {
     public Transaction(int idPerson, int amount, boolean isMonetary, String description, Date timestamp) {
         this.idPerson = idPerson;
