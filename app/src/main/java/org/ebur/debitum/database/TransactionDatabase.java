@@ -17,8 +17,8 @@ import java.util.concurrent.Executors;
 @Database(entities = {Transaction.class, Person.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class TransactionDatabase extends RoomDatabase {
-    public abstract TransactionDAO transactionDao();
-    public abstract PersonDAO personDao();
+    public abstract TransactionDao transactionDao();
+    public abstract PersonDao personDao();
 
     // define a singleton TransactionDatabase to prevent having multiple instances of the database opened at the same time
     private static volatile TransactionDatabase INSTANCE;
@@ -52,12 +52,17 @@ public abstract class TransactionDatabase extends RoomDatabase {
 
             databaseWriteExecutor.execute(() -> {
                 // Populate the database
-                TransactionDAO dao = INSTANCE.transactionDao();
-                dao.deleteAll();
+                TransactionDao transactionDao = INSTANCE.transactionDao();
+                PersonDao personDao = INSTANCE.personDao();
 
-                dao.insert(new Transaction("Haushaltskasse", 799, true, "Netflix", new Date(1616493107)));
-                dao.insert(new Transaction("Natalie", -1000, true, "Pralinen", new Date(1610293082)));
-                dao.insert(new Transaction("Natalie", 1, false, "Buch", new Date(1609293082)));
+                transactionDao.deleteAll();
+                personDao.deleteAll();
+
+                personDao.insert(new Person("Haushaltskasse"));
+                personDao.insert(new Person("Natalie"));
+                transactionDao.insert(new Transaction(personDao.getId("Haushaltskasse"), 799, true, "Netflix", new Date(1616493107)));
+                transactionDao.insert(new Transaction(personDao.getId("Natalie"), -1000, true, "Pralinen", new Date(1610293082)));
+                transactionDao.insert(new Transaction(personDao.getId("Natalie"), 1, false, "Buch", new Date(1609293082)));
             });
         }
     };

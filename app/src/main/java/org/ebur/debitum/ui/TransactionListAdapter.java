@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import org.ebur.debitum.database.Transaction;
+import org.ebur.debitum.database.TransactionWithPerson;
 
-public class TransactionListAdapter extends ListAdapter<Transaction, TransactionListViewHolder> {
+public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, TransactionListViewHolder> {
 
-    public TransactionListAdapter(@NonNull DiffUtil.ItemCallback<Transaction> diffCallback) {
+    public TransactionListAdapter(@NonNull DiffUtil.ItemCallback<TransactionWithPerson> diffCallback) {
         super(diffCallback);
     }
 
@@ -22,19 +22,21 @@ public class TransactionListAdapter extends ListAdapter<Transaction, Transaction
 
     @Override
     public void onBindViewHolder(TransactionListViewHolder holder, int position) {
-        Transaction current = getItem(position);
-        holder.bind(current.name, current.description, current.getAmount(), current.timestamp);
+        TransactionWithPerson current = getItem(position);
+        // TODO display name instead of id
+
+        holder.bind(current.person.name, current.transaction.description, current.transaction.getAmount(), current.transaction.timestamp);
     }
 
-    static class TransactionDiff extends DiffUtil.ItemCallback<Transaction> {
+    static class TransactionDiff extends DiffUtil.ItemCallback<TransactionWithPerson> {
 
         @Override
-        public boolean areItemsTheSame(@NonNull Transaction oldItem, @NonNull Transaction newItem) {
-            return oldItem == newItem;
+        public boolean areItemsTheSame(@NonNull TransactionWithPerson oldItem, @NonNull TransactionWithPerson newItem) {
+            return oldItem.equals(newItem);
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Transaction oldItem, @NonNull Transaction newItem) {
+        public boolean areContentsTheSame(@NonNull TransactionWithPerson oldItem, @NonNull TransactionWithPerson newItem) {
             return oldItem.equals(newItem);
         }
     }

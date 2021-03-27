@@ -6,13 +6,17 @@ import androidx.room.Relation;
 import java.util.List;
 
 
-public class PersonWithTransactions {
+public class TransactionWithPerson {
 
     @Embedded
-    public Person person;
+    public Transaction transaction;
     @Relation(
             parentColumn = "id_person",
             entityColumn = "id_person"
     )
-    public List<Transaction> transactions;
+    public Person person;
+
+    public boolean equals(TransactionWithPerson t) {
+        return t.transaction.idTransaction == this.transaction.idTransaction;
+    }
 }

@@ -28,10 +28,10 @@ public class Transaction {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_transaction") public int idTransaction;
-    @ColumnInfo(name = "amount") public int amount;
+    @ColumnInfo(name = "amount") public int amount; // Money: lent amount in 1/100 Euro/Dollar/...; Things: Number of things
     @ColumnInfo(name= "id_person") public int idPerson;
     @ColumnInfo(name = "description") public String description;
-    @ColumnInfo(name = "is_monetary") public boolean isMonetary;
+    @ColumnInfo(name = "is_monetary") public boolean isMonetary; // True for money, false for things
     @ColumnInfo(name = "timestamp") public Date timestamp;
 
     public String getAmount() {

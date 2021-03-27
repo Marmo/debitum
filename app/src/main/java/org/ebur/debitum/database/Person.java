@@ -6,6 +6,11 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "person")
 public class Person {
+
+    public Person(String name) {
+        this.name = name;
+    }
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_person") public int idPerson;
     @ColumnInfo(name = "name") public String name;

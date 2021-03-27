@@ -57,16 +57,17 @@ public class TransactionListFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(requireActivity(), AddTransactionActivity.class);
                 startActivityForResult(intent, TransactionListFragment.NEW_TRANSACTION_ACTIVITY_REQUEST_CODE);
+                // TODO get list of person names, pass it to the AddTransactionActivity per Intent and fill a Spinner there
+                //   use Bundle.putStringArrayList(String key, ArrayList<String> value)
             }
         });
 
         // observe ViewModel's LiveData
         transactionListViewModel = new ViewModelProvider(this).get(TransactionListViewModel.class);
         transactionListViewModel.getTransactions().observe(requireActivity(), transactions -> {
-            // Update the cached copy of the words in the MainTabPagerAdapter.
+            // Update the cached copy of the transactions in the MainTabPagerAdapter.
             adapter.submitList(transactions);
         });
-
 
         return root;
     }
@@ -76,11 +77,11 @@ public class TransactionListFragment extends Fragment {
 
         if (requestCode == NEW_TRANSACTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Transaction transaction = new Transaction(extras.getString("NAME"),
-                    extras.getInt("AMOUNT"),
-                    extras.getBoolean("ISMONETARY"),
-                    extras.getString("DESC"),
-                    new Date(extras.getLong("TIMESTAMP")));
+            Transaction transaction = new Transaction(transactionListViewModel.getPersonId(extras.getString("NAME")),
+                                                      extras.getInt("AMOUNT"),
+                                                      extras.getBoolean("ISMONETARY"),
+                                                      extras.getString("DESC"),
+                                                      new Date(extras.getLong("TIMESTAMP")));
             transactionListViewModel.insert(transaction);
         }
     }

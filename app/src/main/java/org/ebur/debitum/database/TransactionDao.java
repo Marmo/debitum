@@ -6,21 +6,26 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+//import androidx.room.Transaction;
+
+import org.ebur.debitum.database.Transaction;
 
 import java.util.List;
 
 @Dao
-public interface TransactionDAO {
+public interface TransactionDao {
 
     //get all transactions
-    @Query("select * from txn ")
-    LiveData<List<Transaction>> getAllTransactions();
+    @androidx.room.Transaction
+    @Query("select txn.* from txn inner join person on txn.id_person = person.id_person")
+    LiveData<List<TransactionWithPerson>> getAllTransactions();
 
     //get all transactions of one person
+    @androidx.room.Transaction
     @Query("select txn.* from txn " +
             "inner join person on txn.id_person = person.id_person " +
             "where name = :name")
-    List<Transaction> getTransactionsByName(String name);
+    List<TransactionWithPerson> getTransactionsByName(String name);
 
     //get sum of all transactions of one person
     @Query("select sum(txn.amount) from txn " +
@@ -42,7 +47,7 @@ public interface TransactionDAO {
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(Transaction... transactions);
+    void insert(Transaction... transactions);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Transaction transaction);

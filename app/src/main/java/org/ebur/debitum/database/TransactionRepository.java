@@ -8,8 +8,10 @@ import java.util.List;
 
 public class TransactionRepository {
 
-    private TransactionDAO transactionDao;
-    private LiveData<List<Transaction>> allTransactions;
+    private TransactionDao transactionDao;
+    private PersonDao personDao;
+    private LiveData<List<TransactionWithPerson>> allTransactions;
+    private LiveData<List<Person>> allPersons;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -18,14 +20,16 @@ public class TransactionRepository {
     public TransactionRepository(Application application) {
         TransactionDatabase db = TransactionDatabase.getDatabase(application);
         transactionDao = db.transactionDao();
+        personDao = db.personDao();
         allTransactions = transactionDao.getAllTransactions();
     }
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    public LiveData<List<Transaction>> getAllTransactions() {
+    public LiveData<List<TransactionWithPerson>> getAllTransactions() {
         return allTransactions;
     }
+    public LiveData<List<Person>> getAllPersons() {return allPersons; }
 
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
@@ -33,6 +37,14 @@ public class TransactionRepository {
         TransactionDatabase.databaseWriteExecutor.execute(() -> {
             transactionDao.insert(transaction);
         });
+    }
+    public void insert(Person person) {
+        TransactionDatabase.databaseWriteExecutor.execute(() -> {
+            personDao.insert(person);
+        });
+    }
+    public int getPersonId(String name) {
+        return personDao.getId(name);
     }
 }
 
