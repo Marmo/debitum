@@ -35,8 +35,8 @@ public class Transaction {
     @ColumnInfo(name = "timestamp") public Date timestamp;
 
     public String getAmount() {
-        if (isMonetary) return Integer.toString(amount);
-        else            return  String.format(Locale.getDefault(),"%.2f", amount/100.0);
+        if (isMonetary) return  String.format(Locale.getDefault(),"%.2f", amount/100.0);
+        else            return Integer.toString(amount);
     }
 
     public boolean equals(Transaction t) { return this.idTransaction == t.idTransaction; }
