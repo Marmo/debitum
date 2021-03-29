@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.Utilities;
 
 import java.util.Date;
 
@@ -29,7 +30,8 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder {
         txnNameView.setText(name);
         txnDescriptionView.setText(description);
         txnAmountView.setText(amount);
-        txnTimestampView.setText(Long.toString(timestamp.getTime()));
+        String dateFormat = this.itemView.getContext().getResources().getString(R.string.add_transaction_date_format);
+        txnTimestampView.setText(Utilities.formatDate(timestamp, dateFormat));
     }
 
     static TransactionListViewHolder create(ViewGroup parent) {

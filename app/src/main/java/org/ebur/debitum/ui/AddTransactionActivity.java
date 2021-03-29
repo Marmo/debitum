@@ -23,11 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.viewModel.AddTransactionViewModel;
-import org.ebur.debitum.viewModel.TransactionListViewModel;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -98,8 +97,8 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
 
         // initialize date
         viewModel.setTimestamp(new Date());
-        //editDateView.setText(getString(R.string.add_transaction_date_format, year, month, day));
-
+        editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
+                getString(R.string.add_transaction_date_format)));
     }
 
     // ---------------------------
@@ -129,10 +128,11 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             AddTransactionActivity activity = (AddTransactionActivity) requireActivity();
-            activity.editDateView.setText(getString(R.string.add_transaction_date_format, year, month, day));
             final Calendar c = Calendar.getInstance();
             c.set(year, month, day);
-            activity.viewModel.setTimestamp(new Date(c.getTimeInMillis()));
+            Date d = new Date(c.getTimeInMillis());
+            activity.viewModel.setTimestamp(d);
+            activity.editDateView.setText(Utilities.formatDate(d, getString(R.string.add_transaction_date_format)));
         }
     }
 
@@ -147,7 +147,4 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
-
-
-
 }
