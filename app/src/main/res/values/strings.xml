@@ -11,4 +11,7 @@
     <string name="add_transaction_date_format">yyyy-MM-dd</string>
     <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
     <string name="switch_monetary_label">Monetary</string>
+    <string name="add_transaction_date_content_description">Date</string>
+    <string name="add_transaction_gave">Gave</string>
+    <string name="add_transaction_received">Received</string>
 </resources>
