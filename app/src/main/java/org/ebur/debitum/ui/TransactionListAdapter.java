@@ -23,8 +23,6 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, T
     @Override
     public void onBindViewHolder(TransactionListViewHolder holder, int position) {
         TransactionWithPerson current = getItem(position);
-        // TODO display name instead of id
-
         holder.bind(current.person.name, current.transaction.description, current.transaction.getAmount(), current.transaction.timestamp);
     }
 

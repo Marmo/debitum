@@ -14,6 +14,8 @@ import org.ebur.debitum.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String EXTRA_PERSON_NAME_LIST = "org.ebur.debitum.PERSON_NAME_LIST";
+
     // TODO can't I set these in xml and that's it?
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_people_title, R.string.tab_txn_title};

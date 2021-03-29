@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +28,7 @@ public class TransactionListFragment extends Fragment {
 
     public static final int NEW_TRANSACTION_ACTIVITY_REQUEST_CODE = 1;
 
-    private TransactionListViewModel transactionListViewModel;
+    private TransactionListViewModel viewModel;
 
     public static TransactionListFragment newInstance() {
         return new TransactionListFragment();
@@ -57,15 +56,13 @@ public class TransactionListFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(requireActivity(), AddTransactionActivity.class);
                 startActivityForResult(intent, TransactionListFragment.NEW_TRANSACTION_ACTIVITY_REQUEST_CODE);
-                // TODO get list of person names, pass it to the AddTransactionActivity per Intent and fill a Spinner there
-                //   use Bundle.putStringArrayList(String key, ArrayList<String> value)
             }
         });
 
         // observe ViewModel's LiveData
-        transactionListViewModel = new ViewModelProvider(this).get(TransactionListViewModel.class);
-        transactionListViewModel.getTransactions().observe(requireActivity(), transactions -> {
-            // Update the cached copy of the transactions in the MainTabPagerAdapter.
+        viewModel = new ViewModelProvider(this).get(TransactionListViewModel.class);
+        viewModel.getTransactions().observe(requireActivity(), transactions -> {
+            // Update the transactions in the [recyclerView] via [adapter].
             adapter.submitList(transactions);
         });
 
@@ -77,12 +74,12 @@ public class TransactionListFragment extends Fragment {
 
         if (requestCode == NEW_TRANSACTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Transaction transaction = new Transaction(transactionListViewModel.getPersonId(extras.getString("NAME")),
+            Transaction transaction = new Transaction(viewModel.getPersonId(extras.getString("NAME")),
                                                       extras.getInt("AMOUNT"),
                                                       extras.getBoolean("ISMONETARY"),
                                                       extras.getString("DESC"),
                                                       new Date(extras.getLong("TIMESTAMP")));
-            transactionListViewModel.insert(transaction);
+            viewModel.insert(transaction);
         }
     }
 }

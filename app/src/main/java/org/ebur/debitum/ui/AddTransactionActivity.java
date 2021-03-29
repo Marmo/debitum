@@ -9,33 +9,39 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.database.Person;
+import org.ebur.debitum.viewModel.AddTransactionViewModel;
+import org.ebur.debitum.viewModel.TransactionListViewModel;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddTransactionActivity extends AppCompatActivity {
+public class AddTransactionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public static final String EXTRA_REPLY = "org.ebur.debitum.transactionlistsql.REPLY";
 
-    private EditText editNameView;
+    private AddTransactionViewModel viewModel;
+
+    private Spinner spinnerNameView;
     private EditText editAmountView;
     private SwitchCompat switchIsMonetaryView;
     private EditText editDescView;
     private TextView editDateView;
-
-    // TODO: This should probably be in a ViewModel, not directly here in the Activity
-    private long date;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,35 +51,54 @@ public class AddTransactionActivity extends AppCompatActivity {
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        editNameView = findViewById(R.id.edit_name);
+        spinnerNameView = findViewById(R.id.spinner_name);
         editAmountView = findViewById(R.id.edit_amount);
         switchIsMonetaryView = findViewById(R.id.switch_monetary);
         editDescView = findViewById(R.id.edit_description);
         editDateView = findViewById(R.id.edit_date);
 
+        // initialize name spinner
+        ArrayAdapter<String> nameSpinnerAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item);
+        nameSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerNameView.setAdapter(nameSpinnerAdapter);
+        spinnerNameView.setOnItemSelectedListener(this);
+
+        // observe ViewModel's LiveData
+        viewModel = new ViewModelProvider(this).get(AddTransactionViewModel.class);
+        viewModel.getPersons().observe(this, persons -> {
+            // update contents of [spinnerNameView] via [nameSpinnerAdapter]
+            nameSpinnerAdapter.clear();
+            for(Person person : persons) {
+                nameSpinnerAdapter.add(person.name);
+            }
+        });
+
+
         final Button saveButton = findViewById(R.id.button_save);
+        // TODO make lambda a separate method (for better readability)
         saveButton.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
-            if (TextUtils.isEmpty(editNameView.getText()) || TextUtils.isEmpty(editAmountView.getText())) {
+            if (TextUtils.isEmpty(viewModel.getName()) || TextUtils.isEmpty(editAmountView.getText())) {
                 Toast toast = Toast.makeText(this, R.string.add_transaction_incomplete_data, Toast.LENGTH_SHORT);
                 toast.show();
             } else {
                 Bundle extras = new Bundle();
-                extras.putString("NAME", editNameView.getText().toString());
+                extras.putString("NAME", viewModel.getName());
                 // TODO handle different input possibilities, including not parseable ones
                 extras.putInt("AMOUNT", Integer.parseInt(editAmountView.getText().toString()));
                 extras.putBoolean("ISMONETARY", switchIsMonetaryView.isChecked());
                 extras.putString("DESC", editDescView.getText().toString());
-                extras.putLong("TIMESTAMP", date);
+                extras.putLong("TIMESTAMP", viewModel.getTimestamp().getTime());
                 replyIntent.putExtras(extras);
                 setResult(RESULT_OK, replyIntent);
+
+                finish();
             }
-            finish();
         });
 
         // initialize date
-        // TODO use ViewModel
-        date = new Date().getTime();
+        viewModel.setTimestamp(new Date());
+        //editDateView.setText(getString(R.string.add_transaction_date_format, year, month, day));
 
     }
 
@@ -105,12 +130,24 @@ public class AddTransactionActivity extends AppCompatActivity {
         public void onDateSet(DatePicker view, int year, int month, int day) {
             AddTransactionActivity activity = (AddTransactionActivity) requireActivity();
             activity.editDateView.setText(getString(R.string.add_transaction_date_format, year, month, day));
-            // TODO use ViewModel
             final Calendar c = Calendar.getInstance();
             c.set(year, month, day);
-            activity.date = c.getTimeInMillis();
+            activity.viewModel.setTimestamp(new Date(c.getTimeInMillis()));
         }
     }
+
+    // ---------------------------
+    // Name Spinner event handling
+    // ---------------------------
+
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        viewModel.setName(parent.getItemAtPosition(pos).toString());
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
 
 
 }
