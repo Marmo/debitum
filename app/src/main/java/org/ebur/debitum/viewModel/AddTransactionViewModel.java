@@ -29,10 +29,14 @@ public class AddTransactionViewModel extends AndroidViewModel {
 
     public LiveData<List<Person>> getPersons() { return persons; }
 
-    public int getPersonId(String name) { return repository.getPersonId(name); }
-
     public void setName(String name) { this.name = name; }
     public String getName() { return this.name; }
+    public int getPersonId() {
+        for (Person person : persons.getValue()) {
+            if(person.name.equals(this.name)) return person.idPerson;
+        }
+        return -1;
+    }
 
     public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
     public Date getTimestamp() { return this.timestamp; }

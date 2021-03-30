@@ -38,5 +38,4 @@ public class TransactionListViewModel extends AndroidViewModel {
 
     public void insert(Transaction transaction) { repository.insert(transaction); }
     public void insert(Person person) { repository.insert(person); }
-    public int getPersonId(String name) { return repository.getPersonId(name); }
 }

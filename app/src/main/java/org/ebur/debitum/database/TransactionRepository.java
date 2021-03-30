@@ -44,13 +44,5 @@ public class TransactionRepository {
             personDao.insert(person);
         });
     }
-    public int getPersonId(String name) {
-        // using final and an array instead of an int was proposed by Android Studio; not sure, why ...
-        final int[] id = new int[1];
-        TransactionDatabase.databaseWriteExecutor.execute(() -> {
-            id[0] = personDao.getId(name);
-        });
-        return id[0];
-    }
 }
 

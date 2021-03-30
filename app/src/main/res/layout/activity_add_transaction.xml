@@ -30,13 +30,16 @@
             android:id="@+id/radioButton_received"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_transaction_received" />
+            android:checked="true"
+            android:text="@string/add_transaction_received"
+            android:textSize="@dimen/text_size_add_transaction" />
 
         <RadioButton
             android:id="@+id/radioButton_gave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_transaction_gave" />
+            android:text="@string/add_transaction_gave"
+            android:textSize="@dimen/text_size_add_transaction" />
 
     </RadioGroup>
 
@@ -64,6 +67,7 @@
         android:layout_marginEnd="16dp"
         android:checked="true"
         android:text="@string/switch_monetary_label"
+        android:textSize="@dimen/text_size_add_transaction"
         app:layout_constraintBottom_toTopOf="@+id/edit_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupGaveReceived" />

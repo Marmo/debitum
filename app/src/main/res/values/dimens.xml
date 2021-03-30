@@ -8,4 +8,5 @@
     <dimen name="small_padding">8dp</dimen>
     <dimen name="big_padding">16dp</dimen>
     <dimen name="add_transaction_item_height">48dp</dimen>
+    <dimen name="text_size_add_transaction">16sp</dimen>
 </resources>

@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
     private AddTransactionViewModel viewModel;
 
     private Spinner spinnerNameView;
+    private RadioButton gaveRadio;
     private EditText editAmountView;
     private SwitchCompat switchIsMonetaryView;
     private EditText editDescView;
@@ -51,6 +53,7 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
         //setSupportActionBar(toolbar);
 
         spinnerNameView = findViewById(R.id.spinner_name);
+        gaveRadio = findViewById(R.id.radioButton_gave);
         editAmountView = findViewById(R.id.edit_amount);
         switchIsMonetaryView = findViewById(R.id.switch_monetary);
         editDescView = findViewById(R.id.edit_description);
@@ -81,10 +84,14 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
                 Toast toast = Toast.makeText(this, R.string.add_transaction_incomplete_data, Toast.LENGTH_SHORT);
                 toast.show();
             } else {
+                //evaluate received-gave-radios
+                int factor = 1;
+                if(gaveRadio.isChecked()) factor = -1;
+
                 Bundle extras = new Bundle();
-                extras.putString("NAME", viewModel.getName());
+                extras.putInt("PERSON_ID", viewModel.getPersonId());
                 // TODO handle different input possibilities, including not parseable ones
-                extras.putInt("AMOUNT", Integer.parseInt(editAmountView.getText().toString()));
+                extras.putInt("AMOUNT", factor*Integer.parseInt(editAmountView.getText().toString()));
                 extras.putBoolean("ISMONETARY", switchIsMonetaryView.isChecked());
                 extras.putString("DESC", editDescView.getText().toString());
                 extras.putLong("TIMESTAMP", viewModel.getTimestamp().getTime());

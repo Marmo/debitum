@@ -74,7 +74,7 @@ public class TransactionListFragment extends Fragment {
 
         if (requestCode == NEW_TRANSACTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Transaction transaction = new Transaction(viewModel.getPersonId(extras.getString("NAME")),
+            Transaction transaction = new Transaction(extras.getInt("PERSON_ID"),
                                                       extras.getInt("AMOUNT"),
                                                       extras.getBoolean("ISMONETARY"),
                                                       extras.getString("DESC"),
