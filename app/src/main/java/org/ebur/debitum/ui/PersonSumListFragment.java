@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
+import org.ebur.debitum.viewModel.TransactionListViewModel;
 
 
 public class PersonSumListFragment extends Fragment {
 
     public static final int NEW_TRANSACTION_ACTIVITY_REQUEST_CODE = 1;
 
-    private PersonSumListViewModel viewModel;
+    private TransactionListViewModel viewModel;
 
     public static PersonSumListFragment newInstance() {
         return new PersonSumListFragment();
@@ -43,8 +44,8 @@ public class PersonSumListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
         // observe ViewModel's LiveData
-        viewModel = new ViewModelProvider(this).get(PersonSumListViewModel.class);
-        viewModel.getPersonSums().observe(requireActivity(), personSums -> {
+        viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
+        viewModel.getPersonSums().observe(getViewLifecycleOwner(), personSums -> {
             // Update the transactions in the [recyclerView] via [adapter].
             adapter.submitList(personSums);
         });

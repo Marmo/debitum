@@ -21,30 +21,29 @@ public interface TransactionDao {
     LiveData<List<TransactionWithPerson>> getAllTransactions();
 
     //get all transactions of one person
-    @androidx.room.Transaction
-    @Query("select txn.* from txn " +
-            "inner join person on txn.id_person = person.id_person " +
-            "where name = :name")
-    List<TransactionWithPerson> getTransactionsByName(String name);
+//    @androidx.room.Transaction
+//    @Query("select txn.* from txn " +
+//            "inner join person on txn.id_person = person.id_person " +
+//            "where name = :name")
+//    List<TransactionWithPerson> getTransactionsByName(String name);
 
     //get sum of all transactions of one person
-    @Query("select sum(txn.amount) from txn " +
-            "join person on txn.id_person = person.id_person " +
-            "where person.name = :name and txn.is_monetary " +
-            "group by person.name")
-    int getSumByName(String name);
+//    @Query("select sum(txn.amount) from txn " +
+//            "join person on txn.id_person = person.id_person " +
+//            "where person.name = :name and txn.is_monetary " +
+//            "group by person.name")
+//    int getSumByName(String name);
 
     //get sum of all transactions grouped by person
-    // TODO include persons without debt
     @androidx.room.Transaction
-    @Query("select person.id_person, person.name, sum(txn.amount) as sum from txn " +
-            "join person on txn.id_person = person.id_person " +
+    @Query("select person.id_person, person.name, sum(txn.amount) as sum from person " +
+            "left join txn on txn.id_person = person.id_person " +
             "where txn.is_monetary " +
             "group by person.id_person, person.name")
     LiveData<List<PersonWithSum>> getSumByName();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Transaction... transactions);
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    void insert(Transaction... transactions);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Transaction transaction);

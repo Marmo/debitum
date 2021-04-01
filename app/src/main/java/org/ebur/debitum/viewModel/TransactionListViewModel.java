@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import org.ebur.debitum.database.Person;
+import org.ebur.debitum.database.PersonWithSum;
 import org.ebur.debitum.database.TransactionRepository;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
@@ -25,16 +26,19 @@ public class TransactionListViewModel extends AndroidViewModel {
 
     private final LiveData<List<TransactionWithPerson>> transactions;
     private final LiveData<List<Person>> persons;
+    private final LiveData<List<PersonWithSum>> personSums;
 
     public TransactionListViewModel (Application application) {
         super(application);
         repository = new TransactionRepository(application);
         transactions = repository.getAllTransactions();
         persons = repository.getAllPersons();
+        personSums = repository.getAllPersonSums();
     }
 
     public LiveData<List<TransactionWithPerson>> getTransactions() { return transactions; }
     public LiveData<List<Person>> getPersons() { return persons; }
+    public LiveData<List<PersonWithSum>> getPersonSums() { return personSums; }
 
     public void insert(Transaction transaction) { repository.insert(transaction); }
     public void insert(Person person) { repository.insert(person); }

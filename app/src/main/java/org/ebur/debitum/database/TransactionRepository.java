@@ -10,6 +10,7 @@ public class TransactionRepository {
 
     private TransactionDao transactionDao;
     private PersonDao personDao;
+
     private LiveData<List<TransactionWithPerson>> allTransactions;
     private LiveData<List<Person>> allPersons;
     private LiveData<List<PersonWithSum>> allPersonSums;
@@ -20,8 +21,10 @@ public class TransactionRepository {
     // https://github.com/googlesamples
     public TransactionRepository(Application application) {
         TransactionDatabase db = TransactionDatabase.getDatabase(application);
+
         transactionDao = db.transactionDao();
         personDao = db.personDao();
+
         allTransactions = transactionDao.getAllTransactions();
         allPersons = personDao.getAllPersons();
         allPersonSums = transactionDao.getSumByName();

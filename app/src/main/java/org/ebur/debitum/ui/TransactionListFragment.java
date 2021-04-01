@@ -60,8 +60,8 @@ public class TransactionListFragment extends Fragment {
         });
 
         // observe ViewModel's LiveData
-        viewModel = new ViewModelProvider(this).get(TransactionListViewModel.class);
-        viewModel.getTransactions().observe(requireActivity(), transactions -> {
+        viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
+        viewModel.getTransactions().observe(getViewLifecycleOwner(), transactions -> {
             // Update the transactions in the [recyclerView] via [adapter].
             adapter.submitList(transactions);
         });
