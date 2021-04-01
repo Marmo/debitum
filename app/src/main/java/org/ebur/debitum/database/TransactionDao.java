@@ -35,16 +35,13 @@ public interface TransactionDao {
     int getSumByName(String name);
 
     //get sum of all transactions grouped by person
-    @Query("select person.name, sum(txn.amount) as sum from txn " +
+    // TODO include persons without debt
+    @androidx.room.Transaction
+    @Query("select person.id_person, person.name, sum(txn.amount) as sum from txn " +
             "join person on txn.id_person = person.id_person " +
             "where txn.is_monetary " +
-            "group by person.name")
-    List<PersonWithSum> getSumByName();
-
-    static class PersonWithSum {
-        public String name;
-        public int sum;
-    }
+            "group by person.id_person, person.name")
+    LiveData<List<PersonWithSum>> getSumByName();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Transaction... transactions);

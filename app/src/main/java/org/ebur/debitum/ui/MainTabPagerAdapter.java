@@ -19,6 +19,8 @@ import org.ebur.debitum.R;
  */
 public class MainTabPagerAdapter extends FragmentStateAdapter {
 
+    private final int TAB_PEOPLE = 0, TAB_TRANSACTIONS = 1;
+
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_people_title, R.string.tab_txn_title};
 
@@ -30,14 +32,16 @@ public class MainTabPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        // TODO differentiate by position (another fragment type for People tab than for Transactions tab)
-        return TransactionListFragment.newInstance();
+        switch (position) {
+            case TAB_PEOPLE: return PersonSumListFragment.newInstance();
+            case TAB_TRANSACTIONS: return TransactionListFragment.newInstance();
+        }
+        return null;
     }
 
     @Override
     public int getItemCount() {
         // TODO should I better add the tabs in xml?
-        return 2;
+        return TAB_TITLES.length;
     }
 }

@@ -36,7 +36,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder {
 
     static TransactionListViewHolder create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item, parent, false);
+                .inflate(R.layout.transaction_list_item, parent, false);
         return new TransactionListViewHolder(view);
     }
 }

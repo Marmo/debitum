@@ -8,4 +8,6 @@
     <color name="green_dark">#6b9b37</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="lent_red">#FF1744</color><!--Material A400-->
+    <color name="owe_green">#64DD17</color><!--Material A700-->
 </resources>

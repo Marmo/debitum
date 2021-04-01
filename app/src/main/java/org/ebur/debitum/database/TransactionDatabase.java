@@ -60,6 +60,7 @@ public abstract class TransactionDatabase extends RoomDatabase {
 
                 personDao.insert(new Person("Haushaltskasse"));
                 personDao.insert(new Person("Natalie"));
+                personDao.insert(new Person("Thea"));
                 transactionDao.insert(new Transaction(personDao.getId("Haushaltskasse"), 799, true, "Netflix", new Date(1616493107)));
                 transactionDao.insert(new Transaction(personDao.getId("Natalie"), -1000, true, "Pralinen", new Date(1610293082)));
                 transactionDao.insert(new Transaction(personDao.getId("Natalie"), 1, false, "Buch", new Date(1609293082)));
