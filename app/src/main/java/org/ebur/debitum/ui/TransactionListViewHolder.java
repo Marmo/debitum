@@ -37,11 +37,11 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder {
 
         int gaveReceivedString, amountColor;
         if(sign == -1) {
-            gaveReceivedString = R.string.transaction_list_received;
+            gaveReceivedString = R.string.transaction_list_gave;
             amountColor = R.color.owe_green;
         }
         else { // sign == 1 (or 0??)
-            gaveReceivedString = R.string.transaction_list_gave;
+            gaveReceivedString = R.string.transaction_list_received;
             amountColor = R.color.lent_red;
         }
         txnGaveReceivedView.setText(gaveReceivedString);
