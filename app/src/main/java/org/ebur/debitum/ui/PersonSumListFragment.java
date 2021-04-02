@@ -13,8 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.viewModel.PersonSumListViewModel;
+import org.ebur.debitum.database.PersonWithTransactions;
+import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class PersonSumListFragment extends Fragment {
@@ -45,9 +50,22 @@ public class PersonSumListFragment extends Fragment {
 
         // observe ViewModel's LiveData
         viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
-        viewModel.getPersonSums().observe(getViewLifecycleOwner(), personSums -> {
+        viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), personsWithTransactions -> {
+            // the list returned by TransactionDao.getAllPersonsWithTransactions) contains one [PersonWithTransactions]
+            // for every monetary? transaction, with a list of all transactions of the person, thus
+            // having each transaction multiple times. Thus we have to filter it, leaving only one
+            // [PersonWithTransactions} for every distinct person having all of their transactions
+            /*List<Integer> foundIds = new ArrayList<>();
+            List<PersonWithTransactions> correctedPWT = new ArrayList<>();
+            for (PersonWithTransactions pwt : personsWithTransactions) {
+                if(!foundIds.contains(pwt.person.idPerson)) {
+                    correctedPWT.add(new PersonWithTransactions(pwt.person, pwt.transactions));
+                    foundIds.add(pwt.person.idPerson);
+                }
+            }
             // Update the transactions in the [recyclerView] via [adapter].
-            adapter.submitList(personSums);
+            adapter.submitList(correctedPWT);*/
+            adapter.submitList(personsWithTransactions);
         });
 
         return root;

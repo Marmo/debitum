@@ -58,12 +58,12 @@ public abstract class TransactionDatabase extends RoomDatabase {
                 transactionDao.deleteAll();
                 personDao.deleteAll();
 
-                personDao.insert(new Person("Haushaltskasse"));
-                personDao.insert(new Person("Natalie"));
-                personDao.insert(new Person("Thea"));
-                transactionDao.insert(new Transaction(personDao.getId("Haushaltskasse"), 799, true, "Netflix", new Date(1616493107)));
-                transactionDao.insert(new Transaction(personDao.getId("Natalie"), -1000, true, "Pralinen", new Date(1610293082)));
-                transactionDao.insert(new Transaction(personDao.getId("Natalie"), 1, false, "Buch", new Date(1609293082)));
+                personDao.insert(new Person("Bilbo Beutlin"));
+                personDao.insert(new Person("Galadriel"));
+                personDao.insert(new Person("Gimli, Sohn Gloins"));
+                transactionDao.insert(new Transaction(personDao.getId("Bilbo Beutlin"), 799, true, "Dingens", new Date(1616493107)));
+                transactionDao.insert(new Transaction(personDao.getId("Galadriel"), -1000, true, "Teil", new Date(1610293082)));
+                transactionDao.insert(new Transaction(personDao.getId("Galadriel"), 1, false, "Zeug", new Date(1609293082)));
             });
         }
     };

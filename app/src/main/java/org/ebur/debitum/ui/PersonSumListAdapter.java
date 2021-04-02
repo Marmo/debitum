@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import org.ebur.debitum.database.PersonWithSum;
+import org.ebur.debitum.database.PersonWithTransactions;
 
-public class PersonSumListAdapter extends ListAdapter<PersonWithSum, PersonSumListViewHolder> {
+public class PersonSumListAdapter extends ListAdapter<PersonWithTransactions, PersonSumListViewHolder> {
 
-    public PersonSumListAdapter(@NonNull DiffUtil.ItemCallback<PersonWithSum> diffCallback) {
+    public PersonSumListAdapter(@NonNull DiffUtil.ItemCallback<PersonWithTransactions> diffCallback) {
         super(diffCallback);
     }
 
@@ -22,19 +22,19 @@ public class PersonSumListAdapter extends ListAdapter<PersonWithSum, PersonSumLi
 
     @Override
     public void onBindViewHolder(PersonSumListViewHolder holder, int position) {
-        PersonWithSum current = getItem(position);
+        PersonWithTransactions current = getItem(position);
         holder.bind(current.person.name, current.getFormattedSum(), current.getSign());
     }
 
-    static class PersonSumDiff extends DiffUtil.ItemCallback<PersonWithSum> {
+    static class PersonSumDiff extends DiffUtil.ItemCallback<PersonWithTransactions> {
 
         @Override
-        public boolean areItemsTheSame(@NonNull PersonWithSum oldItem, @NonNull PersonWithSum newItem) {
+        public boolean areItemsTheSame(@NonNull PersonWithTransactions oldItem, @NonNull PersonWithTransactions newItem) {
             return oldItem.equals(newItem);
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull PersonWithSum oldItem, @NonNull PersonWithSum newItem) {
+        public boolean areContentsTheSame(@NonNull PersonWithTransactions oldItem, @NonNull PersonWithTransactions newItem) {
             return oldItem.equals(newItem);
         }
     }

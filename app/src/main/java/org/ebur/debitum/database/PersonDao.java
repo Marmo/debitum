@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface PersonDao {
 
-    @Query("SELECT * FROM person")
+    @Query("SELECT * FROM person order by name")
     LiveData<List<Person>> getAllPersons();
 
     @Query("select id_person from person where name = :name")

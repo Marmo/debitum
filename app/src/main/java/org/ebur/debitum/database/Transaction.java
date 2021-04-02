@@ -18,6 +18,7 @@ import java.util.Locale;
         },
         indices = { @Index("id_person") })
 public class Transaction {
+
     public Transaction(int idPerson, int amount, boolean isMonetary, String description, Date timestamp) {
         this.idPerson = idPerson;
         this.amount = amount;
