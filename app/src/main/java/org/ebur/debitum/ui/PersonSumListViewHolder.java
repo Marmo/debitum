@@ -27,9 +27,12 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder {
         return new PersonSumListViewHolder(view);
     }
 
-    public void bind(String name, String formattedUnsignedSum, int sign) {
+    // TODO much of the following code is replicated in TransactionListViewHolder
+    //   create Superclass containing a method like formatViews(View gaveReceivedLabel, View amountView, int sign)
+    //   where gaveReceivedLabel's text is set and amountView's color, based on sign
+    public void bind(String name, String sum, int sign) {
         nameView.setText(name);
-        sumView.setText(formattedUnsignedSum);
+        sumView.setText(sum);
 
         if(sign == -1) {
             oweLentLabelView.setText(R.string.person_sum_list_you_owe);
@@ -38,6 +41,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder {
         else if(sign == 0) {
             oweLentLabelView.setText(R.string.person_sum_list_no_debt);
             sumView.setVisibility(View.INVISIBLE);
+            sumView.setHeight(0);
         }
         else { // sign == 1
             oweLentLabelView.setText(R.string.person_sum_list_you_lent);

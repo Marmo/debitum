@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import org.ebur.debitum.database.PersonWithTransactions;
+import org.ebur.debitum.database.Transaction;
 
 public class PersonSumListAdapter extends ListAdapter<PersonWithTransactions, PersonSumListViewHolder> {
 
@@ -23,7 +24,10 @@ public class PersonSumListAdapter extends ListAdapter<PersonWithTransactions, Pe
     @Override
     public void onBindViewHolder(PersonSumListViewHolder holder, int position) {
         PersonWithTransactions current = getItem(position);
-        holder.bind(current.person.name, current.getFormattedSum(), current.getSign());
+        holder.bind(current.person.name,
+                Transaction.getFormattedSum(current.transactions, false),
+                Transaction.getSumSign(current.transactions)
+        );
     }
 
     static class PersonSumDiff extends DiffUtil.ItemCallback<PersonWithTransactions> {

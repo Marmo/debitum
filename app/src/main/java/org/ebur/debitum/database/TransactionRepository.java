@@ -20,7 +20,7 @@ public class TransactionRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public TransactionRepository(Application application) {
-        TransactionDatabase db = TransactionDatabase.getDatabase(application);
+        AppDatabase db = AppDatabase.getDatabase(application);
 
         transactionDao = db.transactionDao();
         personDao = db.personDao();
@@ -41,12 +41,12 @@ public class TransactionRepository {
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
     public void insert(Transaction transaction) {
-        TransactionDatabase.databaseWriteExecutor.execute(() -> {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
             transactionDao.insert(transaction);
         });
     }
     public void insert(Person person) {
-        TransactionDatabase.databaseWriteExecutor.execute(() -> {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
             personDao.insert(person);
         });
     }

@@ -41,7 +41,6 @@ public class MainTabPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        // TODO should I better add the tabs in xml?
         return TAB_TITLES.length;
     }
 }

@@ -14,7 +14,11 @@
     <string name="add_transaction_date_content_description">Date</string>
     <string name="add_transaction_gave">Gave</string>
     <string name="add_transaction_received">Received</string>
+
     <string name="person_sum_list_you_owe">you owe</string>
     <string name="person_sum_list_no_debt">no debt</string>
     <string name="person_sum_list_you_lent">you lent</string>
+
+    <string name="transaction_list_gave">gave</string>
+    <string name="transaction_list_received">received</string>
 </resources>

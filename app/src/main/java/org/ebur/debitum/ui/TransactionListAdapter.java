@@ -23,7 +23,12 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, T
     @Override
     public void onBindViewHolder(TransactionListViewHolder holder, int position) {
         TransactionWithPerson current = getItem(position);
-        holder.bind(current.person.name, current.transaction.description, current.transaction.getAmount(), current.transaction.timestamp);
+        holder.bind(current.person.name,
+                current.transaction.description,
+                current.transaction.getFormattedAmount(false),
+                Integer.compare(current.transaction.amount, 0),
+                current.transaction.timestamp
+        );
     }
 
     static class TransactionDiff extends DiffUtil.ItemCallback<TransactionWithPerson> {

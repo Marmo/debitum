@@ -16,12 +16,12 @@ import java.util.concurrent.Executors;
 // TODO set exportSchema to true and define export location
 @Database(entities = {Transaction.class, Person.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
-public abstract class TransactionDatabase extends RoomDatabase {
+public abstract class AppDatabase extends RoomDatabase {
     public abstract TransactionDao transactionDao();
     public abstract PersonDao personDao();
 
-    // define a singleton TransactionDatabase to prevent having multiple instances of the database opened at the same time
-    private static volatile TransactionDatabase INSTANCE;
+    // define a singleton AppDatabase to prevent having multiple instances of the database opened at the same time
+    private static volatile AppDatabase INSTANCE;
     // create an ExecutorService with a fixed thread pool that will be used to run database operations asynchronously on a background thread
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
@@ -30,12 +30,12 @@ public abstract class TransactionDatabase extends RoomDatabase {
     /* returns the singleton. It'll create the database the first time it's accessed, using Room's
      * database builder to create a RoomDatabase object
      */
-    static TransactionDatabase getDatabase(final Context context) {
+    static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (TransactionDatabase.class) {
+            synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            TransactionDatabase.class, "transaction_database")
+                            AppDatabase.class, "transaction_database")
                             .addCallback(roomDatabaseCallback)
                             .build();
                 }

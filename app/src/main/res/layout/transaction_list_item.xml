@@ -4,12 +4,14 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="5dip" >
+
     <TextView
         android:id="@+id/list_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/list_item_description"
         android:layout_width="wrap_content"
@@ -18,21 +20,35 @@
         android:layout_marginTop="7dp"
         android:textColor="#343434"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/list_item_gave_received"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#343434"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/list_item_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/list_item_gave_received"
+        android:layout_alignParentEnd="true"
+        android:paddingVertical="12dp"
+        android:textColor="#343434"
+        android:textSize="18sp" />
+
     <TextView
         android:id="@+id/list_item_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/list_item_description"
-        android:layout_alignBottom="@id/list_item_description"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:textColor="#343434"
-        android:textSize="14sp" />
-    <TextView
-        android:id="@+id/list_item_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/list_item_timestamp"
-        android:layout_alignParentEnd="true"
+        android:layout_below="@id/list_item_amount"
         android:textColor="#343434"
         android:textSize="14sp" />
 </RelativeLayout>

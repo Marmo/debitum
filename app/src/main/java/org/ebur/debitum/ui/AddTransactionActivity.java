@@ -88,10 +88,13 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
                 int factor = 1;
                 if(gaveRadio.isChecked()) factor = -1;
 
+                // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005
+                int amount = (int) (factor*Double.parseDouble(editAmountView.getText().toString())*100);
+
                 Bundle extras = new Bundle();
                 extras.putInt("PERSON_ID", viewModel.getPersonId());
                 // TODO handle different input possibilities, including not parseable ones
-                extras.putInt("AMOUNT", factor*Integer.parseInt(editAmountView.getText().toString()));
+                extras.putInt("AMOUNT", amount);
                 extras.putBoolean("ISMONETARY", switchIsMonetaryView.isChecked());
                 extras.putString("DESC", editDescView.getText().toString());
                 extras.putLong("TIMESTAMP", viewModel.getTimestamp().getTime());
