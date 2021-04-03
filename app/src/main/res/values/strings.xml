@@ -7,8 +7,7 @@
     <string name="previous">Previous</string>
     <string name="hint_amount">Amount</string>
     <string name="hint_desc">Description</string>
-    <!-- TODO make nicer date formatting -->
-    <string name="add_transaction_date_format">yyyy-MM-dd</string>
+    <string name="date_format">yyyy-MM-dd</string>
     <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
     <string name="switch_monetary_label">Monetary</string>
     <string name="add_transaction_date_content_description">Date</string>
@@ -22,4 +21,12 @@
     <string name="transaction_list_gave">gave</string>
     <string name="transaction_list_received">received</string>
     <string name="fab_content_description">add transaction</string>
+    <string name="toolbar_add_person">Add Person</string>
+    <string name="title_activity_edit_person">Edit Person</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

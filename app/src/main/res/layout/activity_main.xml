@@ -6,12 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:theme="@style/Theme.Debitum.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@android:color/white"
+            android:background="?attr/colorPrimary">
+        </androidx.appcompat.widget.Toolbar>
 
 
         <com.google.android.material.tabs.TabLayout
@@ -19,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
+            android:elevation="4dp"
             app:tabIndicatorColor="@color/white"
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="?android:attr/textColorPrimaryInverse" >

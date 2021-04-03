@@ -108,7 +108,7 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
         // initialize date
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
-                getString(R.string.add_transaction_date_format)));
+                getString(R.string.date_format)));
     }
 
     // ---------------------------
@@ -142,7 +142,7 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
             c.set(year, month, day);
             Date d = new Date(c.getTimeInMillis());
             activity.viewModel.setTimestamp(d);
-            activity.editDateView.setText(Utilities.formatDate(d, getString(R.string.add_transaction_date_format)));
+            activity.editDateView.setText(Utilities.formatDate(d, getString(R.string.date_format)));
         }
     }
 

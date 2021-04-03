@@ -23,6 +23,8 @@ import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
+// TODO make list items selectable to delete them (via ActionBar-Button)
+// TODO make list items selactabke to edit them (fab or ActionBar-Button)
 
 public class TransactionListFragment extends Fragment {
 

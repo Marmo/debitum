@@ -27,6 +27,9 @@ public class PersonWithTransactions {
     }
 
     public boolean equals(PersonWithTransactions pws) {
-        return pws.person.idPerson == this.person.idPerson;
+        boolean person, sum;
+        person = pws.person.idPerson == this.person.idPerson;
+        sum = Transaction.getSum(pws.transactions) == Transaction.getSum(this.transactions);
+        return person && sum;
     }
 }
