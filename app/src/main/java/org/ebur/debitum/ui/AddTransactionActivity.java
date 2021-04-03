@@ -33,8 +33,6 @@ import java.util.Date;
 
 public class AddTransactionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    public static final String EXTRA_REPLY = "org.ebur.debitum.transactionlistsql.REPLY";
-
     private AddTransactionViewModel viewModel;
 
     private Spinner spinnerNameView;
@@ -77,7 +75,6 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
 
 
         final Button saveButton = findViewById(R.id.button_save);
-        // TODO make lambda a separate method (for better readability)
         saveButton.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
             if (TextUtils.isEmpty(viewModel.getName()) || TextUtils.isEmpty(editAmountView.getText())) {

@@ -6,4 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".ui.EditPersonActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/imageName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/big_padding"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_person_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_person_name"
+        app:srcCompat="@drawable/ic_baseline_person_outline_24" />
+
+    <EditText
+        android:id="@+id/edit_person_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/big_padding"
+        android:layout_marginTop="@dimen/appbar_padding"
+        android:layout_marginEnd="@dimen/big_padding"
+        android:hint="@string/edit_person_name"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageName"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:inputType="text"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

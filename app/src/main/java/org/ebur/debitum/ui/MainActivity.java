@@ -21,12 +21,12 @@ import org.ebur.debitum.R;
 // TODO make fab briefly disappear when changing tabs
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_PERSON_NAME_LIST = "org.ebur.debitum.PERSON_NAME_LIST";
+    public static final String EXTRA_NEW_PERSON = "org.ebur.debitum.NEW_PERSON";
 
     // TODO can't I set these in xml and that's it?
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_people_title, R.string.tab_txn_title};
-    private static final int EDIT_PERSON_ACTIVITY_REQUEST_CODE = 1;
+    private static final int NEW_PERSON_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAddPersonAction(MenuItem item) {
         Intent intent = new Intent(this, EditPersonActivity.class);
-        startActivityForResult(intent, MainActivity.EDIT_PERSON_ACTIVITY_REQUEST_CODE);
+        intent.putExtra(EXTRA_NEW_PERSON, true);
+        startActivity(intent, null);
     }
 }

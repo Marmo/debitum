@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/miSavePerson"
+        android:icon="@drawable/ic_baseline_save_24"
+        android:onClick="onSavePersonAction"
+        android:title="@string/edit_person_save"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/miDeletePerson"
+        android:icon="@drawable/ic_baseline_save_24"
+        android:onClick="onDeletePersonAction"
+        android:title="@string/edit_person_delete"
+        app:showAsAction="ifRoom" />
+</menu>

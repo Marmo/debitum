@@ -1,18 +1,13 @@
 <resources>
+    <!-- General -->
     <string name="app_name">Debitum</string>
+    <string name="date_format">yyyy-MM-dd</string>
+
+    <!-- MainActivity-->
     <string name="tab_people_title">People</string>
     <string name="tab_txn_title">Transactions</string>
-    <string name="title_activity_add_transaction">Add Transaction</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="hint_amount">Amount</string>
-    <string name="hint_desc">Description</string>
-    <string name="date_format">yyyy-MM-dd</string>
-    <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
-    <string name="switch_monetary_label">Monetary</string>
-    <string name="add_transaction_date_content_description">Date</string>
-    <string name="add_transaction_gave">Gave</string>
-    <string name="add_transaction_received">Received</string>
+    <string name="main_toolbar_add_person">Add Person</string>
+    <string name="fab_content_description">add transaction</string>
 
     <string name="person_sum_list_you_owe">you owe</string>
     <string name="person_sum_list_no_debt">no debt</string>
@@ -20,13 +15,21 @@
 
     <string name="transaction_list_gave">gave</string>
     <string name="transaction_list_received">received</string>
-    <string name="fab_content_description">add transaction</string>
-    <string name="toolbar_add_person">Add Person</string>
-    <string name="title_activity_edit_person">Edit Person</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- AddTransactionActivity -->
+    <string name="title_activity_add_transaction">Add Transaction</string>
+    <string name="hint_amount">Amount</string>
+    <string name="hint_desc">Description</string>
+    <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
+    <string name="switch_monetary_label">Monetary</string>
+    <string name="add_transaction_date_content_description">Date</string>
+    <string name="add_transaction_gave">Gave</string>
+    <string name="add_transaction_received">Received</string>
+
+    <!-- EditPersonActivity -->
+    <string name="title_activity_edit_person">Edit Person</string>
+    <string name="title_activity_edit_person_add">Add Person</string>
+    <string name="edit_person_name">Name</string>
+    <string name="edit_person_save">Save</string>
+    <string name="edit_person_delete">Delete</string>
 </resources>

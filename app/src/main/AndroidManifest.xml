@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Debitum.NoActionBar">
-        <activity android:name=".ui.EditPersonActivity"></activity>
+        <activity
+            android:name=".ui.EditPersonActivity"
+            android:label="@string/title_activity_edit_person"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
         <activity
             android:name=".ui.AddTransactionActivity"
             android:label="@string/title_activity_add_transaction"
