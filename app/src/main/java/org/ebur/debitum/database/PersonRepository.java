@@ -37,9 +37,12 @@ public class PersonRepository {
     public boolean exists(String name) {
         // TODO use query in DAO, but must not be run on main thread. How?
         // return personDao.exists(name);
-        for (Person person : allPersons.getValue()) {
+        Future future = AppDatabase.databaseWriteExecutor.Sunnit((name) -> {
+            personDao.exists(name);
+        });
+        /*for (Person person : allPersons.getValue()) {
             if(person.name.equals(name)) return true;
-        }
-        return false;
+        }*/
+        return future.get();
     }
 }
