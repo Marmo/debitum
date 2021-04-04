@@ -18,6 +18,8 @@ import org.ebur.debitum.database.Person;
 import org.ebur.debitum.viewModel.AddTransactionViewModel;
 import org.ebur.debitum.viewModel.EditPersonViewModel;
 
+import java.util.concurrent.ExecutionException;
+
 public class EditPersonActivity extends AppCompatActivity {
 
     private EditPersonViewModel viewModel;
@@ -43,13 +45,6 @@ public class EditPersonActivity extends AppCompatActivity {
 
         // observe ViewModel's LiveData
         viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
-        /*viewModel.getPersons().observe(this, persons -> {
-            // update contents of [spinnerNameView] via [nameSpinnerAdapter]
-            nameSpinnerAdapter.clear();
-            for(Person person : persons) {
-                nameSpinnerAdapter.add(person.name);
-            }
-        });*/
     }
 
     @Override
@@ -75,14 +70,19 @@ public class EditPersonActivity extends AppCompatActivity {
         else name = nameView.getText().toString();
 
         // check if Person with that name already exists
-        if(viewModel.personExists(name)) {
+        try {
+            if(viewModel.personExists(name)) {
+                // TODO extract string resource
+                Toast.makeText(getApplicationContext(), name + " already exists, please enter a different name!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                // insert new person (via viewModel) and finish activity
+                viewModel.addPerson(name);
+                finish();
+            }
+        } catch (ExecutionException | InterruptedException e) {
             // TODO extract string resource
-            Toast.makeText(getApplicationContext(), name + " already exists, please enter a different name!", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            // insert new person (via viewModel)
-            viewModel.addPerson(name);
-            finish();
+            Toast.makeText(getApplicationContext(),  "Error trying to access database, please try again!\n" + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
     }
 

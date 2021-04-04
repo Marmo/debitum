@@ -9,6 +9,7 @@ import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class EditPersonViewModel extends AndroidViewModel {
 
@@ -25,5 +26,5 @@ public class EditPersonViewModel extends AndroidViewModel {
     public LiveData<List<Person>> getPersons() { return persons; }
 
     public void addPerson(String name) {repository.insert(new Person(name));}
-    public boolean personExists(String name) { return repository.exists(name); }
+    public boolean personExists(String name) throws ExecutionException, InterruptedException { return repository.exists(name); }
 }

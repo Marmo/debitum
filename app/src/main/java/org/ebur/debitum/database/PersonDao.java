@@ -20,7 +20,7 @@ public interface PersonDao {
 
     @Transaction
     @Query("select exists (select 1 from person where name=:name limit 1)")
-    boolean exists(String name);
+    Boolean exists(String name);
 
     @Insert
     void insert(Person... persons);

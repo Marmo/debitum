@@ -24,7 +24,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
     // create an ExecutorService with a fixed thread pool that will be used to run database operations asynchronously on a background thread
     private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
+    static final ExecutorService databaseTaskExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     /* returns the singleton. It'll create the database the first time it's accessed, using Room's
@@ -50,7 +50,7 @@ public abstract class AppDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
 
-            databaseWriteExecutor.execute(() -> {
+            databaseTaskExecutor.execute(() -> {
                 // Populate the database
                 TransactionDao transactionDao = INSTANCE.transactionDao();
                 PersonDao personDao = INSTANCE.personDao();

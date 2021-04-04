@@ -5,6 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class PersonRepository {
 
@@ -29,20 +31,13 @@ public class PersonRepository {
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
     public void insert(Person person) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
+        AppDatabase.databaseTaskExecutor.execute(() -> {
             personDao.insert(person);
         });
     }
 
-    public boolean exists(String name) {
-        // TODO use query in DAO, but must not be run on main thread. How?
-        // return personDao.exists(name);
-        Future future = AppDatabase.databaseWriteExecutor.Sunnit((name) -> {
-            personDao.exists(name);
-        });
-        /*for (Person person : allPersons.getValue()) {
-            if(person.name.equals(name)) return true;
-        }*/
-        return future.get();
+    public boolean exists(String name) throws ExecutionException, InterruptedException {
+        Future<Boolean> future = AppDatabase.databaseTaskExecutor.submit( () -> personDao.exists(name));
+        return (boolean) future.get();
     }
 }

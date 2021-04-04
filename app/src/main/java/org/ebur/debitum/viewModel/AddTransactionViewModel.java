@@ -28,6 +28,7 @@ public class AddTransactionViewModel extends AndroidViewModel {
 
     public void setName(String name) { this.name = name; }
     public String getName() { return this.name; }
+    // TODO rewrite using future, move to repository
     public int getPersonId() {
         for (Person person : persons.getValue()) {
             if(person.name.equals(this.name)) return person.idPerson;
