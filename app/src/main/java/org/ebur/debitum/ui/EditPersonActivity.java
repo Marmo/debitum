@@ -63,8 +63,8 @@ public class EditPersonActivity extends AppCompatActivity {
 
         // check if nameView has contents
         if(TextUtils.isEmpty(nameView.getText())) {
-            // TODO extract string resource
-            Toast.makeText(getApplicationContext(), "Please enter a name!", Toast.LENGTH_SHORT).show();
+            String errorMessage = getResources().getString(R.string.error_message_database_access);
+            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
             return;
         }
         else name = nameView.getText().toString();
@@ -72,8 +72,8 @@ public class EditPersonActivity extends AppCompatActivity {
         // check if Person with that name already exists
         try {
             if(viewModel.personExists(name)) {
-                // TODO extract string resource
-                Toast.makeText(getApplicationContext(), name + " already exists, please enter a different name!", Toast.LENGTH_SHORT).show();
+                String errorMessage = getResources().getString(R.string.error_message_database_access, name);
+                Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
             }
             else {
                 // insert new person (via viewModel) and finish activity
@@ -81,8 +81,8 @@ public class EditPersonActivity extends AppCompatActivity {
                 finish();
             }
         } catch (ExecutionException | InterruptedException e) {
-            // TODO extract string resource
-            Toast.makeText(getApplicationContext(),  "Error trying to access database, please try again!\n" + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
+            Toast.makeText(getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
         }
     }
 

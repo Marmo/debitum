@@ -10,6 +10,7 @@ import org.ebur.debitum.database.PersonRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class AddTransactionViewModel extends AndroidViewModel {
 
@@ -28,12 +29,7 @@ public class AddTransactionViewModel extends AndroidViewModel {
 
     public void setName(String name) { this.name = name; }
     public String getName() { return this.name; }
-    // TODO rewrite using future, move to repository
-    public int getPersonId() {
-        for (Person person : persons.getValue()) {
-            if(person.name.equals(this.name)) return person.idPerson;
-        }
-        return -1;
+    public int getSelectedPersonId() throws ExecutionException, InterruptedException { return repository.getPersonId(this.name);
     }
 
     public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }

@@ -61,9 +61,9 @@ public abstract class AppDatabase extends RoomDatabase {
                 personDao.insert(new Person("Bilbo Beutlin"));
                 personDao.insert(new Person("Galadriel"));
                 personDao.insert(new Person("Gimli, Sohn Gloins"));
-                transactionDao.insert(new Transaction(personDao.getId("Bilbo Beutlin"), 799, true, "Dingens", new Date(1616493107)));
-                transactionDao.insert(new Transaction(personDao.getId("Galadriel"), -1000, true, "Teil", new Date(1610293082)));
-                transactionDao.insert(new Transaction(personDao.getId("Galadriel"), 1, false, "Zeug", new Date(1609293082)));
+                transactionDao.insert(new Transaction(personDao.getPersonId("Bilbo Beutlin"), 799, true, "Dingens", new Date(1616493107)));
+                transactionDao.insert(new Transaction(personDao.getPersonId("Galadriel"), -1000, true, "Teil", new Date(1610293082)));
+                transactionDao.insert(new Transaction(personDao.getPersonId("Galadriel"), 1, false, "Zeug", new Date(1609293082)));
             });
         }
     };

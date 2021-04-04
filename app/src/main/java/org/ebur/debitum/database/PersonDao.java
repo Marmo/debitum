@@ -15,8 +15,8 @@ public interface PersonDao {
     @Query("SELECT * FROM person order by name")
     LiveData<List<Person>> getAllPersons();
 
-    @Query("select id_person from person where name = :name")
-    int getId(String name);
+    @Query("select id_person from person where name = :name limit 1")
+    int getPersonId(String name);
 
     @Transaction
     @Query("select exists (select 1 from person where name=:name limit 1)")

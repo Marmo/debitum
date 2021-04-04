@@ -30,6 +30,7 @@ import org.ebur.debitum.viewModel.AddTransactionViewModel;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 public class AddTransactionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -89,7 +90,11 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
                 int amount = (int) (factor*Double.parseDouble(editAmountView.getText().toString())*100);
 
                 Bundle extras = new Bundle();
-                extras.putInt("PERSON_ID", viewModel.getPersonId());
+                try {extras.putInt("PERSON_ID", viewModel.getSelectedPersonId());}
+                catch (ExecutionException | InterruptedException e) {
+                    String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
+                    Toast.makeText(getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
+                }
                 // TODO handle different input possibilities, including not parseable ones
                 extras.putInt("AMOUNT", amount);
                 extras.putBoolean("ISMONETARY", switchIsMonetaryView.isChecked());
