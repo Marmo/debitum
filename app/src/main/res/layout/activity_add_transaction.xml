@@ -56,7 +56,7 @@
         android:fontFamily="sans-serif-light"
         android:hint="@string/hint_amount"
         android:importantForAutofill="no"
-        android:inputType="numberSigned"
+        android:inputType="numberDecimal"
         android:minHeight="10dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/switch_monetary"

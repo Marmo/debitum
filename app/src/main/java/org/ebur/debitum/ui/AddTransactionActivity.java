@@ -87,6 +87,9 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
                 if(gaveRadio.isChecked()) factor = -1;
 
                 // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005
+                // TODO handle different input possibilities, including not parseable ones
+                // TODO limit max number of decimal places https://www.tutorialspoint.com/how-to-limit-decimal-places-in-android-edittext
+                //      https://exceptionshub.com/limit-decimal-places-in-android-edittext.html
                 int amount = (int) (factor*Double.parseDouble(editAmountView.getText().toString())*100);
 
                 Bundle extras = new Bundle();
@@ -95,7 +98,6 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
                     String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
                     Toast.makeText(getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
                 }
-                // TODO handle different input possibilities, including not parseable ones
                 extras.putInt("AMOUNT", amount);
                 extras.putBoolean("ISMONETARY", switchIsMonetaryView.isChecked());
                 extras.putString("DESC", editDescView.getText().toString());
