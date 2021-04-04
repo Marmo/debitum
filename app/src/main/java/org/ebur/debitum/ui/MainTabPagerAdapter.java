@@ -19,10 +19,7 @@ import org.ebur.debitum.R;
  */
 public class MainTabPagerAdapter extends FragmentStateAdapter {
 
-    private final int TAB_PEOPLE = 0, TAB_TRANSACTIONS = 1;
-
-    @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_people_title, R.string.tab_txn_title};
+    private final int TAB_PEOPLE = 0, TAB_TRANSACTIONS = 1, TAB_COUNT = 2;
 
     public MainTabPagerAdapter(FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -41,6 +38,6 @@ public class MainTabPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return TAB_TITLES.length;
+        return TAB_COUNT;
     }
 }

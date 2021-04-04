@@ -4,16 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.database.Person;
+import org.ebur.debitum.viewModel.AddTransactionViewModel;
+import org.ebur.debitum.viewModel.EditPersonViewModel;
 
 public class EditPersonActivity extends AppCompatActivity {
+
+    private EditPersonViewModel viewModel;
 
     private EditText nameView;
     private Toolbar toolbar;
@@ -29,11 +36,20 @@ public class EditPersonActivity extends AppCompatActivity {
         nameView = (EditText) findViewById(R.id.edit_person_name);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         newPerson = getIntent().getBooleanExtra(MainActivity.EXTRA_NEW_PERSON, false);
         if(newPerson) toolbar.setTitle(R.string.title_activity_edit_person_add);
 
-        // observe LiveData of all persons
+        // observe ViewModel's LiveData
+        viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
+        /*viewModel.getPersons().observe(this, persons -> {
+            // update contents of [spinnerNameView] via [nameSpinnerAdapter]
+            nameSpinnerAdapter.clear();
+            for(Person person : persons) {
+                nameSpinnerAdapter.add(person.name);
+            }
+        });*/
     }
 
     @Override
@@ -48,12 +64,26 @@ public class EditPersonActivity extends AppCompatActivity {
     }
 
     public void onSavePersonAction(MenuItem item) {
-        Toast.makeText(getApplicationContext(), nameView.getText().toString() + " saved!", Toast.LENGTH_SHORT).show();
+        String name;
+
         // check if nameView has contents
+        if(TextUtils.isEmpty(nameView.getText())) {
+            // TODO extract string resource
+            Toast.makeText(getApplicationContext(), "Please enter a name!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else name = nameView.getText().toString();
 
         // check if Person with that name already exists
-
-        // insert new person (via viewModel)
+        if(viewModel.personExists(name)) {
+            // TODO extract string resource
+            Toast.makeText(getApplicationContext(), name + " already exists, please enter a different name!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            // insert new person (via viewModel)
+            viewModel.addPerson(name);
+            finish();
+        }
     }
 
     public void onDeletePersonAction(MenuItem item) {

@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     // TODO can't I set these in xml and that's it?
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_people_title, R.string.tab_txn_title};
-    private static final int NEW_PERSON_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         // setup and TabLayout and attach it to the ViewPager
+        // TODO remove naming of tabs from here
         TabLayout tabs = findViewById(R.id.tabs);
         new TabLayoutMediator(tabs, viewPager,
                 (tab, position) -> tab.setText(TAB_TITLES[position])
