@@ -23,7 +23,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder {
 
     static PersonSumListViewHolder create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.person_sum_list_item, parent, false);
+                .inflate(R.layout.item_person_sum_list, parent, false);
         return new PersonSumListViewHolder(view);
     }
 

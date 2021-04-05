@@ -7,4 +7,14 @@
         android:title="@string/main_toolbar_add_person"
         android:onClick="onAddPersonAction"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/miEditTransaction"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="@string/main_toolbar_edit_transaction"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/miDeleteTransaction"
+        android:icon="@drawable/ic_baseline_delete_outline_24"
+        android:title="@string/main_toolbar_delete_transaction"
+        app:showAsAction="ifRoom" />
 </menu>

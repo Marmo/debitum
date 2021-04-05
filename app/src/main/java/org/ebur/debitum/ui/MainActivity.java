@@ -12,18 +12,23 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.viewModel.TransactionListViewModel;
 
-// TODO add ActionBar-Button + Activity to add/edit Person
+import java.util.HashMap;
+
 // TODO put fab in MainActivity instead of TransactionListFragment
 // TODO make fab briefly disappear when changing tabs
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_NEW_PERSON = "org.ebur.debitum.NEW_PERSON";
 
-    // TODO can't I set these in xml and that's it?
+    private TransactionListViewModel viewModel;
+    private Menu menu;
+
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_people_title, R.string.tab_txn_title};
 
@@ -32,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         MainTabPagerAdapter adapter = new MainTabPagerAdapter(this);
@@ -46,12 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 (tab, position) -> tab.setText(TAB_TITLES[position])
         ).attach();
 
+        viewModel = new ViewModelProvider(this).get(TransactionListViewModel.class);
+        viewModel.getToolbarMenuItems().observe(this, this::updateToolbarMenu);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        this.menu = menu;
+        updateToolbarMenu(viewModel.getToolbarMenuItems().getValue());
         return true;
     }
 
@@ -59,5 +66,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EditPersonActivity.class);
         intent.putExtra(EXTRA_NEW_PERSON, true);
         startActivity(intent, null);
+    }
+
+    private void updateToolbarMenu(HashMap<Integer, Boolean> menuItems) {
+        // Update toolbar menu (reset to all visible, then remove unwanted items)
+        if (menu != null) {
+            menu.clear();
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+            menuItems.forEach( (menuItem, visible) -> { if(!visible) menu.removeItem(menuItem); });
+        }
     }
 }

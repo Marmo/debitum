@@ -3,7 +3,9 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dip" >
+    android:padding="5dip"
+    android:elevation="4dp"
+    android:background="@drawable/list_item_background">
 
     <TextView
         android:id="@+id/list_item_name"

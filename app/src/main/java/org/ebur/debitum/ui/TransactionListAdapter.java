@@ -3,6 +3,7 @@ package org.ebur.debitum.ui;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
@@ -10,8 +11,11 @@ import org.ebur.debitum.database.TransactionWithPerson;
 
 public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, TransactionListViewHolder> {
 
+    private SelectionTracker<Long> selectionTracker = null;
+
     public TransactionListAdapter(@NonNull DiffUtil.ItemCallback<TransactionWithPerson> diffCallback) {
         super(diffCallback);
+        setHasStableIds(true);
     }
 
     @NonNull
@@ -26,10 +30,16 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, T
         holder.bind(current.person.name,
                 current.transaction.description,
                 current.transaction.getFormattedAmount(false),
-                Integer.compare(current.transaction.amount, 0),
-                current.transaction.timestamp
+                Integer.compare(current.transaction.amount, 0), // sign for determining amount color + received/gave label
+                current.transaction.timestamp,
+                selectionTracker.isSelected( (long) position)
         );
     }
+
+    @Override
+    public long getItemId(int position) { return position; }
+
+    public void setSelectionTracker(SelectionTracker<Long> selectionTracker) { this.selectionTracker = selectionTracker; }
 
     static class TransactionDiff extends DiffUtil.ItemCallback<TransactionWithPerson> {
 

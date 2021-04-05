@@ -25,7 +25,6 @@ public class EditPersonActivity extends AppCompatActivity {
     private EditPersonViewModel viewModel;
 
     private EditText nameView;
-    private Toolbar toolbar;
 
     // TODO put this to viewModel?
     private boolean newPerson;
@@ -35,13 +34,13 @@ public class EditPersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_person);
 
-        nameView = (EditText) findViewById(R.id.edit_person_name);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        nameView = findViewById(R.id.edit_person_name);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         newPerson = getIntent().getBooleanExtra(MainActivity.EXTRA_NEW_PERSON, false);
-        if(newPerson) toolbar.setTitle(R.string.title_activity_edit_person_add);
+        if(newPerson) getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
 
         // observe ViewModel's LiveData
         viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);

@@ -8,6 +8,8 @@
     <string name="tab_people_title">People</string>
     <string name="tab_txn_title">Transactions</string>
     <string name="main_toolbar_add_person">Add Person</string>
+    <string name="main_toolbar_delete_transaction">Delete Transaction</string>
+    <string name="main_toolbar_edit_transaction">Edit Transaction</string>
     <string name="fab_content_description">add transaction</string>
 
     <string name="person_sum_list_you_owe">you owe</string>

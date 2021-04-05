@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
@@ -28,7 +29,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder {
         txnTimestampView = itemView.findViewById(R.id.list_item_timestamp);
     }
 
-    public void bind(String name, String description, String amount, int sign, Date timestamp) {
+    public void bind(String name, String description, String amount, int sign, Date timestamp, boolean isSelected) {
         txnNameView.setText(name);
         txnDescriptionView.setText(description);
         txnAmountView.setText(amount);
@@ -46,12 +47,28 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder {
         }
         txnGaveReceivedView.setText(gaveReceivedString);
         txnAmountView.setTextColor(txnAmountView.getResources().getColor(amountColor, null));
+
+        // selection state
+        itemView.setActivated(isSelected);
     }
 
     static TransactionListViewHolder create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.transaction_list_item, parent, false);
+                .inflate(R.layout.item_transaction_list, parent, false);
         return new TransactionListViewHolder(view);
+    }
+
+    // anonymouns implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails
+    //     https://proandroiddev.com/a-guide-to-recyclerview-selection-3ed9f2381504?gi=ee4affe1b9d3
+    //     https://developer.android.com/reference/androidx/recyclerview/selection/package-summary
+    ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
+        return new ItemDetailsLookup.ItemDetails<Long>() {
+            @Override
+            public int getPosition() { return getAdapterPosition(); }
+
+            @Override
+            public Long getSelectionKey() { return getItemId(); }
+        };
     }
 }
 

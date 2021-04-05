@@ -51,10 +51,20 @@ public class PersonSumListFragment extends Fragment {
 
         // observe ViewModel's LiveData
         viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
-        viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), personsWithTransactions -> {
-            adapter.submitList(personsWithTransactions);
-        });
+        viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), adapter::submitList);
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.showToolbarMenuItem(R.id.miAddPerson);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        viewModel.hideToolbarMenuItem(R.id.miAddPerson);
     }
 }
