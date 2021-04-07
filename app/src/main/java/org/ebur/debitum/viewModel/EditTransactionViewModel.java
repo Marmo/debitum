@@ -12,14 +12,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class AddTransactionViewModel extends AndroidViewModel {
+public class EditTransactionViewModel extends AndroidViewModel {
 
     private final PersonRepository repository;
     private final LiveData<List<Person>> persons;
     private Date timestamp;
     private String name = "";
+    private boolean newTransaction;
 
-    public AddTransactionViewModel(Application application) {
+    public EditTransactionViewModel(Application application) {
         super(application);
         repository = new PersonRepository(application);
         persons = repository.getAllPersons();
@@ -31,6 +32,9 @@ public class AddTransactionViewModel extends AndroidViewModel {
     public String getName() { return this.name; }
     public int getSelectedPersonId() throws ExecutionException, InterruptedException { return repository.getPersonId(this.name);
     }
+
+    public boolean isNewTransaction() { return newTransaction; }
+    public void setNewTransaction(boolean newTransaction) { this.newTransaction = newTransaction; }
 
     public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
     public Date getTimestamp() { return this.timestamp; }

@@ -7,4 +7,5 @@
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
     app:layout_constraintTop_toTopOf="parent"
-    app:titleTextColor="@android:color/white" />
+    app:titleTextColor="@android:color/white"
+    />

@@ -18,7 +18,7 @@
                 android:value=".ui.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.AddTransactionActivity"
+            android:name=".ui.EditTransactionActivity"
             android:label="@string/title_activity_add_transaction"
             android:parentActivityName=".ui.MainActivity">
             <meta-data

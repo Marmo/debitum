@@ -25,6 +25,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_NEW_PERSON = "org.ebur.debitum.NEW_PERSON";
+    public static final String EXTRA_NEW_TRANSACTION = "org.ebur.debitum.NEW_TRANSACTION";
 
     private TransactionListViewModel viewModel;
     private Menu menu;

@@ -19,7 +19,7 @@
     <string name="transaction_list_gave">gave</string>
     <string name="transaction_list_received">received</string>
 
-    <!-- AddTransactionActivity -->
+    <!-- EditTransactionActivity -->
     <string name="title_activity_add_transaction">Add Transaction</string>
     <string name="hint_amount">Amount</string>
     <string name="hint_desc">Description</string>

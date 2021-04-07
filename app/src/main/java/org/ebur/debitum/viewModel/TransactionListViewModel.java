@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TransactionListViewModel extends AndroidViewModel {
+    // TODO unify EditTransactionViewModel and EditPersonViewModel into BaseViewModel and derive the specialised View Models from this
 
     private final TransactionRepository txnRepository;
     private final PersonRepository persRepository;

@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/miSavePerson"
+        android:id="@+id/miSaveTransaction"
         android:icon="@drawable/ic_baseline_save_24"
-        android:onClick="onSavePersonAction"
+        android:onClick="onSaveTransactionAction"
         android:title="@string/edit_person_save"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/miDeletePerson"
+        android:id="@+id/miDeleteTransaction"
         android:icon="@drawable/ic_baseline_delete_outline_24"
-        android:onClick="onDeletePersonAction"
+        android:onClick="onDeleteTransactionAction"
         android:title="@string/edit_person_delete"
         app:showAsAction="ifRoom" />
 </menu>

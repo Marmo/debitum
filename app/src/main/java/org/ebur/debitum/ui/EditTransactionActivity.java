@@ -8,10 +8,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,15 +29,15 @@ import android.widget.Toast;
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
-import org.ebur.debitum.viewModel.AddTransactionViewModel;
+import org.ebur.debitum.viewModel.EditTransactionViewModel;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
-public class AddTransactionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EditTransactionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private AddTransactionViewModel viewModel;
+    private EditTransactionViewModel viewModel;
 
     private Spinner spinnerNameView;
     private RadioButton gaveRadio;
@@ -46,10 +49,7 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_transaction);
-        // TODO use toolbar button instead of separate save button
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_edit_transaction);
 
         spinnerNameView = findViewById(R.id.spinner_name);
         gaveRadio = findViewById(R.id.radioButton_gave);
@@ -65,7 +65,7 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
         spinnerNameView.setOnItemSelectedListener(this);
 
         // observe ViewModel's LiveData
-        viewModel = new ViewModelProvider(this).get(AddTransactionViewModel.class);
+        viewModel = new ViewModelProvider(this).get(EditTransactionViewModel.class);
         viewModel.getPersons().observe(this, persons -> {
             // update contents of [spinnerNameView] via [nameSpinnerAdapter]
             nameSpinnerAdapter.clear();
@@ -74,45 +74,70 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
             }
         });
 
+        // setup toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final Button saveButton = findViewById(R.id.button_save);
-        saveButton.setOnClickListener(view -> {
-            Intent replyIntent = new Intent();
-            if (TextUtils.isEmpty(viewModel.getName()) || TextUtils.isEmpty(editAmountView.getText())) {
-                Toast toast = Toast.makeText(this, R.string.add_transaction_incomplete_data, Toast.LENGTH_SHORT);
-                toast.show();
-            } else {
-                //evaluate received-gave-radios
-                int factor = 1;
-                if(gaveRadio.isChecked()) factor = -1;
-
-                // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005
-                // TODO handle different input possibilities, including not parseable ones
-                // TODO limit max number of decimal places https://www.tutorialspoint.com/how-to-limit-decimal-places-in-android-edittext
-                //      https://exceptionshub.com/limit-decimal-places-in-android-edittext.html
-                int amount = (int) (factor*Double.parseDouble(editAmountView.getText().toString())*100);
-
-                Bundle extras = new Bundle();
-                try {extras.putInt("PERSON_ID", viewModel.getSelectedPersonId());}
-                catch (ExecutionException | InterruptedException e) {
-                    String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-                    Toast.makeText(getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
-                }
-                extras.putInt("AMOUNT", amount);
-                extras.putBoolean("ISMONETARY", switchIsMonetaryView.isChecked());
-                extras.putString("DESC", editDescView.getText().toString());
-                extras.putLong("TIMESTAMP", viewModel.getTimestamp().getTime());
-                replyIntent.putExtras(extras);
-                setResult(RESULT_OK, replyIntent);
-
-                finish();
-            }
-        });
+        viewModel.setNewTransaction(getIntent().getBooleanExtra(MainActivity.EXTRA_NEW_TRANSACTION, false));
+        if(viewModel.isNewTransaction()) getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
 
         // initialize date
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_edit_transaction, menu);
+
+        //remove delete menu item when creating new person
+        if(viewModel.isNewTransaction()) menu.removeItem(R.id.miDeleteTransaction);
+
+        return true;
+    }
+
+    // -----------------------------------
+    // Toolbar Menu buttons event handling
+    // -----------------------------------
+
+    public void onSaveTransactionAction(MenuItem item) {
+        Intent replyIntent = new Intent();
+        if (TextUtils.isEmpty(viewModel.getName()) || TextUtils.isEmpty(editAmountView.getText())) {
+            Toast toast = Toast.makeText(this, R.string.add_transaction_incomplete_data, Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            //evaluate received-gave-radios
+            int factor = 1;
+            if (gaveRadio.isChecked()) factor = -1;
+
+            // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005
+            // TODO handle different input possibilities, including not parseable ones
+            // TODO limit max number of decimal places https://www.tutorialspoint.com/how-to-limit-decimal-places-in-android-edittext
+            //      https://exceptionshub.com/limit-decimal-places-in-android-edittext.html
+            int amount = (int) (factor * Double.parseDouble(editAmountView.getText().toString()) * 100);
+
+            Bundle extras = new Bundle();
+            try {
+                extras.putInt("PERSON_ID", viewModel.getSelectedPersonId());
+            } catch (ExecutionException | InterruptedException e) {
+                String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
+                Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+            }
+            extras.putInt("AMOUNT", amount);
+            extras.putBoolean("ISMONETARY", switchIsMonetaryView.isChecked());
+            extras.putString("DESC", editDescView.getText().toString());
+            extras.putLong("TIMESTAMP", viewModel.getTimestamp().getTime());
+            replyIntent.putExtras(extras);
+            setResult(RESULT_OK, replyIntent);
+
+            finish();
+        }
+    }
+
+    public void onDeleteTransactionAction(MenuItem item) {
     }
 
     // ---------------------------
@@ -141,7 +166,7 @@ public class AddTransactionActivity extends AppCompatActivity implements Adapter
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            AddTransactionActivity activity = (AddTransactionActivity) requireActivity();
+            EditTransactionActivity activity = (EditTransactionActivity) requireActivity();
             final Calendar c = Calendar.getInstance();
             c.set(year, month, day);
             Date d = new Date(c.getTimeInMillis());

@@ -2,7 +2,6 @@ package org.ebur.debitum.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -14,8 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.database.Person;
-import org.ebur.debitum.viewModel.AddTransactionViewModel;
 import org.ebur.debitum.viewModel.EditPersonViewModel;
 
 import java.util.concurrent.ExecutionException;
@@ -26,24 +23,22 @@ public class EditPersonActivity extends AppCompatActivity {
 
     private EditText nameView;
 
-    // TODO put this to viewModel?
-    private boolean newPerson;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_person);
-
         nameView = findViewById(R.id.edit_person_name);
+
+        // observe ViewModel's LiveData
+        viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
+
+        // setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        newPerson = getIntent().getBooleanExtra(MainActivity.EXTRA_NEW_PERSON, false);
-        if(newPerson) getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
-
-        // observe ViewModel's LiveData
-        viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
+        viewModel.setNewPerson(getIntent().getBooleanExtra(MainActivity.EXTRA_NEW_PERSON, false));
+        if(viewModel.isNewPerson()) getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
     }
 
     @Override
@@ -52,7 +47,7 @@ public class EditPersonActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_edit_person, menu);
 
         //remove delete menu item when creating new person
-        if(newPerson) menu.removeItem(R.id.miDeletePerson);
+        if(viewModel.isNewPerson()) menu.removeItem(R.id.miDeletePerson);
 
         return true;
     }

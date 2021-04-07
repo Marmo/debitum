@@ -25,6 +25,9 @@ public class EditPersonViewModel extends AndroidViewModel {
 
     public LiveData<List<Person>> getPersons() { return persons; }
 
+    public boolean isNewPerson() { return newPerson; }
+    public void setNewPerson(boolean newPerson) { this.newPerson = newPerson; }
+
     public void addPerson(String name) {repository.insert(new Person(name));}
     public boolean personExists(String name) throws ExecutionException, InterruptedException { return repository.exists(name); }
 }
