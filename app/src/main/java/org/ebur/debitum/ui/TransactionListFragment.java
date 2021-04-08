@@ -33,6 +33,7 @@ import static android.app.Activity.RESULT_OK;
 public class TransactionListFragment extends Fragment {
 
     public static final int NEW_TRANSACTION_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_TRANSACTION_ACTIVITY_REQUEST_CODE = 2;
 
     private TransactionListViewModel viewModel;
     private SelectionTracker<Long> selectionTracker = null;
@@ -109,20 +110,6 @@ public class TransactionListFragment extends Fragment {
         super.onPause();
         viewModel.hideToolbarMenuItem(R.id.miDeleteTransaction);
         viewModel.hideToolbarMenuItem(R.id.miEditTransaction);
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == NEW_TRANSACTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Transaction transaction = new Transaction(extras.getInt("PERSON_ID"),
-                                                      extras.getInt("AMOUNT"),
-                                                      extras.getBoolean("ISMONETARY"),
-                                                      extras.getString("DESC"),
-                                                      new Date(extras.getLong("TIMESTAMP")));
-            viewModel.insert(transaction);
-        }
     }
 
     private void setEditDeleteMenuItemVisibility(int nSelectedRows) {

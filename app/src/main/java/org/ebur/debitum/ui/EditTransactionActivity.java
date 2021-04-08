@@ -29,6 +29,7 @@ import android.widget.Toast;
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
+import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.EditTransactionViewModel;
 
 import java.util.Calendar;
@@ -58,7 +59,7 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
         editDescView = findViewById(R.id.edit_description);
         editDateView = findViewById(R.id.edit_date);
 
-        // initialize name spinner
+        // setup name spinner
         ArrayAdapter<String> nameSpinnerAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item);
         nameSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerNameView.setAdapter(nameSpinnerAdapter);
@@ -112,26 +113,26 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
             //evaluate received-gave-radios
             int factor = 1;
             if (gaveRadio.isChecked()) factor = -1;
-
             // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005
             // TODO handle different input possibilities, including not parseable ones
             // TODO limit max number of decimal places https://www.tutorialspoint.com/how-to-limit-decimal-places-in-android-edittext
             //      https://exceptionshub.com/limit-decimal-places-in-android-edittext.html
             int amount = (int) (factor * Double.parseDouble(editAmountView.getText().toString()) * 100);
 
-            Bundle extras = new Bundle();
+            int idPerson = -1;
             try {
-                extras.putInt("PERSON_ID", viewModel.getSelectedPersonId());
+                idPerson = viewModel.getSelectedPersonId();
             } catch (ExecutionException | InterruptedException e) {
                 String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
                 Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
             }
-            extras.putInt("AMOUNT", amount);
-            extras.putBoolean("ISMONETARY", switchIsMonetaryView.isChecked());
-            extras.putString("DESC", editDescView.getText().toString());
-            extras.putLong("TIMESTAMP", viewModel.getTimestamp().getTime());
-            replyIntent.putExtras(extras);
-            setResult(RESULT_OK, replyIntent);
+            Transaction transaction = new Transaction(idPerson,
+                    amount,
+                    switchIsMonetaryView.isChecked(),
+                    editDescView.getText().toString(),
+                    viewModel.getTimestamp());
+            viewModel.insert(transaction);
+
 
             finish();
         }
