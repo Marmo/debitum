@@ -10,9 +10,9 @@ import java.util.concurrent.Future;
 
 public class PersonRepository {
 
-    private PersonDao personDao;
+    private final PersonDao personDao;
 
-    private LiveData<List<Person>> allPersons;
+    private final LiveData<List<Person>> allPersons;
 
     // Note that in order to unit test the Repository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.

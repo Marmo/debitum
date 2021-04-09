@@ -32,9 +32,6 @@ import static android.app.Activity.RESULT_OK;
 
 public class TransactionListFragment extends Fragment {
 
-    public static final int NEW_TRANSACTION_ACTIVITY_REQUEST_CODE = 1;
-    public static final int EDIT_TRANSACTION_ACTIVITY_REQUEST_CODE = 2;
-
     private TransactionListViewModel viewModel;
     private SelectionTracker<Long> selectionTracker = null;
 
@@ -61,13 +58,10 @@ public class TransactionListFragment extends Fragment {
 
         // TODO move FAB to MainActivity
         FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(requireActivity(), EditTransactionActivity.class);
-                intent.putExtra(MainActivity.EXTRA_NEW_TRANSACTION, true);
-                startActivityForResult(intent, TransactionListFragment.NEW_TRANSACTION_ACTIVITY_REQUEST_CODE);
-            }
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(requireActivity(), EditTransactionActivity.class);
+            intent.putExtra(MainActivity.EXTRA_NEW_TRANSACTION, true);
+            startActivity(intent);
         });
 
         // build selectionTracker

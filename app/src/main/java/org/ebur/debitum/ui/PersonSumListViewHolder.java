@@ -27,9 +27,6 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder {
         return new PersonSumListViewHolder(view);
     }
 
-    // TODO much of the following code is replicated in TransactionListViewHolder
-    //   create Superclass containing a method like formatViews(View gaveReceivedLabel, View amountView, int sign)
-    //   where gaveReceivedLabel's text is set and amountView's color, based on sign
     public void bind(String name, String sum, int sign) {
         nameView.setText(name);
         sumView.setText(sum);

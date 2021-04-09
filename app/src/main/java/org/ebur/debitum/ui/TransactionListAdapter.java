@@ -27,11 +27,7 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, T
     @Override
     public void onBindViewHolder(TransactionListViewHolder holder, int position) {
         TransactionWithPerson current = getItem(position);
-        holder.bind(current.person.name,
-                current.transaction.description,
-                current.transaction.getFormattedAmount(false),
-                Integer.compare(current.transaction.amount, 0), // sign for determining amount color + received/gave label
-                current.transaction.timestamp,
+        holder.bind(current,
                 selectionTracker.isSelected( (long) position)
         );
     }

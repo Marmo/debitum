@@ -24,6 +24,7 @@
     <string name="hint_amount">Amount</string>
     <string name="hint_desc">Description</string>
     <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
+    <string name="add_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
     <string name="switch_monetary_label">Monetary</string>
     <string name="add_transaction_date_content_description">Date</string>
     <string name="add_transaction_gave">Gave</string>

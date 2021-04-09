@@ -57,7 +57,7 @@ public class EditPersonActivity extends AppCompatActivity {
 
         // check if nameView has contents
         if(TextUtils.isEmpty(nameView.getText())) {
-            String errorMessage = getResources().getString(R.string.error_message_database_access);
+            String errorMessage = getResources().getString(R.string.error_message_enter_name);
             Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -66,7 +66,7 @@ public class EditPersonActivity extends AppCompatActivity {
         // check if Person with that name already exists
         try {
             if(viewModel.personExists(name)) {
-                String errorMessage = getResources().getString(R.string.error_message_database_access, name);
+                String errorMessage = getResources().getString(R.string.error_message_name_exists, name);
                 Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
             }
             else {

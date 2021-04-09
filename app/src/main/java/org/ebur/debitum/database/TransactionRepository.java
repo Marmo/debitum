@@ -5,13 +5,15 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class TransactionRepository {
 
-    private TransactionDao transactionDao;
+    private final TransactionDao transactionDao;
 
-    private LiveData<List<TransactionWithPerson>> allTransactions;
-    private LiveData<List<PersonWithTransactions>> allPersonsWithTransactions;
+    private final LiveData<List<TransactionWithPerson>> allTransactions;
+    private final LiveData<List<PersonWithTransactions>> allPersonsWithTransactions;
 
     // Note that in order to unit test the Repository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -39,6 +41,17 @@ public class TransactionRepository {
         AppDatabase.databaseTaskExecutor.execute(() -> {
             transactionDao.insert(transaction);
         });
+    }
+
+    public void update(Transaction transaction) {
+        AppDatabase.databaseTaskExecutor.execute(() -> {
+            transactionDao.update(transaction);
+        });
+    }
+
+    public TransactionWithPerson getTransaction(int idTransaction) throws ExecutionException, InterruptedException {
+        Future<TransactionWithPerson> future = AppDatabase.databaseTaskExecutor.submit( () -> transactionDao.getTransaction(idTransaction));
+        return future.get();
     }
 }
 
