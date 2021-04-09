@@ -1,6 +1,7 @@
 package org.ebur.debitum.viewModel;
 
 import android.app.Application;
+import android.view.animation.TranslateAnimation;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -19,7 +20,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
 
     private final PersonRepository personRepository;
     private final TransactionRepository transactionRepository;
-    private final LiveData<List<Person>> persons;
+    //private final LiveData<List<Person>> persons;
     private int idTransaction = -1;
     private Date timestamp;
     private String name = "";
@@ -29,10 +30,11 @@ public class EditTransactionViewModel extends AndroidViewModel {
         super(application);
         personRepository = new PersonRepository(application);
         transactionRepository = new TransactionRepository(application);
-        persons = personRepository.getAllPersons();
+        //persons = personRepository.getAllPersons();
     }
 
-    public LiveData<List<Person>> getPersons() { return persons; }
+    //public LiveData<List<Person>> getPersons() { return persons; }
+    public List<Person> getPersons() throws ExecutionException, InterruptedException { return  personRepository.getAllPersonsNonLive(); }
 
     public void setIdTransaction(int id) { this.idTransaction = id; }
     public int getIdTransaction() { return this.idTransaction; }
@@ -50,4 +52,5 @@ public class EditTransactionViewModel extends AndroidViewModel {
     public TransactionWithPerson getTransaction(int idTransaction) throws ExecutionException, InterruptedException { return transactionRepository.getTransaction(idTransaction); }
     public void insert(Transaction transaction) { transactionRepository.insert(transaction); }
     public void update(Transaction transaction) { transactionRepository.update(transaction); }
+    public void delete(Transaction transaction) { transactionRepository.delete(transaction); }
 }

@@ -17,6 +17,6 @@ public class TransactionWithPerson {
     public Person person;
 
     public boolean equals(TransactionWithPerson t) {
-        return t.transaction.idTransaction == this.transaction.idTransaction;
+        return this.transaction.equals(t.transaction) && this.person.equals(t.person);
     }
 }

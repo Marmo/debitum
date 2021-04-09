@@ -15,4 +15,8 @@ public class Person {
     @ColumnInfo(name = "id_person") public int idPerson;
     @ColumnInfo(name = "name") public String name;
 
+    public boolean equals(Person p) {
+        return this.name.equals(p.name) && (this.idPerson == p.idPerson);
+    }
+
 }

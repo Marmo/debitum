@@ -15,6 +15,9 @@ public interface PersonDao {
     @Query("SELECT * FROM person order by name")
     LiveData<List<Person>> getAllPersons();
 
+    @Query("SELECT * FROM person order by name")
+    List<Person> getAllPersonsNonLive();
+
     @Query("select id_person from person where name = :name limit 1")
     int getPersonId(String name);
 

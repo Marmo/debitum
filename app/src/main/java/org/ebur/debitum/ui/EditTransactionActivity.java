@@ -2,7 +2,6 @@ package org.ebur.debitum.ui;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,13 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
@@ -38,7 +38,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
-// TODO handle new transaction extra (if false, get infos for transaction id (in extra) from viewModel and fill views accordingly) & if false update transaction instead of inserting new one
 public class EditTransactionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private EditTransactionViewModel viewModel;
@@ -75,25 +74,32 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
         spinnerNameView.setOnItemSelectedListener(this);
 
         // observe ViewModel's LiveData
-        viewModel.getPersons().observe(this, persons -> {
-            // update contents of [spinnerNameView] via [nameSpinnerAdapter]
+        /*viewModel.getPersons().observe(this, persons -> {
             nameSpinnerAdapter.clear();
             for(Person person : persons) {
                 nameSpinnerAdapter.add(person.name);
             }
-        });
+        });*/
 
         // setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
+        try {
+            for(Person person : viewModel.getPersons()) {
+                nameSpinnerAdapter.add(person.name);
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
         fillViews();
     }
 
     private void fillViews() {
         if (viewModel.isNewTransaction()) {
-            getSupportActionBar().setTitle(R.string.title_activity_add_transaction);
+            getSupportActionBar().setTitle(R.string.title_activity_edit_transaction_add);
             viewModel.setTimestamp(new Date());
         } else if (!(viewModel.isNewTransaction())) {
             viewModel.setIdTransaction(getIntent().getIntExtra("ID_TRANSACTION", -1));
@@ -106,7 +112,7 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
                 finish();
             }
             spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(txn.person.name));
-            gaveRadio.setActivated(txn.transaction.amount<0);
+            gaveRadio.setChecked(txn.transaction.amount<0);
             editAmountView.setText(txn.transaction.getFormattedAmount(false));
             switchIsMonetaryView.setChecked(txn.transaction.isMonetary);
             editDescView.setText(txn.transaction.description);
@@ -185,6 +191,20 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
     }
 
     public void onDeleteTransactionAction(MenuItem item) {
+        // build Transaction
+        Transaction transaction = new Transaction();
+        transaction.idTransaction = viewModel.getIdTransaction();
+        // TODO ask if we really want to delete the transaction?
+        //    https://developer.android.com/guide/topics/ui/dialogs
+
+        // delete from database via viewModel
+        viewModel.delete(transaction);
+
+        // TODO show Snackbar confirming delete
+        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.FragmentTransactionList_constraintLayout), "Transaction deleted", Snackbar.LENGTH_SHORT);
+        mySnackbar.show();
+
+        finish();
     }
 
     // ---------------------------

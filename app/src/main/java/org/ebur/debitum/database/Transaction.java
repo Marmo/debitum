@@ -6,7 +6,6 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -21,6 +20,9 @@ import java.util.Locale;
         indices = { @Index("id_person") })
 public class Transaction {
 
+    public Transaction() {
+        this(0, 0, false, "", new Date(0));
+    }
     public Transaction(int idPerson, int amount, boolean isMonetary, String description, Date timestamp) {
         this.idPerson = idPerson;
         this.amount = amount; //negative amounts denote money given to the user, positive means given to person
@@ -43,16 +45,23 @@ public class Transaction {
     /*
      * returns the amount formatted as a string, depending on isMonetary
      */
-    public String getFormattedAmount(boolean signed) {
+    public String getFormattedAmount() { return this.getFormattedAmount(true); }
+    public String getFormattedAmount(boolean signed) { return getFormattedAmount(signed, Locale.getDefault()); }
+    public String getFormattedAmount(boolean signed, Locale locale) {
         int value = signed ? this.amount : Math.abs(this.amount);
-        if (isMonetary) return Transaction.formatAmount(value);
+        if (isMonetary) return Transaction.formatMonetaryAmount(value, locale);
         else            return Integer.toString(value);
     }
-    public String getFormattedAmount() {
-        return this.getFormattedAmount(true);
-    }
 
-    public boolean equals(Transaction t) { return this.idTransaction == t.idTransaction; }
+    public boolean equals(Transaction t) {
+        boolean id = this.idTransaction == t.idTransaction;
+        boolean desc = this.description.equals(t.description);
+        boolean amnt = this.amount == t.amount;
+        boolean isMon = this.isMonetary == t.isMonetary;
+        boolean idpers = this.idPerson == t.idPerson;
+        boolean timestmp = this.timestamp.equals(t.timestamp);
+        return amnt && desc && timestmp && isMon && id && idpers;
+    }
 
     // TODO create getter and setter methods and make members private
 
@@ -60,8 +69,9 @@ public class Transaction {
      * static tool methods
      ****************************/
 
-    public static String formatAmount(int amount) {
-        return String.format(Locale.getDefault(),"%.2f", amount/100.0);
+    public static String formatMonetaryAmount(int amount) { return formatMonetaryAmount(amount, Locale.getDefault()); }
+    public static String formatMonetaryAmount(int amount, Locale locale) {
+        return String.format(locale,"%.2f", amount/100.0);
     }
     /*
      * return sum of all monetary transactions
@@ -79,7 +89,7 @@ public class Transaction {
     // return sum formatted as a String (e.g. 10.05 for amount=1005)
     // signed controls if absolute value or true sum is used
     public static String getFormattedSum(List<Transaction> transactions, boolean signed) {
-        return Transaction.formatAmount(Transaction.getSum(transactions, signed));
+        return Transaction.formatMonetaryAmount(Transaction.getSum(transactions, signed));
     }
     public static String getFormattedSum(List<Transaction> transactions) { return Transaction.getFormattedSum(transactions, true); }
 
