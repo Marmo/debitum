@@ -56,14 +56,6 @@ public class TransactionListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
-        // TODO move FAB to MainActivity
-        FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            Intent intent = new Intent(requireActivity(), EditTransactionActivity.class);
-            intent.putExtra(MainActivity.EXTRA_NEW_TRANSACTION, true);
-            startActivity(intent);
-        });
-
         // build selectionTracker
         this.selectionTracker = new SelectionTracker.Builder<Long>(
                 "transactionListSelection",

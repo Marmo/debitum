@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TransactionListViewModel viewModel;
     private Menu menu;
+    private FloatingActionButton fab;
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_people_title, R.string.tab_txn_title};
@@ -52,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(tabs, viewPager,
                 (tab, position) -> tab.setText(TAB_TITLES[position])
         ).attach();
+
+        // setup fab
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(this, EditTransactionActivity.class);
+            intent.putExtra(MainActivity.EXTRA_NEW_TRANSACTION, true);
+            startActivity(intent);
+        });
 
         viewModel = new ViewModelProvider(this).get(TransactionListViewModel.class);
         viewModel.getToolbarMenuItems().observe(this, this::updateToolbarMenu);
@@ -78,4 +88,7 @@ public class MainActivity extends AppCompatActivity {
             menuItems.forEach( (menuItem, visible) -> { if(!visible) menu.removeItem(menuItem); });
         }
     }
+
+    public void hideFab() { fab.hide(); }
+    public void showFab() { fab.show(); }
 }
