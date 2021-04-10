@@ -49,10 +49,9 @@ public class TransactionRepository {
         });
     }
 
-    public void delete(Transaction transaction) {
-        AppDatabase.databaseTaskExecutor.execute(() -> {
-            transactionDao.delete(transaction);
-        });
+    public int delete(Transaction transaction) throws ExecutionException, InterruptedException {
+        Future<Integer> future = AppDatabase.databaseTaskExecutor.submit( () -> transactionDao.delete(transaction));
+        return future.get();
     }
 
     public TransactionWithPerson getTransaction(int idTransaction) throws ExecutionException, InterruptedException {

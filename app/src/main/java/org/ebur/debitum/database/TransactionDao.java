@@ -37,7 +37,7 @@ public interface TransactionDao {
     void insert(Transaction transaction);
 
     @Delete
-    void delete(Transaction transaction);
+    int delete(Transaction transaction);
 
     @Query("delete from txn")
     void deleteAll();

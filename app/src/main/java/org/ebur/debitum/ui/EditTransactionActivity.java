@@ -209,10 +209,16 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
         //    https://developer.android.com/guide/topics/ui/dialogs
 
         // delete from database via viewModel
-        viewModel.delete(transaction);
+        int rowsDeleted = -1;
+        try {
+            rowsDeleted = viewModel.delete(transaction);
+        } catch (ExecutionException | InterruptedException e) {
+            String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
+            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+        }
 
         // TODO show Snackbar confirming delete
-        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.FragmentTransactionList_constraintLayout), "Transaction deleted", Snackbar.LENGTH_SHORT);
+        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.FragmentTransactionList_constraintLayout), rowsDeleted+" Transaction(s) deleted", Snackbar.LENGTH_SHORT);
         mySnackbar.show();
 
         finish();
