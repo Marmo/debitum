@@ -71,14 +71,26 @@ public class Transaction {
      * static tool methods
      ****************************/
 
+    /**
+     * @param amount Amount to be formatted in cents (1/100 of main currency)
+     * @return Returns a properly formatted Amount (2 decimal places, decimal separator from default locale)
+     */
     public static String formatMonetaryAmount(int amount) { return formatMonetaryAmount(amount, Locale.getDefault()); }
+
+    /**
+     * @param amount Amount to be formatted in cents (1/100 of main currency)
+     * @param locale Locale to format the String representation of the amount with
+     * @return Returns a properly formatted Amount (2 decimal places, decimal separator from locale)
+     */
     public static String formatMonetaryAmount(int amount, Locale locale) {
         return String.format(locale,"%.2f", amount/100.0);
     }
-    /*
-     * return sum of all monetary transactions
-     * signed controls if absolute value or true sum is used (for the final result, not the
-     * single transaction amounts!)
+
+    /**
+     * @param signed controls if absolute value or true sum is used (for the final result, not the
+     *               single transaction amounts!)
+     * @param transactions List of [Transaction]s whose sum shall be calculated
+     * @return sum of all monetary transactions in transactions in cents (1/100 of main currency)
      */
     public static int getSum(List<Transaction> transactions, boolean signed) {
         int sum = 0;
@@ -88,7 +100,11 @@ public class Transaction {
     }
     public static int getSum(List<Transaction> transactions) { return Transaction.getSum(transactions,true); }
 
-    // return sum formatted as a String (e.g. 10.05 for amount=1005)
+    /**
+     * @param signed if returned formatted sum shall include a negative-sign
+     * @param transactions List of [Transaction]s whose sum shall be calculated and formatted
+     * @return sum formatted as a String (e.g. 10.05 for amount=1005)
+      */
     // signed controls if absolute value or true sum is used
     public static String getFormattedSum(List<Transaction> transactions, boolean signed) {
         return Transaction.formatMonetaryAmount(Transaction.getSum(transactions, signed));
@@ -96,7 +112,11 @@ public class Transaction {
     public static String getFormattedSum(List<Transaction> transactions) { return Transaction.getFormattedSum(transactions, true); }
 
 
-    // returns if sum is negative
+    /**
+     *
+     * @param transactions List of [Transaction]s for which the sign of the sum shall be calculated
+     * @return sign of the sum of all monetary [Transaction]s
+     */
     public static int getSumSign(List<Transaction> transactions) {
         return Integer.compare(Transaction.getSum(transactions), 0); // -1 if sum<0, 0 if sum==0, 1 if sum>0
     }

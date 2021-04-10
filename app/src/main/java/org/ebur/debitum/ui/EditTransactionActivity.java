@@ -11,7 +11,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +38,7 @@ import org.ebur.debitum.viewModel.EditTransactionViewModel;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class EditTransactionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -57,15 +60,17 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
         setContentView(R.layout.activity_edit_transaction);
         viewModel = new ViewModelProvider(this).get(EditTransactionViewModel.class);
 
+        // determine if we want to create a new transaction
+        viewModel.setNewTransaction(getIntent().getBooleanExtra(MainActivity.EXTRA_NEW_TRANSACTION, false));
+
+        // setup views
         spinnerNameView = findViewById(R.id.spinner_name);
         gaveRadio = findViewById(R.id.radioButton_gave);
         editAmountView = findViewById(R.id.edit_amount);
+        editAmountView.addTextChangedListener(new AmountTextWatcher());
         switchIsMonetaryView = findViewById(R.id.switch_monetary);
         editDescView = findViewById(R.id.edit_description);
         editDateView = findViewById(R.id.edit_date);
-
-        // determine if we want to create a new transaction
-        viewModel.setNewTransaction(getIntent().getBooleanExtra(MainActivity.EXTRA_NEW_TRANSACTION, false));
 
         // setup name spinner
         nameSpinnerAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item);
@@ -94,30 +99,36 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        fillViews();
+
+        if (viewModel.isNewTransaction()) fillViewsNewTransaction();
+        else fillViewsEditTransaction();
     }
 
-    private void fillViews() {
-        if (viewModel.isNewTransaction()) {
-            getSupportActionBar().setTitle(R.string.title_activity_edit_transaction_add);
-            viewModel.setTimestamp(new Date());
-        } else if (!(viewModel.isNewTransaction())) {
-            viewModel.setIdTransaction(getIntent().getIntExtra("ID_TRANSACTION", -1));
-            TransactionWithPerson txn = null;
-            try {
-                txn = viewModel.getTransaction(viewModel.getIdTransaction());
-            } catch(ExecutionException|InterruptedException e) {
-                String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-                Toast.makeText(getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
-                finish();
-            }
-            spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(txn.person.name));
-            gaveRadio.setChecked(txn.transaction.amount<0);
-            editAmountView.setText(txn.transaction.getFormattedAmount(false));
-            switchIsMonetaryView.setChecked(txn.transaction.isMonetary);
-            editDescView.setText(txn.transaction.description);
-            viewModel.setTimestamp(txn.transaction.timestamp);
+    private void fillViewsNewTransaction() {
+        getSupportActionBar().setTitle(R.string.title_activity_edit_transaction_add);
+        viewModel.setTimestamp(new Date());
+        editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
+                getString(R.string.date_format)));
+    }
+
+    private void fillViewsEditTransaction() {
+        viewModel.setIdTransaction(getIntent().getIntExtra("ID_TRANSACTION", -1));
+        TransactionWithPerson txn = null;
+        try {
+            txn = viewModel.getTransaction(viewModel.getIdTransaction());
+        } catch(ExecutionException|InterruptedException e) {
+            String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
+            Toast.makeText(getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
+            finish();
         }
+        spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(txn.person.name));
+        gaveRadio.setChecked(txn.transaction.amount<0);
+        // IMPORTANT: set switchIsMonetaryView _before_ setting amount, because on setting amount the
+        // AmountTextWatcher::afterTextChanged is called, and within this method isMonetary is needed to apply correct formatting!
+        switchIsMonetaryView.setChecked(txn.transaction.isMonetary);
+        editAmountView.setText(txn.transaction.getFormattedAmount(false));
+        editDescView.setText(txn.transaction.description);
+        viewModel.setTimestamp(txn.transaction.timestamp);
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
     }
@@ -150,7 +161,7 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
                 boolean isMonetary = switchIsMonetaryView.isChecked();
 
                 // parse amount
-                // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005
+                // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005 (format is enforced by AmountTextWatcher)
                 // TODO handle different input possibilities, including not parseable ones
                 // TODO limit max number of decimal places https://www.tutorialspoint.com/how-to-limit-decimal-places-in-android-edittext
                 //      https://exceptionshub.com/limit-decimal-places-in-android-edittext.html
@@ -254,5 +265,46 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
+    }
+
+    // ---------------------------------------------------------
+    // Enforce correct input in editAmountView
+    // ---------------------------------------------------------
+
+    class AmountTextWatcher implements TextWatcher {
+
+        String formattedAmount = "";
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // prevent us from looping infinitely
+            if (s.toString().equals(formattedAmount)) return;
+            formattedAmount = formatArbitraryDecimalInput(s.toString());
+            editAmountView.setText(formattedAmount);
+            // prevent cursor to jump to front
+            editAmountView.setSelection(editAmountView.length());;
+        }
+    }
+
+    private String formatArbitraryDecimalInput(String input) {
+        // examples (monetary): 1 --> 0,01; 0,012 --> 0,12; 0,123 --> 1,23; 1,234 --> 12,34; 12,345 --> 123,45; 123,4 --> 12,34
+
+        String formattedAmount = "";
+        // remove all decimal separators (this the final result for non-monetaries, where only integers are allowed)
+        formattedAmount = input.replaceAll("[.,]", "");
+
+        if (switchIsMonetaryView.isChecked()) {
+            // add decSep two digits from the right, while adding leading zeros if needed
+            // this is accomplished by removing decSep --> converting to int --> dividing by 100 --> converting to local String
+            formattedAmount = Transaction.formatMonetaryAmount(Integer.parseInt(formattedAmount), Locale.getDefault());
+        }
+        return formattedAmount;
     }
 }
