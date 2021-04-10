@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red_primary">#d32f2f</color>
-    <color name="red_light">#ff6659</color>
-    <color name="red_dark">#9a0007</color>
-    <color name="green_secondary">#9ccc65</color>
-    <color name="green_light">#cfff95</color>
-    <color name="green_dark">#6b9b37</color>
+    <color name="primaryColor">#9c1802</color>
+    <color name="primaryLightColor">#d44e2d</color>
+    <color name="primaryDarkColor">#670000</color>
+    <color name="secondaryColor">#727272</color>
+    <color name="secondaryLightColor">#a0a0a0</color>
+    <color name="secondaryDarkColor">#474747</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#ffffff</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="lent_red">#FF1744</color><!--Material A400-->
