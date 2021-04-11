@@ -12,8 +12,7 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/Theme.Debitum.AppBarOverlay">
 
-        <include
-            layout="@layout/toolbar"/>
+        <include layout="@layout/toolbar" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -23,7 +22,7 @@
             android:elevation="4dp"
             app:tabIndicatorColor="@color/white"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="?android:attr/textColorPrimaryInverse" >
+            app:tabTextColor="?android:attr/textColorPrimaryInverse">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabPeople"
@@ -50,9 +49,9 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         android:contentDescription="@string/fab_content_description"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_baseline_euro_symbol_24" />
+        android:src="@drawable/ic_baseline_add_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
