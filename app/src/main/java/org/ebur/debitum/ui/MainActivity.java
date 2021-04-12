@@ -88,7 +88,4 @@ public class MainActivity extends AppCompatActivity {
             menuItems.forEach( (menuItem, visible) -> { if(!visible) menu.removeItem(menuItem); });
         }
     }
-
-    public void hideFab() { fab.hide(); }
-    public void showFab() { fab.show(); }
 }

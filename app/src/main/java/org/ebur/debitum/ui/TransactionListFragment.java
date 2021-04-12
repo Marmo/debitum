@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
 
@@ -32,11 +33,28 @@ import static android.app.Activity.RESULT_OK;
 
 public class TransactionListFragment extends Fragment {
 
+    // fragment initialization parameters
+    private static final String ARG_FILTER_BY_NAME = "filterBy_Name";
+    private static final String ARG_FILTER_BY_ID = "filterBy_Id";
+
     private TransactionListViewModel viewModel;
     private SelectionTracker<Long> selectionTracker = null;
 
     public static TransactionListFragment newInstance() {
-        return new TransactionListFragment();
+        return newInstance(null);
+    }
+    public static TransactionListFragment newInstance(Person filterBy) {
+        TransactionListFragment fragment = new TransactionListFragment();
+        Bundle args = new Bundle();
+        if (filterBy != null){
+            args.putString(ARG_FILTER_BY_NAME, filterBy.name);
+            args.putInt(ARG_FILTER_BY_ID, filterBy.idPerson);
+        } else { // no filter applied
+            args.putString(ARG_FILTER_BY_NAME, "");
+            args.putInt(ARG_FILTER_BY_ID, -1);
+        }
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -88,7 +106,11 @@ public class TransactionListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         viewModel.hideToolbarMenuItem(R.id.miAddPerson);
+        // show edit/delete transaction buttons based on number of selected items
         setEditDeleteMenuItemVisibility(selectionTracker.getSelection().size());
+        if(getArguments().getInt(ARG_FILTER_BY_ID)>=0) { // filtered by person
+            viewModel.showToolbarMenuItem(R.id.miEditPerson);
+        }
     }
 
     @Override
@@ -96,6 +118,7 @@ public class TransactionListFragment extends Fragment {
         super.onPause();
         viewModel.hideToolbarMenuItem(R.id.miDeleteTransaction);
         viewModel.hideToolbarMenuItem(R.id.miEditTransaction);
+        viewModel.hideToolbarMenuItem(R.id.miEditPerson);
     }
 
     private void setEditDeleteMenuItemVisibility(int nSelectedRows) {

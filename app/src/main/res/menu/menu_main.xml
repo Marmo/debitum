@@ -17,4 +17,9 @@
         android:icon="@drawable/ic_baseline_delete_outline_24"
         android:title="@string/main_toolbar_delete_transaction"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/miEditPerson"
+        android:icon="@drawable/ic_baseline_edit_person_24"
+        android:title="@string/main_toolbar_edit_person"
+        app:showAsAction="ifRoom" />
 </menu>

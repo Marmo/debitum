@@ -8,9 +8,10 @@
     <string name="tab_people_title">People</string>
     <string name="tab_txn_title">Transactions</string>
     <string name="main_toolbar_add_person">Add Person</string>
+    <string name="main_toolbar_edit_person">Edit Person</string>
     <string name="main_toolbar_delete_transaction">Delete Transaction</string>
     <string name="main_toolbar_edit_transaction">Edit Transaction</string>
-    <string name="fab_content_description">add transaction</string>
+    <string name="fab_content_description">Add Transaction</string>
 
     <string name="person_sum_list_you_owe">you owe</string>
     <string name="person_sum_list_no_debt">no debt</string>
@@ -39,4 +40,6 @@
     <string name="edit_person_delete">Delete</string>
     <string name="error_message_enter_name">Please enter a name!</string>
     <string name="error_message_name_exists">%1$s already exists, please enter a different name!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
