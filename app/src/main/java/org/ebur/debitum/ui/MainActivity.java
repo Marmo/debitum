@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_NEW_TRANSACTION = "org.ebur.debitum.NEW_TRANSACTION";
 
-    private TransactionListViewModel viewModel;
     private Menu menu;
     private FloatingActionButton fab;
     private NavController navController;
@@ -52,30 +51,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(MainActivity.EXTRA_NEW_TRANSACTION, true);
             startActivity(intent);
         });
-
-        viewModel = new ViewModelProvider(this).get(TransactionListViewModel.class);
-        //viewModel.getToolbarMenuItems().observe(this, this::updateToolbarMenuItemVisibility);
-
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        this.menu = menu;
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        updateToolbarMenuItemVisibility(viewModel.getToolbarMenuItems().getValue());
-        return true;
-    }*/
-
-    /*private void updateToolbarMenuItemVisibility(ArrayList<Integer> visibleItems) {
-        // Update toolbar menu (check which of the menu's items is listed in visibleItems-List
-        // and set visibility accordingly)
-            for (int i = 0; i < menu.size(); i++) {
-                MenuItem mi = menu.getItem(i);
-                int resId = mi.getItemId();
-                mi.setVisible(visibleItems.contains(resId));
-            }
-        }
-    }*/
 
     // TODO use safe args https://developer.android.com/guide/navigation/navigation-getting-started#ensure_type-safety_by_using_safe_args
     public void onSearchTransactionAction(MenuItem item) {
