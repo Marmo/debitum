@@ -19,7 +19,12 @@ public class Person implements Parcelable {
     @ColumnInfo(name = "name") public String name;
 
     public boolean equals(Person p) {
-        return this.name.equals(p.name) && (this.idPerson == p.idPerson);
+        if(p != null) {
+            return this.name.equals(p.name) && (this.idPerson == p.idPerson);
+        } else {
+            return false;
+        }
+
     }
 
     // -------------------------

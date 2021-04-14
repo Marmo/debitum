@@ -24,9 +24,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
+import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -36,12 +39,14 @@ import static android.app.Activity.RESULT_OK;
 public class TransactionListFragment extends Fragment {
 
     // fragment initialization parameters
-    private static final String ARG_FILTER_BY = "filterBy";
+    public static final String ARG_FILTER_BY = "filterBy";
 
     private TransactionListViewModel viewModel;
     private SelectionTracker<Long> selectionTracker = null;
 
     private int nRowsSelected = 0;
+    @Nullable
+    private Person filterBy;
 
     public static TransactionListFragment newInstance() {
         return newInstance(null);
@@ -71,6 +76,9 @@ public class TransactionListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
+        // set Person filter
+        filterBy = requireArguments().getParcelable(ARG_FILTER_BY);
+
         // build selectionTracker
         this.selectionTracker = new SelectionTracker.Builder<Long>(
                 "transactionListSelection",
@@ -93,7 +101,9 @@ public class TransactionListFragment extends Fragment {
 
         // observe ViewModel's LiveData
         viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
-        viewModel.getTransactions().observe(getViewLifecycleOwner(), adapter::submitList);
+        viewModel.getTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
+            adapter.submitList(filter(transactions, filterBy));
+        });
 
         setHasOptionsMenu(true);
 
@@ -129,5 +139,14 @@ public class TransactionListFragment extends Fragment {
         }
         else requireActivity().invalidateOptionsMenu();
         nRowsSelected = nRowsSelectedNew;
+    }
+
+
+    private List<TransactionWithPerson> filter(List<TransactionWithPerson> transactions, @Nullable Person filterBy) {
+        if (filterBy == null) return transactions;
+        // http://javatricks.de/tricks/liste-filtern
+        else return transactions.stream()
+                .filter(twp -> twp.person.equals(filterBy))
+                .collect(Collectors.toList());
     }
 }

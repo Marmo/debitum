@@ -7,6 +7,7 @@ import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
+import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.TransactionWithPerson;
 
 public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, TransactionListViewHolder> {
@@ -49,5 +50,4 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, T
             return oldItem.equals(newItem);
         }
     }
-
 }
