@@ -80,7 +80,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         fragment.startActivity(intent);
     }
 
-    // anonymouns implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails
+    // anonymous implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails
     //     https://proandroiddev.com/a-guide-to-recyclerview-selection-3ed9f2381504?gi=ee4affe1b9d3
     //     https://developer.android.com/reference/androidx/recyclerview/selection/package-summary
     ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
