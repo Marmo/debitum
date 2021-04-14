@@ -24,10 +24,7 @@ public class PersonSumListAdapter extends ListAdapter<PersonWithTransactions, Pe
     @Override
     public void onBindViewHolder(PersonSumListViewHolder holder, int position) {
         PersonWithTransactions current = getItem(position);
-        holder.bind(current.person.name,
-                Transaction.getFormattedSum(current.transactions, false),
-                Transaction.getSumSign(current.transactions)
-        );
+        holder.bind(current);
     }
 
     static class PersonSumDiff extends DiffUtil.ItemCallback<PersonWithTransactions> {
