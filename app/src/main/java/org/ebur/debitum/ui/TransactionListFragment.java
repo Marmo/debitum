@@ -125,7 +125,9 @@ public class TransactionListFragment extends Fragment {
 
     private void invalidateMenuIfNeeded(int nRowsSelectedNew) {
         if ( nRowsSelectedNew == nRowsSelected
-                || (nRowsSelectedNew > 1 && nRowsSelected > 1)) return;
+                || (nRowsSelectedNew > 1 && nRowsSelected > 1)) {
+        }
         else requireActivity().invalidateOptionsMenu();
+        nRowsSelected = nRowsSelectedNew;
     }
 }

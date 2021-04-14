@@ -30,6 +30,7 @@ ext {
     constraintLayoutVersion = '2.0.4'
     appCompatVersion = '1.2.0'
     coreTestingVersion = '2.1.0'
+    navigationVersion = '2.3.5'
     //testing
     espressoVersion = '3.3.0'
     junitVersion = '4.13.2'

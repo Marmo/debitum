@@ -17,6 +17,8 @@ import org.ebur.debitum.viewModel.EditPersonViewModel;
 
 import java.util.concurrent.ExecutionException;
 
+import static org.ebur.debitum.ui.PersonSumListFragment.EXTRA_NEW_PERSON;
+
 public class EditPersonActivity extends AppCompatActivity {
 
     private EditPersonViewModel viewModel;
@@ -37,7 +39,7 @@ public class EditPersonActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        viewModel.setNewPerson(getIntent().getBooleanExtra(MainActivity.EXTRA_NEW_PERSON, false));
+        viewModel.setNewPerson(getIntent().getBooleanExtra(EXTRA_NEW_PERSON, false));
         if(viewModel.isNewPerson()) getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
     }
 

@@ -56,6 +56,8 @@ dependencies {
 
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
 
-    implementation 'androidx.navigation:navigation-fragment:2.3.4'
-    implementation 'androidx.navigation:navigation-ui:2.3.4'
+    implementation "androidx.navigation:navigation-fragment:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui:$navigationVersion"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion"
+
 }

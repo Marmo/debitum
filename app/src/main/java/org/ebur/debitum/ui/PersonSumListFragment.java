@@ -1,7 +1,11 @@
 package org.ebur.debitum.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -9,23 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.database.PersonWithTransactions;
-import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 // TODO add Activity to show all transactions of one person that is launched when clicking on one row
 // TODO in PersonTransactionListActivity add ActionBar options to edit/delete person
 public class PersonSumListFragment extends Fragment {
-
-    public static final int NEW_TRANSACTION_ACTIVITY_REQUEST_CODE = 1;
+    public static final String EXTRA_NEW_PERSON = "org.ebur.debitum.NEW_PERSON";
 
     private TransactionListViewModel viewModel;
 
@@ -53,18 +53,33 @@ public class PersonSumListFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
         viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), adapter::submitList);
 
+        setHasOptionsMenu(true);
+
         return root;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        viewModel.showToolbarMenuItem(R.id.miAddPerson);
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+        // add fragment's menu items to activity's toolbar
+        inflater.inflate(R.menu.menu_person_sum_list, menu);
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        viewModel.hideToolbarMenuItem(R.id.miAddPerson);
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.miAddPerson) {
+            onAddPersonAction(item);
+            return true;
+        } else {
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+            return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onAddPersonAction(MenuItem item) {
+        Intent intent = new Intent(requireActivity(), EditPersonActivity.class);
+        intent.putExtra(EXTRA_NEW_PERSON, true);
+        startActivity(intent, null);
     }
 }
