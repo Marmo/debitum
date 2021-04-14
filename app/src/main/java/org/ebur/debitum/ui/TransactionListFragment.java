@@ -134,10 +134,11 @@ public class TransactionListFragment extends Fragment {
     }
 
     private void invalidateMenuIfNeeded(int nRowsSelectedNew) {
-        if ( nRowsSelectedNew == nRowsSelected
-                || (nRowsSelectedNew > 1 && nRowsSelected > 1)) {
+        // rebuild options menu if relevant change in selected item number occured
+        if ( nRowsSelectedNew != nRowsSelected
+                && (nRowsSelectedNew <= 1 || nRowsSelected <= 1)) {
+            requireActivity().invalidateOptionsMenu();
         }
-        else requireActivity().invalidateOptionsMenu();
         nRowsSelected = nRowsSelectedNew;
     }
 
