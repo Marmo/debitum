@@ -3,6 +3,8 @@ package org.ebur.debitum.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -34,25 +36,20 @@ import static android.app.Activity.RESULT_OK;
 public class TransactionListFragment extends Fragment {
 
     // fragment initialization parameters
-    private static final String ARG_FILTER_BY_NAME = "filterBy_Name";
-    private static final String ARG_FILTER_BY_ID = "filterBy_Id";
+    private static final String ARG_FILTER_BY = "filterBy";
 
     private TransactionListViewModel viewModel;
     private SelectionTracker<Long> selectionTracker = null;
 
+    private int nRowsSelected = 0;
+
     public static TransactionListFragment newInstance() {
         return newInstance(null);
     }
-    public static TransactionListFragment newInstance(Person filterBy) {
+    public static TransactionListFragment newInstance(@Nullable Person filterBy) {
         TransactionListFragment fragment = new TransactionListFragment();
         Bundle args = new Bundle();
-        if (filterBy != null){
-            args.putString(ARG_FILTER_BY_NAME, filterBy.name);
-            args.putInt(ARG_FILTER_BY_ID, filterBy.idPerson);
-        } else { // no filter applied
-            args.putString(ARG_FILTER_BY_NAME, "");
-            args.putInt(ARG_FILTER_BY_ID, -1);
-        }
+        args.putParcelable(ARG_FILTER_BY, filterBy);
         fragment.setArguments(args);
         return fragment;
     }
@@ -88,7 +85,7 @@ public class TransactionListFragment extends Fragment {
             @Override
             public void onSelectionChanged() {
                 super.onSelectionChanged();
-                setEditDeleteMenuItemVisibility(selectionTracker.getSelection().size());
+                invalidateMenuIfNeeded(selectionTracker.getSelection().size());
             }
         });
         adapter.setSelectionTracker(this.selectionTracker);
@@ -96,8 +93,9 @@ public class TransactionListFragment extends Fragment {
 
         // observe ViewModel's LiveData
         viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
-        // Update the transactions in the [recyclerView] via [adapter].
         viewModel.getTransactions().observe(getViewLifecycleOwner(), adapter::submitList);
+
+        setHasOptionsMenu(true);
 
         return root;
     }
@@ -105,37 +103,29 @@ public class TransactionListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.hideToolbarMenuItem(R.id.miAddPerson);
         // show edit/delete transaction buttons based on number of selected items
-        setEditDeleteMenuItemVisibility(selectionTracker.getSelection().size());
-        if(getArguments().getInt(ARG_FILTER_BY_ID)>=0) { // filtered by person
-            viewModel.showToolbarMenuItem(R.id.miEditPerson);
-        }
+        invalidateMenuIfNeeded(selectionTracker.getSelection().size());
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        viewModel.hideToolbarMenuItem(R.id.miDeleteTransaction);
-        viewModel.hideToolbarMenuItem(R.id.miEditTransaction);
-        viewModel.hideToolbarMenuItem(R.id.miEditPerson);
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_transaction_list, menu);
+
+        // only show edit person menu item when filtered by person
+        if(requireArguments().getParcelable(ARG_FILTER_BY) == null) {
+            menu.findItem(R.id.miEditPerson).setVisible(false);
+        }
+
+        // only show edit transaction menu item if exactly one transaction is selected
+        if(nRowsSelected != 1) menu.findItem(R.id.miEditTransaction).setVisible(false);
+
+        // only show delete transaction menu item if one or more items are selected
+        if(nRowsSelected < 1) menu.findItem(R.id.miDeleteTransaction).setVisible(false);
     }
 
-    private void setEditDeleteMenuItemVisibility(int nSelectedRows) {
-        if (nSelectedRows == 0) {
-            // remove delete and edit from MainActivity's toolbar
-            viewModel.hideToolbarMenuItem(R.id.miDeleteTransaction);
-            viewModel.hideToolbarMenuItem(R.id.miEditTransaction);
-        }
-        else if (nSelectedRows == 1) {
-            // add delete and edit to MainActivity's toolbar
-            viewModel.showToolbarMenuItem(R.id.miDeleteTransaction);
-            viewModel.showToolbarMenuItem(R.id.miEditTransaction);
-        }
-        else if (nSelectedRows>1) {
-            // add delete and remove edit from MainActivity's toolbar
-            viewModel.showToolbarMenuItem(R.id.miDeleteTransaction);
-            viewModel.hideToolbarMenuItem(R.id.miEditTransaction);
-        }
+    private void invalidateMenuIfNeeded(int nRowsSelectedNew) {
+        if ( nRowsSelectedNew == nRowsSelected
+                || (nRowsSelectedNew > 1 && nRowsSelected > 1)) return;
+        else requireActivity().invalidateOptionsMenu();
     }
 }
