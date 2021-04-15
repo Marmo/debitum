@@ -46,8 +46,6 @@
 
     </RadioGroup>
 
-    <!-- TODO respect locale (currently only "." as decimal separator is allowed by keyboard, even when locale uses ",".
-            but parsing respects locale, resulting in 1234,00 as amount when entering 12.34 here :/ -->
     <EditText
         android:id="@+id/edit_amount"
         android:layout_width="0dp"
