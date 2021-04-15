@@ -56,6 +56,11 @@ public class PersonRepository {
         return future.get();
     }
 
+    public Person getPersonById(int id)throws ExecutionException, InterruptedException {
+        Future<Person> future = AppDatabase.databaseTaskExecutor.submit( () -> personDao.getPersonById(id));
+        return future.get();
+    }
+
     public boolean exists(String name) throws ExecutionException, InterruptedException {
         Future<Boolean> future = AppDatabase.databaseTaskExecutor.submit( () -> personDao.exists(name));
         return future.get();

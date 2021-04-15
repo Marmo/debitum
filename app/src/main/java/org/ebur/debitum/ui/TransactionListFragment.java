@@ -29,6 +29,7 @@ import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import static org.ebur.debitum.ui.PersonSumListFragment.EXTRA_EDITED_PERSON;
@@ -39,22 +40,18 @@ import static org.ebur.debitum.ui.PersonSumListFragment.EXTRA_EDITED_PERSON;
 public class TransactionListFragment extends Fragment {
 
     // fragment initialization parameters
-    public static final String ARG_FILTER_BY = "filterBy";
+    public static final String ARG_FILTER_PERSON = "filterPerson";
 
     private TransactionListViewModel viewModel;
     private SelectionTracker<Long> selectionTracker = null;
 
     private int nRowsSelected = 0;
-    @Nullable
-    private Person filterBy;
 
-    public static TransactionListFragment newInstance() {
-        return newInstance(null);
-    }
-    public static TransactionListFragment newInstance(@Nullable Person filterBy) {
+    // public static TransactionListFragment newInstance() { return newInstance(0); }
+    public static TransactionListFragment newInstance(@Nullable Integer filterPersonId) {
         TransactionListFragment fragment = new TransactionListFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_FILTER_BY, filterBy);
+        args.putInt(ARG_FILTER_PERSON, filterPersonId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,6 +65,8 @@ public class TransactionListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview);
 
@@ -77,7 +76,11 @@ public class TransactionListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
         // set Person filter
-        filterBy = requireArguments().getParcelable(ARG_FILTER_BY);
+        try {
+            viewModel.setFilterPerson(requireArguments().getInt(ARG_FILTER_PERSON));
+        } catch (ExecutionException | InterruptedException e) { // TODO implement better excepton handling
+            e.printStackTrace();
+        }
 
         // build selectionTracker
         this.selectionTracker = new SelectionTracker.Builder<Long>(
@@ -100,9 +103,9 @@ public class TransactionListFragment extends Fragment {
 
 
         // observe ViewModel's LiveData
-        viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
         viewModel.getTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
-            adapter.submitList(filter(transactions, filterBy));
+            Person filterPerson = viewModel.getFilterPerson();
+            adapter.submitList(filter(transactions, filterPerson));
         });
 
         setHasOptionsMenu(true);
@@ -122,7 +125,7 @@ public class TransactionListFragment extends Fragment {
         inflater.inflate(R.menu.menu_transaction_list, menu);
 
         // only show edit person menu item when filtered by person
-        if(requireArguments().getParcelable(ARG_FILTER_BY) == null) {
+        if(requireArguments().getParcelable(ARG_FILTER_PERSON) == null) {
             menu.findItem(R.id.miEditPerson).setVisible(false);
         }
 
@@ -148,7 +151,7 @@ public class TransactionListFragment extends Fragment {
 
     public void onEditPersonAction(MenuItem item) {
         Intent intent = new Intent(requireActivity(), EditPersonActivity.class);
-        intent.putExtra(EXTRA_EDITED_PERSON, filterBy);
+        intent.putExtra(EXTRA_EDITED_PERSON, viewModel.getFilterPerson());
         startActivity(intent, null);
 
     }
@@ -163,11 +166,12 @@ public class TransactionListFragment extends Fragment {
     }
 
 
-    private List<TransactionWithPerson> filter(List<TransactionWithPerson> transactions, @Nullable Person filterBy) {
-        if (filterBy == null) return transactions;
+    private List<TransactionWithPerson> filter(List<TransactionWithPerson> transactions, @Nullable Person filterPerson) {
+        if (transactions == null) return null;
+        if (filterPerson == null) return transactions;
         // http://javatricks.de/tricks/liste-filtern
         else return transactions.stream()
-                .filter(twp -> twp.person.equals(filterBy))
+                .filter(twp -> twp.person.equals(filterPerson))
                 .collect(Collectors.toList());
     }
 }

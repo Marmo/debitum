@@ -40,7 +40,6 @@ public class EditPersonActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // TODO remove EXTRA_NEW_PERSON and decide this upon if a person to be edited is passed or not
         // pre-populate name view if a Person is edited
         Person editedPerson = getIntent().getParcelableExtra(EXTRA_EDITED_PERSON);
         viewModel.setEditedPerson(editedPerson);

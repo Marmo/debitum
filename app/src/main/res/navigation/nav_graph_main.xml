@@ -21,8 +21,6 @@
         tools:layout="@layout/fragment_transaction_list">
         <argument
             android:name="filterBy"
-            app:argType="org.ebur.debitum.database.Person"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:argType="integer" />
     </fragment>
 </navigation>

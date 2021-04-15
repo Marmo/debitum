@@ -1,6 +1,5 @@
 package org.ebur.debitum.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +65,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
     public void onClick(View v) {
         NavController navController = NavHostFragment.findNavController(FragmentManager.findFragment(v));
         Bundle args = new Bundle();
-        args.putParcelable(TransactionListFragment.ARG_FILTER_BY, person);
+        args.putInt(TransactionListFragment.ARG_FILTER_PERSON, person.idPerson);
         navController.navigate(R.id.action_personSumListFragment_to_transactionListFragment, args);
     }
 }

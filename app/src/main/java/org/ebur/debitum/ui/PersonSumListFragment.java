@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.viewModel.PersonSumListViewModel;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
 
 // TODO add Activity to show all transactions of one person that is launched when clicking on one row
@@ -27,7 +28,7 @@ import org.ebur.debitum.viewModel.TransactionListViewModel;
 public class PersonSumListFragment extends Fragment {
     public static final String EXTRA_EDITED_PERSON = "org.ebur.debitum.EDITED_PERSON";
 
-    private TransactionListViewModel viewModel;
+    private PersonSumListViewModel viewModel;
 
     public static PersonSumListFragment newInstance() {
         return new PersonSumListFragment();
@@ -50,7 +51,7 @@ public class PersonSumListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
         // observe ViewModel's LiveData
-        viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(PersonSumListViewModel.class);
         viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), adapter::submitList);
 
         setHasOptionsMenu(true);

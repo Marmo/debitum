@@ -22,6 +22,9 @@ public interface PersonDao {
     @Query("select id_person from person where name = :name limit 1")
     int getPersonId(String name);
 
+    @Query("select * from person where id_person = :id limit 1")
+    Person getPersonById(int id);
+
     @Transaction
     @Query("select exists (select 1 from person where name=:name limit 1)")
     Boolean exists(String name);
