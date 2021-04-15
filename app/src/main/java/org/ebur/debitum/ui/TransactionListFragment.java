@@ -16,9 +16,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.selection.MutableSelection;
-import androidx.recyclerview.selection.Selection;
 import androidx.recyclerview.selection.SelectionPredicates;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.selection.StableIdKeyProvider;
@@ -32,12 +32,9 @@ import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
-
-import static org.ebur.debitum.ui.PersonSumListFragment.EXTRA_EDITED_PERSON;
 
 // TODO make list items selectable to delete them (via ActionBar-Button)
 // TODO make list items selactable to edit them (fab or ActionBar-Button)
@@ -130,8 +127,8 @@ public class TransactionListFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_transaction_list, menu);
 
-        // only show edit person menu item when filtered by person
-        if(requireArguments().getParcelable(ARG_FILTER_PERSON) == null) {
+        // do not show edit person menu item when not filtered by person
+        if(requireArguments().getInt(ARG_FILTER_PERSON) == 0) {
             menu.findItem(R.id.miEditPerson).setVisible(false);
         }
 
@@ -162,9 +159,10 @@ public class TransactionListFragment extends Fragment {
     }
 
     public void onEditPersonAction() {
-        Intent intent = new Intent(requireActivity(), EditPersonActivity.class);
-        intent.putExtra(EXTRA_EDITED_PERSON, viewModel.getFilterPerson());
-        startActivity(intent, null);
+        NavController navController = NavHostFragment.findNavController(this);
+        Bundle args = new Bundle();
+        args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, viewModel.getFilterPerson());
+        navController.navigate(R.id.action_transactionListFragment_to_editPersonFragment, args);
     }
 
     private void onEditTransactionAction() {

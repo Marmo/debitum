@@ -1,16 +1,24 @@
 package org.ebur.debitum.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
@@ -18,54 +26,73 @@ import org.ebur.debitum.viewModel.EditPersonViewModel;
 
 import java.util.concurrent.ExecutionException;
 
-import static org.ebur.debitum.ui.PersonSumListFragment.EXTRA_EDITED_PERSON;
+public class EditPersonFragment extends Fragment {
 
-public class EditPersonActivity extends AppCompatActivity {
+    public static final String ARG_EDITED_PERSON = "editedPerson";
 
     private EditPersonViewModel viewModel;
 
     private EditText nameView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_person);
-        nameView = findViewById(R.id.edit_person_name);
-
-        // observe ViewModel's LiveData
-        viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
-
-        // setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // pre-populate name view if a Person is edited
-        Person editedPerson = getIntent().getParcelableExtra(EXTRA_EDITED_PERSON);
-        viewModel.setEditedPerson(editedPerson);
-
-        if(editedPerson != null) nameView.setText(editedPerson.name);
-        else getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
+        nameView = root.findViewById(R.id.edit_person_name);
+
+        // setup viewModel
+        viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
+
+        // pre-populate name view if a Person is edited
+        Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
+        viewModel.setEditedPerson(editedPerson);
+
+        if(editedPerson != null) nameView.setText(editedPerson.name);
+        else // TODO getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
+
+        setHasOptionsMenu(true);
+
+        return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_person, menu);
+        inflater.inflate(R.menu.menu_edit_person, menu);
 
         //remove delete menu item when creating new person
         if(viewModel.isNewPerson()) menu.removeItem(R.id.miDeletePerson);
-
-        return true;
     }
 
-    public void onSavePersonAction(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.miSavePerson) {
+            onSavePersonAction();
+            return true;
+        } else if(id==R.id.miDeletePerson) {
+            onDeletePersonAction();
+            return true;
+        } else {
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+            return NavigationUI.onNavDestinationSelected(item, navController)
+                    || super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onSavePersonAction() {
         String name;
 
         // check if nameView has contents
         if(TextUtils.isEmpty(nameView.getText())) {
             String errorMessage = getResources().getString(R.string.error_message_enter_name);
-            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity().getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
             return;
         }
         else name = nameView.getText().toString();
@@ -74,7 +101,7 @@ public class EditPersonActivity extends AppCompatActivity {
         try {
             if(viewModel.personExists(name)) {
                 String errorMessage = getResources().getString(R.string.error_message_name_exists, name);
-                Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity().getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
             }
             else {
                 if(viewModel.getEditedPerson() == null) {
@@ -85,15 +112,15 @@ public class EditPersonActivity extends AppCompatActivity {
                     oldPerson.name = name;
                     viewModel.update(oldPerson);
                 }
-                finish();
+                // TODO navigate back
             }
         } catch (ExecutionException | InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-            Toast.makeText(getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
+            Toast.makeText(requireActivity().getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
         }
     }
 
-    public void onDeletePersonAction(MenuItem item) {
+    public void onDeletePersonAction() {
         // TODO ask for confirmation
         viewModel.delete(viewModel.getEditedPerson());
         // TODO snackbar confirming deletion

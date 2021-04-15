@@ -15,18 +15,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
-import org.ebur.debitum.viewModel.TransactionListViewModel;
 
 // TODO add Activity to show all transactions of one person that is launched when clicking on one row
 // TODO in PersonTransactionListActivity add ActionBar options to edit/delete person
 public class PersonSumListFragment extends Fragment {
-    public static final String EXTRA_EDITED_PERSON = "org.ebur.debitum.EDITED_PERSON";
 
     private PersonSumListViewModel viewModel;
 
@@ -69,7 +68,7 @@ public class PersonSumListFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(id==R.id.miAddPerson) {
-            onAddPersonAction(item);
+            onAddPersonAction();
             return true;
         } else {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
@@ -78,8 +77,10 @@ public class PersonSumListFragment extends Fragment {
         }
     }
 
-    public void onAddPersonAction(MenuItem item) {
-        Intent intent = new Intent(requireActivity(), EditPersonActivity.class);
-        startActivity(intent, null);
+    public void onAddPersonAction() {
+        NavController navController = NavHostFragment.findNavController(this);
+        Bundle args = new Bundle();
+        args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, null);
+        navController.navigate(R.id.action_personSumListFragment_to_editPersonFragment, args);
     }
 }

@@ -33,9 +33,9 @@
     <string name="add_transaction_gave">Gave</string>
     <string name="add_transaction_received">Received</string>
 
-    <!-- EditPersonActivity -->
-    <string name="title_activity_edit_person">Edit Person</string>
-    <string name="title_activity_edit_person_add">Add Person</string>
+    <!-- EditPersonFragment -->
+    <string name="title_fragment_edit_person">Edit Person</string>
+    <string name="title_fragment_edit_person_add">Add Person</string>
     <string name="edit_person_name">Name</string>
     <string name="edit_person_save">Save</string>
     <string name="edit_person_delete">Delete</string>
