@@ -25,7 +25,7 @@ import org.ebur.debitum.viewModel.TransactionListViewModel;
 // TODO add Activity to show all transactions of one person that is launched when clicking on one row
 // TODO in PersonTransactionListActivity add ActionBar options to edit/delete person
 public class PersonSumListFragment extends Fragment {
-    public static final String EXTRA_NEW_PERSON = "org.ebur.debitum.NEW_PERSON";
+    public static final String EXTRA_EDITED_PERSON = "org.ebur.debitum.EDITED_PERSON";
 
     private TransactionListViewModel viewModel;
 
@@ -79,7 +79,6 @@ public class PersonSumListFragment extends Fragment {
 
     public void onAddPersonAction(MenuItem item) {
         Intent intent = new Intent(requireActivity(), EditPersonActivity.class);
-        intent.putExtra(EXTRA_NEW_PERSON, true);
         startActivity(intent, null);
     }
 }

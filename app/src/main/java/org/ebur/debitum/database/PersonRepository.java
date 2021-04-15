@@ -33,11 +33,21 @@ public class PersonRepository {
         return future.get();
     }
 
-    // You must call this on a non-UI thread or your app will throw an exception. Room ensures
-    // that you're not doing any long running operations on the main thread, blocking the UI.
     public void insert(Person person) {
         AppDatabase.databaseTaskExecutor.execute(() -> {
             personDao.insert(person);
+        });
+    }
+
+    public void update(Person person) {
+        AppDatabase.databaseTaskExecutor.execute(() -> {
+            personDao.update(person);
+        });
+    }
+
+    public void delete(Person person) {
+        AppDatabase.databaseTaskExecutor.execute(() -> {
+            personDao.delete(person);
         });
     }
 

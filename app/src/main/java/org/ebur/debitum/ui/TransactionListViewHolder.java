@@ -71,6 +71,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         return new TransactionListViewHolder(view);
     }
 
+    // TODO pre-populate person name in editTransaction when started from filtered TransactionList
     @Override
     public void onClick(View v) {
         TransactionListFragment fragment = FragmentManager.findFragment(v);

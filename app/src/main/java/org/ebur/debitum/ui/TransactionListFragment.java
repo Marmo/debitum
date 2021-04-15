@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.selection.SelectionPredicates;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.selection.StableIdKeyProvider;
@@ -19,19 +23,15 @@ import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
-import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static android.app.Activity.RESULT_OK;
+import static org.ebur.debitum.ui.PersonSumListFragment.EXTRA_EDITED_PERSON;
 
 // TODO make list items selectable to delete them (via ActionBar-Button)
 // TODO make list items selactable to edit them (fab or ActionBar-Button)
@@ -131,6 +131,26 @@ public class TransactionListFragment extends Fragment {
 
         // only show delete transaction menu item if one or more items are selected
         if(nRowsSelected < 1) menu.findItem(R.id.miDeleteTransaction).setVisible(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.miEditPerson) {
+            onEditPersonAction(item);
+            return true;
+        } else {
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+            return NavigationUI.onNavDestinationSelected(item, navController)
+                    || super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onEditPersonAction(MenuItem item) {
+        Intent intent = new Intent(requireActivity(), EditPersonActivity.class);
+        intent.putExtra(EXTRA_EDITED_PERSON, filterBy);
+        startActivity(intent, null);
+
     }
 
     private void invalidateMenuIfNeeded(int nRowsSelectedNew) {

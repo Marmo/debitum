@@ -15,7 +15,7 @@ public class EditPersonViewModel extends AndroidViewModel {
 
     private final PersonRepository repository;
     private final LiveData<List<Person>> persons;
-    private boolean newPerson;
+    private Person editedPerson;
 
     public EditPersonViewModel(Application application) {
         super(application);
@@ -25,9 +25,14 @@ public class EditPersonViewModel extends AndroidViewModel {
 
     public LiveData<List<Person>> getPersons() { return persons; }
 
-    public boolean isNewPerson() { return newPerson; }
-    public void setNewPerson(boolean newPerson) { this.newPerson = newPerson; }
+    public boolean isNewPerson() { return editedPerson == null; }
+
+    public Person getEditedPerson() { return editedPerson; }
+    public void setEditedPerson(Person editedPerson) { this.editedPerson = editedPerson; }
 
     public void addPerson(String name) {repository.insert(new Person(name));}
     public boolean personExists(String name) throws ExecutionException, InterruptedException { return repository.exists(name); }
+
+    public void update(Person person) { repository.update(person); }
+    public void delete(Person person) { repository.delete(person); }
 }

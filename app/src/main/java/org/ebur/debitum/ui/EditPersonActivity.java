@@ -13,11 +13,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.database.Person;
 import org.ebur.debitum.viewModel.EditPersonViewModel;
 
 import java.util.concurrent.ExecutionException;
 
-import static org.ebur.debitum.ui.PersonSumListFragment.EXTRA_NEW_PERSON;
+import static org.ebur.debitum.ui.PersonSumListFragment.EXTRA_EDITED_PERSON;
 
 public class EditPersonActivity extends AppCompatActivity {
 
@@ -39,8 +40,13 @@ public class EditPersonActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        viewModel.setNewPerson(getIntent().getBooleanExtra(EXTRA_NEW_PERSON, false));
-        if(viewModel.isNewPerson()) getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
+        // TODO remove EXTRA_NEW_PERSON and decide this upon if a person to be edited is passed or not
+        // pre-populate name view if a Person is edited
+        Person editedPerson = getIntent().getParcelableExtra(EXTRA_EDITED_PERSON);
+        viewModel.setEditedPerson(editedPerson);
+
+        if(editedPerson != null) nameView.setText(editedPerson.name);
+        else getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
     }
 
     @Override
@@ -72,8 +78,14 @@ public class EditPersonActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
             }
             else {
-                // insert new person (via viewModel) and finish activity
-                viewModel.addPerson(name);
+                if(viewModel.getEditedPerson() == null) {
+                    // insert new person (via viewModel) and finish activity
+                    viewModel.addPerson(name);
+                } else {
+                    Person oldPerson = viewModel.getEditedPerson();
+                    oldPerson.name = name;
+                    viewModel.update(oldPerson);
+                }
                 finish();
             }
         } catch (ExecutionException | InterruptedException e) {
@@ -83,5 +95,6 @@ public class EditPersonActivity extends AppCompatActivity {
     }
 
     public void onDeletePersonAction(MenuItem item) {
+        viewModel.delete(viewModel.getEditedPerson());
     }
 }
