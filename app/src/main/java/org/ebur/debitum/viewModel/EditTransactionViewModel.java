@@ -1,10 +1,8 @@
 package org.ebur.debitum.viewModel;
 
 import android.app.Application;
-import android.view.animation.TranslateAnimation;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonRepository;
@@ -52,5 +50,5 @@ public class EditTransactionViewModel extends AndroidViewModel {
     public TransactionWithPerson getTransaction(int idTransaction) throws ExecutionException, InterruptedException { return transactionRepository.getTransaction(idTransaction); }
     public void insert(Transaction transaction) { transactionRepository.insert(transaction); }
     public void update(Transaction transaction) { transactionRepository.update(transaction); }
-    public int delete(Transaction transaction) throws ExecutionException, InterruptedException { return transactionRepository.delete(transaction); }
+    public int delete(Transaction transaction) throws ExecutionException, InterruptedException { return transactionRepository.deleteAndCount(transaction); }
 }

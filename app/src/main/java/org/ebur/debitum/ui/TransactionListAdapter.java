@@ -29,12 +29,12 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, T
     public void onBindViewHolder(TransactionListViewHolder holder, int position) {
         TransactionWithPerson current = getItem(position);
         holder.bind(current,
-                selectionTracker.isSelected( (long) position)
+                selectionTracker.isSelected(getItemId(position))
         );
     }
 
     @Override
-    public long getItemId(int position) { return position; }
+    public long getItemId(int position) { return getItem(position).transaction.idTransaction; }
 
     public void setSelectionTracker(SelectionTracker<Long> selectionTracker) { this.selectionTracker = selectionTracker; }
 

@@ -205,7 +205,7 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
         // build Transaction
         Transaction transaction = new Transaction();
         transaction.idTransaction = viewModel.getIdTransaction();
-        // TODO ask if we really want to delete the transaction?
+        // TODO ask for confirmation (OR: display snackbar with undo button)
         //    https://developer.android.com/guide/topics/ui/dialogs
 
         // delete from database via viewModel

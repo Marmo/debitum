@@ -94,6 +94,8 @@ public class EditPersonActivity extends AppCompatActivity {
     }
 
     public void onDeletePersonAction(MenuItem item) {
+        // TODO ask for confirmation
         viewModel.delete(viewModel.getEditedPerson());
+        // TODO snackbar confirming deletion
     }
 }

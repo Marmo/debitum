@@ -25,6 +25,11 @@ public class Transaction {
     public Transaction() {
         this(0, 0, false, "", new Date(0));
     }
+    @Ignore
+    public Transaction(int id) {
+        this();
+        this.idTransaction = id;
+    }
     public Transaction(int idPerson, int amount, boolean isMonetary, String description, Date timestamp) {
         this.idPerson = idPerson;
         this.amount = amount; //negative amounts denote money given to the user, positive means given to person

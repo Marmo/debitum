@@ -12,10 +12,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.selection.MutableSelection;
+import androidx.recyclerview.selection.Selection;
 import androidx.recyclerview.selection.SelectionPredicates;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.selection.StableIdKeyProvider;
@@ -25,9 +28,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
+import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -43,6 +48,7 @@ public class TransactionListFragment extends Fragment {
     public static final String ARG_FILTER_PERSON = "filterPerson";
 
     private TransactionListViewModel viewModel;
+    private TransactionListAdapter adapter;
     private SelectionTracker<Long> selectionTracker = null;
 
     private int nRowsSelected = 0;
@@ -71,7 +77,7 @@ public class TransactionListFragment extends Fragment {
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview);
 
         // setup adapter
-        final TransactionListAdapter adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
+        adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
@@ -140,7 +146,13 @@ public class TransactionListFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(id==R.id.miEditPerson) {
-            onEditPersonAction(item);
+            onEditPersonAction();
+            return true;
+        } else if(id==R.id.miEditTransaction) {
+            onEditTransactionAction();
+            return true;
+        } else if(id==R.id.miDeleteTransaction) {
+            onDeleteTransaction();
             return true;
         } else {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
@@ -149,11 +161,42 @@ public class TransactionListFragment extends Fragment {
         }
     }
 
-    public void onEditPersonAction(MenuItem item) {
+    public void onEditPersonAction() {
         Intent intent = new Intent(requireActivity(), EditPersonActivity.class);
         intent.putExtra(EXTRA_EDITED_PERSON, viewModel.getFilterPerson());
         startActivity(intent, null);
+    }
 
+    private void onEditTransactionAction() {
+        // we can assume, that only one row is selected, as the menu item is hidden else
+        if (selectionTracker.getSelection().size() == 1) {
+            // clear selection, as nothing shall be selected upon returning from EditTransactionActivity
+            selectionTracker.clearSelection();
+
+            // get selected idTransaction (note: TransactionListAdapter.getItemId returns the
+            // item's transaction id as the unique row id, so we can use that here
+            int selectedId = selectionTracker.getSelection().iterator().next().intValue();
+
+            // start EditTransactionActivity
+            Intent intent = new Intent(requireActivity(), EditTransactionActivity.class);
+            intent.putExtra(MainActivity.EXTRA_NEW_TRANSACTION, false);
+            intent.putExtra("ID_TRANSACTION", selectedId);
+            startActivity(intent);
+        }
+    }
+
+    private void onDeleteTransaction() {
+        // TODO ask for confirmation OR: show snackbar afterwards with undo button
+        // make copy of selection so we have a constant list of selected items
+        MutableSelection<Long> selection = new MutableSelection<>();
+        selectionTracker.copySelection(selection);
+
+        for (Long idTransaction : selection) {
+            // we just need a Transaction with the correct id for deletion, so we create a dummy one
+            viewModel.delete(new Transaction(idTransaction.intValue()));
+        }
+        selectionTracker.clearSelection();
+        // TODO: show snackbar with success message including number of deleted transactions
     }
 
     private void invalidateMenuIfNeeded(int nRowsSelectedNew) {
