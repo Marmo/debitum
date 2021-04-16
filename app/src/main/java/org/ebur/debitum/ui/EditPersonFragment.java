@@ -2,6 +2,7 @@ package org.ebur.debitum.ui;
 
 import androidx.annotation.NonNull;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
@@ -43,18 +46,17 @@ public class EditPersonFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
         nameView = root.findViewById(R.id.edit_person_name);
-
-        // setup viewModel
-        viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
 
         // pre-populate name view if a Person is edited
         Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
         viewModel.setEditedPerson(editedPerson);
 
         if(editedPerson != null) nameView.setText(editedPerson.name);
-        else // TODO getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
+        else {}// TODO getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
 
         setHasOptionsMenu(true);
 
@@ -92,7 +94,7 @@ public class EditPersonFragment extends Fragment {
         // check if nameView has contents
         if(TextUtils.isEmpty(nameView.getText())) {
             String errorMessage = getResources().getString(R.string.error_message_enter_name);
-            Toast.makeText(requireActivity().getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
             return;
         }
         else name = nameView.getText().toString();
@@ -101,7 +103,7 @@ public class EditPersonFragment extends Fragment {
         try {
             if(viewModel.personExists(name)) {
                 String errorMessage = getResources().getString(R.string.error_message_name_exists, name);
-                Toast.makeText(requireActivity().getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
             }
             else {
                 if(viewModel.getEditedPerson() == null) {
@@ -112,17 +114,32 @@ public class EditPersonFragment extends Fragment {
                     oldPerson.name = name;
                     viewModel.update(oldPerson);
                 }
-                // TODO navigate back
+
+                Navigation.findNavController(getView()).navigateUp();
             }
         } catch (ExecutionException | InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-            Toast.makeText(requireActivity().getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),  errorMessage, Toast.LENGTH_LONG).show();
         }
     }
 
     public void onDeletePersonAction() {
-        // TODO ask for confirmation
-        viewModel.delete(viewModel.getEditedPerson());
-        // TODO snackbar confirming deletion
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setPositiveButton(R.string.edit_person_confirm_deletion_delete, (dialog, id) -> {
+            viewModel.delete(viewModel.getEditedPerson());
+            // navigate back to PersonSumListFragment, as any views related to the deleted Person will become invalid
+            Navigation.findNavController(getView()).navigate(R.id.action_editPersonFragment_to_personSumListFragment);
+            Snackbar.make(requireView(),
+                    getString(R.string.edit_person_snackbar_deleted_person, viewModel.getEditedPerson().name),
+                    Snackbar.LENGTH_SHORT)
+                    .show();
+        });
+        builder.setNegativeButton(R.string.edit_person_confirm_deletion_cancel, (dialog, id) -> dialog.cancel());
+
+        builder.setMessage(getString(R.string.edit_person_confirm_deletion, viewModel.getEditedPerson().name))
+                .setTitle(R.string.edit_person_confirm_deletion_title);
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
     }
 }

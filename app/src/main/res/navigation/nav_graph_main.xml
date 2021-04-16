@@ -33,11 +33,16 @@
         android:id="@+id/editPersonFragment"
         android:name="org.ebur.debitum.ui.EditPersonFragment"
         android:label="@string/title_fragment_edit_person"
-        tools:layout="@layout/fragment_edit_person" >
+        tools:layout="@layout/fragment_edit_person">
         <argument
             android:name="editedPerson"
+            android:defaultValue="@null"
             app:argType="org.ebur.debitum.database.Person"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_editPersonFragment_to_personSumListFragment"
+            app:destination="@id/personSumListFragment"
+            app:popUpTo="@id/personSumListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
