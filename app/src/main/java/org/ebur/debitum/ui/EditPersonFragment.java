@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -34,6 +35,7 @@ public class EditPersonFragment extends Fragment {
     public static final String ARG_EDITED_PERSON = "editedPerson";
 
     private EditPersonViewModel viewModel;
+    private NavController nav;
 
     private EditText nameView;
 
@@ -47,6 +49,7 @@ public class EditPersonFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
+        nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
         nameView = root.findViewById(R.id.edit_person_name);
@@ -54,9 +57,8 @@ public class EditPersonFragment extends Fragment {
         // pre-populate name view if a Person is edited
         Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
         viewModel.setEditedPerson(editedPerson);
-
         if(editedPerson != null) nameView.setText(editedPerson.name);
-        else {}// TODO getSupportActionBar().setTitle(R.string.title_activity_edit_person_add);
+        else requireActivity().getActionBar().setTitle(R.string.title_fragment_edit_person_add);
 
         setHasOptionsMenu(true);
 
@@ -72,6 +74,10 @@ public class EditPersonFragment extends Fragment {
         if(viewModel.isNewPerson()) menu.removeItem(R.id.miDeletePerson);
     }
 
+    // ---------------------------
+    // Toolbar Menu event handling
+    // ---------------------------
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -82,8 +88,7 @@ public class EditPersonFragment extends Fragment {
             onDeletePersonAction();
             return true;
         } else {
-            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-            return NavigationUI.onNavDestinationSelected(item, navController)
+            return NavigationUI.onNavDestinationSelected(item, nav)
                     || super.onOptionsItemSelected(item);
         }
     }
@@ -114,8 +119,7 @@ public class EditPersonFragment extends Fragment {
                     oldPerson.name = name;
                     viewModel.update(oldPerson);
                 }
-
-                Navigation.findNavController(getView()).navigateUp();
+                nav.navigateUp();
             }
         } catch (ExecutionException | InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
@@ -128,7 +132,7 @@ public class EditPersonFragment extends Fragment {
         builder.setPositiveButton(R.string.edit_person_confirm_deletion_delete, (dialog, id) -> {
             viewModel.delete(viewModel.getEditedPerson());
             // navigate back to PersonSumListFragment, as any views related to the deleted Person will become invalid
-            Navigation.findNavController(getView()).navigate(R.id.action_editPersonFragment_to_personSumListFragment);
+            nav.navigate(R.id.action_editPersonFragment_to_personSumListFragment);
             Snackbar.make(requireView(),
                     getString(R.string.edit_person_snackbar_deleted_person, viewModel.getEditedPerson().name),
                     Snackbar.LENGTH_SHORT)

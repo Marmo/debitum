@@ -1,6 +1,5 @@
 package org.ebur.debitum.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -45,6 +43,7 @@ public class TransactionListFragment extends Fragment {
     public static final String ARG_FILTER_PERSON = "filterPerson";
 
     private TransactionListViewModel viewModel;
+    private NavController nav;
     private TransactionListAdapter adapter;
     private SelectionTracker<Long> selectionTracker = null;
 
@@ -69,6 +68,7 @@ public class TransactionListFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
+        nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview);
@@ -123,6 +123,10 @@ public class TransactionListFragment extends Fragment {
         invalidateMenuIfNeeded(selectionTracker.getSelection().size());
     }
 
+    // ---------------------------
+    // Toolbar Menu event handling
+    // ---------------------------
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_transaction_list, menu);
@@ -152,34 +156,31 @@ public class TransactionListFragment extends Fragment {
             onDeleteTransaction();
             return true;
         } else {
-            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-            return NavigationUI.onNavDestinationSelected(item, navController)
+            return NavigationUI.onNavDestinationSelected(item, nav)
                     || super.onOptionsItemSelected(item);
         }
     }
 
     public void onEditPersonAction() {
-        NavController navController = NavHostFragment.findNavController(this);
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, viewModel.getFilterPerson());
-        navController.navigate(R.id.action_transactionListFragment_to_editPersonFragment, args);
+        nav.navigate(R.id.action_transactionListFragment_to_editPersonFragment, args);
     }
 
     private void onEditTransactionAction() {
         // we can assume, that only one row is selected, as the menu item is hidden else
         if (selectionTracker.getSelection().size() == 1) {
-            // clear selection, as nothing shall be selected upon returning from EditTransactionActivity
+            // clear selection, as nothing shall be selected upon returning from EditTransactionFragment
             selectionTracker.clearSelection();
 
             // get selected idTransaction (note: TransactionListAdapter.getItemId returns the
             // item's transaction id as the unique row id, so we can use that here
             int selectedId = selectionTracker.getSelection().iterator().next().intValue();
 
-            // start EditTransactionActivity
-            Intent intent = new Intent(requireActivity(), EditTransactionActivity.class);
-            intent.putExtra(MainActivity.EXTRA_NEW_TRANSACTION, false);
-            intent.putExtra("ID_TRANSACTION", selectedId);
-            startActivity(intent);
+            // start EditTransactionFragment
+            Bundle args = new Bundle();
+            args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, selectedId);
+            nav.navigate(R.id.action_transactionListFragment_to_editTransactionFragment);
         }
     }
 

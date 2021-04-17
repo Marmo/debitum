@@ -1,20 +1,21 @@
 package org.ebur.debitum.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.TransactionWithPerson;
-
-import java.util.Date;
 
 class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private final TextView txnNameView;
@@ -74,11 +75,11 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
     // TODO pre-populate person name in editTransaction when started from filtered TransactionList
     @Override
     public void onClick(View v) {
+        NavController nav = Navigation.findNavController(v);
         TransactionListFragment fragment = FragmentManager.findFragment(v);
-        Intent intent = new Intent(fragment.requireActivity(), EditTransactionActivity.class);
-        intent.putExtra(MainActivity.EXTRA_NEW_TRANSACTION, false);
-        intent.putExtra("ID_TRANSACTION", transactionWithPerson.transaction.idTransaction);
-        fragment.startActivity(intent);
+        Bundle args = new Bundle();
+        args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, transactionWithPerson.transaction.idTransaction);
+        nav.navigate(R.id.action_transactionListFragment_to_editTransactionFragment);
     }
 
     // anonymous implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails

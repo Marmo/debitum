@@ -1,6 +1,5 @@
 package org.ebur.debitum.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +27,7 @@ import org.ebur.debitum.viewModel.PersonSumListViewModel;
 public class PersonSumListFragment extends Fragment {
 
     private PersonSumListViewModel viewModel;
+    private NavController nav;
 
     public static PersonSumListFragment newInstance() {
         return new PersonSumListFragment();
@@ -42,6 +42,9 @@ public class PersonSumListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(requireActivity()).get(PersonSumListViewModel.class);
+        nav = NavHostFragment.findNavController(this);
+
         View root = inflater.inflate(R.layout.fragment_person_sum_list, container, false);
 
         RecyclerView recyclerView = root.findViewById(R.id.person_sum_list_recyclerview);
@@ -50,7 +53,6 @@ public class PersonSumListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
         // observe ViewModel's LiveData
-        viewModel = new ViewModelProvider(requireActivity()).get(PersonSumListViewModel.class);
         viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), adapter::submitList);
 
         setHasOptionsMenu(true);
@@ -60,7 +62,6 @@ public class PersonSumListFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
-        // add fragment's menu items to activity's toolbar
         inflater.inflate(R.menu.menu_person_sum_list, menu);
     }
 
@@ -71,16 +72,14 @@ public class PersonSumListFragment extends Fragment {
             onAddPersonAction();
             return true;
         } else {
-            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-            return NavigationUI.onNavDestinationSelected(item, navController)
+            return NavigationUI.onNavDestinationSelected(item, nav)
                 || super.onOptionsItemSelected(item);
         }
     }
 
     public void onAddPersonAction() {
-        NavController navController = NavHostFragment.findNavController(this);
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, null);
-        navController.navigate(R.id.action_personSumListFragment_to_editPersonFragment, args);
+        nav.navigate(R.id.action_personSumListFragment_to_editPersonFragment, args);
     }
 }

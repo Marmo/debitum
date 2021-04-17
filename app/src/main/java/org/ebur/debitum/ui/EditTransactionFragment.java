@@ -3,20 +3,15 @@ package org.ebur.debitum.ui;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -25,6 +20,15 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -41,9 +45,12 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-public class EditTransactionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EditTransactionFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+    public static final String ARG_ID_TRANSACTION = "idTransaction";
 
     private EditTransactionViewModel viewModel;
+    private NavController nav;
 
     ArrayAdapter<String> nameSpinnerAdapter;
 
@@ -55,71 +62,73 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
     private TextView editDateView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_transaction);
-        viewModel = new ViewModelProvider(this).get(EditTransactionViewModel.class);
+    }
 
-        // determine if we want to create a new transaction
-        viewModel.setNewTransaction(getIntent().getBooleanExtra(MainActivity.EXTRA_NEW_TRANSACTION, false));
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        viewModel = new ViewModelProvider(this).get(EditTransactionViewModel.class);
+        nav = NavHostFragment.findNavController(this);
+
+        View root = inflater.inflate(R.layout.fragment_edit_transaction, container, false);
+
+        // get Transaction ID from Arguments, which is also used to detemine if a new transaction is created
+        viewModel.setIdTransaction(requireArguments().getInt(ARG_ID_TRANSACTION, -1));
 
         // setup views
-        spinnerNameView = findViewById(R.id.spinner_name);
-        gaveRadio = findViewById(R.id.radioButton_gave);
-        editAmountView = findViewById(R.id.edit_amount);
+        spinnerNameView = root.findViewById(R.id.spinner_name);
+        gaveRadio = root.findViewById(R.id.radioButton_gave);
+        editAmountView = root.findViewById(R.id.edit_amount);
         editAmountView.addTextChangedListener(new AmountTextWatcher());
-        switchIsMonetaryView = findViewById(R.id.switch_monetary);
-        editDescView = findViewById(R.id.edit_description);
-        editDateView = findViewById(R.id.edit_date);
+        switchIsMonetaryView = root.findViewById(R.id.switch_monetary);
+        editDescView = root.findViewById(R.id.edit_description);
+        editDateView = root.findViewById(R.id.edit_date);
 
         // setup name spinner
-        nameSpinnerAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item);
+        nameSpinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item);
         nameSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerNameView.setAdapter(nameSpinnerAdapter);
         spinnerNameView.setOnItemSelectedListener(this);
 
-        // observe ViewModel's LiveData
-        /*viewModel.getPersons().observe(this, persons -> {
-            nameSpinnerAdapter.clear();
-            for(Person person : persons) {
-                nameSpinnerAdapter.add(person.name);
-            }
-        });*/
-
-        // setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
+        // this fixes a IllegalStateException in RecyclerView after completion
         try {
             for(Person person : viewModel.getPersons()) {
                 nameSpinnerAdapter.add(person.name);
             }
         } catch (ExecutionException | InterruptedException e) {
+            // TOD besster exception handling
             e.printStackTrace();
         }
 
         if (viewModel.isNewTransaction()) fillViewsNewTransaction();
         else fillViewsEditTransaction();
+
+        setHasOptionsMenu(true);
+
+        return root;
     }
 
     private void fillViewsNewTransaction() {
-        getSupportActionBar().setTitle(R.string.title_activity_edit_transaction_add);
+        requireActivity().getActionBar().setTitle(R.string.title_fragment_edit_transaction_add);
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
     }
 
     private void fillViewsEditTransaction() {
-        viewModel.setIdTransaction(getIntent().getIntExtra("ID_TRANSACTION", -1));
         TransactionWithPerson txn = null;
         try {
             txn = viewModel.getTransaction(viewModel.getIdTransaction());
         } catch(ExecutionException|InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-            Toast.makeText(getApplicationContext(),  errorMessage, Toast.LENGTH_LONG).show();
-            finish();
+            Toast.makeText(getContext(),  errorMessage, Toast.LENGTH_LONG).show();
+            nav.navigateUp();
         }
         spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(txn.person.name));
         gaveRadio.setChecked(txn.transaction.amount<0);
@@ -134,25 +143,36 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_transaction, menu);
+        inflater.inflate(R.menu.menu_edit_transaction, menu);
 
-        //remove delete menu item when creating new person
+        //delete menu item senseless when creating new person
         if(viewModel.isNewTransaction()) menu.removeItem(R.id.miDeleteTransaction);
+    }
 
+    // ---------------------------
+    // Toolbar Menu event handling
+    // ---------------------------
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.miSaveTransaction) {
+            onSaveTransactionAction();
+            return true;
+        } else if(id==R.id.miDeleteTransaction) {
+            onDeleteTransactionAction();
+            return true;
+        }
         return true;
     }
 
-    // -----------------------------------
-    // Toolbar Menu buttons event handling
-    // -----------------------------------
-
-    public void onSaveTransactionAction(MenuItem item) {
+    public void onSaveTransactionAction() {
 
             // at least name and amount have to be filled
             if (TextUtils.isEmpty(viewModel.getName()) || TextUtils.isEmpty(editAmountView.getText())) {
-                Toast.makeText(this, R.string.add_transaction_incomplete_data, Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.add_transaction_incomplete_data, Toast.LENGTH_SHORT).show();
             } else {
                 //evaluate received-gave-radios
                 int factor = 1;
@@ -162,15 +182,12 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
 
                 // parse amount
                 // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005 (format is enforced by AmountTextWatcher)
-                // TODO handle different input possibilities, including not parseable ones
-                // TODO limit max number of decimal places https://www.tutorialspoint.com/how-to-limit-decimal-places-in-android-edittext
-                //      https://exceptionshub.com/limit-decimal-places-in-android-edittext.html
                 if (isMonetary) factor *= 100;
                 int amount = 0;
                 try {
                     amount = (int) (factor * Utilities.parseAmount(editAmountView.getText().toString()));
                 } catch (ParseException e) {
-                    Toast.makeText(this, R.string.add_transaction_wrong_amount_format, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), R.string.add_transaction_wrong_amount_format, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -180,7 +197,7 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
                     idPerson = viewModel.getSelectedPersonId();
                 } catch (ExecutionException | InterruptedException e) {
                     String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-                    Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
                 }
 
                 // build transaction
@@ -197,11 +214,11 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
                     viewModel.update(transaction);
                 }
 
-                finish();
+                nav.navigateUp();
             }
     }
 
-    public void onDeleteTransactionAction(MenuItem item) {
+    public void onDeleteTransactionAction() {
         // build Transaction
         Transaction transaction = new Transaction();
         transaction.idTransaction = viewModel.getIdTransaction();
@@ -214,14 +231,14 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
             rowsDeleted = viewModel.delete(transaction);
         } catch (ExecutionException | InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
         }
 
         // TODO show Snackbar confirming delete
-        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.FragmentTransactionList_constraintLayout), rowsDeleted+" Transaction(s) deleted", Snackbar.LENGTH_SHORT);
+        Snackbar mySnackbar = Snackbar.make(requireView(), rowsDeleted+" Transaction(s) deleted", Snackbar.LENGTH_SHORT);
         mySnackbar.show();
 
-        finish();
+        nav.navigateUp();
     }
 
     // ---------------------------
@@ -230,7 +247,7 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "addTransactionDatePicker");
+        newFragment.show(getParentFragmentManager(), "addTransactionDatePicker");
     }
 
     public static class DatePickerFragment extends DialogFragment
@@ -250,12 +267,12 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            EditTransactionActivity activity = (EditTransactionActivity) requireActivity();
+            EditTransactionFragment fragment = (EditTransactionFragment) getParentFragment();
             final Calendar c = Calendar.getInstance();
             c.set(year, month, day);
             Date d = new Date(c.getTimeInMillis());
-            activity.viewModel.setTimestamp(d);
-            activity.editDateView.setText(Utilities.formatDate(d, getString(R.string.date_format)));
+            fragment.viewModel.setTimestamp(d);
+            fragment.editDateView.setText(Utilities.formatDate(d, getString(R.string.date_format)));
         }
     }
 
@@ -270,7 +287,6 @@ public class EditTransactionActivity extends AppCompatActivity implements Adapte
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
     }
 
     // ---------------------------------------------------------

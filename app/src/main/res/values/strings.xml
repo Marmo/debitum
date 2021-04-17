@@ -11,7 +11,7 @@
     <string name="main_toolbar_edit_person">Edit Person</string>
     <string name="main_toolbar_delete_transaction">Delete Transaction</string>
     <string name="main_toolbar_edit_transaction">Edit Transaction</string>
-    <string name="main_toolbar_search_transaction">Search Transaction</string>
+    <string name="main_toolbar_search_transaction">Transaction List</string>
     <string name="fab_content_description">Add Transaction</string>
 
     <string name="person_sum_list_you_owe">you owe</string>
@@ -21,9 +21,9 @@
     <string name="transaction_list_gave">gave</string>
     <string name="transaction_list_received">received</string>
 
-    <!-- EditTransactionActivity -->
-    <string name="title_activity_edit_transaction_add">Add Transaction</string>
-    <string name="title_activity_edit_transaction">Edit Transaction</string>
+    <!-- EditTransactionFragment -->
+    <string name="title_fragment_edit_transaction_add">Add Transaction</string>
+    <string name="title_fragment_edit_transaction">Edit Transaction</string>
     <string name="hint_amount">Amount</string>
     <string name="hint_desc">Description</string>
     <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
