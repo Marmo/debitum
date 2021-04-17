@@ -3,6 +3,10 @@
     <string name="app_name">Debitum</string>
     <string name="date_format">yyyy-MM-dd</string>
     <string name="error_message_database_access">Error trying to access database, please try again!\n%1$s</string>
+    <string name="button_label_save">Save</string>
+    <string name="button_label_delete">Delete</string>
+    <string name="delete_dialog_confirm">Delete</string>
+    <string name="delete_dialog_cancel">Cancel</string>
 
     <!-- MainActivity-->
     <string name="title_fragment_person_sum_list">People</string>
@@ -32,18 +36,17 @@
     <string name="add_transaction_date_content_description">Date</string>
     <string name="add_transaction_gave">Gave</string>
     <string name="add_transaction_received">Received</string>
+    <string name="edit_transaction_confirm_deletion_title">Delete Transaction</string>
+    <string name="edit_transaction_confirm_deletion">Really delete this Transaction?</string>
+    <string name="edit_transaction_snackbar_deleted_transaction">Transaction deleted</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Edit Person</string>
     <string name="title_fragment_edit_person_add">Add Person</string>
     <string name="edit_person_name">Name</string>
-    <string name="edit_person_save">Save</string>
-    <string name="edit_person_delete">Delete</string>
     <string name="edit_person_confirm_deletion_title">Delete Person</string>
-    <string name="edit_person_confirm_deletion">Really delete Person %1$s and all of their transactions?</string>
-    <string name="edit_person_confirm_deletion_delete">Delete</string>
-    <string name="edit_person_confirm_deletion_cancel">Cancel</string>
-    <string name="edit_person_snackbar_deleted_person">Deleted %1$s</string>
+    <string name="edit_person_confirm_deletion">Really delete %1$s and all of their transactions?</string>
+    <string name="edit_person_snackbar_deleted_person">%1$s deleted</string>
     <string name="error_message_enter_name">Please enter a name!</string>
     <string name="error_message_name_exists">%1$s already exists, please enter a different name!</string>
 </resources>

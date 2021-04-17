@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -87,6 +87,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         switchIsMonetaryView = root.findViewById(R.id.switch_monetary);
         editDescView = root.findViewById(R.id.edit_description);
         editDateView = root.findViewById(R.id.edit_date);
+        editDateView.setOnClickListener((view) -> showDatePickerDialog());
 
         // setup name spinner
         nameSpinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item);
@@ -115,7 +116,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
     }
 
     private void fillViewsNewTransaction() {
-        requireActivity().getActionBar().setTitle(R.string.title_fragment_edit_transaction_add);
+        ((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_transaction_add);
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
@@ -183,7 +184,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
                 // parse amount
                 // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005 (format is enforced by AmountTextWatcher)
                 if (isMonetary) factor *= 100;
-                int amount = 0;
+                int amount;
                 try {
                     amount = (int) (factor * Utilities.parseAmount(editAmountView.getText().toString()));
                 } catch (ParseException e) {
@@ -222,30 +223,32 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         // build Transaction
         Transaction transaction = new Transaction();
         transaction.idTransaction = viewModel.getIdTransaction();
-        // TODO ask for confirmation (OR: display snackbar with undo button)
-        //    https://developer.android.com/guide/topics/ui/dialogs
 
-        // delete from database via viewModel
-        int rowsDeleted = -1;
-        try {
-            rowsDeleted = viewModel.delete(transaction);
-        } catch (ExecutionException | InterruptedException e) {
-            String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
-        }
+        // ask for confirmation
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setPositiveButton(R.string.delete_dialog_confirm, (dialog, id) -> {
+            viewModel.delete(transaction);
+            // navigate back to PersonSumListFragment, as any views related to the deleted Person will become invalid
+            nav.navigateUp();
+            Snackbar.make(requireView(),
+                    R.string.edit_transaction_snackbar_deleted_transaction,
+                    Snackbar.LENGTH_SHORT)
+                    .show();
+        });
+        builder.setNegativeButton(R.string.delete_dialog_cancel, (dialog, id) -> dialog.cancel());
 
-        // TODO show Snackbar confirming delete
-        Snackbar mySnackbar = Snackbar.make(requireView(), rowsDeleted+" Transaction(s) deleted", Snackbar.LENGTH_SHORT);
-        mySnackbar.show();
+        builder.setMessage(R.string.edit_transaction_confirm_deletion)
+                .setTitle(R.string.edit_transaction_confirm_deletion_title);
+        AlertDialog dialog = builder.create();
 
-        nav.navigateUp();
+        dialog.show();
     }
 
     // ---------------------------
     // Date and TimePicker dialogs
     // ---------------------------
 
-    public void showDatePickerDialog(View v) {
+    public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getParentFragmentManager(), "addTransactionDatePicker");
     }
@@ -276,9 +279,9 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         }
     }
 
-    // ---------------------------
-    // Name Spinner event handling
-    // ---------------------------
+    // ------------------------------------------------------
+    // Name Spinner event handling / interface implementation
+    // ------------------------------------------------------
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -289,9 +292,9 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    // ---------------------------------------------------------
+    // ---------------------------------------
     // Enforce correct input in editAmountView
-    // ---------------------------------------------------------
+    // ---------------------------------------
 
     class AmountTextWatcher implements TextWatcher {
 
@@ -311,14 +314,14 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
             formattedAmount = formatArbitraryDecimalInput(s.toString());
             editAmountView.setText(formattedAmount);
             // prevent cursor to jump to front
-            editAmountView.setSelection(editAmountView.length());;
+            editAmountView.setSelection(editAmountView.length());
         }
     }
 
     private String formatArbitraryDecimalInput(String input) {
         // examples (monetary): 1 --> 0,01; 0,012 --> 0,12; 0,123 --> 1,23; 1,234 --> 12,34; 12,345 --> 123,45; 123,4 --> 12,34
 
-        String formattedAmount = "";
+        String formattedAmount;
         // remove all decimal separators (this the final result for non-monetaries, where only integers are allowed)
         formattedAmount = input.replaceAll("[.,]", "");
 

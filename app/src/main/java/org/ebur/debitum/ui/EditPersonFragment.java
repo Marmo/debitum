@@ -18,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -58,7 +57,7 @@ public class EditPersonFragment extends Fragment {
         Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
         viewModel.setEditedPerson(editedPerson);
         if(editedPerson != null) nameView.setText(editedPerson.name);
-        else requireActivity().getActionBar().setTitle(R.string.title_fragment_edit_person_add);
+        else ((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_person_add);
 
         setHasOptionsMenu(true);
 
@@ -129,7 +128,7 @@ public class EditPersonFragment extends Fragment {
 
     public void onDeletePersonAction() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
-        builder.setPositiveButton(R.string.edit_person_confirm_deletion_delete, (dialog, id) -> {
+        builder.setPositiveButton(R.string.delete_dialog_confirm, (dialog, id) -> {
             viewModel.delete(viewModel.getEditedPerson());
             // navigate back to PersonSumListFragment, as any views related to the deleted Person will become invalid
             nav.navigate(R.id.action_editPersonFragment_to_personSumListFragment);
@@ -138,7 +137,7 @@ public class EditPersonFragment extends Fragment {
                     Snackbar.LENGTH_SHORT)
                     .show();
         });
-        builder.setNegativeButton(R.string.edit_person_confirm_deletion_cancel, (dialog, id) -> dialog.cancel());
+        builder.setNegativeButton(R.string.delete_dialog_cancel, (dialog, id) -> dialog.cancel());
 
         builder.setMessage(getString(R.string.edit_person_confirm_deletion, viewModel.getEditedPerson().name))
                 .setTitle(R.string.edit_person_confirm_deletion_title);

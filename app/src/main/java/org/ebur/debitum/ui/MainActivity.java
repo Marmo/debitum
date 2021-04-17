@@ -19,6 +19,7 @@ import org.ebur.debitum.R;
 public class MainActivity extends AppCompatActivity {
 
     private NavController navController;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         assert navHostFragment != null;
         navController = navHostFragment.getNavController();
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
         setSupportActionBar(toolbar);
 
@@ -46,5 +47,9 @@ public class MainActivity extends AppCompatActivity {
     // TODO use safe args https://developer.android.com/guide/navigation/navigation-getting-started#ensure_type-safety_by_using_safe_args
     public void onSearchTransactionAction(MenuItem item) {
         navController.navigate(R.id.action_personSumListFragment_to_transactionListFragment);
+    }
+
+    public void setToolbarTitle(int titleResId) {
+        toolbar.setTitle(titleResId);
     }
 }

@@ -102,7 +102,6 @@
         android:focusable="true"
         android:fontFamily="sans-serif-light"
         android:minHeight="20dp"
-        android:onClick="showDatePickerDialog"
         android:outlineProvider="bounds"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

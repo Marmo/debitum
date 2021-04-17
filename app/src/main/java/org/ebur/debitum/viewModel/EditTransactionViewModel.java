@@ -46,5 +46,5 @@ public class EditTransactionViewModel extends AndroidViewModel {
     public TransactionWithPerson getTransaction(int idTransaction) throws ExecutionException, InterruptedException { return transactionRepository.getTransaction(idTransaction); }
     public void insert(Transaction transaction) { transactionRepository.insert(transaction); }
     public void update(Transaction transaction) { transactionRepository.update(transaction); }
-    public int delete(Transaction transaction) throws ExecutionException, InterruptedException { return transactionRepository.deleteAndCount(transaction); }
+    public void delete(Transaction transaction) { transactionRepository.delete(transaction); }
 }
