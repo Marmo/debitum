@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/btm_people"
+        android:title="@string/bottom_nav_people"
+        android:icon="@drawable/ic_baseline_person_outline_24" />
+    <item android:id="@+id/btm_money"
+        android:title="@string/bottom_nav_money"
+        android:icon="@drawable/ic_outline_account_balance_wallet_24" />
+    <item android:id="@+id/btm_items"
+        android:title="@string/bottom_nav_items"
+        android:icon="@drawable/ic_outline_local_offer_24" />
+    <item android:id="@+id/btm_settings"
+        android:title="@string/bottom_nav_settings"
+        android:icon="@drawable/ic_outline_settings_24" />
+</menu>

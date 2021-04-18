@@ -29,9 +29,9 @@ public class PersonSumListFragment extends Fragment {
     private PersonSumListViewModel viewModel;
     private NavController nav;
 
-    public static PersonSumListFragment newInstance() {
+    /*public static PersonSumListFragment newInstance() {
         return new PersonSumListFragment();
-    }
+    }*/
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,10 +71,8 @@ public class PersonSumListFragment extends Fragment {
         if(id==R.id.miAddPerson) {
             onAddPersonAction();
             return true;
-        } else {
-            return NavigationUI.onNavDestinationSelected(item, nav)
-                || super.onOptionsItemSelected(item);
         }
+        return true;
     }
 
     public void onAddPersonAction() {

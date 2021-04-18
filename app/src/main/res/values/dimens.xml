@@ -9,4 +9,5 @@
     <dimen name="big_padding">16dp</dimen>
     <dimen name="add_transaction_item_height">48dp</dimen>
     <dimen name="text_size_add_transaction">16sp</dimen>
+    <dimen name="bottom_nav_min_height">64dp</dimen>
 </resources>

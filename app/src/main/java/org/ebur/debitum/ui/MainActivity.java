@@ -4,6 +4,7 @@ package org.ebur.debitum.ui;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private NavController nav;
     private Toolbar toolbar;
     private FloatingActionButton fab;
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +60,28 @@ public class MainActivity extends AppCompatActivity {
             if(DESTINATIONS_WITH_FAB.contains(destination.getId())) fab.show();
             else fab.hide();
         });
+
+        // setup Bottom Navigation
+        setupBottomNavigation();
     }
 
-    // TODO move to PersonSumList
-    // TODO use safe args https://developer.android.com/guide/navigation/navigation-getting-started#ensure_type-safety_by_using_safe_args
-    public void onSearchTransactionAction(MenuItem item) {
-        nav.navigate(R.id.action_personSumListFragment_to_transactionListFragment);
+    private void setupBottomNavigation() {
+        bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setItemOnTouchListener(R.id.btm_people, (view, event) -> {
+            view.performClick();
+            nav.navigate(R.id.personSumListFragment);
+            return true;
+        });
+        bottomNav.setItemOnTouchListener(R.id.btm_money, (view, event) -> {
+            view.performClick();
+            nav.navigate(R.id.transactionListFragment);
+            return true;
+        });
+        bottomNav.setItemOnTouchListener(R.id.btm_items, (view, event) -> {
+            view.performClick();
+            nav.navigate(R.id.transactionListFragment);
+            return true;
+        });
     }
 
     public void setToolbarTitle(int titleResId) {

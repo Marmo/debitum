@@ -33,7 +33,7 @@
     <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
     <string name="add_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
     <string name="switch_monetary_label_money">Money</string>
-    <string name="switch_monetary_label_thing">Thing</string>
+    <string name="switch_monetary_label_item">Item</string>
     <string name="add_transaction_date_content_description">Date</string>
     <string name="add_transaction_gave">Gave</string>
     <string name="add_transaction_received">Received</string>
@@ -50,4 +50,8 @@
     <string name="edit_person_snackbar_deleted_person">%1$s deleted</string>
     <string name="error_message_enter_name">Please enter a name!</string>
     <string name="error_message_name_exists">%1$s already exists, please enter a different name!</string>
+    <string name="bottom_nav_people">People</string>
+    <string name="bottom_nav_money">Money</string>
+    <string name="bottom_nav_items">Items</string>
+    <string name="bottom_nav_settings">Settings</string>
 </resources>

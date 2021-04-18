@@ -366,7 +366,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         if (checked) {
             switchIsMonetaryView.setText(R.string.switch_monetary_label_money);
         } else if (!checked) {
-            switchIsMonetaryView.setText(R.string.switch_monetary_label_thing);
+            switchIsMonetaryView.setText(R.string.switch_monetary_label_item);
         }
     }
 }
