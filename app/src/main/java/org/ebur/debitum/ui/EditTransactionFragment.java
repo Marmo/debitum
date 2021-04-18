@@ -80,14 +80,13 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         // get Transaction ID from Arguments, which is also used to determine if a new transaction is created
         viewModel.setIdTransaction(requireArguments().getInt(ARG_ID_TRANSACTION, -1));
 
-        prefillNameViewIfFromFilteredTransactionList();
-
         // setup views
         spinnerNameView = root.findViewById(R.id.spinner_name);
         gaveRadio = root.findViewById(R.id.radioButton_gave);
         editAmountView = root.findViewById(R.id.edit_amount);
         editAmountView.addTextChangedListener(new AmountTextWatcher());
         switchIsMonetaryView = root.findViewById(R.id.switch_monetary);
+        switchIsMonetaryView.setOnCheckedChangeListener((view, checked) -> onSwitchIsMonetaryChanged(view, checked));
         editDescView = root.findViewById(R.id.edit_description);
         editDateView = root.findViewById(R.id.edit_date);
         editDateView.setOnClickListener((view) -> showDatePickerDialog());
@@ -98,12 +97,27 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         spinnerNameView.setAdapter(nameSpinnerAdapter);
         spinnerNameView.setOnItemSelectedListener(this);
 
+
+        fillSpinnerNameView();
+        prefillNameViewIfFromFilteredTransactionList();
+
         if (viewModel.isNewTransaction()) fillViewsNewTransaction();
         else fillViewsEditTransaction();
 
         setHasOptionsMenu(true);
 
         return root;
+    }
+
+    private void fillSpinnerNameView() {
+        // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
+        // this fixes a IllegalStateException in RecyclerView after completion
+        try {
+            for(Person person : viewModel.getPersons()) nameSpinnerAdapter.add(person.name);
+        } catch (ExecutionException | InterruptedException e) {
+            // TODO better exception handling
+            e.printStackTrace();
+        }
     }
 
     private void prefillNameViewIfFromFilteredTransactionList() {
@@ -128,14 +142,12 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
 
     private void fillViewsNewTransaction() {
         ((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_transaction_add);
-        fillSpinnerNameView();
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
     }
 
     private void fillViewsEditTransaction() {
-        fillSpinnerNameView();
         TransactionWithPerson txn = null;
         try {
             txn = viewModel.getTransaction(viewModel.getIdTransaction());
@@ -154,17 +166,6 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         viewModel.setTimestamp(txn.transaction.timestamp);
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
-    }
-
-    private void fillSpinnerNameView() {
-        // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
-        // this fixes a IllegalStateException in RecyclerView after completion
-        try {
-            for(Person person : viewModel.getPersons()) nameSpinnerAdapter.add(person.name);
-        } catch (ExecutionException | InterruptedException e) {
-            // TODO better exception handling
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -355,5 +356,17 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
             formattedAmount = Transaction.formatMonetaryAmount(Integer.parseInt(formattedAmount), Locale.getDefault());
         }
         return formattedAmount;
+    }
+
+    //-------------------------------
+    // Toggle isMonetary-Switch-Label
+    //-------------------------------
+
+    public void onSwitchIsMonetaryChanged(View v, boolean checked) {
+        if (checked) {
+            switchIsMonetaryView.setText(R.string.switch_monetary_label_money);
+        } else if (!checked) {
+            switchIsMonetaryView.setText(R.string.switch_monetary_label_thing);
+        }
     }
 }
