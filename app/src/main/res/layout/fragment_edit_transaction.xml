@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:checked="true"
-        android:text="@string/switch_monetary_label"
+        android:text="@string/switch_monetary_label_money"
         android:textSize="@dimen/text_size_add_transaction"
         app:layout_constraintBottom_toTopOf="@+id/edit_description"
         app:layout_constraintEnd_toEndOf="parent"
