@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.selection.MutableSelection;
@@ -39,8 +38,7 @@ import java.util.stream.Collectors;
 
 public class TransactionListFragment extends Fragment {
 
-    // fragment initialization parameters
-    public static final String ARG_FILTER_PERSON = "filterPerson";
+    public static final String ARG_FILTER_ID_PERSON = "filterIdPerson";
 
     private TransactionListViewModel viewModel;
     private NavController nav;
@@ -49,11 +47,10 @@ public class TransactionListFragment extends Fragment {
 
     private int nRowsSelected = 0;
 
-    // public static TransactionListFragment newInstance() { return newInstance(0); }
     public static TransactionListFragment newInstance(@Nullable Integer filterPersonId) {
         TransactionListFragment fragment = new TransactionListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_FILTER_PERSON, filterPersonId);
+        args.putInt(ARG_FILTER_ID_PERSON, filterPersonId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -80,7 +77,7 @@ public class TransactionListFragment extends Fragment {
 
         // set Person filter
         try {
-            viewModel.setFilterPerson(requireArguments().getInt(ARG_FILTER_PERSON));
+            viewModel.setFilterPerson(requireArguments().getInt(ARG_FILTER_ID_PERSON));
         } catch (ExecutionException | InterruptedException e) { // TODO implement better excepton handling
             e.printStackTrace();
         }
@@ -132,7 +129,7 @@ public class TransactionListFragment extends Fragment {
         inflater.inflate(R.menu.menu_transaction_list, menu);
 
         // do not show edit person menu item when not filtered by person
-        if(requireArguments().getInt(ARG_FILTER_PERSON) == 0) {
+        if(requireArguments().getInt(ARG_FILTER_ID_PERSON) == 0) {
             menu.findItem(R.id.miEditPerson).setVisible(false);
         }
 

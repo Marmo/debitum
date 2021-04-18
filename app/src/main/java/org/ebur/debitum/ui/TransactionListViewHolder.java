@@ -72,14 +72,12 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         return new TransactionListViewHolder(view);
     }
 
-    // TODO pre-populate person name in editTransaction when started from filtered TransactionList
     @Override
     public void onClick(View v) {
         NavController nav = Navigation.findNavController(v);
-        TransactionListFragment fragment = FragmentManager.findFragment(v);
         Bundle args = new Bundle();
         args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, transactionWithPerson.transaction.idTransaction);
-        nav.navigate(R.id.action_transactionListFragment_to_editTransactionFragment);
+        nav.navigate(R.id.action_transactionListFragment_to_editTransactionFragment, args);
     }
 
     // anonymous implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails

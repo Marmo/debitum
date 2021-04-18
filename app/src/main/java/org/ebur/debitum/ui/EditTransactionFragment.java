@@ -27,6 +27,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -76,8 +77,10 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
 
         View root = inflater.inflate(R.layout.fragment_edit_transaction, container, false);
 
-        // get Transaction ID from Arguments, which is also used to detemine if a new transaction is created
+        // get Transaction ID from Arguments, which is also used to determine if a new transaction is created
         viewModel.setIdTransaction(requireArguments().getInt(ARG_ID_TRANSACTION, -1));
+
+        prefillNameViewIfFromFilteredTransactionList();
 
         // setup views
         spinnerNameView = root.findViewById(R.id.spinner_name);
@@ -95,18 +98,6 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         spinnerNameView.setAdapter(nameSpinnerAdapter);
         spinnerNameView.setOnItemSelectedListener(this);
 
-
-        // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
-        // this fixes a IllegalStateException in RecyclerView after completion
-        try {
-            for(Person person : viewModel.getPersons()) {
-                nameSpinnerAdapter.add(person.name);
-            }
-        } catch (ExecutionException | InterruptedException e) {
-            // TOD besster exception handling
-            e.printStackTrace();
-        }
-
         if (viewModel.isNewTransaction()) fillViewsNewTransaction();
         else fillViewsEditTransaction();
 
@@ -115,14 +106,36 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         return root;
     }
 
+    private void prefillNameViewIfFromFilteredTransactionList() {
+        // Check if we come from a TransactionListFragment that was filtered by person
+        // If this is the case AND we want to create a new transaction prefill the name spinner with
+        // the name by which the TransactionListFragment was filtered
+        NavBackStackEntry previous = nav.getPreviousBackStackEntry();
+        if (previous.getDestination().getId() == R.id.transactionListFragment) {
+            int idPerson = previous.getArguments().getInt(TransactionListFragment.ARG_FILTER_ID_PERSON);
+            if (idPerson > 0 && viewModel.getIdTransaction() == -1) { // TransactionList was filtered by Person and we are creating a new Transaction
+                try {
+                    String name = viewModel.getPersonById(idPerson).name;
+                    spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(name));
+                    viewModel.setSelectedName(name);
+                } catch (ExecutionException | InterruptedException e) {
+                    // TODO better Exception handling: do not change spinnerNameView + show snackbar advising to double check person
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     private void fillViewsNewTransaction() {
         ((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_transaction_add);
+        fillSpinnerNameView();
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
     }
 
     private void fillViewsEditTransaction() {
+        fillSpinnerNameView();
         TransactionWithPerson txn = null;
         try {
             txn = viewModel.getTransaction(viewModel.getIdTransaction());
@@ -141,6 +154,17 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         viewModel.setTimestamp(txn.transaction.timestamp);
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
+    }
+
+    private void fillSpinnerNameView() {
+        // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
+        // this fixes a IllegalStateException in RecyclerView after completion
+        try {
+            for(Person person : viewModel.getPersons()) nameSpinnerAdapter.add(person.name);
+        } catch (ExecutionException | InterruptedException e) {
+            // TODO better exception handling
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -172,7 +196,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
     public void onSaveTransactionAction() {
 
             // at least name and amount have to be filled
-            if (TextUtils.isEmpty(viewModel.getName()) || TextUtils.isEmpty(editAmountView.getText())) {
+            if (TextUtils.isEmpty(viewModel.getSelectedName()) || TextUtils.isEmpty(editAmountView.getText())) {
                 Toast.makeText(requireContext(), R.string.add_transaction_incomplete_data, Toast.LENGTH_SHORT).show();
             } else {
                 //evaluate received-gave-radios
@@ -285,7 +309,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        viewModel.setName(parent.getItemAtPosition(pos).toString());
+        viewModel.setSelectedName(parent.getItemAtPosition(pos).toString());
     }
 
     @Override
