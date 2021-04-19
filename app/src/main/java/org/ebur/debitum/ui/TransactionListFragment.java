@@ -41,6 +41,7 @@ public class TransactionListFragment extends Fragment {
     protected TransactionListViewModel viewModel;
     protected PersonFilterViewModel personFilterViewModel;
     private NavController nav;
+    private RecyclerView recyclerView;
     protected TransactionListAdapter adapter;
     private SelectionTracker<Long> selectionTracker = null;
 
@@ -55,7 +56,7 @@ public class TransactionListFragment extends Fragment {
         nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
-        RecyclerView recyclerView = root.findViewById(R.id.recyclerview);
+        recyclerView = root.findViewById(R.id.recyclerview);
 
         // setup adapter
         adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
@@ -66,10 +67,20 @@ public class TransactionListFragment extends Fragment {
         Bundle args = getArguments();
         if (args != null && args.containsKey(ARG_FILTER_PERSON)) {
             personFilterViewModel.setFilterPerson(args.getParcelable(ARG_FILTER_PERSON));
+            ((MainActivity) requireActivity()).showFilterBar();
         }
 
-        // build selectionTracker
-        this.selectionTracker = new SelectionTracker.Builder<>(
+        buildSelectionTracker();
+
+        observeTransactionsLiveData();
+
+        setHasOptionsMenu(true);
+
+        return root;
+    }
+
+    private void buildSelectionTracker() {
+        selectionTracker = new SelectionTracker.Builder<>(
                 "transactionListSelection",
                 recyclerView,
                 new StableIdKeyProvider(recyclerView),
@@ -86,12 +97,6 @@ public class TransactionListFragment extends Fragment {
             }
         });
         adapter.setSelectionTracker(this.selectionTracker);
-
-        observeTransactionsLiveData();
-
-        setHasOptionsMenu(true);
-
-        return root;
     }
 
     protected void observeTransactionsLiveData() {

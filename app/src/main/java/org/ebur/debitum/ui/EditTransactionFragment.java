@@ -129,7 +129,8 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         // the name by which the TransactionListFragment was filtered
         NavBackStackEntry previous = nav.getPreviousBackStackEntry();
         int previousDestId = previous.getDestination().getId();
-        if (previousDestId == R.id.transactionListFragment || previousDestId == R.id.itemTransactionListFragment) {
+        if (previousDestId == R.id.transactionListFragment
+                || previousDestId == R.id.itemTransactionListFragment) {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             if (filterPerson != null && viewModel.getIdTransaction() == -1) { // TransactionList was filtered by Person and we are creating a new Transaction
                 spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(filterPerson.name));

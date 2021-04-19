@@ -43,10 +43,10 @@
             app:argType="integer"
             android:defaultValue="0" />
         <action
-            android:id="@+id/action_itemTransactionList_to_editPerson"
+            android:id="@+id/action_transactionList_to_editPerson"
             app:destination="@id/editPersonFragment" />
         <action
-            android:id="@+id/action_itemTransactionList_to_editTransaction"
+            android:id="@+id/action_transactionList_to_editTransaction"
             app:destination="@id/editTransactionFragment" />
     </fragment>
     <fragment
