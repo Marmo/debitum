@@ -17,25 +17,30 @@ import java.util.concurrent.ExecutionException;
 public class TransactionListViewModel extends AndroidViewModel {
 
     private final TransactionRepository txnRepository;
-    private final PersonRepository personRepository;
 
-    private final LiveData<List<TransactionWithPerson>> transactions;
-    private Person filterPerson;
+    private final LiveData<List<TransactionWithPerson>> moneyTransactions;
+    private final LiveData<List<TransactionWithPerson>> itemTransactions;
 
     public TransactionListViewModel (Application application) {
         super(application);
         txnRepository = new TransactionRepository(application);
-        personRepository = new PersonRepository(application);
-        transactions = txnRepository.getAllTransactions();
+        moneyTransactions = txnRepository.getAllMoneyTransactions();
+        itemTransactions = txnRepository.getAllItemTransactions();
     }
 
-    public LiveData<List<TransactionWithPerson>> getTransactions() { return transactions; }
-    public void setFilterPerson(int idPerson) throws ExecutionException, InterruptedException {
-        filterPerson = personRepository.getPersonById(idPerson);
+    public LiveData<List<TransactionWithPerson>> getMoneyTransactions() {
+        return moneyTransactions;
     }
-    public Person getFilterPerson() { return filterPerson; }
+    public LiveData<List<TransactionWithPerson>> getItemTransactions() {
+        return itemTransactions;
+    }
 
-    public void insert(Transaction transaction) { txnRepository.insert(transaction); }
+    public void insert(Transaction transaction) {
+        txnRepository.insert(transaction);
+    }
 
-    public void delete(Transaction transaction) { txnRepository.delete(transaction); }
+    public void delete(Transaction transaction) {
+        txnRepository.delete(transaction);
+    }
+
 }

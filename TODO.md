@@ -1,11 +1,12 @@
 # code
-- bottom navigation
 - db import export
 - icon in front of person rows
 - show totals on top of recycler views
 - use RxJava
 - put filterPerson in filtered Lists into header to indicate filtering
 - add "x" in filter Header to dismiss filter
+- remove up arrow on all top-level nav destinations
+- create a way to get from person sum list directly to filtered items list
 
 # visuals
 - refactor vector drawables (readability)

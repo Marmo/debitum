@@ -12,7 +12,8 @@ public class TransactionRepository {
 
     private final TransactionDao transactionDao;
 
-    private final LiveData<List<TransactionWithPerson>> allTransactions;
+    private final LiveData<List<TransactionWithPerson>> allMoneyTransactions;
+    private final LiveData<List<TransactionWithPerson>> allItemTransactions;
     private final LiveData<List<PersonWithTransactions>> allPersonsWithTransactions;
 
     // Note that in order to unit test the Repository, you have to remove the Application
@@ -24,15 +25,21 @@ public class TransactionRepository {
 
         transactionDao = db.transactionDao();
 
-        allTransactions = transactionDao.getAllTransactions();
+        allMoneyTransactions = transactionDao.getAllTransactions(true);
+        allItemTransactions = transactionDao.getAllTransactions(false);
         allPersonsWithTransactions = transactionDao.getAllPersonsWithTransactions();
     }
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    public LiveData<List<TransactionWithPerson>> getAllTransactions() {
-        return allTransactions;
+    public LiveData<List<TransactionWithPerson>> getAllMoneyTransactions() {
+        return allMoneyTransactions;
     }
+
+    public LiveData<List<TransactionWithPerson>> getAllItemTransactions() {
+        return allItemTransactions;
+    }
+
     public LiveData<List<PersonWithTransactions>> getAllPersonsWithTransactions() { return allPersonsWithTransactions; }
 
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures

@@ -39,6 +39,7 @@ import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.EditTransactionViewModel;
+import org.ebur.debitum.viewModel.PersonFilterViewModel;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -51,6 +52,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
     public static final String ARG_ID_TRANSACTION = "idTransaction";
 
     private EditTransactionViewModel viewModel;
+    private PersonFilterViewModel personFilterViewModel;
     private NavController nav;
 
     ArrayAdapter<String> nameSpinnerAdapter;
@@ -73,6 +75,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
                              Bundle savedInstanceState) {
 
         viewModel = new ViewModelProvider(this).get(EditTransactionViewModel.class);
+        personFilterViewModel = new ViewModelProvider(requireActivity()).get(PersonFilterViewModel.class);
         nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_edit_transaction, container, false);
@@ -125,17 +128,12 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         // If this is the case AND we want to create a new transaction prefill the name spinner with
         // the name by which the TransactionListFragment was filtered
         NavBackStackEntry previous = nav.getPreviousBackStackEntry();
-        if (previous.getDestination().getId() == R.id.transactionListFragment) {
-            int idPerson = previous.getArguments().getInt(TransactionListFragment.ARG_FILTER_ID_PERSON);
-            if (idPerson > 0 && viewModel.getIdTransaction() == -1) { // TransactionList was filtered by Person and we are creating a new Transaction
-                try {
-                    String name = viewModel.getPersonById(idPerson).name;
-                    spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(name));
-                    viewModel.setSelectedName(name);
-                } catch (ExecutionException | InterruptedException e) {
-                    // TODO better Exception handling: do not change spinnerNameView + show snackbar advising to double check person
-                    e.printStackTrace();
-                }
+        int previousDestId = previous.getDestination().getId();
+        if (previousDestId == R.id.transactionListFragment || previousDestId == R.id.itemTransactionListFragment) {
+            Person filterPerson = personFilterViewModel.getFilterPerson();
+            if (filterPerson != null && viewModel.getIdTransaction() == -1) { // TransactionList was filtered by Person and we are creating a new Transaction
+                spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(filterPerson.name));
+                viewModel.setSelectedName(filterPerson.name);
             }
         }
     }

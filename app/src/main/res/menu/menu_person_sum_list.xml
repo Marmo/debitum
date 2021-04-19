@@ -5,6 +5,6 @@
     <item
         android:id="@+id/miAddPerson"
         android:icon="@drawable/ic_baseline_person_add_24"
-        android:title="@string/main_toolbar_add_person"
+        android:title="@string/toolbar_add_person"
         app:showAsAction="ifRoom"/>
 </menu>

@@ -1,13 +1,11 @@
 package org.ebur.debitum.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.selection.ItemDetailsLookup;
@@ -77,7 +75,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         NavController nav = Navigation.findNavController(v);
         Bundle args = new Bundle();
         args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, transactionWithPerson.transaction.idTransaction);
-        nav.navigate(R.id.action_transactionListFragment_to_editTransactionFragment, args);
+        nav.navigate(R.id.action_transactionList_to_editTransaction, args);
     }
 
     // anonymous implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails

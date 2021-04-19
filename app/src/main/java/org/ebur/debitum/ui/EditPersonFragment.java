@@ -131,7 +131,7 @@ public class EditPersonFragment extends Fragment {
         builder.setPositiveButton(R.string.delete_dialog_confirm, (dialog, id) -> {
             viewModel.delete(viewModel.getEditedPerson());
             // navigate back to PersonSumListFragment, as any views related to the deleted Person will become invalid
-            nav.navigate(R.id.action_editPersonFragment_to_personSumListFragment);
+            nav.navigate(R.id.action_editPerson_to_personSumList_after_delete);
             Snackbar.make(requireView(),
                     getString(R.string.edit_person_snackbar_deleted_person, viewModel.getEditedPerson().name),
                     Snackbar.LENGTH_SHORT)

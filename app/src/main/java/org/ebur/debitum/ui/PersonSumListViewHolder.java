@@ -65,8 +65,8 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
     public void onClick(View v) {
         NavController navController = NavHostFragment.findNavController(FragmentManager.findFragment(v));
         Bundle args = new Bundle();
-        args.putInt(TransactionListFragment.ARG_FILTER_ID_PERSON, person.idPerson);
-        navController.navigate(R.id.action_personSumListFragment_to_transactionListFragment, args);
+        args.putParcelable(TransactionListFragment.ARG_FILTER_PERSON, person);
+        navController.navigate(R.id.action_personSumList_to_transactionList, args);
     }
 }
 

@@ -13,9 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,10 +26,6 @@ public class PersonSumListFragment extends Fragment {
 
     private PersonSumListViewModel viewModel;
     private NavController nav;
-
-    /*public static PersonSumListFragment newInstance() {
-        return new PersonSumListFragment();
-    }*/
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +72,6 @@ public class PersonSumListFragment extends Fragment {
     public void onAddPersonAction() {
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, null);
-        nav.navigate(R.id.action_personSumListFragment_to_editPersonFragment, args);
+        nav.navigate(R.id.action_personSumList_to_editPerson, args);
     }
 }

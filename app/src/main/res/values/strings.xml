@@ -8,22 +8,24 @@
     <string name="delete_dialog_confirm">Delete</string>
     <string name="delete_dialog_cancel">Cancel</string>
 
-    <!-- MainActivity-->
-    <string name="title_fragment_person_sum_list">People</string>
-    <string name="title_fragment_transaction_list">Transactions</string>
-    <string name="main_toolbar_add_person">Add Person</string>
-    <string name="main_toolbar_edit_person">Edit Person</string>
-    <string name="main_toolbar_delete_transaction">Delete Transaction</string>
-    <string name="main_toolbar_edit_transaction">Edit Transaction</string>
-    <string name="main_toolbar_search_transaction">Transaction List</string>
+    <!-- MainActivity -->
     <string name="fab_content_description">Add Transaction</string>
 
+    <!-- PersonSumListFragment -->
+    <string name="title_fragment_person_sum_list">People</string>
     <string name="person_sum_list_you_owe">you owe</string>
     <string name="person_sum_list_no_debt">no debt</string>
     <string name="person_sum_list_you_lent">you lent</string>
+    <string name="toolbar_add_person">Add Person</string>
 
+    <!-- TransactionListFragment -->
+    <string name="title_fragment_transaction_list">Transactions</string>
+    <string name="title_fragment_transaction_list_items">Items</string>
     <string name="transaction_list_gave">gave</string>
     <string name="transaction_list_received">received</string>
+    <string name="toolbar_edit_person">Edit Person</string>
+    <string name="toolbar_delete_transaction">Delete Transaction</string>
+    <string name="toolbar_edit_transaction">Edit Transaction</string>
 
     <!-- EditTransactionFragment -->
     <string name="title_fragment_edit_transaction_add">Add Transaction</string>

@@ -10,6 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavArgument;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -18,6 +19,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.viewModel.PersonFilterViewModel;
+import org.ebur.debitum.viewModel.TransactionListViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         });
         bottomNav.setItemOnTouchListener(R.id.btm_items, (view, event) -> {
             view.performClick();
-            nav.navigate(R.id.transactionListFragment);
+            nav.navigate(R.id.itemTransactionListFragment);
             return true;
         });
     }

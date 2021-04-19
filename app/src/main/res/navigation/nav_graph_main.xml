@@ -11,10 +11,10 @@
         android:label="@string/title_fragment_person_sum_list"
         tools:layout="@layout/fragment_person_sum_list">
         <action
-            android:id="@+id/action_personSumListFragment_to_transactionListFragment"
+            android:id="@+id/action_personSumList_to_transactionList"
             app:destination="@id/transactionListFragment" />
         <action
-            android:id="@+id/action_personSumListFragment_to_editPersonFragment"
+            android:id="@+id/action_personSumList_to_editPerson"
             app:destination="@id/editPersonFragment" />
     </fragment>
     <fragment
@@ -24,12 +24,29 @@
         tools:layout="@layout/fragment_transaction_list">
         <argument
             android:name="filterBy"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="0" />
         <action
-            android:id="@+id/action_transactionListFragment_to_editPersonFragment"
+            android:id="@+id/action_transactionList_to_editPerson"
             app:destination="@id/editPersonFragment" />
         <action
-            android:id="@+id/action_transactionListFragment_to_editTransactionFragment"
+            android:id="@+id/action_transactionList_to_editTransaction"
+            app:destination="@id/editTransactionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemTransactionListFragment"
+        android:name="org.ebur.debitum.ui.ItemTransactionListFragment"
+        android:label="@string/title_fragment_transaction_list_items"
+        tools:layout="@layout/fragment_transaction_list" >
+        <argument
+            android:name="filterBy"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_itemTransactionList_to_editPerson"
+            app:destination="@id/editPersonFragment" />
+        <action
+            android:id="@+id/action_itemTransactionList_to_editTransaction"
             app:destination="@id/editTransactionFragment" />
     </fragment>
     <fragment
@@ -43,7 +60,7 @@
             app:argType="org.ebur.debitum.database.Person"
             app:nullable="true" />
         <action
-            android:id="@+id/action_editPersonFragment_to_personSumListFragment"
+            android:id="@+id/action_editPerson_to_personSumList_after_delete"
             app:destination="@id/personSumListFragment"
             app:popUpTo="@id/personSumListFragment"
             app:popUpToInclusive="true" />
@@ -51,7 +68,8 @@
     <fragment
         android:id="@+id/editTransactionFragment"
         android:name="org.ebur.debitum.ui.EditTransactionFragment"
-        android:label="@string/title_fragment_edit_transaction" >
+        android:label="@string/title_fragment_edit_transaction"
+        tools:layout="@layout/fragment_edit_transaction" >
         <argument
             android:name="idTransaction"
             app:argType="integer"

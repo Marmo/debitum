@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
-//import androidx.room.Transaction;
 
 import java.util.List;
 
@@ -16,9 +15,8 @@ public interface TransactionDao {
 
     // get all transactions
     @androidx.room.Transaction
-    @Query("select txn.* from txn order by timestamp desc")
-    LiveData<List<TransactionWithPerson>> getAllTransactions();
-
+    @Query("select txn.* from txn where is_monetary = :isMonetary order by timestamp desc")
+    LiveData<List<TransactionWithPerson>> getAllTransactions(boolean isMonetary);
 
     // get all persons with at least one transaction and a list of all of their transactions
     @androidx.room.Transaction
