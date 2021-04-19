@@ -85,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
             nav.navigate(R.id.itemTransactionListFragment);
             return true;
         });
+
+        nav.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            int id = destination.getId();
+            if (id == R.id.personSumListFragment) bottomNav.setSelectedItemId(R.id.btm_people);
+            else if(id == R.id.transactionListFragment) bottomNav.setSelectedItemId(R.id.btm_money);
+            else if (id == R.id.itemTransactionListFragment) bottomNav.setSelectedItemId(R.id.btm_items);
+        });
     }
 
     public void setToolbarTitle(int titleResId) {
