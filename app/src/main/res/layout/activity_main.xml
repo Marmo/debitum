@@ -30,6 +30,7 @@
             android:background="?attr/colorSecondary"
             android:elevation="2dp"
             android:minHeight="?attr/actionBarSize"
+            app:titleMarginStart="32dp"
             android:theme="?attr/actionBarTheme"
             app:logo="@drawable/ic_baseline_account_circle_24"
             app:menu="@menu/filter_bar" />
