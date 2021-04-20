@@ -4,6 +4,7 @@
 - icon in front of person rows
 - show totals on top of recycler views
 - remove up arrow on all top-level nav destinations
+- set isMonetary switch in editTransaction when coming from item view
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
@@ -18,7 +19,7 @@
 - understand and use themes and styles
 
 # other
-# 1.0
+## 1.0
 - Readme
 - License
 - Release 
