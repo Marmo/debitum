@@ -17,6 +17,7 @@
 - add dividers
 - rearrange + restyle list items
 - understand and use themes and styles
+- app icon
 
 # other
 ## 1.0
