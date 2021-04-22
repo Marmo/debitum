@@ -79,4 +79,5 @@
     <string name="restore_confirm">Overwrite</string>
     <string name="restore_confirm_text">Really overwrite all existing data with data from Backup?\nApp will be restarted after successful restore.</string>
     <string name="restore_confirm_title">Restore from Backup</string>
+    <string name="total">header_label</string>
 </resources>
