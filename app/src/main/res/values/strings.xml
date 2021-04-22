@@ -42,6 +42,7 @@
     <string name="edit_transaction_confirm_deletion_title">Delete Transaction</string>
     <string name="edit_transaction_confirm_deletion_text">Really delete this Transaction?</string>
     <string name="edit_transaction_snackbar_deleted_transaction">Transaction deleted</string>
+    <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed in amount</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Edit Person</string>

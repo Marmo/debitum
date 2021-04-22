@@ -18,6 +18,7 @@
 - rearrange + restyle list items
 - understand and use themes and styles
 - app icon
+- tap-on-item visualization
 
 # other
 ## 1.0

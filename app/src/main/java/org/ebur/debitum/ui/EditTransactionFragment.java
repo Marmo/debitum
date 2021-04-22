@@ -349,9 +349,16 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         // remove all decimal separators (this the final result for non-monetaries, where only integers are allowed)
         formattedAmount = input.replaceAll("[.,]", "");
 
+        // check if input is short enough to be parsed as integer later
+        if(formattedAmount.length()>9) { // we might be above 2^32=4.294.967.296 and later want to make an int of this String
+            formattedAmount = formattedAmount.substring(0, formattedAmount.length() - 1); // so we simply remove the last digit
+            Toast.makeText(requireContext(), R.string.edit_transaction_snackbar_max_amount, Toast.LENGTH_SHORT).show();
+        }
+
         if (switchIsMonetaryView.isChecked()) {
             // add decSep two digits from the right, while adding leading zeros if needed
             // this is accomplished by removing decSep --> converting to int --> dividing by 100 --> converting to local String
+
             formattedAmount = Transaction.formatMonetaryAmount(Integer.parseInt(formattedAmount), Locale.getDefault());
         }
         return formattedAmount;
