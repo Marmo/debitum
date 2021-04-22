@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Debitum.NoActionBar">
         <activity
+            android:name=".ui.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
+        <activity
             android:name=".ui.EditTransactionFragment"
             android:label="@string/title_fragment_edit_transaction"
             android:parentActivityName=".ui.MainActivity">

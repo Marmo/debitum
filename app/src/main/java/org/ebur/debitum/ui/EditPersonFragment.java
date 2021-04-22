@@ -137,9 +137,9 @@ public class EditPersonFragment extends Fragment {
                     Snackbar.LENGTH_SHORT)
                     .show();
         });
-        builder.setNegativeButton(R.string.delete_dialog_cancel, (dialog, id) -> dialog.cancel());
+        builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
 
-        builder.setMessage(getString(R.string.edit_person_confirm_deletion, viewModel.getEditedPerson().name))
+        builder.setMessage(getString(R.string.edit_person_confirm_deletion_text, viewModel.getEditedPerson().name))
                 .setTitle(R.string.edit_person_confirm_deletion_title);
         AlertDialog dialog = builder.create();
 

@@ -101,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
             nav.navigate(R.id.itemTransactionListFragment);
             return true;
         });
+        bottomNav.setItemOnTouchListener(R.id.btm_settings, (view, event) -> {
+            view.performClick();
+            nav.navigate(R.id.settingsActivity);
+            return true;
+        });
 
         nav.addOnDestinationChangedListener((controller, destination, arguments) -> {
             int id = destination.getId();

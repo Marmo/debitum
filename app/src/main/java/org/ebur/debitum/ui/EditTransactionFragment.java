@@ -259,9 +259,9 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
                     Snackbar.LENGTH_SHORT)
                     .show();
         });
-        builder.setNegativeButton(R.string.delete_dialog_cancel, (dialog, id) -> dialog.cancel());
+        builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
 
-        builder.setMessage(R.string.edit_transaction_confirm_deletion)
+        builder.setMessage(R.string.edit_transaction_confirm_deletion_text)
                 .setTitle(R.string.edit_transaction_confirm_deletion_title);
         AlertDialog dialog = builder.create();
 

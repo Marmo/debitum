@@ -6,7 +6,7 @@
     <string name="button_label_save">Save</string>
     <string name="button_label_delete">Delete</string>
     <string name="delete_dialog_confirm">Delete</string>
-    <string name="delete_dialog_cancel">Cancel</string>
+    <string name="dialog_cancel">Cancel</string>
 
     <!-- MainActivity -->
     <string name="fab_content_description">Add Transaction</string>
@@ -40,7 +40,7 @@
     <string name="add_transaction_gave">Gave</string>
     <string name="add_transaction_received">Received</string>
     <string name="edit_transaction_confirm_deletion_title">Delete Transaction</string>
-    <string name="edit_transaction_confirm_deletion">Really delete this Transaction?</string>
+    <string name="edit_transaction_confirm_deletion_text">Really delete this Transaction?</string>
     <string name="edit_transaction_snackbar_deleted_transaction">Transaction deleted</string>
 
     <!-- EditPersonFragment -->
@@ -48,7 +48,7 @@
     <string name="title_fragment_edit_person_add">Add Person</string>
     <string name="edit_person_name">Name</string>
     <string name="edit_person_confirm_deletion_title">Delete Person</string>
-    <string name="edit_person_confirm_deletion">Really delete %1$s and all of their transactions?</string>
+    <string name="edit_person_confirm_deletion_text">Really delete %1$s and all of their transactions?</string>
     <string name="edit_person_snackbar_deleted_person">%1$s deleted</string>
     <string name="error_message_enter_name">Please enter a name!</string>
     <string name="error_message_name_exists">%1$s already exists, please enter a different name!</string>
@@ -57,4 +57,25 @@
     <string name="bottom_nav_items">Items</string>
     <string name="bottom_nav_settings">Settings</string>
     <string name="dismiss_filter">dismiss filter</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Settings Activity -->
+    <string name="pref_maintenance_header">Maintenance</string>
+    <string name="backup_successful">Database successfully backed up to external storage</string>
+    <string name="backup_failed">Backup failed! Internal error message: %1$s</string>
+    <!--<string name="restore_successful">Database successfully restored from external storage!</string>-->
+    <string name="restore_failed">Restore failed! Internal error message: %1$s</string>
+
+    <string name="pref_backup_title">Backup database</string>
+    <string name="pref_restore_title">Restore database</string>
+    <string name="pref_backup_summary">Location: %1$s</string>
+    <string name="pref_restore_summary">from previously backed up "%1$s" in external storage</string>
+    <string name="pref_help_header">Help</string>
+    <string name="pref_github_title">View on GitHub</string>
+    <string name="pref_github_summary">do i need this?</string>
+    <string name="pref_about_title">About</string>
+    <string name="pref_about_summary">hmmm … not sure</string>
+    <string name="restore_confirm">Overwrite</string>
+    <string name="restore_confirm_text">Really overwrite all existing data with data from Backup?\nApp will be restarted after successful restore.</string>
+    <string name="restore_confirm_title">Restore from Backup</string>
 </resources>

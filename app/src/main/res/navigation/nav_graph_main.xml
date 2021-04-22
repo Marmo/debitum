@@ -75,4 +75,9 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="org.ebur.debitum.ui.SettingsActivity"
+        android:label="@string/title_activity_settings"
+        tools:layout="@layout/activity_settings"/>
 </navigation>

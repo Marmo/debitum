@@ -1,10 +1,10 @@
 # code
 ## 1.0
-- db import export
 - icon in front of person rows
 - show totals on top of recycler views
 - remove up arrow on all top-level nav destinations
 - set isMonetary switch in editTransaction when coming from item view
+- move away from ir.androidexception.roomdatabasebackupandrestore Backup lib, backup as sqlite-db
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
