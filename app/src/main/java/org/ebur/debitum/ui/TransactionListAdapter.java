@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.ebur.debitum.database.Person;
+import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 
 public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, RecyclerView.ViewHolder> {
@@ -31,7 +33,8 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, R
             case TYPE_ITEM:
                 return TransactionListViewHolder.create(parent);
             default:
-                return null;
+                throw new ClassCastException("Unknown viewType");
+
         }
     }
 
@@ -39,7 +42,8 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, R
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof HeaderViewHolder) {
             HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
-            headerHolder.bind(100);
+            TransactionWithPerson header = getItem(position);
+            headerHolder.bind(header.transaction.amount, header.transaction.isMonetary);
         }
         else if(holder instanceof TransactionListViewHolder) {
             TransactionListViewHolder itemHolder = (TransactionListViewHolder) holder;
@@ -51,7 +55,9 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, R
     }
 
     @Override
-    public long getItemId(int position) { return getItem(position).transaction.idTransaction; }
+    public long getItemId(int position) {
+        return getItem(position).transaction.idTransaction;
+    }
 
     @Override
     public int getItemViewType(int position) {
@@ -67,7 +73,7 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, R
 
         @Override
         public boolean areItemsTheSame(@NonNull TransactionWithPerson oldItem, @NonNull TransactionWithPerson newItem) {
-            return oldItem.equals(newItem);
+            return oldItem.transaction.idTransaction ==  newItem.transaction.idTransaction;
         }
 
         @Override

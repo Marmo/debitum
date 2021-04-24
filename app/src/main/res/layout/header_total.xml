@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="32dp">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/header_label"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="64dp"
-        android:text="@string/total"
-        android:layout_weight="1"/>
+        android:layout_marginVertical="32dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/header_label"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/header_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/header_label"
+        android:layout_alignParentEnd="true"
         android:layout_marginEnd="32dp"
-        android:layout_gravity="center|end"/>
-</LinearLayout>
+        android:fontFamily="sans-serif-light"
+        android:textSize="30sp"
+        tools:text="123" />
+
+    <TextView
+        android:id="@+id/header_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_total"
+        android:layout_alignEnd="@id/header_total"
+        android:text="@string/header_desc_items"
+        android:textSize="12sp" />
+
+</RelativeLayout>

@@ -32,7 +32,7 @@ public class Transaction {
     }
     public Transaction(int idPerson, int amount, boolean isMonetary, String description, Date timestamp) {
         this.idPerson = idPerson;
-        this.amount = amount; //negative amounts denote money given to the user, positive means given to person
+        this.amount = amount;
         this.description = description;
         this.timestamp = timestamp;
         this.isMonetary = isMonetary;
@@ -41,7 +41,7 @@ public class Transaction {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_transaction") public int idTransaction;
     // Money: lent amount in 1/100 Euro/Dollar/...,
-    //        positive means user gave money to person, negative means user receivef money from person
+    //        positive means user gave money to person, negative means user received money from person
     // Things: Number of things
     @ColumnInfo(name = "amount") public int amount;
     @ColumnInfo(name= "id_person") public int idPerson;
@@ -72,9 +72,9 @@ public class Transaction {
 
     // TODO create getter and setter methods and make members private
 
-    /****************************
-     * static tool methods
-     ****************************/
+    //---------------------
+    // static tool methods
+    // --------------------
 
     /**
      * @param amount Amount to be formatted in cents (1/100 of main currency)
@@ -104,6 +104,16 @@ public class Transaction {
         return signed ? sum : Math.abs(sum);
     }
     public static int getSum(List<Transaction> transactions) { return Transaction.getSum(transactions,true); }
+
+    /**
+     * @param transactions List of [Transaction]s for which the number of lent items shall be calculated
+     * @return number of all lent items (sum of |amount| of all non-monetary transactions)
+     */
+    public static int getNumberOfItems(List<Transaction> transactions) {
+        int number = 0;
+        for(Transaction t : transactions) if (!t.isMonetary) number += Math.abs(t.amount);
+        return number;
+    }
 
     /**
      * @param signed if returned formatted sum shall include a negative-sign

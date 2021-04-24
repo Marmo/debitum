@@ -1,7 +1,6 @@
 # code
 ## 1.0
 - icon in front of person rows
-- show totals on top of recycler views
 - remove up arrow on all top-level nav destinations
 - set isMonetary switch in editTransaction when coming from item view
 - do something about the integer overflow when summing too many transactions 

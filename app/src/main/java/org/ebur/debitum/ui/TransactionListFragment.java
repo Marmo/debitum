@@ -30,6 +30,7 @@ import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,8 +103,18 @@ public class TransactionListFragment extends Fragment {
     protected void observeTransactionsLiveData() {
         viewModel.getMoneyTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
-            adapter.submitList(filter(transactions, filterPerson));
+            List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
+            listForAdapter.add(0, createTotalHeader(Transaction.getSum(TransactionWithPerson.getTransactions(listForAdapter))));
+            adapter.submitList(listForAdapter);
         });
+    }
+
+    // create a TransactionWithPerson containing the header information for the RecyclerView
+    protected TransactionWithPerson createTotalHeader(int total) {
+        TransactionWithPerson header = new TransactionWithPerson(new Transaction(Integer.MIN_VALUE), new Person("PONDER STIBBONS"));
+        header.transaction.amount = total;
+        header.transaction.isMonetary = true; // used to indicate correct number formatting in HeaderViewHolder
+        return header;
     }
 
     @Override
@@ -199,7 +210,10 @@ public class TransactionListFragment extends Fragment {
 
     protected List<TransactionWithPerson> filter(List<TransactionWithPerson> transactions, @Nullable Person filterPerson) {
         if (transactions == null) return null;
-        if (filterPerson == null) return transactions;
+        // IMPORTANT: return a copy of the passed list, as we add a header item afterwards and do
+        // not want it to be added to the viewModel's original list, too (instead just to the
+        // adapter's copy of the list)
+        if (filterPerson == null) return new ArrayList<>(transactions);
         // http://javatricks.de/tricks/liste-filtern
         else return transactions.stream()
                 .filter(twp -> twp.person.equals(filterPerson))
