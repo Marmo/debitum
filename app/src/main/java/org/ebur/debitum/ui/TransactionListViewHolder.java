@@ -46,16 +46,16 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         int sign = Integer.compare(twp.transaction.amount, 0);
         switch (sign) {
             case -1:
-                gaveReceivedString = R.string.transaction_list_gave;
-                amountColor = R.color.owe_green;
-                break;
-            case 1:
                 gaveReceivedString = R.string.transaction_list_received;
                 amountColor = R.color.lent_red;
                 break;
+            case 0:
+            case 1:
+                gaveReceivedString = R.string.transaction_list_gave;
+                amountColor = R.color.owe_green;
+                break;
             default:
-                gaveReceivedString = -1;
-                amountColor = -1;
+                throw new IllegalStateException("Unexpected value (sign): " + sign);
         }
         txnGaveReceivedView.setText(gaveReceivedString);
         txnAmountView.setTextColor(txnAmountView.getResources().getColor(amountColor, null));

@@ -41,7 +41,7 @@ public class Transaction {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_transaction") public int idTransaction;
     // Money: lent amount in 1/100 Euro/Dollar/...,
-    //        positive means user gave money to person, negative means user received money from person
+    //        negative means user gave money to person, positive means user received money from person
     // Things: Number of things
     @ColumnInfo(name = "amount") public int amount;
     @ColumnInfo(name= "id_person") public int idPerson;

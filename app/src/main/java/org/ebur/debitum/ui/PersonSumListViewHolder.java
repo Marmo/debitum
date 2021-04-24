@@ -46,7 +46,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
 
         int sign = Transaction.getSumSign(pwt.transactions);
         switch(sign) {
-            case -1:
+            case 1:
                 oweLentLabelView.setText(R.string.person_sum_list_you_owe);
                 sumView.setTextColor(sumView.getResources().getColor(R.color.owe_green, null));
                 break;
@@ -55,7 +55,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
                 sumView.setVisibility(View.INVISIBLE);
                 sumView.setHeight(0);
                 break;
-            case 1:
+            case -1:
                 oweLentLabelView.setText(R.string.person_sum_list_you_lent);
                 sumView.setTextColor(sumView.getResources().getColor(R.color.lent_red, null));
         }

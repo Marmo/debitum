@@ -36,8 +36,8 @@ class HeaderViewHolder extends RecyclerView.ViewHolder {
 
 
 
-        int amountColor = total<0 ? R.color.owe_green : R.color.lent_red;
-        totalView.setTextColor(totalView.getResources().getColor(amountColor, null));
+        int totalColor = total>0 ? R.color.owe_green : R.color.lent_red;
+        totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
     }
 
     static HeaderViewHolder create(ViewGroup parent) {

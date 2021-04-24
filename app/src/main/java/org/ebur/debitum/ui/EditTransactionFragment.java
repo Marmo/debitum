@@ -89,7 +89,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         editAmountView = root.findViewById(R.id.edit_amount);
         editAmountView.addTextChangedListener(new AmountTextWatcher());
         switchIsMonetaryView = root.findViewById(R.id.switch_monetary);
-        switchIsMonetaryView.setOnCheckedChangeListener((view, checked) -> onSwitchIsMonetaryChanged(view, checked));
+        switchIsMonetaryView.setOnCheckedChangeListener(this::onSwitchIsMonetaryChanged);
         editDescView = root.findViewById(R.id.edit_description);
         editDateView = root.findViewById(R.id.edit_date);
         editDateView.setOnClickListener((view) -> showDatePickerDialog());
@@ -128,7 +128,9 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         // If this is the case AND we want to create a new transaction prefill the name spinner with
         // the name by which the TransactionListFragment was filtered
         NavBackStackEntry previous = nav.getPreviousBackStackEntry();
-        int previousDestId = previous.getDestination().getId();
+        int previousDestId = 0;
+        if (previous != null)
+            previousDestId = previous.getDestination().getId();
         if (previousDestId == R.id.transactionListFragment
                 || previousDestId == R.id.itemTransactionListFragment) {
             Person filterPerson = personFilterViewModel.getFilterPerson();
@@ -156,7 +158,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
             nav.navigateUp();
         }
         spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(txn.person.name));
-        gaveRadio.setChecked(txn.transaction.amount<0);
+        gaveRadio.setChecked(txn.transaction.amount>0); // per default received is set (see layout xml)
         // IMPORTANT: set switchIsMonetaryView _before_ setting amount, because on setting amount the
         // AmountTextWatcher::afterTextChanged is called, and within this method isMonetary is needed to apply correct formatting!
         switchIsMonetaryView.setChecked(txn.transaction.isMonetary);
@@ -200,8 +202,8 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
                 Toast.makeText(requireContext(), R.string.add_transaction_incomplete_data, Toast.LENGTH_SHORT).show();
             } else {
                 //evaluate received-gave-radios
-                int factor = 1;
-                if (gaveRadio.isChecked()) factor = -1;
+                int factor = -1;
+                if (gaveRadio.isChecked()) factor = 1;
 
                 boolean isMonetary = switchIsMonetaryView.isChecked();
 
@@ -298,6 +300,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
             final Calendar c = Calendar.getInstance();
             c.set(year, month, day);
             Date d = new Date(c.getTimeInMillis());
+            assert fragment != null;
             fragment.viewModel.setTimestamp(d);
             fragment.editDateView.setText(Utilities.formatDate(d, getString(R.string.date_format)));
         }
