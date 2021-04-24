@@ -19,4 +19,11 @@ public class ItemTransactionListFragment extends TransactionListFragment {
             adapter.submitList(listForAdapter);
         });
     }
+
+    @Override
+    protected TransactionWithPerson createTotalHeader(int total) {
+        TransactionWithPerson header = super.createTotalHeader(total);
+        header.transaction.isMonetary = false; // used to indicate correct number formatting in HeaderViewHolder
+        return header;
+    }
 }

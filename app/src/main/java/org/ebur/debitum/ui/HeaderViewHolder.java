@@ -30,7 +30,7 @@ class HeaderViewHolder extends RecyclerView.ViewHolder {
             descView.setVisibility(View.INVISIBLE);
         }
         else {
-            totalView.setText(total);
+            totalView.setText(String.format(Locale.getDefault(), "%d", total));
             descView.setVisibility(View.VISIBLE);
         }
 
