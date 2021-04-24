@@ -24,6 +24,6 @@
 ## 1.0
 - german translation
 - Readme
-- License
+- License (Vector assets!)
 - Release 
 - FDroid
