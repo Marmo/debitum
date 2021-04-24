@@ -23,21 +23,15 @@ class HeaderViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(int total, boolean isMonetary) {
         if (isMonetary) {
-            // factor -1: we want to see negative numbers if we owe money to others, while the
-            // amount in Transaction objects is positive in case someone gave us money
-            // TODO maybe the logic in Transaction should be also; negative amount if someone lends me money??
-            totalView.setText(Transaction.formatMonetaryAmount(-1 * total));
+            totalView.setText(Transaction.formatMonetaryAmount(total));
             descView.setVisibility(View.INVISIBLE);
+            int totalColor = total>0 ? R.color.owe_green : R.color.lent_red;
+            totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
         }
         else {
             totalView.setText(String.format(Locale.getDefault(), "%d", total));
             descView.setVisibility(View.VISIBLE);
         }
-
-
-
-        int totalColor = total>0 ? R.color.owe_green : R.color.lent_red;
-        totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
     }
 
     static HeaderViewHolder create(ViewGroup parent) {
