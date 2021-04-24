@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="5dip"
+    android:background="@drawable/list_item_background"
     android:elevation="4dp"
-    android:background="@drawable/list_item_background">
+    android:orientation="horizontal"
+    android:paddingVertical="18dp"
+    android:paddingHorizontal="24dp">
 
     <TextView
         android:id="@+id/list_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
         android:textSize="17sp"
-        android:textStyle="bold" />
+        tools:text="Rincewind" />
 
     <TextView
         android:id="@+id/list_item_description"
@@ -21,7 +24,8 @@
         android:layout_below="@id/list_item_name"
         android:layout_marginTop="7dp"
         android:textColor="#343434"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="Stamps" />
 
     <TextView
         android:id="@+id/list_item_gave_received"
@@ -30,27 +34,31 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:textColor="#343434"
-        android:textSize="12sp" />
+        android:textSize="10sp"
+        tools:text="RECEIVED" />
 
     <TextView
         android:id="@+id/list_item_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_below="@id/list_item_gave_received"
         android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:fontFamily="sans-serif-light"
         android:paddingVertical="12dp"
         android:textColor="#343434"
-        android:textSize="18sp" />
+        android:textSize="20sp"
+        tools:text="7,00" />
 
     <TextView
         android:id="@+id/list_item_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/list_item_description"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:layout_below="@id/list_item_amount"
+        android:layout_alignBaseline="@id/list_item_description"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:textColor="#343434"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="1986-03-02" />
 </RelativeLayout>
