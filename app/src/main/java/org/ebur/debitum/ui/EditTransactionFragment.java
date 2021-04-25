@@ -78,7 +78,7 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
 
         View root = inflater.inflate(R.layout.fragment_edit_transaction, container, false);
 
-        // get Transaction ID from Arguments, which is also used to determine if a new transaction is created
+        // get Transaction ID from Arguments, which is also used to determine, if a new transaction is created
         viewModel.setIdTransaction(requireArguments().getInt(ARG_ID_TRANSACTION, -1));
 
         // setup views
@@ -168,7 +168,6 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
     }
 
     private void fillViewsNewTransaction() {
-        //((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_transaction_add);
         toolbar.setTitle(R.string.title_fragment_edit_transaction_add);
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
@@ -178,6 +177,8 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
     }
 
     private void fillViewsEditTransaction() {
+        toolbar.setTitle(R.string.title_fragment_edit_transaction);
+
         TransactionWithPerson txn = null;
         try {
             txn = viewModel.getTransaction(viewModel.getIdTransaction());

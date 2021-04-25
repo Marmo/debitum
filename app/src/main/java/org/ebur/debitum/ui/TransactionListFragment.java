@@ -171,17 +171,17 @@ public class TransactionListFragment extends Fragment {
     private void onEditTransactionAction() {
         // we can assume, that only one row is selected, as the menu item is hidden else
         if (selectionTracker.getSelection().size() == 1) {
-            // clear selection, as nothing shall be selected upon returning from EditTransactionFragment
-            selectionTracker.clearSelection();
-
             // get selected idTransaction (note: TransactionListAdapter.getItemId returns the
             // item's transaction id as the unique row id, so we can use that here
             int selectedId = selectionTracker.getSelection().iterator().next().intValue();
 
+            // clear selection, as nothing shall be selected upon returning from EditTransactionFragment
+            selectionTracker.clearSelection();
+
             // start EditTransactionFragment
             Bundle args = new Bundle();
             args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, selectedId);
-            nav.navigate(R.id.action_transactionList_to_editTransaction);
+            nav.navigate(R.id.action_transactionList_to_editTransaction, args);
         }
     }
 
