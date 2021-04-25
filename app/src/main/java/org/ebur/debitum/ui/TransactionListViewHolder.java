@@ -1,13 +1,10 @@
 package org.ebur.debitum.ui;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,13 +12,12 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.TransactionWithPerson;
 
-class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+class TransactionListViewHolder extends RecyclerView.ViewHolder { //implements View.OnClickListener {
     private final TextView txnNameView;
     private final TextView txnDescriptionView;
     private final TextView txnAmountView;
     private final TextView txnGaveReceivedView;
     private final TextView txnTimestampView;
-    private TransactionWithPerson transactionWithPerson;
 
     private TransactionListViewHolder(View itemView) {
         super(itemView);
@@ -31,11 +27,10 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         txnGaveReceivedView = itemView.findViewById(R.id.list_item_gave_received);
         txnTimestampView = itemView.findViewById(R.id.list_item_timestamp);
 
-        itemView.setOnClickListener(this);
+        //itemView.setOnClickListener(this);
     }
 
     public void bind(TransactionWithPerson twp, boolean isSelected) {
-        this.transactionWithPerson = twp;
         txnNameView.setText(twp.person.name);
         txnDescriptionView.setText(twp.transaction.description);
         txnAmountView.setText(twp.transaction.getFormattedAmount(false));
@@ -70,13 +65,13 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         return new TransactionListViewHolder(view);
     }
 
-    @Override
+    /*@Override
     public void onClick(View v) {
         NavController nav = Navigation.findNavController(v);
         Bundle args = new Bundle();
         args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, transactionWithPerson.transaction.idTransaction);
         nav.navigate(R.id.action_transactionList_to_editTransaction, args);
-    }
+    }*/
 
     // anonymous implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails
     //     https://proandroiddev.com/a-guide-to-recyclerview-selection-3ed9f2381504?gi=ee4affe1b9d3
