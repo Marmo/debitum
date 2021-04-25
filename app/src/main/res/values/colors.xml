@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#9c1802</color>
-    <color name="primaryLightColor">#d44e2d</color>
-    <color name="primaryDarkColor">#670000</color>
-    <color name="secondaryColor">#727272</color>
-    <color name="secondaryLightColor">#a0a0a0</color>
-    <color name="secondaryDarkColor">#474747</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#ffffff</color>
+    <color name="red_totem_pole">#9c1802</color>
+    <color name="red_valencia">#d44e2d</color>
+    <color name="red_lonestar">#670000</color>
+    <color name="gray_dove_gray">#727272</color>
+    <color name="gray_silver_chalice">#a0a0a0</color>
+    <color name="gray_tundra">#474747</color>
     <color name="white">#ffffff</color>
+    <color name="white_alpha.6">#99ffffff</color>
     <color name="black">#000000</color>
-    <color name="lent_red">#FF1744</color><!--Material A400-->
-    <color name="owe_green">#64DD17</color><!--Material A700-->
+    <!--Material A400-->
+    <color name="lent_red">#FF1744</color>
+    <!--Material A700-->
+    <color name="owe_green">#64DD17</color>
     <color name="gray_light">#EDEDED</color>
 </resources>

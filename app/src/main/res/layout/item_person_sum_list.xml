@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:textColor="#343434"
         android:textSize="12sp" />
 
     <TextView
@@ -29,6 +28,5 @@
         android:layout_below="@id/list_item_owe_lent"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="3dp"
-        android:textColor="#343434"
         android:textSize="18sp" />
 </RelativeLayout>

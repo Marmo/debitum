@@ -4,28 +4,29 @@
     <!-- Base application theme. -->
     <style name="Theme.Debitum" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
-        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorPrimary">@color/red_totem_pole</item>
+        <item name="colorPrimaryVariant">@color/red_lonestar</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
-        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="colorSecondary">@color/gray_dove_gray</item>
+        <item name="colorSecondaryVariant">@color/gray_tundra</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="Theme.Debitum.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.Debitum.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Debitum.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!--
     <style name="Theme.Debitum.NoActionBar.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    -->
+
+    <style name="Theme.Debitum.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -35,11 +36,12 @@
     <style name="Theme.Debitum.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.Debitum.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryLightColor</item>
-        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/red_lonestar</item>
+        <item name="colorAccent">@color/red_valencia</item>
+        <item name="colorPrimary">@color/red_totem_pole</item>
         <item name="android:windowIsFloating">false</item>
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="actionMenuTextColor">@color/primaryTextColor</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
     </style>
+
 </resources>

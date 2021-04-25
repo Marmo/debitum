@@ -22,7 +22,7 @@
                 android:paddingStart="6dp"
                 app:contentInsetStartWithNavigation="0dp"
                 app:navigationIcon="@drawable/ic_baseline_close_24"
-                app:titleTextColor="@color/primaryTextColor"/>
+                app:titleTextColor="?attr/colorOnPrimary"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 

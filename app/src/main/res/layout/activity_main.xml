@@ -53,9 +53,9 @@
             android:layout_gravity="bottom"
             app:elevation="8dp"
             android:background="?attr/colorPrimary"
-            app:itemIconTint="@color/primaryTextColor"
-            app:itemTextColor="@color/primaryTextColor"
-            app:labelVisibilityMode="selected"
+            app:itemIconTint="@color/bottom_nav_item_selector"
+            app:itemTextColor="@color/bottom_nav_item_selector"
+            app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation" />
     </LinearLayout>
 

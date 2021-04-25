@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/list_item_name"
         android:layout_marginTop="7dp"
-        android:textColor="#343434"
         android:textSize="14sp"
         tools:text="Stamps" />
 
@@ -33,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:textColor="#343434"
         android:textSize="10sp"
         tools:text="RECEIVED" />
 
@@ -46,7 +44,6 @@
         android:layout_centerVertical="true"
         android:fontFamily="sans-serif-light"
         android:paddingVertical="12dp"
-        android:textColor="#343434"
         android:textSize="20sp"
         tools:text="7,00" />
 
@@ -58,7 +55,6 @@
         android:layout_alignBaseline="@id/list_item_description"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:textColor="#343434"
         android:textSize="14sp"
         tools:text="1986-03-02" />
 </RelativeLayout>
