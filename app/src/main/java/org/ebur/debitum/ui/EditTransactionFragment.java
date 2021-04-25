@@ -1,6 +1,5 @@
 package org.ebur.debitum.ui;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -8,8 +7,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +27,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
@@ -97,7 +92,7 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
                 // using long here, because enforcing of max. 9 digits in
                 // AmountTextWatcher.formatArbitraryAmount might not yet have taken place
                 boolean amountOk = Long.parseLong(s.toString().replaceAll("[.,]", "")) > 0;
-                Utilities.setMenuItemEnabled(toolbar.getMenu().findItem(R.id.miSaveTransaction), amountOk);
+                toolbar.getMenu().findItem(R.id.miSaveTransaction).setEnabled(amountOk);
             }
         });
         switchIsMonetaryView = root.findViewById(R.id.switch_monetary);
@@ -178,6 +173,8 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
+        // as amount is 0.00 saving will be disabled initially
+        toolbar.getMenu().findItem(R.id.miSaveTransaction).setEnabled(false);
     }
 
     private void fillViewsEditTransaction() {
