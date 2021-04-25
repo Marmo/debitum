@@ -32,7 +32,7 @@
     <!-- EditTransactionFragment -->
     <string name="title_fragment_edit_transaction_add">Add Transaction</string>
     <string name="title_fragment_edit_transaction">Edit Transaction</string>
-    <string name="hint_amount">Amount</string>
+    <string name="hint_amount">Amount *</string>
     <string name="hint_desc">Description</string>
     <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
     <string name="add_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>

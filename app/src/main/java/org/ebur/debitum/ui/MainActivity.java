@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
+import androidx.navigation.fragment.DialogFragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -26,7 +27,7 @@ import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final Set<Integer> DESTINATIONS_WITH_FAB = Stream.of(R.id.personSumListFragment, R.id.transactionListFragment, R.id.itemTransactionListFragment)
+    private final Set<Integer> DESTINATIONS_WITH_FAB_AND_BOTTOMNAV = Stream.of(R.id.personSumListFragment, R.id.transactionListFragment, R.id.itemTransactionListFragment)
             .collect(Collectors.toCollection(HashSet::new));
     private final Set<Integer> DESTINATIONS_WITH_PERSON_FILTER = Stream.of(R.id.transactionListFragment, R.id.itemTransactionListFragment)
             .collect(Collectors.toCollection(HashSet::new));
@@ -76,8 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
         // control FAB visibility
         nav.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if(DESTINATIONS_WITH_FAB.contains(destination.getId())) fab.show();
-            else fab.hide();
+            if(DESTINATIONS_WITH_FAB_AND_BOTTOMNAV.contains(destination.getId())) {
+                fab.show();
+            }
+            else {
+                fab.hide();
+            }
         });
 
         setupBottomNavigation();

@@ -24,8 +24,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
@@ -47,7 +47,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-public class EditTransactionFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+// https://medium.com/alexander-schaefer/implementing-the-new-material-design-full-screen-dialog-for-android-e9dcc712cb38
+public class EditTransactionFragment extends DialogFragment implements AdapterView.OnItemSelectedListener {
 
     public static final String ARG_ID_TRANSACTION = "idTransaction";
 
@@ -55,8 +56,9 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
     private PersonFilterViewModel personFilterViewModel;
     private NavController nav;
 
-    ArrayAdapter<String> nameSpinnerAdapter;
+    private ArrayAdapter<String> nameSpinnerAdapter;
 
+    private Toolbar toolbar;
     private Spinner spinnerNameView;
     private RadioButton gaveRadio;
     private EditText editAmountView;
@@ -67,6 +69,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FullScreenDialog);
     }
 
     @Override
@@ -84,10 +87,19 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         viewModel.setIdTransaction(requireArguments().getInt(ARG_ID_TRANSACTION, -1));
 
         // setup views
+        toolbar = root.findViewById(R.id.dialog_toolbar);
         spinnerNameView = root.findViewById(R.id.spinner_name);
         gaveRadio = root.findViewById(R.id.radioButton_gave);
         editAmountView = root.findViewById(R.id.edit_amount);
         editAmountView.addTextChangedListener(new AmountTextWatcher());
+        editAmountView.addTextChangedListener(new AmountTextWatcher() { // control if Save-Button should be enabled
+            @Override public void afterTextChanged(Editable s) {
+                // using long here, because enforcing of max. 9 digits in
+                // AmountTextWatcher.formatArbitraryAmount might not yet have taken place
+                boolean amountOk = Long.parseLong(s.toString().replaceAll("[.,]", "")) > 0;
+                Utilities.setMenuItemEnabled(toolbar.getMenu().findItem(R.id.miSaveTransaction), amountOk);
+            }
+        });
         switchIsMonetaryView = root.findViewById(R.id.switch_monetary);
         switchIsMonetaryView.setOnCheckedChangeListener(this::onSwitchIsMonetaryChanged);
         editDescView = root.findViewById(R.id.edit_description);
@@ -100,16 +112,35 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         spinnerNameView.setAdapter(nameSpinnerAdapter);
         spinnerNameView.setOnItemSelectedListener(this);
 
+        //setHasOptionsMenu(true);
+
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        toolbar.setNavigationOnClickListener(v -> dismiss());
+        toolbar.inflateMenu(R.menu.menu_edit_transaction);
+        toolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
 
         fillSpinnerNameView();
         prefillNameViewIfFromFilteredTransactionList();
 
         if (viewModel.isNewTransaction()) fillViewsNewTransaction();
         else fillViewsEditTransaction();
+    }
 
-        setHasOptionsMenu(true);
-
-        return root;
+    // make dialog fullscreen
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            dialog.getWindow().setLayout(width, height);
+        }
     }
 
     private void fillSpinnerNameView() {
@@ -142,7 +173,8 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
     }
 
     private void fillViewsNewTransaction() {
-        ((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_transaction_add);
+        //((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_transaction_add);
+        toolbar.setTitle(R.string.title_fragment_edit_transaction_add);
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
@@ -169,14 +201,15 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
                 getString(R.string.date_format)));
     }
 
+    /*
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.menu_edit_transaction, menu);
 
         //delete menu item senseless when creating new person
-        if(viewModel.isNewTransaction()) menu.removeItem(R.id.miDeleteTransaction);
-    }
+        //if(viewModel.isNewTransaction()) menu.removeItem(R.id.miDeleteTransaction);
+    }*/
 
     // ---------------------------
     // Toolbar Menu event handling
@@ -188,10 +221,10 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         if(id==R.id.miSaveTransaction) {
             onSaveTransactionAction();
             return true;
-        } else if(id==R.id.miDeleteTransaction) {
+        } /*else if(id==R.id.miDeleteTransaction) {
             onDeleteTransactionAction();
             return true;
-        }
+        }*/
         return true;
     }
 
@@ -245,7 +278,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
             }
     }
 
-    public void onDeleteTransactionAction() {
+    /*public void onDeleteTransactionAction() {
         // build Transaction
         Transaction transaction = new Transaction();
         transaction.idTransaction = viewModel.getIdTransaction();
@@ -268,7 +301,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
         AlertDialog dialog = builder.create();
 
         dialog.show();
-    }
+    }*/
 
     // ---------------------------
     // Date and TimePicker dialogs
@@ -374,7 +407,7 @@ public class EditTransactionFragment extends Fragment implements AdapterView.OnI
     public void onSwitchIsMonetaryChanged(View v, boolean checked) {
         if (checked) {
             switchIsMonetaryView.setText(R.string.switch_monetary_label_money);
-        } else if (!checked) {
+        } else {
             switchIsMonetaryView.setText(R.string.switch_monetary_label_item);
         }
     }

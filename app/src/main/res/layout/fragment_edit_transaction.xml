@@ -1,111 +1,143 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/spinner_name"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/add_transaction_item_height"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/radioGroupGaveReceived"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/big_padding"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_name">
-
-        <RadioButton
-            android:id="@+id/radioButton_received"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/add_transaction_received"
-            android:textSize="@dimen/text_size_add_transaction" />
+            app:elevation="6dp">
 
-        <RadioButton
-            android:id="@+id/radioButton_gave"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/dialog_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:paddingEnd="16dp"
+                android:paddingStart="6dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIcon="@drawable/ic_baseline_close_24"
+                app:titleTextColor="@color/primaryTextColor"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add_transaction_gave"
-            android:textSize="@dimen/text_size_add_transaction" />
+            android:layout_height="0dp"
+            android:layout_weight="2">
 
-    </RadioGroup>
+            <Spinner
+                android:id="@+id/spinner_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/add_transaction_item_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edit_amount"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/add_transaction_item_height"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/big_padding"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_amount"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
-        android:digits="0123456789.,"
-        android:minHeight="10dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/switch_monetary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupGaveReceived" />
+            <RadioGroup
+                android:id="@+id/radioGroupGaveReceived"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/big_padding"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_name">
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switch_monetary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:checked="true"
-        android:text="@string/switch_monetary_label_money"
-        android:textSize="@dimen/text_size_add_transaction"
-        app:layout_constraintBottom_toTopOf="@+id/edit_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupGaveReceived" />
+                <RadioButton
+                    android:id="@+id/radioButton_received"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/add_transaction_received"
+                    android:textSize="@dimen/text_size_add_transaction" />
 
-    <EditText
-        android:id="@+id/edit_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/big_padding"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_desc"
-        android:inputType="textAutoComplete"
-        android:minHeight="@dimen/add_transaction_item_height"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_amount"
-        android:importantForAutofill="no" />
+                <RadioButton
+                    android:id="@+id/radioButton_gave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_transaction_gave"
+                    android:textSize="@dimen/text_size_add_transaction" />
 
-    <TextView
-        android:id="@+id/edit_date"
-        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/add_transaction_item_height"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/big_padding"
-        android:layout_marginEnd="16dp"
-        android:clickable="true"
-        android:contentDescription="@string/add_transaction_date_content_description"
-        android:focusable="true"
-        android:fontFamily="sans-serif-light"
-        android:minHeight="20dp"
-        android:outlineProvider="bounds"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_description" />
+            </RadioGroup>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/edit_amount"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/add_transaction_item_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/big_padding"
+                android:layout_marginEnd="16dp"
+                android:digits="0123456789.,"
+                android:fontFamily="sans-serif-light"
+                android:hint="@string/hint_amount"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:minHeight="10dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/switch_monetary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupGaveReceived" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_monetary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:checked="true"
+                android:text="@string/switch_monetary_label_money"
+                android:textSize="@dimen/text_size_add_transaction"
+                app:layout_constraintBottom_toTopOf="@+id/edit_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupGaveReceived" />
+
+            <EditText
+                android:id="@+id/edit_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/big_padding"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif-light"
+                android:hint="@string/hint_desc"
+                android:importantForAutofill="no"
+                android:inputType="textAutoComplete"
+                android:minHeight="@dimen/add_transaction_item_height"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_amount" />
+
+            <TextView
+                android:id="@+id/edit_date"
+                style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/add_transaction_item_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/big_padding"
+                android:layout_marginEnd="16dp"
+                android:clickable="true"
+                android:contentDescription="@string/add_transaction_date_content_description"
+                android:focusable="true"
+                android:fontFamily="sans-serif-light"
+                android:minHeight="20dp"
+                android:outlineProvider="bounds"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_description" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

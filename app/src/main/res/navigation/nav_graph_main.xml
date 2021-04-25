@@ -65,7 +65,7 @@
             app:popUpTo="@id/personSumListFragment"
             app:popUpToInclusive="true" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/editTransactionFragment"
         android:name="org.ebur.debitum.ui.EditTransactionFragment"
         android:label="@string/title_fragment_edit_transaction"
@@ -74,7 +74,7 @@
             android:name="idTransaction"
             app:argType="integer"
             android:defaultValue="-1" />
-    </fragment>
+    </dialog>
     <activity
         android:id="@+id/settingsActivity"
         android:name="org.ebur.debitum.ui.SettingsActivity"
