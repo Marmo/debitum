@@ -7,6 +7,11 @@
 - make editpersonfragment dialog
 - github link in settings
 - help html in settings
+- move dialog toolbar to included layout xml
+- disable save in editPerson when name empty
+- show red subline under editPerson name view when person already exists (after trying to save)
+- make amount int when switching to item
+- crash when craeting txn, 1 to amount, witch to item, bacskspace til empty
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
@@ -21,6 +26,7 @@
 - understand and use themes and styles
 - app icon
 - tap-on-item visualization
+- make editTexts conform to material design (required-subline, frame)
 
 # other
 ## 1.0
