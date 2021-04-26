@@ -3,6 +3,7 @@ package org.ebur.debitum.ui;
 import androidx.annotation.NonNull;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -29,18 +32,20 @@ import org.ebur.debitum.viewModel.EditPersonViewModel;
 
 import java.util.concurrent.ExecutionException;
 
-public class EditPersonFragment extends Fragment {
+public class EditPersonFragment extends DialogFragment {
 
     public static final String ARG_EDITED_PERSON = "editedPerson";
 
     private EditPersonViewModel viewModel;
     private NavController nav;
 
+    private Toolbar toolbar;
     private EditText nameView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FullScreenDialog);
     }
 
     @Override
@@ -51,27 +56,56 @@ public class EditPersonFragment extends Fragment {
         nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
+
+        toolbar = root.findViewById(R.id.dialog_toolbar);
         nameView = root.findViewById(R.id.edit_person_name);
 
-        // pre-populate name view if a Person is edited
         Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
         viewModel.setEditedPerson(editedPerson);
-        if(editedPerson != null) nameView.setText(editedPerson.name);
-        else ((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_person_add);
 
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
 
         return root;
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        toolbar.setNavigationOnClickListener(v -> dismiss());
+        toolbar.inflateMenu(R.menu.menu_edit_person);
+        toolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
+
+        // adding or editing a person?
+        if(!viewModel.isNewPerson()) {
+            nameView.setText(viewModel.getEditedPerson().name);
+        }
+        else {
+            ((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_person_add);
+            toolbar.getMenu().removeItem(R.id.miDeletePerson);
+        }
+    }
+
+    // make dialog fullscreen
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            dialog.getWindow().setLayout(width, height);
+        }
+    }
+
+    /*@Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.menu_edit_person, menu);
 
         //remove delete menu item when creating new person
         if(viewModel.isNewPerson()) menu.removeItem(R.id.miDeletePerson);
-    }
+    }*/
 
     // ---------------------------
     // Toolbar Menu event handling
