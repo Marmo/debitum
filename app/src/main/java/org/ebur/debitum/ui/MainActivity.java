@@ -48,7 +48,11 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
         nav = navHostFragment.getNavController();
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(nav.getGraph()).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.personSumListFragment,
+                R.id.transactionListFragment,
+                R.id.itemTransactionListFragment)
+                .build();
         toolbar = findViewById(R.id.toolbar);
         NavigationUI.setupWithNavController(toolbar, nav, appBarConfiguration);
         setSupportActionBar(toolbar);

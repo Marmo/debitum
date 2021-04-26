@@ -2,7 +2,6 @@
 ## 1.0
 - show total on top of PersonSumList
 - icon in front of person rows
-- remove up arrow on all top-level nav destinations
 - set isMonetary switch in editTransaction when coming from item view
 - implement selection in personsumlist (edit+delete), remove delete person from editperson
 - make editpersonfragment dialog
