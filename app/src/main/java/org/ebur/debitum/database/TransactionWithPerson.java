@@ -1,5 +1,6 @@
 package org.ebur.debitum.database;
 
+import androidx.annotation.NonNull;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
@@ -22,7 +23,7 @@ public class TransactionWithPerson {
         this.person = person;
     }
 
-    public boolean equals(TransactionWithPerson t) {
+    public boolean equals(@NonNull TransactionWithPerson t) {
         return this.transaction.equals(t.transaction) && this.person.equals(t.person);
     }
 

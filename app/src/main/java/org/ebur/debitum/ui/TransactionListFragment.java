@@ -15,10 +15,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.selection.ItemKeyProvider;
 import androidx.recyclerview.selection.MutableSelection;
 import androidx.recyclerview.selection.SelectionPredicates;
 import androidx.recyclerview.selection.SelectionTracker;
-import androidx.recyclerview.selection.StableIdKeyProvider;
 import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,12 +57,12 @@ public class TransactionListFragment extends Fragment {
         nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
-        recyclerView = root.findViewById(R.id.recyclerview);
 
-        // setup adapter
+        // setup recyclerview and adapter
+        recyclerView = root.findViewById(R.id.recyclerview);
         adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // set Person filter if in argument
         Bundle args = getArguments();
@@ -84,12 +84,24 @@ public class TransactionListFragment extends Fragment {
         selectionTracker = new SelectionTracker.Builder<>(
                 "transactionListSelection",
                 recyclerView,
-                new StableIdKeyProvider(recyclerView),
-                new ListItemDetailsLookup(recyclerView),
-                StorageStrategy.createLongStorage()).withSelectionPredicate(
-                SelectionPredicates.createSelectAnything()
-        ).build();
+                new ItemKeyProvider<Long>(ItemKeyProvider.SCOPE_MAPPED) {
+                    @Override
+                    public Long getKey(int position) {
+                        return adapter.getItemId(position);
+                    }
 
+                    @Override
+                    public int getPosition(@NonNull Long key) {
+                        RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForItemId(key);
+                        return viewHolder == null ? RecyclerView.NO_POSITION : viewHolder.getLayoutPosition();
+                    }
+                },
+                new ListItemDetailsLookup(recyclerView),
+                StorageStrategy.createLongStorage())
+                .withSelectionPredicate(SelectionPredicates.createSelectAnything())
+                .build();
+
+        // change visible menu items depending on item selection
         this.selectionTracker.addObserver(new SelectionTracker.SelectionObserver<Long>() {
             @Override
             public void onSelectionChanged() {
@@ -104,13 +116,13 @@ public class TransactionListFragment extends Fragment {
         viewModel.getMoneyTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
-            listForAdapter.add(0, createTotalHeader(Transaction.getSum(TransactionWithPerson.getTransactions(listForAdapter))));
+            listForAdapter.add(0, buildTotalHeader(Transaction.getSum(TransactionWithPerson.getTransactions(listForAdapter))));
             adapter.submitList(listForAdapter);
         });
     }
 
     // create a TransactionWithPerson containing the header information for the RecyclerView
-    protected TransactionWithPerson createTotalHeader(int total) {
+    protected TransactionWithPerson buildTotalHeader(int total) {
         TransactionWithPerson header = new TransactionWithPerson(new Transaction(Integer.MIN_VALUE), new Person("PONDER STIBBONS"));
         header.transaction.amount = total;
         header.transaction.isMonetary = true; // used to indicate correct number formatting in HeaderViewHolder
@@ -178,7 +190,7 @@ public class TransactionListFragment extends Fragment {
             // clear selection, as nothing shall be selected upon returning from EditTransactionFragment
             selectionTracker.clearSelection();
 
-            // start EditTransactionFragment
+            // navigate to EditTransactionFragment
             Bundle args = new Bundle();
             args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, selectedId);
             nav.navigate(R.id.action_transactionList_to_editTransaction, args);
@@ -187,13 +199,16 @@ public class TransactionListFragment extends Fragment {
 
     private void onDeleteTransaction() {
         // TODO ask for confirmation OR: show snackbar afterwards with undo button
-        // make copy of selection so we have a constant list of selected items
+        // make copy of selection so we have a constant list of selected items, even during
+        // iteratively deleting items
         MutableSelection<Long> selection = new MutableSelection<>();
         selectionTracker.copySelection(selection);
 
         for (Long idTransaction : selection) {
+            //int position = recyclerView.findViewHolderForItemId(idTransaction).getAdapterPosition();
             // we just need a Transaction with the correct id for deletion, so we create a dummy one
             viewModel.delete(new Transaction(idTransaction.intValue()));
+            //adapter.notifyItemRemoved(position);
         }
         selectionTracker.clearSelection();
         // TODO: show snackbar with success message including number of deleted transactions

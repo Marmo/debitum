@@ -73,7 +73,7 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, R
 
         @Override
         public boolean areItemsTheSame(@NonNull TransactionWithPerson oldItem, @NonNull TransactionWithPerson newItem) {
-            return oldItem.transaction.idTransaction ==  newItem.transaction.idTransaction;
+            return oldItem.transaction.idTransaction == newItem.transaction.idTransaction;
         }
 
         @Override
