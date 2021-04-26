@@ -4,7 +4,10 @@
 - icon in front of person rows
 - remove up arrow on all top-level nav destinations
 - set isMonetary switch in editTransaction when coming from item view
-- do something about the integer overflow when summing too many transactions 
+- implement selection in personsumlist (edit+delete), remove delete person from editperson
+- make editpersonfragment dialog
+- github link in settings
+- help html in settings
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
