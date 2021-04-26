@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -22,6 +23,8 @@ import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
@@ -166,7 +169,7 @@ public class TransactionListFragment extends Fragment {
             onEditTransactionAction();
             return true;
         } else if(id==R.id.miDeleteTransaction) {
-            onDeleteTransaction();
+            onDeleteTransactionAction();
             return true;
         } else {
             return NavigationUI.onNavDestinationSelected(item, nav)
@@ -197,21 +200,34 @@ public class TransactionListFragment extends Fragment {
         }
     }
 
-    private void onDeleteTransaction() {
-        // TODO ask for confirmation OR: show snackbar afterwards with undo button
+    private void onDeleteTransactionAction() {
         // make copy of selection so we have a constant list of selected items, even during
         // iteratively deleting items
         MutableSelection<Long> selection = new MutableSelection<>();
         selectionTracker.copySelection(selection);
 
-        for (Long idTransaction : selection) {
-            //int position = recyclerView.findViewHolderForItemId(idTransaction).getAdapterPosition();
-            // we just need a Transaction with the correct id for deletion, so we create a dummy one
-            viewModel.delete(new Transaction(idTransaction.intValue()));
-            //adapter.notifyItemRemoved(position);
-        }
-        selectionTracker.clearSelection();
-        // TODO: show snackbar with success message including number of deleted transactions
+        int deleteCount = selection.size();
+
+        // ask for confirmation
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setPositiveButton(R.string.delete_dialog_confirm, (dialog, id) -> {
+            for (Long idTransaction : selection) {
+                // Room uses the primary key (idTransaction) to find the row to be deleted, so an
+                // empty Transaction with the correct id will suffice
+                viewModel.delete(new Transaction(idTransaction.intValue()));
+            }
+            selectionTracker.clearSelection();
+            Snackbar.make(requireView(),
+                    getResources().getQuantityString(R.plurals.transaction_list_snackbar_deleted, deleteCount),
+                    Snackbar.LENGTH_LONG)
+                    .show();
+        });
+        builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
+        builder.setMessage(R.string.transaction_list_dialog_delete_text)
+                .setTitle(getResources().getQuantityString(R.plurals.transaction_list_dialog_delete_title, deleteCount));
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
     }
 
     private void invalidateMenuIfNeeded(int nRowsSelectedNew) {

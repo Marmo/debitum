@@ -28,6 +28,15 @@
     <string name="toolbar_edit_transaction">Edit Transaction</string>
     <string name="header_label">Total</string>
     <string name="header_desc_items">ITEMS LENT</string>
+    <plurals name="transaction_list_snackbar_deleted">
+        <item quantity="one">%d Transaction deleted</item>
+        <item quantity="other">%d Transactions deleted</item>
+    </plurals>
+    <plurals name="transaction_list_dialog_delete_title">
+        <item quantity="one">Delete %d Transaction?</item>
+        <item quantity="other">Delete %d Transactions?</item>
+    </plurals>
+    <string name="transaction_list_dialog_delete_text">This can\'t be undone</string>
 
     <!-- EditTransactionFragment -->
     <string name="title_fragment_edit_transaction_add">Add Transaction</string>
@@ -41,9 +50,6 @@
     <string name="add_transaction_date_content_description">Date</string>
     <string name="add_transaction_gave">Gave</string>
     <string name="add_transaction_received">Received</string>
-    <string name="edit_transaction_confirm_deletion_title">Delete Transaction</string>
-    <string name="edit_transaction_confirm_deletion_text">Really delete this Transaction?</string>
-    <string name="edit_transaction_snackbar_deleted_transaction">Transaction deleted</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed in amount</string>
 
     <!-- EditPersonFragment -->
