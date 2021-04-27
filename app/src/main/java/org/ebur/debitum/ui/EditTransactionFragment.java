@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -91,8 +92,14 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
             @Override public void afterTextChanged(Editable s) {
                 // using long here, because enforcing of max. 9 digits in
                 // AmountTextWatcher.formatArbitraryAmount might not yet have taken place
-                boolean amountOk = Long.parseLong(s.toString().replaceAll("[.,]", "")) > 0;
-                toolbar.getMenu().findItem(R.id.miSaveTransaction).setEnabled(amountOk);
+                boolean amountOk = false;
+                try {
+                    amountOk = Long.parseLong(s.toString().replaceAll("[.,]", "")) > 0;
+                } catch (NumberFormatException ignored) {
+                } finally {
+                    toolbar.getMenu().findItem(R.id.miSaveTransaction).setEnabled(amountOk);
+                }
+
             }
         });
         switchIsMonetaryView = root.findViewById(R.id.switch_monetary);
@@ -172,7 +179,7 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
         viewModel.setTimestamp(new Date());
         editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
-        // as amount is 0.00 saving will be disabled initially
+        // as amount is 0.00, saving will be disabled initially
         toolbar.getMenu().findItem(R.id.miSaveTransaction).setEnabled(false);
     }
 
@@ -199,16 +206,6 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
                 getString(R.string.date_format)));
     }
 
-    /*
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.menu_edit_transaction, menu);
-
-        //delete menu item senseless when creating new person
-        //if(viewModel.isNewTransaction()) menu.removeItem(R.id.miDeleteTransaction);
-    }*/
-
     // ---------------------------
     // Toolbar Menu event handling
     // ---------------------------
@@ -219,10 +216,7 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
         if(id==R.id.miSaveTransaction) {
             onSaveTransactionAction();
             return true;
-        } /*else if(id==R.id.miDeleteTransaction) {
-            onDeleteTransactionAction();
-            return true;
-        }*/
+        }
         return true;
     }
 
@@ -275,31 +269,6 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
                 nav.navigateUp();
             }
     }
-
-    /*public void onDeleteTransactionAction() {
-        // build Transaction
-        Transaction transaction = new Transaction();
-        transaction.idTransaction = viewModel.getIdTransaction();
-
-        // ask for confirmation
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
-        builder.setPositiveButton(R.string.delete_dialog_confirm, (dialog, id) -> {
-            viewModel.delete(transaction);
-            // navigate back to PersonSumListFragment, as any views related to the deleted Person will become invalid
-            nav.navigateUp();
-            Snackbar.make(requireView(),
-                    R.string.edit_transaction_snackbar_deleted_transaction,
-                    Snackbar.LENGTH_SHORT)
-                    .show();
-        });
-        builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
-
-        builder.setMessage(R.string.edit_transaction_confirm_deletion_text)
-                .setTitle(R.string.edit_transaction_confirm_deletion_title);
-        AlertDialog dialog = builder.create();
-
-        dialog.show();
-    }*/
 
     // ---------------------------
     // Date and TimePicker dialogs
@@ -367,9 +336,12 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
 
         @Override
         public void afterTextChanged(Editable s) {
+            String str = s.toString();
+            // nothing to do on empty strings
+            if (str.isEmpty()) return;
             // prevent us from looping infinitely
-            if (s.toString().equals(formattedAmount)) return;
-            formattedAmount = formatArbitraryDecimalInput(s.toString());
+            if (str.equals(formattedAmount)) return;
+            formattedAmount = formatArbitraryDecimalInput(str);
             editAmountView.setText(formattedAmount);
             // prevent cursor to jump to front
             editAmountView.setSelection(editAmountView.length());
@@ -394,6 +366,9 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
             // this is accomplished by removing decSep --> converting to int --> dividing by 100 --> converting to local String
 
             formattedAmount = Transaction.formatMonetaryAmount(Integer.parseInt(formattedAmount), Locale.getDefault());
+        } else {
+            // remove leading 0s
+            formattedAmount = formattedAmount.replaceFirst("^0+","");
         }
         return formattedAmount;
     }
@@ -407,6 +382,11 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
             switchIsMonetaryView.setText(R.string.switch_monetary_label_money);
         } else {
             switchIsMonetaryView.setText(R.string.switch_monetary_label_item);
+        }
+        String s = editAmountView.getText().toString();
+        if(!s.isEmpty()) {
+            // apply proper formatting for newly chosen amount type
+            editAmountView.setText(formatArbitraryDecimalInput(s));
         }
     }
 }
