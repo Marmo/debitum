@@ -12,7 +12,7 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.TransactionWithPerson;
 
-class TransactionListViewHolder extends RecyclerView.ViewHolder { //implements View.OnClickListener {
+class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private final TextView txnNameView;
     private final TextView txnDescriptionView;
     private final TextView txnAmountView;
@@ -27,7 +27,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder { //implements V
         txnGaveReceivedView = itemView.findViewById(R.id.list_item_gave_received);
         txnTimestampView = itemView.findViewById(R.id.list_item_timestamp);
 
-        //itemView.setOnClickListener(this);
+        itemView.setOnClickListener(this);
     }
 
     public void bind(TransactionWithPerson twp, boolean isSelected) {
@@ -65,14 +65,6 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder { //implements V
         return new TransactionListViewHolder(view);
     }
 
-    /*@Override
-    public void onClick(View v) {
-        NavController nav = Navigation.findNavController(v);
-        Bundle args = new Bundle();
-        args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, transactionWithPerson.transaction.idTransaction);
-        nav.navigate(R.id.action_transactionList_to_editTransaction, args);
-    }*/
-
     // anonymous implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails
     //     https://proandroiddev.com/a-guide-to-recyclerview-selection-3ed9f2381504?gi=ee4affe1b9d3
     //     https://developer.android.com/reference/androidx/recyclerview/selection/package-summary
@@ -84,6 +76,12 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder { //implements V
             @Override
             public Long getSelectionKey() { return getItemId(); }
         };
+    }
+
+    // without having an onClickListener the view will not get the pressed state when clicked
+    // and thus won't reflect the backgroundTint change from list_item_bg_selector.xml
+    @Override
+    public void onClick(View v) {
     }
 }
 

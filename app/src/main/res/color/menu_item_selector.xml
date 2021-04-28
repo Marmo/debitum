@@ -5,5 +5,5 @@
         android:color="?attr/colorOnPrimary"
         android:state_enabled="true" />
     <item
-        android:color="@color/white_alpha.6"/>
+        android:color="@color/white_a.6"/>
 </selector>

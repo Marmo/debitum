@@ -59,10 +59,10 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
             case -1:
                 oweLentLabelView.setText(R.string.person_sum_list_you_lent);
                 sumView.setTextColor(sumView.getResources().getColor(R.color.lent_red, null));
-
-            // selection state
-            itemView.setActivated(isSelected);
         }
+
+        // selection state
+        itemView.setActivated(isSelected);
     }
 
     @Override

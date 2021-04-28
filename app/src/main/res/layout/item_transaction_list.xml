@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_item_background"
+    android:background="?attr/colorSurface"
+    android:backgroundTint="@color/list_item_bg_selector"
+    android:backgroundTintMode="src_over"
     android:orientation="horizontal"
-    android:paddingVertical="18dp"
-    android:paddingHorizontal="24dp">
+    android:paddingHorizontal="24dp"
+    android:paddingVertical="18dp">
 
     <TextView
         android:id="@+id/list_item_name"

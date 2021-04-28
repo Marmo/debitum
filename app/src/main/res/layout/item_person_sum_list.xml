@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/colorSurface"
+    android:backgroundTint="@color/list_item_bg_selector"
+    android:backgroundTintMode="src_over"
     android:orientation="horizontal"
-    android:background="@drawable/list_item_background"
-    android:paddingVertical="18dp"
-    android:paddingHorizontal="24dp" >
+    android:paddingHorizontal="24dp"
+    android:paddingVertical="18dp">
 
     <TextView
         android:id="@+id/list_item_name"
@@ -16,14 +17,14 @@
         android:layout_centerVertical="true"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="Rincewind"/>
+        tools:text="Rincewind" />
 
     <TextView
         android:id="@+id/list_item_owe_lent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:textSize="12sp"
         tools:text="@string/person_sum_list_you_lent" />
 
@@ -35,5 +36,5 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="3dp"
         android:textSize="18sp"
-        tools:text="123,45"/>
+        tools:text="123,45" />
 </RelativeLayout>

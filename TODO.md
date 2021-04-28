@@ -21,7 +21,6 @@
 - rearrange + restyle list items
 - understand and use themes and styles
 - app icon
-- tap-on-item visualization
 - make editTexts conform to material design (required-subline, frame)
 
 # other
