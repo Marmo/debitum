@@ -37,9 +37,6 @@ public class EditTransactionViewModel extends AndroidViewModel {
     public void setSelectedName(String selectedName) { this.selectedName = selectedName; }
     public String getSelectedName() { return this.selectedName; }
     public int getSelectedPersonId() throws ExecutionException, InterruptedException { return personRepository.getPersonId(this.selectedName); }
-    public Person getPersonById(int idPerson) throws ExecutionException, InterruptedException {
-        return personRepository.getPersonById(idPerson);
-    }
 
     public boolean isNewTransaction() { return idTransaction == -1; }
 

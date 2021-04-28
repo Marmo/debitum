@@ -98,15 +98,6 @@ public class EditPersonFragment extends DialogFragment {
         }
     }
 
-    /*@Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.menu_edit_person, menu);
-
-        //remove delete menu item when creating new person
-        if(viewModel.isNewPerson()) menu.removeItem(R.id.miDeletePerson);
-    }*/
-
     // ---------------------------
     // Toolbar Menu event handling
     // ---------------------------

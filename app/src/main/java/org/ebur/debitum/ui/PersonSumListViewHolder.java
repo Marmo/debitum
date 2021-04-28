@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
@@ -38,7 +39,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
         return new PersonSumListViewHolder(view);
     }
 
-    public void bind(PersonWithTransactions pwt) {
+    public void bind(PersonWithTransactions pwt, boolean isSelected) {
         nameView.setText(pwt.person.name);
         sumView.setText(Transaction.getFormattedSum(pwt.transactions, false));
 
@@ -58,6 +59,9 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
             case -1:
                 oweLentLabelView.setText(R.string.person_sum_list_you_lent);
                 sumView.setTextColor(sumView.getResources().getColor(R.color.lent_red, null));
+
+            // selection state
+            itemView.setActivated(isSelected);
         }
     }
 
@@ -67,6 +71,19 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
         Bundle args = new Bundle();
         args.putParcelable(TransactionListFragment.ARG_FILTER_PERSON, person);
         navController.navigate(R.id.action_personSumList_to_transactionList, args);
+    }
+
+    // anonymous implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails
+    //     https://proandroiddev.com/a-guide-to-recyclerview-selection-3ed9f2381504?gi=ee4affe1b9d3
+    //     https://developer.android.com/reference/androidx/recyclerview/selection/package-summary
+    ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
+        return new ItemDetailsLookup.ItemDetails<Long>() {
+            @Override
+            public int getPosition() { return getAdapterPosition(); }
+
+            @Override
+            public Long getSelectionKey() { return getItemId(); }
+        };
     }
 }
 

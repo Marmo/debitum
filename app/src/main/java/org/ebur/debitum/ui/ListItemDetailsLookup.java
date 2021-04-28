@@ -23,9 +23,9 @@ public class ListItemDetailsLookup extends ItemDetailsLookup<Long> {
             if (holder instanceof TransactionListViewHolder) {
                 return ((TransactionListViewHolder) holder).getItemDetails();
             }
-            /*else if (holder instanceof PersonSumListViewHolder) {
+            else if (holder instanceof PersonSumListViewHolder) {
                 return ((PersonSumListViewHolder) holder).getItemDetails();
-            }*/
+            }
         }
         return null;
     }

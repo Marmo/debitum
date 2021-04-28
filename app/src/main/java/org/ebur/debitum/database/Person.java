@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "person")
@@ -12,6 +13,12 @@ public class Person implements Parcelable {
 
     public Person(String name) {
         this.name = name;
+    }
+
+    @Ignore
+    public Person(int idPerson) {
+        this("");
+        this.idPerson = idPerson;
     }
 
     @PrimaryKey(autoGenerate = true)

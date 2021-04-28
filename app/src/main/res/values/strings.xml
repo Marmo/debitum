@@ -17,6 +17,15 @@
     <string name="person_sum_list_no_debt">NO DEBT</string>
     <string name="person_sum_list_you_lent">YOU LENT</string>
     <string name="toolbar_add_person">Add Person</string>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="one">%1$d Person deleted</item>
+        <item quantity="other">%1$d Persons deleted</item>
+    </plurals>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="one">Delete %1$d Person?</item>
+        <item quantity="other">Delete %1$d Persons?</item>
+    </plurals>
+    <string name="person_sum_list_dialog_delete_text">This can\'t be undone and will delete all of their transactions, too.</string>
 
     <!-- TransactionListFragment -->
     <string name="title_fragment_transaction_list">Transactions</string>
@@ -29,14 +38,14 @@
     <string name="header_label">Total</string>
     <string name="header_desc_items">ITEMS LENT</string>
     <plurals name="transaction_list_snackbar_deleted">
-        <item quantity="one">%d Transaction deleted</item>
-        <item quantity="other">%d Transactions deleted</item>
+        <item quantity="one">%1$d Transaction deleted</item>
+        <item quantity="other">%1$d Transactions deleted</item>
     </plurals>
     <plurals name="transaction_list_dialog_delete_title">
-        <item quantity="one">Delete %d Transaction?</item>
-        <item quantity="other">Delete %d Transactions?</item>
+        <item quantity="one">Delete %1$d Transaction?</item>
+        <item quantity="other">Delete %1$d Transactions?</item>
     </plurals>
-    <string name="transaction_list_dialog_delete_text">This can\'t be undone</string>
+    <string name="transaction_list_dialog_delete_text">This can\'t be undone.</string>
 
     <!-- EditTransactionFragment -->
     <string name="title_fragment_edit_transaction_add">Add Transaction</string>

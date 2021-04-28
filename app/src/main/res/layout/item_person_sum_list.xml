@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dip" >
+    android:background="@drawable/list_item_background"
+    android:paddingVertical="18dp"
+    android:paddingHorizontal="24dp" >
 
     <TextView
         android:id="@+id/list_item_name"
@@ -11,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="Rincewind"/>
 
     <TextView
         android:id="@+id/list_item_owe_lent"
@@ -19,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        tools:text="@string/person_sum_list_you_lent" />
 
     <TextView
         android:id="@+id/list_item_sum"
@@ -28,5 +34,6 @@
         android:layout_below="@id/list_item_owe_lent"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="3dp"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="123,45"/>
 </RelativeLayout>

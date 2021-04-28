@@ -3,8 +3,6 @@
 - show total on top of PersonSumList
 - icon in front of person rows
 - set isMonetary switch in editTransaction when coming from item view
-- implement selection in personsumlist (edit+delete), remove delete person from editperson
-- make editpersonfragment dialog
 - github link in settings
 - help html in settings
 - move dialog toolbar to included layout xml
