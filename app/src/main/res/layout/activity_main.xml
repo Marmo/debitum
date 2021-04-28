@@ -16,8 +16,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="@dimen/bar_elevation"
             android:background="?attr/colorPrimary"
-            android:elevation="4dp"
             android:minHeight="?attr/actionBarSize"
             android:layout_gravity="top"
             app:titleTextColor="@android:color/white" />
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:alpha="0.5"
             android:background="?attr/colorSecondary"
-            android:elevation="2dp"
+            android:elevation="@dimen/filterbar_elevation"
             android:minHeight="?attr/actionBarSize"
             app:titleMarginStart="32dp"
             android:theme="?attr/actionBarTheme"
@@ -50,8 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="@dimen/bottom_nav_min_height"
+            android:elevation="@dimen/bar_elevation"
             android:layout_gravity="bottom"
-            app:elevation="8dp"
             android:background="?attr/colorPrimary"
             app:itemIconTint="@color/bottom_nav_item_selector"
             app:itemTextColor="@color/bottom_nav_item_selector"
@@ -63,11 +63,11 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="8dp"
         android:contentDescription="@string/fab_content_description"
         android:src="@drawable/ic_baseline_add_24"
-        app:elevation="6dp"
-        app:fabSize="mini"
+        app:fabSize="auto"
         app:layout_anchor="@id/bottom_navigation"
-        app:layout_anchorGravity="center_horizontal" />
+        app:layout_anchorGravity="center_horizontal"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

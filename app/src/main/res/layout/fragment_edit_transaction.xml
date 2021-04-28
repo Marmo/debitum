@@ -12,7 +12,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:elevation="6dp">
+            android:elevation="@dimen/bar_elevation">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/dialog_toolbar"

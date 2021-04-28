@@ -6,6 +6,9 @@
     <item android:id="@+id/btm_money"
         android:title="@string/bottom_nav_money"
         android:icon="@drawable/ic_outline_account_balance_wallet_24" />
+    <item android:id="@+id/btm_placeholder"
+        android:title=""
+        android:enabled="false"/>
     <item android:id="@+id/btm_items"
         android:title="@string/bottom_nav_items"
         android:icon="@drawable/ic_outline_local_offer_24" />

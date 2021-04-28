@@ -3,13 +3,13 @@
     <!-- Base application theme. -->
     <style name="Theme.Debitum" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/red_totem_pole</item>
-        <item name="colorPrimaryDark">@color/red_lonestar</item>
-        <item name="colorPrimaryVariant">@color/red_lonestar</item>
+        <item name="colorPrimary">@color/grey_fiord</item>
+        <item name="colorPrimaryDark">@color/grey_aztec</item>
+        <item name="colorPrimaryVariant">@color/grey_slate_grey</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/gray_dove_gray</item>
-        <item name="colorSecondaryVariant">@color/gray_tundra</item>
+        <item name="colorSecondary">@color/red_valencia</item>
+        <item name="colorSecondaryVariant">@color/red_totem_pole</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -38,9 +38,9 @@
     <style name="Theme.Debitum.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.Debitum.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
-        <item name="colorPrimaryDark">@color/red_lonestar</item>
-        <item name="colorAccent">@color/red_valencia</item>
-        <item name="colorPrimary">@color/red_totem_pole</item>
+        <item name="colorPrimaryDark">@color/grey_aztec</item>
+        <item name="colorAccent">@color/grey_slate_grey</item>
+        <item name="colorPrimary">@color/grey_fiord</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">@color/white</item>

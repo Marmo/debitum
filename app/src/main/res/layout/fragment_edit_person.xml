@@ -21,6 +21,7 @@
                 android:id="@+id/dialog_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:elevation="@dimen/bar_elevation"
                 android:paddingEnd="16dp"
                 android:paddingStart="6dp"
                 app:contentInsetStartWithNavigation="0dp"
