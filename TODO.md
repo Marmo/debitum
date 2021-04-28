@@ -3,7 +3,6 @@
 - show total on top of PersonSumList
 - icon in front of person rows
 - set isMonetary switch in editTransaction when coming from item view
-- github link in settings
 - help html in settings
 - move dialog toolbar to included layout xml
 - disable save in editPerson when name empty

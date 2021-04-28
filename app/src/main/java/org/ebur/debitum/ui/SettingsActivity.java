@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -42,18 +43,38 @@ public class SettingsActivity extends AppCompatActivity {
 
         private final String BACKUP_FILENAME = "debitum_backup.db";
         private final String BACKUP_SUBDIR = "backup";
-        private final String PREF_KEY_BACKUP = "backup";
-        private final String PREF_KEY_RESTORE = "restore";
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+
+            final String PREF_KEY_BACKUP = "backup";
+            final String PREF_KEY_RESTORE = "restore";
+            final String PREF_KEY_GITHUB = "github";
+
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
             Preference backupPref = findPreference(PREF_KEY_BACKUP);
-            backupPref.setSummary(getString(R.string.pref_backup_summary, getContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR));
-            backupPref.setOnPreferenceClickListener(preference -> {backup(); return true;});
+            if (backupPref!=null) {
+                backupPref.setSummary(getString(R.string.pref_backup_summary, requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR));
+                backupPref.setOnPreferenceClickListener(preference -> {
+                    backup();
+                    return true;
+                });
+            }
             Preference restorePref = findPreference(PREF_KEY_RESTORE);
-            restorePref.setSummary(getString(R.string.pref_restore_summary, BACKUP_FILENAME));
-            restorePref.setOnPreferenceClickListener(preference -> {restore(); return true;});
+            if(restorePref!=null) {
+                restorePref.setSummary(getString(R.string.pref_restore_summary, BACKUP_FILENAME));
+                restorePref.setOnPreferenceClickListener(preference -> {
+                    restore();
+                    return true;
+                });
+            }
+            Preference githubPref = findPreference(PREF_KEY_GITHUB);
+            if (githubPref!=null) {githubPref.setOnPreferenceClickListener(preference -> {
+                    openGithub();
+                    return true;
+                });
+            }
         }
 
         // ---------------------
@@ -61,7 +82,7 @@ public class SettingsActivity extends AppCompatActivity {
         // ---------------------
 
         private void backup() {
-            String path = getContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
+            String path = requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
             AppDatabase.backupDatabase(BACKUP_FILENAME, path, (success, message) -> {
                 String info;
                 if (success) {info = getString(R.string.backup_successful);}
@@ -76,7 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
         private void restore() {
             AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
             builder.setPositiveButton(R.string.restore_confirm, (dialog, id) -> {
-                String path = getContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
+                String path = requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
                 AppDatabase.restoreDatabase(BACKUP_FILENAME, path, (success, message) -> {
                     if (!success) {
                         Snackbar.make(requireActivity().findViewById(R.id.settings),
@@ -102,9 +123,15 @@ public class SettingsActivity extends AppCompatActivity {
             Intent restartIntent = new Intent(getContext(), MainActivity.class);
             int requestCode = 1;
             PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), requestCode, restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-            AlarmManager mgr = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
+            AlarmManager mgr = (AlarmManager)requireContext().getSystemService(Context.ALARM_SERVICE);
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent);
             System.exit(0);
+        }
+
+        private void openGithub() {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("https://github.com/Marmo/debitum"));
+            startActivity(i);
         }
     }
 }
