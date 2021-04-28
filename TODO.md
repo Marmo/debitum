@@ -7,6 +7,7 @@
 - move dialog toolbar to included layout xml
 - disable save in editPerson when name empty
 - show red subline under editPerson name view when person already exists (after trying to save)
+- fix back stack (e.g. from Settings Activity)
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
