@@ -8,22 +8,21 @@ import androidx.lifecycle.LiveData;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonRepository;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class EditPersonViewModel extends AndroidViewModel {
 
     private final PersonRepository repository;
-    private final LiveData<List<Person>> persons;
+    //private final LiveData<List<Person>> persons;
     private Person editedPerson;
 
     public EditPersonViewModel(Application application) {
         super(application);
         repository = new PersonRepository(application);
-        persons = repository.getAllPersons();
+        //persons = repository.getAllPersons();
     }
-
-    public LiveData<List<Person>> getPersons() { return persons; }
 
     public boolean isNewPerson() { return editedPerson == null; }
 

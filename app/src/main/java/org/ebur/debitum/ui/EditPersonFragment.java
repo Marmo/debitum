@@ -5,7 +5,9 @@ import androidx.annotation.NonNull;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +27,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
@@ -40,7 +44,8 @@ public class EditPersonFragment extends DialogFragment {
     private NavController nav;
 
     private Toolbar toolbar;
-    private EditText nameView;
+    private TextInputLayout nameViewLayout;
+    private TextInputEditText nameView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,12 +63,13 @@ public class EditPersonFragment extends DialogFragment {
         View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
 
         toolbar = root.findViewById(R.id.dialog_toolbar);
-        nameView = root.findViewById(R.id.edit_person_name);
+        nameViewLayout = root.findViewById(R.id.edit_person_name);
+        nameView = (TextInputEditText) nameViewLayout.getEditText();
+        assert nameView != null;
+        nameView.addTextChangedListener(new NameTextWatcher());
 
         Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
         viewModel.setEditedPerson(editedPerson);
-
-        //setHasOptionsMenu(true);
 
         return root;
     }
@@ -131,8 +137,9 @@ public class EditPersonFragment extends DialogFragment {
         // check if Person with that name already exists
         try {
             if(viewModel.personExists(name)) {
-                String errorMessage = getResources().getString(R.string.error_message_name_exists, name);
-                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                nameViewLayout.setError(getString(R.string.error_message_name_exists, name));
+                /*String errorMessage = getResources().getString(R.string.error_message_name_exists, name);
+                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();*/
             }
             else {
                 if(viewModel.getEditedPerson() == null) {
@@ -169,5 +176,21 @@ public class EditPersonFragment extends DialogFragment {
         AlertDialog dialog = builder.create();
 
         dialog.show();
+    }
+
+    class NameTextWatcher implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            nameViewLayout.setError(null);
+        }
     }
 }
