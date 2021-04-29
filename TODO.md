@@ -11,6 +11,7 @@
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
+- use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
 
 # visuals
 ## 1.0
