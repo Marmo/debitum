@@ -32,6 +32,7 @@
             android:minHeight="?attr/actionBarSize"
             app:titleMarginStart="32dp"
             android:theme="?attr/actionBarTheme"
+            app:titleTextColor="?attr/colorOnSecondary"
             app:logo="@drawable/ic_baseline_account_circle_24"
             app:menu="@menu/filter_bar" />
 
