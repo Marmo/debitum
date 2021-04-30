@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/header_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/grey_middle_a.5">
 
     <TextView
         android:id="@+id/header_label"
@@ -35,5 +36,14 @@
         android:layout_alignEnd="@id/header_total"
         android:text="@string/header_desc_items"
         android:textSize="12sp" />
+
+    <!--<ImageView
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/header_label"
+        android:layout_marginTop="8dp"
+        android:background="?attr/colorOnSurface"
+        android:alpha="0.5"/>-->
 
 </RelativeLayout>

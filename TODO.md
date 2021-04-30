@@ -19,8 +19,6 @@
 ## 1.0
 - refactor vector drawables (readability)
 - improve icons
-- add icons to edit screens
-- add dividers
 - rearrange + restyle list items
 - understand and use themes and styles
 - app icon
