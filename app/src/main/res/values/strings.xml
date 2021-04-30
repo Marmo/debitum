@@ -7,6 +7,7 @@
     <string name="button_label_delete">Delete</string>
     <string name="delete_dialog_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
+    <string name="required_helper_text">* Required</string>
 
     <!-- MainActivity -->
     <string name="fab_content_description">Add Transaction</string>
@@ -50,15 +51,19 @@
     <!-- EditTransactionFragment -->
     <string name="title_fragment_edit_transaction_add">Add Transaction</string>
     <string name="title_fragment_edit_transaction">Edit Transaction</string>
-    <string name="hint_amount">Amount *</string>
-    <string name="hint_desc">Description</string>
-    <string name="add_transaction_incomplete_data">Please fill at least name and amount!</string>
-    <string name="add_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
+    <string name="edit_transaction_hint_person">Person*</string>
+    <string name="edit_transaction_error_select_name">Please select a name!</string>
+    <string name="edit_transaction_hint_amount_money">Amount*</string>
+    <string name="edit_transaction_hint_amount_item">Number of items *</string>
+    <string name="edit_transaction_error_enter_amount">Please fill at least name and amount!</string>
+    <string name="edit_transaction_hint_desc">Description</string>
+    <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
     <string name="switch_monetary_label_money">Money</string>
     <string name="switch_monetary_label_item">Item</string>
-    <string name="add_transaction_date_content_description">Date</string>
-    <string name="add_transaction_gave">Gave</string>
-    <string name="add_transaction_received">Received</string>
+    <string name="edit_transaction_date_dialog_title">Select date</string>
+    <string name="edit_transaction_date_content_description">Date</string>
+    <string name="edit_transaction_gave">Gave</string>
+    <string name="edit_transaction_received">Received</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed in amount</string>
 
     <!-- EditPersonFragment -->

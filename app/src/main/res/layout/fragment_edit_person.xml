@@ -46,7 +46,7 @@
                 android:singleLine="true"
                 android:inputType="text"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:startIconDrawable="@drawable/ic_baseline_person_outline_24"
+                app:startIconDrawable="@drawable/ic_baseline_person_outline_surf_24"
                 app:startIconContentDescription="Person"
                 app:endIconMode="clear_text"
                 app:endIconContentDescription="clear text"
@@ -58,31 +58,6 @@
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!--<ImageView
-                android:id="@+id/imageName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/big_padding"
-                android:layout_weight="1"
-                app:layout_constraintBottom_toBottomOf="@+id/edit_person_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/edit_person_name"
-                app:srcCompat="@drawable/ic_baseline_person_outline_24" />
-
-            <EditText
-                android:id="@+id/edit_person_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/big_padding"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="@dimen/big_padding"
-                android:hint="@string/edit_person_name"
-                android:singleLine="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageName"
-                app:layout_constraintTop_toTopOf="parent"
-                android:inputType="text"/>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

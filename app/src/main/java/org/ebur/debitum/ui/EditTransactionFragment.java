@@ -1,33 +1,34 @@
 package org.ebur.debitum.ui;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
@@ -38,29 +39,33 @@ import org.ebur.debitum.viewModel.EditTransactionViewModel;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 
 import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 // https://medium.com/alexander-schaefer/implementing-the-new-material-design-full-screen-dialog-for-android-e9dcc712cb38
-public class EditTransactionFragment extends DialogFragment implements AdapterView.OnItemSelectedListener {
+public class EditTransactionFragment extends DialogFragment {
 
+    private static final String TAG = "EditTransactionFragment";
     public static final String ARG_ID_TRANSACTION = "idTransaction";
 
     private EditTransactionViewModel viewModel;
     private PersonFilterViewModel personFilterViewModel;
     private NavController nav;
 
-    private ArrayAdapter<String> nameSpinnerAdapter;
+    private ArrayAdapter<String> spinnerNameAdapter;
 
     private Toolbar toolbar;
-    private Spinner spinnerNameView;
+    private TextInputLayout spinnerNameLayout;
+    private AutoCompleteTextView spinnerName;
     private RadioButton gaveRadio;
-    private EditText editAmountView;
-    private SwitchCompat switchIsMonetaryView;
-    private EditText editDescView;
-    private TextView editDateView;
+    private TextInputLayout editAmountLayout;
+    private EditText editAmount;
+    private SwitchMaterial switchIsMonetary;
+    private TextInputLayout editDateLayout;
+    private EditText editDescription;
+    private AutoCompleteTextView editDate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,37 +89,21 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
 
         // setup views
         toolbar = root.findViewById(R.id.dialog_toolbar);
-        spinnerNameView = root.findViewById(R.id.spinner_name);
+        spinnerNameLayout = root.findViewById(R.id.spinner_name);
         gaveRadio = root.findViewById(R.id.radioButton_gave);
-        editAmountView = root.findViewById(R.id.edit_amount);
-        editAmountView.addTextChangedListener(new AmountTextWatcher());
-        editAmountView.addTextChangedListener(new AmountTextWatcher() { // control if Save-Button should be enabled
-            @Override public void afterTextChanged(Editable s) {
-                // using long here, because enforcing of max. 9 digits in
-                // AmountTextWatcher.formatArbitraryAmount might not yet have taken place
-                boolean amountOk = false;
-                try {
-                    amountOk = Long.parseLong(s.toString().replaceAll("[.,]", "")) > 0;
-                } catch (NumberFormatException ignored) {
-                } finally {
-                    toolbar.getMenu().findItem(R.id.miSaveTransaction).setEnabled(amountOk);
-                }
-
-            }
-        });
-        switchIsMonetaryView = root.findViewById(R.id.switch_monetary);
-        switchIsMonetaryView.setOnCheckedChangeListener(this::onSwitchIsMonetaryChanged);
-        editDescView = root.findViewById(R.id.edit_description);
-        editDateView = root.findViewById(R.id.edit_date);
-        editDateView.setOnClickListener((view) -> showDatePickerDialog());
-
-        // setup name spinner
-        nameSpinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item);
-        nameSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerNameView.setAdapter(nameSpinnerAdapter);
-        spinnerNameView.setOnItemSelectedListener(this);
-
-        //setHasOptionsMenu(true);
+        editAmountLayout = root.findViewById(R.id.edit_amount);
+        editAmount = editAmountLayout.getEditText();
+        assert editAmount != null;
+        editAmount.addTextChangedListener(new AmountTextWatcher());
+        switchIsMonetary = root.findViewById(R.id.switch_monetary);
+        switchIsMonetary.setOnCheckedChangeListener(this::onSwitchIsMonetaryChanged);
+        TextInputLayout editDescriptionLayout = root.findViewById(R.id.edit_description);
+        editDescription = editDescriptionLayout.getEditText();
+        editDateLayout = root.findViewById(R.id.edit_date);
+        editDateLayout.setOnClickListener(view -> showDatePickerDialog(view));
+        editDate = (AutoCompleteTextView) editDateLayout.getEditText();
+        assert editDate != null;
+        editDate.setOnClickListener(view -> showDatePickerDialog(view));
 
         return root;
     }
@@ -126,17 +115,17 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
         toolbar.inflateMenu(R.menu.menu_edit_transaction);
         toolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
 
-        fillSpinnerNameView();
-        prefillNameViewIfFromFilteredTransactionList();
+        setupSpinnerName();
+        prefillSpinnerNameIfFromFilteredTransactionList();
 
         if (viewModel.isNewTransaction()) fillViewsNewTransaction();
         else fillViewsEditTransaction();
     }
 
-    // make dialog fullscreen
     @Override
     public void onStart() {
         super.onStart();
+        // make dialog fullscreen
         Dialog dialog = getDialog();
         if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -145,18 +134,21 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
         }
     }
 
-    private void fillSpinnerNameView() {
+    private void setupSpinnerName() {
+        spinnerName = (AutoCompleteTextView) spinnerNameLayout.getEditText();
+        spinnerNameAdapter = new ArrayAdapter<>(requireContext(), R.layout.item_spinner);
+        spinnerName.setAdapter(spinnerNameAdapter);
+        spinnerName.setOnItemClickListener((parent, view, position, id) -> viewModel.setSelectedName(parent.getItemAtPosition(position).toString()));
         // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
         // this fixes a IllegalStateException in RecyclerView after completion
         try {
-            for(Person person : viewModel.getPersons()) nameSpinnerAdapter.add(person.name);
+            for(Person person : viewModel.getPersons()) spinnerNameAdapter.add(person.name);
         } catch (ExecutionException | InterruptedException e) {
-            // TODO better exception handling
-            e.printStackTrace();
+            Log.e(TAG, Objects.requireNonNull(e.getMessage()));
         }
     }
 
-    private void prefillNameViewIfFromFilteredTransactionList() {
+    private void prefillSpinnerNameIfFromFilteredTransactionList() {
         // Check if we come from a TransactionListFragment that was filtered by person
         // If this is the case AND we want to create a new transaction prefill the name spinner with
         // the name by which the TransactionListFragment was filtered
@@ -168,7 +160,7 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
                 || previousDestId == R.id.itemTransactionListFragment) {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             if (filterPerson != null && viewModel.getIdTransaction() == -1) { // TransactionList was filtered by Person and we are creating a new Transaction
-                spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(filterPerson.name));
+                spinnerName.setSelection(spinnerNameAdapter.getPosition(filterPerson.name));
                 viewModel.setSelectedName(filterPerson.name);
             }
         }
@@ -177,10 +169,8 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
     private void fillViewsNewTransaction() {
         toolbar.setTitle(R.string.title_fragment_edit_transaction_add);
         viewModel.setTimestamp(new Date());
-        editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
+        editDate.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
-        // as amount is 0.00, saving will be disabled initially
-        toolbar.getMenu().findItem(R.id.miSaveTransaction).setEnabled(false);
     }
 
     private void fillViewsEditTransaction() {
@@ -194,15 +184,16 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
             Toast.makeText(getContext(),  errorMessage, Toast.LENGTH_LONG).show();
             nav.navigateUp();
         }
-        spinnerNameView.setSelection(nameSpinnerAdapter.getPosition(txn.person.name));
+        assert txn != null;
+        spinnerName.setText(txn.person.name);
         gaveRadio.setChecked(txn.transaction.amount>0); // per default received is set (see layout xml)
         // IMPORTANT: set switchIsMonetaryView _before_ setting amount, because on setting amount the
         // AmountTextWatcher::afterTextChanged is called, and within this method isMonetary is needed to apply correct formatting!
-        switchIsMonetaryView.setChecked(txn.transaction.isMonetary);
-        editAmountView.setText(txn.transaction.getFormattedAmount(false));
-        editDescView.setText(txn.transaction.description);
+        switchIsMonetary.setChecked(txn.transaction.isMonetary);
+        editAmount.setText(txn.transaction.getFormattedAmount(false));
+        editDescription.setText(txn.transaction.description);
         viewModel.setTimestamp(txn.transaction.timestamp);
-        editDateView.setText(Utilities.formatDate(viewModel.getTimestamp(),
+        editDate.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));
     }
 
@@ -223,23 +214,27 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
     public void onSaveTransactionAction() {
 
             // at least name and amount have to be filled
-            if (TextUtils.isEmpty(viewModel.getSelectedName()) || TextUtils.isEmpty(editAmountView.getText())) {
-                Toast.makeText(requireContext(), R.string.add_transaction_incomplete_data, Toast.LENGTH_SHORT).show();
+            // TODO that if-in-if with same conditions looks weird
+            if (TextUtils.isEmpty(viewModel.getSelectedName()) || TextUtils.isEmpty(editAmount.getText())) {
+                if(TextUtils.isEmpty(viewModel.getSelectedName()))
+                    spinnerNameLayout.setError(getString(R.string.edit_transaction_error_select_name));
+                if(TextUtils.isEmpty(editAmount.getText()))
+                    editAmountLayout.setError(getText(R.string.edit_transaction_error_enter_amount));
             } else {
                 //evaluate received-gave-radios
                 int factor = -1;
                 if (gaveRadio.isChecked()) factor = 1;
 
-                boolean isMonetary = switchIsMonetaryView.isChecked();
+                boolean isMonetary = switchIsMonetary.isChecked();
 
                 // parse amount
                 // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005 (format is enforced by AmountTextWatcher)
                 if (isMonetary) factor *= 100;
                 int amount;
                 try {
-                    amount = (int) (factor * Utilities.parseAmount(editAmountView.getText().toString()));
+                    amount = (int) (factor * Utilities.parseAmount(editAmount.getText().toString()));
                 } catch (ParseException e) {
-                    Toast.makeText(requireActivity(), R.string.add_transaction_wrong_amount_format, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), R.string.edit_transaction_wrong_amount_format, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -256,7 +251,7 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
                 Transaction transaction = new Transaction(idPerson,
                         amount,
                         isMonetary,
-                        editDescView.getText().toString(),
+                        editDescription.getText().toString(),
                         viewModel.getTimestamp());
 
                 // update database
@@ -274,49 +269,17 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
     // Date and TimePicker dialogs
     // ---------------------------
 
-    public void showDatePickerDialog() {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getParentFragmentManager(), "addTransactionDatePicker");
-    }
-
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
-
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-
-            // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            EditTransactionFragment fragment = (EditTransactionFragment) getParentFragment();
-            final Calendar c = Calendar.getInstance();
-            c.set(year, month, day);
-            Date d = new Date(c.getTimeInMillis());
-            assert fragment != null;
-            fragment.viewModel.setTimestamp(d);
-            fragment.editDateView.setText(Utilities.formatDate(d, getString(R.string.date_format)));
-        }
-    }
-
-    // ------------------------------------------------------
-    // Name Spinner event handling / interface implementation
-    // ------------------------------------------------------
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        viewModel.setSelectedName(parent.getItemAtPosition(pos).toString());
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void showDatePickerDialog(View v) {
+        MaterialDatePicker<Long> datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                        .setTitleText(R.string.edit_transaction_date_dialog_title)
+                        .setSelection(viewModel.getTimestamp().getTime())
+                        .build();
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            viewModel.setTimestamp(new Date(selection));
+            editDate.setText(Utilities.formatDate(new Date(selection), getString(R.string.date_format)));
+        });
+        datePicker.show(getParentFragmentManager(), "addTransactionDatePicker");
     }
 
     // ---------------------------------------
@@ -342,9 +305,9 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
             // prevent us from looping infinitely
             if (str.equals(formattedAmount)) return;
             formattedAmount = formatArbitraryDecimalInput(str);
-            editAmountView.setText(formattedAmount);
+            editAmount.setText(formattedAmount);
             // prevent cursor to jump to front
-            editAmountView.setSelection(editAmountView.length());
+            editAmount.setSelection(editAmount.length());
         }
     }
 
@@ -361,7 +324,7 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
             Toast.makeText(requireContext(), R.string.edit_transaction_snackbar_max_amount, Toast.LENGTH_SHORT).show();
         }
 
-        if (switchIsMonetaryView.isChecked()) {
+        if (switchIsMonetary.isChecked()) {
             // add decSep two digits from the right, while adding leading zeros if needed
             // this is accomplished by removing decSep --> converting to int --> dividing by 100 --> converting to local String
 
@@ -378,15 +341,26 @@ public class EditTransactionFragment extends DialogFragment implements AdapterVi
     //-------------------------------
 
     public void onSwitchIsMonetaryChanged(View v, boolean checked) {
+        Resources res = getResources();
+        Drawable startIcon;
+
         if (checked) {
-            switchIsMonetaryView.setText(R.string.switch_monetary_label_money);
+            //switchIsMonetary.setText(R.string.switch_monetary_label_money);
+            startIcon = res.getDrawable(R.drawable.ic_baseline_money_24, null);
+            editAmountLayout.setHint(R.string.edit_transaction_hint_amount_money);
         } else {
-            switchIsMonetaryView.setText(R.string.switch_monetary_label_item);
+            //switchIsMonetary.setText(R.string.switch_monetary_label_item);
+            startIcon = res.getDrawable(R.drawable.ic_baseline_tag_24, null);
+            editAmountLayout.setHint(R.string.edit_transaction_hint_amount_item);
         }
-        String s = editAmountView.getText().toString();
+
+        // apply proper formatting for chosen amount type
+        String s = editAmount.getText().toString();
         if(!s.isEmpty()) {
-            // apply proper formatting for newly chosen amount type
-            editAmountView.setText(formatArbitraryDecimalInput(s));
+            editAmount.setText(formatArbitraryDecimalInput(s));
         }
+
+        // change editAmount icon;
+        editAmountLayout.setStartIconDrawable(startIcon);
     }
 }

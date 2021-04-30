@@ -85,10 +85,10 @@ public class EditPersonFragment extends DialogFragment {
         // adding or editing a person?
         if(!viewModel.isNewPerson()) {
             nameView.setText(viewModel.getEditedPerson().name);
+            toolbar.setTitle(R.string.title_fragment_edit_person);
         }
         else {
-            ((MainActivity) requireActivity()).setToolbarTitle(R.string.title_fragment_edit_person_add);
-            toolbar.getMenu().removeItem(R.id.miDeletePerson);
+            toolbar.setTitle(R.string.title_fragment_edit_person_add);
         }
     }
 
@@ -114,9 +114,6 @@ public class EditPersonFragment extends DialogFragment {
         if(id==R.id.miSavePerson) {
             onSavePersonAction();
             return true;
-        } else if(id==R.id.miDeletePerson) {
-            onDeletePersonAction();
-            return true;
         } else {
             return NavigationUI.onNavDestinationSelected(item, nav)
                     || super.onOptionsItemSelected(item);
@@ -128,8 +125,7 @@ public class EditPersonFragment extends DialogFragment {
 
         // check if nameView has contents
         if(TextUtils.isEmpty(nameView.getText())) {
-            String errorMessage = getResources().getString(R.string.error_message_enter_name);
-            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+            nameViewLayout.setError(getString(R.string.error_message_enter_name));
             return;
         }
         else name = nameView.getText().toString();
@@ -156,26 +152,6 @@ public class EditPersonFragment extends DialogFragment {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
             Toast.makeText(getContext(),  errorMessage, Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void onDeletePersonAction() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
-        builder.setPositiveButton(R.string.delete_dialog_confirm, (dialog, id) -> {
-            viewModel.delete(viewModel.getEditedPerson());
-            // navigate back to PersonSumListFragment, as any views related to the deleted Person will become invalid
-            nav.navigate(R.id.action_editPerson_to_personSumList_after_delete);
-            Snackbar.make(requireView(),
-                    getString(R.string.edit_person_snackbar_deleted_person, viewModel.getEditedPerson().name),
-                    Snackbar.LENGTH_SHORT)
-                    .show();
-        });
-        builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
-
-        builder.setMessage(getString(R.string.edit_person_confirm_deletion_text, viewModel.getEditedPerson().name))
-                .setTitle(R.string.edit_person_confirm_deletion_title);
-        AlertDialog dialog = builder.create();
-
-        dialog.show();
     }
 
     class NameTextWatcher implements TextWatcher {
