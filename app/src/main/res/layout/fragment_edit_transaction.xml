@@ -32,16 +32,29 @@
             android:layout_height="0dp"
             android:layout_weight="2">
 
-            <Spinner
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/spinner_name"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/add_transaction_item_height"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:hint="@string/edit_transaction_hint_person"
+                app:startIconDrawable="@drawable/ic_baseline_person_outline_surf_24"
+                app:startIconContentDescription="Person"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperText="@string/required_helper_text">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RadioGroup
                 android:id="@+id/radioGroupGaveReceived"
@@ -58,83 +71,106 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="@string/add_transaction_received"
+                    android:text="@string/edit_transaction_received"
                     android:textSize="@dimen/text_size_add_transaction" />
 
                 <RadioButton
                     android:id="@+id/radioButton_gave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/add_transaction_gave"
+                    android:text="@string/edit_transaction_gave"
                     android:textSize="@dimen/text_size_add_transaction" />
 
             </RadioGroup>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_amount"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/add_transaction_item_height"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="@dimen/big_padding"
-                android:layout_marginEnd="16dp"
-                android:digits="0123456789.,"
-                android:fontFamily="sans-serif-light"
-                android:hint="@string/hint_amount"
-                android:importantForAutofill="no"
-                android:inputType="numberDecimal"
-                android:minHeight="10dp"
-                android:textSize="18sp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toStartOf="@+id/switch_monetary"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroupGaveReceived" />
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupGaveReceived"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/edit_transaction_hint_amount_money"
+                android:singleLine="true"
+                android:inputType="numberDecimal"
+                android:digits="0123456789.,"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_baseline_money_24"
+                app:startIconContentDescription="Amount"
+                app:endIconMode="clear_text"
+                app:endIconContentDescription="clear input"
+                app:helperTextEnabled="true"
+                app:helperText="@string/required_helper_text" >
 
-            <androidx.appcompat.widget.SwitchCompat
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switch_monetary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:checked="true"
-                android:text="@string/switch_monetary_label_money"
                 android:textSize="@dimen/text_size_add_transaction"
-                app:layout_constraintBottom_toTopOf="@+id/edit_description"
+                app:layout_constraintTop_toTopOf="@+id/edit_amount"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroupGaveReceived" />
+                app:layout_constraintBottom_toBottomOf="@+id/edit_amount" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="@dimen/big_padding"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="sans-serif-light"
-                android:hint="@string/hint_desc"
-                android:importantForAutofill="no"
-                android:inputType="textAutoComplete"
-                android:minHeight="@dimen/add_transaction_item_height"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_amount" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_amount"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/edit_transaction_hint_desc"
+                android:singleLine="true"
+                android:inputType="text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_baseline_notes_24"
+                app:startIconContentDescription="Description"
+                app:endIconMode="clear_text"
+                app:endIconContentDescription="clear text" >
 
-            <TextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_date"
-                style="@android:style/Widget.Material.Light.Spinner.Underlined"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/add_transaction_item_height"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="@dimen/big_padding"
-                android:layout_marginEnd="16dp"
-                android:clickable="true"
-                android:contentDescription="@string/add_transaction_date_content_description"
-                android:focusable="true"
-                android:fontFamily="sans-serif-light"
-                android:minHeight="20dp"
-                android:outlineProvider="bounds"
-                android:textSize="18sp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_description" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_description"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/edit_transaction_date_content_description"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_baseline_event_24"
+                app:startIconContentDescription="Calendar" >
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

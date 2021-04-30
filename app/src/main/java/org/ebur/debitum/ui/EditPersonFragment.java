@@ -128,8 +128,7 @@ public class EditPersonFragment extends DialogFragment {
 
         // check if nameView has contents
         if(TextUtils.isEmpty(nameView.getText())) {
-            String errorMessage = getResources().getString(R.string.error_message_enter_name);
-            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+            nameViewLayout.setError(getString(R.string.error_message_enter_name));
             return;
         }
         else name = nameView.getText().toString();
