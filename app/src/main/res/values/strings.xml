@@ -19,12 +19,12 @@
     <string name="person_sum_list_you_lent">YOU LENT</string>
     <string name="toolbar_add_person">Add Person</string>
     <plurals name="person_sum_list_snackbar_deleted">
-        <item quantity="one">%1$d Person deleted</item>
-        <item quantity="other">%1$d Persons deleted</item>
+        <item quantity="one">%d Person deleted</item>
+        <item quantity="other">%d Persons deleted</item>
     </plurals>
     <plurals name="person_sum_list_dialog_delete_title">
-        <item quantity="one">Delete %1$d Person?</item>
-        <item quantity="other">Delete %1$d Persons?</item>
+        <item quantity="one">Delete %d Person?</item>
+        <item quantity="other">Delete %d Persons?</item>
     </plurals>
     <string name="person_sum_list_dialog_delete_text">This can\'t be undone and will delete all of their transactions, too.</string>
 
@@ -39,12 +39,12 @@
     <string name="header_label">Total</string>
     <string name="header_desc_items">ITEMS LENT</string>
     <plurals name="transaction_list_snackbar_deleted">
-        <item quantity="one">%1$d Transaction deleted</item>
-        <item quantity="other">%1$d Transactions deleted</item>
+        <item quantity="one">%d Transaction deleted</item>
+        <item quantity="other">%d Transactions deleted</item>
     </plurals>
     <plurals name="transaction_list_dialog_delete_title">
-        <item quantity="one">Delete %1$d Transaction?</item>
-        <item quantity="other">Delete %1$d Transactions?</item>
+        <item quantity="one">Delete %d Transaction?</item>
+        <item quantity="other">Delete %d Transactions?</item>
     </plurals>
     <string name="transaction_list_dialog_delete_text">This can\'t be undone.</string>
 
@@ -70,9 +70,6 @@
     <string name="title_fragment_edit_person">Edit Person</string>
     <string name="title_fragment_edit_person_add">Add Person</string>
     <string name="edit_person_name">Name</string>
-    <string name="edit_person_confirm_deletion_title">Delete Person</string>
-    <string name="edit_person_confirm_deletion_text">Really delete %1$s and all of their transactions?</string>
-    <string name="edit_person_snackbar_deleted_person">%1$s deleted</string>
     <string name="error_message_enter_name">Please enter a name!</string>
     <string name="error_message_name_exists">%1$s already exists, please enter a different name!</string>
     <string name="bottom_nav_people">People</string>
@@ -86,12 +83,11 @@
     <string name="pref_maintenance_header">Maintenance</string>
     <string name="backup_successful">Database successfully backed up to external storage</string>
     <string name="backup_failed">Backup failed! Internal error message: %1$s</string>
-    <!--<string name="restore_successful">Database successfully restored from external storage!</string>-->
     <string name="restore_failed">Restore failed! Internal error message: %1$s</string>
 
     <string name="pref_backup_title">Backup database</string>
     <string name="pref_restore_title">Restore database</string>
-    <string name="pref_backup_summary">Location: %1$s</string>
+    <string name="pref_backup_summary">to %1$s</string>
     <string name="pref_restore_summary">from previously backed up "%1$s" in external storage</string>
     <string name="pref_help_header">Help</string>
     <string name="pref_github_title">View on GitHub</string>
