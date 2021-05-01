@@ -49,6 +49,7 @@ public class EditTransactionFragment extends DialogFragment {
 
     private static final String TAG = "EditTransactionFragment";
     public static final String ARG_ID_TRANSACTION = "idTransaction";
+    public static final String ARG_ID_NEW_ITEM = "newItem";
 
     private EditTransactionViewModel viewModel;
     private PersonFilterViewModel personFilterViewModel;
@@ -63,7 +64,6 @@ public class EditTransactionFragment extends DialogFragment {
     private TextInputLayout editAmountLayout;
     private EditText editAmount;
     private SwitchMaterial switchIsMonetary;
-    private TextInputLayout editDateLayout;
     private EditText editDescription;
     private AutoCompleteTextView editDate;
 
@@ -99,7 +99,7 @@ public class EditTransactionFragment extends DialogFragment {
         switchIsMonetary.setOnCheckedChangeListener(this::onSwitchIsMonetaryChanged);
         TextInputLayout editDescriptionLayout = root.findViewById(R.id.edit_description);
         editDescription = editDescriptionLayout.getEditText();
-        editDateLayout = root.findViewById(R.id.edit_date);
+        TextInputLayout editDateLayout = root.findViewById(R.id.edit_date);
         editDateLayout.setOnClickListener(view -> showDatePickerDialog(view));
         editDate = (AutoCompleteTextView) editDateLayout.getEditText();
         assert editDate != null;
@@ -168,6 +168,7 @@ public class EditTransactionFragment extends DialogFragment {
 
     private void fillViewsNewTransaction() {
         toolbar.setTitle(R.string.title_fragment_edit_transaction_add);
+        switchIsMonetary.setChecked(!requireArguments().getBoolean(ARG_ID_NEW_ITEM, false));
         viewModel.setTimestamp(new Date());
         editDate.setText(Utilities.formatDate(viewModel.getTimestamp(),
                 getString(R.string.date_format)));

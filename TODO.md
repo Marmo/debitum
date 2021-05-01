@@ -2,11 +2,11 @@
 ## 1.0
 - show total on top of PersonSumList
 - icon in front of person rows
-- set isMonetary switch in editTransaction when coming from item view
 - help html in settings
 - fix back stack (e.g. from Settings Activity)
 - create new Person from EditTransaction
 - make description required if creating item transaction
+- move filterBar from Activity to fragments
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
@@ -14,6 +14,7 @@
 - unify transactionList and PersonSumList (abstract base class)
 - unify EditPerson and EditTransaction (abstract base class)
 - move dialog toolbar to included layout xml
+- contacts integration
 
 # visuals
 ## 1.0
@@ -23,6 +24,7 @@
 - understand and use themes and styles
 - app icon
 - transitions
+  - click on person row --> filterBar
   - navgraph
   - changes to amount edit text when switching switch
   - opening of dialogs (editTxn/person)

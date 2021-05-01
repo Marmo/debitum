@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
-import androidx.navigation.fragment.DialogFragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         // setup fab
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> nav.navigate(R.id.editTransactionFragment));
+        fab.setOnClickListener(view -> onAddTransactionAction());
 
         // control FAB visibility
         nav.addOnDestinationChangedListener((controller, destination, arguments) -> {
@@ -124,10 +123,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void setToolbarTitle(int titleResId) {
-        toolbar.setTitle(titleResId);
-    }
-
     public void showFilterBar() {
         if(personFilterViewModel.getFilterPerson() != null) {
             filterBar.setTitle(personFilterViewModel.getFilterPerson().name);
@@ -143,5 +138,15 @@ public class MainActivity extends AppCompatActivity {
         // (then unfiltered, as the viewModel's filterPerson was nulled)
         NavDestination current = nav.getCurrentDestination();
         if (current != null) nav.navigate(current.getId());
+    }
+
+    private void onAddTransactionAction() {
+        boolean isItemList = false;
+        NavDestination dest = nav.getCurrentDestination();
+        if(dest != null)
+            isItemList = dest.getId() == R.id.itemTransactionListFragment;
+        Bundle args = new Bundle();
+        args.putBoolean(EditTransactionFragment.ARG_ID_NEW_ITEM, isItemList);
+        nav.navigate(R.id.editTransactionFragment, args);
     }
 }
