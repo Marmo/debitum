@@ -53,7 +53,6 @@ public class EditTransactionFragment extends DialogFragment {
 
     private EditTransactionViewModel viewModel;
     private PersonFilterViewModel personFilterViewModel;
-    private NavController nav;
 
     private ArrayAdapter<String> spinnerNameAdapter;
 
@@ -80,7 +79,6 @@ public class EditTransactionFragment extends DialogFragment {
 
         viewModel = new ViewModelProvider(this).get(EditTransactionViewModel.class);
         personFilterViewModel = new ViewModelProvider(requireActivity()).get(PersonFilterViewModel.class);
-        nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_edit_transaction, container, false);
 
@@ -100,10 +98,10 @@ public class EditTransactionFragment extends DialogFragment {
         TextInputLayout editDescriptionLayout = root.findViewById(R.id.edit_description);
         editDescription = editDescriptionLayout.getEditText();
         TextInputLayout editDateLayout = root.findViewById(R.id.edit_date);
-        editDateLayout.setOnClickListener(view -> showDatePickerDialog(view));
+        editDateLayout.setOnClickListener(this::showDatePickerDialog);
         editDate = (AutoCompleteTextView) editDateLayout.getEditText();
         assert editDate != null;
-        editDate.setOnClickListener(view -> showDatePickerDialog(view));
+        editDate.setOnClickListener(this::showDatePickerDialog);
 
         return root;
     }
@@ -152,7 +150,7 @@ public class EditTransactionFragment extends DialogFragment {
         // Check if we come from a TransactionListFragment that was filtered by person
         // If this is the case AND we want to create a new transaction prefill the name spinner with
         // the name by which the TransactionListFragment was filtered
-        NavBackStackEntry previous = nav.getPreviousBackStackEntry();
+        NavBackStackEntry previous = NavHostFragment.findNavController(this).getPreviousBackStackEntry();
         int previousDestId = 0;
         if (previous != null)
             previousDestId = previous.getDestination().getId();
@@ -183,7 +181,7 @@ public class EditTransactionFragment extends DialogFragment {
         } catch(ExecutionException|InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
             Toast.makeText(getContext(),  errorMessage, Toast.LENGTH_LONG).show();
-            nav.navigateUp();
+            NavHostFragment.findNavController(this).navigateUp();
         }
         assert txn != null;
         spinnerName.setText(txn.person.name);
@@ -262,7 +260,7 @@ public class EditTransactionFragment extends DialogFragment {
                     viewModel.update(transaction);
                 }
 
-                nav.navigateUp();
+                NavHostFragment.findNavController(this).navigateUp();
             }
     }
 

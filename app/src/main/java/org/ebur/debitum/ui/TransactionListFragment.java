@@ -45,7 +45,6 @@ public class TransactionListFragment extends Fragment {
 
     protected TransactionListViewModel viewModel;
     protected PersonFilterViewModel personFilterViewModel;
-    private NavController nav;
     private RecyclerView recyclerView;
     protected TransactionListAdapter adapter;
     private SelectionTracker<Long> selectionTracker = null;
@@ -58,7 +57,6 @@ public class TransactionListFragment extends Fragment {
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
         personFilterViewModel = new ViewModelProvider(requireActivity()).get(PersonFilterViewModel.class);
-        nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
 
@@ -174,15 +172,14 @@ public class TransactionListFragment extends Fragment {
             onDeleteTransactionAction();
             return true;
         } else {
-            return NavigationUI.onNavDestinationSelected(item, nav)
-                    || super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
         }
     }
 
     public void onEditPersonAction() {
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, personFilterViewModel.getFilterPerson());
-        nav.navigate(R.id.action_editPerson, args);
+        NavHostFragment.findNavController(this).navigate(R.id.action_editPerson, args);
     }
 
     private void onEditTransactionAction() {
@@ -198,7 +195,7 @@ public class TransactionListFragment extends Fragment {
             // navigate to EditTransactionFragment
             Bundle args = new Bundle();
             args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, selectedId);
-            nav.navigate(R.id.action_editTransaction, args);
+            NavHostFragment.findNavController(this).navigate(R.id.action_editTransaction, args);
         }
     }
 

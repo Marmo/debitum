@@ -40,7 +40,6 @@ public class PersonSumListFragment extends Fragment {
     private static final String TAG = "PersonSumListFragment";
 
     private PersonSumListViewModel viewModel;
-    private NavController nav;
     private RecyclerView recyclerView;
     private PersonSumListAdapter adapter;
     private SelectionTracker<Long> selectionTracker = null;
@@ -57,7 +56,6 @@ public class PersonSumListFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(requireActivity()).get(PersonSumListViewModel.class);
-        nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_person_sum_list, container, false);
 
@@ -170,7 +168,7 @@ public class PersonSumListFragment extends Fragment {
             // navigate to EditTransactionFragment
             Bundle args = new Bundle();
             args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, selectedPerson);
-            nav.navigate(R.id.action_editPerson, args);
+            NavHostFragment.findNavController(this).navigate(R.id.action_editPerson, args);
         }
     }
 
@@ -207,7 +205,7 @@ public class PersonSumListFragment extends Fragment {
     public void onAddPersonAction() {
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, null);
-        nav.navigate(R.id.action_editPerson, args);
+        NavHostFragment.findNavController(this).navigate(R.id.action_editPerson, args);
     }
 
     private void invalidateMenuIfNeeded(int nRowsSelectedNew) {

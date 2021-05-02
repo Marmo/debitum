@@ -41,7 +41,6 @@ public class EditPersonFragment extends DialogFragment {
     public static final String ARG_EDITED_PERSON = "editedPerson";
 
     private EditPersonViewModel viewModel;
-    private NavController nav;
 
     private Toolbar toolbar;
     private TextInputLayout nameViewLayout;
@@ -58,7 +57,6 @@ public class EditPersonFragment extends DialogFragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
-        nav = NavHostFragment.findNavController(this);
 
         View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
 
@@ -115,8 +113,7 @@ public class EditPersonFragment extends DialogFragment {
             onSavePersonAction();
             return true;
         } else {
-            return NavigationUI.onNavDestinationSelected(item, nav)
-                    || super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
         }
     }
 
@@ -146,7 +143,7 @@ public class EditPersonFragment extends DialogFragment {
                     oldPerson.name = name;
                     viewModel.update(oldPerson);
                 }
-                nav.navigateUp();
+                NavHostFragment.findNavController(this).navigateUp();
             }
         } catch (ExecutionException | InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
