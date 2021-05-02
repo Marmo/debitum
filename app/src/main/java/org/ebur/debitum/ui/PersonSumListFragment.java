@@ -29,7 +29,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
-import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
 import java.util.concurrent.ExecutionException;
@@ -171,7 +170,7 @@ public class PersonSumListFragment extends Fragment {
             // navigate to EditTransactionFragment
             Bundle args = new Bundle();
             args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, selectedPerson);
-            nav.navigate(R.id.action_personSumList_to_editPerson, args);
+            nav.navigate(R.id.action_editPerson, args);
         }
     }
 
@@ -208,7 +207,7 @@ public class PersonSumListFragment extends Fragment {
     public void onAddPersonAction() {
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, null);
-        nav.navigate(R.id.action_personSumList_to_editPerson, args);
+        nav.navigate(R.id.action_editPerson, args);
     }
 
     private void invalidateMenuIfNeeded(int nRowsSelectedNew) {

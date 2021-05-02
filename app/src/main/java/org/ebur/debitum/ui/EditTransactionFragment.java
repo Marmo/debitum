@@ -156,8 +156,8 @@ public class EditTransactionFragment extends DialogFragment {
         int previousDestId = 0;
         if (previous != null)
             previousDestId = previous.getDestination().getId();
-        if (previousDestId == R.id.transactionListFragment
-                || previousDestId == R.id.itemTransactionListFragment) {
+        if (previousDestId == R.id.money_dest
+                || previousDestId == R.id.item_dest) {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             if (filterPerson != null && viewModel.getIdTransaction() == -1) { // TransactionList was filtered by Person and we are creating a new Transaction
                 spinnerName.setSelection(spinnerNameAdapter.getPosition(filterPerson.name));

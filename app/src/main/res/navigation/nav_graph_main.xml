@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
-    app:startDestination="@id/personSumListFragment">
+    app:startDestination="@id/people_dest">
 
     <fragment
-        android:id="@+id/personSumListFragment"
+        android:id="@+id/people_dest"
         android:name="org.ebur.debitum.ui.PersonSumListFragment"
         android:label="@string/title_fragment_person_sum_list"
         tools:layout="@layout/fragment_person_sum_list">
         <action
-            android:id="@+id/action_personSumList_to_transactionList"
-            app:destination="@id/transactionListFragment" />
+            android:id="@+id/action_personSumList_to_transactionList_on_filter"
+            app:destination="@id/money_dest" />
         <action
-            android:id="@+id/action_personSumList_to_editPerson"
-            app:destination="@id/editPersonFragment" />
+            android:id="@+id/action_editPerson"
+            app:destination="@id/editPerson_dest" />
     </fragment>
     <fragment
-        android:id="@+id/transactionListFragment"
+        android:id="@+id/money_dest"
         android:name="org.ebur.debitum.ui.TransactionListFragment"
         android:label="@string/title_fragment_transaction_list"
         tools:layout="@layout/fragment_transaction_list">
@@ -27,14 +27,14 @@
             app:argType="integer"
             android:defaultValue="0" />
         <action
-            android:id="@+id/action_transactionList_to_editPerson"
-            app:destination="@id/editPersonFragment" />
+            android:id="@id/action_editPerson"
+            app:destination="@id/editPerson_dest" />
         <action
-            android:id="@+id/action_transactionList_to_editTransaction"
-            app:destination="@id/editTransactionFragment" />
+            android:id="@+id/action_editTransaction"
+            app:destination="@id/editTransaction_dest" />
     </fragment>
     <fragment
-        android:id="@+id/itemTransactionListFragment"
+        android:id="@+id/item_dest"
         android:name="org.ebur.debitum.ui.ItemTransactionListFragment"
         android:label="@string/title_fragment_transaction_list_items"
         tools:layout="@layout/fragment_transaction_list" >
@@ -43,14 +43,14 @@
             app:argType="integer"
             android:defaultValue="0" />
         <action
-            android:id="@+id/action_transactionList_to_editPerson"
-            app:destination="@id/editPersonFragment" />
+            android:id="@+id/action_editPerson"
+            app:destination="@id/editPerson_dest" />
         <action
-            android:id="@+id/action_transactionList_to_editTransaction"
-            app:destination="@id/editTransactionFragment" />
+            android:id="@id/action_editTransaction"
+            app:destination="@id/editTransaction_dest" />
     </fragment>
     <dialog
-        android:id="@+id/editPersonFragment"
+        android:id="@+id/editPerson_dest"
         android:name="org.ebur.debitum.ui.EditPersonFragment"
         android:label="@string/title_fragment_edit_person"
         tools:layout="@layout/fragment_edit_person">
@@ -59,14 +59,9 @@
             android:defaultValue="@null"
             app:argType="org.ebur.debitum.database.Person"
             app:nullable="true" />
-        <action
-            android:id="@+id/action_editPerson_to_personSumList_after_delete"
-            app:destination="@id/personSumListFragment"
-            app:popUpTo="@id/personSumListFragment"
-            app:popUpToInclusive="true" />
     </dialog>
     <dialog
-        android:id="@+id/editTransactionFragment"
+        android:id="@+id/editTransaction_dest"
         android:name="org.ebur.debitum.ui.EditTransactionFragment"
         android:label="@string/title_fragment_edit_transaction"
         tools:layout="@layout/fragment_edit_transaction" >
@@ -75,9 +70,8 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </dialog>
-    <activity
-        android:id="@+id/settingsActivity"
-        android:name="org.ebur.debitum.ui.SettingsActivity"
-        android:label="@string/title_activity_settings"
-        tools:layout="@layout/activity_settings"/>
+    <fragment
+        android:id="@+id/settings_dest"
+        android:name="org.ebur.debitum.ui.SettingsFragment"
+        android:label="@string/title_fragment_settings"/>
 </navigation>

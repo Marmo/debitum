@@ -182,7 +182,7 @@ public class TransactionListFragment extends Fragment {
     public void onEditPersonAction() {
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, personFilterViewModel.getFilterPerson());
-        nav.navigate(R.id.action_transactionList_to_editPerson, args);
+        nav.navigate(R.id.action_editPerson, args);
     }
 
     private void onEditTransactionAction() {
@@ -198,7 +198,7 @@ public class TransactionListFragment extends Fragment {
             // navigate to EditTransactionFragment
             Bundle args = new Bundle();
             args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, selectedId);
-            nav.navigate(R.id.action_transactionList_to_editTransaction, args);
+            nav.navigate(R.id.action_editTransaction, args);
         }
     }
 

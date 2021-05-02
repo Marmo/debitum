@@ -55,7 +55,7 @@
     <string name="edit_transaction_error_select_name">Please select a name!</string>
     <string name="edit_transaction_hint_amount_money">Amount*</string>
     <string name="edit_transaction_hint_amount_item">Number of items *</string>
-    <string name="edit_transaction_error_enter_amount">Please fill at least name and amount!</string>
+    <string name="edit_transaction_error_enter_amount">Please enter amount!</string>
     <string name="edit_transaction_hint_desc">Description</string>
     <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
     <string name="switch_monetary_label_money">Money</string>
@@ -79,7 +79,8 @@
     <string name="dismiss_filter">dismiss filter</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Settings Activity -->
+    <!-- SettingsFragment -->
+    <string name="title_fragment_settings">Settings</string>
     <string name="pref_maintenance_header">Maintenance</string>
     <string name="backup_successful">Database successfully backed up to external storage</string>
     <string name="backup_failed">Backup failed! Internal error message: %1$s</string>

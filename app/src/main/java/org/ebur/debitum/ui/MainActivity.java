@@ -2,6 +2,7 @@
 package org.ebur.debitum.ui;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,16 +27,16 @@ import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final Set<Integer> DESTINATIONS_WITH_FAB_AND_BOTTOMNAV = Stream.of(R.id.personSumListFragment, R.id.transactionListFragment, R.id.itemTransactionListFragment)
+    private final Set<Integer> DESTINATIONS_WITH_FAB = Stream.of(R.id.people_dest, R.id.money_dest, R.id.item_dest)
             .collect(Collectors.toCollection(HashSet::new));
-    private final Set<Integer> DESTINATIONS_WITH_PERSON_FILTER = Stream.of(R.id.transactionListFragment, R.id.itemTransactionListFragment)
+    private final Set<Integer> DESTINATIONS_WITH_PERSON_FILTER = Stream.of(R.id.money_dest, R.id.item_dest)
             .collect(Collectors.toCollection(HashSet::new));
 
     private NavController nav;
     private PersonFilterViewModel personFilterViewModel;
-    private Toolbar toolbar, filterBar;
+    private Toolbar filterBar;
+    BottomNavigationView bottomNav;
     private FloatingActionButton fab;
-    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,20 +44,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         personFilterViewModel = new ViewModelProvider(this).get(PersonFilterViewModel.class);
 
-        // setup toolbar
+        setupToolbar();
+        setupFilterBar();
+        setupBottomNavigation();
+        setupFAB();
+    }
+
+    private void setupToolbar() {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
         nav = navHostFragment.getNavController();
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.personSumListFragment,
-                R.id.transactionListFragment,
-                R.id.itemTransactionListFragment)
+                R.id.people_dest,
+                R.id.money_dest,
+                R.id.item_dest,
+                R.id.settings_dest)
                 .build();
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         NavigationUI.setupWithNavController(toolbar, nav, appBarConfiguration);
         setSupportActionBar(toolbar);
+    }
 
-        //setup filter bar
+    private void setupFilterBar() {
         filterBar = findViewById(R.id.filter_bar);
         filterBar.getMenu().findItem(R.id.miDismiss_filter).setOnMenuItemClickListener(item -> {
             onDismissPersonFilterAction();
@@ -73,54 +82,28 @@ public class MainActivity extends AppCompatActivity {
                     && personFilterViewModel.getFilterPerson() != null) filterBar.setVisibility(View.VISIBLE);
             else filterBar.setVisibility(View.GONE);
         });
+    }
 
-        // setup fab
+    private void setupFAB() {
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> onAddTransactionAction());
 
         // control FAB visibility
         nav.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if(DESTINATIONS_WITH_FAB_AND_BOTTOMNAV.contains(destination.getId())) {
+            if(DESTINATIONS_WITH_FAB.contains(destination.getId())) {
                 fab.show();
+                bottomNav.getMenu().findItem(R.id.btm_placeholder).setVisible(true);
             }
             else {
                 fab.hide();
+                bottomNav.getMenu().findItem(R.id.btm_placeholder).setVisible(false);
             }
         });
-
-        setupBottomNavigation();
-
     }
 
     private void setupBottomNavigation() {
         bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setItemOnTouchListener(R.id.btm_people, (view, event) -> {
-            view.performClick();
-            nav.navigate(R.id.personSumListFragment);
-            return true;
-        });
-        bottomNav.setItemOnTouchListener(R.id.btm_money, (view, event) -> {
-            view.performClick();
-            nav.navigate(R.id.transactionListFragment);
-            return true;
-        });
-        bottomNav.setItemOnTouchListener(R.id.btm_items, (view, event) -> {
-            view.performClick();
-            nav.navigate(R.id.itemTransactionListFragment);
-            return true;
-        });
-        bottomNav.setItemOnTouchListener(R.id.btm_settings, (view, event) -> {
-            view.performClick();
-            nav.navigate(R.id.settingsActivity);
-            return true;
-        });
-
-        nav.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            int id = destination.getId();
-            if (id == R.id.personSumListFragment) bottomNav.setSelectedItemId(R.id.btm_people);
-            else if(id == R.id.transactionListFragment) bottomNav.setSelectedItemId(R.id.btm_money);
-            else if (id == R.id.itemTransactionListFragment) bottomNav.setSelectedItemId(R.id.btm_items);
-        });
+        NavigationUI.setupWithNavController(bottomNav, nav);
     }
 
     public void showFilterBar() {
@@ -144,9 +127,9 @@ public class MainActivity extends AppCompatActivity {
         boolean isItemList = false;
         NavDestination dest = nav.getCurrentDestination();
         if(dest != null)
-            isItemList = dest.getId() == R.id.itemTransactionListFragment;
+            isItemList = dest.getId() == R.id.item_dest;
         Bundle args = new Bundle();
         args.putBoolean(EditTransactionFragment.ARG_ID_NEW_ITEM, isItemList);
-        nav.navigate(R.id.editTransactionFragment, args);
+        nav.navigate(R.id.editTransaction_dest, args);
     }
 }
