@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Debitum.NoActionBar">
         <activity
-            android:name=".ui.SettingsActivity"
-            android:label="@string/title_activity_settings"/>
-        <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name">
             <intent-filter>

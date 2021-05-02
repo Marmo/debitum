@@ -71,9 +71,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             String info;
             if (success) {info = getString(R.string.backup_successful);}
             else info = getString(R.string.backup_failed, message);
-            Snackbar.make(requireActivity().findViewById(R.id.settings),
+            Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
                     info,
-                    Snackbar.LENGTH_SHORT)
+                    Snackbar.LENGTH_LONG)
                     .show();
         });
     }
@@ -84,7 +84,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             String path = requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
             AppDatabase.restoreDatabase(BACKUP_FILENAME, path, (success, message) -> {
                 if (!success) {
-                    Snackbar.make(requireActivity().findViewById(R.id.settings),
+                    Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
                             getString(R.string.restore_failed, message),
                             Snackbar.LENGTH_SHORT)
                             .show();
