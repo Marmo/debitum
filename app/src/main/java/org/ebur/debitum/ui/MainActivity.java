@@ -20,6 +20,8 @@ import androidx.navigation.ui.NavigationUI;
 import org.ebur.debitum.R;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,10 +29,11 @@ import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final Set<Integer> DESTINATIONS_WITH_FAB = Stream.of(R.id.people_dest, R.id.money_dest, R.id.item_dest)
-            .collect(Collectors.toCollection(HashSet::new));
-    private final Set<Integer> DESTINATIONS_WITH_PERSON_FILTER = Stream.of(R.id.money_dest, R.id.item_dest)
-            .collect(Collectors.toCollection(HashSet::new));
+    private final ArrayList<Integer> DESTINATIONS_WITH_FAB =
+            Stream.of(R.id.people_dest, R.id.money_dest, R.id.item_dest)
+                .collect(Collectors.toCollection(ArrayList::new));
+    private final ArrayList<Integer> DESTINATIONS_WITH_PERSON_FILTER = Stream.of(R.id.money_dest, R.id.item_dest)
+            .collect(Collectors.toCollection(ArrayList::new));
 
     private NavController nav;
     private PersonFilterViewModel personFilterViewModel;
