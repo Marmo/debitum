@@ -217,13 +217,13 @@ public class TransactionListFragment extends Fragment {
             }
             selectionTracker.clearSelection();
             Snackbar.make(requireView(),
-                    getResources().getQuantityString(R.plurals.transaction_list_snackbar_deleted, deleteCount),
+                    getResources().getQuantityString(R.plurals.transaction_list_snackbar_deleted, deleteCount, deleteCount),
                     Snackbar.LENGTH_LONG)
                     .show();
         });
         builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
         builder.setMessage(R.string.transaction_list_dialog_delete_text)
-                .setTitle(getResources().getQuantityString(R.plurals.transaction_list_dialog_delete_title, deleteCount));
+                .setTitle(getResources().getQuantityString(R.plurals.transaction_list_dialog_delete_title, deleteCount, deleteCount));
         AlertDialog dialog = builder.create();
 
         dialog.show();
