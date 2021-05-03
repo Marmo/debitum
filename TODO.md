@@ -7,6 +7,7 @@
 - create new Person from EditTransaction
 - make description required if creating item transaction
 - move filterBar from Activity to fragments
+- fix restart after restore
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
@@ -19,6 +20,7 @@
 # visuals
 ## 1.0
 - refactor vector drawables (readability)
+- change totals bg or owe green
 - improve icons
 - rearrange + restyle list items
 - understand and use themes and styles
