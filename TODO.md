@@ -3,7 +3,6 @@
 - help html in settings
 - create new Person from EditTransaction
 - move filterBar from Activity to fragments
-- fix restart after restore
 - remove selectedName from EditPersonViewModel as we can get it from the spinnerName which is an TextView now
 ## later
 - use RxJava

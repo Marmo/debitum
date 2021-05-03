@@ -10,6 +10,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -86,7 +89,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 if (!success) {
                     Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
                             getString(R.string.restore_failed, message),
-                            Snackbar.LENGTH_SHORT)
+                            Snackbar.LENGTH_LONG)
                             .show();
                 } else {
                     restartApp();
@@ -104,12 +107,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void restartApp() {
-        Intent restartIntent = new Intent(getContext(), MainActivity.class);
+        /*Intent restartIntent = new Intent(getContext(), MainActivity.class);
         int requestCode = 1;
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), requestCode, restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager mgr = (AlarmManager)requireContext().getSystemService(Context.ALARM_SERVICE);
-        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent);
-        System.exit(0);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 500, pendingIntent);
+        System.exit(0);*/
+        NavUtils.navigateUpTo(requireActivity(), new Intent(getContext(), MainActivity.class));
+        startActivity(requireActivity().getIntent());
     }
 
     private void openGithub() {
