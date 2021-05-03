@@ -18,10 +18,8 @@ public class EditTransactionViewModel extends AndroidViewModel {
 
     private final PersonRepository personRepository;
     private final TransactionRepository transactionRepository;
-    //private final LiveData<List<Person>> persons;
     private int idTransaction = -1;
     private Date timestamp;
-    private String selectedName = "";
 
     public EditTransactionViewModel(Application application) {
         super(application);
@@ -34,9 +32,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
     public void setIdTransaction(int id) { this.idTransaction = id; }
     public int getIdTransaction() { return this.idTransaction; }
 
-    public void setSelectedName(String selectedName) { this.selectedName = selectedName; }
-    public String getSelectedName() { return this.selectedName; }
-    public int getSelectedPersonId() throws ExecutionException, InterruptedException { return personRepository.getPersonId(this.selectedName); }
+    public int getPersonId(String name) throws ExecutionException, InterruptedException { return personRepository.getPersonId(name); }
 
     public boolean isNewTransaction() { return idTransaction == -1; }
 

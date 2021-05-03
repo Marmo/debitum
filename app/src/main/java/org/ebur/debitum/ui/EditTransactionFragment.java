@@ -23,7 +23,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
-import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -53,8 +52,6 @@ public class EditTransactionFragment extends DialogFragment {
 
     private EditTransactionViewModel viewModel;
     private PersonFilterViewModel personFilterViewModel;
-
-    private ArrayAdapter<String> spinnerNameAdapter;
 
     private Toolbar toolbar;
     private TextInputLayout spinnerNameLayout;
@@ -135,9 +132,9 @@ public class EditTransactionFragment extends DialogFragment {
 
     private void setupSpinnerName() {
         spinnerName = (AutoCompleteTextView) spinnerNameLayout.getEditText();
-        spinnerNameAdapter = new ArrayAdapter<>(requireContext(), R.layout.item_spinner);
+        ArrayAdapter<String> spinnerNameAdapter = new ArrayAdapter<>(requireContext(), R.layout.item_spinner);
         spinnerName.setAdapter(spinnerNameAdapter);
-        spinnerName.setOnItemClickListener((parent, view, position, id) -> viewModel.setSelectedName(parent.getItemAtPosition(position).toString()));
+        //spinnerName.setOnItemClickListener((parent, view, position, id) -> viewModel.setSelectedName(parent.getItemAtPosition(position).toString()));
         // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
         // this fixes a IllegalStateException in RecyclerView after completion
         try {
@@ -160,9 +157,7 @@ public class EditTransactionFragment extends DialogFragment {
                 || previousDestId == R.id.item_dest) {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             if (filterPerson != null && viewModel.getIdTransaction() == -1) { // TransactionList was filtered by Person and we are creating a new Transaction
-                //spinnerName.setSelection(spinnerNameAdapter.getPosition(filterPerson.name));
                 spinnerName.setText(filterPerson.name, false); // IMPORTANT: filter=false, else the dropdown will be filtered to the selected name
-                viewModel.setSelectedName(filterPerson.name);
             }
         }
     }
@@ -188,7 +183,6 @@ public class EditTransactionFragment extends DialogFragment {
         }
         assert txn != null;
         spinnerName.setText(txn.person.name, false);  // IMPORTANT: filter=false, else the dropdown will be filtered to the selected name
-        viewModel.setSelectedName(txn.person.name);
         gaveRadio.setChecked(txn.transaction.amount>0); // per default received is set (see layout xml)
         // IMPORTANT: set switchIsMonetaryView _before_ setting amount, because on setting amount the
         // AmountTextWatcher::afterTextChanged is called, and within this method isMonetary is needed to apply correct formatting!
@@ -216,60 +210,60 @@ public class EditTransactionFragment extends DialogFragment {
 
     public void onSaveTransactionAction() {
 
-            // CHECK PRECONDITIONS FOR SAVING
-            boolean nameEmpty = TextUtils.isEmpty(viewModel.getSelectedName());
-            boolean amountEmpty = TextUtils.isEmpty(editAmount.getText());
-            boolean descEmptyAndItem = !switchIsMonetary.isChecked() && TextUtils.isEmpty(editDescription.getText());
-            if (nameEmpty || amountEmpty || descEmptyAndItem ) {
-                if(nameEmpty)
-                    spinnerNameLayout.setError(getString(R.string.edit_transaction_error_select_name));
-                if(amountEmpty)
-                    editAmountLayout.setError(getText(R.string.edit_transaction_error_enter_amount));
-                if(descEmptyAndItem)
-                    editDescriptionLayout.setError(getText(R.string.edit_transaction_error_enter_description));
-            } else {
-                //evaluate received-gave-radios
-                int factor = -1;
-                if (gaveRadio.isChecked()) factor = 1;
+        // CHECK PRECONDITIONS FOR SAVING
+        boolean nameEmpty = TextUtils.isEmpty(spinnerName.getText());
+        boolean amountEmpty = TextUtils.isEmpty(editAmount.getText());
+        boolean descEmptyAndItem = !switchIsMonetary.isChecked() && TextUtils.isEmpty(editDescription.getText());
+        if (nameEmpty || amountEmpty || descEmptyAndItem ) {
+            if(nameEmpty)
+                spinnerNameLayout.setError(getString(R.string.edit_transaction_error_select_name));
+            if(amountEmpty)
+                editAmountLayout.setError(getText(R.string.edit_transaction_error_enter_amount));
+            if(descEmptyAndItem)
+                editDescriptionLayout.setError(getText(R.string.edit_transaction_error_enter_description));
+        } else {
+            //evaluate received-gave-radios
+            int factor = -1;
+            if (gaveRadio.isChecked()) factor = 1;
 
-                boolean isMonetary = switchIsMonetary.isChecked();
+            boolean isMonetary = switchIsMonetary.isChecked();
 
-                // parse amount
-                // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005 (format is enforced by AmountTextWatcher)
-                if (isMonetary) factor *= 100;
-                int amount;
-                try {
-                    amount = (int) (factor * Utilities.parseAmount(editAmount.getText().toString()));
-                } catch (ParseException e) {
-                    Toast.makeText(requireActivity(), R.string.edit_transaction_wrong_amount_format, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // get person id from selected person name
-                int idPerson = -1;
-                try {
-                    idPerson = viewModel.getSelectedPersonId();
-                } catch (ExecutionException | InterruptedException e) {
-                    String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
-                }
-
-                // build transaction
-                Transaction transaction = new Transaction(idPerson,
-                        amount,
-                        isMonetary,
-                        editDescription.getText().toString(),
-                        viewModel.getTimestamp());
-
-                // update database
-                if(viewModel.isNewTransaction()) viewModel.insert(transaction);
-                else if (!viewModel.isNewTransaction()) {
-                    transaction.idTransaction = viewModel.getIdTransaction();
-                    viewModel.update(transaction);
-                }
-
-                NavHostFragment.findNavController(this).navigateUp();
+            // parse amount
+            // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005 (format is enforced by AmountTextWatcher)
+            if (isMonetary) factor *= 100;
+            int amount;
+            try {
+                amount = (int) (factor * Utilities.parseAmount(editAmount.getText().toString()));
+            } catch (ParseException e) {
+                Toast.makeText(requireActivity(), R.string.edit_transaction_wrong_amount_format, Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // get person id from selected person name
+            int idPerson = -1;
+            try {
+                idPerson = viewModel.getPersonId(spinnerName.getText().toString());
+            } catch (ExecutionException | InterruptedException e) {
+                String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
+            }
+
+            // build transaction
+            Transaction transaction = new Transaction(idPerson,
+                    amount,
+                    isMonetary,
+                    editDescription.getText().toString(),
+                    viewModel.getTimestamp());
+
+            // update database
+            if(viewModel.isNewTransaction()) viewModel.insert(transaction);
+            else if (!viewModel.isNewTransaction()) {
+                transaction.idTransaction = viewModel.getIdTransaction();
+                viewModel.update(transaction);
+            }
+
+            NavHostFragment.findNavController(this).navigateUp();
+        }
     }
 
     // ---------------------------

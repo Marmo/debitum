@@ -2,7 +2,6 @@
 ## 1.0
 - help html in settings
 - create new Person from EditTransaction
-- move filterBar from Activity to fragments
 - remove selectedName from EditPersonViewModel as we can get it from the spinnerName which is an TextView now
 ## later
 - use RxJava
