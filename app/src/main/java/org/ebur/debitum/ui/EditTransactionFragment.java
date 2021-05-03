@@ -141,7 +141,8 @@ public class EditTransactionFragment extends DialogFragment {
         // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
         // this fixes a IllegalStateException in RecyclerView after completion
         try {
-            for(Person person : viewModel.getPersons()) spinnerNameAdapter.add(person.name);
+            for(Person person : viewModel.getPersons())
+                spinnerNameAdapter.add(person.name);
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, Objects.requireNonNull(e.getMessage()));
         }
@@ -159,7 +160,8 @@ public class EditTransactionFragment extends DialogFragment {
                 || previousDestId == R.id.item_dest) {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             if (filterPerson != null && viewModel.getIdTransaction() == -1) { // TransactionList was filtered by Person and we are creating a new Transaction
-                spinnerName.setSelection(spinnerNameAdapter.getPosition(filterPerson.name));
+                //spinnerName.setSelection(spinnerNameAdapter.getPosition(filterPerson.name));
+                spinnerName.setText(filterPerson.name, false); // IMPORTANT: filter=false, else the dropdown will be filtered to the selected name
                 viewModel.setSelectedName(filterPerson.name);
             }
         }
@@ -185,7 +187,8 @@ public class EditTransactionFragment extends DialogFragment {
             NavHostFragment.findNavController(this).navigateUp();
         }
         assert txn != null;
-        spinnerName.setText(txn.person.name);
+        spinnerName.setText(txn.person.name, false);  // IMPORTANT: filter=false, else the dropdown will be filtered to the selected name
+        viewModel.setSelectedName(txn.person.name);
         gaveRadio.setChecked(txn.transaction.amount>0); // per default received is set (see layout xml)
         // IMPORTANT: set switchIsMonetaryView _before_ setting amount, because on setting amount the
         // AmountTextWatcher::afterTextChanged is called, and within this method isMonetary is needed to apply correct formatting!
@@ -214,7 +217,6 @@ public class EditTransactionFragment extends DialogFragment {
     public void onSaveTransactionAction() {
 
             // CHECK PRECONDITIONS FOR SAVING
-            // TODO that if-in-if with same conditions looks weird
             boolean nameEmpty = TextUtils.isEmpty(viewModel.getSelectedName());
             boolean amountEmpty = TextUtils.isEmpty(editAmount.getText());
             boolean descEmptyAndItem = !switchIsMonetary.isChecked() && TextUtils.isEmpty(editDescription.getText());

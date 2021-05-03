@@ -4,8 +4,7 @@
 - create new Person from EditTransaction
 - move filterBar from Activity to fragments
 - fix restart after restore
-- fix only one person available when editing transaction
-- fix crash when creating transaction from filtered transaction list
+- remove selectedName from EditPersonViewModel as we can get it from the spinnerName which is an TextView now
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
