@@ -118,6 +118,8 @@ public class TransactionListFragment extends Fragment {
     protected void observeTransactionsLiveData() {
         viewModel.getMoneyTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
+            // IMPORTANT filter() does not alter the input list but creates a copy instead
+            // we need to make a copy so that the header is not added to the original list (again and again and again ...)
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
             listForAdapter.add(0, buildTotalHeader(TransactionWithPerson.getSum(listForAdapter)));
             adapter.submitList(listForAdapter);

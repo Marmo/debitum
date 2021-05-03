@@ -34,8 +34,10 @@ import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 // TODO add Activity to show all transactions of one person that is launched when clicking on one row
 // TODO in PersonTransactionListActivity add ActionBar options to edit/delete person
@@ -73,11 +75,13 @@ public class PersonSumListFragment extends Fragment {
 
         // observe ViewModel's LiveData
         viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), pwtList -> {
-            pwtList.add(0, buildTotalHeader(
-                    PersonWithTransactions.getSum(pwtList),
-                    PersonWithTransactions.getNumberOfItems(pwtList)
+            // we need to make a copy so that the header is not added to the original list (again and again and again ...)
+            List<PersonWithTransactions> listForAdapter = new ArrayList<>(pwtList);
+            listForAdapter.add(0, buildTotalHeader(
+                    PersonWithTransactions.getSum(listForAdapter),
+                    PersonWithTransactions.getNumberOfItems(listForAdapter)
             ));
-            adapter.submitList(pwtList);
+            adapter.submitList(listForAdapter);
         });
 
         setHasOptionsMenu(true);
