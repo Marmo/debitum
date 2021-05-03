@@ -1,16 +1,8 @@
 
 package org.ebur.debitum.ui;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,18 +19,12 @@ import androidx.navigation.ui.NavigationUI;
 import org.ebur.debitum.R;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final ArrayList<Integer> DESTINATIONS_WITH_FAB =
-            Stream.of(R.id.people_dest, R.id.money_dest, R.id.item_dest)
-                .collect(Collectors.toCollection(ArrayList::new));
     private final ArrayList<Integer> DESTINATIONS_WITH_PERSON_FILTER = Stream.of(R.id.money_dest, R.id.item_dest)
             .collect(Collectors.toCollection(ArrayList::new));
 
@@ -96,11 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupFAB() {
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> onAddTransactionAction(view));
+        fab.setOnClickListener(this::onAddTransactionAction);
 
         // control FAB visibility
         nav.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if(DESTINATIONS_WITH_FAB.contains(destination.getId())) {
+            if(destination.getId() != R.id.settings_dest) {
                 fab.show();
                 bottomNav.getMenu().findItem(R.id.btm_placeholder).setVisible(true);
             }
