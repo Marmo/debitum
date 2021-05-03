@@ -63,6 +63,7 @@ public class EditTransactionFragment extends DialogFragment {
     private TextInputLayout editAmountLayout;
     private EditText editAmount;
     private SwitchMaterial switchIsMonetary;
+    private TextInputLayout editDescriptionLayout;
     private EditText editDescription;
     private AutoCompleteTextView editDate;
 
@@ -95,7 +96,7 @@ public class EditTransactionFragment extends DialogFragment {
         editAmount.addTextChangedListener(new AmountTextWatcher());
         switchIsMonetary = root.findViewById(R.id.switch_monetary);
         switchIsMonetary.setOnCheckedChangeListener(this::onSwitchIsMonetaryChanged);
-        TextInputLayout editDescriptionLayout = root.findViewById(R.id.edit_description);
+        editDescriptionLayout = root.findViewById(R.id.edit_description);
         editDescription = editDescriptionLayout.getEditText();
         TextInputLayout editDateLayout = root.findViewById(R.id.edit_date);
         editDateLayout.setOnClickListener(this::showDatePickerDialog);
@@ -212,13 +213,18 @@ public class EditTransactionFragment extends DialogFragment {
 
     public void onSaveTransactionAction() {
 
-            // at least name and amount have to be filled
+            // CHECK PRECONDITIONS FOR SAVING
             // TODO that if-in-if with same conditions looks weird
-            if (TextUtils.isEmpty(viewModel.getSelectedName()) || TextUtils.isEmpty(editAmount.getText())) {
-                if(TextUtils.isEmpty(viewModel.getSelectedName()))
+            boolean nameEmpty = TextUtils.isEmpty(viewModel.getSelectedName());
+            boolean amountEmpty = TextUtils.isEmpty(editAmount.getText());
+            boolean descEmptyAndItem = !switchIsMonetary.isChecked() && TextUtils.isEmpty(editDescription.getText());
+            if (nameEmpty || amountEmpty || descEmptyAndItem ) {
+                if(nameEmpty)
                     spinnerNameLayout.setError(getString(R.string.edit_transaction_error_select_name));
-                if(TextUtils.isEmpty(editAmount.getText()))
+                if(amountEmpty)
                     editAmountLayout.setError(getText(R.string.edit_transaction_error_enter_amount));
+                if(descEmptyAndItem)
+                    editDescriptionLayout.setError(getText(R.string.edit_transaction_error_enter_description));
             } else {
                 //evaluate received-gave-radios
                 int factor = -1;
@@ -344,13 +350,16 @@ public class EditTransactionFragment extends DialogFragment {
         Drawable startIcon;
 
         if (checked) {
-            //switchIsMonetary.setText(R.string.switch_monetary_label_money);
             startIcon = res.getDrawable(R.drawable.ic_baseline_money_24, null);
             editAmountLayout.setHint(R.string.edit_transaction_hint_amount_money);
+            editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc);
+            editDescriptionLayout.setError(null);
+            editDescriptionLayout.setHelperText(null);
         } else {
-            //switchIsMonetary.setText(R.string.switch_monetary_label_item);
             startIcon = res.getDrawable(R.drawable.ic_baseline_tag_24, null);
             editAmountLayout.setHint(R.string.edit_transaction_hint_amount_item);
+            editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc_item);
+            editDescriptionLayout.setHelperText(getString(R.string.required_helper_text));
         }
 
         // apply proper formatting for chosen amount type

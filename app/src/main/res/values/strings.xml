@@ -56,7 +56,9 @@
     <string name="edit_transaction_hint_amount_money">Amount*</string>
     <string name="edit_transaction_hint_amount_item">Number of items *</string>
     <string name="edit_transaction_error_enter_amount">Please enter amount!</string>
+    <string name="edit_transaction_error_enter_description">Please enter description!</string>
     <string name="edit_transaction_hint_desc">Description</string>
+    <string name="edit_transaction_hint_desc_item">Description*</string>
     <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
     <string name="switch_monetary_label_money">Money</string>
     <string name="switch_monetary_label_item">Item</string>

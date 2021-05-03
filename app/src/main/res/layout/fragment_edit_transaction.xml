@@ -140,7 +140,9 @@
                 app:startIconDrawable="@drawable/ic_baseline_notes_24"
                 app:startIconContentDescription="Description"
                 app:endIconMode="clear_text"
-                app:endIconContentDescription="clear text" >
+                app:endIconContentDescription="clear text"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

@@ -1,10 +1,7 @@
 # code
 ## 1.0
-- icon in front of person rows
 - help html in settings
-- fix back stack (e.g. from Settings Activity)
 - create new Person from EditTransaction
-- make description required if creating item transaction
 - move filterBar from Activity to fragments
 - fix restart after restore
 - fix only one person available when editing transaction
@@ -17,7 +14,7 @@
 - unify transactionList and PersonSumList (abstract base class)
 - unify EditPerson and EditTransaction (abstract base class)
 - move dialog toolbar to included layout xml
-- contacts integration
+- contacts integration, icon in front of person rows
 
 # visuals
 ## 1.0
