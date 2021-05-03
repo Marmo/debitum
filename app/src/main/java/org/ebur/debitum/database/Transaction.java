@@ -70,8 +70,6 @@ public class Transaction {
         return amnt && desc && timestmp && isMon && id && idpers;
     }
 
-    // TODO create getter and setter methods and make members private
-
     //---------------------
     // static tool methods
     // --------------------
@@ -124,7 +122,6 @@ public class Transaction {
     public static String getFormattedSum(List<Transaction> transactions, boolean signed) {
         return Transaction.formatMonetaryAmount(Transaction.getSum(transactions, signed));
     }
-    public static String getFormattedSum(List<Transaction> transactions) { return Transaction.getFormattedSum(transactions, true); }
 
 
     /**

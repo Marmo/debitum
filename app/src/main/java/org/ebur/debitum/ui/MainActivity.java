@@ -1,9 +1,16 @@
 
 package org.ebur.debitum.ui;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -89,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupFAB() {
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> onAddTransactionAction());
+        fab.setOnClickListener(view -> onAddTransactionAction(view));
 
         // control FAB visibility
         nav.addOnDestinationChangedListener((controller, destination, arguments) -> {
@@ -126,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         if (current != null) nav.navigate(current.getId());
     }
 
-    private void onAddTransactionAction() {
+    private void onAddTransactionAction(View fab) {
         boolean isItemList = false;
         NavDestination dest = nav.getCurrentDestination();
         if(dest != null)

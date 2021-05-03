@@ -1,6 +1,5 @@
 # code
 ## 1.0
-- show total on top of PersonSumList
 - icon in front of person rows
 - help html in settings
 - fix back stack (e.g. from Settings Activity)
@@ -8,6 +7,9 @@
 - make description required if creating item transaction
 - move filterBar from Activity to fragments
 - fix restart after restore
+- fix only one person available when editing transaction
+- fix crash when creating transaction from filtered transaction list
+- fab should not disappear when opening editX dialog
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list

@@ -119,7 +119,7 @@ public class TransactionListFragment extends Fragment {
         viewModel.getMoneyTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
-            listForAdapter.add(0, buildTotalHeader(Transaction.getSum(TransactionWithPerson.getTransactions(listForAdapter))));
+            listForAdapter.add(0, buildTotalHeader(TransactionWithPerson.getSum(listForAdapter)));
             adapter.submitList(listForAdapter);
         });
     }

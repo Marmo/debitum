@@ -15,9 +15,9 @@ public class PersonTest {
      */
     @Before
     public void setUp() {
-        person1 = new Person("foo"); person1.idPerson = 0;
-        person2 = new Person("foo"); person2.idPerson = 0;
-        person3 = new Person("foo"); person3.idPerson = 1;
+        person1 = new Person("foo"); person1.idPerson = 0; person1.name = "Samuel Mumm";
+        person2 = new Person("foo"); person2.idPerson = 0; person2.name = "Samuel Mumm";
+        person3 = new Person("foo"); person3.idPerson = 1; person3.name = "Fred Colon";
     }
 
     @Test

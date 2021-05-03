@@ -4,14 +4,8 @@ import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Map;
 
 
 public class PersonWithTransactions {
@@ -26,10 +20,54 @@ public class PersonWithTransactions {
         this.transactions = transactions;
     }
 
-    public boolean equals(PersonWithTransactions pws) {
+    public PersonWithTransactions(Person person, Transaction... transaction) {
+        this.person = person;
+        this.transactions = new ArrayList<>();
+        this.transactions.addAll(Arrays.asList(transaction));
+    }
+
+    public boolean equals(PersonWithTransactions pwt) {
         boolean person, sum;
-        person = pws.person.equals(this.person);
-        sum = Transaction.getSum(pws.transactions) == Transaction.getSum(this.transactions);
+        person = pwt.person.equals(this.person);
+        sum = Transaction.getSum(pwt.transactions) == Transaction.getSum(this.transactions);
         return person && sum;
+    }
+
+    /**
+     * @return The sum of all monetary transactions of this PersonWithTransactions' transaction list
+     */
+    public int getSum() {
+        return Transaction.getSum(this.transactions);
+    }
+
+    /**
+     * @return number of all lent items (sum of |amount| of all non-monetary transactions) in this PersonWithTransactions' transaction list
+     */
+    public int getNumberOfItems() {
+        return Transaction.getNumberOfItems(this.transactions);
+    }
+
+    /**
+     * @param personWithTransactionsList List of PersonWithTransactions
+     * @return The sum of all monetary transactions of all PersonWithTransactionss in the given List
+     */
+    public static int getSum(List<PersonWithTransactions> personWithTransactionsList) {
+        int sum = 0;
+        for (PersonWithTransactions pwt :personWithTransactionsList) {
+            sum+=Transaction.getSum(pwt.transactions);
+        }
+        return sum;
+    }
+
+    /**
+     * @param personWithTransactionsList List of PersonWithTransactions
+     * @return number of all lent items (sum of |amount| of all non-monetary transactions) of all transactions of all elements of personWithTransactionsList
+     */
+    public static int getNumberOfItems(List<PersonWithTransactions> personWithTransactionsList) {
+        int sum = 0;
+        for (PersonWithTransactions pwt :personWithTransactionsList) {
+            sum+=Transaction.getNumberOfItems(pwt.transactions);
+        }
+        return sum;
     }
 }

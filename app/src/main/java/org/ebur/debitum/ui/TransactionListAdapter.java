@@ -34,7 +34,6 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, R
                 return TransactionListViewHolder.create(parent);
             default:
                 throw new ClassCastException("Unknown viewType");
-
         }
     }
 

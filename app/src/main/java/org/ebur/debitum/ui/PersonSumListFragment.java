@@ -29,8 +29,12 @@ import com.google.android.material.snackbar.Snackbar;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
+import org.ebur.debitum.database.PersonWithTransactions;
+import org.ebur.debitum.database.Transaction;
+import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 // TODO add Activity to show all transactions of one person that is launched when clicking on one row
@@ -68,11 +72,28 @@ public class PersonSumListFragment extends Fragment {
         buildSelectionTracker();
 
         // observe ViewModel's LiveData
-        viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), adapter::submitList);
+        viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), pwtList -> {
+            pwtList.add(0, buildTotalHeader(
+                    PersonWithTransactions.getSum(pwtList),
+                    PersonWithTransactions.getNumberOfItems(pwtList)
+            ));
+            adapter.submitList(pwtList);
+        });
 
         setHasOptionsMenu(true);
 
         return root;
+    }
+
+    // create a PersonWithTransactions containing the header information for the RecyclerView
+    private PersonWithTransactions buildTotalHeader(int totalMoney, int totalItems) {
+        Transaction headerMoneyTxn = new Transaction(Integer.MIN_VALUE);
+        Transaction headerItemTxn = new Transaction(Integer.MIN_VALUE+1);
+        headerMoneyTxn.amount = totalMoney;
+        headerItemTxn.amount = totalItems;
+        headerMoneyTxn.isMonetary = true;
+        headerItemTxn.isMonetary = false;
+        return new PersonWithTransactions(new Person("PONDER STIBBONS"), headerMoneyTxn, headerItemTxn);
     }
 
     private void buildSelectionTracker() {

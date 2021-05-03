@@ -15,7 +15,7 @@ public class ItemTransactionListFragment extends TransactionListFragment {
         viewModel.getItemTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
-            listForAdapter.add(0, buildTotalHeader(Transaction.getNumberOfItems(TransactionWithPerson.getTransactions(listForAdapter))));
+            listForAdapter.add(0, buildTotalHeader(TransactionWithPerson.getNumberOfItems(listForAdapter)));
             adapter.submitList(listForAdapter);
         });
     }
