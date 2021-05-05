@@ -2,13 +2,14 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="dialog_vertical_spacing">16dp</dimen>
+    <dimen name="dialog_horizontal_spacing">16dp</dimen>
     <dimen name="appbar_padding">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="small_padding">8dp</dimen>
     <dimen name="big_padding">16dp</dimen>
-    <dimen name="add_transaction_item_height">48dp</dimen>
-    <dimen name="text_size_add_transaction">16sp</dimen>
     <dimen name="bottom_nav_min_height">64dp</dimen>
     <dimen name="bar_elevation">4dp</dimen>
     <dimen name="filterbar_elevation">2dp</dimen>

@@ -32,15 +32,17 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginVertical="@dimen/activity_vertical_margin">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/spinner_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                android:layout_marginTop="@dimen/dialog_vertical_spacing"
                 app:layout_constraintEnd_toStartOf="@id/barrier_buttons"
                 android:hint="@string/edit_transaction_hint_person"
                 android:labelFor="@id/spinner_name_editText"
@@ -65,7 +67,7 @@
                 style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/dialog_horizontal_spacing"
                 app:icon="@drawable/ic_baseline_add_24"
                 app:layout_constraintBaseline_toBaselineOf="@id/spinner_name"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -74,8 +76,8 @@
                 android:id="@+id/radioGroupGaveReceived"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="@dimen/big_padding"
+                android:layout_marginStart="@dimen/dialog_horizontal_spacing"
+                android:layout_marginTop="@dimen/dialog_vertical_spacing"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/spinner_name">
@@ -85,15 +87,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="@string/edit_transaction_received"
-                    android:textSize="@dimen/text_size_add_transaction" />
+                    android:text="@string/edit_transaction_received" />
 
                 <RadioButton
                     android:id="@+id/radioButton_gave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/edit_transaction_gave"
-                    android:textSize="@dimen/text_size_add_transaction" />
+                    android:text="@string/edit_transaction_gave" />
 
             </RadioGroup>
 
@@ -102,8 +102,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                android:layout_marginTop="@dimen/dialog_vertical_spacing"
                 app:layout_constraintEnd_toStartOf="@id/barrier_buttons"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/radioGroupGaveReceived"
@@ -128,9 +128,8 @@
                 android:id="@+id/switch_monetary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/dialog_horizontal_spacing"
                 android:checked="true"
-                android:textSize="@dimen/text_size_add_transaction"
                 app:layout_constraintBaseline_toBaselineOf="@id/edit_amount"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -139,8 +138,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                android:layout_marginTop="@dimen/dialog_vertical_spacing"
                 android:hint="@string/edit_transaction_hint_desc"
                 android:inputType="text"
                 android:singleLine="true"
@@ -165,8 +164,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                android:layout_marginTop="@dimen/dialog_vertical_spacing"
                 android:contentDescription="@string/edit_transaction_date_content_description"
                 android:labelFor="@id/edit_date_editText"
                 app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"
