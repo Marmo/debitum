@@ -31,17 +31,19 @@
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginVertical="@dimen/activity_vertical_margin">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_person_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                android:layout_marginVertical="@dimen/dialog_vertical_spacing"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginHorizontal="32dp"
-                android:layout_marginTop="32dp"
                 android:hint="@string/edit_person_name"
                 android:singleLine="true"
                 android:inputType="text"

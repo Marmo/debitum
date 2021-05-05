@@ -10,14 +10,19 @@
     <string name="required_helper_text">* Required</string>
 
     <!-- MainActivity -->
-    <string name="fab_content_description">Add Transaction</string>
+    <string name="fab_content_description">Create Transaction</string>
+    <string name="bottom_nav_people">People</string>
+    <string name="bottom_nav_money">Money</string>
+    <string name="bottom_nav_items">Items</string>
+    <string name="bottom_nav_settings">Settings</string>
+    <string name="dismiss_filter">dismiss filter</string>
 
     <!-- PersonSumListFragment -->
     <string name="title_fragment_person_sum_list">People</string>
     <string name="person_sum_list_you_owe">YOU OWE</string>
     <string name="person_sum_list_no_debt">NO DEBT</string>
     <string name="person_sum_list_you_lent">YOU LENT</string>
-    <string name="toolbar_add_person">Add Person</string>
+    <string name="toolbar_create_person">Create Person</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d Person deleted</item>
         <item quantity="other">%d Persons deleted</item>
@@ -49,7 +54,7 @@
     <string name="transaction_list_dialog_delete_text">This can\'t be undone.</string>
 
     <!-- EditTransactionFragment -->
-    <string name="title_fragment_edit_transaction_add">Add Transaction</string>
+    <string name="title_fragment_edit_transaction_create">Create Transaction</string>
     <string name="title_fragment_edit_transaction">Edit Transaction</string>
     <string name="edit_transaction_hint_person">Person*</string>
     <string name="edit_transaction_error_select_name">Please select a name!</string>
@@ -70,16 +75,11 @@
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Edit Person</string>
-    <string name="title_fragment_edit_person_add">Add Person</string>
+    <string name="title_fragment_edit_person_create">Create Person</string>
     <string name="edit_person_name">Name</string>
     <string name="error_message_enter_name">Please enter a name!</string>
     <string name="error_message_name_exists">%1$s already exists, please enter a different name!</string>
-    <string name="bottom_nav_people">People</string>
-    <string name="bottom_nav_money">Money</string>
-    <string name="bottom_nav_items">Items</string>
-    <string name="bottom_nav_settings">Settings</string>
-    <string name="dismiss_filter">dismiss filter</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="checkbox_continue_new_transaction">continue with creating a new Transaction after saving</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>

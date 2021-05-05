@@ -2,34 +2,24 @@ package org.ebur.debitum.ui;
 
 import androidx.annotation.NonNull;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -37,19 +27,19 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.viewModel.EditPersonViewModel;
 import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ExecutionException;
 
 public class EditPersonFragment extends DialogFragment {
 
     public static final String ARG_EDITED_PERSON = "editedPerson";
+    public static final String ARG_NEW_PERSON_REQUESTED = "newPersonRequested";
 
     private EditPersonViewModel viewModel;
 
     private Toolbar toolbar;
-    private TextInputLayout nameViewLayout;
-    private TextInputEditText nameView;
+    private TextInputLayout editNameLayout;
+    private TextInputEditText editName;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,10 +56,10 @@ public class EditPersonFragment extends DialogFragment {
         View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
 
         toolbar = root.findViewById(R.id.dialog_toolbar);
-        nameViewLayout = root.findViewById(R.id.edit_person_name);
-        nameView = (TextInputEditText) nameViewLayout.getEditText();
-        assert nameView != null;
-        nameView.addTextChangedListener(new NameTextWatcher());
+        editNameLayout = root.findViewById(R.id.edit_person_name);
+        editName = (TextInputEditText) editNameLayout.getEditText();
+        assert editName != null;
+        editName.addTextChangedListener(new NameTextWatcher());
 
         Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
         viewModel.setEditedPerson(editedPerson);
@@ -85,13 +75,14 @@ public class EditPersonFragment extends DialogFragment {
         toolbar.inflateMenu(R.menu.menu_edit_person);
         toolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
 
-        // adding or editing a person?
-        if(!viewModel.isNewPerson()) {
-            nameView.setText(viewModel.getEditedPerson().name);
-            toolbar.setTitle(R.string.title_fragment_edit_person);
+        // we create a new person
+        if(viewModel.isNewPerson()) {
+            toolbar.setTitle(R.string.title_fragment_edit_person_create);
         }
+        // we edit a person
         else {
-            toolbar.setTitle(R.string.title_fragment_edit_person_add);
+            editName.setText(viewModel.getEditedPerson().name);
+            toolbar.setTitle(R.string.title_fragment_edit_person);
         }
     }
 
@@ -126,16 +117,16 @@ public class EditPersonFragment extends DialogFragment {
         String name;
 
         // check if nameView has contents
-        if(TextUtils.isEmpty(nameView.getText())) {
-            nameViewLayout.setError(getString(R.string.error_message_enter_name));
+        if(editName.getText() == null || TextUtils.isEmpty(editName.getText())) {
+            editNameLayout.setError(getString(R.string.error_message_enter_name));
             return;
         }
-        else name = nameView.getText().toString();
+        else name = editName.getText().toString();
 
         // check if Person with that name already exists
         try {
             if(viewModel.personExists(name)) {
-                nameViewLayout.setError(getString(R.string.error_message_name_exists, name));
+                editNameLayout.setError(getString(R.string.error_message_name_exists, name));
                 /*String errorMessage = getResources().getString(R.string.error_message_name_exists, name);
                 Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();*/
             }
@@ -149,16 +140,15 @@ public class EditPersonFragment extends DialogFragment {
                     viewModel.update(oldPerson);
                 }
 
-                // return the new name back to the calling fragment (currently only
-                // EditTransactionFragement uses this)
-                NavBackStackEntry requester = NavHostFragment.findNavController(this).getPreviousBackStackEntry();
-                if(viewModel.isNewPerson()
-                        && requester != null
-                        && requester.getDestination().getId() == R.id.editTransaction_dest) {
-                    NewPersonRequestViewModel requestViewModel =
-                            new ViewModelProvider(requester).get(NewPersonRequestViewModel.class);
-                    // only set name if there are observers and if we are creating a new Person
-                    if (requestViewModel.getNewPersonName().hasObservers()) {
+                // return the new name back to the calling fragment via NewPersonRequestViewModel
+                // (currently only EditTransactionFragement uses this)
+                // only set name if a new person was requested
+                if(requireArguments().getBoolean(ARG_NEW_PERSON_REQUESTED)
+                        && viewModel.isNewPerson()) {
+                    NavBackStackEntry requester = NavHostFragment.findNavController(this).getPreviousBackStackEntry();
+                    if (requester != null) {
+                        NewPersonRequestViewModel requestViewModel =
+                                new ViewModelProvider(requester).get(NewPersonRequestViewModel.class);
                         requestViewModel.setNewPersonName(name);
                     }
                 }
@@ -170,6 +160,7 @@ public class EditPersonFragment extends DialogFragment {
         }
     }
 
+    // only needed to reset error on editName
     class NameTextWatcher implements TextWatcher {
 
         @Override
@@ -182,7 +173,7 @@ public class EditPersonFragment extends DialogFragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            nameViewLayout.setError(null);
+            editNameLayout.setError(null);
         }
     }
 }

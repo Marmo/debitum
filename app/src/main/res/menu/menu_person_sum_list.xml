@@ -15,6 +15,6 @@
     <item
         android:id="@+id/miAddPerson"
         android:icon="@drawable/ic_baseline_person_add_24"
-        android:title="@string/toolbar_add_person"
+        android:title="@string/toolbar_create_person"
         app:showAsAction="ifRoom"/>
 </menu>

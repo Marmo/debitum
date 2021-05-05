@@ -36,7 +36,6 @@ import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
-import org.ebur.debitum.viewModel.EditPersonViewModel;
 import org.ebur.debitum.viewModel.EditTransactionViewModel;
 import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
@@ -61,7 +60,6 @@ public class EditTransactionFragment extends DialogFragment {
     private TextInputLayout spinnerNameLayout;
     private AutoCompleteTextView spinnerName;
     private ArrayAdapter<String> spinnerNameAdapter;
-    private Button buttonNewPerson;
     private RadioButton gaveRadio;
     private TextInputLayout editAmountLayout;
     private EditText editAmount;
@@ -92,7 +90,7 @@ public class EditTransactionFragment extends DialogFragment {
         // setup views
         toolbar = root.findViewById(R.id.dialog_toolbar);
         spinnerNameLayout = root.findViewById(R.id.spinner_name);
-        buttonNewPerson = root.findViewById(R.id.button_new_person);
+        Button buttonNewPerson = root.findViewById(R.id.button_new_person);
         buttonNewPerson.setOnClickListener(this::onNewPersonAction);
         gaveRadio = root.findViewById(R.id.radioButton_gave);
         editAmountLayout = root.findViewById(R.id.edit_amount);
@@ -170,7 +168,7 @@ public class EditTransactionFragment extends DialogFragment {
     }
 
     private void fillViewsNewTransaction() {
-        toolbar.setTitle(R.string.title_fragment_edit_transaction_add);
+        toolbar.setTitle(R.string.title_fragment_edit_transaction_create);
         switchIsMonetary.setChecked(!requireArguments().getBoolean(ARG_ID_NEW_ITEM, false));
         viewModel.setTimestamp(new Date());
         editDate.setText(Utilities.formatDate(viewModel.getTimestamp(),
@@ -285,7 +283,7 @@ public class EditTransactionFragment extends DialogFragment {
             spinnerName.setText(newPersonName, false);
             requestViewModel.getNewPersonName().removeObservers(requester);
         });
-        NavHostFragment.findNavController(this).navigate(R.id.action_addPerson);
+        NavHostFragment.findNavController(this).navigate(R.id.action_requestNewPerson);
     }
 
     // ---------------------------

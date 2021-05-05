@@ -74,6 +74,10 @@
             android:defaultValue="@null"
             app:argType="org.ebur.debitum.database.Person"
             app:nullable="true" />
+        <argument
+            android:name="newPersonRequested"
+            android:defaultValue="false"
+            app:argType="boolean" />
     </dialog>
     <dialog
         android:id="@+id/editTransaction_dest"
@@ -85,11 +89,14 @@
             app:argType="integer"
             android:defaultValue="-1" />
         <action
-            android:id="@id/action_addPerson"
+            android:id="@+id/action_requestNewPerson"
             app:destination="@id/editPerson_dest" >
             <argument
                 android:name="editedPerson"
                 android:defaultValue="@null" />
+            <argument
+                android:name="newPersonRequested"
+                android:defaultValue="true" />
         </action>
     </dialog>
     <fragment
