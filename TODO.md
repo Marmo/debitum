@@ -14,6 +14,7 @@
 # visuals
 ## 1.0
 - refactor vector drawables (readability)
+- margin for recycler views
 - change totals bg or owe green
 - improve icons
 - rearrange + restyle list items
