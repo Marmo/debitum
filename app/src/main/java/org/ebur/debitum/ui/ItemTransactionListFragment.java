@@ -11,7 +11,7 @@ import java.util.List;
 public class ItemTransactionListFragment extends TransactionListFragment {
 
     @Override
-    protected void observeTransactionsLiveData() {
+    protected void subscribeToViewModel() {
         viewModel.getItemTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);

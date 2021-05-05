@@ -13,9 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.selection.ItemKeyProvider;
 import androidx.recyclerview.selection.MutableSelection;
 import androidx.recyclerview.selection.SelectionPredicates;
@@ -76,7 +74,7 @@ public class TransactionListFragment extends Fragment {
 
         buildSelectionTracker();
 
-        observeTransactionsLiveData();
+        subscribeToViewModel();
 
         setHasOptionsMenu(true);
 
@@ -115,7 +113,7 @@ public class TransactionListFragment extends Fragment {
         adapter.setSelectionTracker(this.selectionTracker);
     }
 
-    protected void observeTransactionsLiveData() {
+    protected void subscribeToViewModel() {
         viewModel.getMoneyTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             // IMPORTANT filter() does not alter the input list but creates a copy instead
@@ -149,16 +147,17 @@ public class TransactionListFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_transaction_list, menu);
 
-        // do not show edit person menu item when not filtered by person
-        if(personFilterViewModel.getFilterPerson() == null) {
+        // do not show edit person menu item when not filtered by person or when rows are selected
+        if(personFilterViewModel.getFilterPerson() == null || nRowsSelected > 0)
             menu.findItem(R.id.miEditPerson).setVisible(false);
-        }
 
         // only show edit transaction menu item if exactly one transaction is selected
-        if(nRowsSelected != 1) menu.findItem(R.id.miEditTransaction).setVisible(false);
+        if(nRowsSelected != 1)
+            menu.findItem(R.id.miEditTransaction).setVisible(false);
 
         // only show delete transaction menu item if one or more items are selected
-        if(nRowsSelected < 1) menu.findItem(R.id.miDeleteTransaction).setVisible(false);
+        if(nRowsSelected < 1)
+            menu.findItem(R.id.miDeleteTransaction).setVisible(false);
     }
 
     @Override
