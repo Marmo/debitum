@@ -24,6 +24,13 @@
             app:exitAnim="@anim/fragment_close_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_addPerson"
+            app:destination="@id/editPerson_dest" >
+            <argument
+                android:name="editedPerson"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/money_dest"
@@ -77,6 +84,13 @@
             android:name="idTransaction"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@id/action_addPerson"
+            app:destination="@id/editPerson_dest" >
+            <argument
+                android:name="editedPerson"
+                android:defaultValue="@null" />
+        </action>
     </dialog>
     <fragment
         android:id="@+id/settings_dest"

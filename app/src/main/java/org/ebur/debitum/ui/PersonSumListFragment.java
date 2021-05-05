@@ -228,9 +228,9 @@ public class PersonSumListFragment extends Fragment {
     }
 
     public void onAddPersonAction() {
-        Bundle args = new Bundle();
-        args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, null);
-        NavHostFragment.findNavController(this).navigate(R.id.action_editPerson, args);
+        //Bundle args = new Bundle();
+        //args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, null);
+        NavHostFragment.findNavController(this).navigate(R.id.action_addPerson);//, args);
     }
 
     private void invalidateMenuIfNeeded(int nRowsSelectedNew) {

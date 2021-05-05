@@ -1,7 +1,7 @@
 # code
 ## 1.0
 - help html in settings
-- create new Person from EditTransaction
+- create new Transaction after creating person (checkbox)
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -34,7 +36,9 @@ import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
+import org.ebur.debitum.viewModel.EditPersonViewModel;
 import org.ebur.debitum.viewModel.EditTransactionViewModel;
+import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 
 import java.text.ParseException;
@@ -56,6 +60,8 @@ public class EditTransactionFragment extends DialogFragment {
     private Toolbar toolbar;
     private TextInputLayout spinnerNameLayout;
     private AutoCompleteTextView spinnerName;
+    private ArrayAdapter<String> spinnerNameAdapter;
+    private Button buttonNewPerson;
     private RadioButton gaveRadio;
     private TextInputLayout editAmountLayout;
     private EditText editAmount;
@@ -86,6 +92,8 @@ public class EditTransactionFragment extends DialogFragment {
         // setup views
         toolbar = root.findViewById(R.id.dialog_toolbar);
         spinnerNameLayout = root.findViewById(R.id.spinner_name);
+        buttonNewPerson = root.findViewById(R.id.button_new_person);
+        buttonNewPerson.setOnClickListener(this::onNewPersonAction);
         gaveRadio = root.findViewById(R.id.radioButton_gave);
         editAmountLayout = root.findViewById(R.id.edit_amount);
         editAmount = editAmountLayout.getEditText();
@@ -132,9 +140,8 @@ public class EditTransactionFragment extends DialogFragment {
 
     private void setupSpinnerName() {
         spinnerName = (AutoCompleteTextView) spinnerNameLayout.getEditText();
-        ArrayAdapter<String> spinnerNameAdapter = new ArrayAdapter<>(requireContext(), R.layout.item_spinner);
+        spinnerNameAdapter = new ArrayAdapter<>(requireContext(), R.layout.item_spinner);
         spinnerName.setAdapter(spinnerNameAdapter);
-        //spinnerName.setOnItemClickListener((parent, view, position, id) -> viewModel.setSelectedName(parent.getItemAtPosition(position).toString()));
         // since an observed person-LiveData would be filled initially too late, we have to fill the adapter manually
         // this fixes a IllegalStateException in RecyclerView after completion
         try {
@@ -264,6 +271,21 @@ public class EditTransactionFragment extends DialogFragment {
 
             NavHostFragment.findNavController(this).navigateUp();
         }
+    }
+
+    private void onNewPersonAction(View view) {
+        NavController nav = NavHostFragment.findNavController(this);
+        NavBackStackEntry requester = nav.getCurrentBackStackEntry();
+        assert requester != null;
+        NewPersonRequestViewModel requestViewModel =
+                new ViewModelProvider(requester).get(NewPersonRequestViewModel.class);
+        requestViewModel.getNewPersonName().observe(getViewLifecycleOwner(), newPersonName -> {
+            spinnerNameAdapter.add(newPersonName);
+            spinnerNameAdapter.sort(String::compareTo);
+            spinnerName.setText(newPersonName, false);
+            requestViewModel.getNewPersonName().removeObservers(requester);
+        });
+        NavHostFragment.findNavController(this).navigate(R.id.action_addPerson);
     }
 
     // ---------------------------

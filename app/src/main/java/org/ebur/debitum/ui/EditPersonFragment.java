@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -22,7 +23,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -33,6 +36,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.viewModel.EditPersonViewModel;
+import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ExecutionException;
 
@@ -135,13 +140,27 @@ public class EditPersonFragment extends DialogFragment {
                 Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();*/
             }
             else {
-                if(viewModel.getEditedPerson() == null) {
-                    // insert new person (via viewModel) and finish activity
+                if (viewModel.getEditedPerson() == null) {
+                    // insert new person (via viewModel)
                     viewModel.addPerson(name);
                 } else {
                     Person oldPerson = viewModel.getEditedPerson();
                     oldPerson.name = name;
                     viewModel.update(oldPerson);
+                }
+
+                // return the new name back to the calling fragment (currently only
+                // EditTransactionFragement uses this)
+                NavBackStackEntry requester = NavHostFragment.findNavController(this).getPreviousBackStackEntry();
+                if(viewModel.isNewPerson()
+                        && requester != null
+                        && requester.getDestination().getId() == R.id.editTransaction_dest) {
+                    NewPersonRequestViewModel requestViewModel =
+                            new ViewModelProvider(requester).get(NewPersonRequestViewModel.class);
+                    // only set name if there are observers and if we are creating a new Person
+                    if (requestViewModel.getNewPersonName().hasObservers()) {
+                        requestViewModel.setNewPersonName(name);
+                    }
                 }
                 NavHostFragment.findNavController(this).navigateUp();
             }
