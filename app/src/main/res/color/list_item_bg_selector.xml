@@ -4,6 +4,6 @@
     <item android:state_activated="true"
           android:color="@color/red_coral_a.3" />
     <item android:state_pressed="true"
-          android:color="@color/grey_middle_a.5"/>
+          android:color="@color/grey_slate_grey_a.5"/>
     <item android:color="?attr/colorSurface" />
 </selector>

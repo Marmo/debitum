@@ -9,4 +9,8 @@
         <item name="android:minWidth">48dp</item>
         <item name="android:minHeight">48dp</item>
     </style>
+
+    <style name="TotalsHeader">
+        <item name="android:background">@color/grey_slate_grey_a.1</item>
+    </style>
 </resources>

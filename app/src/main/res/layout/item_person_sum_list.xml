@@ -35,6 +35,7 @@
         android:layout_below="@id/list_item_owe_lent"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="3dp"
+        android:fontFamily="sans-serif-light"
         android:textSize="18sp"
         tools:text="123,45" />
 </RelativeLayout>

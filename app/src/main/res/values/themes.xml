@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Debitum" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/grey_fiord</item>
+        <item name="colorPrimary">@color/grey_fjord</item>
         <item name="colorPrimaryDark">@color/grey_aztec</item>
         <item name="colorPrimaryVariant">@color/grey_slate_grey</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -33,7 +33,7 @@
     <style name="Theme.Debitum.FullScreenDialog" parent="Theme.MaterialComponents.DayNight.Dialog">
         <item name="colorPrimaryDark">@color/grey_aztec</item>
         <item name="colorAccent">@color/grey_slate_grey</item>
-        <item name="colorPrimary">@color/grey_fiord</item>
+        <item name="colorPrimary">@color/grey_fjord</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">?attr/colorSurface</item>
