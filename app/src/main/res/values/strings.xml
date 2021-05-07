@@ -56,7 +56,7 @@
     <string name="title_fragment_edit_transaction_create">Create Transaction</string>
     <string name="title_fragment_edit_transaction">Edit Transaction</string>
     <string name="edit_transaction_hint_person">Person*</string>
-    <string name="edit_transaction_error_select_name">Please select a name!</string>
+    <string name="edit_transaction_error_select_name">Please select a person!</string>
     <string name="edit_transaction_hint_amount_money">Amount*</string>
     <string name="edit_transaction_hint_amount_item">Number of items *</string>
     <string name="edit_transaction_error_enter_amount">Please enter amount!</string>
@@ -64,8 +64,6 @@
     <string name="edit_transaction_hint_desc">Description</string>
     <string name="edit_transaction_hint_desc_item">Description*</string>
     <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
-    <string name="switch_monetary_label_money">Money</string>
-    <string name="switch_monetary_label_item">Item</string>
     <string name="edit_transaction_date_dialog_title">Select date</string>
     <string name="edit_transaction_date_content_description">Date</string>
     <string name="edit_transaction_gave">Gave</string>
@@ -78,7 +76,6 @@
     <string name="edit_person_name">Name</string>
     <string name="error_message_enter_name">Please enter a name!</string>
     <string name="error_message_name_exists">%1$s already exists, please enter a different name!</string>
-    <string name="checkbox_continue_new_transaction">continue with creating a new Transaction after saving</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>

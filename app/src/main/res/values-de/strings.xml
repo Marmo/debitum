@@ -1,0 +1,99 @@
+<resources>
+    <!-- General -->
+    <string name="app_name">Debitum</string>
+    <string name="error_message_database_access">Fehler beim Datenbankzugriff, bitte erneut versuchen!\n%1$s</string>
+    <string name="button_label_save">Speichern</string>
+    <string name="button_label_delete">Löschen</string>
+    <string name="delete_dialog_confirm">Löschen</string>
+    <string name="dialog_cancel">Abbrechen</string>
+    <string name="required_helper_text">* erforderlich</string>
+
+    <!-- MainActivity -->
+    <string name="fab_content_description">Transaktion erstellen</string>
+    <string name="bottom_nav_people">@string/title_fragment_person_sum_list</string>
+    <string name="bottom_nav_money">@string/title_fragment_transaction_list_money</string>
+    <string name="bottom_nav_items">@string/title_fragment_transaction_list_items</string>
+    <string name="bottom_nav_settings">@string/title_fragment_settings</string>
+    <string name="dismiss_filter">Filter verwerfen</string>
+
+    <!-- PersonSumListFragment -->
+    <string name="title_fragment_person_sum_list">Personen</string>
+    <string name="person_sum_list_you_owe">DU SCHULDEST</string>
+    <string name="person_sum_list_no_debt">KEINE SCHULDEN</string>
+    <string name="person_sum_list_you_lent">DU BEKOMMST</string>
+    <string name="toolbar_create_person">Person erstellen</string>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="one">%d Person gelöscht</item>
+        <item quantity="other">%d Personen gelöscht</item>
+    </plurals>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="one">%d Person löschen?</item>
+        <item quantity="other">%d Personen löschen?</item>
+    </plurals>
+    <string name="person_sum_list_dialog_delete_text">Das kann nicht rückgängig gemacht werden. Alle Transaktionen der Person werden ebenfalls gelöscht!</string>
+
+    <!-- TransactionListFragment -->
+    <string name="title_fragment_transaction_list_money">Geld</string>
+    <string name="title_fragment_transaction_list_items">Dinge</string>
+    <string name="transaction_list_gave">GAB</string>
+    <string name="transaction_list_received">BEKAM</string>
+    <string name="toolbar_edit_person">Person bearbeiten</string>
+    <string name="toolbar_delete_transaction">Transaktion löschen</string>
+    <string name="toolbar_edit_transaction">Transaktion bearbeiten</string>
+    <string name="header_label">Summe</string>
+    <string name="header_desc_items">DINGE VER-/GELIEHEN</string>
+    <plurals name="transaction_list_snackbar_deleted">
+        <item quantity="one">%d Transaktion gelöscht</item>
+        <item quantity="other">%d Transaktionen gelöscht</item>
+    </plurals>
+    <plurals name="transaction_list_dialog_delete_title">
+        <item quantity="one">%d Transaktion löschen?</item>
+        <item quantity="other">%d Transaktionen löschen?</item>
+    </plurals>
+    <string name="transaction_list_dialog_delete_text">Das kann nicht rückgängig gemacht werden.</string>
+
+    <!-- EditTransactionFragment -->
+    <string name="title_fragment_edit_transaction_create">Transaktion erstellen</string>
+    <string name="title_fragment_edit_transaction">Transaktion bearbeiten</string>
+    <string name="edit_transaction_hint_person">Person*</string>
+    <string name="edit_transaction_error_select_name">Bitte Person auswählen!</string>
+    <string name="edit_transaction_hint_amount_money">Betrag*</string>
+    <string name="edit_transaction_hint_amount_item">Anzahl *</string>
+    <string name="edit_transaction_error_enter_amount">Bitte Betrag angeben!</string>
+    <string name="edit_transaction_error_enter_description">Bitte Beschreibung angeben!</string>
+    <string name="edit_transaction_hint_desc">Beschreibung</string>
+    <string name="edit_transaction_hint_desc_item">Beschreibung*</string>
+    <string name="edit_transaction_wrong_amount_format">Irgend etwas stimmt mit dem Format des Betrages nicht, bitte prüfen!</string>
+    <string name="edit_transaction_date_dialog_title">Datum wählen</string>
+    <string name="edit_transaction_date_content_description">Datum</string>
+    <string name="edit_transaction_gave">Gab</string>
+    <string name="edit_transaction_received">Bekam</string>
+    <string name="edit_transaction_snackbar_max_amount">Max. 9 Ziffern im Betrag zulässig</string>
+
+    <!-- EditPersonFragment -->
+    <string name="title_fragment_edit_person">Person bearbeiten</string>
+    <string name="title_fragment_edit_person_create">Person erstellen</string>
+    <string name="edit_person_name">Name</string>
+    <string name="error_message_enter_name">Bitte Namen angeben!</string>
+    <string name="error_message_name_exists">%1$s existiert bereits, bitte anderen Namen angeben!</string>
+
+    <!-- SettingsFragment -->
+    <string name="title_fragment_settings">Einstellungen</string>
+    <string name="pref_maintenance_header">Wartung</string>
+    <string name="backup_successful">Datenbank erfolgreich in externen Speicher exportiert</string>
+    <string name="backup_failed">Sicherung fehlgeschlagen! Interne Fehlermeldung: %1$s</string>
+    <string name="restore_failed">Wiederherstellung fehlgeschlagen! Interne Fehlermeldung: %1$s</string>
+
+    <string name="pref_backup_title">Datenbank sichern</string>
+    <string name="pref_restore_title">Datenbank wiederherstellen</string>
+    <string name="pref_backup_summary">nach %1$s</string>
+    <string name="pref_restore_summary">von früher gesicherter "%1$s" im externen Speicher</string>
+    <string name="pref_help_header">Hilfe</string>
+    <string name="pref_github_title">Auf GitHub ansehen</string>
+    <string name="pref_github_summary">um den Quellcode zu sichten oder Fehler und Ideen zu melden</string>
+    <string name="pref_about_title">About</string>
+    <string name="pref_about_summary">\?</string>
+    <string name="restore_confirm">Ersetzen</string>
+    <string name="restore_confirm_text">Sollen die bestehenden Daten wirklich mit denen aus der Sicherung ersetzt werden?\nDie App wird nach der Wiederhersetellung neu gestartet.</string>
+    <string name="restore_confirm_title">Aus Sicherung wiederherstellen</string>
+</resources>

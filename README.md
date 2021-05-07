@@ -27,6 +27,8 @@ all transactions and persons)
 ## Sreenshots
 TODO
 
+## Translation
+You are welcome to contribute to [translations](TRANSLATION.md).
 
 ## License
 All code in this repository is licensed under the [GNU General Public License v3.0](LICENSE).
