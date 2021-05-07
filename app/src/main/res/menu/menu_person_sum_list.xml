@@ -5,7 +5,7 @@
     <item
         android:id="@+id/miDeletePerson"
         android:icon="@drawable/ic_baseline_delete_outline_24"
-        android:title="@string/button_label_delete"
+        android:title="@string/toolbar_delete_person"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/miEditPerson"

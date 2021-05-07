@@ -3,7 +3,6 @@
     <string name="app_name">Debitum</string>
     <string name="error_message_database_access">Fehler beim Datenbankzugriff, bitte erneut versuchen!\n%1$s</string>
     <string name="button_label_save">Speichern</string>
-    <string name="button_label_delete">Löschen</string>
     <string name="delete_dialog_confirm">Löschen</string>
     <string name="dialog_cancel">Abbrechen</string>
     <string name="required_helper_text">* erforderlich</string>
@@ -22,6 +21,7 @@
     <string name="person_sum_list_no_debt">KEINE SCHULDEN</string>
     <string name="person_sum_list_you_lent">DU BEKOMMST</string>
     <string name="toolbar_create_person">Person erstellen</string>
+    <string name="toolbar_delete_person">Person Löschen</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d Person gelöscht</item>
         <item quantity="other">%d Personen gelöscht</item>

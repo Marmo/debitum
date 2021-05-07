@@ -3,7 +3,6 @@
     <string name="app_name">Debitum</string>
     <string name="error_message_database_access">Error trying to access database, please try again!\n%1$s</string>
     <string name="button_label_save">Save</string>
-    <string name="button_label_delete">Delete</string>
     <string name="delete_dialog_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="required_helper_text">* Required</string>
@@ -22,6 +21,7 @@
     <string name="person_sum_list_no_debt">NO DEBT</string>
     <string name="person_sum_list_you_lent">YOU LENT</string>
     <string name="toolbar_create_person">Create Person</string>
+    <string name="toolbar_delete_person">Delete</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d Person deleted</item>
         <item quantity="other">%d Persons deleted</item>
