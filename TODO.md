@@ -14,13 +14,9 @@
 
 # visuals
 ## 1.0
-- refactor vector drawables (readability)
-- margin for recycler views
-- change totals bg or owe green
 - improve icons
 - rearrange + restyle list items
 - understand and use themes and styles
-- app icon
 - transitions
   - click on person row --> filterBar
   - navgraph
@@ -31,6 +27,8 @@
 ## 1.0
 - german translation
 - Readme
-- License (Vector assets!)
+- License
+  - Android Vector assets
+  - own drawings (launcher icon), including use of android icons
 - Release 
 - FDroid
