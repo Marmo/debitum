@@ -10,7 +10,6 @@ import org.ebur.debitum.database.PersonRepository;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionRepository;
-import org.ebur.debitum.database.TransactionWithPerson;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;

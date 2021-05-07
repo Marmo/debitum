@@ -5,14 +5,11 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import org.ebur.debitum.database.Person;
-import org.ebur.debitum.database.PersonRepository;
-import org.ebur.debitum.database.TransactionRepository;
 import org.ebur.debitum.database.Transaction;
+import org.ebur.debitum.database.TransactionRepository;
 import org.ebur.debitum.database.TransactionWithPerson;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class TransactionListViewModel extends AndroidViewModel {
 

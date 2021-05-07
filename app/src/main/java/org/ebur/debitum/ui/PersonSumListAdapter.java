@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.database.PersonWithTransactions;
-import org.ebur.debitum.database.Transaction;
-import org.ebur.debitum.database.TransactionWithPerson;
 
 public class PersonSumListAdapter extends ListAdapter<PersonWithTransactions, RecyclerView.ViewHolder> {
 

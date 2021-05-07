@@ -1,5 +1,5 @@
 # code
-## 1.0
+## 1.0.0
 - help html in settings
 ## later
 - use RxJava
@@ -13,7 +13,7 @@
 - move more logic to ViewModels
 
 # visuals
-## 1.0
+## 1.0.0
 - improve icons
 - rearrange + restyle list items
 - understand and use themes and styles
@@ -24,7 +24,6 @@
   - opening of dialogs (editTxn/person)
 
 # other
-## 1.0
-- add backup info to AndroidManifest.xml
+## 1.0.0
 - Release 
 - FDroid

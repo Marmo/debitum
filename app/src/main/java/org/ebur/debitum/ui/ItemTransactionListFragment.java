@@ -2,7 +2,6 @@ package org.ebur.debitum.ui;
 
 
 import org.ebur.debitum.database.Person;
-import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 
 import java.util.List;

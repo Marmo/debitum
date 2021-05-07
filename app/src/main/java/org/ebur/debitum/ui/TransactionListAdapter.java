@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.ebur.debitum.database.Person;
-import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 
 public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, RecyclerView.ViewHolder> {

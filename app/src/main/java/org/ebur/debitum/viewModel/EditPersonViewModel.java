@@ -3,13 +3,10 @@ package org.ebur.debitum.viewModel;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonRepository;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class EditPersonViewModel extends AndroidViewModel {
