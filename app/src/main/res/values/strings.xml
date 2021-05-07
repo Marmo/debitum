@@ -33,7 +33,7 @@
     <string name="person_sum_list_dialog_delete_text">This can\'t be undone and will delete all of their transactions, too.</string>
 
     <!-- TransactionListFragment -->
-    <string name="title_fragment_transaction_list">Transactions</string>
+    <string name="title_fragment_transaction_list_money">Money</string>
     <string name="title_fragment_transaction_list_items">Items</string>
     <string name="transaction_list_gave">GAVE</string>
     <string name="transaction_list_received">RECEIVED</string>

@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/money_dest"
         android:name="org.ebur.debitum.ui.TransactionListFragment"
-        android:label="@string/title_fragment_transaction_list"
+        android:label="@string/title_fragment_transaction_list_money"
         tools:layout="@layout/fragment_transaction_list">
         <argument
             android:name="filterBy"
