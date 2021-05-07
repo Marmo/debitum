@@ -241,14 +241,14 @@
        sodipodi:cy="54"
        sodipodi:rx="26"
        sodipodi:ry="26"
-       sodipodi:start="5.6727014"
-       sodipodi:end="2.2306298"
-       d="M 75.303638,39.095135 A 26,26 0 0 1 71.925586,72.832774 26,26 0 0 1 38.062382,74.542452"
+       sodipodi:start="5.6057355"
+       sodipodi:end="2.3173258"
+       d="M 74.258517,37.702991 A 26,26 0 0 1 71.73893,73.008692 26,26 0 0 1 36.343522,73.085303"
        sodipodi:open="true"
        clip-path="url(#clipPath4317)" />
     <g
        id="g8978"
-       transform="translate(17.96052,14.983334)">
+       transform="translate(17,14.276226)">
       <path
          style="fill:#f9f9f9;fill-opacity:1;stroke-width:1"
          inkscape:label="pen"
