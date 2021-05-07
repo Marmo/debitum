@@ -25,10 +25,6 @@
 
 # other
 ## 1.0
-- german translation
-- Readme
-- License
-  - Android Vector assets
-  - own drawings (launcher icon), including use of android icons
+- add backup info to AndroidManifest.xml
 - Release 
 - FDroid
