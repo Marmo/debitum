@@ -1,7 +1,5 @@
 package org.ebur.debitum;
 
-import android.view.MenuItem;
-
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +7,10 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Utilities {
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static String formatDate(Date date) {
+        return formatDate(date, DATE_FORMAT);
+    }
     public static String formatDate(Date date, String format) {
         return new SimpleDateFormat(format, Locale.getDefault()).format(date);
     }

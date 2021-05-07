@@ -171,8 +171,7 @@ public class EditTransactionFragment extends DialogFragment {
         toolbar.setTitle(R.string.title_fragment_edit_transaction_create);
         switchIsMonetary.setChecked(!requireArguments().getBoolean(ARG_ID_NEW_ITEM, false));
         viewModel.setTimestamp(new Date());
-        editDate.setText(Utilities.formatDate(viewModel.getTimestamp(),
-                getString(R.string.date_format)));
+        editDate.setText(Utilities.formatDate(viewModel.getTimestamp()));
     }
 
     private void fillViewsEditTransaction() {
@@ -195,8 +194,7 @@ public class EditTransactionFragment extends DialogFragment {
         editAmount.setText(txn.transaction.getFormattedAmount(false));
         editDescription.setText(txn.transaction.description);
         viewModel.setTimestamp(txn.transaction.timestamp);
-        editDate.setText(Utilities.formatDate(viewModel.getTimestamp(),
-                getString(R.string.date_format)));
+        editDate.setText(Utilities.formatDate(viewModel.getTimestamp()));
     }
 
     // ---------------------------
@@ -298,7 +296,7 @@ public class EditTransactionFragment extends DialogFragment {
                         .build();
         datePicker.addOnPositiveButtonClickListener(selection -> {
             viewModel.setTimestamp(new Date(selection));
-            editDate.setText(Utilities.formatDate(new Date(selection), getString(R.string.date_format)));
+            editDate.setText(Utilities.formatDate(new Date(selection)));
         });
         datePicker.show(getParentFragmentManager(), "addTransactionDatePicker");
     }

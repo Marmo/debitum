@@ -1,7 +1,6 @@
 <resources>
     <!-- General -->
     <string name="app_name">Debitum</string>
-    <string name="date_format">yyyy-MM-dd</string>
     <string name="error_message_database_access">Error trying to access database, please try again!\n%1$s</string>
     <string name="button_label_save">Save</string>
     <string name="button_label_delete">Delete</string>

@@ -34,8 +34,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         txnNameView.setText(twp.person.name);
         txnDescriptionView.setText(twp.transaction.description);
         txnAmountView.setText(twp.transaction.getFormattedAmount(false));
-        String dateFormat = this.itemView.getContext().getResources().getString(R.string.date_format);
-        txnTimestampView.setText(Utilities.formatDate(twp.transaction.timestamp, dateFormat));
+        txnTimestampView.setText(Utilities.formatDate(twp.transaction.timestamp));
 
         int gaveReceivedString, amountColor;
         int sign = Integer.compare(twp.transaction.amount, 0);
