@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-// TODO set exportSchema to true and define export location
 @Database(entities = {Transaction.class, Person.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
@@ -82,8 +81,6 @@ public abstract class AppDatabase extends RoomDatabase {
     // Backup and restore DB
     // ---------------------
     private static void backupOrRestoreDatabase(boolean backup, String filename, String path, OnBackupRestoreFinishListener onBackupRestoreFinishListener) {
-        // request permissions: https://stackoverflow.com/a/51629594
-        // TODO maybe it would be advisable to close and reopen the database?
             boolean success = false;
             String message = "";
             File backupFile = new File(path, filename);

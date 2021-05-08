@@ -40,7 +40,6 @@ public class PersonSumListAdapter extends ListAdapter<PersonWithTransactions, Re
         if(holder instanceof HeaderViewHolder) {
             HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
             PersonWithTransactions header = getItem(position);
-            // TODO we currently ignore the item transaction in the header-PersonWithTransactions
             headerHolder.bind(header.getSum(), true);
         }
         else if(holder instanceof PersonSumListViewHolder) {

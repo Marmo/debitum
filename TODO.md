@@ -23,6 +23,7 @@
   - navgraph
   - changes to amount edit text when switching switch
   - opening of dialogs (editTxn/person)
+- decide if items are shown in PersonSumList header or remove item transaction from header transaction
 
 # other
 ## 1.0.0

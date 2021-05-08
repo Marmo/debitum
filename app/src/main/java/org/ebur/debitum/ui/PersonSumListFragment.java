@@ -1,8 +1,6 @@
 package org.ebur.debitum.ui;
 
-import android.graphics.Canvas;
 import android.graphics.drawable.InsetDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -35,14 +32,11 @@ import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-// TODO add Activity to show all transactions of one person that is launched when clicking on one row
-// TODO in PersonTransactionListActivity add ActionBar options to edit/delete person
 public class PersonSumListFragment extends Fragment {
 
     private static final String TAG = "PersonSumListFragment";
