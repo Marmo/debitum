@@ -13,4 +13,14 @@
     <style name="TotalsHeader">
         <item name="android:background">@color/grey_slate_grey_a.1</item>
     </style>
+
+    <style name="listAmount">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="listOweLent">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+    </style>
 </resources>

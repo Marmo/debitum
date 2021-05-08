@@ -1,5 +1,8 @@
 package org.ebur.debitum.ui;
 
+import android.graphics.Canvas;
+import android.graphics.drawable.InsetDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -31,6 +35,7 @@ import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +71,12 @@ public class PersonSumListFragment extends Fragment {
         adapter = new PersonSumListAdapter(new PersonSumListAdapter.PersonSumDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        DividerItemDecoration decoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
+        InsetDrawable divider = (InsetDrawable) getResources().getDrawable(R.drawable.divider, null);
+        divider.setAlpha(33);
+        decoration.setDrawable(divider);
+        recyclerView.addItemDecoration(decoration);
+
 
         buildSelectionTracker();
 

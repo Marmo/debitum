@@ -1,41 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/person_sum_list_item_height"
     android:background="?attr/colorSurface"
     android:backgroundTint="@color/list_item_bg_selector"
     android:backgroundTintMode="src_over"
     android:orientation="horizontal"
-    android:paddingHorizontal="24dp"
-    android:paddingVertical="18dp">
+    android:paddingEnd="24dp"
+    android:paddingVertical="12dp"
+    tools:ignore="RtlSymmetry">
+
+    <ImageView
+        android:id="@+id/list_item_avatar"
+        android:layout_width="@dimen/person_sum_list_item_height"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:alpha="0.4"
+        app:srcCompat="@drawable/ic_baseline_account_circle_24"
+        app:tint="@color/grey_aztec"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/list_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/list_item_avatar"
         android:textSize="18sp"
-        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
         tools:text="Rincewind" />
 
-    <TextView
-        android:id="@+id/list_item_owe_lent"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
-        android:textSize="12sp"
-        tools:text="@string/person_sum_list_you_lent" />
+        tools:ignore="RelativeOverlap">
+        <TextView
+            android:id="@+id/list_item_owe_lent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            style="@style/listOweLent"
+            tools:text="@string/person_sum_list_you_lent" />
 
-    <TextView
-        android:id="@+id/list_item_sum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/list_item_owe_lent"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="3dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="18sp"
-        tools:text="123,45" />
+        <TextView
+            android:id="@+id/list_item_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_gravity="end"
+            style="@style/listAmount"
+            tools:text="123,45" />
+    </LinearLayout>
 </RelativeLayout>

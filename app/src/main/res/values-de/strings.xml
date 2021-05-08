@@ -16,9 +16,9 @@
 
     <!-- PersonSumListFragment -->
     <string name="title_fragment_person_sum_list">Personen</string>
-    <string name="person_sum_list_you_owe">DU SCHULDEST</string>
-    <string name="person_sum_list_no_debt">KEINE SCHULDEN</string>
-    <string name="person_sum_list_you_lent">DU BEKOMMST</string>
+    <string name="person_sum_list_you_owe">du schuldest</string>
+    <string name="person_sum_list_no_debt">keine Schulden</string>
+    <string name="person_sum_list_you_lent">du bekommst</string>
     <string name="toolbar_create_person">Person erstellen</string>
     <string name="toolbar_delete_person">Person Löschen</string>
     <plurals name="person_sum_list_snackbar_deleted">
@@ -34,8 +34,8 @@
     <!-- TransactionListFragment -->
     <string name="title_fragment_transaction_list_money">Geld</string>
     <string name="title_fragment_transaction_list_items">Dinge</string>
-    <string name="transaction_list_gave">GAB</string>
-    <string name="transaction_list_received">BEKAM</string>
+    <string name="transaction_list_gave">gab</string>
+    <string name="transaction_list_received">bekam</string>
     <string name="toolbar_edit_person">Person bearbeiten</string>
     <string name="toolbar_delete_transaction">Transaktion löschen</string>
     <string name="toolbar_edit_transaction">Transaktion bearbeiten</string>

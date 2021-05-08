@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:textSize="10sp"
+        style="@style/listOweLent"
         tools:text="RECEIVED" />
 
     <TextView
@@ -43,9 +43,8 @@
         android:layout_below="@id/list_item_gave_received"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:fontFamily="sans-serif-light"
         android:paddingVertical="12dp"
-        android:textSize="20sp"
+        style="@style/listAmount"
         tools:text="7,00" />
 
     <TextView

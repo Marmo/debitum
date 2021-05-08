@@ -1,6 +1,6 @@
 # code
 ## 1.0.0
-- icon in front of person rows
+- use scrolling-behaviour-action-bar for header (solves problems with divider in person sum list being inset also below header and looks nicer)
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list

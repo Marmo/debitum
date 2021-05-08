@@ -13,4 +13,5 @@
     <dimen name="bottom_nav_min_height">64dp</dimen>
     <dimen name="bar_elevation">4dp</dimen>
     <dimen name="filterbar_elevation">2dp</dimen>
+    <dimen name="person_sum_list_item_height">72dp</dimen>
 </resources>
