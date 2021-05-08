@@ -1,6 +1,6 @@
 <resources>
     <!-- General -->
-    <string name="app_name">Debitum</string>
+    <string name="app_name" translatable="false">Debitum</string>
     <string name="error_message_database_access">Error trying to access database, please try again!\n%1$s</string>
     <string name="button_label_save">Save</string>
     <string name="delete_dialog_confirm">Delete</string>
@@ -21,7 +21,7 @@
     <string name="person_sum_list_no_debt">NO DEBT</string>
     <string name="person_sum_list_you_lent">YOU LENT</string>
     <string name="toolbar_create_person">Create Person</string>
-    <string name="toolbar_delete_person">Delete</string>
+    <string name="toolbar_delete_person">Delete Person</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d Person deleted</item>
         <item quantity="other">%d Persons deleted</item>
@@ -89,7 +89,10 @@
     <string name="pref_backup_summary">to %1$s</string>
     <string name="pref_restore_summary">from previously backed up "%1$s" in external storage</string>
     <string name="pref_help_header">Help</string>
-    <string name="pref_github_title">View on GitHub</string>
+    <string name="pref_guide_title">Quick Guide</string>
+    <string name="pref_guide_summary">see GitHub for more</string>
+    <string name="pref_guide_dialog_close">close</string>
+    <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Study the source code, report issues &amp; ideas</string>
     <string name="pref_about_title">About</string>
     <string name="pref_about_summary">hmmm … not sure</string>

@@ -20,6 +20,11 @@
         app:title="@string/pref_help_header">
 
         <Preference
+            app:key="guide"
+            app:title="@string/pref_guide_title"
+            app:summary="@string/pref_guide_summary" />
+
+        <Preference
             app:key="github"
             app:title="@string/pref_github_title"
             app:summary="@string/pref_github_summary" />

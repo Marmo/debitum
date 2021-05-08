@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_text"><![CDATA[<h1>Über</h1>
+<p>Mit Debitum kannst du dir alle Arten von ge- und verliehenem Geld und Dingen merken. So wirst du
+  nnie wieder grübeln, ob dein Freund dir schon dieses Buch zurückgegeben hat oder darüber diskutieren,
+  wie viel du deiner Kollegin für Kaffee schuldest.</p>
+
+<h1>Benutzung</h1>
+<p>Um dir geliehenes Geld oder Dinge zu merken, musst du mit der roten Schaltfläche (Mitte unten)
+eine Transaktion erstellen. Im erscheinenden Dialog kannst du Details wie Betrag, eine Beschreibung
+oder ein Datum angeben und zwischen Geld- oder Gegenstandstransaktionen umschalten.</p>
+
+<p>In der unteren Navigationsleiste kannst du verschiedene Ansichten deiner Transaktionen aufrufen.
+
+    <ul>
+    <li>Personen: Summe für jede Person, sortiert nach dem Datum der letzten Transaktion
+        <ul>
+            <li>du kannst auf eine Zeile tippen, um die Geld- und Dinge-Listen nach dieser Person zu filtern</li>
+            <li>du kannst hier über das Menü oben eine neue Person erstellen (Alternative: die \"+\"-Schaltfläche im Transaktion-Erzeugen-Dialog)</li>
+        </ul>
+    </li>
+    <li>Geld: zeigt nur finanzielle Transaktionen, sortiert nach Datum (absteigend)</li>
+    <li>Dinge: Zeigt nur verliehene Gegenstände, sortiert nach Datum (absteigend). Es gibt aktuell keine besondere Möglichkeit, um
+    Gegenstände als zurückgegeben zu markieren, daher sollten Transaktionen von bereits zurückgegebenen Dingen einfach
+    gelöscht werden.</li>
+     </ul>
+</p>
+Die einzigen Optionen, die aktuell in den Einstellungen verfügbar sind, sind Sicherung und Wiederherstellung
+der Datenbank (beinhaltet alle Personen und Transaktionen).</p>]]></string>
+</resources>

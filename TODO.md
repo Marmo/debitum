@@ -1,6 +1,6 @@
 # code
 ## 1.0.0
-- help html in settings
+- icon in front of person rows
 ## later
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
@@ -8,9 +8,10 @@
 - unify transactionList and PersonSumList (abstract base class)
 - unify EditPerson and EditTransaction (abstract base class)
 - move dialog toolbar to included layout xml
-- contacts integration, icon in front of person rows
+- contacts integration
 - use contextual action bar
 - move more logic to ViewModels
+- make nicer guide display
 
 # visuals
 ## 1.0.0

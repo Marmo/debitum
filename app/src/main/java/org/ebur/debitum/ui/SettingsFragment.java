@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import androidx.core.app.NavUtils;
 import androidx.preference.Preference;
@@ -29,6 +32,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         final String PREF_KEY_BACKUP = "backup";
         final String PREF_KEY_RESTORE = "restore";
+        final String PREF_KEY_GUIDE = "guide";
         final String PREF_KEY_GITHUB = "github";
 
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
@@ -49,12 +53,36 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
+        Preference guidePref = findPreference(PREF_KEY_GUIDE);
+        if (guidePref!=null) {guidePref.setOnPreferenceClickListener(preference -> {
+            showGuide();
+            return true;
+        });
+        }
         Preference githubPref = findPreference(PREF_KEY_GITHUB);
         if (githubPref!=null) {githubPref.setOnPreferenceClickListener(preference -> {
                 openGithub();
                 return true;
             });
         }
+    }
+
+    private void showGuide() {
+        WebView webView = new WebView(getContext());
+        webView.loadData(getString(R.string.guide_text),"text/html", "utf-8");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(R.string.pref_guide_title)
+                .setView(webView)
+                .setPositiveButton(getString(R.string.pref_guide_dialog_close), (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
+    }
+
+    private void openGithub() {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse("https://github.com/Marmo/debitum"));
+        startActivity(i);
     }
 
     // ---------------------
@@ -108,11 +136,5 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         System.exit(0);*/
         NavUtils.navigateUpTo(requireActivity(), new Intent(getContext(), MainActivity.class));
         startActivity(requireActivity().getIntent());
-    }
-
-    private void openGithub() {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse("https://github.com/Marmo/debitum"));
-        startActivity(i);
     }
 }
