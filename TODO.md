@@ -11,12 +11,11 @@
 - contacts integration
 - use contextual action bar
 - move more logic to ViewModels
-- make nicer guide display
+- make nicer quick-guide display
 
 # visuals
 ## 1.0.0
 - improve icons
-- rearrange + restyle list items
 - understand and use themes and styles
 - transitions
   - click on person row --> filterBar

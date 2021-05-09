@@ -14,4 +14,6 @@
     <dimen name="bar_elevation">4dp</dimen>
     <dimen name="filterbar_elevation">2dp</dimen>
     <dimen name="person_sum_list_item_height">72dp</dimen>
+    <dimen name="list_margin_horizontal">24dp</dimen>
+    <dimen name="list_margin_vertical">12dp</dimen>
 </resources>

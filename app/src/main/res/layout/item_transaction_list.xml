@@ -7,44 +7,41 @@
     android:backgroundTint="@color/list_item_bg_selector"
     android:backgroundTintMode="src_over"
     android:orientation="horizontal"
-    android:paddingHorizontal="24dp"
-    android:paddingVertical="18dp">
+    android:paddingHorizontal="@dimen/list_margin_horizontal"
+    android:paddingVertical="@dimen/list_margin_vertical">
 
     <TextView
         android:id="@+id/list_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="17sp"
+        style="@style/listName"
         tools:text="Rincewind" />
-
-    <TextView
-        android:id="@+id/list_item_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/list_item_name"
-        android:layout_marginTop="7dp"
-        android:textSize="14sp"
-        tools:text="Stamps" />
 
     <TextView
         android:id="@+id/list_item_gave_received"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@id/list_item_name"
+        android:layout_below="@id/list_item_name"
         style="@style/listOweLent"
         tools:text="RECEIVED" />
 
     <TextView
-        android:id="@+id/list_item_amount"
+        android:id="@+id/list_item_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/list_item_gave_received"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:paddingVertical="12dp"
+        android:layout_alignStart="@id/list_item_name"
+        android:textSize="14sp"
+        tools:text="Stamps" />
+
+    <TextView
+        android:id="@+id/list_item_amount"
         style="@style/listAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/list_item_name"
+        android:layout_alignParentEnd="true"
         tools:text="7,00" />
 
     <TextView
@@ -54,7 +51,6 @@
         android:layout_below="@id/list_item_amount"
         android:layout_alignBaseline="@id/list_item_description"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:textSize="14sp"
         tools:text="1986-03-02" />
 </RelativeLayout>

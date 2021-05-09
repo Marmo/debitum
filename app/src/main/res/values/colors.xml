@@ -22,8 +22,6 @@
     <color name="white_a.6">#99ffffff</color>
     <color name="black">#000000</color>
 
-    <!--Material A400-->
-    <color name="lent_red">#FF1744</color>
-    <!--Material A700-->
-    <color name="owe_green">#64DD17</color>
+    <color name="lent_red">#DD2C00</color>
+    <color name="owe_green">#00C853</color>
 </resources>
