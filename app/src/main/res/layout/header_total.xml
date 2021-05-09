@@ -34,7 +34,8 @@
         android:layout_below="@id/header_total"
         android:layout_alignEnd="@id/header_total"
         android:text="@string/header_desc_items"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:fontFamily="sans-serif-smallcaps" />
 
     <!--<ImageView
         android:id="@+id/divider"
