@@ -41,7 +41,7 @@
     <string name="toolbar_delete_transaction">Delete Transaction</string>
     <string name="toolbar_edit_transaction">Edit Transaction</string>
     <string name="header_label">Total</string>
-    <string name="header_desc_items">ITEMS LENT</string>
+    <string name="header_desc_items">items lent</string>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d Transaction deleted</item>
         <item quantity="other">%d Transactions deleted</item>
