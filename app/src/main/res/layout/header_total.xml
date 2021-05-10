@@ -23,9 +23,10 @@
         android:layout_alignBaseline="@id/header_label"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="32dp"
-        android:fontFamily="sans-serif-light"
+        style="@style/listAmount"
         android:textSize="30sp"
-        tools:text="123" />
+        tools:text="123"
+        tools:ignore="RelativeOverlap" />
 
     <TextView
         android:id="@+id/header_description"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -12,27 +13,33 @@
 
     <TextView
         android:id="@+id/list_item_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         style="@style/listName"
-        tools:text="Rincewind" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@id/barrierNameToAmount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Moist von Lipwig" />
 
     <TextView
         android:id="@+id/list_item_gave_received"
+        style="@style/listOweLent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/list_item_name"
-        android:layout_below="@id/list_item_name"
-        style="@style/listOweLent"
+        app:layout_constraintStart_toStartOf="@id/list_item_name"
+        app:layout_constraintTop_toBottomOf="@id/list_item_name"
         tools:text="RECEIVED" />
 
     <TextView
         android:id="@+id/list_item_description"
-        android:layout_width="wrap_content"
+        style="@style/listDescription"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/list_item_gave_received"
-        android:layout_alignStart="@id/list_item_name"
-        android:textSize="14sp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@id/barrierNameToAmount"
+        app:layout_constraintStart_toStartOf="@id/list_item_name"
+        app:layout_constraintTop_toBottomOf="@id/list_item_gave_received"
         tools:text="Stamps" />
 
     <TextView
@@ -40,17 +47,24 @@
         style="@style/listAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/list_item_name"
-        android:layout_alignParentEnd="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/list_item_name"
         tools:text="7,00" />
 
     <TextView
         android:id="@+id/list_item_timestamp"
+        style="@style/listTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/list_item_amount"
-        android:layout_alignBaseline="@id/list_item_description"
-        android:layout_alignParentEnd="true"
-        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/list_item_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/list_item_amount"
         tools:text="1986-03-02" />
-</RelativeLayout>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierNameToAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="list_item_amount,list_item_timestamp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

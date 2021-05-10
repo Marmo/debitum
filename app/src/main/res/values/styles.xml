@@ -14,16 +14,21 @@
         <item name="android:background">@color/grey_slate_grey_a.1</item>
     </style>
 
-    <style name="listName">
+    <style name="listName" parent="TextAppearance.MdcTypographyStyles.Headline6">
+        <item name="fontFamily">@font/robotoslab_regular</item>
+        <item name="android:fontFamily">@font/robotoslab_regular</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
     </style>
-    <style name="listAmount">
-        <item name="android:textSize">24sp</item>
-        <item name="android:fontFamily">sans-serif-light</item>
+    <style name="listAmount" parent="TextAppearance.MdcTypographyStyles.Headline5">
+        <item name="fontFamily">@font/robotoslab_light</item>
+        <item name="android:fontFamily">@font/robotoslab_light</item>
     </style>
-    <style name="listOweLent">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">sans-serif-smallcaps</item>
+    <style name="listOweLent" parent="TextAppearance.MdcTypographyStyles.Overline"/>
+    <style name="listTimestamp" parent="TextAppearance.MdcTypographyStyles.Body2"/>
+    <style name="listDescription" parent="TextAppearance.MdcTypographyStyles.Body2">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
     </style>
 </resources>
