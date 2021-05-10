@@ -15,7 +15,6 @@
         android:id="@+id/list_item_avatar"
         android:layout_width="@dimen/person_sum_list_item_height"
         android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
         android:alpha="0.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/list_item_name"
@@ -44,7 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/list_item_sum"
-        app:layout_constraintEnd_toEndOf="@id/list_item_sum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/person_sum_list_you_lent" />
 
     <TextView
@@ -52,7 +52,8 @@
         style="@style/listAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/groupSum"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/list_item_owe_lent"
         tools:text="123,45" />
 
@@ -61,15 +62,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="left"
-        app:constraint_referenced_ids="list_item_owe_lent,list_item_sum" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/groupSum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="list_item_sum,list_item_owe_lent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:constraint_referenced_ids="list_item_owe_lent,list_item_sum"
+        tools:layout_editor_absoluteX="321dp"
+        tools:layout_editor_absoluteY="12dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

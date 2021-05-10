@@ -53,8 +53,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
                 break;
             case 0:
                 oweLentLabelView.setText(R.string.person_sum_list_no_debt);
-                sumView.setVisibility(View.INVISIBLE);
-                sumView.setHeight(0);
+                sumView.setVisibility(View.GONE);
                 break;
             case -1:
                 oweLentLabelView.setText(R.string.person_sum_list_you_lent);
