@@ -24,4 +24,6 @@
 
     <color name="lent_red">#DD2C00</color>
     <color name="owe_green">#00C853</color>
+
+    <color name="divider">@color/black</color>
 </resources>

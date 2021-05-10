@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -66,7 +67,9 @@ public class PersonSumListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         DividerItemDecoration decoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
-        InsetDrawable divider = (InsetDrawable) getResources().getDrawable(R.drawable.divider, null);
+        //InsetDrawable divider = (InsetDrawable) getResources().getDrawable(R.drawable.divider_inset_start, null);
+        InsetDrawable divider = (InsetDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.divider_inset_start, null);
+        assert divider!=null;
         divider.setAlpha(33);
         decoration.setDrawable(divider);
         recyclerView.addItemDecoration(decoration);
