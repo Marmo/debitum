@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
@@ -48,6 +49,12 @@ public class TransactionListFragment extends Fragment {
     private SelectionTracker<Long> selectionTracker = null;
 
     private int nRowsSelected = 0;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setEnterTransition(new MaterialFadeThrough()); setExitTransition(new MaterialFadeThrough());
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,

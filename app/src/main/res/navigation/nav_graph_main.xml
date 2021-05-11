@@ -12,11 +12,7 @@
         tools:layout="@layout/fragment_person_sum_list">
         <action
             android:id="@+id/action_personSumList_to_transactionList_on_filter"
-            app:destination="@id/money_dest"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:destination="@id/money_dest" />
         <action
             android:id="@+id/action_editPerson"
             app:destination="@id/editPerson_dest"

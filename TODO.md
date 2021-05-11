@@ -15,13 +15,12 @@
 
 # visuals
 ## 1.0.0
-- improve icons
-- understand and use themes and styles
 - transitions
   - click on person row --> filterBar
-  - navgraph
   - changes to amount edit text when switching switch
-  - opening of dialogs (editTxn/person)
+  - fab to editTransaction
+  - menu buttons to editTransaction and editPerson
+  - shared element add person from editTransaction
 - remove unused fonts
 ## later
 - decide if items are shown in PersonSumList header or remove item transaction from header transaction
