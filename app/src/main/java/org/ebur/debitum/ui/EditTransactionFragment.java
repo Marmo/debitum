@@ -25,6 +25,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
+import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -281,7 +282,10 @@ public class EditTransactionFragment extends DialogFragment {
             spinnerName.setText(newPersonName, false);
             requestViewModel.getNewPersonName().removeObservers(requester);
         });
-        NavHostFragment.findNavController(this).navigate(R.id.action_requestNewPerson);
+        FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder()
+                .addSharedElement(view, "to_edit_person")
+                .build();
+        NavHostFragment.findNavController(this).navigate(R.id.action_requestNewPerson, null, null, extras);
     }
 
     // ---------------------------

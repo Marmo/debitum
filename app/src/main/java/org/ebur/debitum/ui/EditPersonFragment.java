@@ -21,6 +21,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.transition.MaterialContainerTransform;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
@@ -44,6 +45,7 @@ public class EditPersonFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FullScreenDialog);
+        setSharedElementEnterTransition(new MaterialContainerTransform());
     }
 
     @Override

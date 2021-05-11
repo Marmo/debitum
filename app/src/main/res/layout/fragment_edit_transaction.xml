@@ -70,7 +70,8 @@
                 android:layout_marginEnd="@dimen/dialog_horizontal_spacing"
                 app:icon="@drawable/ic_baseline_add_24"
                 app:layout_constraintBaseline_toBaselineOf="@id/spinner_name"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:transitionName="to_edit_person"/>
 
             <RadioGroup
                 android:id="@+id/radioGroupGaveReceived"
