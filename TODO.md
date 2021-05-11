@@ -17,7 +17,6 @@
 ## 1.0.0
 - transitions
   - click on person row --> filterBar
-  - changes to amount edit text when switching switch
   - fab to editTransaction
   - menu buttons to editTransaction and editPerson
 - remove unused fonts

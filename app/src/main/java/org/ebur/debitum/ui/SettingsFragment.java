@@ -13,6 +13,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.transition.Hold;
 import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.R;
@@ -30,7 +31,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setEnterTransition(new MaterialFadeThrough()); setExitTransition(new MaterialFadeThrough());
+        setEnterTransition(new MaterialFadeThrough());
+        setExitTransition(new Hold());
 
         final String PREF_KEY_BACKUP = "backup";
         final String PREF_KEY_RESTORE = "restore";
