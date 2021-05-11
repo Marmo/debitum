@@ -22,20 +22,6 @@
             android:layout_gravity="top"
             app:titleTextColor="@android:color/white" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/filter_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0.5"
-            android:background="?attr/colorSecondary"
-            android:elevation="@dimen/filterbar_elevation"
-            android:minHeight="?attr/actionBarSize"
-            app:titleMarginStart="32dp"
-            android:theme="?attr/actionBarTheme"
-            app:titleTextColor="?attr/colorOnSecondary"
-            app:logo="@drawable/ic_baseline_account_circle_24"
-            app:menu="@menu/filter_bar" />
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"

@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.selection.ItemKeyProvider;
 import androidx.recyclerview.selection.MutableSelection;
@@ -33,6 +36,7 @@ import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +52,8 @@ public class TransactionListFragment extends Fragment {
     private RecyclerView recyclerView;
     protected TransactionListAdapter adapter;
     private SelectionTracker<Long> selectionTracker = null;
+
+    private Toolbar filterBar;
 
     private int nRowsSelected = 0;
 
@@ -74,12 +80,8 @@ public class TransactionListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
-        // set Person filter if in argument
-        Bundle args = getArguments();
-        if (args != null && args.containsKey(ARG_FILTER_PERSON)) {
-            personFilterViewModel.setFilterPerson(args.getParcelable(ARG_FILTER_PERSON));
-            ((MainActivity) requireActivity()).showFilterBar();
-        }
+        filterBar = root.findViewById(R.id.filter_bar);
+        setupFilterBar();
 
         buildSelectionTracker();
 
@@ -88,6 +90,34 @@ public class TransactionListFragment extends Fragment {
         setHasOptionsMenu(true);
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // set Person filter if in argument
+        Bundle args = getArguments();
+        if (args != null && args.containsKey(ARG_FILTER_PERSON)) {
+            personFilterViewModel.setFilterPerson(args.getParcelable(ARG_FILTER_PERSON));
+            showFilterBar();
+        }
+    }
+
+    private void setupFilterBar() {
+        filterBar.getMenu().findItem(R.id.miDismiss_filter).setOnMenuItemClickListener(item -> {
+            dismissFilterBar();
+            return true;
+        });
+        // observe filterPerson to set filterBar title
+        personFilterViewModel.getFilterPersonLive().observe(requireActivity(), filterPerson -> {
+            if(filterPerson == null) {
+                filterBar.setVisibility(View.GONE);
+            } else {
+                filterBar.setTitle(filterPerson.name);
+                filterBar.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void buildSelectionTracker() {
@@ -258,5 +288,24 @@ public class TransactionListFragment extends Fragment {
         else return transactions.stream()
                 .filter(twp -> twp.person.equals(filterPerson))
                 .collect(Collectors.toList());
+    }
+
+    // -------------
+    // Person filter
+    // -------------
+
+    public void showFilterBar() {
+        if(personFilterViewModel.getFilterPerson() != null) {
+            filterBar.setTitle(personFilterViewModel.getFilterPerson().name);
+        }
+    }
+
+    private void dismissFilterBar() {
+        personFilterViewModel.setFilterPerson(null);
+        // replace curremt framgent with a new one of the same class
+        // (then unfiltered, as the viewModel's filterPerson was nulled)
+        NavController nav = NavHostFragment.findNavController(this);
+        NavDestination current = nav.getCurrentDestination();
+        if (current != null) nav.navigate(current.getId());
     }
 }

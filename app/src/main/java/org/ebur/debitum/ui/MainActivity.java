@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
             .collect(Collectors.toCollection(ArrayList::new));
 
     private NavController nav;
-    private PersonFilterViewModel personFilterViewModel;
-    private Toolbar filterBar;
     BottomNavigationView bottomNav;
     private FloatingActionButton fab;
 
@@ -38,10 +36,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        personFilterViewModel = new ViewModelProvider(this).get(PersonFilterViewModel.class);
 
         setupToolbar();
-        setupFilterBar();
         setupBottomNavigation();
         setupFAB();
     }
@@ -59,25 +55,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         NavigationUI.setupWithNavController(toolbar, nav, appBarConfiguration);
         setSupportActionBar(toolbar);
-    }
-
-    private void setupFilterBar() {
-        filterBar = findViewById(R.id.filter_bar);
-        filterBar.getMenu().findItem(R.id.miDismiss_filter).setOnMenuItemClickListener(item -> {
-            onDismissPersonFilterAction();
-            return true;
-        });
-        // observe filterPerson to set filterBar title
-        personFilterViewModel.getFilterPersonLive().observe(this, filterPerson -> {
-            if(filterPerson != null) filterBar.setTitle(filterPerson.name);
-        });
-
-        // control filter bar visibility (only show in certain screens)
-        nav.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if(DESTINATIONS_WITH_PERSON_FILTER.contains(destination.getId())
-                    && personFilterViewModel.getFilterPerson() != null) filterBar.setVisibility(View.VISIBLE);
-            else filterBar.setVisibility(View.GONE);
-        });
     }
 
     private void setupFAB() {
@@ -100,23 +77,6 @@ public class MainActivity extends AppCompatActivity {
     private void setupBottomNavigation() {
         bottomNav = findViewById(R.id.bottom_navigation);
         NavigationUI.setupWithNavController(bottomNav, nav);
-    }
-
-    public void showFilterBar() {
-        if(personFilterViewModel.getFilterPerson() != null) {
-            filterBar.setTitle(personFilterViewModel.getFilterPerson().name);
-            filterBar.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void onDismissPersonFilterAction() {
-        personFilterViewModel.setFilterPerson(null);
-        filterBar.setTitle("");
-        filterBar.setVisibility(View.GONE);
-        // replace curremt framgent with a new one of the same class
-        // (then unfiltered, as the viewModel's filterPerson was nulled)
-        NavDestination current = nav.getCurrentDestination();
-        if (current != null) nav.navigate(current.getId());
     }
 
     private void onAddTransactionAction(View fab) {

@@ -8,14 +8,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.TransactionListFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/filter_bar"
+        android:transitionName="filter_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.5"
+        android:background="?attr/colorSecondary"
+        android:elevation="@dimen/filterbar_elevation"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:logo="@drawable/ic_baseline_account_circle_24"
+        app:menu="@menu/filter_bar"
+        app:titleMarginStart="32dp"
+        app:titleTextColor="?attr/colorOnSecondary" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filter_bar"
         tools:listitem="@layout/item_transaction_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
