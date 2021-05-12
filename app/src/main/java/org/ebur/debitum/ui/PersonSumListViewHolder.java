@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
+import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +20,7 @@ import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
 
 class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private final View itemView;
     private final TextView nameView;
     private final TextView oweLentLabelView;
     private final TextView sumView;
@@ -26,6 +29,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
 
     private PersonSumListViewHolder(View itemView) {
         super(itemView);
+        this.itemView = itemView;
         nameView = itemView.findViewById(R.id.list_item_name);
         oweLentLabelView = itemView.findViewById(R.id.list_item_owe_lent);
         sumView = itemView.findViewById(R.id.list_item_sum);
@@ -60,6 +64,8 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
                 sumView.setTextColor(sumView.getResources().getColor(R.color.lent_red, null));
         }
 
+        ViewCompat.setTransitionName(itemView, person.name);
+
         // selection state
         itemView.setActivated(isSelected);
     }
@@ -69,7 +75,12 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
         NavController navController = NavHostFragment.findNavController(FragmentManager.findFragment(v));
         Bundle args = new Bundle();
         args.putParcelable(TransactionListFragment.ARG_FILTER_PERSON, person);
-        navController.navigate(R.id.action_personSumList_to_transactionList_on_filter, args);
+
+        FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder()
+                .addSharedElement(v, person.name)
+                .build();
+
+        navController.navigate(R.id.action_personSumList_to_transactionList_on_filter, args, null, extras);
     }
 
     // anonymous implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails

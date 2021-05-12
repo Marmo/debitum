@@ -25,9 +25,12 @@ import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Transition;
+import androidx.transition.TransitionInflater;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.Hold;
+import com.google.android.material.transition.MaterialContainerTransform;
 import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.R;
@@ -36,7 +39,6 @@ import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 import org.ebur.debitum.viewModel.TransactionListViewModel;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +62,11 @@ public class TransactionListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Transitions
         setEnterTransition(new MaterialFadeThrough());
         setExitTransition(new Hold());
+        setSharedElementEnterTransition(new MaterialContainerTransform());
     }
 
     @Override
@@ -73,6 +78,9 @@ public class TransactionListFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
 
+        filterBar = root.findViewById(R.id.filter_bar);
+        setupFilterBar();
+
         // setup recyclerview and adapter
         recyclerView = root.findViewById(R.id.recyclerview);
         adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
@@ -80,44 +88,31 @@ public class TransactionListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
-        filterBar = root.findViewById(R.id.filter_bar);
-        setupFilterBar();
-
         buildSelectionTracker();
-
         subscribeToViewModel();
-
         setHasOptionsMenu(true);
 
         return root;
     }
 
-    @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    private void setupFilterBar() {
         // set Person filter if in argument
         Bundle args = getArguments();
         if (args != null && args.containsKey(ARG_FILTER_PERSON)) {
             personFilterViewModel.setFilterPerson(args.getParcelable(ARG_FILTER_PERSON));
-            showFilterBar();
         }
-    }
 
-    private void setupFilterBar() {
         filterBar.getMenu().findItem(R.id.miDismiss_filter).setOnMenuItemClickListener(item -> {
             dismissFilterBar();
             return true;
         });
-        // observe filterPerson to set filterBar title
-        personFilterViewModel.getFilterPersonLive().observe(requireActivity(), filterPerson -> {
-            if(filterPerson == null) {
-                filterBar.setVisibility(View.GONE);
-            } else {
-                filterBar.setTitle(filterPerson.name);
-                filterBar.setVisibility(View.VISIBLE);
-            }
-        });
+
+        if(personFilterViewModel.getFilterPerson() != null) {
+            filterBar.setTitle(personFilterViewModel.getFilterPerson().name);
+            filterBar.setVisibility(View.VISIBLE);
+        } else {
+            filterBar.setVisibility(View.GONE);
+        }
     }
 
     private void buildSelectionTracker() {
@@ -294,18 +289,14 @@ public class TransactionListFragment extends Fragment {
     // Person filter
     // -------------
 
-    public void showFilterBar() {
-        if(personFilterViewModel.getFilterPerson() != null) {
-            filterBar.setTitle(personFilterViewModel.getFilterPerson().name);
-        }
-    }
-
     private void dismissFilterBar() {
         personFilterViewModel.setFilterPerson(null);
         // replace curremt framgent with a new one of the same class
         // (then unfiltered, as the viewModel's filterPerson was nulled)
         NavController nav = NavHostFragment.findNavController(this);
         NavDestination current = nav.getCurrentDestination();
-        if (current != null) nav.navigate(current.getId());
+        if (current != null)
+            nav.navigate(current.getId());
+        filterBar.setVisibility(View.GONE);
     }
 }
