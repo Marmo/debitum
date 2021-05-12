@@ -1,5 +1,12 @@
 <PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        app:title="@string/pref_general_header">
+        <SwitchPreferenceCompat
+            app:key="dismiss_filter_behaviour"
+            app:title="@string/pref_dismiss_filter_title"
+            app:defaultValue="true"/>
+    </PreferenceCategory>
 
     <PreferenceCategory
         app:title="@string/pref_maintenance_header">
@@ -27,7 +34,12 @@
         <Preference
             app:key="github"
             app:title="@string/pref_github_title"
-            app:summary="@string/pref_github_summary" />
+            app:summary="@string/pref_github_summary" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/Marmo/debitum" />
+
+        </Preference>
 
         <Preference
             app:key="about"

@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.ItemKeyProvider;
 import androidx.recyclerview.selection.MutableSelection;
 import androidx.recyclerview.selection.SelectionPredicates;
@@ -291,12 +293,20 @@ public class TransactionListFragment extends Fragment {
 
     private void dismissFilterBar() {
         personFilterViewModel.setFilterPerson(null);
-        // replace curremt framgent with a new one of the same class
-        // (then unfiltered, as the viewModel's filterPerson was nulled)
+        SharedPreferences pref =
+                PreferenceManager.getDefaultSharedPreferences(requireActivity());
+
         NavController nav = NavHostFragment.findNavController(this);
-        NavDestination current = nav.getCurrentDestination();
-        if (current != null)
-            nav.navigate(current.getId());
+        if(pref.getBoolean(SettingsFragment.PREF_KEY_DISMISS_FILTER_BEHAVIOUR, false)) {
+            nav.navigate(R.id.people_dest);
+        } else {
+            // replace curremt framgent with a new one of the same class
+            // (then unfiltered, as the viewModel's filterPerson was nulled)
+            NavDestination current = nav.getCurrentDestination();
+            if (current != null)
+                nav.navigate(current.getId());
+        }
+
         filterBar.setVisibility(View.GONE);
     }
 }

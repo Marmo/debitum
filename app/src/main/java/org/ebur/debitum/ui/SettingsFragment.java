@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import androidx.core.app.NavUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.Hold;
@@ -29,6 +30,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private final String BACKUP_FILENAME = "debitum_backup.db";
     private final String BACKUP_SUBDIR = "backup";
 
+    public final static String PREF_KEY_DISMISS_FILTER_BEHAVIOUR = "dismiss_filter_behaviour";
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setEnterTransition(new MaterialFadeThrough());
@@ -37,9 +40,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final String PREF_KEY_BACKUP = "backup";
         final String PREF_KEY_RESTORE = "restore";
         final String PREF_KEY_GUIDE = "guide";
-        final String PREF_KEY_GITHUB = "github";
 
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+        SwitchPreferenceCompat dismissFilterPref = findPreference(PREF_KEY_DISMISS_FILTER_BEHAVIOUR);
+        if(dismissFilterPref != null) {
+            dismissFilterPref.setSummaryOff(R.string.pref_dismiss_filter_summary_false);
+            dismissFilterPref.setSummaryOn(R.string.pref_dismiss_filter_summary_true);
+        }
 
         Preference backupPref = findPreference(PREF_KEY_BACKUP);
         if (backupPref!=null) {
@@ -63,12 +71,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             return true;
         });
         }
-        Preference githubPref = findPreference(PREF_KEY_GITHUB);
-        if (githubPref!=null) {githubPref.setOnPreferenceClickListener(preference -> {
-                openGithub();
-                return true;
-            });
-        }
     }
 
     private void showGuide() {
@@ -81,12 +83,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 .setPositiveButton(getString(R.string.pref_guide_dialog_close), (dialog, which) -> dialog.dismiss())
                 .create()
                 .show();
-    }
-
-    private void openGithub() {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse("https://github.com/Marmo/debitum"));
-        startActivity(i);
     }
 
     // ---------------------

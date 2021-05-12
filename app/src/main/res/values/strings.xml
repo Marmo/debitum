@@ -79,11 +79,14 @@
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>
+    <string name="pref_general_header">General</string>
+    <string name="pref_dismiss_filter_title">When dismissing person filter …</string>
+    <string name="pref_dismiss_filter_summary_true">Return to Person list</string>
+    <string name="pref_dismiss_filter_summary_false">Stay in the current list</string>
     <string name="pref_maintenance_header">Maintenance</string>
     <string name="backup_successful">Database successfully backed up to external storage</string>
     <string name="backup_failed">Backup failed! Internal error message: %1$s</string>
     <string name="restore_failed">Restore failed! Internal error message: %1$s</string>
-
     <string name="pref_backup_title">Backup database</string>
     <string name="pref_restore_title">Restore database</string>
     <string name="pref_backup_summary">to %1$s</string>
