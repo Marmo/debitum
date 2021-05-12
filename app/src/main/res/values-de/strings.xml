@@ -79,9 +79,9 @@
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Einstellungen</string>
     <string name="pref_general_header">Allgemein</string>
-    <string name="pref_dismiss_filter_title">Beim Verwerfen vom Personenfilter …</string>
-    <string name="pref_dismiss_filter_summary_true">kehre zur Personenliste zurück</string>
-    <string name="pref_dismiss_filter_summary_false">bleibe in der aktuellen Liste</string>
+    <string name="pref_dismiss_filter_title">Beim Verwerfen des Personenfilters …</string>
+    <string name="pref_dismiss_filter_summary_true">zurück zur Personenliste</string>
+    <string name="pref_dismiss_filter_summary_false">in der aktuellen Liste bleiben</string>
     <string name="pref_maintenance_header">Wartung</string>
     <string name="backup_successful">Datenbank erfolgreich in externen Speicher exportiert</string>
     <string name="backup_failed">Sicherung fehlgeschlagen! Interne Fehlermeldung: %1$s</string>
