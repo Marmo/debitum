@@ -15,10 +15,6 @@
 
 # visuals
 ## 1.0.0
-- transitions
-  - click on person row --> filterBar
-  - fab to editTransaction
-  - menu buttons to editTransaction and editPerson
 - remove unused fonts
 ## later
 - decide if items are shown in PersonSumList header or remove item transaction from header transaction
