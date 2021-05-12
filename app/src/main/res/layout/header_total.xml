@@ -12,9 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginVertical="32dp"
-        android:fontFamily="sans-serif-black"
         android:text="@string/header_label"
-        android:textSize="30sp" />
+        android:textAppearance="@style/headerLabel"/>
 
     <TextView
         android:id="@+id/header_total"
@@ -23,7 +22,7 @@
         android:layout_alignBaseline="@id/header_label"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="32dp"
-        style="@style/listAmount"
+        android:textAppearance="@style/listAmount"
         android:textSize="30sp"
         tools:text="123"
         tools:ignore="RelativeOverlap" />
@@ -37,14 +36,5 @@
         android:text="@string/header_desc_items"
         android:textSize="12sp"
         android:fontFamily="sans-serif-smallcaps" />
-
-    <!--<ImageView
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/header_label"
-        android:layout_marginTop="8dp"
-        android:background="?attr/colorOnSurface"
-        android:alpha="0.5"/>-->
 
 </RelativeLayout>

@@ -14,20 +14,29 @@
         <item name="android:background">@color/grey_slate_grey_a.1</item>
     </style>
 
-    <style name="listName" parent="TextAppearance.MdcTypographyStyles.Headline6">
+    <style name="headerLabel" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:alpha">0.5</item>
+    </style>
+    <style name="listName" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/robotoslab_regular</item>
         <item name="android:fontFamily">@font/robotoslab_regular</item>
         <item name="android:textSize">18sp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
-    <style name="listAmount" parent="TextAppearance.MdcTypographyStyles.Headline5">
+    <style name="listAmount" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">@font/robotoslab_light</item>
         <item name="android:fontFamily">@font/robotoslab_light</item>
     </style>
-    <style name="listOweLent" parent="TextAppearance.MdcTypographyStyles.Overline"/>
-    <style name="listTimestamp" parent="TextAppearance.MdcTypographyStyles.Body2"/>
-    <style name="listDescription" parent="TextAppearance.MdcTypographyStyles.Body2">
+    <style name="listOweLent" parent="TextAppearance.MaterialComponents.Overline"/>
+    <style name="listTimestamp" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:alpha">0.5</item>
+    </style>
+    <style name="listDescription" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:alpha">0.5</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
