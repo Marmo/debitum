@@ -12,20 +12,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            app:liftOnScroll="true">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
-                android:minHeight="?attr/actionBarSize"
-                app:titleTextColor="?attr/colorOnPrimary" />
-        </com.google.android.material.appbar.AppBarLayout>
+            android:minHeight="?attr/actionBarSize" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -42,13 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="@dimen/bottom_nav_min_height"
-            android:elevation="@dimen/bar_elevation"
             android:layout_gravity="bottom"
-            android:background="?attr/colorPrimary"
-            app:itemIconTint="@color/bottom_nav_item_selector"
-            app:itemTextColor="@color/bottom_nav_item_selector"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_navigation" />
+            app:menu="@menu/bottom_navigation"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"/>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
