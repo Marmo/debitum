@@ -1,6 +1,5 @@
 # code
 ## 1.0.0
-- use scrolling-behaviour-action-bar for header (solves problems with divider in person sum list being inset also below header and looks nicer)
 - move Total Header to view subclass (to remove duplicate code from list fragments, https://developer.android.com/training/custom-views/create-view)
 ## later
 - use RxJava
@@ -18,7 +17,6 @@
 ## 1.0.0
 - add ripple on list items (https://stackoverflow.com/questions/40509161/recycler-view-click-animation)
 ## later
-- decide if items are shown in PersonSumList header or remove item transaction from header transaction
 
 # other
 ## 1.0.0

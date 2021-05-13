@@ -16,7 +16,7 @@
         android:background="?attr/colorSecondary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:logo="@drawable/ic_baseline_account_circle_24"
+        app:logo="@drawable/ic_outline_filter_alt_24"
         app:menu="@menu/filter_bar"
         app:titleMarginStart="32dp"
         app:titleTextColor="?attr/colorOnSecondary" />
