@@ -25,28 +25,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-                <com.google.android.material.appbar.AppBarLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+        <include layout="@layout/header_total" />
 
-                    <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/header_bar"
-                        style="@style/TotalsHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_scrollFlags="scroll|enterAlways|snap">
-
-                        <include layout="@layout/header_total" />
-                    </com.google.android.material.appbar.MaterialToolbar>
-
-                </com.google.android.material.appbar.AppBarLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    tools:listitem="@layout/item_transaction_list" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_transaction_list" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
