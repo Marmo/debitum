@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="divider">@color/white</color>
+    <!--slate_grey alpha 0.1 on black-->
+    <color name="header">#232b2f</color>
 </resources>
