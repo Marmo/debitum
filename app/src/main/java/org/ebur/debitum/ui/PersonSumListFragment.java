@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,6 +55,8 @@ public class PersonSumListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Transitions
         setEnterTransition(new MaterialFadeThrough());
         setExitTransition(new Hold());
     }
@@ -66,46 +69,47 @@ public class PersonSumListFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_person_sum_list, container, false);
 
-        recyclerView = root.findViewById(R.id.person_sum_list_recyclerview);
+        setupTotalHeader(root);
+        setupRecyclerView(root);
+        buildSelectionTracker();
+        subscribeToViewModel();
+        setHasOptionsMenu(true);
+        return root;
+    }
+
+    private void setupRecyclerView(View root) {
+        recyclerView = root.findViewById(R.id.recyclerview);
         adapter = new PersonSumListAdapter(new PersonSumListAdapter.PersonSumDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         DividerItemDecoration decoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
-        //InsetDrawable divider = (InsetDrawable) getResources().getDrawable(R.drawable.divider_inset_start, null);
         InsetDrawable divider = (InsetDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.divider_inset_start, null);
         assert divider!=null;
         divider.setAlpha(33);
         decoration.setDrawable(divider);
         recyclerView.addItemDecoration(decoration);
-
-
-        buildSelectionTracker();
-
-        // observe ViewModel's LiveData
-        viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), pwtList -> {
-            // we need to make a copy so that the header is not added to the original list (again and again and again ...)
-            List<PersonWithTransactions> listForAdapter = new ArrayList<>(pwtList);
-            listForAdapter.add(0, buildTotalHeader(
-                    PersonWithTransactions.getSum(listForAdapter),
-                    PersonWithTransactions.getNumberOfItems(listForAdapter)
-            ));
-            adapter.submitList(listForAdapter);
-        });
-
-        setHasOptionsMenu(true);
-
-        return root;
     }
 
-    // create a PersonWithTransactions containing the header information for the RecyclerView
-    private PersonWithTransactions buildTotalHeader(int totalMoney, int totalItems) {
-        Transaction headerMoneyTxn = new Transaction(Integer.MIN_VALUE);
-        Transaction headerItemTxn = new Transaction(Integer.MIN_VALUE+1);
-        headerMoneyTxn.amount = totalMoney;
-        headerItemTxn.amount = totalItems;
-        headerMoneyTxn.isMonetary = true;
-        headerItemTxn.isMonetary = false;
-        return new PersonWithTransactions(new Person("PONDER STIBBONS"), headerMoneyTxn, headerItemTxn);
+    private void subscribeToViewModel() {
+        viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), pwtList -> {
+            updateTotalHeader(
+                    PersonWithTransactions.getSum(pwtList),
+                    PersonWithTransactions.getNumberOfItems(pwtList)
+            );
+            adapter.submitList(pwtList);
+        });
+    }
+
+    private void setupTotalHeader(View root) {
+        TextView descView = root.findViewById(R.id.header_description);
+        descView.setVisibility(View.INVISIBLE);
+    }
+
+    protected void updateTotalHeader(int totalMoney, int totalItems) {
+        TextView totalView = requireView().findViewById(R.id.header_total);
+        totalView.setText(Transaction.formatMonetaryAmount(totalMoney));
+        int totalColor = totalMoney>0 ? R.color.owe_green : R.color.lent_red;
+        totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
     }
 
     private void buildSelectionTracker() {

@@ -28,8 +28,6 @@ import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.Transition;
-import androidx.transition.TransitionInflater;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.Hold;
@@ -46,7 +44,6 @@ import org.ebur.debitum.viewModel.TransactionListViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 public class TransactionListFragment extends Fragment {
 
@@ -82,24 +79,12 @@ public class TransactionListFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
 
         setupFilterBar(root);
-
         setupTotalHeader(root);
-
         setupRecyclerView(root);
-
         buildSelectionTracker();
         subscribeToViewModel();
         setHasOptionsMenu(true);
-
         return root;
-    }
-
-    private void setupRecyclerView(View root) {
-        recyclerView = root.findViewById(R.id.recyclerview);
-        adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
     }
 
     private void setupFilterBar(View root) {
@@ -121,6 +106,14 @@ public class TransactionListFragment extends Fragment {
         } else {
             filterBar.setVisibility(View.GONE);
         }
+    }
+
+    private void setupRecyclerView(View root) {
+        recyclerView = root.findViewById(R.id.recyclerview);
+        adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
     }
 
     private void buildSelectionTracker() {

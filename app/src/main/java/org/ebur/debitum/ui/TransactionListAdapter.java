@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
-import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.database.TransactionWithPerson;
 
@@ -16,6 +15,7 @@ public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, T
 
     public TransactionListAdapter(@NonNull DiffUtil.ItemCallback<TransactionWithPerson> diffCallback) {
         super(diffCallback);
+        setHasStableIds(true);
     }
 
     @NonNull
