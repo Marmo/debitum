@@ -16,8 +16,7 @@
 
 # visuals
 ## 1.0.0
-- remove unused fonts
-- add tap animation on list items (https://stackoverflow.com/questions/40509161/recycler-view-click-animation)
+- add ripple on list items (https://stackoverflow.com/questions/40509161/recycler-view-click-animation)
 ## later
 - decide if items are shown in PersonSumList header or remove item transaction from header transaction
 
