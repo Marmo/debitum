@@ -10,58 +10,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.database.TransactionWithPerson;
 
-public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, RecyclerView.ViewHolder> {
-
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
+public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, TransactionListViewHolder> {
 
     private SelectionTracker<Long> selectionTracker = null;
 
     public TransactionListAdapter(@NonNull DiffUtil.ItemCallback<TransactionWithPerson> diffCallback) {
         super(diffCallback);
-        setHasStableIds(true);
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_HEADER:
-                return HeaderViewHolder.create(parent);
-            case TYPE_ITEM:
-                return TransactionListViewHolder.create(parent);
-            default:
-                throw new ClassCastException("Unknown viewType");
-        }
+    public TransactionListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return TransactionListViewHolder.create(parent);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof HeaderViewHolder) {
-            HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
-            TransactionWithPerson header = getItem(position);
-            headerHolder.bind(header.transaction.amount, header.transaction.isMonetary);
-        }
-        else if(holder instanceof TransactionListViewHolder) {
-            TransactionListViewHolder itemHolder = (TransactionListViewHolder) holder;
-            TransactionWithPerson current = getItem(position);
-            itemHolder.bind(current,
-                    selectionTracker.isSelected(getItemId(position))
-            );
-        }
+    public void onBindViewHolder(@NonNull TransactionListViewHolder holder, int position) {
+        TransactionWithPerson current = getItem(position);
+        holder.bind(current, selectionTracker.isSelected(getItemId(position)));
     }
 
     @Override
     public long getItemId(int position) {
         return getItem(position).transaction.idTransaction;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (position == 0)
-            return TYPE_HEADER;
-        else
-            return TYPE_ITEM;
     }
 
     public void setSelectionTracker(SelectionTracker<Long> selectionTracker) { this.selectionTracker = selectionTracker; }

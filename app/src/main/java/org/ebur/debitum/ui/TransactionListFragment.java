@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -80,15 +81,11 @@ public class TransactionListFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
 
-        filterBar = root.findViewById(R.id.filter_bar);
-        setupFilterBar();
+        setupFilterBar(root);
 
-        // setup recyclerview and adapter
-        recyclerView = root.findViewById(R.id.recyclerview);
-        adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        setupTotalHeader(root);
+
+        setupRecyclerView(root);
 
         buildSelectionTracker();
         subscribeToViewModel();
@@ -97,7 +94,16 @@ public class TransactionListFragment extends Fragment {
         return root;
     }
 
-    private void setupFilterBar() {
+    private void setupRecyclerView(View root) {
+        recyclerView = root.findViewById(R.id.recyclerview);
+        adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+    }
+
+    private void setupFilterBar(View root) {
+        filterBar = root.findViewById(R.id.filter_bar);
         // set Person filter if in argument
         Bundle args = getArguments();
         if (args != null && args.containsKey(ARG_FILTER_PERSON)) {
@@ -152,20 +158,21 @@ public class TransactionListFragment extends Fragment {
     protected void subscribeToViewModel() {
         viewModel.getMoneyTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
-            // IMPORTANT filter() does not alter the input list but creates a copy instead
-            // we need to make a copy so that the header is not added to the original list (again and again and again ...)
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
-            listForAdapter.add(0, buildTotalHeader(TransactionWithPerson.getSum(listForAdapter)));
+            updateTotalHeader(TransactionWithPerson.getSum(listForAdapter));
             adapter.submitList(listForAdapter);
         });
     }
 
-    // create a TransactionWithPerson containing the header information for the RecyclerView
-    protected TransactionWithPerson buildTotalHeader(int total) {
-        TransactionWithPerson header = new TransactionWithPerson(new Transaction(Integer.MIN_VALUE), new Person("PONDER STIBBONS"));
-        header.transaction.amount = total;
-        header.transaction.isMonetary = true; // used to indicate correct number formatting in HeaderViewHolder
-        return header;
+    protected void setupTotalHeader(View root) {
+        TextView descView = root.findViewById(R.id.header_description);
+        descView.setVisibility(View.INVISIBLE);
+    }
+    protected void updateTotalHeader(int total) {
+        TextView totalView = requireView().findViewById(R.id.header_total);
+        totalView.setText(Transaction.formatMonetaryAmount(total));
+        int totalColor = total>0 ? R.color.owe_green : R.color.lent_red;
+        totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
     }
 
     @Override

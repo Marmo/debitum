@@ -11,7 +11,7 @@
     </style>
 
     <style name="TotalsHeader">
-        <item name="android:background">@color/grey_slate_grey_a.1</item>
+        <item name="android:background">@color/header</item>
     </style>
 
     <style name="headerLabel" parent="TextAppearance.MaterialComponents.Headline4">

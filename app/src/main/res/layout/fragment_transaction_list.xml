@@ -22,9 +22,6 @@
         app:titleTextColor="?attr/colorOnSecondary" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -34,12 +31,14 @@
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/list_header"
+                        android:id="@+id/header_bar"
+                        style="@style/TotalsHeader"
                         android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        app:layout_scrollFlags="scroll|enterAlways|snap"
-                        app:title="title"
-                        />
+                        android:layout_height="wrap_content"
+                        app:layout_scrollFlags="scroll|enterAlways|snap">
+
+                        <include layout="@layout/header_total" />
+                    </com.google.android.material.appbar.MaterialToolbar>
 
                 </com.google.android.material.appbar.AppBarLayout>
 

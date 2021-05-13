@@ -23,7 +23,7 @@ class HeaderViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(int total, boolean isMonetary) {
         if (isMonetary) {
-            totalView.setText(Transaction.formatMonetaryAmount(total));
+                totalView.setText(Transaction.formatMonetaryAmount(total));
             descView.setVisibility(View.INVISIBLE);
             int totalColor = total>0 ? R.color.owe_green : R.color.lent_red;
             totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
@@ -36,7 +36,7 @@ class HeaderViewHolder extends RecyclerView.ViewHolder {
 
     static HeaderViewHolder create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.header_total, parent, false);
+                .inflate(R.layout.header_total_old, parent, false);
         return new HeaderViewHolder(view);
     }
 }

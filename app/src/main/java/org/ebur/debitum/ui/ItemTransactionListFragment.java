@@ -1,10 +1,16 @@
 package org.ebur.debitum.ui;
 
 
+import android.view.View;
+import android.widget.TextView;
+
+import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
+import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 
 import java.util.List;
+import java.util.Locale;
 
 // like TransactionListFragment but shows only non-monetary items
 public class ItemTransactionListFragment extends TransactionListFragment {
@@ -14,15 +20,20 @@ public class ItemTransactionListFragment extends TransactionListFragment {
         viewModel.getItemTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
-            listForAdapter.add(0, buildTotalHeader(TransactionWithPerson.getNumberOfItems(listForAdapter)));
+            updateTotalHeader(TransactionWithPerson.getNumberOfItems(listForAdapter));
             adapter.submitList(listForAdapter);
         });
     }
 
     @Override
-    protected TransactionWithPerson buildTotalHeader(int total) {
-        TransactionWithPerson header = super.buildTotalHeader(total);
-        header.transaction.isMonetary = false; // used to indicate correct number formatting in HeaderViewHolder
-        return header;
+    protected void setupTotalHeader(View root) {
+        TextView descView = root.findViewById(R.id.header_description);
+        descView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void updateTotalHeader(int total) {
+        TextView totalView = requireView().findViewById(R.id.header_total);
+        totalView.setText(String.format(Locale.getDefault(), "%d", total));
     }
 }
