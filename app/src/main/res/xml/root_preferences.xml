@@ -41,11 +41,6 @@
 
         </Preference>
 
-        <Preference
-            app:key="about"
-            app:title="@string/pref_about_title"
-            app:summary="@string/pref_about_summary" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>

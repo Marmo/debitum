@@ -97,8 +97,6 @@
     <string name="pref_guide_dialog_close">close</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Study the source code, report issues &amp; ideas</string>
-    <string name="pref_about_title">About</string>
-    <string name="pref_about_summary">hmmm … not sure</string>
     <string name="restore_confirm">Overwrite</string>
     <string name="restore_confirm_text">Really overwrite all existing data with data from Backup?\nApp will be restarted after successful restore.</string>
     <string name="restore_confirm_title">Restore from Backup</string>
