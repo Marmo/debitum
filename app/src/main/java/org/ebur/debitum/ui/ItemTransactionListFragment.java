@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
-import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 
 import java.util.List;

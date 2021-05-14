@@ -3,9 +3,9 @@ package org.ebur.debitum;
 import org.ebur.debitum.database.Person;
 import org.junit.Before;
 import org.junit.Test;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PersonTest {
     private Person person1, person2, person3;

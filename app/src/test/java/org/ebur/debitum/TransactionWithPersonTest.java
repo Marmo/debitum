@@ -1,7 +1,6 @@
 package org.ebur.debitum;
 
 import org.ebur.debitum.database.Person;
-import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.junit.Before;

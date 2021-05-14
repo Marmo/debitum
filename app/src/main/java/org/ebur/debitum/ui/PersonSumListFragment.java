@@ -37,8 +37,6 @@ import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class PersonSumListFragment extends Fragment {
