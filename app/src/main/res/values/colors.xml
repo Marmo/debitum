@@ -2,7 +2,7 @@
 <resources>
     <!--<color name="red_totem_pole">#9c1802</color>
     <color name="red_valencia">#d44e2d</color>
-    <color name="red_lonestar">#670000</color>
+
     <color name="gray_dove_gray">#727272</color>
     <color name="gray_silver_chalice">#a0a0a0</color>
     <color name="gray_tundra">#474747</color>-->
@@ -14,15 +14,19 @@
     <color name="red_coral">#ff7f58</color>
     <color name="red_coral_a.3">#4cff7f58</color>
     <color name="red_totem_pole">#9c1901</color>
+    <color name="red_lonestar">#670000</color>
 
     <!-- basic colors -->
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
+    <color name="white_50">#ffffff</color>
+    <color name="black_800">#121212</color> <!--Color surface (dark)-->
+    <color name="black_900">#000000</color>
 
     <color name="lent_red">#DD2C00</color>
     <color name="owe_green">#00C853</color>
 
-    <color name="divider">@color/black</color>
+    <color name="divider">@color/black_900</color>
     <!--slate_grey alpha 0.1 on white-->
-    <color name="header">#f5f6f7</color>
+    <color name="light_grey">#f5f6f7</color>
+    <!--slate_grey alpha 0.1 on black-->
+    <color name="dark_grey">#232b2f</color>
 </resources>

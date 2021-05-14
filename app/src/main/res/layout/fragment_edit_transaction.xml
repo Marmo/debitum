@@ -59,7 +59,7 @@
 
             <Button
                 android:id="@+id/button_new_person"
-                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                style="@style/Widget.Debitum.Button.OutlinedButton.IconOnly"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="@dimen/dialog_horizontal_spacing"

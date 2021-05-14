@@ -8,9 +8,9 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.appbar.MaterialToolbar
-        style="@style/TotalsHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/totalsHeader"
         app:layout_scrollFlags="scroll|enterAlways|snap">
 
         <androidx.constraintlayout.widget.ConstraintLayout

@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.Hold;
 import com.google.android.material.transition.MaterialFadeThrough;
@@ -216,7 +217,7 @@ public class PersonSumListFragment extends Fragment {
         int deleteCount = selection.size();
 
         // ask for confirmation
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
         builder.setPositiveButton(R.string.delete_dialog_confirm, (dialog, id) -> {
             for (Long idPerson : selection) {
                 // Room uses the primary key (idPerson) to find the row to be deleted, so an

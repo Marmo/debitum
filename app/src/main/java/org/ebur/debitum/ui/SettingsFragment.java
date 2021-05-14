@@ -1,15 +1,16 @@
 package org.ebur.debitum.ui;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NavUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.Hold;
 import com.google.android.material.transition.MaterialFadeThrough;
@@ -74,7 +75,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         WebView webView = new WebView(getContext());
         webView.loadData(getString(R.string.guide_text),"text/html", "utf-8");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
         builder.setTitle(R.string.pref_guide_title)
                 .setView(webView)
                 .setPositiveButton(getString(R.string.pref_guide_dialog_close), (dialog, which) -> dialog.dismiss())
@@ -100,7 +101,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void restore() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
         builder.setPositiveButton(R.string.restore_confirm, (dialog, id) -> {
             String path = requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
             AppDatabase.restoreDatabase(BACKUP_FILENAME, path, (success, message) -> {
@@ -125,12 +126,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void restartApp() {
-        /*Intent restartIntent = new Intent(getContext(), MainActivity.class);
-        int requestCode = 1;
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), requestCode, restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-        AlarmManager mgr = (AlarmManager)requireContext().getSystemService(Context.ALARM_SERVICE);
-        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 500, pendingIntent);
-        System.exit(0);*/
         NavUtils.navigateUpTo(requireActivity(), new Intent(getContext(), MainActivity.class));
         startActivity(requireActivity().getIntent());
     }

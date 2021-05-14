@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.Hold;
 import com.google.android.material.transition.MaterialContainerTransform;
@@ -245,7 +246,7 @@ public class TransactionListFragment extends Fragment {
         int deleteCount = selection.size();
 
         // ask for confirmation
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
         builder.setPositiveButton(R.string.delete_dialog_confirm, (dialog, id) -> {
             for (Long idTransaction : selection) {
                 // Room uses the primary key (idTransaction) to find the row to be deleted, so an

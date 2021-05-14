@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="TotalsHeader">
-        <item name="android:background">@color/grey_slate_grey_a.2</item>
+    <style name="totalsHeader">
+        <item name="android:background">@color/dark_grey</item>
     </style>
 </resources>

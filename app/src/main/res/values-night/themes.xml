@@ -1,27 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.Debitum" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/grey_aztec</item>
-        <item name="colorPrimaryVariant">@color/grey_fjord</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/red_totem_pole</item>
-        <item name="colorSecondaryVariant">@color/red_valencia</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-
-        <item name="android:actionMenuTextColor">?attr/colorOnPrimary</item>
-    </style>
-
-    <style name="Theme.Debitum.FullScreenDialog" parent="Theme.MaterialComponents.DayNight.Dialog">
-        <item name="colorPrimaryDark">@color/grey_aztec</item>
-        <item name="colorAccent">@color/grey_fjord</item>
+    <!--Top level DayNight theme to be used in AndroidManifest.xml-->
+    <style name="Theme.Debitum" parent="Base.Theme.Debitum">
+        <!--Material color attributes (dark theme) -->
         <item name="colorPrimary">@color/grey_fjord</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowBackground">?attr/colorSurface</item>
-        <item name="android:actionMenuTextColor">?attr/colorOnPrimary</item>
+        <item name="colorPrimaryVariant">@color/grey_aztec</item>
+        <item name="colorSecondary">@color/red_coral</item>
+        <item name="colorSecondaryVariant">@color/red_coral</item>
+        <item name="android:colorBackground">@color/black_900</item>
+        <item name="colorSurface">@color/black_800</item>
+        <item name="colorOnPrimary">@color/white_50</item>
+        <item name="colorOnSecondary">@color/black_900</item>
+        <item name="colorOnBackground">@color/white_50</item>
+        <item name="colorOnSurface">@color/white_50</item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
     </style>
 </resources>

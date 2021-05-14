@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="Widget.Debitum.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="iconPadding">0dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -10,8 +10,8 @@
         <item name="android:minHeight">48dp</item>
     </style>
 
-    <style name="TotalsHeader">
-        <item name="android:background">@color/header</item>
+    <style name="totalsHeader">
+        <item name="android:background">@color/light_grey</item>
     </style>
 
     <style name="headerLabel" parent="TextAppearance.MaterialComponents.Headline4">
