@@ -50,7 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/list_item_name"
+        app:layout_constraintBaseline_toBaselineOf="@id/list_item_gave_received"
+        tools:layout_editor_absoluteY="23dp"
         tools:text="7,00" />
 
     <TextView

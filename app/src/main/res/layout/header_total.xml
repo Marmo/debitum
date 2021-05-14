@@ -8,21 +8,24 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.appbar.MaterialToolbar
+        style="@style/totalsHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/totalsHeader"
+        app:contentInsetStart="0dp"
+        android:elevation="2dp"
         app:layout_scrollFlags="scroll|enterAlways|snap">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/list_margin_horizontal"
-            android:layout_marginVertical="@dimen/list_margin_vertical">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/header_label"
+                android:layout_marginStart="@dimen/list_margin_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/list_margin_vertical"
+                android:layout_marginBottom="@dimen/list_margin_vertical"
                 android:text="@string/header_label"
                 android:textAppearance="@style/headerLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -33,8 +36,9 @@
                 android:id="@+id/header_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/listAmount"
-                android:textSize="30sp"
+                android:layout_marginEnd="@dimen/list_margin_horizontal"
+                android:layout_marginTop="12dp"
+                android:textAppearance="@style/headerAmount"
                 app:layout_constraintBaseline_toBaselineOf="@id/header_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="RelativeOverlap"
@@ -44,11 +48,21 @@
                 android:id="@+id/header_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:text="@string/header_desc_items"
                 android:textSize="12sp"
+                android:alpha="0.8"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/header_total"
                 app:layout_constraintTop_toBottomOf="@id/header_total" />
+            
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="?attr/colorPrimary"
+                android:alpha="0.2"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.MaterialToolbar>

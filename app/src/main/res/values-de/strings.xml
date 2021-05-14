@@ -39,7 +39,7 @@
     <string name="toolbar_edit_person">Person bearbeiten</string>
     <string name="toolbar_delete_transaction">Transaktion löschen</string>
     <string name="toolbar_edit_transaction">Transaktion bearbeiten</string>
-    <string name="header_label">Summe</string>
+    <string name="header_label">SUMME</string>
     <string name="header_desc_items">Dinge ver-/entliehen</string>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d Transaktion gelöscht</item>

@@ -15,6 +15,9 @@
     <color name="red_coral_a.3">#4cff7f58</color>
     <color name="red_totem_pole">#9c1901</color>
     <color name="red_lonestar">#670000</color>
+    <color name="grey_tom_thumb">#344f39</color>
+    <color name="grey_black_bean">#0d2713</color>
+    <color name="grey_glade_green">#5f7b63</color>
 
     <!-- basic colors -->
     <color name="white_50">#ffffff</color>
@@ -22,7 +25,7 @@
     <color name="black_900">#000000</color>
 
     <color name="lent_red">#DD2C00</color>
-    <color name="owe_green">#00C853</color>
+    <color name="owe_green">#00A544</color>
 
     <color name="divider">@color/black_900</color>
     <!--slate_grey alpha 0.1 on white-->
