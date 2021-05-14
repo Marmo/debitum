@@ -22,7 +22,6 @@
 
 # visuals
 # 1.0.0
-- align header items with list items
 - smaller name font
 - smaller header (height)
 ## 1.1.0
