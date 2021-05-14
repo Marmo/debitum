@@ -1,7 +1,7 @@
 # code
 ## 1.0.0
-- move Total Header to view subclass (to remove duplicate code from list fragments, https://developer.android.com/training/custom-views/create-view)
 ## later
+- move Total Header to view subclass (to remove duplicate code from list fragments, https://developer.android.com/training/custom-views/create-view)
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
@@ -15,7 +15,6 @@
 
 # visuals
 ## 1.0.0
-- add ripple on list items (https://stackoverflow.com/questions/40509161/recycler-view-click-animation)
 ## later
 
 # other
