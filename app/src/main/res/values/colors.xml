@@ -8,9 +8,7 @@
     <color name="gray_tundra">#474747</color>-->
     <color name="grey_fjord">#455a64</color>
     <color name="grey_slate_grey">#718792</color>
-    <color name="grey_slate_grey_a.5">#7f718792</color>
     <color name="grey_slate_grey_a.2">#33718792</color>
-    <color name="grey_slate_grey_a.1">#19718792</color>
     <color name="grey_aztec">#1c313a</color>
     <color name="red_valencia">#d44e2d</color>
     <color name="red_coral">#ff7f58</color>
@@ -19,7 +17,6 @@
 
     <!-- basic colors -->
     <color name="white">#ffffff</color>
-    <color name="white_a.6">#99ffffff</color>
     <color name="black">#000000</color>
 
     <color name="lent_red">#DD2C00</color>

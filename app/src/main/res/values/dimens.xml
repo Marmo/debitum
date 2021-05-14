@@ -6,7 +6,6 @@
     <dimen name="dialog_vertical_spacing">16dp</dimen>
     <dimen name="dialog_horizontal_spacing">16dp</dimen>
     <dimen name="bottom_nav_min_height">64dp</dimen>
-    <dimen name="toolbar_elevation">24dp</dimen>
     <dimen name="person_sum_list_item_height">72dp</dimen>
     <dimen name="list_margin_horizontal">24dp</dimen>
     <dimen name="list_margin_vertical">12dp</dimen>
