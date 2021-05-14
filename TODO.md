@@ -22,8 +22,9 @@
 
 # visuals
 # 1.0.0
-- Button text color in Calendar Dialog hardly readable in dark mode
-- Button text color in Delete Dialog hardly readable in dark mode
+- align header items with list items
+- smaller name font
+- smaller header (height)
 ## 1.1.0
 ## later
 
