@@ -56,7 +56,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/header_total"
                 app:layout_constraintTop_toBottomOf="@id/header_total" />
-            
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
