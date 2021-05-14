@@ -22,8 +22,6 @@
 
 # visuals
 # 1.0.0
-- smaller name font
-- smaller header (height)
 ## 1.1.0
 ## later
 
@@ -31,3 +29,4 @@
 ## 1.0.0
 - Release 
 - FDroid
+- Google Play Store
