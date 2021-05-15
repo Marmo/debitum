@@ -5,7 +5,7 @@
 - unify EditPerson and EditTransaction (abstract base class)
 - move dialog toolbar to included layout xml
 - contacts integration
-- use contextual action bar
+- use contextual action bar (and drop toolbar in main activity completely)
 - move more logic to ViewModels
 
 ## later
@@ -22,11 +22,13 @@
 
 # visuals
 # 1.0.0
+- style for filter bar
 ## 1.1.0
 ## later
 
 # other
 ## 1.0.0
+- Screenshots
 - Release 
 - FDroid
 - Google Play Store
