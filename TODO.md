@@ -12,7 +12,7 @@
 - use contextual action bar (and drop toolbar in main activity completely)
 - move more logic to ViewModels
 
-## later
+## later / unassigned
 - move Total Header to view subclass (to remove duplicate code from list fragments, https://developer.android.com/training/custom-views/create-view)
 - use RxJava
 - create a way to get from person sum list directly to filtered items list
