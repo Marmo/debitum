@@ -56,8 +56,8 @@ public class PersonSumListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         // Transitions
-        setEnterTransition(new MaterialFadeThrough());
-        setExitTransition(new Hold());
+        setEnterTransition(new MaterialFadeThrough().setDuration(400));
+        setExitTransition(new MaterialFadeThrough().setDuration(400));
     }
 
     @Override

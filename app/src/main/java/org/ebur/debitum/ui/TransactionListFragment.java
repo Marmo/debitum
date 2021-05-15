@@ -65,9 +65,9 @@ public class TransactionListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         // Transitions
-        setEnterTransition(new MaterialFadeThrough());
-        setExitTransition(new Hold());
-        setSharedElementEnterTransition(new MaterialContainerTransform());
+        setEnterTransition(new MaterialFadeThrough().setDuration(400));
+        setExitTransition(new MaterialFadeThrough().setDuration(400));
+        setSharedElementEnterTransition(new MaterialContainerTransform().setDuration(500));
     }
 
     @Override

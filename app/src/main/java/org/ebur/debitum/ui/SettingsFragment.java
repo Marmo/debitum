@@ -32,8 +32,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setEnterTransition(new MaterialFadeThrough());
-        setExitTransition(new Hold());
+
+        setEnterTransition(new MaterialFadeThrough().setDuration(400));
+        setExitTransition(new MaterialFadeThrough().setDuration(400));
 
         final String PREF_KEY_BACKUP = "backup";
         final String PREF_KEY_RESTORE = "restore";
