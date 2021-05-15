@@ -36,6 +36,7 @@
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">18sp</item>
         <item name="android:alpha">1</item>
+        <item name="android:textAllCaps">true</item>
     </style>
     <style name="TextAppearance.Debitum.HeaderAmount" parent="TextAppearance.Debitum.ListAmount">
         <item name="android:textSize">20sp</item>

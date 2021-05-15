@@ -40,7 +40,7 @@
     <string name="toolbar_edit_person">Edit Person</string>
     <string name="toolbar_delete_transaction">Delete Transaction</string>
     <string name="toolbar_edit_transaction">Edit Transaction</string>
-    <string name="header_label">TOTAL</string>
+    <string name="header_label">Total</string>
     <string name="header_desc_items">items lent</string>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d Transaction deleted</item>
@@ -55,14 +55,14 @@
     <!-- EditTransactionFragment -->
     <string name="title_fragment_edit_transaction_create">Create Transaction</string>
     <string name="title_fragment_edit_transaction">Edit Transaction</string>
-    <string name="edit_transaction_hint_person">Person*</string>
+    <string name="edit_transaction_hint_person">Person *</string>
     <string name="edit_transaction_error_select_name">Please select a person!</string>
-    <string name="edit_transaction_hint_amount_money">Amount*</string>
+    <string name="edit_transaction_hint_amount_money">Amount *</string>
     <string name="edit_transaction_hint_amount_item">Number of items *</string>
     <string name="edit_transaction_error_enter_amount">Please enter amount!</string>
     <string name="edit_transaction_error_enter_description">Please enter description!</string>
     <string name="edit_transaction_hint_desc">Description</string>
-    <string name="edit_transaction_hint_desc_item">Description*</string>
+    <string name="edit_transaction_hint_desc_item">Description *</string>
     <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
     <string name="edit_transaction_date_dialog_title">Select date</string>
     <string name="edit_transaction_date_content_description">Date</string>
