@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="totalsHeader">
+    <style name="ThemeOverlay.Debitum.totalsHeader">
         <item name="android:background">@color/dark_grey</item>
     </style>
 </resources>

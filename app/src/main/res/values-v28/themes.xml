@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Debitum" parent="Base.Theme.Debitum">
+        <!-- https://stackoverflow.com/a/57187466 -->
+        <item name="android:spotShadowAlpha">0.1</item>
+        <item name="android:ambientShadowAlpha">0.3</item>
+    </style>
+</resources>

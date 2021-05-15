@@ -8,11 +8,10 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.appbar.MaterialToolbar
-        style="@style/totalsHeader"
+        style="@style/ThemeOverlay.Debitum.TotalsHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentInsetStart="0dp"
-        android:elevation="2dp"
         app:layout_scrollFlags="scroll|enterAlways|snap">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +26,7 @@
                 android:layout_marginTop="@dimen/list_margin_vertical"
                 android:layout_marginBottom="@dimen/list_margin_vertical"
                 android:text="@string/header_label"
-                android:textAppearance="@style/headerLabel"
+                android:textAppearance="@style/TextAppearance.Debitum.HeaderLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/list_margin_horizontal"
                 android:layout_marginTop="12dp"
-                android:textAppearance="@style/headerAmount"
+                android:textAppearance="@style/TextAppearance.Debitum.HeaderAmount"
                 app:layout_constraintBaseline_toBaselineOf="@id/header_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="RelativeOverlap"
@@ -59,10 +58,15 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/list_margin_horizontal"
+                android:layout_marginEnd="@dimen/list_margin_horizontal"
+                android:alpha="0.3"
                 android:background="?attr/colorPrimary"
-                android:alpha="0.2"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="@id/header_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="contentDescription"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.MaterialToolbar>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <style name="Widget.Debitum.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="iconPadding">0dp</item>
         <item name="android:insetTop">0dp</item>
@@ -10,41 +11,52 @@
         <item name="android:minHeight">48dp</item>
     </style>
 
-    <style name="totalsHeader">
+    <style name="ThemeOverlay.Debitum.Toolbar">
+        <item name="android:elevation">@dimen/toolbar_elevation</item>
+    </style>
+    <style name="ThemeOverlay.Debitum.FilterBar">
+        <item name="android:elevation">@dimen/filterbar_elevation</item>
+        <item name="android:alpha">0.9</item>
+        <item name="android:background">?attr/colorSecondary</item>
+    </style>
+    <style name="ThemeOverlay.Debitum.TotalsHeader">
         <item name="android:background">?attr/colorSurface</item>
         <item name="android:alpha">0.8</item>
+        <item name="android:elevation">@dimen/header_elevation</item>
     </style>
-    <style name="headerLabel" parent="TextAppearance.MaterialComponents.Headline5">
+
+    <style name="TextAppearance.Debitum.HeaderLabel" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">sans-serif-light</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">18sp</item>
         <item name="android:alpha">1</item>
     </style>
-    <style name="headerAmount" parent="listAmount">
+    <style name="TextAppearance.Debitum.HeaderAmount" parent="TextAppearance.Debitum.ListAmount">
         <item name="android:textSize">20sp</item>
     </style>
 
-
-
-    <style name="listName" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="TextAppearance.Debitum.ListName" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/robotoslab_regular</item>
         <item name="android:fontFamily">@font/robotoslab_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
-    <style name="listAmount" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="TextAppearance.Debitum.ListAmount" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/robotoslab_light</item>
         <item name="android:fontFamily">@font/robotoslab_light</item>
         <item name="android:textSize">20sp</item>
     </style>
-    <style name="listOweLent" parent="TextAppearance.MaterialComponents.Overline"/>
+    <style name="TextAppearance.Debitum.ListOweLent" parent="TextAppearance.MaterialComponents.Overline"/>
     <style name="listTimestamp" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:alpha">0.5</item>
     </style>
-    <style name="listDescription" parent="TextAppearance.MaterialComponents.Body2">
+    <style name="TextAppearance.Debitum.ListDescription" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:alpha">0.5</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
+
+    <style name="ThemeOverlay"/>
+    <style name="ThemeOverlay.Debitum"/>
 </resources>

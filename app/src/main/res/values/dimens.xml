@@ -9,4 +9,8 @@
     <dimen name="person_sum_list_item_height">64dp</dimen>
     <dimen name="list_margin_horizontal">16dp</dimen>
     <dimen name="list_margin_vertical">12dp</dimen>
+
+    <dimen name="toolbar_elevation">6dp</dimen>
+    <dimen name="filterbar_elevation">4dp</dimen>
+    <dimen name="header_elevation">4dp</dimen>
 </resources>
