@@ -16,13 +16,19 @@
     </style>
     <style name="ThemeOverlay.Debitum.FilterBar">
         <item name="android:elevation">@dimen/filterbar_elevation</item>
-        <item name="android:alpha">0.9</item>
+        <item name="android:alpha">0.8</item>
         <item name="android:background">?attr/colorSecondary</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Debitum.FilterBarTitle</item>
     </style>
     <style name="ThemeOverlay.Debitum.TotalsHeader">
         <item name="android:background">?attr/colorSurface</item>
         <item name="android:alpha">0.8</item>
         <item name="android:elevation">@dimen/header_elevation</item>
+    </style>
+
+
+    <style name="TextAppearance.Debitum.FilterBarTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">sans-serif</item>
     </style>
 
     <style name="TextAppearance.Debitum.HeaderLabel" parent="TextAppearance.MaterialComponents.Headline5">
