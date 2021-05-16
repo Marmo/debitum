@@ -43,7 +43,6 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "transaction_database")
-                            .addCallback(roomDatabaseCallback)
                             .setJournalMode(JournalMode.TRUNCATE) // to make export easier, might have negative implications on write performance
                             .build();
                 }
@@ -52,30 +51,6 @@ public abstract class AppDatabase extends RoomDatabase {
         dbFile = context.getDatabasePath("transaction_database");
         return INSTANCE;
     }
-
-    // THIS IS FOR TESTING ONLY !!!
-    private static final RoomDatabase.Callback roomDatabaseCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-
-            databaseTaskExecutor.execute(() -> {
-                // Populate the database
-                TransactionDao transactionDao = INSTANCE.transactionDao();
-                PersonDao personDao = INSTANCE.personDao();
-
-                transactionDao.deleteAll();
-                personDao.deleteAll();
-
-                personDao.insert(new Person("Bilbo Beutlin"));
-                personDao.insert(new Person("Galadriel"));
-                personDao.insert(new Person("Gimli, Sohn Gloins"));
-                transactionDao.insert(new Transaction(personDao.getPersonId("Bilbo Beutlin"), 799, true, "Dingens", new Date(1616493107)));
-                transactionDao.insert(new Transaction(personDao.getPersonId("Galadriel"), -1000, true, "Teil", new Date(1610293082)));
-                transactionDao.insert(new Transaction(personDao.getPersonId("Galadriel"), 1, false, "Zeug", new Date(1609293082)));
-            });
-        }
-    };
 
     // ---------------------
     // Backup and restore DB
@@ -88,12 +63,17 @@ public abstract class AppDatabase extends RoomDatabase {
             try {
                 if(backup) {
                     // create backup dir if it not yet exists
-                    if(backupFile.getParentFile() != null && !backupFile.getParentFile().exists())
-                        backupFile.getParentFile().mkdirs();
-                    copyFile(dbFile, backupFile);
+                    if(backupFile.getParentFile() != null
+                            && (backupFile.getParentFile().exists()
+                                || backupFile.getParentFile().mkdirs())) {
+                        copyFile(dbFile, backupFile);
+                        success = true;
+                    }
                 }
-                else copyFile(backupFile, dbFile);
-                success = true;
+                else {
+                    copyFile(backupFile, dbFile);
+                    success = true;
+                }
             } catch (IOException e) {
                 message = e.getMessage();
             } finally {
