@@ -24,7 +24,7 @@ oder ein Datum angeben und zwischen Geld- oder Gegenstandstransaktionen umschalt
     Gegenstände als zurückgegeben zu markieren, daher sollten Transaktionen von bereits zurückgegebenen Dingen einfach
     gelöscht werden.</li>
      </ul>
-</p>
-Die einzigen Optionen, die aktuell in den Einstellungen verfügbar sind, sind Sicherung und Wiederherstellung
-der Datenbank (beinhaltet alle Personen und Transaktionen).</p>]]></string>
+
+Im Einstellungs-Bildschirm gibt es die Möglichkeit, die Datenbank zu sichern und aus einer Sicherung
+wiederherzustellen (beinhaltet alle Personen und Transaktionen).</p>]]></string>
 </resources>
