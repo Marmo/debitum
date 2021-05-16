@@ -16,11 +16,18 @@ public class ItemTransactionListFragment extends TransactionListFragment {
 
     @Override
     protected void subscribeToViewModel() {
-        viewModel.getItemTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
+        viewModel.getItemTransactions().observe(getViewLifecycleOwner(), transactions -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
             updateTotalHeader(TransactionWithPerson.getNumberOfItems(listForAdapter));
             adapter.submitList(listForAdapter);
+            if(transactions.isEmpty()) {
+                recyclerView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+            } else {
+                recyclerView.setVisibility(View.VISIBLE);
+                emptyView.setVisibility(View.GONE);
+            }
         });
     }
 

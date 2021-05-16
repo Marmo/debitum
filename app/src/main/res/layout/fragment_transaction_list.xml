@@ -34,5 +34,8 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_transaction_list" />
 
+        <include
+            layout="@layout/view_empty_database"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

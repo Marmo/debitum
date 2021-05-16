@@ -13,6 +13,7 @@
     <string name="bottom_nav_items">@string/title_fragment_transaction_list_items</string>
     <string name="bottom_nav_settings">@string/title_fragment_settings</string>
     <string name="dismiss_filter">Filter verwerfen</string>
+    <string name="database_empty">"Du hast noch nichts aufgezeichnet!\nErstelle eine neue Transaktion mit dem \"+\"-Button ganz unten."</string>
 
     <!-- PersonSumListFragment -->
     <string name="title_fragment_person_sum_list">Personen</string>

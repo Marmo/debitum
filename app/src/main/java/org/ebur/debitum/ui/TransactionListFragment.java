@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.transition.Hold;
 import com.google.android.material.transition.MaterialContainerTransform;
 import com.google.android.material.transition.MaterialFadeThrough;
 
@@ -52,9 +51,10 @@ public class TransactionListFragment extends Fragment {
 
     protected TransactionListViewModel viewModel;
     protected PersonFilterViewModel personFilterViewModel;
-    private RecyclerView recyclerView;
+    protected RecyclerView recyclerView;
     protected TransactionListAdapter adapter;
     private SelectionTracker<Long> selectionTracker = null;
+    protected View emptyView;
 
     private Toolbar filterBar;
 
@@ -78,6 +78,8 @@ public class TransactionListFragment extends Fragment {
         personFilterViewModel = new ViewModelProvider(requireActivity()).get(PersonFilterViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
+
+        emptyView = root.findViewById(R.id.emptyDbView);
 
         setupFilterBar(root);
         setupTotalHeader(root);
@@ -150,11 +152,18 @@ public class TransactionListFragment extends Fragment {
     }
 
     protected void subscribeToViewModel() {
-        viewModel.getMoneyTransactions().observe(getViewLifecycleOwner(), (transactions) -> {
+        viewModel.getMoneyTransactions().observe(getViewLifecycleOwner(), transactions -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
             updateTotalHeader(TransactionWithPerson.getSum(listForAdapter));
             adapter.submitList(listForAdapter);
+            if(transactions.isEmpty()) {
+                recyclerView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+            } else {
+                recyclerView.setVisibility(View.VISIBLE);
+                emptyView.setVisibility(View.GONE);
+            }
         });
     }
 

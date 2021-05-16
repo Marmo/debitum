@@ -48,6 +48,7 @@ public class PersonSumListFragment extends Fragment {
     private RecyclerView recyclerView;
     private PersonSumListAdapter adapter;
     private SelectionTracker<Long> selectionTracker = null;
+    private View emptyView;
 
     private int nRowsSelected = 0;
 
@@ -67,6 +68,8 @@ public class PersonSumListFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(PersonSumListViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_person_sum_list, container, false);
+
+        emptyView = root.findViewById(R.id.emptyDbView);
 
         setupTotalHeader(root);
         setupRecyclerView(root);
@@ -96,6 +99,13 @@ public class PersonSumListFragment extends Fragment {
                     PersonWithTransactions.getNumberOfItems(pwtList)
             );
             adapter.submitList(pwtList);
+            if(pwtList.isEmpty()) {
+                recyclerView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+            } else {
+                recyclerView.setVisibility(View.VISIBLE);
+                emptyView.setVisibility(View.GONE);
+            }
         });
     }
 
