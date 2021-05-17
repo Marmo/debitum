@@ -32,7 +32,5 @@
 
 # other
 ## 1.0.0
-- Screenshots
 - Release 
 - FDroid
-- Google Play Store
