@@ -5,6 +5,9 @@ With Debitum you can track all kinds of IOUs, be it money or lent items. This wa
 forget if your friend already gave you back that book anymore or dispute about much you owe your 
 colleague for coffee.
 
+There is no online service whatsoever involved, so your data is saved on your 
+device only (as far as this app is concerned).
+
 The UI is inspired by [UOme](https://play.google.com/store/apps/details?id=cz.kns.uome) by Pikadorama.
 
 ## Usage
@@ -19,11 +22,14 @@ Via the Bottom Navigation you can choose different views of your transactions:
   new transaction
 * Money: Shows only monetary transactions, ordered by date (descending)
 * Items: Shows only lent items, ordered by date (descending). There is no extra way to mark an item 
-as returned, so returned item's transacctions should simply be deleted. 
+as returned, so returned item's transactions should simply be deleted. 
 
 From the Settings Screen you can backup and restore the database (contains all transactions and persons).
+Make sure to move backup files out of the way before uninstalling the app or clearing app data, as currently
+the backup is saved in the app's data folder on external storage, which is deleted upon 
+uninstall/clearing app data.
 
-## Sreenshots
+## Screenshots
 <img alt="People list" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_people.png" width="200"/> <img alt="Money" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_money.png" width="200"/>
 <img alt="Money filtered" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_money_filtered.png" width="200"/> <img alt="Items" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_items.png" width="200"/>
 <img alt="Dark mode" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_night_money.png" width="200"/>

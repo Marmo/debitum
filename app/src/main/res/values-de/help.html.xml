@@ -10,6 +10,9 @@
 eine Transaktion erstellen. Im erscheinenden Dialog kannst du Details wie Betrag, eine Beschreibung
 oder ein Datum angeben und zwischen Geld- oder Gegenstandstransaktionen umschalten.</p>
 
+<p>Die App nutzt keine Internetverbindung, so dass deine Daten ausschließlich
+auf deinem Gerät gespeichert werden (insofern diese App darauf Einfluss hat).</p>
+
 <p>In der unteren Navigationsleiste kannst du verschiedene Ansichten deiner Transaktionen aufrufen.
 
     <ul>
@@ -25,6 +28,9 @@ oder ein Datum angeben und zwischen Geld- oder Gegenstandstransaktionen umschalt
     gelöscht werden.</li>
      </ul>
 
-Im Einstellungs-Bildschirm gibt es die Möglichkeit, die Datenbank zu sichern und aus einer Sicherung
-wiederherzustellen (beinhaltet alle Personen und Transaktionen).</p>]]></string>
+In den Einstellungen gibt es die Möglichkeit, die Datenbank zu sichern und aus einer Sicherung
+wiederherzustellen (beinhaltet alle Personen und Transaktionen).
+Diese muss vor dem Deinstallieren der App oder dem Löschen der Anwendungsdaten an einen anderen Ort
+verschoben werden, da die Sicherung aktuell im Datenordner der App im externen Speicher abgelegt wird,
+ der bei Deinstallation oder beim Löschen der Anwendungsdaten entfernt wird.</p>]]></string>
 </resources>

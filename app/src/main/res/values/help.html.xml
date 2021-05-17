@@ -5,6 +5,9 @@
 forget if your friend already gave you back that book anymore or dispute about much you owe your
 colleague for coffee.</p>
 
+<p>There is no online service whatsoever involved, so your data is saved on your
+device only (as far as this app is concerned).</p>
+
 <h1>Usage</h1>
 <p>To take note of lent money or items, you need to create a transaction using the red floating
 action button. There you can enter details like amount, description or date and switch between a
@@ -24,5 +27,8 @@ money- or an item-transaction.</p>
      item as returned, so returned item\'s transacctions should simply be deleted.</li>
      </ul>
 
-From the Settings Screen you can backup and restore the database (contains all transactions and persons).</p>]]></string>
+From the Settings Screen you can backup and restore the database (contains all transactions and persons).
+Make sure to move backup files out of the way before uninstalling the app or clearing app data, as
+currently the backup is saved in the app's data folder on external storage, which is deleted upon
+uninstall/clearing app data.</p>]]></string>
 </resources>

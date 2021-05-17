@@ -1,1 +1,1 @@
-track lent money and items
+keep track of lent money and items
