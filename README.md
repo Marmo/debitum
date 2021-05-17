@@ -24,7 +24,9 @@ as returned, so returned item's transacctions should simply be deleted.
 From the Settings Screen you can backup and restore the database (contains all transactions and persons).
 
 ## Sreenshots
-TODO
+<img alt="People list" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_people.png" width="200"/> <img alt="Money" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_money.png" width="200"/>
+<img alt="Money filtered" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_money_filtered.png" width="200"/> <img alt="Items" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_items.png" width="200"/>
+<img alt="Dark mode" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_night_money.png" width="200"/>
 
 ## Translation
 You are welcome to contribute to [translations](TRANSLATION.md).
