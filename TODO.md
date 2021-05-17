@@ -1,5 +1,6 @@
 # code
 ## 1.0.x
+- add debug build type (https://developer.android.com/studio/build/application-id#change_the_application_id_for_build_variants)
 - fix date picker
 - improve transitions (https://material.io/blog/android-material-motion)
     - move transition durations to integer resource
