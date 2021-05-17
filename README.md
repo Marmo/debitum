@@ -1,9 +1,22 @@
-# Debitum
+<h1 align="center">Debitum</h1>
+<p align="center">
+  <a href="https://f-droid.org/de/packages/org.ebur.debitum/">
+    <img src="https://img.shields.io/f-droid/v/org.ebur.debitum.svg" />
+  </a>
+  <a href="https://github.com/marmo/debitum/releases/latest">
+    <img src="https://img.shields.io/github/release/marmo/debitum.svg?logo=github" />
+  </a>
+</p>
 
-## About
 With Debitum you can track all kinds of IOUs, be it money or lent items. This way you will never 
 forget if your friend already gave you back that book anymore or dispute about much you owe your 
 colleague for coffee.
+
+<p align="center">
+ <a href="https://f-droid.org/de/packages/org.ebur.debitum/">
+  <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="75" />
+ </a>
+</p>
 
 There is no online service whatsoever involved, so your data is saved on your 
 device only (as far as this app is concerned).
