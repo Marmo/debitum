@@ -21,8 +21,7 @@ Via the Bottom Navigation you can choose different views of your transactions:
 * Items: Shows only lent items, ordered by date (descending). There is no extra way to mark an item 
 as returned, so returned item's transacctions should simply be deleted. 
 
-The only options currently available in Settings are backup and restore of the database (contains 
-all transactions and persons)
+From the Settings Screen you can backup and restore the database (contains all transactions and persons).
 
 ## Sreenshots
 TODO
