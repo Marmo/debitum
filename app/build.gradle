@@ -59,5 +59,4 @@ dependencies {
 
     implementation "androidx.navigation:navigation-fragment:$navigationVersion"
     implementation "androidx.navigation:navigation-ui:$navigationVersion"
-    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion"
 }
