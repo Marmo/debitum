@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.Hold;
 import com.google.android.material.transition.MaterialFadeThrough;
 
+import org.ebur.debitum.BuildConfig;
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.AppDatabase;
 
@@ -39,6 +40,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final String PREF_KEY_BACKUP = "backup";
         final String PREF_KEY_RESTORE = "restore";
         final String PREF_KEY_GUIDE = "guide";
+        final String PREF_KEY_VERSION = "version";
 
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
@@ -65,10 +67,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
         Preference guidePref = findPreference(PREF_KEY_GUIDE);
-        if (guidePref!=null) {guidePref.setOnPreferenceClickListener(preference -> {
-            showGuide();
-            return true;
-        });
+        if (guidePref!=null) {
+            guidePref.setOnPreferenceClickListener(preference -> {
+                showGuide();
+                return true;
+            });
+        }
+
+        Preference versionPref = findPreference(PREF_KEY_VERSION);
+        if(versionPref!=null) {
+            versionPref.setSummary(getString(R.string.pref_version, BuildConfig.VERSION_NAME));
         }
     }
 

@@ -92,13 +92,16 @@
     <string name="pref_restore_title">Restore database</string>
     <string name="pref_backup_summary">to %1$s</string>
     <string name="pref_restore_summary">from previously backed up "%1$s" in external storage</string>
+    <string name="pref_backup_warning">Be aware that the folder where the database backup is copied
+        to will be deleted when the app is uninstalled or its data is cleared. You have to move it
+        to a safe place before uninstalling/clearing data if you want to restore the data later!</string>
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Quick Guide</string>
-    <string name="pref_guide_summary">see GitHub for more</string>
     <string name="pref_guide_dialog_close">close</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Study the source code, report issues &amp; ideas</string>
     <string name="restore_confirm">Overwrite</string>
     <string name="restore_confirm_text">Really overwrite all existing data with data from Backup?\nApp will be restarted after successful restore.</string>
     <string name="restore_confirm_title">Restore from Backup</string>
+    <string name="pref_version">Version %1$s</string>
 </resources>

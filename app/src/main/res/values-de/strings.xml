@@ -91,13 +91,17 @@
     <string name="pref_restore_title">Datenbank wiederherstellen</string>
     <string name="pref_backup_summary">nach %1$s</string>
     <string name="pref_restore_summary">von früher gesicherter "%1$s" im externen Speicher</string>
+    <string name="pref_backup_warning">Bitte beachte, dass das Verzeichnis, in das die Sicherung
+        abgelegt wird, beim Deinstallieren oder dem Löschen der Anwendungsdaten ebenfalls entfernt
+        wird. Du musst die Datei an einen sicheren Ort verschieben, wenn du sie später wiederherstellen
+        willst!</string>
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Kurzanleitung</string>
-    <string name="pref_guide_summary">siehe GitHub für mehr</string>
     <string name="pref_guide_dialog_close">schließen</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Quellcode sichten, Fehler und Ideen melden</string>
     <string name="restore_confirm">Ersetzen</string>
     <string name="restore_confirm_text">Sollen die bestehenden Daten wirklich mit denen aus der Sicherung ersetzt werden?\nDie App wird nach der Wiederhersetellung neu gestartet.</string>
     <string name="restore_confirm_title">Aus Sicherung wiederherstellen</string>
+    <string name="pref_version">Version %1$s</string>
 </resources>

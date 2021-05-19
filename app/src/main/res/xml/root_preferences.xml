@@ -21,26 +21,31 @@
             app:title="@string/pref_restore_title"
             app:summary="@string/pref_restore_summary" />
 
+        <Preference
+            app:icon="@drawable/ic_round_warning_amber_24"
+            app:summary="@string/pref_backup_warning" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:title="@string/pref_help_header">
+        app:title="@string/pref_info_header">
 
         <Preference
             app:key="guide"
-            app:title="@string/pref_guide_title"
-            app:summary="@string/pref_guide_summary" />
+            app:title="@string/pref_guide_title" />
 
         <Preference
             app:key="github"
-            app:title="@string/pref_github_title"
-            app:summary="@string/pref_github_summary" >
+            app:summary="@string/pref_github_summary"
+            app:title="@string/pref_github_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/Marmo/debitum" />
 
         </Preference>
+        <Preference
+            app:key="version"
+            app:summary="@string/pref_version" />
 
     </PreferenceCategory>
-
 </PreferenceScreen>
