@@ -1,10 +1,13 @@
 # code
-## 1.0.x
-- add debug build type (https://developer.android.com/studio/build/application-id#change_the_application_id_for_build_variants)
+## 1.0.1
+- fix views for snackbars
 - fix date picker
 - improve transitions (https://material.io/blog/android-material-motion)
     - move transition durations to integer resource
 - restore db: add specific error message when no backup file was found
+- Settings: add version info
+- Settings: add Note about backup being deleted upon uninstall
+
 ## 1.1.0
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
 - unify transactionList and PersonSumList (abstract base class)
@@ -27,11 +30,7 @@
 - make nicer quick-guide display
 
 # visuals
-# 1.0.0
 ## 1.1.0
 ## later
 
 # other
-## 1.0.0
-- Release 
-- FDroid

@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<!--The FrameLayout here is only needed so that the root layout of the PersonSumListFragment is not
+  a CoordinatorLayout. This would cause the snackbar.make(requireView, ...) to attach the snackbar
+  to the (inner) fragment's CoordinatorLayout and not the (outer) Activity's CoordinatorLayout
+  which holds the FAB. Thus the snackbar would be behind the FAB, some way above the bottom of the
+  screen and the FAB would not move out of the way -->
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:transitionGroup="true">
+    android:layout_height="match_parent">
 
-    <include
-        layout="@layout/header_total"
-        app:elevation="12dp" />
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/item_person_sum_list"/>
+        android:transitionGroup="true">
 
-    <include
-        layout="@layout/view_empty_database"/>
+        <include
+            layout="@layout/header_total" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_person_sum_list"/>
+
+        <include
+            layout="@layout/view_empty_database"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>
