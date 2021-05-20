@@ -1,0 +1,5 @@
+- neu: Versionsnummer in Einstellungen angezeigt
+- neu: Hinweis in den Einstellungen auf Löschen der Backup-Datei bei Deinstallation
+- behoben: Nachrichtenleisten in der Personenliste nun an der richtigen Stelle
+- behoben: Datumsauswahl im Transaktion-Bearbeiten-Dialog nun mit einem Klick sichtbar
+- neu: spezifische Fehlermeldung, wenn Sicherungsdatei beim Widerherstellen nicht gefunden wird

@@ -1,6 +1,4 @@
 # code
-## 1.0.1
-
 ## 1.1.0
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
 - unify transactionList and PersonSumList (abstract base class)
