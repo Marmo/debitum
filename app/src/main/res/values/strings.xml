@@ -86,8 +86,8 @@
     <string name="pref_dismiss_filter_summary_false">Stay in the current list</string>
     <string name="pref_maintenance_header">Maintenance</string>
     <string name="backup_successful">Database successfully backed up to external storage</string>
-    <string name="backup_failed">Backup failed! Internal error message: %1$s</string>
-    <string name="restore_failed">Restore failed! Internal error message: %1$s</string>
+    <string name="backup_failed">Backup failed! %1$s</string>
+    <string name="restore_failed">Restore failed! %1$s</string>
     <string name="pref_backup_title">Backup database</string>
     <string name="pref_restore_title">Restore database</string>
     <string name="pref_backup_summary">to %1$s</string>
@@ -95,6 +95,7 @@
     <string name="pref_backup_warning">Be aware that the folder where the database backup is copied
         to will be deleted when the app is uninstalled or its data is cleared. You have to move it
         to a safe place before uninstalling/clearing data if you want to restore the data later!</string>
+    <string name="pref_restore_file_not_found">Backup file not found</string>
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Quick Guide</string>
     <string name="pref_guide_dialog_close">close</string>

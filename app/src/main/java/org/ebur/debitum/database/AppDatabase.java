@@ -2,19 +2,18 @@ package org.ebur.debitum.database;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
-import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import org.ebur.debitum.R;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -28,6 +27,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
 
     private static File dbFile;
+    private static String backupFileNotFoundMessage;
 
     // create an ExecutorService with a fixed thread pool that will be used to run database operations asynchronously on a background thread
     private static final int NUMBER_OF_THREADS = 4;
@@ -49,6 +49,8 @@ public abstract class AppDatabase extends RoomDatabase {
             }
         }
         dbFile = context.getDatabasePath("transaction_database");
+        backupFileNotFoundMessage = context.getString(R.string.pref_restore_file_not_found);
+
         return INSTANCE;
     }
 
@@ -71,8 +73,12 @@ public abstract class AppDatabase extends RoomDatabase {
                     }
                 }
                 else {
-                    copyFile(backupFile, dbFile);
-                    success = true;
+                    if(backupFile.exists()) {
+                        copyFile(backupFile, dbFile);
+                        success = true;
+                    } else {
+                        message = backupFileNotFoundMessage;
+                    }
                 }
             } catch (IOException e) {
                 message = e.getMessage();

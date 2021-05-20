@@ -104,7 +104,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             else info = getString(R.string.backup_failed, message);
             Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
                     info,
-                    Snackbar.LENGTH_LONG)
+                    7000)
                     .show();
         });
     }
@@ -117,7 +117,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 if (!success) {
                     Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
                             getString(R.string.restore_failed, message),
-                            Snackbar.LENGTH_LONG)
+                            7000)
                             .show();
                 } else {
                     restartApp();
