@@ -11,8 +11,13 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "person")
 public class Person implements Parcelable {
 
-    public Person(String name) {
+    public Person(String name, String note) {
         this.name = name;
+        this.note = note;
+    }
+    @Ignore
+    public Person(String name) {
+        this(name, "");
     }
 
     @Ignore
@@ -24,10 +29,16 @@ public class Person implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_person") public int idPerson;
     @ColumnInfo(name = "name") public String name;
+    @ColumnInfo(name = "note") public String note;
 
     public boolean equals(Person p) {
         if(p != null) {
-            return this.name.equals(p.name) && (this.idPerson == p.idPerson);
+            // treat note as "" when null
+            String note = this.note == null ? "":this.note;
+
+            return this.name.equals(p.name)
+                    && (this.idPerson == p.idPerson)
+                    && (note.equals(p.note));
         } else {
             return false;
         }
@@ -45,6 +56,7 @@ public class Person implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeInt(idPerson);
         out.writeString(name);
+        out.writeString(note);
     }
 
     public static final Parcelable.Creator<Person> CREATOR
@@ -61,6 +73,7 @@ public class Person implements Parcelable {
     private Person(Parcel in) {
         idPerson = in.readInt();
         name = in.readString();
+        note = in.readString();
     }
 
 }

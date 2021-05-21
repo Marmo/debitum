@@ -40,6 +40,8 @@ public class EditPersonFragment extends DialogFragment {
     private Toolbar toolbar;
     private TextInputLayout editNameLayout;
     private TextInputEditText editName;
+    private TextInputLayout editNoteLayout;
+    private TextInputEditText editNote;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +63,8 @@ public class EditPersonFragment extends DialogFragment {
         editName = (TextInputEditText) editNameLayout.getEditText();
         assert editName != null;
         editName.addTextChangedListener(new NameTextWatcher());
+        editNoteLayout = root.findViewById(R.id.edit_person_note);
+        editNote = (TextInputEditText) editNoteLayout.getEditText();
 
         Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
         viewModel.setEditedPerson(editedPerson);
@@ -83,6 +87,7 @@ public class EditPersonFragment extends DialogFragment {
         // we edit a person
         else {
             editName.setText(viewModel.getEditedPerson().name);
+            editNote.setText(viewModel.getEditedPerson().note);
             toolbar.setTitle(R.string.title_fragment_edit_person);
         }
     }
@@ -115,53 +120,64 @@ public class EditPersonFragment extends DialogFragment {
     }
 
     public void onSavePersonAction() {
-        String name;
+        String name, note;
 
-        // check if nameView has contents
+        // check if nameView has contents and get name
         if(editName.getText() == null || TextUtils.isEmpty(editName.getText())) {
             editNameLayout.setError(getString(R.string.error_message_enter_name));
             return;
+        } else {
+            name = editName.getText().toString();
         }
-        else name = editName.getText().toString();
 
-        // check if Person with that name already exists
+        // get note
+        if(editNote.getText() != null) {
+            note = editNote.getText().toString();
+        } else {
+            note = "";
+        }
+
         try {
-            if(viewModel.personExists(name)) {
-                editNameLayout.setError(getString(R.string.error_message_name_exists, name));
-                /*String errorMessage = getResources().getString(R.string.error_message_name_exists, name);
-                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();*/
-            }
-            else {
-                if (viewModel.getEditedPerson() == null) {
-                    // insert new person (via viewModel)
-                    viewModel.addPerson(name);
+            // CREATE NEW PERSON
+            if (viewModel.getEditedPerson() == null) {
+                if(viewModel.personExists(name)) {
+                    editNameLayout.setError(getString(R.string.error_message_name_exists, name));
+                    return;
                 } else {
-                    Person oldPerson = viewModel.getEditedPerson();
-                    oldPerson.name = name;
-                    viewModel.update(oldPerson);
+                    // insert new person (via viewModel)
+                    viewModel.addPerson(name, note);
                 }
-
-                // return the new name back to the calling fragment via NewPersonRequestViewModel
-                // (currently only EditTransactionFragement uses this)
-                // only set name if a new person was requested
-                if(requireArguments().getBoolean(ARG_NEW_PERSON_REQUESTED)
-                        && viewModel.isNewPerson()) {
-                    NavBackStackEntry requester = NavHostFragment.findNavController(this).getPreviousBackStackEntry();
-                    if (requester != null) {
-                        NewPersonRequestViewModel requestViewModel =
-                                new ViewModelProvider(requester).get(NewPersonRequestViewModel.class);
-                        requestViewModel.setNewPersonName(name);
-                    }
-                }
-                NavHostFragment.findNavController(this).navigateUp();
             }
+            // EDIT EXISTING PERSON
+            else {
+                Person editedPerson = viewModel.getEditedPerson();
+                editedPerson.name = name;
+                editedPerson.note = note;
+                viewModel.update(editedPerson);
+            }
+
+            // return the new name back to the calling fragment via NewPersonRequestViewModel
+            // (currently only EditTransactionFragement uses this)
+            // only set name if a new person was requested
+            if(requireArguments().getBoolean(ARG_NEW_PERSON_REQUESTED)
+                    && viewModel.isNewPerson()) {
+                NavBackStackEntry requester = NavHostFragment.findNavController(this).getPreviousBackStackEntry();
+                if (requester != null) {
+                    NewPersonRequestViewModel requestViewModel =
+                            new ViewModelProvider(requester).get(NewPersonRequestViewModel.class);
+                    requestViewModel.setNewPersonName(name);
+                }
+            }
+
+            NavHostFragment.findNavController(this).navigateUp();
+
         } catch (ExecutionException | InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
             Toast.makeText(getContext(),  errorMessage, Toast.LENGTH_LONG).show();
         }
     }
 
-    // only needed to reset error on editName
+    // needed to reset error on editName
     class NameTextWatcher implements TextWatcher {
 
         @Override

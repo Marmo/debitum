@@ -1,3 +1,6 @@
+# v1.1.0
+- add: list with third party licenses in settings
+
 # v1.0.1
 - add version info in settings
 - add note on deletion of backup files upon uninstall in settings

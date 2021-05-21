@@ -7,8 +7,9 @@
 - contacts integration
 - use contextual action bar (and drop toolbar in main activity completely)
 - move more logic to ViewModels
-- add licenses view
 - add notes to person (editPersonFragment, person entity, filter bar with note as subtitle)
+    - fix filter
+    - add note to filter bar
 - improve transitions (https://material.io/blog/android-material-motion)
     - move transition durations to integer resource
 

@@ -2,10 +2,13 @@ package org.ebur.debitum.database;
 
 import android.content.Context;
 
+import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import org.ebur.debitum.R;
 
@@ -17,7 +20,11 @@ import java.nio.channels.FileChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Transaction.class, Person.class}, version = 1, exportSchema = false)
+@Database(
+        entities = {Transaction.class, Person.class},
+        version = 2,
+        exportSchema = true
+)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract TransactionDao transactionDao();
@@ -34,6 +41,14 @@ public abstract class AppDatabase extends RoomDatabase {
     static final ExecutorService databaseTaskExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE person "
+                    + " ADD COLUMN note TEXT");
+        }
+    };
+
     /* returns the singleton. It'll create the database the first time it's accessed, using Room's
      * database builder to create a RoomDatabase object
      */
@@ -44,6 +59,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "transaction_database")
                             .setJournalMode(JournalMode.TRUNCATE) // to make export easier, might have negative implications on write performance
+                            .addMigrations(MIGRATION_1_2)
                             .build();
                 }
             }

@@ -77,6 +77,7 @@
     <string name="edit_person_name">Name</string>
     <string name="error_message_enter_name">Please enter a name!</string>
     <string name="error_message_name_exists">%1$s already exists, please enter a different name!</string>
+    <string name="edit_person_note">Note</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>
