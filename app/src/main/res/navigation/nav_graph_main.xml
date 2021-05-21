@@ -97,5 +97,13 @@
     <fragment
         android:id="@+id/settings_dest"
         android:name="org.ebur.debitum.ui.SettingsFragment"
-        android:label="@string/title_fragment_settings"/>
+        android:label="@string/title_fragment_settings">
+        <action
+            android:id="@+id/action_settings_to_licenses"
+            app:destination="@id/licenses_dest" />
+    </fragment>
+    <dialog
+        android:id="@+id/licenses_dest"
+        android:name="org.ebur.debitum.ui.LicensesFragment"
+        android:label="@string/pref_licenses_title" />
 </navigation>

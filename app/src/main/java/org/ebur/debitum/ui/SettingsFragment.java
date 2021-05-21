@@ -6,6 +6,9 @@ import android.webkit.WebView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NavUtils;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
@@ -40,6 +43,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final String PREF_KEY_BACKUP = "backup";
         final String PREF_KEY_RESTORE = "restore";
         final String PREF_KEY_GUIDE = "guide";
+        final String PREF_KEY_LICENSES = "licenses";
         final String PREF_KEY_VERSION = "version";
 
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
@@ -70,6 +74,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (guidePref!=null) {
             guidePref.setOnPreferenceClickListener(preference -> {
                 showGuide();
+                return true;
+            });
+        }
+
+        Preference licensesPref = findPreference(PREF_KEY_LICENSES);
+        if(licensesPref!=null) {
+            licensesPref.setOnPreferenceClickListener(preference -> {
+                NavHostFragment.findNavController(this).navigate(R.id.action_settings_to_licenses);
                 return true;
             });
         }
