@@ -29,3 +29,11 @@
 ## later
 
 # other
+
+
+# release-checklist
+- update whatsnew (2x)
+- update CHANGELOG.md
+- check gradle.build version+version code
+- build release (!) apk, rename debitum-x.x.x-unsigned.apk
+- tag release
