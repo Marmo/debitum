@@ -104,4 +104,8 @@
     <string name="restore_confirm_text">Sollen die bestehenden Daten wirklich mit denen aus der Sicherung ersetzt werden?\nDie App wird nach der Wiederhersetellung neu gestartet.</string>
     <string name="restore_confirm_title">Aus Sicherung wiederherstellen</string>
     <string name="pref_version">Version %1$s</string>
+    <string name="pref_licenses_title">Drittanbieterlizenzen</string>
+
+    <!--3rd party license-->
+    <string name="title_fragment_licenses">Drittanbieterlizenzen</string>
 </resources>

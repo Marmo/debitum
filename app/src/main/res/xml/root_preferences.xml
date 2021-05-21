@@ -44,6 +44,9 @@
 
         </Preference>
         <Preference
+            app:key="licenses"
+            app:title="@string/pref_licenses_title" />
+        <PreferenceCategory
             app:key="version"
             app:summary="@string/pref_version" />
 
