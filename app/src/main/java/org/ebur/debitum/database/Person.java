@@ -33,12 +33,14 @@ public class Person implements Parcelable {
 
     public boolean equals(Person p) {
         if(p != null) {
-            // treat note as "" when null
-            String note = this.note == null ? "":this.note;
+            boolean equalId = this.idPerson == p.idPerson;
+            boolean equalNameAndId = equalId && this.name.equals(p.name);
+            boolean equalNoteAndNameAndId = equalNameAndId
+                    && ((this.note == null && p.note == null)
+                        || (this.note!= null && this.note.equals(p.note))
+                       );
 
-            return this.name.equals(p.name)
-                    && (this.idPerson == p.idPerson)
-                    && (note.equals(p.note));
+            return equalNoteAndNameAndId;
         } else {
             return false;
         }

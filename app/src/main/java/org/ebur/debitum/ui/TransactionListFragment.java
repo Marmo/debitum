@@ -105,6 +105,7 @@ public class TransactionListFragment extends Fragment {
 
         if(personFilterViewModel.getFilterPerson() != null) {
             filterBar.setTitle(personFilterViewModel.getFilterPerson().name);
+            filterBar.setSubtitle(personFilterViewModel.getFilterPerson().note);
             filterBar.setVisibility(View.VISIBLE);
         } else {
             filterBar.setVisibility(View.GONE);
@@ -285,21 +286,18 @@ public class TransactionListFragment extends Fragment {
         nRowsSelected = nRowsSelectedNew;
     }
 
+    // -------------
+    // Person filter
+    // -------------
+
     protected List<TransactionWithPerson> filter(List<TransactionWithPerson> transactions, @Nullable Person filterPerson) {
         if (transactions == null) return null;
-        // IMPORTANT: return a copy of the passed list, as we add a header item afterwards and do
-        // not want it to be added to the viewModel's original list, too (instead just to the
-        // adapter's copy of the list)
         if (filterPerson == null) return new ArrayList<>(transactions);
         // http://javatricks.de/tricks/liste-filtern
         else return transactions.stream()
                 .filter(twp -> twp.person.equals(filterPerson))
                 .collect(Collectors.toList());
     }
-
-    // -------------
-    // Person filter
-    // -------------
 
     private void dismissFilterBar() {
         personFilterViewModel.setFilterPerson(null);

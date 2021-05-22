@@ -131,11 +131,8 @@ public class EditPersonFragment extends DialogFragment {
         }
 
         // get note
-        if(editNote.getText() != null) {
-            note = editNote.getText().toString();
-        } else {
-            note = "";
-        }
+        assert editNote.getText() != null;
+        note = editNote.getText().toString();
 
         try {
             // CREATE NEW PERSON

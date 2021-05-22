@@ -23,7 +23,7 @@ public interface TransactionDao {
     //@Query("select * from person where id_person in (select distinct id_person from txn)")
     @Query("select person.* " +
             "from person join txn on person.id_person = txn.id_person " +
-            "group by person.id_person, person.name " +
+            "group by person.id_person, person.name, person.note " +
             "order by max(txn.timestamp) desc")
     LiveData<List<PersonWithTransactions>> getAllPersonsWithTransactions();
 
