@@ -1,5 +1,6 @@
 # v1.1.0
 - add: list with third party licenses in settings
+- add: persons can have a note that is displayed in the filter bar
 
 # v1.0.1
 - add version info in settings
