@@ -35,6 +35,7 @@ public class LicensesFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         Toolbar toolbar = view.findViewById(R.id.dialog_toolbar);
+        toolbar.setTitle(R.string.title_fragment_licenses);
         toolbar.setNavigationOnClickListener(v -> dismiss());
     }
 

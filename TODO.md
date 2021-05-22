@@ -5,7 +5,7 @@
 - unify EditPerson and EditTransaction (abstract base class)
 - move dialog toolbar to included layout xml
 - contacts integration
-- use contextual action bar (and drop toolbar in main activity completely)
+- use contextual action bar (and drop toolbar in main activity completely?)
 - move more logic to ViewModels
 - improve transitions (https://material.io/blog/android-material-motion)
     - move transition durations to integer resource
@@ -16,7 +16,6 @@
 - create a way to get from person sum list directly to filtered items list of a person
 - unify transactionList and PersonSumList (abstract base class)
 - unify EditPerson and EditTransaction (abstract base class)
-- move dialog toolbar to included layout xml
 - contacts integration
 - use contextual action bar
 - move more logic to ViewModels
