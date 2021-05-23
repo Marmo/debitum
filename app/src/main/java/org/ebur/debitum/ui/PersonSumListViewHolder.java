@@ -76,8 +76,9 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
         Bundle args = new Bundle();
         args.putParcelable(TransactionListFragment.ARG_FILTER_PERSON, person);
 
+        String endViewTransitionName = v.getResources().getString(R.string.transition_name_person_filter);
         FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder()
-                .addSharedElement(v, person.name)
+                .addSharedElement(v, endViewTransitionName)
                 .build();
 
         navController.navigate(R.id.action_personSumList_to_transactionList_on_filter, args, null, extras);

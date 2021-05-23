@@ -110,4 +110,7 @@
 
     <!--3rd party license-->
     <string name="title_fragment_licenses">3rd party licenses</string>
+
+    <!--Transition names-->
+    <string name="transition_name_person_filter" translatable="false">TRANSITION_SET_PERSON_FILTER</string>
 </resources>
