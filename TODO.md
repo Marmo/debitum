@@ -4,6 +4,7 @@
 - use contextual action bar (and drop toolbar in main activity completely?)
     - style
     - make floating
+    - add title
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
     - move transition durations to integer resource
 
