@@ -4,7 +4,11 @@
 - use contextual action bar (and drop toolbar in main activity completely?)
     - style
     - make floating
-    - add title
+    - add to PersonSumList
+    - move edit person button to filter bar
+    - set title
+    - move delete to overflow
+    - get actionMode from startSupportActionMode
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
     - move transition durations to integer resource
 
@@ -28,5 +32,5 @@
 - update whatsnew (2x)
 - update CHANGELOG.md
 - check gradle.build version+version code
-- build release (!) apk, rename debitum-x.x.x-unsigned.apk
+- build release (!) apk, rename debitum-x.x.x.apk
 - tag release
