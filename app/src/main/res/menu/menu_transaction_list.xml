@@ -3,18 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/miDeleteTransaction"
-        android:icon="@drawable/ic_baseline_delete_outline_24"
-        android:title="@string/toolbar_delete_transaction"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/miEditPerson"
         android:icon="@drawable/ic_baseline_edit_person_24"
         android:title="@string/toolbar_edit_person"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/miEditTransaction"
-        android:icon="@drawable/ic_baseline_edit_24"
-        android:title="@string/toolbar_edit_transaction"
         app:showAsAction="ifRoom" />
 </menu>

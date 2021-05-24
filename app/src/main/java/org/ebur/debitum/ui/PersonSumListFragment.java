@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.transition.Hold;
 import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.R;

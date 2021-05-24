@@ -31,6 +31,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.transition.MaterialSharedAxis;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
@@ -73,6 +74,10 @@ public class EditTransactionFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FullScreenDialog);
+
+        // Transitions
+        setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.Z, true).setDuration(500));
+        setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.Z, false).setDuration(500));
     }
 
     @Override

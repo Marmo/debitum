@@ -3,6 +3,7 @@ package org.ebur.debitum.ui;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,7 +60,7 @@ public class TransactionListFragment extends Fragment {
 
     private Toolbar filterBar;
 
-    private int nRowsSelected = 0;
+    private ActionMode actionMode;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +75,8 @@ public class TransactionListFragment extends Fragment {
         sharedElementTransition.setDrawingViewId(R.id.nav_host_fragment);
         sharedElementTransition.setScrimColor(Color.TRANSPARENT);
         setSharedElementEnterTransition(sharedElementTransition);
+
+
     }
 
     @Override
@@ -147,12 +150,20 @@ public class TransactionListFragment extends Fragment {
                 .withSelectionPredicate(SelectionPredicates.createSelectAnything())
                 .build();
 
-        // change visible menu items depending on item selection
+        // start action mode & change visible menu items depending on item selection
         this.selectionTracker.addObserver(new SelectionTracker.SelectionObserver<Long>() {
             @Override
+            protected void onSelectionCleared() {
+                actionMode.finish();
+            }
+
+            @Override
             public void onSelectionChanged() {
-                super.onSelectionChanged();
-                invalidateMenuIfNeeded(selectionTracker.getSelection().size());
+                if(actionMode == null) {
+                    actionMode = requireActivity().startActionMode(actionModeCallback);
+                } else {
+                    actionMode.invalidate(); // refresh visible menu items
+                }
             }
         });
         adapter.setSelectionTracker(this.selectionTracker);
@@ -185,13 +196,52 @@ public class TransactionListFragment extends Fragment {
         totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        // show edit/delete transaction buttons based on number of selected items
-        invalidateMenuIfNeeded(selectionTracker.getSelection().size());
-    }
+    // ----------------------
+    // Contextual action mode
+    // https://developer.android.com/guide/topics/ui/menus#CAB
+    // ----------------------
 
+    private final ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.menu_transaction_list_cab, menu);
+            actionMode = mode;
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            int nRowsSelected = selectionTracker.getSelection().size();
+            // only show edit transaction menu item if exactly one transaction is selected
+            menu.findItem(R.id.miEditTransaction).setVisible(nRowsSelected == 1);
+            // only show delete transaction menu item if one or more items are selected
+            menu.findItem(R.id.miDeleteTransaction).setVisible(nRowsSelected >= 1);
+            return true;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem menuItem) {
+            int id = menuItem.getItemId();
+            if(id==R.id.miEditTransaction) {
+                onEditTransactionAction();
+                mode.finish();
+                return true;
+            } else if(id==R.id.miDeleteTransaction) {
+                onDeleteTransactionAction();
+                mode.finish();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            selectionTracker.clearSelection();
+            actionMode = null;
+        }
+    };
     // ---------------------------
     // Toolbar Menu event handling
     // ---------------------------
@@ -200,17 +250,9 @@ public class TransactionListFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_transaction_list, menu);
 
-        // do not show edit person menu item when not filtered by person or when rows are selected
-        if(personFilterViewModel.getFilterPerson() == null || nRowsSelected > 0)
+        // do not show edit person menu item when not filtered by person
+        if(personFilterViewModel.getFilterPerson() == null)
             menu.findItem(R.id.miEditPerson).setVisible(false);
-
-        // only show edit transaction menu item if exactly one transaction is selected
-        if(nRowsSelected != 1)
-            menu.findItem(R.id.miEditTransaction).setVisible(false);
-
-        // only show delete transaction menu item if one or more items are selected
-        if(nRowsSelected < 1)
-            menu.findItem(R.id.miDeleteTransaction).setVisible(false);
     }
 
     @Override
@@ -218,12 +260,6 @@ public class TransactionListFragment extends Fragment {
         int id = item.getItemId();
         if(id==R.id.miEditPerson) {
             onEditPersonAction();
-            return true;
-        } else if(id==R.id.miEditTransaction) {
-            onEditTransactionAction();
-            return true;
-        } else if(id==R.id.miDeleteTransaction) {
-            onDeleteTransactionAction();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -283,15 +319,6 @@ public class TransactionListFragment extends Fragment {
         dialog.show();
     }
 
-    private void invalidateMenuIfNeeded(int nRowsSelectedNew) {
-        // rebuild options menu if relevant change in selected item number occured
-        if ( nRowsSelectedNew != nRowsSelected
-                && (nRowsSelectedNew <= 1 || nRowsSelected <= 1)) {
-            requireActivity().invalidateOptionsMenu();
-        }
-        nRowsSelected = nRowsSelectedNew;
-    }
-
     // -------------
     // Person filter
     // -------------
@@ -314,7 +341,7 @@ public class TransactionListFragment extends Fragment {
         if(pref.getBoolean(SettingsFragment.PREF_KEY_DISMISS_FILTER_BEHAVIOUR, false)) {
             nav.navigate(R.id.people_dest);
         } else {
-            // replace curremt framgent with a new one of the same class
+            // replace current fragment with a new one of the same class
             // (then unfiltered, as the viewModel's filterPerson was nulled)
             NavDestination current = nav.getCurrentDestination();
             if (current != null)
