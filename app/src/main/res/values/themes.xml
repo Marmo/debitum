@@ -36,18 +36,16 @@
         <!--Component styles-->
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.Debitum.AlertDialog</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+        <item name="actionModeStyle">@style/Widget.Debitum.ActionMode</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_baseline_close_control_24</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="ThemeOverlay.Debitum.AlertDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">?attr/colorSecondary</item>
     </style>
-<!--
-    <style name="Theme.Debitum.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
--->
-    <style name="Theme.Debitum.FullScreenDialog"><!-- parent="Theme.MaterialComponents.DayNight.Dialog">-->
+
+    <style name="Theme.Debitum.FullScreenDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">?attr/colorSurface</item>
         <item name="android:actionMenuTextColor">?attr/colorOnPrimary</item>

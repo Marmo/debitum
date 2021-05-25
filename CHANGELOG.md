@@ -1,6 +1,8 @@
 # v1.1.0
 - add: list with third party licenses in settings
 - add: persons can have a note that is displayed in the filter bar
+- change: use contextual action bar for displaying edit/delete menu items when selecting rows
+- change: edit person button in filtered transaction list is now in filter bar instead of top toolbar  
 
 # v1.0.1
 - add version info in settings

@@ -35,7 +35,7 @@
                 android:singleLine="true"
                 android:inputType="text"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:startIconDrawable="@drawable/ic_baseline_person_outline_surf_24"
+                app:startIconDrawable="@drawable/ic_baseline_person_outline_onsurface_24"
                 app:startIconContentDescription="Person"
                 app:endIconMode="clear_text"
                 app:endIconContentDescription="clear text"

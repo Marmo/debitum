@@ -37,7 +37,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:startIconContentDescription="Person"
-                app:startIconDrawable="@drawable/ic_baseline_person_outline_surf_24">
+                app:startIconDrawable="@drawable/ic_baseline_person_outline_onsurface_24">
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner_name_editText"

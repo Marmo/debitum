@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@id/people_dest"
         android:title="@string/bottom_nav_people"
-        android:icon="@drawable/ic_baseline_person_outline_prim_24" />
+        android:icon="@drawable/ic_baseline_person_outline_onprimary_24" />
     <item android:id="@id/money_dest"
         android:title="@string/bottom_nav_money"
         android:icon="@drawable/ic_outline_account_balance_wallet_24" />

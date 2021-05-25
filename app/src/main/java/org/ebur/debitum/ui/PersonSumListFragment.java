@@ -3,6 +3,7 @@ package org.ebur.debitum.ui;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,7 +50,7 @@ public class PersonSumListFragment extends Fragment {
     private SelectionTracker<Long> selectionTracker = null;
     private View emptyView;
 
-    private int nRowsSelected = 0;
+    private ActionMode actionMode;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,8 +95,7 @@ public class PersonSumListFragment extends Fragment {
     private void subscribeToViewModel() {
         viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), pwtList -> {
             updateTotalHeader(
-                    PersonWithTransactions.getSum(pwtList),
-                    PersonWithTransactions.getNumberOfItems(pwtList)
+                    PersonWithTransactions.getSum(pwtList)
             );
             adapter.submitList(pwtList);
             if(pwtList.isEmpty()) {
@@ -113,7 +113,7 @@ public class PersonSumListFragment extends Fragment {
         descView.setVisibility(View.INVISIBLE);
     }
 
-    protected void updateTotalHeader(int totalMoney, int totalItems) {
+    protected void updateTotalHeader(int totalMoney) {
         TextView totalView = requireView().findViewById(R.id.header_total);
         totalView.setText(Transaction.formatMonetaryAmount(totalMoney));
         int totalColor = totalMoney>0 ? R.color.owe_green : R.color.lent_red;
@@ -141,23 +141,84 @@ public class PersonSumListFragment extends Fragment {
                 .withSelectionPredicate(SelectionPredicates.createSelectAnything())
                 .build();
 
-        // change visible menu items depending on item selection
+        // start action mode & change visible menu items depending on item selection
         this.selectionTracker.addObserver(new SelectionTracker.SelectionObserver<Long>() {
+            /*@Override
+            protected void onSelectionCleared() {
+                actionMode.finish();
+            }*/
+
             @Override
             public void onSelectionChanged() {
-                super.onSelectionChanged();
-                invalidateMenuIfNeeded(selectionTracker.getSelection().size());
+                if(actionMode == null) {
+                    actionMode = requireActivity().startActionMode(actionModeCallback);
+                } else if(!selectionTracker.hasSelection()) {
+                    actionMode.finish();
+                } else {
+                    actionMode.invalidate(); // refresh visible menu items
+                }
             }
         });
         adapter.setSelectionTracker(this.selectionTracker);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        // show edit/delete transaction buttons based on number of selected items
-        invalidateMenuIfNeeded(selectionTracker.getSelection().size());
-    }
+    // ----------------------
+    // Contextual action mode
+    // https://developer.android.com/guide/topics/ui/menus#CAB
+    // ----------------------
+
+    private final ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.menu_person_sum_list_action_mode, menu);
+            actionMode = mode;
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            int nRowsSelected = selectionTracker.getSelection().size();
+            // only show edit transaction menu item if exactly one transaction is selected
+            menu.findItem(R.id.miEditPerson).setVisible(nRowsSelected == 1);
+            // only show delete transaction menu item if one or more items are selected
+            menu.findItem(R.id.miDeletePerson).setVisible(nRowsSelected >= 1);
+            CharSequence title = getResources().getQuantityString(R.plurals.actionmode_selected, nRowsSelected, nRowsSelected);
+            mode.setTitle(title);
+            return true;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem menuItem) {
+            int id = menuItem.getItemId();
+            if(id==R.id.miEditPerson) {
+                // get selected idPerson (note: PersonSumListAdapter.getItemId returns the
+                // item's person id as the unique row id, so we can use that here
+                int selectedId = selectionTracker.getSelection().iterator().next().intValue();
+                selectionTracker.clearSelection();
+                onEditPersonAction(selectedId);
+                mode.finish();
+                return true;
+            } else if(id==R.id.miDeletePerson) {
+                // make copy of selection so we have a constant list of selected items, even during
+                // iteratively deleting items
+                MutableSelection<Long> selectionCopy = new MutableSelection<>();
+                selectionTracker.copySelection(selectionCopy);
+                selectionTracker.clearSelection();
+                onDeletePersonAction(selectionCopy);
+                mode.finish();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            selectionTracker.clearSelection();
+            actionMode = null;
+        }
+    };
 
     // ---------------------------
     // Toolbar Menu event handling
@@ -166,15 +227,6 @@ public class PersonSumListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_person_sum_list, menu);
-
-        // only show add person menu item when nothing is selected
-        if(nRowsSelected > 0) menu.findItem(R.id.miAddPerson).setVisible(false);
-
-        // only show edit transaction menu item if exactly one transaction is selected
-        if(nRowsSelected != 1) menu.findItem(R.id.miEditPerson).setVisible(false);
-
-        // only show delete transaction menu item if one or more items are selected
-        if(nRowsSelected == 0) menu.findItem(R.id.miDeletePerson).setVisible(false);
     }
 
     @Override
@@ -183,46 +235,26 @@ public class PersonSumListFragment extends Fragment {
         if(id==R.id.miAddPerson) {
             onAddPersonAction();
             return true;
-        } else if(id==R.id.miEditPerson) {
-            onEditPersonAction();
-            return true;
-        } else if(id==R.id.miDeletePerson) {
-            onDeletePersonAction();
-            return true;
-        }
-        return true;
-    }
-
-    public void onEditPersonAction() {
-        // we can assume, that only one row is selected, as the menu item is hidden else
-        if (selectionTracker.getSelection().size() == 1) {
-            // get selected idPerson (note: PersonSumListAdapter.getItemId returns the
-            // item's person id as the unique row id, so we can use that here
-            int selectedId = selectionTracker.getSelection().iterator().next().intValue();
-            Person selectedPerson;
-            try {
-                selectedPerson = viewModel.getPersonById(selectedId);
-            } catch (InterruptedException | ExecutionException e) {
-                Log.e(TAG, String.format("person with id %d could not be found in the database", selectedId));
-                return;
-            }
-
-            // clear selection, as nothing shall be selected upon returning from EditPersonFragment
-            selectionTracker.clearSelection();
-
-            // navigate to EditTransactionFragment
-            Bundle args = new Bundle();
-            args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, selectedPerson);
-            NavHostFragment.findNavController(this).navigate(R.id.action_editPerson, args);
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 
-    public void onDeletePersonAction() {
-        // make copy of selection so we have a constant list of selected items, even during
-        // iteratively deleting items
-        MutableSelection<Long> selection = new MutableSelection<>();
-        selectionTracker.copySelection(selection);
+    public void onEditPersonAction(int idPerson) {
+        Person selectedPerson;
+        try {
+            selectedPerson = viewModel.getPersonById(idPerson);
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e(TAG, String.format("person with id %d could not be found in the database", idPerson));
+            return;
+        }
+        // navigate to EditTransactionFragment
+        Bundle args = new Bundle();
+        args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, selectedPerson);
+        NavHostFragment.findNavController(this).navigate(R.id.action_editPerson, args);
+    }
 
+    public void onDeletePersonAction(MutableSelection<Long> selection) {
         int deleteCount = selection.size();
 
         // ask for confirmation
@@ -248,17 +280,6 @@ public class PersonSumListFragment extends Fragment {
     }
 
     public void onAddPersonAction() {
-        //Bundle args = new Bundle();
-        //args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, null);
         NavHostFragment.findNavController(this).navigate(R.id.action_addPerson);//, args);
-    }
-
-    private void invalidateMenuIfNeeded(int nRowsSelectedNew) {
-        // rebuild options menu if relevant change in selected item number occured
-        if ( nRowsSelectedNew != nRowsSelected
-                && (nRowsSelectedNew <= 1 || nRowsSelected <= 1)) {
-            requireActivity().invalidateOptionsMenu();
-        }
-        nRowsSelected = nRowsSelectedNew;
     }
 }

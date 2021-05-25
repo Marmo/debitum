@@ -12,6 +12,11 @@
 
     <style name="ThemeOverlay.Debitum.Toolbar">
         <item name="android:elevation">@dimen/toolbar_elevation</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    <style name="Widget.Debitum.ActionMode" parent="Widget.AppCompat.ActionMode">
+        <item name="titleTextStyle">?attr/textAppearanceHeadline6</item>
+        <item name="subtitleTextStyle">?attr/textAppearanceSubtitle1</item>
     </style>
     <style name="ThemeOverlay.Debitum.FilterBar">
         <item name="android:elevation">@dimen/filterbar_elevation</item>

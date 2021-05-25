@@ -4,7 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/miEditPerson"
-        android:icon="@drawable/ic_baseline_edit_person_24"
+        android:icon="@drawable/ic_baseline_edit_24"
         android:title="@string/toolbar_edit_person"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/miDeletePerson"
+        android:icon="@drawable/ic_baseline_delete_outline_24"
+        android:title="@string/toolbar_delete_person"
         app:showAsAction="ifRoom" />
 </menu>

@@ -1,11 +1,9 @@
 # code
 ## 1.1.0
 - unify transactionList and PersonSumList (abstract base class)
-- use contextual action bar (and drop toolbar in main activity completely?)
-    - add to PersonSumList
-    - move edit person button to filter bar
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
     - move transition durations to integer resource
+- move internal error messages from Toasts to Log output
 
 ## 1.2.0
 - add option to mark lent item as returned

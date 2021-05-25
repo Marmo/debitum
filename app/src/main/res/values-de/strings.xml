@@ -5,6 +5,10 @@
     <string name="delete_dialog_confirm">Löschen</string>
     <string name="dialog_cancel">Abbrechen</string>
     <string name="required_helper_text">* erforderlich</string>
+    <plurals name="actionmode_selected">
+        <item quantity="one">%d ausgewählt</item>
+        <item quantity="other">%d ausgewählt</item>
+    </plurals>
 
     <!-- MainActivity -->
     <string name="fab_content_description">Transaktion erstellen</string>
