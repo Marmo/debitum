@@ -2,16 +2,16 @@
 ## 1.1.0
 - unify transactionList and PersonSumList (abstract base class)
 - use contextual action bar (and drop toolbar in main activity completely?)
-    - style
-    - make floating
     - add to PersonSumList
     - move edit person button to filter bar
-    - set title
-    - move delete to overflow
-    - get actionMode from startSupportActionMode
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
     - move transition durations to integer resource
 
+## 1.2.0
+- add option to mark lent item as returned
+  - make item list filterable (all/only unreturned/only returned)
+- add sum of selected items to subtitle of contextual action bar <-- update readme!!!
+  
 ## later / unassigned
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
 - move Total Header to view subclass (to remove duplicate code from list fragments, https://developer.android.com/training/custom-views/create-view)
