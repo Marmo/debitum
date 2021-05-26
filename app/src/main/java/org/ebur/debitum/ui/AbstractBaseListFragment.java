@@ -35,20 +35,23 @@ import org.ebur.debitum.database.Transaction;
 /**
  * Generic version of the Box class.
  * @param <TViewModel>> the type of the main viewModel
+ * @param <TAdapter> the type of the recycler view's adapter
  * @param <TViewHolder> the type of the adapter's ViewHolder
- * @param <TListItem> the type containing the data for one row (=the "Type" in the observed LiveData<List<Type>>)
+ * @param <TListItem> the type containing the data for one row (=the "Type" in the observed
+ *                   LiveData<List<Type>>)
  */
 public abstract class AbstractBaseListFragment
         <TViewModel extends AndroidViewModel,
-                TViewHolder extends RecyclerView.ViewHolder & BaseListAdapter.BaseListViewHolder<TListItem>,
-                TListItem extends BaseListAdapter.BaseListItem<TListItem>>
+                TAdapter extends ListAdapter<TListItem, TViewHolder> & AbstractBaseListFragment.Adapter,
+                TViewHolder extends RecyclerView.ViewHolder,
+                TListItem>
         extends Fragment {
 
     protected static final String TAG = "You should have set this yourselves";
 
     protected TViewModel viewModel;
     protected RecyclerView recyclerView;
-    protected BaseListAdapter<TListItem, TViewHolder> adapter;
+    protected TAdapter adapter;
     protected SelectionTracker<Long> selectionTracker = null;
     protected View emptyView;
 
@@ -100,7 +103,7 @@ public abstract class AbstractBaseListFragment
 
     protected void setupRecyclerView(View root) {
         recyclerView = root.findViewById(R.id.recyclerview);
-        adapter = new BaseListAdapter<>(new BaseListAdapter.Diff<TListItem>());
+        adapter = new TAdapter(new TAdapter.Diff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
