@@ -1,7 +1,6 @@
 # code
 ## 1.1.0
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
-    - move transition durations to integer resource
 - move internal error messages from Toasts to Log output
 
 ## 1.2.0
@@ -17,6 +16,7 @@
 - contacts integration
 - move more logic to ViewModels
 - make nicer quick-guide display
+- move transition durations to integer resource
 
 # visuals
 ## 1.1.0
