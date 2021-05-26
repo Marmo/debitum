@@ -10,31 +10,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.preference.PreferenceManager;
-import androidx.recyclerview.selection.ItemKeyProvider;
 import androidx.recyclerview.selection.MutableSelection;
-import androidx.recyclerview.selection.SelectionPredicates;
-import androidx.recyclerview.selection.SelectionTracker;
-import androidx.recyclerview.selection.StorageStrategy;
+import androidx.recyclerview.selection.Selection;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.MaterialContainerTransform;
-import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
@@ -47,55 +40,47 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TransactionListFragment extends Fragment {
+public class TransactionListFragment extends AbstractBaseListFragment <
+        TransactionListViewModel,
+        TransactionListViewHolder,
+        TransactionWithPerson> {
 
     public static final String ARG_FILTER_PERSON = "filterPerson";
 
-    protected TransactionListViewModel viewModel;
     protected PersonFilterViewModel personFilterViewModel;
-    protected RecyclerView recyclerView;
-    protected TransactionListAdapter adapter;
-    private SelectionTracker<Long> selectionTracker = null;
-    protected View emptyView;
 
     private Toolbar filterBar;
 
-    private ActionMode actionMode;
+    @Override
+    int getLayout() {
+        return R.layout.fragment_transaction_list;
+    }
+    @Override
+    Class<TransactionListViewModel> getViewModelClass() {
+        return TransactionListViewModel.class;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Transitions
-        setEnterTransition(new MaterialFadeThrough().setDuration(400));
-        setExitTransition(new MaterialFadeThrough().setDuration(400));
 
         MaterialContainerTransform sharedElementTransition = new MaterialContainerTransform();
         sharedElementTransition.setDuration(500);
         sharedElementTransition.setDrawingViewId(R.id.nav_host_fragment);
         sharedElementTransition.setScrimColor(Color.TRANSPARENT);
         setSharedElementEnterTransition(sharedElementTransition);
-
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(requireActivity()).get(TransactionListViewModel.class);
         personFilterViewModel = new ViewModelProvider(requireActivity()).get(PersonFilterViewModel.class);
 
-        View root = inflater.inflate(R.layout.fragment_transaction_list, container, false);
+        View root = super.onCreateView(inflater, container, savedInstanceState);
 
-        emptyView = root.findViewById(R.id.emptyDbView);
-
+        assert root != null;
         setupFilterBar(root);
-        setupTotalHeader(root);
-        setupRecyclerView(root);
-        buildSelectionTracker();
-        subscribeToViewModel();
-        setHasOptionsMenu(true);
         return root;
     }
 
@@ -113,7 +98,7 @@ public class TransactionListFragment extends Fragment {
         });
 
         filterBar.getMenu().findItem(R.id.miEditPerson).setOnMenuItemClickListener(item -> {
-            onEditPersonAction(personFilterViewModel.getFilterPerson());
+            editPerson(personFilterViewModel.getFilterPerson());
             return true;
         });
 
@@ -126,51 +111,13 @@ public class TransactionListFragment extends Fragment {
         }
     }
 
-    private void setupRecyclerView(@NonNull View root) {
-        recyclerView = root.findViewById(R.id.recyclerview);
-        adapter = new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    @Override
+    protected void setupRecyclerView(@NonNull View root) {
+        super.setupRecyclerView(root);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
     }
 
-    private void buildSelectionTracker() {
-        selectionTracker = new SelectionTracker.Builder<>(
-                "transactionListSelection",
-                recyclerView,
-                new ItemKeyProvider<Long>(ItemKeyProvider.SCOPE_MAPPED) {
-                    @Override
-                    public Long getKey(int position) {
-                        return adapter.getItemId(position);
-                    }
-
-                    @Override
-                    public int getPosition(@NonNull Long key) {
-                        RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForItemId(key);
-                        return viewHolder == null ? RecyclerView.NO_POSITION : viewHolder.getLayoutPosition();
-                    }
-                },
-                new ListItemDetailsLookup(recyclerView),
-                StorageStrategy.createLongStorage())
-                .withSelectionPredicate(SelectionPredicates.createSelectAnything())
-                .build();
-
-        // start action mode & change visible menu items depending on item selection
-        this.selectionTracker.addObserver(new SelectionTracker.SelectionObserver<Long>() {
-            @Override
-            public void onSelectionChanged() {
-                if(actionMode == null) {
-                    actionMode = requireActivity().startActionMode(actionModeCallback);
-                } else if(!selectionTracker.hasSelection()) {
-                    actionMode.finish();
-                } else {
-                    actionMode.invalidate(); // refresh visible menu items
-                }
-            }
-        });
-        adapter.setSelectionTracker(this.selectionTracker);
-    }
-
+    @Override
     protected void subscribeToViewModel() {
         viewModel.getMoneyTransactions().observe(getViewLifecycleOwner(), transactions -> {
             Person filterPerson = personFilterViewModel.getFilterPerson();
@@ -187,90 +134,31 @@ public class TransactionListFragment extends Fragment {
         });
     }
 
-    protected void setupTotalHeader(@NonNull View root) {
-        TextView descView = root.findViewById(R.id.header_description);
-        descView.setVisibility(View.INVISIBLE);
-    }
-
-    protected void updateTotalHeader(int total) {
-        TextView totalView = requireView().findViewById(R.id.header_total);
-        totalView.setText(Transaction.formatMonetaryAmount(total));
-        int totalColor = total>0 ? R.color.owe_green : R.color.lent_red;
-        totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
-    }
-
-    // ----------------------
-    // Contextual action mode
-    // https://developer.android.com/guide/topics/ui/menus#CAB
-    // ----------------------
-
-    private final ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            MenuInflater inflater = mode.getMenuInflater();
-            inflater.inflate(R.menu.menu_transaction_list_action_mode, menu);
-            actionMode = mode;
-            return true;
-        }
-
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            int nRowsSelected = selectionTracker.getSelection().size();
-            // only show edit transaction menu item if exactly one transaction is selected
-            menu.findItem(R.id.miEditTransaction).setVisible(nRowsSelected == 1);
-            // only show delete transaction menu item if one or more items are selected
-            menu.findItem(R.id.miDeleteTransaction).setVisible(nRowsSelected >= 1);
-            CharSequence title = getResources().getQuantityString(R.plurals.actionmode_selected, nRowsSelected, nRowsSelected);
-            mode.setTitle(title);
-            return true;
-        }
-
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem menuItem) {
-            int id = menuItem.getItemId();
-            if(id==R.id.miEditTransaction) {
-                int selectedId = selectionTracker.getSelection().iterator().next().intValue();
-                selectionTracker.clearSelection();
-                onEditTransactionAction(selectedId);
-                mode.finish();
-                return true;
-            } else if(id==R.id.miDeleteTransaction) {
-                // make copy of selection so we have a constant list of selected items, even during
-                // iteratively deleting items
-                MutableSelection<Long> selectionCopy = new MutableSelection<>();
-                selectionTracker.copySelection(selectionCopy);
-                selectionTracker.clearSelection();
-                onDeleteTransactionAction(selectionCopy);
-                mode.finish();
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-            selectionTracker.clearSelection();
-            actionMode = null;
-        }
-    };
     // ---------------------------
     // Toolbar Menu event handling
     // ---------------------------
 
-    public void onEditPersonAction(Person person) {
+    public void editPerson(Person person) {
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, person);
         NavHostFragment.findNavController(this).navigate(R.id.action_editPerson, args);
     }
 
-    private void onEditTransactionAction(int idTransaction) {
+    @Override
+    protected void onActionModeEdit(int idTransaction) {
+        editTransaction(idTransaction);
+    }
+    private void editTransaction(int idTransaction) {
         Bundle args = new Bundle();
         args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, idTransaction);
         NavHostFragment.findNavController(this).navigate(R.id.action_editTransaction, args);
     }
 
-    private void onDeleteTransactionAction(MutableSelection<Long> selection) {
+    @Override
+    protected void onActionModeDelete(Selection<Long> selection) {
+        deleteTransactions(selection);
+    }
+    private void deleteTransactions(Selection<Long> selection) {
         int deleteCount = selection.size();
 
         // ask for confirmation
@@ -301,7 +189,7 @@ public class TransactionListFragment extends Fragment {
     protected List<TransactionWithPerson> filter(List<TransactionWithPerson> transactions, @Nullable Person filterPerson) {
         if (transactions == null) return null;
         if (filterPerson == null) return new ArrayList<>(transactions);
-        // http://javatricks.de/tricks/liste-filtern
+            // http://javatricks.de/tricks/liste-filtern
         else return transactions.stream()
                 .filter(twp -> twp.person.equals(filterPerson))
                 .collect(Collectors.toList());
