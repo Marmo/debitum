@@ -66,6 +66,7 @@ public class TransactionListFragment
         sharedElementTransition.setDuration(500);
         sharedElementTransition.setDrawingViewId(R.id.nav_host_fragment);
         sharedElementTransition.setScrimColor(Color.TRANSPARENT);
+        sharedElementTransition.setFadeMode(MaterialContainerTransform.FADE_MODE_THROUGH);
         setSharedElementEnterTransition(sharedElementTransition);
     }
 
