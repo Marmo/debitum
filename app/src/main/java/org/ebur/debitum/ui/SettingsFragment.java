@@ -6,8 +6,6 @@ import android.webkit.WebView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NavUtils;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -15,7 +13,6 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.transition.Hold;
 import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.BuildConfig;

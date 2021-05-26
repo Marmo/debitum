@@ -1,6 +1,5 @@
 # code
 ## 1.1.0
-- unify transactionList and PersonSumList (abstract base class)
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
     - move transition durations to integer resource
 - move internal error messages from Toasts to Log output
