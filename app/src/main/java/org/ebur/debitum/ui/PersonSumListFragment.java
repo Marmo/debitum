@@ -25,21 +25,28 @@ import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
 import java.util.concurrent.ExecutionException;
 
-public class PersonSumListFragment extends AbstractBaseListFragment <
-        PersonSumListViewModel,
-        PersonSumListViewHolder,
-        PersonWithTransactions> {
-
-    private static final String TAG = "PersonSumListFragment";
+public class PersonSumListFragment
+        extends AbstractBaseListFragment <
+            PersonSumListViewModel,
+            PersonSumListAdapter,
+            PersonSumListViewHolder,
+            PersonWithTransactions> {
 
     @Override
     int getLayout() {
         return R.layout.fragment_person_sum_list;
     }
+    @Override
+    Class<PersonSumListViewModel> getViewModelClass() {
+        return PersonSumListViewModel.class;
+    }
+    @Override
+    PersonSumListAdapter getAdapter() {
+        return new PersonSumListAdapter(new PersonSumListAdapter.PersonSumDiff());
+    }
 
     @Override
-    protected void setupRecyclerView(View root) {
-        super.setupRecyclerView(root);
+    protected void addRecyclerViewDecorations() {
         DividerItemDecoration decoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
         InsetDrawable divider = (InsetDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.divider_inset_start, null);
         assert divider!=null;

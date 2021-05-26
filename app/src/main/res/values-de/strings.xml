@@ -5,6 +5,8 @@
     <string name="delete_dialog_confirm">Löschen</string>
     <string name="dialog_cancel">Abbrechen</string>
     <string name="required_helper_text">* erforderlich</string>
+    <string name="actionmode_edit">Bearbeiten</string>
+    <string name="actionmode_delete">Löschen</string>
     <plurals name="actionmode_selected">
         <item quantity="one">%d ausgewählt</item>
         <item quantity="other">%d ausgewählt</item>
@@ -25,7 +27,6 @@
     <string name="person_sum_list_no_debt">keine Schulden</string>
     <string name="person_sum_list_you_lent">du bekommst</string>
     <string name="toolbar_create_person">Person erstellen</string>
-    <string name="toolbar_delete_person">Person Löschen</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d Person gelöscht</item>
         <item quantity="other">%d Personen gelöscht</item>
@@ -42,8 +43,6 @@
     <string name="transaction_list_gave">gab</string>
     <string name="transaction_list_received">bekam</string>
     <string name="toolbar_edit_person">Person bearbeiten</string>
-    <string name="toolbar_delete_transaction">Transaktion löschen</string>
-    <string name="toolbar_edit_transaction">Transaktion bearbeiten</string>
     <string name="header_label">Summe</string>
     <string name="header_desc_items">Dinge ver-/entliehen</string>
     <plurals name="transaction_list_snackbar_deleted">

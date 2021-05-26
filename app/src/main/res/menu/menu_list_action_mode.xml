@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/miEditTransaction"
+        android:id="@+id/miEdit"
         android:icon="@drawable/ic_baseline_edit_24"
-        android:title="@string/toolbar_edit_transaction"
+        android:title="@string/actionmode_edit"
         app:showAsAction="always" />
     <item
-        android:id="@+id/miDeleteTransaction"
+        android:id="@+id/miDelete"
         android:icon="@drawable/ic_baseline_delete_outline_24"
-        android:title="@string/toolbar_delete_transaction"
+        android:title="@string/actionmode_delete"
         app:showAsAction="ifRoom" />
 </menu>

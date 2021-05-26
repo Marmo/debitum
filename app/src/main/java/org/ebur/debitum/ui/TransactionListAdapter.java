@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.ListAdapter;
 
 import org.ebur.debitum.database.TransactionWithPerson;
 
-public class TransactionListAdapter extends ListAdapter<TransactionWithPerson, TransactionListViewHolder> {
+public class TransactionListAdapter
+        extends ListAdapter<TransactionWithPerson, TransactionListViewHolder>
+        implements AbstractBaseListFragment.Adapter {
 
     private SelectionTracker<Long> selectionTracker = null;
 

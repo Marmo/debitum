@@ -4,6 +4,8 @@ package org.ebur.debitum.ui;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.TransactionWithPerson;
@@ -32,7 +34,7 @@ public class ItemTransactionListFragment extends TransactionListFragment {
     }
 
     @Override
-    protected void setupTotalHeader(View root) {
+    protected void setupTotalHeader(@NonNull View root) {
         TextView descView = root.findViewById(R.id.header_description);
         descView.setVisibility(View.VISIBLE);
     }

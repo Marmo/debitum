@@ -2,7 +2,8 @@
 - add: list with third party licenses in settings
 - add: persons can have a note that is displayed in the filter bar
 - change: use contextual action bar for displaying edit/delete menu items when selecting rows
-- change: edit person button in filtered transaction list is now in filter bar instead of top toolbar  
+- change: edit person button in filtered transaction list is now in filter bar instead of top toolbar
+- refactor: moved all common code from the two list fragments (Transaction + PersonSum) to a new abstract superclass AbstractBaseListFragment
 
 # v1.0.1
 - add version info in settings

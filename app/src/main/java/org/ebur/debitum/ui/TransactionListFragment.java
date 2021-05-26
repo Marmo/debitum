@@ -40,15 +40,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TransactionListFragment extends AbstractBaseListFragment <
-        TransactionListViewModel,
-        TransactionListViewHolder,
-        TransactionWithPerson> {
+public class TransactionListFragment
+        extends AbstractBaseListFragment <
+            TransactionListViewModel,
+            TransactionListAdapter,
+            TransactionListViewHolder,
+            TransactionWithPerson> {
 
     public static final String ARG_FILTER_PERSON = "filterPerson";
-
     protected PersonFilterViewModel personFilterViewModel;
-
     private Toolbar filterBar;
 
     @Override
@@ -58,6 +58,10 @@ public class TransactionListFragment extends AbstractBaseListFragment <
     @Override
     Class<TransactionListViewModel> getViewModelClass() {
         return TransactionListViewModel.class;
+    }
+    @Override
+    TransactionListAdapter getAdapter() {
+        return new TransactionListAdapter(new TransactionListAdapter.TransactionDiff());
     }
 
     @Override
@@ -76,10 +80,7 @@ public class TransactionListFragment extends AbstractBaseListFragment <
                              ViewGroup container,
                              Bundle savedInstanceState) {
         personFilterViewModel = new ViewModelProvider(requireActivity()).get(PersonFilterViewModel.class);
-
-        View root = super.onCreateView(inflater, container, savedInstanceState);
-
-        assert root != null;
+        View root = super.onCreateView(inflater, container, savedInstanceState); assert root != null;
         setupFilterBar(root);
         return root;
     }
@@ -112,8 +113,7 @@ public class TransactionListFragment extends AbstractBaseListFragment <
     }
 
     @Override
-    protected void setupRecyclerView(@NonNull View root) {
-        super.setupRecyclerView(root);
+    protected void addRecyclerViewDecorations() {
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
     }
 

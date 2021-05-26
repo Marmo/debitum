@@ -6,6 +6,8 @@
     <string name="delete_dialog_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="required_helper_text">* Required</string>
+    <string name="actionmode_edit">Edit</string>
+    <string name="actionmode_delete">Delete</string>
     <plurals name="actionmode_selected">
         <item quantity="one">%d selected</item>
         <item quantity="other">%d selected</item>
@@ -26,7 +28,6 @@
     <string name="person_sum_list_no_debt">no debt</string>
     <string name="person_sum_list_you_lent">you lent</string>
     <string name="toolbar_create_person">Create Person</string>
-    <string name="toolbar_delete_person">Delete Person</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d Person deleted</item>
         <item quantity="other">%d Persons deleted</item>
@@ -43,8 +44,6 @@
     <string name="transaction_list_gave">gave</string>
     <string name="transaction_list_received">received</string>
     <string name="toolbar_edit_person">Edit Person</string>
-    <string name="toolbar_delete_transaction">Delete Transaction</string>
-    <string name="toolbar_edit_transaction">Edit Transaction</string>
     <string name="header_label">Total</string>
     <string name="header_desc_items">items lent</string>
     <plurals name="transaction_list_snackbar_deleted">

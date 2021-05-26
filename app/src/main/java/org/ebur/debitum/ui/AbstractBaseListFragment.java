@@ -58,10 +58,19 @@ public abstract class AbstractBaseListFragment
     protected ActionMode actionMode;
 
     /**
-     * returns the root layout that should be used to inflate that fragment
+     * @return the Resource-Id of the root layout that should be used to inflate that fragment
      */
     abstract int getLayout();
-    abstract Class<TViewModel> getViewModelClass();
+
+    /**
+     * @return the class of the ViewModel to be used
+     */
+    abstract Class<TViewModel> getViewModelClass(); // needed, because TViewModel.class does not work when getting the ViewModel
+
+    /**
+     * @return the RecyclerView's adapter (as we cannot directly instantiate TAdapter here)
+     */
+    abstract TAdapter getAdapter();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,11 +110,15 @@ public abstract class AbstractBaseListFragment
         totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
     }
 
-    protected void setupRecyclerView(View root) {
+    protected void setupRecyclerView(@NonNull View root) {
         recyclerView = root.findViewById(R.id.recyclerview);
-        adapter = new TAdapter(new TAdapter.Diff());
+        adapter = getAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        addRecyclerViewDecorations();
+    }
+
+    protected void addRecyclerViewDecorations() {
     }
 
     protected void buildSelectionTracker() {
