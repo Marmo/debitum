@@ -1,7 +1,12 @@
 # code
 ## 1.1.0
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
+  - fab -> new txn dialog
+  - action mode delete -> alertDialog
+  - action mode edit -> edit txn/person dialog
+  
 - move internal error messages from Toasts to Log output
+- add and use action from item list to new transaction dialog
 
 ## 1.2.0
 - add option to mark lent item as returned
