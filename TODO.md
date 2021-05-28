@@ -10,6 +10,7 @@
 - move internal error messages from Toasts to Log output!(EditTransactionFragment:191, EditPersonFragment:173)
 - add and use action from item list to new transaction dialog
 - wrap bottom navigation in com.google.android.material.bottomappbar.BottomAppBar and add cradle for fab
+- set initial focus in editXFragments
 
 ## 1.2.0
 - add option to mark lent item as returned
