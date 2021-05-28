@@ -4,6 +4,7 @@
   - fab -> new txn dialog
   - action mode delete -> alertDialog
   - action mode edit -> edit txn/person dialog
+  - editTxn money<>item TransitionManager.beginDelayedTransition() (https://developer.android.com/training/transitions/#NoScenes)
   
 - move internal error messages from Toasts to Log output!(EditTransactionFragment:191, EditPersonFragment:173)
 - add and use action from item list to new transaction dialog
