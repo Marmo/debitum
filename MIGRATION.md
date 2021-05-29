@@ -14,6 +14,13 @@ Achtung: nur "Simple Debts" werden migriert, da Debitum (noch) keine Unterstütz
     from uome.person_table 
     where idGroup=0;
     ```
+    Ab v1.1.0 (Notiz für Person) sollte folgendes genutzt werden (ungetestet):
+    ```sql
+    insert into person 
+    select _id, name, description 
+    from uome.person_table 
+    where idGroup=0;
+    ```
 6. Transaktionen aus U.O.me nach Debitum migrieren
     ```sql
     insert into txn 
