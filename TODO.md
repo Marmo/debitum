@@ -12,6 +12,7 @@
 - wrap bottom navigation in com.google.android.material.bottomappbar.BottomAppBar and add cradle for fab
 - set initial focus in editXFragments
 - gradle vs wrapper version mismatch gradle/wrapper/gradle-wrapper.jar is gradle-4.6-wrapper.jar, but gradle/wrapper/gradle-wrapper.properties declares https://services.gradle.org/distributions/gradle-6.7.1-bin.zip as the gradle version.There is a gradle command for upgrading the wrapper: ./gradlew wrapper --gradle-version 6.7.1 --gradle-distribution-sha256-sum 3239b5ed86c3838a37d983ac100573f64c1f3fd8e1eb6c89fa5f9529b5ec091d
+- reset error status in ediTxns Person- and Amount editTexts upon entering something 
 
 ## 1.2.0
 - add option to mark lent item as returned
