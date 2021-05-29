@@ -6,7 +6,8 @@ Achtung: nur "Simple Debts" werden migriert, da Debitum (noch) keine Unterstütz
 1. Datenbank aus U.O.me (backup!) und (leere) Datenbank aus Debitum exportieren
 2. Datenbank aus Debitum in "DB Browser for sqlite" öffnen
 3. "Datenbank anhängen" -> uome.backup auswählen, Name "uome"
-4. Debitum-Tabellen leeren: ` delete from person` und ` delete from txn`
+    (Bei Verwendung der SQLite-Kommandozeile wäre der entsprechende Befehl `ATTACH DATABASE 'uome.backup' AS uome;`
+4. Debitum-Tabellen leeren: `delete from person;` und `delete from txn;`
 5. Personen aus U.O.me nach Debitum migrieren:
     ```sql
     insert into person 
