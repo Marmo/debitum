@@ -9,7 +9,7 @@
 </p>
 
 With Debitum you can track all kinds of IOUs, be it money or lent items. This way you will never 
-forget if your friend already gave you back that book anymore or dispute about much you owe your 
+more forget if your friend already gave you back that book or dispute about how much you owe your 
 colleague for coffee.
 
 <p align="center">
