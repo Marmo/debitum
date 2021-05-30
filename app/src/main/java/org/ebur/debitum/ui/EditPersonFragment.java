@@ -90,6 +90,8 @@ public class EditPersonFragment extends DialogFragment {
             editNote.setText(viewModel.getEditedPerson().note);
             toolbar.setTitle(R.string.title_fragment_edit_person);
         }
+
+        editName.requestFocus();
     }
 
     // make dialog fullscreen

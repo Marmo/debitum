@@ -1,7 +1,10 @@
 package org.ebur.debitum.ui;
 
+import android.animation.Animator;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -27,11 +31,12 @@ import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.transition.Slide;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.android.material.transition.MaterialSharedAxis;
+import com.google.android.material.transition.MaterialContainerTransform;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
@@ -74,10 +79,6 @@ public class EditTransactionFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FullScreenDialog);
-
-        // Transitions
-        setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.Z, true).setDuration(500));
-        setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.Z, false).setDuration(500));
     }
 
     @Override
@@ -128,6 +129,13 @@ public class EditTransactionFragment extends DialogFragment {
 
         if (viewModel.isNewTransaction()) fillViewsNewTransaction();
         else fillViewsEditTransaction();
+
+        // set initial focus
+        if (switchIsMonetary.isChecked()) {
+            editAmount.requestFocus();
+        } else {
+            editDescription.requestFocus();
+        }
     }
 
     @Override
@@ -175,7 +183,11 @@ public class EditTransactionFragment extends DialogFragment {
 
     private void fillViewsNewTransaction() {
         toolbar.setTitle(R.string.title_fragment_edit_transaction_create);
-        switchIsMonetary.setChecked(!requireArguments().getBoolean(ARG_ID_NEW_ITEM, false));
+        if(requireArguments().getBoolean(ARG_ID_NEW_ITEM, false)) {
+            editAmount.setText("1");
+        } else {
+            switchIsMonetary.setChecked(!requireArguments().getBoolean(ARG_ID_NEW_ITEM, false));
+        }
         viewModel.setTimestamp(new Date());
         editDate.setText(Utilities.formatDate(viewModel.getTimestamp()));
     }
