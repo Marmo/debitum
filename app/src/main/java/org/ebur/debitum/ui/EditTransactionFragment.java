@@ -183,10 +183,9 @@ public class EditTransactionFragment extends DialogFragment {
 
     private void fillViewsNewTransaction() {
         toolbar.setTitle(R.string.title_fragment_edit_transaction_create);
-        if(requireArguments().getBoolean(ARG_ID_NEW_ITEM, false)) {
+        switchIsMonetary.setChecked(!requireArguments().getBoolean(ARG_ID_NEW_ITEM, false));
+        if(!switchIsMonetary.isChecked()) {
             editAmount.setText("1");
-        } else {
-            switchIsMonetary.setChecked(!requireArguments().getBoolean(ARG_ID_NEW_ITEM, false));
         }
         viewModel.setTimestamp(new Date());
         editDate.setText(Utilities.formatDate(viewModel.getTimestamp()));
