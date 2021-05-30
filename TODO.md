@@ -36,6 +36,7 @@
 ## later
 
 # other
+- move from triple-t to fastlane  to support per-release changelogs
 
 
 # release-checklist
