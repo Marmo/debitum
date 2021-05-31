@@ -1,10 +1,6 @@
 package org.ebur.debitum.ui;
 
-import android.animation.Animator;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -31,12 +26,10 @@ import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.transition.Slide;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.android.material.transition.MaterialContainerTransform;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
@@ -187,7 +180,7 @@ public class EditTransactionFragment extends DialogFragment {
             txn = viewModel.getTransaction(viewModel.getIdTransaction());
         } catch(ExecutionException|InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-            Toast.makeText(getContext(),  errorMessage, Toast.LENGTH_LONG).show();
+            Log.e(TAG, errorMessage);
             NavHostFragment.findNavController(this).navigateUp();
         }
         assert txn != null;
@@ -253,7 +246,7 @@ public class EditTransactionFragment extends DialogFragment {
                 idPerson = viewModel.getPersonId(spinnerName.getText().toString());
             } catch (ExecutionException | InterruptedException e) {
                 String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
+                Log.e(TAG, errorMessage);
             }
 
             // build transaction

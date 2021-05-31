@@ -1,18 +1,14 @@
 # code
 ## 1.1.0
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
-  - https://developer.android.com/reference/android/widget/PopupWindow
-  - fab -> new txn dialog (something basic like fade+scale or fade+slide OR windowEnterTransition with MaterialSharedAxis from xml)
+  - fab -> new txn
   - action mode delete -> alertDialog (something basic like fade+scale or fade+slide)
-  - action mode edit -> edit txn/person dialog (something basic like fade+scale or fade+slide)
+  - action mode edit -> edit txn/person
   - editTxn money<>item https://developer.android.com/guide/topics/resources/drawable-resource#Transition
   
-- move internal error messages from Toasts to Log output!(EditTransactionFragment:191, EditPersonFragment:173)
 - add and use action from item list to new transaction dialog
 - wrap bottom navigation in com.google.android.material.bottomappbar.BottomAppBar and add cradle for fab
-- set initial focus in editXFragments(person: name, money: amount, item: description)
 - reset error status in ediTxns Person- and Amount editTexts upon entering something
-- pre-set amount in add item txn dialog with 1
 
 ## 1.2.0
 - add option to mark lent item as returned

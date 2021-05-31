@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +31,8 @@ import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 import java.util.concurrent.ExecutionException;
 
 public class EditPersonFragment extends DialogFragment {
+
+    private final static String TAG = "EditPersonFragment";
 
     public static final String ARG_EDITED_PERSON = "editedPerson";
     public static final String ARG_NEW_PERSON_REQUESTED = "newPersonRequested";
@@ -172,7 +174,7 @@ public class EditPersonFragment extends DialogFragment {
 
         } catch (ExecutionException | InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-            Toast.makeText(getContext(),  errorMessage, Toast.LENGTH_LONG).show();
+            Log.e(TAG, errorMessage);
         }
     }
 
