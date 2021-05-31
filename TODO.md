@@ -7,7 +7,6 @@
   - editTxn money<>item https://developer.android.com/guide/topics/resources/drawable-resource#Transition
   
 - add and use action from item list to new transaction dialog
-- wrap bottom navigation in com.google.android.material.bottomappbar.BottomAppBar and add cradle for fab
 - reset error status in ediTxns Person- and Amount editTexts upon entering something
 
 ## 1.2.0

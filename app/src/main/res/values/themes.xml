@@ -46,9 +46,8 @@
     </style>
 
     <style name="Theme.Debitum.FullScreenDialog">
-        <!--<item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">?attr/colorSurface</item>
-        <item name="android:actionMenuTextColor">?attr/colorOnPrimary</item>-->
-        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+        <item name="android:actionMenuTextColor">?attr/colorOnPrimary</item>
     </style>
 </resources>
