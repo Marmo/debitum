@@ -7,14 +7,18 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.transition.Transition;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.transition.MaterialElevationScale;
 
 import org.ebur.debitum.R;
 
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             isItemList = dest.getId() == R.id.item_dest;
         Bundle args = new Bundle();
         args.putBoolean(EditTransactionFragment.ARG_ID_NEW_ITEM, isItemList);
-        nav.navigate(R.id.editTransaction_dest, args);
+
+        nav.navigate(R.id.action_global_add_transaction, args);
     }
 }

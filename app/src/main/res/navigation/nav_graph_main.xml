@@ -14,11 +14,7 @@
             app:destination="@id/money_dest" />
         <action
             android:id="@+id/action_editPerson"
-            app:destination="@id/editPerson_dest"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_close_exit"
-            app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_close_exit" />
+            app:destination="@id/editPerson_dest" />
         <action
             android:id="@+id/action_addPerson"
             app:destination="@id/editPerson_dest" >
@@ -93,6 +89,10 @@
                 android:name="newPersonRequested"
                 android:defaultValue="true" />
         </action>
+        <argument
+            android:name="newItem"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </dialog>
     <fragment
         android:id="@+id/settings_dest"
@@ -106,4 +106,11 @@
         android:id="@+id/licenses_dest"
         android:name="org.ebur.debitum.ui.LicensesFragment"
         android:label="@string/pref_licenses_title" />
+    <action
+        android:id="@+id/action_global_add_transaction"
+        app:destination="@id/editTransaction_dest">
+        <argument
+            android:name="idTransaction"
+            android:defaultValue="-1" />
+    </action>
 </navigation>
