@@ -8,6 +8,7 @@
   
 - add and use action from item list to new transaction dialog
 - reset error status in ediTxns Person- and Amount editTexts upon entering something
+- reveal last list item from behind bottomNav
 
 ## 1.2.0
 - add option to mark lent item as returned
