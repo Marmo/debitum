@@ -78,7 +78,7 @@ public class EditTransactionFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FullScreenDialog);
+        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.Theme_Debitum_FullScreenDialog);
     }
 
     @Override
@@ -135,18 +135,6 @@ public class EditTransactionFragment extends DialogFragment {
             editAmount.requestFocus();
         } else {
             editDescription.requestFocus();
-        }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // make dialog fullscreen
-        Dialog dialog = getDialog();
-        if (dialog != null) {
-            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = ViewGroup.LayoutParams.MATCH_PARENT;
-            dialog.getWindow().setLayout(width, height);
         }
     }
 
