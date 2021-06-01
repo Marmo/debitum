@@ -28,17 +28,21 @@
         android:id="@+id/bottom_navigation_bar"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_height="@dimen/bottom_nav_height"
+        android:layout_gravity="bottom"
+        android:clipChildren="true"
+        app:contentInsetStart="0dp"
+        app:fabCradleMargin="7dp"
+        app:fabCradleRoundedCornerRadius="12dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill"
             android:background="#00ffffff"
             app:elevation="0dp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_nav_height"
-            android:layout_gravity="bottom"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation" />
     </com.google.android.material.bottomappbar.BottomAppBar>
