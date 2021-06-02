@@ -84,8 +84,29 @@ public class EditTransactionFragment extends DialogFragment {
 
         View root = inflater.inflate(R.layout.fragment_edit_transaction, container, false);
 
-        // get Transaction ID from Arguments, which is also used to determine, if a new transaction is created
-        viewModel.setIdTransaction(requireArguments().getInt(ARG_ID_TRANSACTION, -1));
+        // get Transaction ID from Arguments and set viewModel's transaction
+        int idTransaction = requireArguments().getInt(ARG_ID_TRANSACTION, -1);
+        if (idTransaction == -1) {
+            viewModel.setTransaction(null);
+        } else {
+            try {
+                viewModel.setTransaction(viewModel.getTransactionFromDatabase(idTransaction));
+            } catch(ExecutionException|InterruptedException e) {
+                String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
+                Log.e(TAG, errorMessage);
+                // escape from this mess
+                NavHostFragment.findNavController(this).navigateUp();
+            }
+        }
+
+        // set viewModel's  transactionType when we are either creating a new item or editing an
+        // existing transaction that has the isMonetary flag unset
+        if(requireArguments().getBoolean(ARG_ID_NEW_ITEM, false)
+                || (!viewModel.isNewTransaction() && !viewModel.getTransaction().transaction.isMonetary)) {
+            viewModel.setTransactionType(EditTransactionViewModel.TRANSACTION_TYPE_ITEM);
+        } else {
+            viewModel.setTransactionType(EditTransactionViewModel.TRANSACTION_TYPE_MONEY);
+        }
 
         // setup views
         toolbar = root.findViewById(R.id.dialog_toolbar);
@@ -97,10 +118,13 @@ public class EditTransactionFragment extends DialogFragment {
         editAmount = editAmountLayout.getEditText();
         assert editAmount != null;
         editAmount.addTextChangedListener(new AmountTextWatcher());
+        editAmount.addTextChangedListener(new TextInputLayoutErrorResetter(editAmountLayout));
         switchIsMonetary = root.findViewById(R.id.switch_monetary);
         switchIsMonetary.setOnCheckedChangeListener(this::onSwitchIsMonetaryChanged);
         editDescriptionLayout = root.findViewById(R.id.edit_description);
         editDescription = editDescriptionLayout.getEditText();
+        assert editDescription!=null;
+        editDescription.addTextChangedListener(new TextInputLayoutErrorResetter(editDescriptionLayout));
         TextInputLayout editDateLayout = root.findViewById(R.id.edit_date);
         editDateLayout.setOnClickListener(this::showDatePickerDialog);
         editDate = (AutoCompleteTextView) editDateLayout.getEditText();
@@ -124,7 +148,7 @@ public class EditTransactionFragment extends DialogFragment {
         else fillViewsEditTransaction();
 
         // set initial focus
-        if (switchIsMonetary.isChecked()) {
+        if (viewModel.isMoneyTransaction()) {
             editAmount.requestFocus();
         } else {
             editDescription.requestFocus();
@@ -143,6 +167,7 @@ public class EditTransactionFragment extends DialogFragment {
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, Objects.requireNonNull(e.getMessage()));
         }
+        spinnerName.addTextChangedListener(new TextInputLayoutErrorResetter(spinnerNameLayout));
     }
 
     private void prefillSpinnerNameIfFromFilteredTransactionList() {
@@ -156,7 +181,7 @@ public class EditTransactionFragment extends DialogFragment {
         if (previousDestId == R.id.money_dest
                 || previousDestId == R.id.item_dest) {
             Person filterPerson = personFilterViewModel.getFilterPerson();
-            if (filterPerson != null && viewModel.getIdTransaction() == -1) { // TransactionList was filtered by Person and we are creating a new Transaction
+            if (filterPerson != null && viewModel.isNewTransaction()) { // TransactionList was filtered by Person and we are creating a new Transaction
                 spinnerName.setText(filterPerson.name, false); // IMPORTANT: filter=false, else the dropdown will be filtered to the selected name
             }
         }
@@ -164,8 +189,8 @@ public class EditTransactionFragment extends DialogFragment {
 
     private void fillViewsNewTransaction() {
         toolbar.setTitle(R.string.title_fragment_edit_transaction_create);
-        switchIsMonetary.setChecked(!requireArguments().getBoolean(ARG_ID_NEW_ITEM, false));
-        if(!switchIsMonetary.isChecked()) {
+        switchIsMonetary.setChecked(viewModel.isMoneyTransaction());
+        if(viewModel.isItemTransaction()) {
             editAmount.setText("1");
         }
         viewModel.setTimestamp(new Date());
@@ -175,15 +200,8 @@ public class EditTransactionFragment extends DialogFragment {
     private void fillViewsEditTransaction() {
         toolbar.setTitle(R.string.title_fragment_edit_transaction);
 
-        TransactionWithPerson txn = null;
-        try {
-            txn = viewModel.getTransaction(viewModel.getIdTransaction());
-        } catch(ExecutionException|InterruptedException e) {
-            String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
-            Log.e(TAG, errorMessage);
-            NavHostFragment.findNavController(this).navigateUp();
-        }
-        assert txn != null;
+        TransactionWithPerson txn = viewModel.getTransaction();
+        assert txn != null; // we should never get here, if this is not the case
         spinnerName.setText(txn.person.name, false);  // IMPORTANT: filter=false, else the dropdown will be filtered to the selected name
         gaveRadio.setChecked(txn.transaction.amount>0); // per default received is set (see layout xml)
         // IMPORTANT: set switchIsMonetaryView _before_ setting amount, because on setting amount the
@@ -259,7 +277,7 @@ public class EditTransactionFragment extends DialogFragment {
             // update database
             if(viewModel.isNewTransaction()) viewModel.insert(transaction);
             else if (!viewModel.isNewTransaction()) {
-                transaction.idTransaction = viewModel.getIdTransaction();
+                transaction.idTransaction = viewModel.getTransaction().transaction.idTransaction;
                 viewModel.update(transaction);
             }
 
@@ -309,14 +327,8 @@ public class EditTransactionFragment extends DialogFragment {
     class AmountTextWatcher implements TextWatcher {
 
         String formattedAmount = "";
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
+        @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
         @Override
         public void afterTextChanged(Editable s) {
             String str = s.toString();

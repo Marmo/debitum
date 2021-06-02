@@ -64,7 +64,7 @@ public class EditPersonFragment extends DialogFragment {
         editNameLayout = root.findViewById(R.id.edit_person_name);
         editName = (TextInputEditText) editNameLayout.getEditText();
         assert editName != null;
-        editName.addTextChangedListener(new NameTextWatcher());
+        editName.addTextChangedListener(new TextInputLayoutErrorResetter(editNameLayout));
         editNoteLayout = root.findViewById(R.id.edit_person_note);
         editNote = (TextInputEditText) editNoteLayout.getEditText();
 
@@ -175,23 +175,6 @@ public class EditPersonFragment extends DialogFragment {
         } catch (ExecutionException | InterruptedException e) {
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
             Log.e(TAG, errorMessage);
-        }
-    }
-
-    // needed to reset error on editName
-    class NameTextWatcher implements TextWatcher {
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            editNameLayout.setError(null);
         }
     }
 }

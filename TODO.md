@@ -1,5 +1,5 @@
 # code
-## 1.1.0
+## 1.1.1
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
   - fab -> new txn
   - action mode delete -> alertDialog (something basic like fade+scale or fade+slide)
@@ -7,7 +7,6 @@
   - editTxn money<>item https://developer.android.com/guide/topics/resources/drawable-resource#Transition
   
 - add and use action from item list to new transaction dialog
-- reset error status in ediTxns Person- and Amount editTexts upon entering something
 
 ## 1.2.0
 - add option to mark lent item as returned

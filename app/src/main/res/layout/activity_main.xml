@@ -33,6 +33,7 @@
         android:clipChildren="true"
         app:contentInsetStart="0dp"
         app:fabCradleMargin="7dp"
+        app:fabAlignmentMode="center"
         app:fabCradleRoundedCornerRadius="12dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
