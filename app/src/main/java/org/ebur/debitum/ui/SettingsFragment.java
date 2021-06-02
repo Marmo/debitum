@@ -2,8 +2,11 @@ package org.ebur.debitum.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NavUtils;
 import androidx.navigation.fragment.NavHostFragment;
@@ -87,6 +90,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if(versionPref!=null) {
             versionPref.setSummary(getString(R.string.pref_version, BuildConfig.VERSION_NAME));
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // add padding so that nothing is hidden behind the bottom navigation
+        getListView().setPadding(0,0,0, getResources().getDimensionPixelSize(R.dimen.bottom_nav_height)+50);
+        getListView().setClipToPadding(false);
     }
 
     private void showGuide() {
