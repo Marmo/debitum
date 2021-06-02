@@ -24,17 +24,17 @@
 - make nicer quick-guide display
 - move transition durations to integer resource
 
-# visuals
-## 1.1.0
-## later
-
 # other
+## 1.1.0
+- update screenshots
+## later
 - move from triple-t to fastlane  to support per-release changelogs
+
 
 
 # release-checklist
 - update whatsnew (2x)
 - update CHANGELOG.md
-- check gradle.build version+version code
+- check build.gradle version+version code
 - build release (!) apk, rename debitum-x.x.x.apk
 - tag release
