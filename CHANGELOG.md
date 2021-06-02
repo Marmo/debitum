@@ -6,6 +6,7 @@
 - change: amount is initially set to 1 for new item transactions
 - change: focus is set to appropriate input fields in edit dialogs
 - change: use cradle for floating action button (add transaction button)
+- change: brighter icon foreground color (aztec->fjord)
 - fix: error messages in edit transaction dialog are cleared now when something is entered
 - refactor: moved all common code from the two list fragments (Transaction + PersonSum) to a new abstract superclass AbstractBaseListFragment
 - refactor: move dialog toolbar to separate included layout
