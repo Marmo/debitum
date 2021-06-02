@@ -5,11 +5,13 @@
     <item
         android:id="@+id/miEditPerson"
         android:icon="@drawable/ic_baseline_edit_person_24"
+        android:iconTint="?attr/colorOnSecondary"
         android:title="@string/toolbar_edit_person"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/miDismiss_filter"
-        android:icon="@drawable/ic_baseline_close_onprimary_24"
+        android:icon="@drawable/ic_baseline_close_onsecondary_24"
+        android:iconTint="?attr/colorOnSecondary"
         android:title="@string/dismiss_filter"
         app:showAsAction="always" />
 </menu>

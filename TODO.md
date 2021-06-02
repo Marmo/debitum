@@ -1,4 +1,7 @@
 # code
+## 1.0.0
+- add bottom padding to pref fragment (bottom nav height)
+
 ## 1.1.1
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
   - fab -> new txn
