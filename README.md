@@ -37,6 +37,9 @@ Via the Bottom Navigation you can choose different views of your transactions:
 * Items: Shows only lent items, ordered by date (descending). There is no extra way to mark an item 
 as returned, so returned item's transactions should simply be deleted. 
 
+Upon creating a new transaction (or editing an existent one) you can switch between a monetary and a
+item transaction using the switch to the right of the amount input field.
+
 From the Settings Screen you can backup and restore the database (contains all transactions and persons).
 Make sure to move backup files out of the way before uninstalling the app or clearing app data, as currently
 the backup is saved in the app's data folder on external storage, which is deleted upon 

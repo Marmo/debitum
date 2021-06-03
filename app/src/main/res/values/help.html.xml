@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="guide_text"><![CDATA[<h1>About</h1>
+    <string name="guide_text"><![CDATA[
 <p>With Debitum you can track all kinds of IOUs, be it money or lent items. This way you will never
 more forget if your friend already gave you back that book or dispute about how much you owe your
 colleague for coffee.</p>
@@ -8,7 +8,7 @@ colleague for coffee.</p>
 <p>There is no online service whatsoever involved, so your data is saved on your
 device only (as far as this app is concerned).</p>
 
-<h1>Usage</h1>
+<h3>Usage</h3>
 <p>To take note of lent money or items, you need to create a transaction using the red floating
 action button. There you can enter details like amount, description or date and switch between a
 money- or an item-transaction.</p>
@@ -25,9 +25,12 @@ money- or an item-transaction.</p>
     <li>Money: Shows only monetary transactions, ordered by date (descending)</li>
     <li>Items: Shows only lent items, ordered by date (descending). There is currently no extra way to mark an
      item as returned, so returned item\'s transactions should simply be deleted.</li>
-     </ul>
+     </ul></p>
 
-From the Settings Screen you can backup and restore the database (contains all transactions and persons).
+<p>Upon creating a new transaction (or editing an existent one) you can switch between a monetary and a
+item transaction using the switch to the right of the amount input field.</p>
+
+<p>From the Settings Screen you can backup and restore the database (contains all transactions and persons).
 Make sure to move backup files out of the way before uninstalling the app or clearing app data, as
 currently the backup is saved in the app\'s data folder on external storage, which is deleted upon
 uninstall/clearing app data.</p>]]></string>
