@@ -43,9 +43,9 @@ the backup is saved in the app's data folder on external storage, which is delet
 uninstall/clearing app data.
 
 ## Screenshots
-<img alt="People list" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_people.png" width="200"/> <img alt="Money" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_money.png" width="200"/>
-<img alt="Money filtered" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_money_filtered.png" width="200"/> <img alt="Items" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_items.png" width="200"/>
-<img alt="Dark mode" src="https://github.com/Marmo/debitum/blob/e9d22929c2c789f7ed5bfd9cbdd5f084192f73b8/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_night_money.png" width="200"/>
+<img alt="People list" src="/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_people.png?raw=true" width="200"/> <img alt="Money" src="/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_money.png?raw=true" width="200"/>
+<img alt="Money filtered" src="/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_money_filtered.png?raw=true" width="200"/> <img alt="Items" src="/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_items.png?raw=true" width="200"/> <img alt="Items filtered" src="/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_items_filtered.png?raw=true" width="200"/> <img alt="Create Transaction Dialog" src="/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_createTxn.png?raw=true" width="200"/> <img alt="Settings" src="/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_light_settings.png?raw=true" width="200"/>
+<img alt="Dark mode" src="/app/src/main/play/listings/en-US/graphics/phone-screenshots/en_night_money.png?raw=true" width="200"/>
 
 ## Translation
 You are welcome to contribute to [translations](TRANSLATION.md).
