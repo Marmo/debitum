@@ -29,8 +29,8 @@ Achtung: nur "Simple Debts" werden migriert, da Debitum (noch) keine Unterstütz
     case 
     	 when financial=0 then 
     		case 
-    			when direction='WITHDRAWAL' then 1 
-    			else -1
+    			when direction='WITHDRAWAL' then -1 
+    			else 1
     		end
     	else 
     		case
