@@ -29,8 +29,6 @@
 - move transition durations to integer resource
 
 # other
-## 1.1.1
-- move from triple-t to fastlane (better fdroid support and per-release changelogs)
 
 ## later
 
