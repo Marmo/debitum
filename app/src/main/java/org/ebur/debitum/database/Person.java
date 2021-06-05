@@ -1,8 +1,10 @@
 package org.ebur.debitum.database;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -11,9 +13,14 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "person")
 public class Person implements Parcelable {
 
+    public static final int[] COLORS = new int[] {0xffd44e2d, 0xff22c9dc, 0xffdc3522, 0xffdc9222, 0xffc9dc22,
+            0xff22dc92, 0xff226cdc, 0xff22dc35, 0xff3522dc, 0xff6cdc22, 0xff9222dc};
+    public static final int NR_OF_COLORS = 11;
+
     public Person(String name, String note) {
         this.name = name;
         this.note = note;
+        this.colorIndex = getColorIndex();
     }
     @Ignore
     public Person(String name) {
@@ -30,21 +37,37 @@ public class Person implements Parcelable {
     @ColumnInfo(name = "id_person") public int idPerson;
     @ColumnInfo(name = "name") public String name;
     @ColumnInfo(name = "note") public String note;
+    @Ignore public int colorIndex = -1;
 
     public boolean equals(Person p) {
         if(p != null) {
             boolean equalId = this.idPerson == p.idPerson;
             boolean equalNameAndId = equalId && this.name.equals(p.name);
-            boolean equalNoteAndNameAndId = equalNameAndId
+            return equalNameAndId
                     && ((this.note == null && p.note == null)
                         || (this.note!= null && this.note.equals(p.note))
                        );
-
-            return equalNoteAndNameAndId;
         } else {
             return false;
         }
 
+    }
+
+    public int getColorIndex() {
+        if (colorIndex == -1) {
+            calcuateColorIndex();
+        }
+        return colorIndex;
+    }
+
+    public void calcuateColorIndex() {
+        colorIndex = Math.abs(name.hashCode()%NR_OF_COLORS);
+    }
+
+    public int getColor() {
+        // TODO get primary color from attribute
+        // TODO get primary color's saturation and value
+        return Color.HSVToColor(new float[] {255*colorIndex/12f, .788f, .831f});
     }
 
     // -------------------------

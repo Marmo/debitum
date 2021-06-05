@@ -12,6 +12,7 @@
   - EditTransactionFragment: switchIsMonetary status to viewModel
 
 ## 1.2.0
+- add color to person, showing colored circle with first letter instead of person icon
 - add option to mark lent item as returned
   - make item list filterable (all/only unreturned/only returned)
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
@@ -27,6 +28,7 @@
 - create a way to get from person sum list directly to filtered items list of a person
 - make nicer quick-guide display
 - move transition durations to integer resource
+- add scrollbar showing the date/month/year while scrolling the transaction list
 
 # other
 
