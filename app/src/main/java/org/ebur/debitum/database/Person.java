@@ -4,11 +4,14 @@ import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.ColorInt;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import org.ebur.debitum.Utilities;
 
 @Entity(tableName = "person")
 public class Person implements Parcelable {
@@ -68,15 +71,13 @@ public class Person implements Parcelable {
      * current secondary color but the hue set to secondary color's
      * hue + colorIndex*360/12
      **/
-    public int getColor() {
-        // TODO use a utils-function @ColorInt int changeHue(int degrees, @ColorInt int baseColor)
-        // TODO implement Utilities.getAttributeColor from here https://orcchg.wordpress.com/2016/02/25/get-attribute-color-or-drawable-programmatically/
-        float[] secondaryColorHSV = new float[3];
-        int secondaryColorRGB = Utilities.getAttributeColor(context, R.attr.colorSecondary);
-        Color.colorToHsv(secondaryColorRGB, secondaryColorHSV);
-        return Color.HSVToColor(new float[] {(secondaryColorHSV[0]+360*colorIndex/NR_OF_COLORS)%360, 
-                                             secondaryColorHSV[1], 
-                                             secondaryColorHSV[2]});
+    @ColorInt
+    public int getColor(@ColorInt int baseColor) {
+        float[] baseColorHSV = new float[3];
+        Color.colorToHSV(baseColor, baseColorHSV);
+        return Color.HSVToColor(new float[] {(baseColorHSV[0]+360f*colorIndex/NR_OF_COLORS)%360,
+                                             baseColorHSV[1],
+                                             baseColorHSV[2]});
     }
 
     // -------------------------

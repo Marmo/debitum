@@ -16,24 +16,41 @@
 
     <ImageView
         android:id="@+id/list_item_avatar"
-        android:layout_width="@dimen/person_sum_list_item_height"
-        android:layout_height="0dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/list_item_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_account_circle_24"
-        tools:ignore="RtlSymmetry" />
+        android:alpha="0.8"
+        app:srcCompat="@drawable/circle_avatar"
+        tools:ignore="ContentDescription,RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/list_item_avatar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/list_item_avatar"
+        app:layout_constraintBottom_toBottomOf="@id/list_item_avatar"
+        app:layout_constraintStart_toStartOf="@id/list_item_avatar"
+        app:layout_constraintEnd_toEndOf="@id/list_item_avatar"
+        android:textColor="?attr/colorSurface"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Debitum.AvatarLetter"
+        android:alpha="0.9"
+        tools:text="R"
+        />
 
     <TextView
         android:id="@+id/list_item_name"
         style="@style/TextAppearance.Debitum.ListName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/person_sum_list_item_height"
         android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="@id/list_item_avatar"
         app:layout_constraintEnd_toStartOf="@id/barrierNameToAmount"
-        app:layout_constraintStart_toEndOf="@id/list_item_avatar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/list_item_avatar"
         tools:text="Rincewind" />
 

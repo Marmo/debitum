@@ -13,6 +13,7 @@
 
 ## 1.2.0
 - add color to person, showing colored circle with first letter instead of person icon
+  - use person color for filter bar background
 - add option to mark lent item as returned
   - make item list filterable (all/only unreturned/only returned)
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!

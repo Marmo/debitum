@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
@@ -18,6 +20,7 @@ import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
@@ -28,6 +31,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
     private final TextView oweLentLabelView;
     private final TextView sumView;
     private final ImageView avatarView;
+    private final TextView avatarLetterView;
 
     private Person person;
 
@@ -38,6 +42,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
         oweLentLabelView = itemView.findViewById(R.id.list_item_owe_lent);
         sumView = itemView.findViewById(R.id.list_item_sum);
         avatarView = itemView.findViewById(R.id.list_item_avatar);
+        avatarLetterView = itemView.findViewById(R.id.list_item_avatar_text);
 
         itemView.setOnClickListener(this);
     }
@@ -49,7 +54,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
     }
 
     public void bind(PersonWithTransactions pwt, boolean isSelected) {
-        nameView.setText(pwt.person.colorIndex + pwt.person.name);
+        nameView.setText(pwt.person.name);
         sumView.setText(Transaction.getFormattedSum(pwt.transactions, false));
 
         person = pwt.person;
@@ -69,7 +74,9 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
                 sumView.setTextColor(sumView.getResources().getColor(R.color.lent_red, null));
         }
 
-        avatarView.setColorFilter(person.getColor(), PorterDuff.Mode.SRC_ATOP);
+        @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(itemView.getContext(), R.attr.colorSecondary);
+        avatarView.setColorFilter(person.getColor(secondaryColorRGB), PorterDuff.Mode.SRC_ATOP);
+        avatarLetterView.setText(String.valueOf(person.name.charAt(0)).toUpperCase());
 
         ViewCompat.setTransitionName(itemView, person.name);
 

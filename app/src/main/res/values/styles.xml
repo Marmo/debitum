@@ -71,6 +71,11 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
+    <style name="TextAppearance.Debitum.AvatarLetter" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 
     <style name="ThemeOverlay"/>
     <style name="ThemeOverlay.Debitum"/>
