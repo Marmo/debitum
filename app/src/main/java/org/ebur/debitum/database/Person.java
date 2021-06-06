@@ -13,9 +13,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "person")
 public class Person implements Parcelable {
 
-    public static final int[] COLORS = new int[] {0xffd44e2d, 0xff22c9dc, 0xffdc3522, 0xffdc9222, 0xffc9dc22,
-            0xff22dc92, 0xff226cdc, 0xff22dc35, 0xff3522dc, 0xff6cdc22, 0xff9222dc};
-    public static final int NR_OF_COLORS = 11;
+    public static final int NR_OF_COLORS = 12;
 
     public Person(String name, String note) {
         this.name = name;
@@ -64,10 +62,21 @@ public class Person implements Parcelable {
         colorIndex = Math.abs(name.hashCode()%NR_OF_COLORS);
     }
 
+    /**
+     * calculates a color based on the person's color index.
+     * The color will have the same saturation and value as the
+     * current secondary color but the hue set to secondary color's
+     * hue + colorIndex*360/12
+     **/
     public int getColor() {
-        // TODO get primary color from attribute
-        // TODO get primary color's saturation and value
-        return Color.HSVToColor(new float[] {255*colorIndex/12f, .788f, .831f});
+        // TODO use a utils-function @ColorInt int changeHue(int degrees, @ColorInt int baseColor)
+        // TODO implement Utilities.getAttributeColor from here https://orcchg.wordpress.com/2016/02/25/get-attribute-color-or-drawable-programmatically/
+        float[] secondaryColorHSV = new float[3];
+        int secondaryColorRGB = Utilities.getAttributeColor(context, R.attr.colorSecondary);
+        Color.colorToHsv(secondaryColorRGB, secondaryColorHSV);
+        return Color.HSVToColor(new float[] {(secondaryColorHSV[0]+360*colorIndex/NR_OF_COLORS)%360, 
+                                             secondaryColorHSV[1], 
+                                             secondaryColorHSV[2]});
     }
 
     // -------------------------
