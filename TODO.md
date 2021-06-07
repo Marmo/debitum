@@ -1,7 +1,6 @@
 # code
 ## 1.2.0
 - editTxn money<>item https://developer.android.com/guide/topics/resources/drawable-resource#Transition
-- add and use action from item list to new transaction dialog
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
 - add option to mark lent item as returned

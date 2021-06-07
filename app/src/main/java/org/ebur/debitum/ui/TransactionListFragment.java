@@ -136,7 +136,7 @@ public class TransactionListFragment
     public void editPerson(Person person) {
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, person);
-        NavHostFragment.findNavController(this).navigate(R.id.action_editPerson, args);
+        NavHostFragment.findNavController(this).navigate(R.id.action_global_editPerson, args);
     }
 
     @Override
@@ -146,7 +146,7 @@ public class TransactionListFragment
     private void editTransaction(int idTransaction) {
         Bundle args = new Bundle();
         args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, idTransaction);
-        NavHostFragment.findNavController(this).navigate(R.id.action_editTransaction, args);
+        NavHostFragment.findNavController(this).navigate(R.id.action_global_editTransaction, args);
     }
 
     @Override

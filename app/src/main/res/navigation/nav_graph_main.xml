@@ -13,9 +13,6 @@
             android:id="@+id/action_personSumList_to_transactionList_on_filter"
             app:destination="@id/money_dest" />
         <action
-            android:id="@+id/action_editPerson"
-            app:destination="@id/editPerson_dest" />
-        <action
             android:id="@+id/action_addPerson"
             app:destination="@id/editPerson_dest" >
             <argument
@@ -32,12 +29,6 @@
             android:name="filterBy"
             app:argType="integer"
             android:defaultValue="0" />
-        <action
-            android:id="@id/action_editPerson"
-            app:destination="@id/editPerson_dest" />
-        <action
-            android:id="@+id/action_editTransaction"
-            app:destination="@id/editTransaction_dest" />
     </fragment>
     <fragment
         android:id="@+id/item_dest"
@@ -49,11 +40,16 @@
             app:argType="integer"
             android:defaultValue="0" />
         <action
-            android:id="@+id/action_editPerson"
-            app:destination="@id/editPerson_dest" />
-        <action
-            android:id="@id/action_editTransaction"
-            app:destination="@id/editTransaction_dest" />
+            android:id="@+id/action_add_item_transaction"
+            app:destination="@id/editTransaction_dest"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="newItem"
+                android:defaultValue="true" />
+        </action>
     </fragment>
     <dialog
         android:id="@+id/editPerson_dest"
@@ -77,8 +73,7 @@
         tools:layout="@layout/fragment_edit_transaction" >
         <argument
             android:name="idTransaction"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            app:argType="integer" />
         <action
             android:id="@+id/action_requestNewPerson"
             app:destination="@id/editPerson_dest" >
@@ -94,6 +89,7 @@
             app:argType="boolean"
             android:defaultValue="false" />
     </dialog>
+
     <fragment
         android:id="@+id/settings_dest"
         android:name="org.ebur.debitum.ui.SettingsFragment"
@@ -106,11 +102,29 @@
         android:id="@+id/licenses_dest"
         android:name="org.ebur.debitum.ui.LicensesFragment"
         android:label="@string/pref_licenses_title" />
+
     <action
-        android:id="@+id/action_global_add_transaction"
+        android:id="@+id/action_global_add_money_transaction"
         app:destination="@id/editTransaction_dest">
         <argument
             android:name="idTransaction"
             android:defaultValue="-1" />
+        <argument
+            android:name="newItem"
+            android:defaultValue="false" />
+    </action>
+    <action
+        android:id="@+id/action_global_editPerson"
+        app:destination="@id/editPerson_dest" >
+        <argument
+            android:name="newPersonRequested"
+            android:defaultValue="false" />
+    </action>
+    <action
+        android:id="@+id/action_global_editTransaction"
+        app:destination="@id/editTransaction_dest" >
+        <argument
+            android:name="newItem"
+            android:defaultValue="false" />
     </action>
 </navigation>

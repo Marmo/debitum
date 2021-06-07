@@ -106,7 +106,7 @@ public class PersonSumListFragment
         // navigate to EditTransactionFragment
         Bundle args = new Bundle();
         args.putParcelable(EditPersonFragment.ARG_EDITED_PERSON, selectedPerson);
-        NavHostFragment.findNavController(this).navigate(R.id.action_editPerson, args);
+        NavHostFragment.findNavController(this).navigate(R.id.action_global_editPerson, args);
     }
 
     protected void onActionModeDelete(Selection<Long> selection) {
