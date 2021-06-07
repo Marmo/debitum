@@ -1,17 +1,14 @@
 # code
-## 1.1.1
+## 1.2.0
 - make dialogs normal fragments
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
   - fab -> new txn
   - action mode delete -> alertDialog (something basic like fade+scale or fade+slide)
   - action mode edit -> edit txn/person
   - editTxn money<>item https://developer.android.com/guide/topics/resources/drawable-resource#Transition
-  
 - add and use action from item list to new transaction dialog
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
-
-## 1.2.0
 - add option to mark lent item as returned
   - make item list filterable (all/only unreturned/only returned)
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
@@ -38,6 +35,7 @@
 # release-checklist
 - update fastlane changelogs (2x)
 - update CHANGELOG.md
+- update screenshots
 - check build.gradle version+version code
 - build release (!) apk, rename debitum-x.x.x.apk
 - tag release
