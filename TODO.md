@@ -36,7 +36,7 @@
 
 
 # release-checklist
-- update whatsnew (2x)
+- update fastlane changelogs (2x)
 - update CHANGELOG.md
 - check build.gradle version+version code
 - build release (!) apk, rename debitum-x.x.x.apk
