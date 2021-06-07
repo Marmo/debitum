@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
@@ -373,17 +374,16 @@ public class EditTransactionFragment extends DialogFragment {
     //-------------------------------
 
     public void onSwitchIsMonetaryChanged(View v, boolean checked) {
-        Resources res = getResources();
         Drawable startIcon;
 
         if (checked) {
-            startIcon = res.getDrawable(R.drawable.ic_baseline_money_24, null);
+            startIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_money_24, null);
             editAmountLayout.setHint(R.string.edit_transaction_hint_amount_money);
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc);
             editDescriptionLayout.setError(null);
             editDescriptionLayout.setHelperText(null);
         } else {
-            startIcon = res.getDrawable(R.drawable.ic_baseline_tag_24, null);
+            startIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_tag_24, null);
             editAmountLayout.setHint(R.string.edit_transaction_hint_amount_item);
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc_item);
             editDescriptionLayout.setHelperText(getString(R.string.required_helper_text));
