@@ -1,11 +1,6 @@
 # code
 ## 1.2.0
-- make dialogs normal fragments
-- improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
-  - fab -> new txn
-  - action mode delete -> alertDialog (something basic like fade+scale or fade+slide)
-  - action mode edit -> edit txn/person
-  - editTxn money<>item https://developer.android.com/guide/topics/resources/drawable-resource#Transition
+- editTxn money<>item https://developer.android.com/guide/topics/resources/drawable-resource#Transition
 - add and use action from item list to new transaction dialog
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
@@ -25,6 +20,12 @@
 - make nicer quick-guide display
 - move transition durations to integer resource
 - add scrollbar showing the date/month/year while scrolling the transaction list
+
+- improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
+  - UNCLEAR: how to do all this with dialog fragments???
+  - fab -> new txn
+  - action mode delete -> alertDialog (something basic like fade+scale or fade+slide)
+  - action mode edit -> edit txn/person
 
 # other
 
