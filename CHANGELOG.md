@@ -1,3 +1,5 @@
+# v1.2.0
+- add: the generic gray person-icon in the person list is now a colored name-based icon
 # v1.1.0
 - add: list with third party licenses in settings
 - add: persons can have a note that is displayed in the filter bar

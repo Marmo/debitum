@@ -1,0 +1,1 @@
+- add: the generic gray person-icon in the person list is now a colored name-based icon

@@ -1,0 +1,1 @@
+- neu: das generische graue Symbol vor jeder Person ist nun farbig basierend auf dem Namen der Person
