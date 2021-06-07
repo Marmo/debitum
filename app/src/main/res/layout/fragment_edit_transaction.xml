@@ -100,7 +100,7 @@
                 app:helperText="@string/required_helper_text"
                 app:helperTextEnabled="true"
                 app:startIconContentDescription="Amount"
-                app:startIconDrawable="@drawable/ic_baseline_money_24">
+                app:startIconDrawable="@drawable/ic_transition_amount">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

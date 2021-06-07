@@ -2,6 +2,7 @@ package org.ebur.debitum.ui;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -374,16 +375,25 @@ public class EditTransactionFragment extends DialogFragment {
     //-------------------------------
 
     public void onSwitchIsMonetaryChanged(View v, boolean checked) {
-        Drawable startIcon;
+        TransitionDrawable startIcon;
+        startIcon = (TransitionDrawable) editAmountLayout.getStartIconDrawable();
 
         if (checked) {
-            startIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_money_24, null);
+            if (startIcon != null) {
+                startIcon.setCrossFadeEnabled(true);
+                startIcon.startTransition(0);
+                startIcon.reverseTransition(50);
+            }
+
             editAmountLayout.setHint(R.string.edit_transaction_hint_amount_money);
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc);
             editDescriptionLayout.setError(null);
             editDescriptionLayout.setHelperText(null);
         } else {
-            startIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_tag_24, null);
+            if (startIcon != null) {
+                startIcon.setCrossFadeEnabled(true);
+                startIcon.startTransition(50);
+            }
             editAmountLayout.setHint(R.string.edit_transaction_hint_amount_item);
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc_item);
             editDescriptionLayout.setHelperText(getString(R.string.required_helper_text));
@@ -394,8 +404,5 @@ public class EditTransactionFragment extends DialogFragment {
         if(!s.isEmpty()) {
             editAmount.setText(formatArbitraryDecimalInput(s));
         }
-
-        // change editAmount icon;
-        editAmountLayout.setStartIconDrawable(startIcon);
     }
 }
