@@ -1,11 +1,9 @@
 package org.ebur.debitum.database;
 
-import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.ColorInt;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -54,6 +52,8 @@ public class Person implements Parcelable {
 
     }
 
+    // as Room generates new objects when a row is updated, we do not need to manually
+    // refresh the color when the name is edited
     public int getColorIndex() {
         if (colorIndex == -1) {
             calcuateColorIndex();
@@ -66,18 +66,14 @@ public class Person implements Parcelable {
     }
 
     /**
-     * calculates a color based on the person's color index.
-     * The color will have the same saturation and value as the
-     * current secondary color but the hue set to secondary color's
-     * hue + colorIndex*360/12
+     * @param baseColor color whose HSV values are used (hue as starting point, saturation & value as-is)
+     * @return a color calculated using the person's color index. The color will have the same
+     * saturation and value as the passed baseColor but the hue set to baseColor's
+     * hue + colorIndex*360/NR_OF_COLORS
      **/
     @ColorInt
     public int getColor(@ColorInt int baseColor) {
-        float[] baseColorHSV = new float[3];
-        Color.colorToHSV(baseColor, baseColorHSV);
-        return Color.HSVToColor(new float[] {(baseColorHSV[0]+360f*colorIndex/NR_OF_COLORS)%360,
-                                             baseColorHSV[1],
-                                             baseColorHSV[2]});
+        return Utilities.changeHue(colorIndex*360f/NR_OF_COLORS, baseColor);
     }
 
     // -------------------------

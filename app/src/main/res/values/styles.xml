@@ -31,6 +31,10 @@
         <item name="android:elevation">@dimen/header_elevation</item>
     </style>
 
+    <style name="ThemeOverlay.Debitum.Avatar">
+        <item name="android:alpha">0.9</item>
+    </style>
+
 
     <style name="TextAppearance.Debitum.FilterBarTitle" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">sans-serif</item>
@@ -75,6 +79,7 @@
         <item name="fontFamily">sans-serif-black</item>
         <item name="android:fontFamily">sans-serif-black</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/colorSurface</item>
     </style>
 
     <style name="ThemeOverlay"/>

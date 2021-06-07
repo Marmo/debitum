@@ -38,9 +38,7 @@ public class Utilities {
      * @return a color int with saturation and value of base color and base color's hue+degrees
      */
     @ColorInt
-    public int changeHue(int degrees, @ColorInt int baseColor) {
-        // TODO use a utils-function @ColorInt int changeHue(int degrees, @ColorInt int baseColor)
-        // TODO implement Utilities.getAttributeColor from here https://orcchg.wordpress.com/2016/02/25/get-attribute-color-or-drawable-programmatically/
+    public static int changeHue(float degrees, @ColorInt int baseColor) {
         float[] baseColorHSV = new float[3];
         Color.colorToHSV(baseColor, baseColorHSV);
         return Color.HSVToColor(new float[] {(baseColorHSV[0]+degrees)%360,
@@ -50,10 +48,11 @@ public class Utilities {
 
     /**
      *
-     * @param context
-     * @param attributeId
+     * @param context context from which the resource shall be retrieved
+     * @param attributeId the attribute that points to the desired color resource (e.g. R.attr.colorSecondary)
      * @return color int that is the result of resolving the given attributes
      */
+    @ColorInt
     public static int getAttributeColor(
             Context context,
             @AttrRes int attributeId) {

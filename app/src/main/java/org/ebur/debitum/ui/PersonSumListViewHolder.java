@@ -1,7 +1,5 @@
 package org.ebur.debitum.ui;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
