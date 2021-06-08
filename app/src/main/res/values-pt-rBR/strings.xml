@@ -1,0 +1,117 @@
+<resources>
+    <!-- General -->
+    <string name="error_message_database_access">Falha ao tentar acessar a base de dados, por favor tente novamente!\n%1$s</string>
+    <string name="button_label_save">Salvar</string>
+    <string name="delete_dialog_confirm">Excluir</string>
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="required_helper_text">* Obrigatório</string>
+    <string name="actionmode_edit">Editar</string>
+    <string name="actionmode_delete">Excluir</string>
+    <plurals name="actionmode_selected">
+        <item quantity="one">%d selecionado</item>
+        <item quantity="other">%d selecionados</item>
+    </plurals>
+
+    <!-- MainActivity -->
+    <string name="fab_content_description">Criar Transação</string>
+    <string name="bottom_nav_people">Pessoas</string>
+    <string name="bottom_nav_money">Dinheiro</string>
+    <string name="bottom_nav_items">Itens</string>
+    <string name="bottom_nav_settings">Configurações</string>
+    <string name="dismiss_filter">ignorar filtro</string>
+    <string name="database_empty">"Nada registrado!\nCrie uma nova Transação usando o botão \"+\"- abaixo."</string>
+
+    <!-- PersonSumListFragment -->
+    <string name="title_fragment_person_sum_list">Pessoas</string>
+    <string name="person_sum_list_you_owe">você deve</string>
+    <string name="person_sum_list_no_debt">sem dívidas</string>
+    <string name="person_sum_list_you_lent">você emprestou</string>
+    <string name="toolbar_create_person">Adicionar Pessoa</string>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="one">%d Pessoa excluída</item>
+        <item quantity="other">%d Pessoas excluídas</item>
+    </plurals>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="one">Excluir %d pessoa?</item>
+        <item quantity="other">Excluir %d pessoas?</item>
+    </plurals>
+    <string name="person_sum_list_dialog_delete_text">Isto não pode ser desfeito e também excluirá todas as suas transações.</string>
+
+    <!-- TransactionListFragment -->
+    <string name="title_fragment_transaction_list_money">Dinheiro</string>
+    <string name="title_fragment_transaction_list_items">Itens</string>
+    <string name="transaction_list_gave">deu</string>
+    <string name="transaction_list_received">recebeu</string>
+    <string name="toolbar_edit_person">Editar pessoa</string>
+    <string name="header_label">Total</string>
+    <string name="header_desc_items">itens emprestados</string>
+    <plurals name="transaction_list_snackbar_deleted">
+        <item quantity="one">%d Transação excluída</item>
+        <item quantity="other">%d Transações excluídas</item>
+    </plurals>
+    <plurals name="transaction_list_dialog_delete_title">
+        <item quantity="one">Excluir %d Transação?</item>
+        <item quantity="other">Excluir %d Transações?</item>
+    </plurals>
+    <string name="transaction_list_dialog_delete_text">Isto não pode ser desfeito.</string>
+
+    <!-- EditTransactionFragment -->
+    <string name="title_fragment_edit_transaction_create">Criar Transação</string>
+    <string name="title_fragment_edit_transaction">Editar Transação</string>
+    <string name="edit_transaction_hint_person">Pessoa *</string>
+    <string name="edit_transaction_error_select_name">Por favor, selecione uma pessoa!</string>
+    <string name="edit_transaction_hint_amount_money">Valor *</string>
+    <string name="edit_transaction_hint_amount_item">Quantidade de itens *</string>
+    <string name="edit_transaction_error_enter_amount">Informe o valor!</string>
+    <string name="edit_transaction_error_enter_description">Por favor, escreva a descrição!</string>
+    <string name="edit_transaction_hint_desc">Descrição</string>
+    <string name="edit_transaction_hint_desc_item">Descrição *</string>
+    <string name="edit_transaction_wrong_amount_format">Algo está errado com formato de quantidade, verificá-lo!</string>
+    <string name="edit_transaction_date_dialog_title">Selecione a data</string>
+    <string name="edit_transaction_date_content_description">Data</string>
+    <string name="edit_transaction_gave">Deu</string>
+    <string name="edit_transaction_received">Recebeu</string>
+    <string name="edit_transaction_snackbar_max_amount">Max. 9 dígitos permitidos em valor</string>
+
+    <!-- EditPersonFragment -->
+    <string name="title_fragment_edit_person">Editar Pessoa</string>
+    <string name="title_fragment_edit_person_create">Adicionar Pessoa</string>
+    <string name="edit_person_name">Nome</string>
+    <string name="error_message_enter_name">Por favor, digite um nome!</string>
+    <string name="error_message_name_exists">%1$s já existe, por favor, digite um nome diferente!</string>
+    <string name="edit_person_note">Anotação</string>
+
+    <!-- SettingsFragment -->
+    <string name="title_fragment_settings">Configurações</string>
+    <string name="pref_general_header">Geral</string>
+    <string name="pref_dismiss_filter_title">Ao dispensar o filtro de pessoas …</string>
+    <string name="pref_dismiss_filter_summary_true">Voltar à lista de pessoas</string>
+    <string name="pref_dismiss_filter_summary_false">Permanecer na lista atual</string>
+    <string name="pref_maintenance_header">Manutenção</string>
+    <string name="backup_successful">A base de dados foi copiado com sucesso ao armazenamento externo</string>
+    <string name="backup_failed">O Backup falhou! %1$s</string>
+    <string name="restore_failed">A restauração falhou! %1$s</string>
+    <string name="pref_backup_title">Fazer um Backup da base de dados</string>
+    <string name="pref_restore_title">Restaurar a base de dados</string>
+    <string name="pref_backup_summary">para %1$s</string>
+    <string name="pref_restore_summary">de arquivo "%1$s" no armazenamento externo</string>
+    <string name="pref_backup_warning">Fique sabendo que a pasta onde o Backup com base de dados é copiado
+                será excluída quando o App for desinstalado ou quando seus dados forem excluídos. Você tem que guardá-lo
+                num lugar seguro antes de desinstalar/excluir dados, se você quiser usá-los posteriormente!</string>
+    <string name="pref_restore_file_not_found">Arquivo do Backup não encontrado</string>
+    <string name="pref_info_header">Info</string>
+    <string name="pref_guide_title">Guia Prático</string>
+    <string name="pref_guide_dialog_close">fechar</string>
+    <string name="pref_github_title">GitHub</string>
+    <string name="pref_github_summary">Verifique o código-fonte, relate os problemas &amp; sugira novas idéias
+</string>
+    <string name="restore_confirm">Substituir</string>
+    <string name="restore_confirm_text">Realmente quer substituir todos os dados existentes com os dados do Backup?\nO App será reiniciado após a restauração bem sucedida.</string>
+    <string name="restore_confirm_title">Restauração do Backup</string>
+    <string name="pref_version">Versão %1$s</string>
+    <string name="pref_licenses_title">licenças de terceiros</string>
+
+    <!--3rd party license-->
+    <string name="title_fragment_licenses">licenças de terceiros</string>
+    
+</resources>
