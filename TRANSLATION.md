@@ -1,7 +1,8 @@
 Translation
 ------------
 
-  * German (@marmo)
+  * German ([@marmo](https://github.com/marmo))
+  * Portuguese (Brasil) ([@mezysinc](https://github.com/mezysinc))
 
 Contribute
 ----------
