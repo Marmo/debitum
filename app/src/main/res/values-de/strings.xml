@@ -5,6 +5,7 @@
     <string name="delete_dialog_confirm">Löschen</string>
     <string name="dialog_cancel">Abbrechen</string>
     <string name="required_helper_text">* erforderlich</string>
+    <string name="actionmode_returned">zurückgegeben</string>
     <string name="actionmode_edit">Bearbeiten</string>
     <string name="actionmode_delete">Löschen</string>
     <plurals name="actionmode_selected">
@@ -68,7 +69,8 @@
     <string name="edit_transaction_hint_desc_item">Beschreibung *</string>
     <string name="edit_transaction_wrong_amount_format">Irgend etwas stimmt mit dem Format des Betrages nicht, bitte prüfen!</string>
     <string name="edit_transaction_date_dialog_title">Datum wählen</string>
-    <string name="edit_transaction_date_content_description">Datum</string>
+    <string name="edit_transaction_hint_date">Datum</string>
+    <string name="edit_transaction_hint_returndate">Rückgabedatum</string>
     <string name="edit_transaction_gave">Gab</string>
     <string name="edit_transaction_received">Bekam</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 Ziffern im Betrag zulässig</string>

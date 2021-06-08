@@ -137,6 +137,9 @@ public class PersonSumListFragment
         dialog.show();
     }
 
+    @Override
+    protected void onActionModeReturned(int selectedId) {}
+
     public void addPerson() {
         NavHostFragment.findNavController(this).navigate(R.id.action_addPerson);//, args);
     }

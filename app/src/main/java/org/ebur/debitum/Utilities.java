@@ -8,6 +8,7 @@ import android.util.TypedValue;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -19,11 +20,17 @@ public class Utilities {
     public static final String TAG = "Utilities";
 
     public static final String DATE_FORMAT = "yyyy-MM-dd";
-    public static String formatDate(Date date) {
+
+    @Nullable
+    public static String formatDate(@Nullable Date date) {
         return formatDate(date, DATE_FORMAT);
     }
-    public static String formatDate(Date date, String format) {
-        return new SimpleDateFormat(format, Locale.getDefault()).format(date);
+    @Nullable
+    public static String formatDate(@Nullable Date date, String format) {
+        if (date == null)
+            return null;
+        else
+            return new SimpleDateFormat(format, Locale.getDefault()).format(date);
     }
 
     public static double parseAmount(String localizedAmountString) throws ParseException {

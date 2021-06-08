@@ -6,6 +6,7 @@
     <string name="delete_dialog_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="required_helper_text">* Required</string>
+    <string name="actionmode_returned">Mark returned</string>
     <string name="actionmode_edit">Edit</string>
     <string name="actionmode_delete">Delete</string>
     <plurals name="actionmode_selected">
@@ -69,7 +70,8 @@
     <string name="edit_transaction_hint_desc_item">Description *</string>
     <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
     <string name="edit_transaction_date_dialog_title">Select date</string>
-    <string name="edit_transaction_date_content_description">Date</string>
+    <string name="edit_transaction_hint_date">Date</string>
+    <string name="edit_transaction_hint_returndate">Date returned</string>
     <string name="edit_transaction_gave">Gave</string>
     <string name="edit_transaction_received">Received</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed in amount</string>

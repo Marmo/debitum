@@ -177,6 +177,9 @@ public class TransactionListFragment
         dialog.show();
     }
 
+    @Override
+    protected void onActionModeReturned(int selectedId) {}
+
     // -------------
     // Person filter
     // -------------

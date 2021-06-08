@@ -10,6 +10,7 @@ import org.ebur.debitum.database.TransactionRepository;
 import org.ebur.debitum.database.TransactionWithPerson;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class TransactionListViewModel extends AndroidViewModel {
 
@@ -32,10 +33,12 @@ public class TransactionListViewModel extends AndroidViewModel {
         return itemTransactions;
     }
 
+    public Transaction getTransactionFromDatabase(int idTransaction) throws ExecutionException, InterruptedException { return txnRepository.getTransaction(idTransaction).transaction; }
+
     public void insert(Transaction transaction) {
         txnRepository.insert(transaction);
     }
-
+    public void update(Transaction transaction) { txnRepository.update(transaction); }
     public void delete(Transaction transaction) {
         txnRepository.delete(transaction);
     }

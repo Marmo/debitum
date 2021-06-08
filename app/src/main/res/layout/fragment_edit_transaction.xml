@@ -152,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
                 android:layout_marginTop="@dimen/dialog_vertical_spacing"
-                android:contentDescription="@string/edit_transaction_date_content_description"
+                android:hint="@string/edit_transaction_hint_date"
                 android:labelFor="@id/edit_date_editText"
                 app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"
                 app:endIconMode="custom"
@@ -168,6 +168,31 @@
                     android:layout_height="wrap_content"
                     android:inputType="none"
                     android:focusable="false"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_returndate"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                android:layout_marginTop="@dimen/dialog_vertical_spacing"
+                android:hint="@string/edit_transaction_hint_returndate"
+                android:labelFor="@id/edit_returndate_editText"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_date"
+                app:startIconContentDescription="Calendar"
+                app:startIconDrawable="@drawable/ic_baseline_event_24">
+
+                <AutoCompleteTextView
+                    android:id="@+id/edit_returndate_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

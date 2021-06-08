@@ -71,6 +71,12 @@ public abstract class AbstractBaseListFragment
      */
     abstract TAdapter getAdapter();
 
+    /**
+     * Can be overridden by subclasses to make the item-returned-button in the action mode visible
+     * @return if the item-returned-button in the action mode should be shown
+     */
+    protected boolean isActionModeReturnEnabled() {return false;}
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,6 +175,9 @@ public abstract class AbstractBaseListFragment
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = mode.getMenuInflater();
             inflater.inflate(R.menu.menu_list_action_mode, menu);
+            if(isActionModeReturnEnabled()) {
+                menu.findItem(R.id.miReturned).setVisible(true);
+            }
             actionMode = mode;
             return true;
         }
@@ -180,6 +189,9 @@ public abstract class AbstractBaseListFragment
             menu.findItem(R.id.miEdit).setVisible(nRowsSelected == 1);
             // only show delete transaction menu item if one or more items are selected
             menu.findItem(R.id.miDelete).setVisible(nRowsSelected >= 1);
+            // only show mark-returned menu item if enabled and exactly one item is selected
+            menu.findItem(R.id.miReturned).setVisible(isActionModeReturnEnabled() && nRowsSelected == 1);
+
             CharSequence title = getResources().getQuantityString(R.plurals.actionmode_selected, nRowsSelected, nRowsSelected);
             mode.setTitle(title);
             return true;
@@ -203,6 +215,12 @@ public abstract class AbstractBaseListFragment
                 onActionModeDelete(selectionCopy);
                 mode.finish();
                 return true;
+            } else if(id==R.id.miReturned) {
+                int selectedId = selectionTracker.getSelection().iterator().next().intValue();
+                selectionTracker.clearSelection();
+                onActionModeReturned(selectedId);
+                mode.finish();
+                return true;
             } else {
                 return false;
             }
@@ -217,6 +235,7 @@ public abstract class AbstractBaseListFragment
 
     protected abstract void onActionModeEdit(int selectedId);
     protected abstract void onActionModeDelete(Selection<Long> selection);
+    protected abstract void onActionModeReturned(int selectedId);
 
     interface Adapter {
         void setSelectionTracker(SelectionTracker<Long> selectionTracker);

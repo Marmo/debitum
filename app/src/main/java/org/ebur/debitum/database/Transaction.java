@@ -36,6 +36,7 @@ public class Transaction {
         this.description = description;
         this.timestamp = timestamp;
         this.isMonetary = isMonetary;
+        this.timestampReturned = null;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -47,7 +48,8 @@ public class Transaction {
     @ColumnInfo(name= "id_person") public int idPerson;
     @ColumnInfo(name = "description") public String description;
     @ColumnInfo(name = "is_monetary") public boolean isMonetary; // True for money, false for things
-    @ColumnInfo(name = "timestamp") public Date timestamp;  // integer counting milliseconds from epoch
+    @ColumnInfo(name = "timestamp") public Date timestamp;  // timestamp when the transaction took place
+    @ColumnInfo(name = "timestamp_returned") public Date timestampReturned;  // timestamp when the item was returned
 
     /*
      * returns the amount formatted as a string, depending on isMonetary
@@ -60,6 +62,14 @@ public class Transaction {
         else            return Integer.toString(value);
     }
 
+    public void setReturned() {
+        this.timestampReturned = new Date();
+    }
+
+    public boolean isReturned() {
+        return timestampReturned != null;
+    }
+
     public boolean equals(Transaction t) {
         boolean id = this.idTransaction == t.idTransaction;
         boolean desc = this.description.equals(t.description);
@@ -67,7 +77,9 @@ public class Transaction {
         boolean isMon = this.isMonetary == t.isMonetary;
         boolean idpers = this.idPerson == t.idPerson;
         boolean timestmp = this.timestamp.equals(t.timestamp);
-        return amnt && desc && timestmp && isMon && id && idpers;
+        boolean timestmpReturned = (!this.isReturned() && !t.isReturned())
+                || (this.isReturned() && this.timestampReturned.equals(t.timestampReturned));
+        return amnt && desc && timestmp && isMon && id && idpers && timestmpReturned;
     }
 
     //---------------------

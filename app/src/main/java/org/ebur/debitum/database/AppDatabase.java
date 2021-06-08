@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 
 @Database(
         entities = {Transaction.class, Person.class},
-        version = 2,
+        version = 3,
         exportSchema = true
 )
 @TypeConverters({Converters.class})
@@ -48,6 +48,14 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE txn "
+                    + " ADD COLUMN timestamp_returned INTEGER");
+        }
+    };
+
     /* returns the singleton. It'll create the database the first time it's accessed, using Room's
      * database builder to create a RoomDatabase object
      */
@@ -58,7 +66,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "transaction_database")
                             .setJournalMode(JournalMode.TRUNCATE) // to make export easier, might have negative implications on write performance
-                            .addMigrations(MIGRATION_1_2)
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                             .build();
                 }
             }

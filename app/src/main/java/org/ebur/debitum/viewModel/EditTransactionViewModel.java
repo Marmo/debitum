@@ -25,6 +25,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
     // maintained separately from transaction for new transactions (transaction = null)
     private int transactionType;
     private Date timestamp;
+    private Date returnTimestamp;
 
 
     public EditTransactionViewModel(Application application) {
@@ -61,11 +62,12 @@ public class EditTransactionViewModel extends AndroidViewModel {
 
     public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
     public Date getTimestamp() { return this.timestamp; }
+    public void setReturnTimestamp(Date timestamp) { this.returnTimestamp = timestamp; }
+    public Date getReturnTimestamp() { return this.returnTimestamp; }
 
     public TransactionWithPerson getTransactionFromDatabase(int idTransaction) throws ExecutionException, InterruptedException { return transactionRepository.getTransaction(idTransaction); }
     public void insert(Transaction transaction) { transactionRepository.insert(transaction); }
     public void update(Transaction transaction) { transactionRepository.update(transaction); }
     public void delete(Transaction transaction) { transactionRepository.delete(transaction); }
-
 
 }

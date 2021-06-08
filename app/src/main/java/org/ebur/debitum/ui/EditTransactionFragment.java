@@ -30,6 +30,7 @@ import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -69,6 +70,8 @@ public class EditTransactionFragment extends DialogFragment {
     private TextInputLayout editDescriptionLayout;
     private EditText editDescription;
     private AutoCompleteTextView editDate;
+    private TextInputLayout editReturnDateLayout;
+    private AutoCompleteTextView editReturnDate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,22 +119,40 @@ public class EditTransactionFragment extends DialogFragment {
         Button buttonNewPerson = root.findViewById(R.id.button_new_person);
         buttonNewPerson.setOnClickListener(this::onNewPersonAction);
         gaveRadio = root.findViewById(R.id.radioButton_gave);
+
         editAmountLayout = root.findViewById(R.id.edit_amount);
         editAmount = editAmountLayout.getEditText();
         assert editAmount != null;
         editAmount.addTextChangedListener(new AmountTextWatcher());
         editAmount.addTextChangedListener(new TextInputLayoutErrorResetter(editAmountLayout));
+
         switchIsMonetary = root.findViewById(R.id.switch_monetary);
         switchIsMonetary.setOnCheckedChangeListener(this::onSwitchIsMonetaryChanged);
+
         editDescriptionLayout = root.findViewById(R.id.edit_description);
         editDescription = editDescriptionLayout.getEditText();
         assert editDescription!=null;
         editDescription.addTextChangedListener(new TextInputLayoutErrorResetter(editDescriptionLayout));
+
         TextInputLayout editDateLayout = root.findViewById(R.id.edit_date);
-        editDateLayout.setOnClickListener(this::showDatePickerDialog);
         editDate = (AutoCompleteTextView) editDateLayout.getEditText();
         assert editDate != null;
-        editDate.setOnClickListener(this::showDatePickerDialog);
+        editDate.setOnClickListener(view -> showDatePickerDialog(view,
+                viewModel.getTimestamp().getTime(),
+                selection -> {
+                    viewModel.setTimestamp(new Date(selection));
+                    editDate.setText(Utilities.formatDate(new Date(selection)));
+        }));
+
+        editReturnDateLayout = root.findViewById(R.id.edit_returndate);
+        editReturnDate = (AutoCompleteTextView) editReturnDateLayout.getEditText();
+        assert editReturnDate != null;
+        editReturnDate.setOnClickListener(view -> showDatePickerDialog(view,
+                viewModel.getReturnTimestamp().getTime(),
+                selection -> {
+                    viewModel.setReturnTimestamp(new Date(selection));
+                    editReturnDate.setText(Utilities.formatDate(new Date(selection)));
+                }));
 
         return root;
     }
@@ -149,11 +170,13 @@ public class EditTransactionFragment extends DialogFragment {
         if (viewModel.isNewTransaction()) fillViewsNewTransaction();
         else fillViewsEditTransaction();
 
-        // set initial focus
+        // set initial focus & show or hide return date input
         if (viewModel.isMoneyTransaction()) {
             editAmount.requestFocus();
+            editReturnDateLayout.setVisibility(View.GONE);
         } else {
             editDescription.requestFocus();
+            editReturnDateLayout.setVisibility(View.VISIBLE);
         }
     }
 
@@ -213,6 +236,8 @@ public class EditTransactionFragment extends DialogFragment {
         editDescription.setText(txn.transaction.description);
         viewModel.setTimestamp(txn.transaction.timestamp);
         editDate.setText(Utilities.formatDate(viewModel.getTimestamp()));
+        viewModel.setReturnTimestamp(txn.transaction.timestampReturned);
+        editReturnDate.setText(Utilities.formatDate(viewModel.getReturnTimestamp()));
     }
 
     // ---------------------------
@@ -275,9 +300,16 @@ public class EditTransactionFragment extends DialogFragment {
                     isMonetary,
                     editDescription.getText().toString(),
                     viewModel.getTimestamp());
+            if (viewModel.isItemTransaction()) {
+                // check if return date is empty (could have been cleared by endIcon click which
+                // stays unnoticed by the view model)
+                if (editReturnDate.getText().toString().isEmpty())
+                    viewModel.setReturnTimestamp(null);
+                transaction.timestampReturned = viewModel.getReturnTimestamp();
+            }
 
             // update database
-            if(viewModel.isNewTransaction()) viewModel.insert(transaction);
+            if (viewModel.isNewTransaction()) viewModel.insert(transaction);
             else if (!viewModel.isNewTransaction()) {
                 transaction.idTransaction = viewModel.getTransaction().transaction.idTransaction;
                 viewModel.update(transaction);
@@ -309,16 +341,13 @@ public class EditTransactionFragment extends DialogFragment {
     // Date and TimePicker dialogs
     // ---------------------------
 
-    public void showDatePickerDialog(View v) {
+    public void showDatePickerDialog(View v, Long date, MaterialPickerOnPositiveButtonClickListener<Long> listener) {
         MaterialDatePicker<Long> datePicker =
                 MaterialDatePicker.Builder.datePicker()
                         .setTitleText(R.string.edit_transaction_date_dialog_title)
-                        .setSelection(viewModel.getTimestamp().getTime())
+                        .setSelection(date)
                         .build();
-        datePicker.addOnPositiveButtonClickListener(selection -> {
-            viewModel.setTimestamp(new Date(selection));
-            editDate.setText(Utilities.formatDate(new Date(selection)));
-        });
+        datePicker.addOnPositiveButtonClickListener(listener);
         datePicker.show(getParentFragmentManager(), "addTransactionDatePicker");
     }
 
@@ -370,9 +399,9 @@ public class EditTransactionFragment extends DialogFragment {
         return formattedAmount;
     }
 
-    //-------------------------------
-    // Toggle isMonetary-Switch-Label
-    //-------------------------------
+    //---------------------------
+    // Toggle isMonetary handling
+    //---------------------------
 
     public void onSwitchIsMonetaryChanged(View v, boolean checked) {
         TransitionDrawable startIcon;
@@ -389,6 +418,7 @@ public class EditTransactionFragment extends DialogFragment {
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc);
             editDescriptionLayout.setError(null);
             editDescriptionLayout.setHelperText(null);
+            editReturnDateLayout.setVisibility(View.GONE);
         } else {
             if (startIcon != null) {
                 startIcon.setCrossFadeEnabled(true);
@@ -397,6 +427,7 @@ public class EditTransactionFragment extends DialogFragment {
             editAmountLayout.setHint(R.string.edit_transaction_hint_amount_item);
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc_item);
             editDescriptionLayout.setHelperText(getString(R.string.required_helper_text));
+            editReturnDateLayout.setVisibility(View.VISIBLE);
         }
 
         // apply proper formatting for chosen amount type
