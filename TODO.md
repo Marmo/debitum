@@ -1,4 +1,3 @@
-# code
 ## 1.2.0
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
@@ -24,10 +23,6 @@
   - fab -> new txn
   - action mode delete -> alertDialog (something basic like fade+scale or fade+slide)
   - action mode edit -> edit txn/person
-
-# other
-
-## later
 
 
 

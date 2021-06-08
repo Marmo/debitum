@@ -46,9 +46,9 @@ the backup is saved in the app's data folder on external storage, which is delet
 uninstall/clearing app data.
 
 ## Screenshots
-<img alt="People list" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/en_light_people.png?raw=true" width="200"/> <img alt="Money" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/en_light_money.png?raw=true" width="200"/>
-<img alt="Money filtered" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/en_light_money_filtered.png?raw=true" width="200"/> <img alt="Items" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/en_light_items.png?raw=true" width="200"/> <img alt="Items filtered" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/en_light_items_filtered.png?raw=true" width="200"/> <img alt="Create Transaction Dialog" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/en_light_createTxn.png?raw=true" width="200"/> <img alt="Settings" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/en_light_settings.png?raw=true" width="200"/>
-<img alt="Dark mode" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/en_night_money.png?raw=true" width="200"/>
+<img alt="People list" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/01_en_light_people.png?raw=true" width="200"/> <img alt="Money" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/02_en_light_money.png?raw=true" width="200"/>
+<img alt="Money filtered" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/04_en_light_money_filtered.png?raw=true" width="200"/> <img alt="Items" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/03_en_light_items.png?raw=true" width="200"/> <img alt="Items filtered" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/05_en_light_items_filtered.png?raw=true" width="200"/> <img alt="Create Transaction Dialog" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/06_en_light_createTxn.png?raw=true" width="200"/> <img alt="Settings" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/07_en_light_settings.png?raw=true" width="200"/>
+<img alt="Dark mode" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/51_en_night_money.png?raw=true" width="200"/>
 
 ## Translation
 You are welcome to contribute to [translations](TRANSLATION.md).
