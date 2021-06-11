@@ -25,9 +25,9 @@
     <color name="owe_green">#00A544</color>
 
     <color name="divider">@color/black_900</color>
-    <!--slate_grey alpha 0.1 on white-->
+    <color name="returned_item_background">#f5f5f5</color>
+    <color name="returned_item_text">#80000000</color>
     <color name="light_grey">#f5f6f7</color>
-    <!--slate_grey alpha 0.1 on black-->
     <color name="dark_grey">#232b2f</color>
 
 </resources>

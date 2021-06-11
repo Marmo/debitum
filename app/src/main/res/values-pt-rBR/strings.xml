@@ -45,7 +45,13 @@
     <string name="transaction_list_received">recebeu</string>
     <string name="toolbar_edit_person">Editar pessoa</string>
     <string name="header_label">Total</string>
-    <string name="header_desc_items">itens emprestados</string>
+    <string name="header_desc_items_unreturned">itens emprestados</string>
+    <string name="header_desc_items_returned">itens retornados</string>
+    <string name="header_desc_items_all">itens</string>
+    <string name="item_filter">Filtrar por estado retornado</string>
+    <string name="item_filter_all">Mostrar tudo</string>
+    <string name="item_filter_unreturned">Mostrar pendentes</string>
+    <string name="item_filter_returned">Mostrar devolvidos</string>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d Transação excluída</item>
         <item quantity="other">%d Transações excluídas</item>

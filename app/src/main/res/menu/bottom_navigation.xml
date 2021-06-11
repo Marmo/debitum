@@ -11,7 +11,7 @@
         android:enabled="false"/>
     <item android:id="@id/item_dest"
         android:title="@string/bottom_nav_items"
-        android:icon="@drawable/ic_outline_local_offer_24" />
+        android:icon="@drawable/ic_outline_local_offer_24_onprimary" />
     <item android:id="@id/settings_dest"
         android:title="@string/bottom_nav_settings"
         android:icon="@drawable/ic_outline_settings_24" />

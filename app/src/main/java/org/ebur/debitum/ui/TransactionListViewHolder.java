@@ -1,10 +1,13 @@
 package org.ebur.debitum.ui;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +37,23 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         txnNameView.setText(twp.person.name);
         txnDescriptionView.setText(twp.transaction.description);
         txnAmountView.setText(twp.transaction.getFormattedAmount(false));
-        txnTimestampView.setText(Utilities.formatDate(twp.transaction.timestamp));
+        if (twp.transaction.isReturned()) {
+            // set date text and background/text color
+            Resources res = itemView.getResources();
+            txnTimestampView.setText(res.getString(R.string.transaction_list_date_given_returned,
+                    Utilities.formatDate(twp.transaction.timestamp),
+                    Utilities.formatDate(twp.transaction.timestampReturned)));
+            itemView.setBackgroundColor(ResourcesCompat.getColor(res,
+                    R.color.returned_item_background,
+                    null));
+            @ColorInt int textColor =  ResourcesCompat.getColor(res,
+                    R.color.returned_item_text,
+                    null);
+            txnNameView.setTextColor(textColor);
+            txnGaveReceivedView.setTextColor(textColor);
+        } else {
+            txnTimestampView.setText(Utilities.formatDate(twp.transaction.timestamp));
+        }
 
         int gaveReceivedString, amountColor;
         int sign = Integer.compare(twp.transaction.amount, 0);

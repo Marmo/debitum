@@ -16,7 +16,7 @@
         style="@style/ThemeOverlay.Debitum.FilterBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:logo="@drawable/ic_outline_filter_alt_24"
+        app:logo="@drawable/ic_outline_filter_alt_24_onsecondary"
         app:menu="@menu/filter_bar"
         app:title="Text"
         app:titleMarginStart="32dp"

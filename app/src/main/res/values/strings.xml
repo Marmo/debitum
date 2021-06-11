@@ -44,9 +44,16 @@
     <string name="title_fragment_transaction_list_items">Items</string>
     <string name="transaction_list_gave">gave</string>
     <string name="transaction_list_received">received</string>
+    <string translatable="false" name="transaction_list_date_given_returned">%1$s\u2013%2$s</string>
     <string name="toolbar_edit_person">Edit Person</string>
     <string name="header_label">Total</string>
-    <string name="header_desc_items">items lent</string>
+    <string name="header_desc_items_unreturned">items lent</string>
+    <string name="header_desc_items_returned">items returned</string>
+    <string name="header_desc_items_all">items</string>
+    <string name="item_filter">Filter by returned state</string>
+    <string name="item_filter_all">Show all</string>
+    <string name="item_filter_unreturned">Show unreturned</string>
+    <string name="item_filter_returned">Show returned</string>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d Transaction deleted</item>
         <item quantity="other">%d Transactions deleted</item>

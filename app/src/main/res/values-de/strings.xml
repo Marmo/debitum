@@ -45,7 +45,13 @@
     <string name="transaction_list_received">bekam</string>
     <string name="toolbar_edit_person">Person bearbeiten</string>
     <string name="header_label">Summe</string>
-    <string name="header_desc_items">Dinge ver-/entliehen</string>
+    <string name="header_desc_items_unreturned">Dinge ver-/entliehen</string>
+    <string name="header_desc_items_returned">Dinge zurückgegeben</string>
+    <string name="header_desc_items_all">Dinge</string>
+    <string name="item_filter">Filter Rückgabestatus</string>
+    <string name="item_filter_all">Alle anzeigen</string>
+    <string name="item_filter_unreturned">Ausstehende anzeigen</string>
+    <string name="item_filter_returned">Zurückgegebene anzeigen</string>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d Transaktion gelöscht</item>
         <item quantity="other">%d Transaktionen gelöscht</item>

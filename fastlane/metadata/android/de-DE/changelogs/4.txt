@@ -1,1 +1,3 @@
 - neu: das generische graue Symbol vor jeder Person ist nun farbig basierend auf dem Namen der Person
+- add: Übersetzung in brasilianisches Portugiesisch ([@mezysinc](https://github.com/mezysinc))
+- add: Dinge können als zurückgegeben markiert werden, das Rückgabedatum wird gespeichert und die Liste geliehener Dinge kann anhand des Rückgabestatus gefiltert werden

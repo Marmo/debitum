@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="divider">@color/white_50</color>
+    <color name="returned_item_background">#202020</color>
+    <color name="returned_item_text">#80ffffff</color>
 </resources>

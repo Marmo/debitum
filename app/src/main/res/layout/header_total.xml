@@ -29,7 +29,7 @@
                 android:textAppearance="@style/TextAppearance.Debitum.HeaderLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/header_total"
@@ -49,24 +49,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/header_desc_items"
+                android:text="@string/header_desc_items_unreturned"
                 android:textSize="12sp"
                 android:alpha="0.8"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/header_total"
                 app:layout_constraintTop_toBottomOf="@id/header_total" />
-
-            <!--<ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/list_margin_horizontal"
-                android:layout_marginEnd="@dimen/list_margin_horizontal"
-                android:alpha="0.2"
-                android:background="?attr/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@id/header_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="contentDescription" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.MaterialToolbar>
