@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/miReturned"
-        android:icon="@drawable/ic_baseline_loop_24"
+        android:icon="@drawable/ic_item_returned_24"
         android:title="@string/actionmode_returned"
         android:visible="false"
         app:showAsAction="always" />
