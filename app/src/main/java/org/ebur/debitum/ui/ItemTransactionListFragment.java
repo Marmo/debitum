@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.ebur.debitum.R;
@@ -20,7 +19,6 @@ import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.viewModel.ItemReturnedFilterViewModel;
-import org.ebur.debitum.viewModel.PersonFilterViewModel;
 
 import java.util.List;
 import java.util.Locale;

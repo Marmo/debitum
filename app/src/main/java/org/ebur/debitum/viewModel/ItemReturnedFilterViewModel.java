@@ -3,12 +3,7 @@ package org.ebur.debitum.viewModel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
-import org.ebur.debitum.database.Person;
 
 public class ItemReturnedFilterViewModel extends AndroidViewModel {
 
