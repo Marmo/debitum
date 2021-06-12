@@ -1,14 +1,12 @@
-## 1.2.0
-- move more logic to ViewModels
-  - EditTransactionFragment: switchIsMonetary status to viewModel
-- add sum of selected items to subtitle of contextual action bar <-- update readme!!!
-- do not overwrite backups but add counter (how to handle restore when there are multiple files?)
-
 ## 1.2.x
   - make cab-returned-item invisible or "set as not returned" icon when selected item is already returned 
+- move more logic to ViewModels
+  - EditTransactionFragment: switchIsMonetary status to viewModel
   
 ## 1.3.0
 - contacts integration
+- add sum of selected items to subtitle of contextual action bar <-- update readme!!!
+- do not overwrite backups but add counter (how to handle restore when there are multiple files?)
 
 ## later / unassigned
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
