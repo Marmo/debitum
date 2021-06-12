@@ -5,14 +5,17 @@
   nie wieder grübeln, ob dein Freund dir schon dieses Buch zurückgegeben hat oder darüber diskutieren,
   wie viel du deiner Kollegin für Kaffee schuldest.</p>
 
-<h3>Benutzung</h3>
-<p>Um dir geliehenes Geld oder Dinge zu merken, musst du mit der roten Schaltfläche (Mitte unten)
-eine Transaktion erstellen. Im erscheinenden Dialog kannst du Details wie Betrag, eine Beschreibung
-oder ein Datum angeben und zwischen Geld- oder Gegenstandstransaktionen umschalten.</p>
-
 <p>Die App nutzt keine Internetverbindung, so dass deine Daten ausschließlich
 auf deinem Gerät gespeichert werden (insofern diese App darauf Einfluss hat).</p>
 
+<h3>Benutzung</h3>
+<h4>Anlegen einer Transaktion</h4>
+<p>Um dir geliehenes Geld oder Dinge zu merken, musst du mit der roten Schaltfläche (Mitte unten)
+eine Transaktion erstellen. Im erscheinenden Dialog kannst du Details wie Betrag, eine Beschreibung
+oder ein Datum angeben und zwischen Geld- oder Gegenstandstransaktionen umschalten (benutze dazu den
+Schalter rechts vom Eingabefeld für die Summe/Anzahl).</p>
+
+<h4>Transaktionlisten</h4>
 <p>In der unteren Navigationsleiste kannst du verschiedene Ansichten deiner Transaktionen aufrufen.
 
     <ul>
@@ -23,13 +26,9 @@ auf deinem Gerät gespeichert werden (insofern diese App darauf Einfluss hat).</
         </ul>
     </li>
     <li>Geld: zeigt nur finanzielle Transaktionen, sortiert nach Datum (absteigend)</li>
-    <li>Dinge: Zeigt nur verliehene Gegenstände, sortiert nach Datum (absteigend). Es gibt aktuell keine besondere Möglichkeit, um
-    Gegenstände als zurückgegeben zu markieren, daher sollten Transaktionen von bereits zurückgegebenen Dingen einfach
-    gelöscht werden.</li>
+    <li>Dinge: Zeigt nur verliehene Gegenstände, sortiert nach Datum (absteigend). Gegenstände können als zurückgegeben markiert werden.
+    Drücke dazu lange auf die Transaktion und wähle den Button "Gegenstand zurückgegeben". Die Liste kann dann anhand des Rückabestatus gefiltert werden.</li>
      </ul></p>
-
-<p>Beim Erstellen einer neuen Transaktion (oder Editieren einer besehenden) kannst du zwischen Geld- und Gegenstands-Transaktion
-umschalten. Benutze dazu den Schalter rechts vom Eingabefeld für die Summe/Anzahl. </p>
 
 <p>In den Einstellungen gibt es die Möglichkeit, die Datenbank zu sichern und aus einer Sicherung
 wiederherzustellen (beinhaltet alle Personen und Transaktionen).

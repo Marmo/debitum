@@ -1,12 +1,12 @@
 ## 1.2.0
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
-- add option to mark lent item as returned
-  - better cab-icon
-  - make cab-returned-item invisible or "set as not returned" icon when selected item is already returned 
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
 
+## 1.2.x
+  - make cab-returned-item invisible or "set as not returned" icon when selected item is already returned 
+  
 ## 1.3.0
 - contacts integration
 
