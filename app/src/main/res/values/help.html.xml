@@ -25,8 +25,7 @@ money- or an item-transaction (use the switch to the right of the amount input f
         </ul>
     </li>
     <li>Money: Shows only monetary transactions, ordered by date (descending)</li>
-    <li>Items: Shows only lent items, ordered by date (descending). There is currently no extra way to mark an
-     item as returned, so returned item\'s transactions should simply be deleted.</li>
+    <li>Items: Shows only lent items, ordered by date (descending). Items can be marked as returned by long-pressing and choosing the \"mark item as returned\" button. The list can then be filtered for returned/unreturned/all items.</li>
      </ul></p>
 
 <p>You can get a context menu in every list by long-pressing a row. From there you can edit or delete items (also multiple rows can be selected this way).</p>
