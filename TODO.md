@@ -2,6 +2,7 @@
   - make cab-returned-item invisible or "set as not returned" icon when selected item is already returned 
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
+- add option in preferences for standard filter in item list
   
 ## 1.3.0
 - contacts integration
@@ -25,10 +26,14 @@
 
 
 
-# release-checklist
-- update fastlane changelogs (2x)
-- update CHANGELOG.md
-- update screenshots
-- check build.gradle version+version code
-- build release (!) apk, rename debitum-x.x.x.apk
-- tag release
+# release-checklist (1.2.0/4)
+[x] update fastlane changelogs (2x)
+[x] update CHANGELOG.md
+[-] update screenshots
+[x] update licenses
+  - ./gradlew checkLicenses
+  - ./gradlew updateLicenses
+  - ./gradlew generateLicensePage
+[x] check build.gradle version+version code
+[x] build release (!) apk, rename debitum-x.x.x.apk
+[x] tag release
