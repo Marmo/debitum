@@ -24,6 +24,9 @@ mais esquecerá se seu amigo já lhe devolveu aquele livro ou ficará na dúvida
     <li>Itens: Mostra apenas itens emprestados, ordenados por data (decrescente). Os itens podem ser marcados como devolvidos pressionando durante muito tempo e escolhendo o botão "marcar item como devolvido". A lista pode, então, ser filtrada para itens devolvidos/expedidos/todos os itens.</li>
      </ul></p>
 
+<p>Você pode obter um menu de contexto em cada lista pressionando uma fila por muito tempo. A partir daí você pode editar ou excluir itens (também várias linhas podem ser selecionadas desta forma).</p>
+
+<h4>Cópia de segurança e restauração</h4>
 <p>Na tela de configurações, você pode fazer um Backup e restaurar a base de dados (contém todas as transações e pessoas).
 Certifique-se de mover os arquivos do Backup para um lugar seguro antes de desinstalar o App ou limpar os dados do App, 
 pois o Backup é salvo em pasta de dados no armazenamento externo, que é excluído ao desinstalar/limpar os dados do App.</p>]]></string>

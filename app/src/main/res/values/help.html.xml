@@ -29,6 +29,8 @@ money- or an item-transaction (use the switch to the right of the amount input f
      item as returned, so returned item\'s transactions should simply be deleted.</li>
      </ul></p>
 
+<p>You can get a context menu in every list by long-pressing a row. From there you can edit or delete items (also multiple rows can be selected this way).</p>
+
 <h4>Backup and restore</h4>
 <p>From the Settings Screen you can backup and restore the database (contains all transactions and persons).
 Make sure to move backup files out of the way before uninstalling the app or clearing app data, as

@@ -38,6 +38,8 @@ Via the Bottom Navigation you can choose different views of your transactions:
 * Money: Shows only monetary transactions, ordered by date (descending). If someone repays a debt to you, you should create a new transaction for this. For details why see [here](https://github.com/Marmo/debitum/issues/3#issue-911261188).
 * Items: Shows only lent items, ordered by date (descending). Items can be marked as returned by long-pressing and choosing the "mark item as returned" button. The list can then be filtered for returned/unreturned/all items. 
 
+You can get a context menu in every list by long-pressing a row. From there you can edit or delete items (also multiple rows can be selected this way).
+
 ### Backup and restore
 From the Settings Screen you can backup and restore the database (contains all transactions and persons).
 Make sure to move backup files out of the way before uninstalling the app or clearing app data, as currently
