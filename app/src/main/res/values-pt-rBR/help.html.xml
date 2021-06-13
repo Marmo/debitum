@@ -10,7 +10,7 @@ mais esquecerá se seu amigo já lhe devolveu aquele livro ou ficará na dúvida
 <h4>Criar transação</h4>
 <p>Para anotar valor de dinheiro ou itens emprestados, você precisa criar uma transação usando o botão vermelho flutuante. Lá você pode digitar os detalhes como quantidade, descrição ou data e fazer alteração entre transação em dinheiro ou item (usando o botão à direita do campo de entrada de valor).</p>
 
-<h4>Listas de transações</h4>
+<h4>Lista de transações</h4>
 <p>Através da barra de navegação embaixo você pode escolher diferentes vistas de suas transações:
 
     <ul>
@@ -21,10 +21,10 @@ mais esquecerá se seu amigo já lhe devolveu aquele livro ou ficará na dúvida
         </ul>
     </li>
     <li>Dinheiro: Mostra apenas transações monetárias, ordenadas por data (decrescente)</li>
-    <li>Itens: Mostra apenas itens emprestados, ordenados por data (decrescente). Os itens podem ser marcados como devolvidos pressionando durante muito tempo e escolhendo o botão \"marcar item como devolvido\". A lista pode, então, ser filtrada para itens devolvidos/expedidos/todos os itens.</li>
+    <li>Itens: Mostrar apenas itens emprestados, ordenados pela data (decrescente). Os itens podem ser marcados como devolvidos via clique longo e logo depois escolhendo a opção \"marcar como devolvido\". Depois a lista pode ser filtrada por itens devolvidos/não devolvidos/tudo.</li>
      </ul></p>
 
-<p>Você pode obter um menu de contexto em cada lista pressionando uma fila por muito tempo. A partir daí você pode editar ou excluir itens (também várias linhas podem ser selecionadas desta forma).</p>
+<p>Você pode obter o menu de contexto em cada lista clicando nela via clique longo. Daí pode editar ou excluir itens (também desta forma pode selecionar várias linhas ao mesmo tempo).</p>
 
 <h4>Cópia de segurança e restauração</h4>
 <p>Na tela de configurações, você pode fazer um Backup e restaurar a base de dados (contém todas as transações e pessoas).

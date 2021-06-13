@@ -5,7 +5,7 @@
     <string name="delete_dialog_confirm">Excluir</string>
     <string name="dialog_cancel">Cancelar</string>
     <string name="required_helper_text">* Obrigatório</string>
-    <string name="actionmode_returned">Retornado</string>
+    <string name="actionmode_returned">Marcar como devolvido</string>
     <string name="actionmode_edit">Editar</string>
     <string name="actionmode_delete">Excluir</string>
     <plurals name="actionmode_selected">
@@ -48,13 +48,13 @@
     <!-- these will appear in the totals header like "8 items lent"-->
     <string-array name="header_desc_items">
         <item>itens emprestados</item>
-        <item>itens retornados</item>
+        <item>itens devolvidos</item>
         <item>itens</item>
     </string-array>
-    <string name="item_filter">Filtrar por estado retornado</string>
+    <string name="item_filter">Filtrar por status dos itens</string>
     <string name="item_filter_all">Mostrar tudo</string>
     <string name="item_filter_unreturned">Mostrar pendentes</string>
-    <string name="item_filter_returned">Mostrar devolvidos</string>
+    <string name="item_filter_returned">Mostrar os devolvidos</string>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d Transação excluída</item>
         <item quantity="other">%d Transações excluídas</item>
@@ -79,7 +79,7 @@
     <string name="edit_transaction_wrong_amount_format">Algo está errado com formato de quantidade, verificá-lo!</string>
     <string name="edit_transaction_date_dialog_title">Selecione a data</string>
     <string name="edit_transaction_hint_date">Data</string>
-    <string name="edit_transaction_hint_returndate">Data de retorno</string>
+    <string name="edit_transaction_hint_returndate">Data de devolução</string>
     <string name="edit_transaction_gave">Deu</string>
     <string name="edit_transaction_received">Recebeu</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 dígitos permitidos em valor</string>
