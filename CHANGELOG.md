@@ -1,3 +1,6 @@
+# v1.2.1
+- add: setting to define standard filter for items list (all/unreturned/returned)
+
 # v1.2.0
 - add: the generic gray person-icon in the person list is now a colored name-based icon
 - add: brazilian portuguese translation ([@mezysinc](https://github.com/mezysinc))
