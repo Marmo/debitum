@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NavUtils;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
@@ -33,6 +34,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private final String BACKUP_SUBDIR = "backup";
 
     public final static String PREF_KEY_DISMISS_FILTER_BEHAVIOUR = "dismiss_filter_behaviour";
+    public final static String PREF_KEY_ITEM_RETURNED_STANDARD_FILTER = "item_returned_standard_filter";
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -52,6 +54,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if(dismissFilterPref != null) {
             dismissFilterPref.setSummaryOff(R.string.pref_dismiss_filter_summary_false);
             dismissFilterPref.setSummaryOn(R.string.pref_dismiss_filter_summary_true);
+        }
+
+        ListPreference ItemReturnedFilterPref = findPreference(PREF_KEY_ITEM_RETURNED_STANDARD_FILTER);
+        if(ItemReturnedFilterPref != null) {
+            ItemReturnedFilterPref.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
         }
 
         Preference backupPref = findPreference(PREF_KEY_BACKUP);

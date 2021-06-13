@@ -8,20 +8,22 @@
         android:icon="@drawable/ic_outline_filter_alt_24_onprimary"
         app:showAsAction="always">
         <menu>
-            <item
-                android:id="@+id/miFilterAll"
-                android:title="@string/item_filter_all"
-                android:icon="@drawable/ic_outline_local_offer_24_controlnormal"
-                app:showAsAction="never"/>
-            <item
-                android:id="@+id/miFilterUnreturned"
-                android:title="@string/item_filter_unreturned"
-                android:icon="@drawable/ic_item_unreturned_24"
-                app:showAsAction="never"/>
-            <item
-                android:id="@+id/miFilterReturned"
-                android:title="@string/item_filter_returned"
-                android:icon="@drawable/ic_item_returned_24"/>
+            <group android:checkableBehavior="single" >
+                <item
+                    android:id="@+id/miFilterAll"
+                    android:icon="@drawable/ic_outline_local_offer_24_controlnormal"
+                    android:title="@string/item_filter_all"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miFilterUnreturned"
+                    android:icon="@drawable/ic_item_unreturned_24"
+                    android:title="@string/item_filter_unreturned"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miFilterReturned"
+                    android:icon="@drawable/ic_item_returned_24"
+                    android:title="@string/item_filter_returned" />
+            </group>
         </menu>
     </item>
 </menu>

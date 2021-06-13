@@ -45,9 +45,12 @@
     <string name="transaction_list_received">recebeu</string>
     <string name="toolbar_edit_person">Editar pessoa</string>
     <string name="header_label">Total</string>
-    <string name="header_desc_items_unreturned">itens emprestados</string>
-    <string name="header_desc_items_returned">itens retornados</string>
-    <string name="header_desc_items_all">itens</string>
+    <!-- these will appear in the totals header like "8 items lent"-->
+    <string-array name="header_desc_items">
+        <item>itens emprestados</item>
+        <item>itens retornados</item>
+        <item>itens</item>
+    </string-array>
     <string name="item_filter">Filtrar por estado retornado</string>
     <string name="item_filter_all">Mostrar tudo</string>
     <string name="item_filter_unreturned">Mostrar pendentes</string>
@@ -95,6 +98,8 @@
     <string name="pref_dismiss_filter_title">Ao dispensar o filtro de pessoas …</string>
     <string name="pref_dismiss_filter_summary_true">Voltar à lista de pessoas</string>
     <string name="pref_dismiss_filter_summary_false">Permanecer na lista atual</string>
+    <string name="pref_item_returned_filter_title">Filtro padrão da lista de itens</string>
+
     <string name="pref_maintenance_header">Manutenção</string>
     <string name="backup_successful">A base de dados foi copiado com sucesso ao armazenamento externo</string>
     <string name="backup_failed">O Backup falhou! %1$s</string>
@@ -102,11 +107,12 @@
     <string name="pref_backup_title">Fazer um Backup da base de dados</string>
     <string name="pref_restore_title">Restaurar a base de dados</string>
     <string name="pref_backup_summary">para %1$s</string>
-    <string name="pref_restore_summary">de arquivo "%1$s" no armazenamento externo</string>
+    <string name="pref_restore_summary">de arquivo \"%1$s\" no armazenamento externo</string>
     <string name="pref_backup_warning">Fique sabendo que a pasta onde o Backup com base de dados é copiado
                 será excluída quando o App for desinstalado ou quando seus dados forem excluídos. Você tem que guardá-lo
                 num lugar seguro antes de desinstalar/excluir dados, se você quiser usá-los posteriormente!</string>
     <string name="pref_restore_file_not_found">Arquivo do Backup não encontrado</string>
+
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Guia Prático</string>
     <string name="pref_guide_dialog_close">fechar</string>

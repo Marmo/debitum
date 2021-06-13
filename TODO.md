@@ -1,10 +1,7 @@
-- update Person Sum list screenshots 
-
 ## 1.2.x
-  - make cab-returned-item invisible or "set as not returned" icon when selected item is already returned 
+- make cab-returned-item invisible or "set as not returned" icon when selected item is already returned 
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
-- add option in preferences for standard filter in item list
 - use licenses fragment for quick guide
   
 ## 1.3.0

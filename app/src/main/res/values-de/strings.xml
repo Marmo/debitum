@@ -45,9 +45,12 @@
     <string name="transaction_list_received">bekam</string>
     <string name="toolbar_edit_person">Person bearbeiten</string>
     <string name="header_label">Summe</string>
-    <string name="header_desc_items_unreturned">Dinge ver-/entliehen</string>
-    <string name="header_desc_items_returned">Dinge zurückgegeben</string>
-    <string name="header_desc_items_all">Dinge</string>
+    <!-- these will appear in the totals header like "8 items lent"-->
+    <string-array name="header_desc_items">
+        <item>Dinge ver-/entliehen</item>
+        <item>Dinge zurückgegeben</item>
+        <item>Dinge</item>
+    </string-array>
     <string name="item_filter">Filter Rückgabestatus</string>
     <string name="item_filter_all">Alle anzeigen</string>
     <string name="item_filter_unreturned">Ausstehende anzeigen</string>
@@ -95,6 +98,8 @@
     <string name="pref_dismiss_filter_title">Beim Verwerfen des Personenfilters …</string>
     <string name="pref_dismiss_filter_summary_true">zurück zur Personenliste</string>
     <string name="pref_dismiss_filter_summary_false">in der aktuellen Liste bleiben</string>
+    <string name="pref_item_returned_filter_title">Standardfilter für Dinge</string>
+
     <string name="pref_maintenance_header">Wartung</string>
     <string name="backup_successful">Datenbank erfolgreich in externen Speicher exportiert</string>
     <string name="backup_failed">Sicherung fehlgeschlagen! %1$s</string>
@@ -102,12 +107,13 @@
     <string name="pref_backup_title">Datenbank sichern</string>
     <string name="pref_restore_title">Datenbank wiederherstellen</string>
     <string name="pref_backup_summary">nach %1$s</string>
-    <string name="pref_restore_summary">von früher gesicherter "%1$s" im externen Speicher</string>
+    <string name="pref_restore_summary">von früher gesicherter \"%1$s\" im externen Speicher</string>
     <string name="pref_backup_warning">Bitte beachte, dass das Verzeichnis, in das die Sicherung
         abgelegt wird, beim Deinstallieren oder dem Löschen der Anwendungsdaten ebenfalls entfernt
         wird. Du musst die Datei an einen sicheren Ort verschieben, wenn du sie später wiederherstellen
         willst!</string>
     <string name="pref_restore_file_not_found">Backup-Datei nicht gefunden</string>
+
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Kurzanleitung</string>
     <string name="pref_guide_dialog_close">schließen</string>

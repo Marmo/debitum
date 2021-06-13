@@ -1,6 +1,7 @@
 package org.ebur.debitum.ui;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.ArrayRes;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
@@ -29,30 +34,53 @@ import java.util.stream.Collectors;
 public class ItemTransactionListFragment extends TransactionListFragment {
 
     private ItemReturnedFilterViewModel returnedFilterViewModel;
+    private TextView descView;
+    private Menu menu;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // get and set standard item returned state filter mode
         returnedFilterViewModel = new ViewModelProvider(this).get(ItemReturnedFilterViewModel.class);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        int standardFilterMode =
+                Integer.parseInt(
+                        pref.getString(SettingsFragment.PREF_KEY_ITEM_RETURNED_STANDARD_FILTER,
+                                Integer.toString(ItemReturnedFilterViewModel.FILTER_ALL)
+                        ));
+        returnedFilterViewModel.setFilterMode(standardFilterMode);
+
+        View root = super.onCreateView(inflater, container, savedInstanceState);
+        assert root != null;
+        descView = root.findViewById(R.id.header_description);
+        return root;
     }
 
     @Override
     protected void subscribeToViewModel() {
         viewModel.getItemTransactions().observe(getViewLifecycleOwner(), this::updateAdapter);
+        returnedFilterViewModel.getFilterMode().observe(getViewLifecycleOwner(), filterMode -> {
+            String[] descs = getResources().getStringArray(R.array.header_desc_items);
+            descView.setText(descs[filterMode-1]);
+            setFilterRadioButtonsCheckedStatus(filterMode);
+            updateAdapter(viewModel.getItemTransactions().getValue());
+        });
     }
 
     private void updateAdapter(List<TransactionWithPerson> transactions) {
-        Person filterPerson = personFilterViewModel.getFilterPerson();
-        List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
-        listForAdapter = filter(listForAdapter, returnedFilterViewModel.getFilterMode());
-        updateTotalHeader(TransactionWithPerson.getNumberOfItems(listForAdapter));
-        adapter.submitList(listForAdapter);
-        if(transactions.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
+        if (transactions != null) {
+            Person filterPerson = personFilterViewModel.getFilterPerson();
+            List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
+            Integer filterMode = returnedFilterViewModel.getFilterMode().getValue();
+            listForAdapter = filter(listForAdapter, filterMode != null ? filterMode : 0);
+            updateTotalHeader(TransactionWithPerson.getNumberOfItems(listForAdapter));
+            adapter.submitList(listForAdapter);
+            if (transactions.isEmpty()) {
+                recyclerView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+            } else {
+                recyclerView.setVisibility(View.VISIBLE);
+                emptyView.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -71,6 +99,9 @@ public class ItemTransactionListFragment extends TransactionListFragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_item_transaction_list, menu);
+        this.menu = menu;
+        Integer filterMode = returnedFilterViewModel.getFilterMode().getValue();
+        setFilterRadioButtonsCheckedStatus(filterMode != null ? filterMode : 0);
     }
 
     @Override
@@ -78,24 +109,40 @@ public class ItemTransactionListFragment extends TransactionListFragment {
         int id = item.getItemId();
         if(id==R.id.miFilterReturned) {
             returnedFilterViewModel.setFilterMode(ItemReturnedFilterViewModel.FILTER_RETURNED);
-            updateAdapter(viewModel.getItemTransactions().getValue());
-            TextView descView = requireView().findViewById(R.id.header_description);
-            descView.setText(R.string.header_desc_items_returned);
             return true;
         } else if (id==R.id.miFilterUnreturned) {
             returnedFilterViewModel.setFilterMode(ItemReturnedFilterViewModel.FILTER_UNRETURNED);
-            updateAdapter(viewModel.getItemTransactions().getValue());
-            TextView descView = requireView().findViewById(R.id.header_description);
-            descView.setText(R.string.header_desc_items_unreturned);
             return true;
         } else if (id==R.id.miFilterAll) {
             returnedFilterViewModel.setFilterMode(ItemReturnedFilterViewModel.FILTER_ALL);
-            updateAdapter(viewModel.getItemTransactions().getValue());
-            TextView descView = requireView().findViewById(R.id.header_description);
-            descView.setText(R.string.header_desc_items_all);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setFilterRadioButtonsCheckedStatus(int filterMode) {
+        if (menu != null) {
+            // CAUTION: if android:checkableBehavior="single"
+            // (MenuItemImpl.mFlags & MenuItemImpl.EXCLUSIVE != 0) setChecked does not care about
+            // the value passed but sets the item for that setChecked is called as checked and the
+            // others in the group unchecked!
+            @IdRes int menuItemResId;
+            switch (filterMode) {
+                case ItemReturnedFilterViewModel.FILTER_ALL:
+                    menuItemResId = R.id.miFilterAll;
+                    break;
+                case ItemReturnedFilterViewModel.FILTER_UNRETURNED:
+                    menuItemResId = R.id.miFilterUnreturned;
+                    break;
+                case ItemReturnedFilterViewModel.FILTER_RETURNED:
+                    menuItemResId = R.id.miFilterReturned;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown filter mode: "+filterMode);
+            }
+            // could also pass false here, as setChecked does not care in exclusive mode!
+            menu.findItem(menuItemResId).setChecked(true);
         }
     }
 

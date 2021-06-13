@@ -4,24 +4,30 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 public class ItemReturnedFilterViewModel extends AndroidViewModel {
 
-    public static final int FILTER_RETURNED = 0x10;
-    public static final int FILTER_UNRETURNED = 0x01;
-    public static final int FILTER_ALL = 0x11;
+    public static final int FILTER_ALL = 0b11;
+    public static final int FILTER_UNRETURNED = 0b10;
+    public static final int FILTER_RETURNED = 0b01;
 
-    private int filterMode = FILTER_UNRETURNED;
+    private final MutableLiveData<Integer> filterMode;
 
     public ItemReturnedFilterViewModel(@NonNull Application application) {
         super(application);
+        filterMode = new MutableLiveData<>(FILTER_UNRETURNED);
     }
 
     public void setFilterMode(int mode) {
-        filterMode = mode;
+        if (mode == FILTER_RETURNED || mode == FILTER_UNRETURNED || mode == FILTER_ALL)
+            filterMode.setValue(mode);
+        else throw new IllegalArgumentException("Unknown filter mode: " + mode);
     }
 
-    public int getFilterMode() {
+    @NonNull
+    public LiveData<Integer> getFilterMode() {
         return filterMode;
     }
 }

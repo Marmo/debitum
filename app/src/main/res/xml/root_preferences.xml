@@ -6,6 +6,12 @@
             app:key="dismiss_filter_behaviour"
             app:title="@string/pref_dismiss_filter_title"
             app:defaultValue="true"/>
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/itemReturnedFilterModes"
+            android:entryValues="@array/itemReturnedFilterModeValues"
+            android:key="item_returned_standard_filter"
+            android:title="@string/pref_item_returned_filter_title" />
     </PreferenceCategory>
 
     <PreferenceCategory

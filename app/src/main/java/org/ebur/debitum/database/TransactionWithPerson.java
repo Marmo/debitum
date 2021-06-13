@@ -43,7 +43,7 @@ public class TransactionWithPerson {
      * @return number of all lent items (sum of |amount| of all non-monetary transactions) of all transactions of all elements of personsWithTransactions
      */
     public static int getNumberOfItems(List<TransactionWithPerson> transactionWithPersonList) {
-        return transactionWithPersonList
+        return transactionWithPersonList == null ? 0 :transactionWithPersonList
                 .stream()
                 .filter(twp -> !twp.transaction.isMonetary)
                 .mapToInt(twp -> Math.abs(twp.transaction.amount))
