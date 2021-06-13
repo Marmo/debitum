@@ -145,7 +145,7 @@ public class EditTransactionFragment extends DialogFragment {
         editReturnDate = (AutoCompleteTextView) editReturnDateLayout.getEditText();
         assert editReturnDate != null;
         editReturnDate.setOnClickListener(view -> showDatePickerDialog(view,
-                viewModel.getReturnTimestamp().getTime(),
+                viewModel.getReturnTimestamp() != null ? viewModel.getReturnTimestamp().getTime() : new Date().getTime(),
                 selection -> {
                     viewModel.setReturnTimestamp(new Date(selection));
                     editReturnDate.setText(Utilities.formatDate(new Date(selection)));
