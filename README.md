@@ -29,7 +29,7 @@ To take note of lent money or items, you need to create a transaction using the 
 button. There you can enter details like amount, description or date and switch between a money- or 
 an item-transaction (use the switch to the right of the amount input field).
 
-### transaction lists
+### Transaction lists
 Via the Bottom Navigation you can choose different views of your transactions:
 * People: summarized by person, ordered by last transaction 
   * you can tap on a row to filter the money- and items list by that person
