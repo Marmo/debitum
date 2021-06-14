@@ -1,9 +1,8 @@
-## 1.2.1/5
-
 ## 1.2.2/6
 - make cab-returned-item invisible or "set as not returned" icon when selected item is already returned
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
+- use MD5 instead of String.hashCode() for avatar color calculation (better distribution of colors)
   
 ## 1.3.0/7
 - contacts integration
@@ -28,13 +27,13 @@
 
 
 # release-checklist (1.2.1/5)
-[x] update fastlane changelogs (2x)
-[x] update CHANGELOG.md
-[-] update screenshots
-[x] update licenses
+- [x] update fastlane changelogs (2x)
+- [x] update CHANGELOG.md
+- [-] update screenshots
+- [x] update licenses
   - ./gradlew checkLicenses
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage
-[x] check build.gradle version+version code
-[x] build release (!) apk, rename debitum-x.x.x.apk
-[] tag release
+- [x] check build.gradle version+version code
+- [x] build release (!) apk, rename debitum-x.x.x.apk
+- [x] tag release
