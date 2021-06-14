@@ -3,7 +3,6 @@ package org.ebur.debitum.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -80,7 +79,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         Preference guidePref = findPreference(PREF_KEY_GUIDE);
         if (guidePref!=null) {
             guidePref.setOnPreferenceClickListener(preference -> {
-                showGuide();
+                NavHostFragment.findNavController(this).navigate(R.id.action_settings_to_guide);
                 return true;
             });
         }
@@ -105,18 +104,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         // add padding so that nothing is hidden behind the bottom navigation
         getListView().setPadding(0,0,0, getResources().getDimensionPixelSize(R.dimen.bottom_nav_height)+50);
         getListView().setClipToPadding(false);
-    }
-
-    private void showGuide() {
-        WebView webView = new WebView(getContext());
-        webView.loadData(getString(R.string.guide_text),"text/html", "utf-8");
-
-        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
-        builder.setTitle(R.string.pref_guide_title)
-                .setView(webView)
-                .setPositiveButton(getString(R.string.pref_guide_dialog_close), (dialog, which) -> dialog.dismiss())
-                .create()
-                .show();
     }
 
     // ---------------------

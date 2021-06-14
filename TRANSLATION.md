@@ -12,7 +12,7 @@ If you want to contribute a translation, just fork this repository and copy & tr
 File | Location | Note
 -----|----------|-----
 [strings.xml](app/src/main/res/values/strings.xml) | `app/src/main/res/values-xx/` | Strings used in Debitum's UI
-[help.html.xml](app/src/main/res/values/help.html.xml) | `app/src/main/res/values-xx/` | Quick Guide accessible from Settings
+[guide_xx.html](app/src/main/assets/guide_en.html) | `app/src/main/assets/` | Quick Guide accessible from Settings
 [full_description.txt](fastlane/metadata/android/en-US/full_description.txt) | `fastlane/metadata/android/xx/` | Full app-description used by F-Droid
 [short_description.txt](fastlane/metadata/android/en-US/short_description.txt) | `fastlane/metadata/android/xx/` | Short app-description used by F-Droid, **max 80 chars**
 

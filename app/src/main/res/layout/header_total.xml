@@ -49,7 +49,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/header_desc_items_unreturned"
                 android:textSize="12sp"
                 android:alpha="0.8"
                 app:layout_constraintBottom_toBottomOf="parent"

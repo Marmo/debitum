@@ -1,12 +1,12 @@
 ## 1.2.1/5
-- move more logic to ViewModels
-  - EditTransactionFragment: switchIsMonetary status to viewModel
 - use licenses fragment for quick guide
   - move xml html to real html in assets
   - update links/paths in TRANSLATION.md
 
 ## 1.2.2/6
 - make cab-returned-item invisible or "set as not returned" icon when selected item is already returned
+- move more logic to ViewModels
+  - EditTransactionFragment: switchIsMonetary status to viewModel
   
 ## 1.3.0/7
 - contacts integration

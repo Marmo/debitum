@@ -96,12 +96,31 @@
         android:label="@string/title_fragment_settings">
         <action
             android:id="@+id/action_settings_to_licenses"
-            app:destination="@id/licenses_dest" />
+            app:destination="@id/licenses_dest" >
+        </action>
+        <action
+            android:id="@+id/action_settings_to_guide"
+            app:destination="@id/guide_dest" >
+        </action>
     </fragment>
     <dialog
         android:id="@+id/licenses_dest"
-        android:name="org.ebur.debitum.ui.LicensesFragment"
-        android:label="@string/pref_licenses_title" />
+        android:name="org.ebur.debitum.ui.HtmlFragment"
+        android:label="@string/pref_licenses_title" >
+        <argument
+            android:name="html_asset_uri"
+            app:argType="reference"
+            android:defaultValue="@string/licenses_uri" />
+    </dialog>
+    <dialog
+        android:id="@+id/guide_dest"
+        android:name="org.ebur.debitum.ui.HtmlFragment"
+        android:label="@string/pref_guide_title" >
+        <argument
+            android:name="html_asset_uri"
+            app:argType="reference"
+            android:defaultValue="@string/guide_uri" />
+    </dialog>
 
     <action
         android:id="@+id/action_global_add_money_transaction"

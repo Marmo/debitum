@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="licenses_uri">file:///android_asset/licenses.html</string>
+    <string name="guide_uri">file:///android_asset/guide_de.html</string>
+</resources>
