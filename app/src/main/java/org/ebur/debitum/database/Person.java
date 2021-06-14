@@ -62,7 +62,9 @@ public class Person implements Parcelable {
     }
 
     public void calcuateColorIndex() {
-        colorIndex = Math.abs(name.hashCode()%NR_OF_COLORS);
+        String md5String = Utilities.md5Hash(name);
+        assert md5String != null;
+        colorIndex = Math.abs(md5String.hashCode()%NR_OF_COLORS);
     }
 
     /**

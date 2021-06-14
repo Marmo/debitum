@@ -10,6 +10,9 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -73,5 +76,21 @@ public class Utilities {
             Log.w(TAG, "did not find color resource " + colorRes);
         }
         return color;
+    }
+
+    public static String md5Hash(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(input.getBytes(StandardCharsets.UTF_8));
+            byte[] hashBytes = md.digest();
+            //Convert hash bytes to hex format
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ignore) {
+            return null;
+        }
     }
 }
