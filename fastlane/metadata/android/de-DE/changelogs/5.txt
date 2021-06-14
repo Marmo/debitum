@@ -1,0 +1,3 @@
+- neu: der Standardfilter für die Liste geliehener Dinge kann nun in den Einstellungen festgelegt werden
+- geändert: Kurzanleitung wird nun als Vollbild angezeigt
+- repariert: Absturz beim Editieren des Rückgabedatums von Dingen behoben

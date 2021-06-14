@@ -1,5 +1,7 @@
 # v1.2.1
 - add: setting to define standard filter for items list (all/unreturned/returned)
+- change: guide is now displayed in fullscreen dialog
+- fix: crash when trying to edit item's return date
 
 # v1.2.0
 - add: the generic gray person-icon in the person list is now a colored name-based icon

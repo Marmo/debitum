@@ -1,7 +1,4 @@
 ## 1.2.1/5
-- use licenses fragment for quick guide
-  - move xml html to real html in assets
-  - update links/paths in TRANSLATION.md
 
 ## 1.2.2/6
 - make cab-returned-item invisible or "set as not returned" icon when selected item is already returned
@@ -31,13 +28,13 @@
 
 
 # release-checklist (1.2.1/5)
-[] update fastlane changelogs (2x)
-[] update CHANGELOG.md
-[] update screenshots
-[] update licenses
+[x] update fastlane changelogs (2x)
+[x] update CHANGELOG.md
+[-] update screenshots
+[x] update licenses
   - ./gradlew checkLicenses
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage
-[] check build.gradle version+version code
-[] build release (!) apk, rename debitum-x.x.x.apk
+[x] check build.gradle version+version code
+[x] build release (!) apk, rename debitum-x.x.x.apk
 [] tag release

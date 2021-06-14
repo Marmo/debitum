@@ -1,0 +1,3 @@
+- add: setting to define standard filter for items list (all/unreturned/returned)
+- change: guide is now displayed in fullscreen dialog
+- fix: crash when trying to edit item's return date
