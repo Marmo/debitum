@@ -43,4 +43,7 @@ public class TransactionListViewModel extends AndroidViewModel {
         txnRepository.delete(transaction);
     }
 
+    public boolean isTransactionReturned(int idTransaction) throws ExecutionException, InterruptedException {
+        return txnRepository.getTransaction(idTransaction).transaction.isReturned();
+    }
 }

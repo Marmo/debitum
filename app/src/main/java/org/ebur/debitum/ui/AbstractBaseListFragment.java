@@ -71,12 +71,6 @@ public abstract class AbstractBaseListFragment
      */
     abstract TAdapter getAdapter();
 
-    /**
-     * Can be overridden by subclasses to make the item-returned-button in the action mode visible
-     * @return if the item-returned-button in the action mode should be shown
-     */
-    protected boolean isActionModeReturnEnabled() {return false;}
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,28 +167,12 @@ public abstract class AbstractBaseListFragment
     private final ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            MenuInflater inflater = mode.getMenuInflater();
-            inflater.inflate(R.menu.menu_list_action_mode, menu);
-            if(isActionModeReturnEnabled()) {
-                menu.findItem(R.id.miReturned).setVisible(true);
-            }
-            actionMode = mode;
-            return true;
+            return createActionMode(mode, menu);
         }
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            int nRowsSelected = selectionTracker.getSelection().size();
-            // only show edit transaction menu item if exactly one transaction is selected
-            menu.findItem(R.id.miEdit).setVisible(nRowsSelected == 1);
-            // only show delete transaction menu item if one or more items are selected
-            menu.findItem(R.id.miDelete).setVisible(nRowsSelected >= 1);
-            // only show mark-returned menu item if enabled and exactly one item is selected
-            menu.findItem(R.id.miReturned).setVisible(isActionModeReturnEnabled() && nRowsSelected == 1);
-
-            CharSequence title = getResources().getQuantityString(R.plurals.actionmode_selected, nRowsSelected, nRowsSelected);
-            mode.setTitle(title);
-            return true;
+            return prepareActionMode(mode, menu);
         }
 
         @Override
@@ -232,6 +210,27 @@ public abstract class AbstractBaseListFragment
             actionMode = null;
         }
     };
+
+    protected boolean createActionMode(ActionMode mode, Menu menu) {
+        MenuInflater inflater = mode.getMenuInflater();
+        inflater.inflate(R.menu.menu_list_action_mode, menu);
+        menu.findItem(R.id.miReturned).setVisible(false);
+        actionMode = mode;
+        return true;
+    }
+    protected boolean prepareActionMode(ActionMode mode, Menu menu) {
+        int nRowsSelected = selectionTracker.getSelection().size();
+        // only show edit transaction menu item if exactly one transaction is selected
+        menu.findItem(R.id.miEdit).setVisible(nRowsSelected == 1);
+        // only show delete transaction menu item if one or more items are selected
+        menu.findItem(R.id.miDelete).setVisible(nRowsSelected >= 1);
+        // hide show mark-returned menu item (feel free to override this method ...)
+        menu.findItem(R.id.miReturned).setVisible(false);
+
+        CharSequence title = getResources().getQuantityString(R.plurals.actionmode_selected, nRowsSelected, nRowsSelected);
+        mode.setTitle(title);
+        return true;
+    }
 
     protected abstract void onActionModeEdit(int selectedId);
     protected abstract void onActionModeDelete(Selection<Long> selection);

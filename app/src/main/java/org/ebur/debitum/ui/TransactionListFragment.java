@@ -41,6 +41,8 @@ public class TransactionListFragment
             TransactionListViewHolder,
             TransactionWithPerson> {
 
+    private final static String TAG = "TransactionListFragment";
+
     public static final String ARG_FILTER_PERSON = "filterPerson";
     protected PersonFilterViewModel personFilterViewModel;
     private Toolbar filterBar;

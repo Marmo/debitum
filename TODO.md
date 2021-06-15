@@ -2,7 +2,6 @@
 - make cab-returned-item invisible or "set as not returned" icon when selected item is already returned
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
-- use MD5 instead of String.hashCode() for avatar color calculation (better distribution of colors)
   
 ## 1.3.0/7
 - contacts integration

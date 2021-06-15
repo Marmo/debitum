@@ -4,6 +4,7 @@ package org.ebur.debitum.ui;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,12 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.ArrayRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.selection.Selection;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
@@ -32,6 +32,8 @@ import java.util.stream.Collectors;
 
 // like TransactionListFragment but shows only non-monetary items
 public class ItemTransactionListFragment extends TransactionListFragment {
+
+    private final static String TAG = "ItemTransactionListFragment";
 
     private ItemReturnedFilterViewModel returnedFilterViewModel;
     private TextView descView;
@@ -147,7 +149,28 @@ public class ItemTransactionListFragment extends TransactionListFragment {
     }
 
     @Override
-    protected boolean isActionModeReturnEnabled() {
+    protected boolean createActionMode(ActionMode mode, Menu menu) {
+        super.createActionMode(mode, menu);
+        menu.findItem(R.id.miReturned).setVisible(true);
+        return true;
+    }
+
+    @Override
+    protected boolean prepareActionMode(ActionMode mode, Menu menu) {
+        super.prepareActionMode(mode, menu); // hides mark-returned item!
+        Selection<Long> selection = selectionTracker.getSelection();
+        boolean returned = false;
+        if(selection.size() == 1 ) {
+            try {
+                returned = viewModel.isTransactionReturned(selectionTracker.getSelection().iterator().next().intValue());
+            } catch (ExecutionException | InterruptedException e) {
+                Log.e(TAG, "Error upon checking if selected transaction is already returned: "+e.getMessage());
+            }
+            // show mark-returned-item if selected txn is not already returned
+            if (!returned) {
+                menu.findItem(R.id.miReturned).setVisible(true);
+            }
+        }
         return true;
     }
 
