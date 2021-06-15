@@ -10,11 +10,9 @@
 
 ## later / unassigned
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
-- move Total Header to view subclass (to remove duplicate code from list fragments, https://developer.android.com/training/custom-views/create-view)
-- use RxJava
+- use RxJava (?)
 - create a way to get from person sum list directly to filtered items list of a person
-- make nicer quick-guide display
-- move transition durations to integer resource
+- make some intro showing basic functions
 - add scrollbar showing the date/month/year while scrolling the transaction list
 
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
@@ -22,6 +20,7 @@
   - fab -> new txn
   - action mode delete -> alertDialog (something basic like fade+scale or fade+slide)
   - action mode edit -> edit txn/person
+  - move transition durations to integer resource
 
 
 
