@@ -1,7 +1,7 @@
 ## 1.2.2/6
-- make cab-returned-item invisible or "set as not returned" icon when selected item is already returned
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
+- turn returned functionality (visibility of input, pre-filling input, saving value) on/off using nav argument 
   
 ## 1.3.0/7
 - contacts integration
