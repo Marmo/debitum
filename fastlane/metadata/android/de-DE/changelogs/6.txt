@@ -1,0 +1,4 @@
+- behoben: Kontextmenü wird jetzt bei Listenwechsel ausgeblendet (konnte Absturz verursachen)
+- behoben: Zurückgegeben-Symbol im Kontextmenü der Dinge-Liste wird jetzt ausgeblendet, wenn der ausgewählte Gegenstand schon zurückgegeben wurde
+- geändert: für die Farbberechnung aus dem Namen einer Person wird jetzt MD5 verwendet (bessere Verteilung der Farben)
+- geändert: Person-hinzufügen-Schaltfläche im Dialog zum Hinzufügen von Transaktionen etwas besser sichtbar

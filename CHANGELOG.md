@@ -1,3 +1,9 @@
+# v1.2.2
+- fix: contextual action bar is now finished upon list change (could have crashed the app)
+- fix: mark-returned-icon in the contextual action bar is now hidden when the selected item is already returned
+- change: use MD5 for calculating a color from a person's name for better distribution of colors
+- change: make "add person" button in edit transaction dialog stand out a little more
+
 # v1.2.1
 - add: setting to define standard filter for items list (all/unreturned/returned)
 - change: guide is now displayed in fullscreen dialog
