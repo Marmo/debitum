@@ -236,6 +236,21 @@ public abstract class AbstractBaseListFragment
     protected abstract void onActionModeDelete(Selection<Long> selection);
     protected abstract void onActionModeReturned(int selectedId);
 
+
+    // this seems to be the best place to finish the action mode, as it is called quickly after
+    // changing the fragment, yet it is _not_ called on screen-off.
+    // NOTE: Until now I did not find a place that matches the above requirements and is _not_
+    // called upon changing from light to dark mode (which would be desirable)
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // finish action mode to prevent it being carried over to another list (causes crash, see issue #15)
+        if (actionMode!=null) {
+            actionMode.finish();
+            actionMode=null;
+        }
+    }
+
     interface Adapter {
         void setSelectionTracker(SelectionTracker<Long> selectionTracker);
     }
