@@ -51,7 +51,10 @@ public class EditTransactionFragment extends DialogFragment {
 
     private static final String TAG = "EditTransactionFragment";
     public static final String ARG_ID_TRANSACTION = "idTransaction";
-    public static final String ARG_ID_NEW_ITEM = "newItem";
+    public static final String ARG_NEW_ITEM = "newItem";
+    public static final String ARG_PRESET_NAME = "presetName";
+    public static final String ARG_PRESET_AMOUNT = "presetAmount";
+    public static final String ARG_PRESET_DESCRIPTION = "presetDescription";
 
     private EditTransactionViewModel viewModel;
     private PersonFilterViewModel personFilterViewModel;
@@ -103,7 +106,7 @@ public class EditTransactionFragment extends DialogFragment {
 
         // set viewModel's  transactionType when we are either creating a new item or editing an
         // existing transaction that has the isMonetary flag unset
-        if(requireArguments().getBoolean(ARG_ID_NEW_ITEM, false)
+        if(requireArguments().getBoolean(ARG_NEW_ITEM, false)
                 || (!viewModel.isNewTransaction() && !viewModel.getTransaction().transaction.isMonetary)) {
             viewModel.setTransactionType(EditTransactionViewModel.TRANSACTION_TYPE_ITEM);
         } else {
@@ -217,6 +220,24 @@ public class EditTransactionFragment extends DialogFragment {
         }
         viewModel.setTimestamp(new Date());
         editDate.setText(Utilities.formatDate(viewModel.getTimestamp()));
+
+        // preset name, description, amount and direction (if in arguments, i.e. if dialog is called
+        // from settle-debt-cab-button
+        // TODO: move all those presets to viewModel (presetIdTransaction, presetTransactionType, preset...)
+        int presetAmount = requireArguments().getInt(ARG_PRESET_AMOUNT);
+        if (presetAmount!=0) { // amount > 0 means person gave to user --> gave radio must be checked
+            editAmount.setText(Transaction.formatMonetaryAmount(Math.abs(presetAmount)));
+            gaveRadio.setChecked(presetAmount>0);
+        }
+        String presetDescription = requireArguments().getString(ARG_PRESET_DESCRIPTION);
+        if (presetDescription != null) {
+            editDescription.setText(presetDescription);
+        }
+
+        String presetName = requireArguments().getString(ARG_PRESET_NAME);
+        if (presetName != null) {
+            spinnerName.setText(presetName, false); // IMPORTANT: filter=false, else the dropdown will be filtered to the selected name
+        }
     }
 
     private void fillViewsEditTransaction() {

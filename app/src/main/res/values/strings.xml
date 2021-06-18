@@ -85,6 +85,7 @@
     <string name="edit_transaction_gave">Gave</string>
     <string name="edit_transaction_received">Received</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed in amount</string>
+    <string name="debt_settlement_money_description">Debt settlement for \"%1$s\" from %2$s</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Edit Person</string>

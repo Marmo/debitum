@@ -3,7 +3,10 @@ package org.ebur.debitum.ui;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.MaterialContainerTransform;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
@@ -32,6 +36,7 @@ import org.ebur.debitum.viewModel.TransactionListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 public class TransactionListFragment
@@ -141,6 +146,17 @@ public class TransactionListFragment
         NavHostFragment.findNavController(this).navigate(R.id.action_global_editPerson, args);
     }
 
+    // -----------
+    // Action Mode
+    // -----------
+
+    @Override
+    protected boolean prepareActionMode(ActionMode mode, Menu menu) {
+        super.prepareActionMode(mode, menu);
+        menu.findItem(R.id.miReturned).setVisible(true);
+        return true;
+    }
+
     @Override
     protected void onActionModeEdit(int idTransaction) {
         editTransaction(idTransaction);
@@ -180,7 +196,19 @@ public class TransactionListFragment
     }
 
     @Override
-    protected void onActionModeReturned(int selectedId) {}
+    protected void onActionModeReturned(int selectedId) {
+        try {
+            Transaction txn = viewModel.getTransactionFromDatabase(selectedId);
+            Bundle args = new Bundle();
+            args.putInt(EditTransactionFragment.ARG_PRESET_AMOUNT, -txn.amount);
+            args.putString(EditTransactionFragment.ARG_PRESET_DESCRIPTION,
+                    getString(R.string.debt_settlement_money_description, txn.description, Utilities.formatDate(txn.timestamp)));
+            args.putString(EditTransactionFragment.ARG_PRESET_NAME, viewModel.getPersonFromDatabase(txn.idPerson).name);
+            NavHostFragment.findNavController(this).navigate(R.id.action_global_editTransaction, args);
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
 
     // -------------
     // Person filter

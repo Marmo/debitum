@@ -148,16 +148,20 @@ public class ItemTransactionListFragment extends TransactionListFragment {
         }
     }
 
+    // -----------
+    // Action Mode
+    // -----------
+
     @Override
     protected boolean createActionMode(ActionMode mode, Menu menu) {
         super.createActionMode(mode, menu);
-        menu.findItem(R.id.miReturned).setVisible(true);
+        menu.findItem(R.id.miReturned).setIcon(R.drawable.ic_item_returned_24);
         return true;
     }
 
     @Override
     protected boolean prepareActionMode(ActionMode mode, Menu menu) {
-        super.prepareActionMode(mode, menu); // hides mark-returned item!
+        super.prepareActionMode(mode, menu); // shows mark-returned item!
         Selection<Long> selection = selectionTracker.getSelection();
         boolean returned = false;
         if(selection.size() == 1 ) {
@@ -166,9 +170,9 @@ public class ItemTransactionListFragment extends TransactionListFragment {
             } catch (ExecutionException | InterruptedException e) {
                 Log.e(TAG, "Error upon checking if selected transaction is already returned: "+e.getMessage());
             }
-            // show mark-returned-item if selected txn is not already returned
-            if (!returned) {
-                menu.findItem(R.id.miReturned).setVisible(true);
+            // hide mark-returned-item if selected txn is already returned
+            if (returned) {
+                menu.findItem(R.id.miReturned).setVisible(false);
             }
         }
         return true;
@@ -181,7 +185,7 @@ public class ItemTransactionListFragment extends TransactionListFragment {
         try {
             txn = viewModel.getTransactionFromDatabase(selectedId);
         } catch (ExecutionException |InterruptedException e) {
-            // TODO notify with toast
+            //TODO notify with toast
             String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
             Log.e(TAG, errorMessage);
             return;

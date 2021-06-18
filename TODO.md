@@ -1,9 +1,10 @@
-## 1.2.3/7
+## 1.3.0/7
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
 - turn returned functionality in EditTransactionFragment (visibility of input, pre-filling input, saving value) on/off using nav argument 
+- make EditTransaction's arg "newItem" --> "presetTypeItem" (nav graph, Dialog)
   
-## 1.3.0/8
+## 1.4.0/8
 - contacts integration
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)

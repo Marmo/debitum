@@ -5,6 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import org.ebur.debitum.database.Person;
+import org.ebur.debitum.database.PersonRepository;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionRepository;
 import org.ebur.debitum.database.TransactionWithPerson;
@@ -15,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 public class TransactionListViewModel extends AndroidViewModel {
 
     private final TransactionRepository txnRepository;
+    private final PersonRepository personRepository;
 
     private final LiveData<List<TransactionWithPerson>> moneyTransactions;
     private final LiveData<List<TransactionWithPerson>> itemTransactions;
@@ -22,6 +25,7 @@ public class TransactionListViewModel extends AndroidViewModel {
     public TransactionListViewModel (Application application) {
         super(application);
         txnRepository = new TransactionRepository(application);
+        personRepository = new PersonRepository(application);
         moneyTransactions = txnRepository.getAllMoneyTransactions();
         itemTransactions = txnRepository.getAllItemTransactions();
     }
@@ -33,7 +37,13 @@ public class TransactionListViewModel extends AndroidViewModel {
         return itemTransactions;
     }
 
-    public Transaction getTransactionFromDatabase(int idTransaction) throws ExecutionException, InterruptedException { return txnRepository.getTransaction(idTransaction).transaction; }
+    public Transaction getTransactionFromDatabase(int idTransaction) throws ExecutionException, InterruptedException {
+        return txnRepository.getTransaction(idTransaction).transaction;
+    }
+
+    public Person getPersonFromDatabase(int idPerson) throws ExecutionException, InterruptedException {
+        return personRepository.getPersonById(idPerson);
+    }
 
     public void insert(Transaction transaction) {
         txnRepository.insert(transaction);

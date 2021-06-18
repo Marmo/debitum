@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal"
+    android:autoMirrored="false">
+
+    <path
+        android:name="1"
+        android:fillColor="@android:color/white"
+        android:pathData="M5,8h2v8L5,16z"/>
+    <path
+        android:name="0"
+        android:fillColor="@android:color/white"
+        android:pathData="M12,8L9,8c-0.55,0 -1,0.45 -1,1v6c0,0.55 0.45,1 1,1h3c0.55,0 1,-0.45 1,-1L13,9c0,-0.55 -0.45,-1 -1,-1zM11,14h-1v-4h1v4z"/>
+    <path
+        android:name="0"
+        android:fillColor="@android:color/white"
+        android:pathData="M18,8h-3c-0.55,0 -1,0.45 -1,1v6c0,0.55 0.45,1 1,1h3c0.55,0 1,-0.45 1,-1L19,9c0,-0.55 -0.45,-1 -1,-1zM17,14h-1v-4h1v4z"/>
+    <path
+        android:name="frame"
+        android:fillColor="@android:color/white"
+        android:pathData="M13,20h-11v-16h20v9h-2v-7h-16v12h9" />
+    <path
+        android:name="checkmark"
+        android:fillColor="@android:color/white"
+        android:pathData="M22,15l-4.25,4.24l-2.12,-2.12l-1.41,1.41l3.53,3.54l5.66,-5.66z"/>
+</vector>
