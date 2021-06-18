@@ -3,6 +3,7 @@
   - EditTransactionFragment: switchIsMonetary status to viewModel
 - turn returned functionality in EditTransactionFragment (visibility of input, pre-filling input, saving value) on/off using nav argument 
 - make EditTransaction's arg "newItem" --> "presetTypeItem" (nav graph, Dialog)
+- make EditTransaction Dialog scrollable (see #14)
   
 ## 1.4.0/8
 - contacts integration
