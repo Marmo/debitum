@@ -1,3 +1,6 @@
+# v1.3.0
+- add: add return shortcut to money list (contextual action bar)
+
 # v1.2.2
 - fix: contextual action bar is now finished upon list change (could have crashed the app)
 - fix: mark-returned-icon in the contextual action bar is now hidden when the selected item is already returned
