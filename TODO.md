@@ -1,4 +1,3 @@
-## 1.2.2/6
 ## 1.2.3/7
 - move more logic to ViewModels
   - EditTransactionFragment: switchIsMonetary status to viewModel
@@ -8,6 +7,7 @@
 - contacts integration
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
+- add returned button to money list (#12)
 
 ## later / unassigned
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
@@ -34,5 +34,5 @@
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage
 - [x] check build.gradle version+version code
-- [] build release (!) apk, rename debitum-x.x.x.apk
-- [] tag release
+- [x] build release (!) apk, rename debitum-x.x.x.apk
+- [x] tag release
