@@ -18,6 +18,10 @@ colleague for coffee.
  </a>
 </p>
 
+The intended use case is to manage (smaller) personal debts and lent items. To keep things simple, 
+things like interest, deadlines, fees etc. will not be an integral part of the app (though the description 
+could somehow be used for that, but I would generally recommend to use more specialised apps for this).
+
 There is no online service whatsoever involved, so your data is saved on your 
 device only (as far as this app is concerned).
 

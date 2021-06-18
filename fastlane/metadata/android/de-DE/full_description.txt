@@ -3,6 +3,11 @@ merken. So wirst du nie wieder grübeln, ob dein Freund dir schon dieses Buch
 zurückgegeben hat oder darüber diskutieren, wie viel du deiner Kollegin für
 Kaffee schuldest.
 
+Debitum ist dafür gedacht (kleinere) persönliche Schulden und verliehene Dinge zu verwalten. Um die
+App einfach zu halten, werden Dinge wie Zinsen, Zieltermine, Gebühren etc. nie integraler Bestandteil
+werden (obwohl das Beschreibungsfeld dafür genutzt werden könnte, jedoch sind hier spezialisiertere
+Apps vorzuziehen).
+
 Die Datenbank, in der Personen und Transaktionen gespeichert sind, kann
 gesichert und wiederhergestellt werden.
 
