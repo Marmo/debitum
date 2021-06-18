@@ -153,7 +153,8 @@ public class TransactionListFragment
     @Override
     protected boolean prepareActionMode(ActionMode mode, Menu menu) {
         super.prepareActionMode(mode, menu);
-        menu.findItem(R.id.miReturned).setVisible(true);
+        // only show returned shortcut when exactly one item is selected
+        menu.findItem(R.id.miReturned).setVisible(selectionTracker.getSelection().size() == 1);
         return true;
     }
 
