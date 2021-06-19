@@ -1,6 +1,6 @@
 # v1.3.0
 - add: add return shortcut to money list (contextual action bar)
-- change: make EditTransaction Dialog scrollable so that everything can be revealed from behind the soft-keyboard
+- change: make EditTransaction/Person dialogs scrollable so that everything can be revealed from behind the soft-keyboard
 - fix: no more one-day-offset from selected date in timezones with negative UTC/GMT offset
 - refactor: make EditTransaction's boolean arg "newItem" -->  integer "presetType" (nav graph, Dialog)
 

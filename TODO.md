@@ -1,18 +1,20 @@
-## 1.3.0/7
-- make EditTransaction Dialog scrollable (see #14)
+## 1.3.1/8
+- New Transaction hidden behind header bar (#2)
   
-## 1.4.0/8
-- contacts integration
+## 1.4.0/9
+- contacts integration (#10)
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
-- add returned button to money list (#12)
+- Edit Transaction (item): handle if returned date is set before the date of actual transaction (#24)
+
+## 1.5.0/10
+- add scrollbar showing the date/month/year while scrolling the transaction list
+- use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
 
 ## later / unassigned
-- use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
 - use RxJava (?)
 - create a way to get from person sum list directly to filtered items list of a person
 - make some intro showing basic functions
-- add scrollbar showing the date/month/year while scrolling the transaction list
 
 - improve transitions (https://material.io/blog/android-material-motion, https://developer.android.com/codelabs/material-motion-android#0)
   - UNCLEAR: how to do all this with dialog fragments???
@@ -23,11 +25,11 @@
 
 
 
-# release-checklist (1.2.2/6)
+# release-checklist (1.3.0/7)
 - [x] update fastlane changelogs (2x)
 - [x] update CHANGELOG.md
-- [-] update screenshots
-- [-] update licenses
+- [x] update screenshots
+- [x] update licenses
   - ./gradlew checkLicenses
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage

@@ -1,0 +1,3 @@
+- neu: Menüpunkt zum Erstellen einer Rückzahlungs-Transaktion in der Geld-Liste (Kontextmenü-Leiste)
+- geändert: Transaktion-/Person-Bearbeiten-Dialog ist nun scrollbar, so dass alle Eingabefelder leicht hinter der Bildschirmtastatur herworgeholt werden können
+- behoben: kein Rücksprung ausgewählter Daten um 1 Tag mehr für Geräte-Zeitzonen mit negativem GMT-/UTC-Versatz
