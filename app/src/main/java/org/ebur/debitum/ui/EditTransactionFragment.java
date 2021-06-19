@@ -405,7 +405,7 @@ public class EditTransactionFragment extends DialogFragment {
             Toast.makeText(requireContext(), R.string.edit_transaction_snackbar_max_amount, Toast.LENGTH_SHORT).show();
         }
 
-        if (switchIsMonetary.isChecked()) {
+        if (viewModel.isMoneyTransaction()) {
             // add decSep two digits from the right, while adding leading zeros if needed
             // this is accomplished by removing decSep --> converting to int --> dividing by 100 --> converting to local String
 
