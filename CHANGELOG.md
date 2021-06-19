@@ -1,5 +1,6 @@
 # v1.3.0
 - add: add return shortcut to money list (contextual action bar)
+- fix: no more one-day-offset from selected date in timezones with negative UTC/GMT offset
 
 # v1.2.2
 - fix: contextual action bar is now finished upon list change (could have crashed the app)
