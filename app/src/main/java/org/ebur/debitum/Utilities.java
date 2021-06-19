@@ -13,11 +13,13 @@ import androidx.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class Utilities {
     public static final String TAG = "Utilities";
@@ -30,10 +32,15 @@ public class Utilities {
     }
     @Nullable
     public static String formatDate(@Nullable Date date, String format) {
-        if (date == null)
+        if (date == null) {
             return null;
-        else
-            return new SimpleDateFormat(format, Locale.getDefault()).format(date);
+        } else {
+            DateFormat dateFormat = new SimpleDateFormat(format, Locale.getDefault());
+            // we must not apply any timezone-hour-adding or subtraction here, see #28
+            // thus we have to use a timezone with UTC offset 0:00
+            dateFormat.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+            return dateFormat.format(date);
+        }
     }
 
     public static double parseAmount(String localizedAmountString) throws ParseException {
