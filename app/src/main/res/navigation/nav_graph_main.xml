@@ -47,8 +47,8 @@
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_close_exit">
             <argument
-                android:name="newItem"
-                android:defaultValue="true" />
+                android:name="presetType"
+                android:defaultValue="1" />
         </action>
     </fragment>
     <dialog
@@ -85,9 +85,9 @@
                 android:defaultValue="true" />
         </action>
         <argument
-            android:name="newItem"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:name="presetType"
+            app:argType="integer"
+            android:defaultValue="0" />
         <argument
             android:name="presetDescription"
             app:argType="string"
@@ -143,8 +143,8 @@
             android:name="idTransaction"
             android:defaultValue="-1" />
         <argument
-            android:name="newItem"
-            android:defaultValue="false" />
+            android:name="presetType"
+            android:defaultValue="0" />
     </action>
     <action
         android:id="@+id/action_global_editPerson"
@@ -156,8 +156,5 @@
     <action
         android:id="@+id/action_global_editTransaction"
         app:destination="@id/editTransaction_dest" >
-        <argument
-            android:name="newItem"
-            android:defaultValue="false" />
     </action>
 </navigation>

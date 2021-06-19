@@ -1,5 +1,4 @@
 ## 1.3.0/7
-- make EditTransaction's arg "newItem" --> "presetTypeItem" (nav graph, Dialog)
 - make EditTransaction Dialog scrollable (see #14)
   
 ## 1.4.0/8

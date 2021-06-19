@@ -51,7 +51,7 @@ public class EditTransactionFragment extends DialogFragment {
 
     private static final String TAG = "EditTransactionFragment";
     public static final String ARG_ID_TRANSACTION = "idTransaction";
-    public static final String ARG_NEW_ITEM = "newItem";
+    public static final String ARG_PRESET_TYPE = "presetType";
     public static final String ARG_PRESET_NAME = "presetName";
     public static final String ARG_PRESET_AMOUNT = "presetAmount";
     public static final String ARG_PRESET_DESCRIPTION = "presetDescription";
@@ -104,14 +104,19 @@ public class EditTransactionFragment extends DialogFragment {
             }
         }
 
-        // set viewModel's  transactionType when we are either creating a new item or editing an
-        // existing transaction that has the isMonetary flag unset
-        if(requireArguments().getBoolean(ARG_NEW_ITEM, false)
-                || (!viewModel.isNewTransaction() && !viewModel.getTransaction().transaction.isMonetary)) {
-            viewModel.setTransactionType(EditTransactionViewModel.TRANSACTION_TYPE_ITEM);
+        // set viewModel's transactionType, look for preset if new transaction, else look in edited transaction
+        int type;
+        if(viewModel.isNewTransaction()) {
+            // new transaction --> look for preset type
+            type = requireArguments().getInt(ARG_PRESET_TYPE, EditTransactionViewModel.TRANSACTION_TYPE_MONEY);
+        } else if (!viewModel.getTransaction().transaction.isMonetary) {
+            // exisitng item transaction, ignore preset
+            type = EditTransactionViewModel.TRANSACTION_TYPE_ITEM;
         } else {
-            viewModel.setTransactionType(EditTransactionViewModel.TRANSACTION_TYPE_MONEY);
+            // existing money transaction
+            type = EditTransactionViewModel.TRANSACTION_TYPE_MONEY;
         }
+        viewModel.setTransactionType(type);
 
         // setup views
         toolbar = root.findViewById(R.id.dialog_toolbar);
@@ -223,7 +228,7 @@ public class EditTransactionFragment extends DialogFragment {
 
         // preset name, description, amount and direction (if in arguments, i.e. if dialog is called
         // from settle-debt-cab-button
-        // TODO: move all those presets to viewModel (presetIdTransaction, presetTransactionType, preset...)
+        // TODO: move all those presets to viewModel (presetIdTransaction, presetType, preset...)
         int presetAmount = requireArguments().getInt(ARG_PRESET_AMOUNT);
         if (presetAmount!=0) { // amount > 0 means person gave to user --> gave radio must be checked
             editAmount.setText(Transaction.formatMonetaryAmount(Math.abs(presetAmount)));
