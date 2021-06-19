@@ -16,63 +16,75 @@
         <include
             layout="@layout/toolbar_dialog"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            android:layout_marginVertical="@dimen/activity_vertical_margin">
+            android:layout_height="0dp"
+            android:layout_weight="2">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_person_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
-                android:layout_marginVertical="@dimen/dialog_vertical_spacing"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:hint="@string/edit_person_name"
-                android:singleLine="true"
-                android:inputType="text"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:startIconDrawable="@drawable/ic_baseline_person_outline_onsurface_24"
-                app:startIconContentDescription="Person"
-                app:endIconMode="clear_text"
-                app:endIconContentDescription="clear text"
-                app:errorEnabled="true" >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginVertical="@dimen/activity_vertical_margin">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_person_name"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                    android:layout_marginVertical="@dimen/dialog_vertical_spacing"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:hint="@string/edit_person_name"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:startIconDrawable="@drawable/ic_baseline_person_outline_onsurface_24"
+                    app:startIconContentDescription="Person"
+                    app:endIconMode="clear_text"
+                    app:endIconContentDescription="clear text"
+                    app:errorEnabled="true" >
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_person_note"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
-                android:layout_marginVertical="@dimen/dialog_vertical_spacing"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_person_name"
-                android:hint="@string/edit_person_note"
-                android:inputType="text"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:startIconDrawable="@drawable/ic_baseline_notes_24"
-                app:startIconContentDescription="Person"
-                app:endIconMode="clear_text"
-                app:endIconContentDescription="clear text" >
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_person_note"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                    android:layout_marginVertical="@dimen/dialog_vertical_spacing"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_person_name"
+                    android:hint="@string/edit_person_note"
+                    android:inputType="text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:startIconDrawable="@drawable/ic_baseline_notes_24"
+                    app:startIconContentDescription="Person"
+                    app:endIconMode="clear_text"
+                    app:endIconContentDescription="clear text" >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--This is needed so that everything can be revealed from behind the keyboard-->
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="50dp"
+                    app:layout_constraintTop_toBottomOf="@id/edit_person_note"
+                    tools:ignore="UselessLeaf" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

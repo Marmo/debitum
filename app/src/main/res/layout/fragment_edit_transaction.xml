@@ -209,10 +209,11 @@
                     tools:layout_editor_absoluteX="347dp" />
 
                 <!--This is needed so that everything can be revealed from behind the keyboard-->
-               <FrameLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    app:layout_constraintTop_toBottomOf="@id/edit_returndate"/>
+                    app:layout_constraintTop_toBottomOf="@id/edit_returndate"
+                    tools:ignore="UselessLeaf" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
