@@ -1,15 +1,7 @@
-Mit Debitum kannst du dir alle Arten von ge- und verliehenem Geld und Dingen
-merken. So wirst du nie wieder grübeln, ob dein Freund dir schon dieses Buch
-zurückgegeben hat oder darüber diskutieren, wie viel du deiner Kollegin für
-Kaffee schuldest.
+Mit Debitum kannst du dir alle Arten von ge- und verliehenem Geld und Dingen merken. So wirst du nie wieder grübeln, ob dein Freund dir schon dieses Buch zurückgegeben hat oder darüber diskutieren, wie viel du deiner Kollegin für Kaffee schuldest.
 
-Debitum ist dafür gedacht (kleinere) persönliche Schulden und verliehene Dinge zu verwalten. Um die
-App einfach zu halten, werden Dinge wie Zinsen, Zieltermine, Gebühren etc. nie integraler Bestandteil
-werden (obwohl das Beschreibungsfeld dafür genutzt werden könnte, jedoch sind hier spezialisiertere
-Apps vorzuziehen).
+Debitum ist dafür gedacht (kleinere) persönliche Schulden und verliehene Dinge zu verwalten. Um die App einfach zu halten, werden Dinge wie Zinsen, Zieltermine, Gebühren etc. nie integraler Bestandteil werden (obwohl das Beschreibungsfeld dafür genutzt werden könnte, jedoch sind hier spezialisierte Apps vorzuziehen).
 
-Die Datenbank, in der Personen und Transaktionen gespeichert sind, kann
-gesichert und wiederhergestellt werden.
+Die Datenbank, in der Personen und Transaktionen gespeichert sind, kann gesichert und wiederhergestellt werden.
 
-Die App nutzt keine Internetverbindung, so dass deine Daten ausschließlich
-auf deinem Gerät gespeichert werden (insofern diese App darauf Einfluss hat).
+Die App nutzt keine Internetverbindung, so dass deine Daten ausschließlich auf deinem Gerät gespeichert werden (insofern diese App darauf Einfluss hat).
