@@ -1,5 +1,4 @@
-Com o Debitum você pode rastrear todos os tipos de débitos, seja em dinheiro ou itens emprestados. Desta forma, você nunca
-mais esquecerá se seu amigo já lhe devolveu aquele livro ou ficará na dúvida sobre o quanto você deve ao seu colega pelo café.
+Com o Debitum você pode rastrear todos os tipos de débitos, seja em dinheiro ou itens emprestados. Desta forma, você nunca mais esquecerá se seu amigo já lhe devolveu aquele livro ou ficará na dúvida sobre o quanto você deve ao seu colega pelo café.
 
 O App foi desenvolvido para auxiliar gerenciamento de pequenas dívidas pessoais e itens emprestados, não foi desenhado para cuidar de coisas como juros, prazos, taxas, etc. isto não fará parte deste App (embora poderia ser usado para isso, mas no modo geral recomendaria usar os apps mais sofisticados para este fim).
 
