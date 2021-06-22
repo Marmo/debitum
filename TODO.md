@@ -4,6 +4,7 @@
 - add splash screen (https://medium.com/android-news/the-complete-android-splash-screen-guide-c7db82bce565)
 - pt translation of Debt settlement description preset
 - separate hint for return money
+- note about repaid money from readme to guide
   
 ## 1.4.0/9
 - contacts integration (#10)
