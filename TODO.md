@@ -1,6 +1,5 @@
 ## 1.3.1/8
 - New Transaction hidden behind header bar (#2)
-- EditTransactionFragment: Amount format not changed upon switching between item and money (#29)
 - add splash screen (https://medium.com/android-news/the-complete-android-splash-screen-guide-c7db82bce565)
 - pt translation of Debt settlement description preset
 - separate hint for return money

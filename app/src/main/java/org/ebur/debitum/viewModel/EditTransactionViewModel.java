@@ -16,9 +16,6 @@ import java.util.concurrent.ExecutionException;
 
 public class EditTransactionViewModel extends AndroidViewModel {
 
-    public final static int TRANSACTION_TYPE_MONEY = 0;
-    public final static int TRANSACTION_TYPE_ITEM = 1;
-
     private final PersonRepository personRepository;
     private final TransactionRepository transactionRepository;
     private TransactionWithPerson transaction;
@@ -39,7 +36,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
     public void setTransaction(TransactionWithPerson twp) {
         this.transaction = twp;
         if (twp != null) {
-            this.transactionType = twp.transaction.isMonetary ? TRANSACTION_TYPE_MONEY : TRANSACTION_TYPE_ITEM;
+            this.transactionType = twp.transaction.isMonetary ? Transaction.TYPE_MONEY : Transaction.TYPE_ITEM;
         }
     }
     public TransactionWithPerson getTransaction() {
@@ -50,10 +47,10 @@ public class EditTransactionViewModel extends AndroidViewModel {
         this. transactionType = type;
     }
     public boolean isMoneyTransaction() {
-        return transactionType == TRANSACTION_TYPE_MONEY;
+        return transactionType == Transaction.TYPE_MONEY;
     }
     public boolean isItemTransaction() {
-        return transactionType == TRANSACTION_TYPE_ITEM;
+        return transactionType == Transaction.TYPE_ITEM;
     }
 
     public int getPersonId(String name) throws ExecutionException, InterruptedException { return personRepository.getPersonId(name); }

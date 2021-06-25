@@ -108,13 +108,13 @@ public class EditTransactionFragment extends DialogFragment {
         int type;
         if(viewModel.isNewTransaction()) {
             // new transaction --> look for preset type
-            type = requireArguments().getInt(ARG_PRESET_TYPE, EditTransactionViewModel.TRANSACTION_TYPE_MONEY);
+            type = requireArguments().getInt(ARG_PRESET_TYPE, Transaction.TYPE_MONEY);
         } else if (!viewModel.getTransaction().transaction.isMonetary) {
             // exisitng item transaction, ignore preset
-            type = EditTransactionViewModel.TRANSACTION_TYPE_ITEM;
+            type = Transaction.TYPE_ITEM;
         } else {
             // existing money transaction
-            type = EditTransactionViewModel.TRANSACTION_TYPE_MONEY;
+            type = Transaction.TYPE_MONEY;
         }
         viewModel.setTransactionType(type);
 
@@ -436,12 +436,12 @@ public class EditTransactionFragment extends DialogFragment {
                 startIcon.startTransition(0);
                 startIcon.reverseTransition(50);
             }
-
             editAmountLayout.setHint(R.string.edit_transaction_hint_amount_money);
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc);
             editDescriptionLayout.setError(null);
             editDescriptionLayout.setHelperText(null);
             editReturnDateLayout.setVisibility(View.GONE);
+            viewModel.setTransactionType(Transaction.TYPE_MONEY);
         } else {
             if (startIcon != null) {
                 startIcon.setCrossFadeEnabled(true);
@@ -451,9 +451,10 @@ public class EditTransactionFragment extends DialogFragment {
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc_item);
             editDescriptionLayout.setHelperText(getString(R.string.required_helper_text));
             editReturnDateLayout.setVisibility(View.VISIBLE);
+            viewModel.setTransactionType(Transaction.TYPE_ITEM);
         }
 
-        // apply proper formatting for chosen amount type
+        // apply proper formatting for chosen amount type by setting the text without changing it
         String s = editAmount.getText().toString();
         if(!s.isEmpty()) {
             editAmount.setText(formatArbitraryDecimalInput(s));

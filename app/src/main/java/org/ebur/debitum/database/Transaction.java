@@ -21,6 +21,9 @@ import java.util.Locale;
         indices = { @Index("id_person") })
 public class Transaction {
 
+    public final static int TYPE_MONEY = 0;
+    public final static int TYPE_ITEM = 1;
+
     @Ignore
     public Transaction() {
         this(0, 0, false, "", new Date(0));
