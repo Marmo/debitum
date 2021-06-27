@@ -1,5 +1,6 @@
 # v1.3.1
 - fix: EditTransactionFragment: Amount format correctly changed upon switching between item and money (#29)
+- fix: New Transaction not hidden behind header bar anymore (#2)
 
 # v1.3.0
 - add: add return shortcut to money list (contextual action bar)

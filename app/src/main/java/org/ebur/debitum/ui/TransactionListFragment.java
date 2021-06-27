@@ -21,6 +21,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.Selection;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
@@ -115,6 +116,20 @@ public class TransactionListFragment
     }
 
     @Override
+    protected void setupRecyclerView(@NonNull View root) {
+        super.setupRecyclerView(root);
+        // needed to scroll down when a transaction is created (else it will be hidden behind
+        // the totals header (#2)
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                recyclerView.scrollToPosition(positionStart);
+            }
+        });
+    }
+
+    @Override
     protected void addRecyclerViewDecorations() {
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
     }
@@ -126,13 +141,11 @@ public class TransactionListFragment
             List<TransactionWithPerson> listForAdapter = filter(transactions, filterPerson);
             updateTotalHeader(TransactionWithPerson.getSum(listForAdapter));
             adapter.submitList(listForAdapter);
-            if(transactions.isEmpty()) {
-                recyclerView.setVisibility(View.GONE);
-                emptyView.setVisibility(View.VISIBLE);
-            } else {
-                recyclerView.setVisibility(View.VISIBLE);
-                emptyView.setVisibility(View.GONE);
-            }
+
+            // show or hide empty-screen
+            boolean empty = transactions.isEmpty();
+            recyclerView.setVisibility(empty?View.GONE:View.VISIBLE);
+            emptyView.setVisibility(empty?View.VISIBLE:View.GONE);
         });
     }
 

@@ -1,17 +1,17 @@
 ## 1.3.1/8
-- New Transaction hidden behind header bar (#2)
-- add splash screen (https://medium.com/android-news/the-complete-android-splash-screen-guide-c7db82bce565)
 - pt translation of Debt settlement description preset
 - separate hint for return money
 - note about repaid money from readme to guide
+
+## 1.2.3/9
   
-## 1.4.0/9
+## 1.4.0/10
 - contacts integration (#10)
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
 - Edit Transaction (item): handle if returned date is set before the date of actual transaction (#24)
 
-## 1.5.0/10
+## 1.5.0/11
 - add scrollbar showing the date/month/year while scrolling the transaction list
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
 
