@@ -5,3 +5,5 @@ The intended use case is to manage (smaller) personal debts and lent items. To k
 You can backup and restore the database where persons and transactions are stored.
 
 There is no online service whatsoever involved, so your data is saved on your device only (as far as this app is concerned).
+
+<i>Keywords: IOU, debt, lend</i>

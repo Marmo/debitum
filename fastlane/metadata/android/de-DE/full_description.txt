@@ -5,3 +5,5 @@ Debitum ist dafür gedacht (kleinere) persönliche Schulden und verliehene Dinge
 Die Datenbank, in der Personen und Transaktionen gespeichert sind, kann gesichert und wiederhergestellt werden.
 
 Die App nutzt keine Internetverbindung, so dass deine Daten ausschließlich auf deinem Gerät gespeichert werden (insofern diese App darauf Einfluss hat).
+
+<i>Stichworte: IOU, debt, lend, Schulden, leihen</i>
