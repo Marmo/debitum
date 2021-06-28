@@ -41,11 +41,7 @@
             android:defaultValue="0" />
         <action
             android:id="@+id/action_add_item_transaction"
-            app:destination="@id/editTransaction_dest"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_close_exit"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@anim/fragment_close_exit">
+            app:destination="@id/editTransaction_dest">
             <argument
                 android:name="presetType"
                 android:defaultValue="1" />

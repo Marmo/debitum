@@ -1,9 +1,8 @@
 ## 1.3.1/8
-- pt translation of Debt settlement description preset
-- separate hint for return money
-- note about repaid money from readme to guide
 
 ## 1.2.3/9
+- separate hint for return money
+- note about repaid money from readme to guide
   
 ## 1.4.0/10
 - contacts integration (#10)
@@ -29,7 +28,7 @@
 
 
 
-# release-checklist (1.3.0/7)
+# release-checklist (1.3.1/8)
 - [x] update fastlane changelogs (2x)
 - [x] update CHANGELOG.md
 - [x] update screenshots
@@ -38,5 +37,5 @@
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage
 - [x] check build.gradle version+version code
-- [x] build release (!) apk, rename debitum-x.x.x.apk
-- [x] tag release
+- [] build release (!) apk, rename debitum-x.x.x.apk
+- [] tag release

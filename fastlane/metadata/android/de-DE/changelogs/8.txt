@@ -1,0 +1,2 @@
+- behoben: Transaktion-Bearbeiten-Dialog: Format des Betrages/der Anzahl wird jetzt korrekt angepasst, wenn zwischen Geld und Gegenstand umgeschaltet wird (#29)
+- behoben: neu erstellte Transaktionen sind nun nicht mehr hinter der Summen-Kopfzeile versteckt (#2)
