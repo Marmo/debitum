@@ -39,7 +39,7 @@ Via the Bottom Navigation you can choose different views of your transactions:
   * you can tap on a row to filter the money- and items list by that person
   * you can create a new Person from the menu of this screen or using the + button while creating a 
   new transaction
-* Money: Shows only monetary transactions, ordered by date (descending). If someone repays a debt to you, you should create a new transaction for this. For details why see [here](https://github.com/Marmo/debitum/issues/3#issue-911261188).
+* Money: Shows only monetary transactions, ordered by date (descending). If someone repays a debt to you, you should create a new transaction for this. For details why see [here](https://github.com/Marmo/debitum/issues/9#issuecomment-861314762).
 * Items: Shows only lent items, ordered by date (descending). Items can be marked as returned by long-pressing and choosing the "mark item as returned" button. The list can then be filtered for returned/unreturned/all items. 
 
 You can get a context menu in every list by long-pressing a row. From there you can edit or delete items (also multiple rows can be selected this way).
