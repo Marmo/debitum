@@ -1,10 +1,13 @@
 package org.ebur.debitum;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
@@ -99,5 +102,44 @@ public class Utilities {
         } catch (NoSuchAlgorithmException ignore) {
             return null;
         }
+    }
+
+    public static void setVisibilityAnimated(View view, int visibility) {
+        float alpha, translationY;
+        int duration = 100;
+        AnimatorListenerAdapter listener;
+        switch (visibility) {
+            case View.VISIBLE:
+                alpha = 1f;
+                translationY = 10f;
+                listener = new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        view.setVisibility(visibility);
+                    }
+                };
+                break;
+            case View.INVISIBLE:
+            case View.GONE:
+                alpha = 0f;
+                translationY = -10f;
+                listener = new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        view.setVisibility(visibility);
+                    }
+                };
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported value for View's visibility: "+visibility);
+        }
+
+        view.animate()
+                .alpha(alpha)
+                .translationY(translationY)
+                .setDuration(duration)
+                .setListener(listener);
     }
 }

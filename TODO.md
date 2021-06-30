@@ -1,6 +1,4 @@
-## 1.3.1/8
-
-## 1.2.3/9
+## 1.3.2/9
 - separate hint for return money
 - note about repaid money from readme to guide
   

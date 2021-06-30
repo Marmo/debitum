@@ -440,7 +440,7 @@ public class EditTransactionFragment extends DialogFragment {
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc);
             editDescriptionLayout.setError(null);
             editDescriptionLayout.setHelperText(null);
-            editReturnDateLayout.setVisibility(View.GONE);
+            Utilities.setVisibilityAnimated(editReturnDateLayout, View.GONE);
             viewModel.setTransactionType(Transaction.TYPE_MONEY);
         } else {
             if (startIcon != null) {
@@ -450,7 +450,7 @@ public class EditTransactionFragment extends DialogFragment {
             editAmountLayout.setHint(R.string.edit_transaction_hint_amount_item);
             editDescriptionLayout.setHint(R.string.edit_transaction_hint_desc_item);
             editDescriptionLayout.setHelperText(getString(R.string.required_helper_text));
-            editReturnDateLayout.setVisibility(View.VISIBLE);
+            Utilities.setVisibilityAnimated(editReturnDateLayout, View.VISIBLE);
             viewModel.setTransactionType(Transaction.TYPE_ITEM);
         }
 
