@@ -6,7 +6,8 @@
     <string name="delete_dialog_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="required_helper_text">* Required</string>
-    <string name="actionmode_returned">Mark returned</string>
+    <string name="actionmode_return_item">Mark returned</string>
+    <string name="actionmode_return_money">Create return transaction</string>
     <string name="actionmode_edit">Edit</string>
     <string name="actionmode_delete">Delete</string>
     <plurals name="actionmode_selected">

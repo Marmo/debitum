@@ -1,5 +1,4 @@
 ## 1.3.2/9
-- separate hint for return money
 - note about repaid money from readme to guide
   
 ## 1.4.0/10

@@ -155,7 +155,9 @@ public class ItemTransactionListFragment extends TransactionListFragment {
     @Override
     protected boolean createActionMode(ActionMode mode, Menu menu) {
         super.createActionMode(mode, menu);
-        menu.findItem(R.id.miReturned).setIcon(R.drawable.ic_item_returned_24);
+        MenuItem returnedItem = menu.findItem(R.id.miReturned);
+        returnedItem.setIcon(R.drawable.ic_item_returned_24);
+        returnedItem.setTitle(R.string.actionmode_return_item);
         return true;
     }
 

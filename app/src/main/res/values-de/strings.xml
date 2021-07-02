@@ -5,7 +5,8 @@
     <string name="delete_dialog_confirm">Löschen</string>
     <string name="dialog_cancel">Abbrechen</string>
     <string name="required_helper_text">* erforderlich</string>
-    <string name="actionmode_returned">zurückgegeben</string>
+    <string name="actionmode_return_item">Gegenstand zurückgegeben</string>
+    <string name="actionmode_return_money">Rückzahlung anlegen</string>
     <string name="actionmode_edit">Bearbeiten</string>
     <string name="actionmode_delete">Löschen</string>
     <plurals name="actionmode_selected">

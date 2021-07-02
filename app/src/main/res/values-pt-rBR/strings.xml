@@ -5,7 +5,9 @@
     <string name="delete_dialog_confirm">Excluir</string>
     <string name="dialog_cancel">Cancelar</string>
     <string name="required_helper_text">* Obrigatório</string>
-    <string name="actionmode_returned">Marcar como devolvido</string>
+    <string name="actionmode_return_item">Marcar como devolvido</string>
+    <!-- TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
+    <string name="actionmode_return_money">Create return transaction</string>
     <string name="actionmode_edit">Editar</string>
     <string name="actionmode_delete">Excluir</string>
     <plurals name="actionmode_selected">

@@ -5,7 +5,7 @@
     <item
         android:id="@+id/miReturned"
         android:icon="@drawable/ic_money_returned_24"
-        android:title="@string/actionmode_returned"
+        android:title="@string/actionmode_return_money"
         android:visible="false"
         app:showAsAction="always" />
     <item

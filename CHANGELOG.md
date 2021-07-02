@@ -1,5 +1,6 @@
 # v1.3.2
 - add: animation for showing/hiding item-returned input
+- add: separate hint for repaying money
 
 # v1.3.1
 - fix: EditTransactionFragment: Amount format correctly changed upon switching between item and money (#29)
