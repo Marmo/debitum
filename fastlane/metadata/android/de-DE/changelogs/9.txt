@@ -1,0 +1,3 @@
+- neu: Animation für Erscheinen/Ausblenden des Rückgabedatum-Eingabefeldes
+- neu: passender Tooltip für Geld-Rückgabe-Menüeintrag
+- neu: Hinweis zu Rückgabe von Geld in der Kurzanleitung

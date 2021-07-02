@@ -24,7 +24,7 @@
 
 
 
-# release-checklist (1.3.1/8)
+# release-checklist (1.3.2/9)
 - [x] update fastlane changelogs (2x)
 - [x] update CHANGELOG.md
 - [x] update screenshots
@@ -33,5 +33,5 @@
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage
 - [x] check build.gradle version+version code
-- [] build release (!) apk, rename debitum-x.x.x.apk
-- [] tag release
+- [x] build release (!) apk, rename debitum-x.x.x.apk
+- [x] tag release
