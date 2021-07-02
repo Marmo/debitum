@@ -14,17 +14,24 @@ action button. There you can enter details like amount, description or date and 
 money- or an item-transaction (use the switch to the right of the amount input field).</p>
 
 <h4>transaction lists</h4>
-<p>Via the Bottom Navigation you can choose different views of your transactions:
+<p>Via the Bottom Navigation you can choose different views of your transactions:</p>
+<h5>People</h5>
+<p>
+    Transactions summarized by person, ordered by last transaction date
+</p>
     <ul>
-    <li>People: summarized by person, ordered by last transaction date
-        <ul>
-            <li>you can tap on a row to filter the money- and items list by that person</li>
-            <li>you can create a new Person from the menu of this screen or using the + button while creating a new transaction</li>
-        </ul>
-    </li>
-    <li>Money: Shows only monetary transactions, ordered by date (descending)</li>
-    <li>Items: Shows only lent items, ordered by date (descending). Items can be marked as returned by long-pressing and choosing the "mark item as returned" button. The list can then be filtered for returned/unreturned/all items.</li>
-     </ul>
+        <li>you can tap on a row to filter the money- and items list by that person</li>
+        <li>you can create a new Person from the menu of this screen or using the + button while creating a new transaction</li>
+    </ul>
+<h5>Money</h5>
+<p>
+    Shows only monetary transactions, ordered by date (descending).
+</p>
+If someone repays a debt to you, you should create a new transaction for this. You can long-tap the initial transaction and select the repay menu item, which will create a matching repay transaction for you. For details why there is no "mark returned" functionality like for items see <a href="https://github.com/Marmo/debitum/issues/9#issuecomment-861314762">here</a>.
+<h5>Items</h5>
+<p>
+    Shows only lent items, ordered by date (descending).
+    Items can be marked as returned by long-pressing and choosing the "mark item as returned" button. The list can then be filtered for returned/unreturned/all items.
 </p>
 
 <p>You can get a context menu in every list by long-pressing a row. From there you can edit or delete
