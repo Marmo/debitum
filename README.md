@@ -40,7 +40,7 @@ Transactions summarized by person, ordered by last transaction
 * you can tap on a row to filter the money- and items list by that person
 * you can create a new Person from the menu of this screen or using the + button while creating a new transaction
 #### Money
-Shows only monetary transactions, ordered by date (descending). If someone repays a debt to you, you should create a new transaction for this. You can long-tap the initial transaction and select the repay menu item, which will create a matching repay transaction for you. For details why there is no "mark returned" functionality like for items see [here](https://github.com/Marmo/debitum/issues/3#issue-911261188).
+Shows only monetary transactions, ordered by date (descending). If someone repays a debt to you, you should create a new transaction for this. You can long-tap the initial transaction and select the repay menu item, which will create a matching repay transaction for you. For details why there is no "mark returned" functionality like for items see [here](https://github.com/Marmo/debitum/issues/9#issuecomment-861314762).
 #### Items
 Shows only lent items, ordered by date (descending). Items can be marked as returned by long-pressing and choosing the "mark item as returned" button. The list can then be filtered for returned/unreturned/all items. 
 
