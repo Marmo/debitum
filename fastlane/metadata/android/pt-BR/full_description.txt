@@ -6,4 +6,4 @@ Você também pode fazer um Backup e restaurar a base de dados com informações
 
 Não existe nenhum serviço online envolvido e seus dados são salvos apenas no seu aparelho.
 
-<i>Keywords: IOU, debt, lend</i>
+<i>Palavras-chave: IOU (eu lhe devo), dívida, empréstimo, debt, lend</i>

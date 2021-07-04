@@ -1,3 +1,6 @@
+# v1.4.0
+- update Brazilian Portuguese translation ([@mezysinc](https://github.com/mezysinc))
+
 # v1.3.2
 - add: animation for showing/hiding item-returned input
 - add: separate hint for repaying money
