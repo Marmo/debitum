@@ -1,5 +1,3 @@
-## 1.3.2/9
-  
 ## 1.4.0/10
 - contacts integration (#10)
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
@@ -25,6 +23,7 @@
 
 
 # release-checklist (1.3.2/9)
+- [] check github milestone
 - [x] update fastlane changelogs (2x)
 - [x] update CHANGELOG.md
 - [x] update screenshots

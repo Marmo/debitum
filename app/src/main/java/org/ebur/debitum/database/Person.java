@@ -1,9 +1,11 @@
 package org.ebur.debitum.database;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -16,14 +18,15 @@ public class Person implements Parcelable {
 
     public static final int NR_OF_COLORS = 12;
 
-    public Person(String name, String note) {
+    public Person(String name, String note, @Nullable Uri linkedContactUri) {
         this.name = name;
         this.note = note;
+        this.linkedContactUri = linkedContactUri;
         this.colorIndex = getColorIndex();
     }
     @Ignore
     public Person(String name) {
-        this(name, "");
+        this(name, "", null);
     }
 
     @Ignore
@@ -36,6 +39,8 @@ public class Person implements Parcelable {
     @ColumnInfo(name = "id_person") public int idPerson;
     @ColumnInfo(name = "name") public String name;
     @ColumnInfo(name = "note") public String note;
+    @Nullable
+    @ColumnInfo(name = "linked_contact_uri") public Uri linkedContactUri;
     @Ignore public int colorIndex = -1;
 
     public boolean equals(Person p) {

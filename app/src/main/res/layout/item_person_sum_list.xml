@@ -34,10 +34,10 @@
         android:gravity="center"
         android:textAlignment="gravity"
         android:textAppearance="@style/TextAppearance.Debitum.AvatarLetter"
-        app:layout_constraintBottom_toBottomOf="@+id/list_item_avatar"
-        app:layout_constraintEnd_toEndOf="@+id/list_item_avatar"
-        app:layout_constraintStart_toStartOf="@+id/list_item_avatar"
-        app:layout_constraintTop_toTopOf="@+id/list_item_avatar"
+        app:layout_constraintBottom_toBottomOf="@id/list_item_avatar"
+        app:layout_constraintEnd_toEndOf="@id/list_item_avatar"
+        app:layout_constraintStart_toStartOf="@id/list_item_avatar"
+        app:layout_constraintTop_toTopOf="@id/list_item_avatar"
         tools:text="R" />
 
     <TextView

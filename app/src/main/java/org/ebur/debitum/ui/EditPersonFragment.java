@@ -1,6 +1,6 @@
 package org.ebur.debitum.ui;
 
-import android.app.Dialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -42,6 +44,27 @@ public class EditPersonFragment extends DialogFragment {
     private TextInputEditText editName;
     private TextInputLayout editNoteLayout;
     private TextInputEditText editNote;
+    private TextInputLayout editContactLayout;
+    private TextInputEditText editContact;
+
+    ActivityResultLauncher<Void> getContact = registerForActivityResult(new ActivityResultContracts.PickContact(),
+            uri -> {
+                // uri will be null if the user cancels the contact-picking. In that case we
+                // do not want to do anything
+                if (uri != null) {
+                    // get contact
+                    // if editName is empty, fill it with name
+                    CharSequence name = editName.getText();
+                    if (name == null || name.toString().isEmpty()) {
+                        editName.setText(uri.getLastPathSegment());
+                    }
+                    // set text of editContact to contact's name
+                    editContact.setText(uri.toString());
+                    // save uri in viewModel
+                    viewModel.setLinkedContactUri(uri);
+                }
+            });
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,9 +88,26 @@ public class EditPersonFragment extends DialogFragment {
         editName.addTextChangedListener(new TextInputLayoutErrorResetter(editNameLayout));
         editNoteLayout = root.findViewById(R.id.edit_person_note);
         editNote = (TextInputEditText) editNoteLayout.getEditText();
+        editContactLayout = root.findViewById(R.id.edit_person_linked_contact);
+        editContact = (TextInputEditText) editContactLayout.getEditText();
+        assert editContact != null;
+        editContact.setOnClickListener(view -> {
+            getContact.launch(null);
+        });
+        editContactLayout.setEndIconOnClickListener(view -> {
+            editContact.setText(null);
+            viewModel.setLinkedContactUri(null);
+        });
 
         Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
         viewModel.setEditedPerson(editedPerson);
+        // this is important, as the value for the linked contact uri when saving is taken
+        // from viewModel.linkedContactUri and NOT from viewModel.editedPerson (as this is null)
+        // TODO This is all not nice. Idea: use the edited person to save all info about the
+        //  edited person, if new or existing. use its id to check if it is a new person or an
+        //  existing one (e.g. -1 if new). create a new person instance when no person is
+        //  supplied in the nav arguments. get rid of viewModel.linkedContactUri completely.
+        viewModel.setLinkedContactUri(viewModel.isNewPerson() ? null : editedPerson.linkedContactUri);
 
         return root;
     }
@@ -89,13 +129,16 @@ public class EditPersonFragment extends DialogFragment {
             editName.setText(viewModel.getEditedPerson().name);
             editNote.setText(viewModel.getEditedPerson().note);
             toolbar.setTitle(R.string.title_fragment_edit_person);
+            // TODO: set linked contact field (contact's name)
+            Uri uri = viewModel.getEditedPerson().linkedContactUri;
+            editContact.setText(uri == null ? "" : uri.toString());
         }
 
         editName.requestFocus();
     }
 
     // make dialog fullscreen
-    @Override
+    /*@Override
     public void onStart() {
         super.onStart();
         Dialog dialog = getDialog();
@@ -104,7 +147,7 @@ public class EditPersonFragment extends DialogFragment {
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             dialog.getWindow().setLayout(width, height);
         }
-    }
+    }*/
 
     // ---------------------------
     // Toolbar Menu event handling
@@ -123,6 +166,7 @@ public class EditPersonFragment extends DialogFragment {
 
     public void onSavePersonAction() {
         String name, note;
+        Uri uri;
 
         // check if nameView has contents and get name
         if(editName.getText() == null || TextUtils.isEmpty(editName.getText())) {
@@ -136,6 +180,9 @@ public class EditPersonFragment extends DialogFragment {
         assert editNote.getText() != null;
         note = editNote.getText().toString();
 
+        // get linked contact uri
+        uri = viewModel.getLinkedContactUri();
+
         try {
             // CREATE NEW PERSON
             if (viewModel.getEditedPerson() == null) {
@@ -144,7 +191,7 @@ public class EditPersonFragment extends DialogFragment {
                     return;
                 } else {
                     // insert new person (via viewModel)
-                    viewModel.addPerson(name, note);
+                    viewModel.addPerson(name, note, uri);
                 }
             }
             // EDIT EXISTING PERSON
@@ -152,6 +199,7 @@ public class EditPersonFragment extends DialogFragment {
                 Person editedPerson = viewModel.getEditedPerson();
                 editedPerson.name = name;
                 editedPerson.note = note;
+                editedPerson.linkedContactUri = uri;
                 viewModel.update(editedPerson);
             }
 
