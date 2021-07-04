@@ -6,8 +6,7 @@
     <string name="dialog_cancel">Cancelar</string>
     <string name="required_helper_text">* Obrigatório</string>
     <string name="actionmode_return_item">Marcar como devolvido</string>
-    <!-- TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
-    <string name="actionmode_return_money">Create return transaction</string>
+    <string name="actionmode_return_money">Criar transação de devolução</string>
     <string name="actionmode_edit">Editar</string>
     <string name="actionmode_delete">Excluir</string>
     <plurals name="actionmode_selected">
@@ -85,8 +84,7 @@
     <string name="edit_transaction_gave">Deu</string>
     <string name="edit_transaction_received">Recebeu</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 dígitos permitidos em valor</string>
-    <!-- TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
-    <string name="debt_settlement_money_description">Debt settlement for \"%1$s\" from %2$s</string>
+    <string name="debt_settlement_money_description">Quitação da dívida para \"%1$s\" de %2$s</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Editar pessoa</string>
