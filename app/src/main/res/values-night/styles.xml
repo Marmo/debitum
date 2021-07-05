@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ThemeOverlay.Debitum.totalsHeader">
-        <item name="android:background">@color/dark_grey</item>
-    </style>
-
     <style name="ThemeOverlay.Debitum.Avatar">
         <item name="android:alpha">0.8</item>
     </style>

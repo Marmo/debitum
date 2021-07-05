@@ -118,7 +118,6 @@
 
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Kurzanleitung</string>
-    <string name="pref_guide_dialog_close">schließen</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Quellcode sichten, Fehler und Ideen melden</string>
     <string name="restore_confirm">Ersetzen</string>
@@ -128,5 +127,4 @@
     <string name="pref_licenses_title">Drittanbieterlizenzen</string>
 
     <!--3rd party license-->
-    <string name="title_fragment_licenses">Drittanbieterlizenzen</string>
 </resources>

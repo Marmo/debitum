@@ -121,7 +121,6 @@
 
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Quick Guide</string>
-    <string name="pref_guide_dialog_close">close</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Study the source code, report issues &amp; ideas</string>
     <string name="restore_confirm">Overwrite</string>
@@ -132,7 +131,6 @@
     <string name="pref_licenses_title">3rd party licenses</string>
 
     <!--3rd party license-->
-    <string name="title_fragment_licenses">3rd party licenses</string>
 
     <!--Transition names-->
     <string name="transition_name_person_filter" translatable="false">TRANSITION_SET_PERSON_FILTER</string>
