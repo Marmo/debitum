@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class Utilities {
+public abstract class Utilities {
     public static final String TAG = "Utilities";
 
     public static final String DATE_FORMAT = "yyyy-MM-dd";
