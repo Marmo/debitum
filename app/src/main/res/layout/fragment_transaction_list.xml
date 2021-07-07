@@ -4,8 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:transitionGroup="true"
-    android:transitionName="@string/transition_name_person_filter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
@@ -13,12 +11,14 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/filter_bar"
+        android:transitionName="@string/transition_name_person_filter"
         style="@style/ThemeOverlay.Debitum.FilterBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:logo="@drawable/ic_outline_filter_alt_24_onsecondary"
         app:menu="@menu/filter_bar"
-        app:title="Text"
+        tools:title="Rincewind"
+        tools:subtitle="Mage"
         app:titleMarginStart="32dp"
         app:titleTextColor="?attr/colorOnSecondary" />
 

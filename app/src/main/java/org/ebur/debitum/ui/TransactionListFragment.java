@@ -1,7 +1,6 @@
 package org.ebur.debitum.ui;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
@@ -71,9 +70,9 @@ public class TransactionListFragment
         super.onCreate(savedInstanceState);
 
         MaterialContainerTransform sharedElementTransition = new MaterialContainerTransform();
-        sharedElementTransition.setDuration(500);
+        sharedElementTransition.setDuration(300);
         sharedElementTransition.setDrawingViewId(R.id.nav_host_fragment);
-        sharedElementTransition.setScrimColor(Color.TRANSPARENT);
+        //sharedElementTransition.setScrimColor(Color.TRANSPARENT);
         sharedElementTransition.setFadeMode(MaterialContainerTransform.FADE_MODE_THROUGH);
         setSharedElementEnterTransition(sharedElementTransition);
     }
