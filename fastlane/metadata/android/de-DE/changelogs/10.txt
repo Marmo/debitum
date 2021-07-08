@@ -1,0 +1,1 @@
+- behoben: Absturz beim Filtern nach Personen ohne Schulden oder mit Notiz (#34)
