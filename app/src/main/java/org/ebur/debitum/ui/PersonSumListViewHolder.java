@@ -1,6 +1,8 @@
 package org.ebur.debitum.ui;
 
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
@@ -17,6 +22,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.ebur.debitum.ContactsHelper;
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
@@ -51,7 +57,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
         return new PersonSumListViewHolder(view);
     }
 
-    public void bind(PersonWithTransactions pwt, boolean isSelected) {
+    public void bind(@NonNull PersonWithTransactions pwt, boolean isSelected) {
         nameView.setText(pwt.person.name);
         sumView.setText(Transaction.getFormattedSum(pwt.transactions, false));
 
@@ -72,9 +78,39 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
                 sumView.setTextColor(sumView.getResources().getColor(R.color.lent_red, null));
         }
 
+        // TODO check if contact linking functionality is enabled
+        ContactsHelper contactsHelper = new ContactsHelper(itemView.getContext());
+        LayerDrawable baseAvatarDrawable = (LayerDrawable) ResourcesCompat.getDrawable(itemView.getResources(), R.drawable.avatar, null);
+        assert baseAvatarDrawable != null;
+        @Nullable Bitmap photo = contactsHelper.getContactImage(person.linkedContactUri);
+        // this will yield either the photo (if uri != null and a photo is there) or a
+        // generated color based on the person's color index
         @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(itemView.getContext(), R.attr.colorSecondary);
+        LayerDrawable avatarDrawable = contactsHelper.makeAvatarDrawable(
+                baseAvatarDrawable,
+                photo,
+                person.getColor(secondaryColorRGB)
+        );
+        // photo will be null if uri is null or there is no photo for the linked contact
+        String letter = photo == null
+                        ? String.valueOf(person.name.charAt(0)).toUpperCase()
+                        : null;
+
+        // fix tint in avatar_circle_mask.xml.xml not being respected
+        avatarDrawable.findDrawableByLayerId(R.id.avatar_mask).setColorFilter(
+                Utilities.getAttributeColor(itemView.getContext(), R.attr.colorSurface),
+                PorterDuff.Mode.SRC_ATOP
+        );
+
+        avatarView.setImageDrawable(avatarDrawable);
+        avatarLetterView.setText(letter);
+
+
+
+
+        /*@ColorInt int secondaryColorRGB = Utilities.getAttributeColor(itemView.getContext(), R.attr.colorSecondary);
         avatarView.setColorFilter(person.getColor(secondaryColorRGB), PorterDuff.Mode.SRC_ATOP);
-        avatarLetterView.setText(String.valueOf(person.name.charAt(0)).toUpperCase());
+        avatarLetterView.setText(String.valueOf(person.name.charAt(0)).toUpperCase());*/
 
         ViewCompat.setTransitionName(itemView, person.name);
 

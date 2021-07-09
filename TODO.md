@@ -6,7 +6,10 @@
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
 - Edit Transaction (item): handle if returned date is set before the date of actual transaction (#24)
 
-## 1.5.0/12
+## 1.4.1/12
+- EditPersonFragment: move avatar to left of person name and update it on name change (if letter avatar)
+
+## 1.5.0/13
 - add scrollbar showing the date/month/year while scrolling the transaction list
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
 
