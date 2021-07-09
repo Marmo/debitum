@@ -1,7 +1,7 @@
 ## 1.4.0/11
 - contacts integration (#10)
     - contact caching
-    - 
+    - check in personSumListViewHolder if we have permission
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
 - Edit Transaction (item): handle if returned date is set before the date of actual transaction (#24)

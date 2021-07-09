@@ -5,15 +5,16 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.provider.ContactsContract;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
@@ -95,28 +96,20 @@ public class ContactsHelper {
      * Creates an avatar Drawable based on the baseAvatarDrawable that contains the bitmap if present
      * or a color based on the person's color index else
      * @param photo contact's photo
-     * @param baseAvatarDrawable Layer-List with one layer (id=R.id.avatar_bitmap) for the bitmap if present
-     *                       and one layer (id=R.id.avatar_shape) for the shape that's used when no bitmap
-     *                       is available
+     * @param color color int to use when there is no photo (i.e. photo==null)
      */
     @NonNull
-    public LayerDrawable makeAvatarDrawable(@NonNull LayerDrawable baseAvatarDrawable, @Nullable Bitmap photo, @ColorInt int color) {
-        // IMPORTANT so that we do not modify the baseAvatarDrawable
-        // https://developer.android.com/reference/android/graphics/drawable/LayerDrawable#mutate()
-        LayerDrawable avatarDrawable = (LayerDrawable) baseAvatarDrawable.mutate();
-
+    public Drawable makeAvatarDrawable(@Nullable Bitmap photo, @ColorInt int color) {
         if (photo == null) {
-            // set color for shape layer of the avatar layer-list drawable
-            Drawable colorLayer = avatarDrawable.findDrawableByLayerId(R.id.avatar_color);
-            colorLayer.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+            Drawable drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.circle, null);
+            assert drawable != null;
+            // min API 29: drawable.mutate().setColorFilter(new BlendModeColorFilter(color, BlendMode.SRC_ATOP));
+            drawable.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+            return drawable;
         } else {
-            // replace bitmap layer with a new BitmapDrawable containing the contact photo
-            int index = avatarDrawable.findIndexByLayerId(R.id.avatar_bitmap);
-            avatarDrawable.setDrawable(index, new BitmapDrawable(context.getResources(), photo));
+            RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(context.getResources(), photo);
+            drawable.setCircular(true);
+            return drawable;
         }
-        avatarDrawable.findDrawableByLayerId(R.id.avatar_bitmap).setVisible(photo!=null, false);
-        avatarDrawable.findDrawableByLayerId(R.id.avatar_color).setVisible(photo==null, false);
-
-        return avatarDrawable;
     }
 }

@@ -2,9 +2,7 @@ package org.ebur.debitum.ui;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,7 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
@@ -219,11 +217,10 @@ public class EditPersonFragment extends DialogFragment {
     void handleChangedContactUri(@Nullable Uri uri) {
 
         if (viewModel.isContactLinkingEnabled().getValue()) {
-            LayerDrawable baseAvatarDrawable = (LayerDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avatar, null);
-            assert baseAvatarDrawable != null;
             @StringRes int hint;
             @Nullable String contactName;
             @Nullable String letter;
+            @NonNull Drawable avatarDrawable;
 
             if (uri == null) {
                 contactName = null;
@@ -240,25 +237,16 @@ public class EditPersonFragment extends DialogFragment {
                 }
             }
 
-            @Nullable Bitmap photo = contactsHelper.getContactImage(uri);
             // this will yield either the photo (if uri != null and a photo is there) or a
             // generated color based on the person's color index
             @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
-            LayerDrawable avatarDrawable = contactsHelper.makeAvatarDrawable(
-                    baseAvatarDrawable,
-                    photo,
+            avatarDrawable = contactsHelper.makeAvatarDrawable(
+                    contactsHelper.getContactImage(uri),
                     viewModel.getEditedPerson().getColor(secondaryColorRGB)
             );
-            // photo will be null if uri is null or there is no photo for the linked contact
-            letter = photo == null
-                            ? String.valueOf(viewModel.getEditedPerson().name.charAt(0)).toUpperCase()
-                            : null;
-
-            // fix tint in avatar_circle_mask.xml.xml not being respected
-            avatarDrawable.findDrawableByLayerId(R.id.avatar_mask).setColorFilter(
-                    Utilities.getAttributeColor(requireContext(), R.attr.colorSurface),
-                    PorterDuff.Mode.SRC_ATOP
-            );
+            letter = avatarDrawable instanceof RoundedBitmapDrawable
+                            ? null
+                            : String.valueOf(viewModel.getEditedPerson().name.charAt(0)).toUpperCase();
 
             editContactLayout.setHint(hint);
             editContact.setText(contactName);

@@ -84,7 +84,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/edit_person_linked_contact"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/edit_person_linked_contact"
-                    app:srcCompat="@drawable/avatar"
+                    app:srcCompat="@color/grey_slate_grey"
                     tools:ignore="ContentDescription,RtlSymmetry" />
 
                 <TextView
