@@ -2,8 +2,9 @@ package org.ebur.debitum.ui;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
@@ -55,6 +57,7 @@ public class EditPersonFragment extends DialogFragment {
     public static final String ARG_NEW_PERSON_REQUESTED = "newPersonRequested";
 
     private EditPersonViewModel viewModel;
+    private ContactsHelper contactsHelper;
 
     private Toolbar toolbar;
     private TextInputLayout editNameLayout;
@@ -87,6 +90,8 @@ public class EditPersonFragment extends DialogFragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
+        // TODO move contactsHelper to shared View model (scope: Activity or navgraph)
+        contactsHelper = new ContactsHelper(requireContext());
 
         View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
 
@@ -212,34 +217,53 @@ public class EditPersonFragment extends DialogFragment {
     }
 
     void handleChangedContactUri(@Nullable Uri uri) {
-        if (uri==null) {
-            editContact.setText(null);
-            editContactLayout.setHint(R.string.edit_person_hint_no_linked_contact);
-            avatarView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.circle, null));
-        } else if (viewModel.isContactLinkingEnabled().getValue()) {
-            // if editName is empty, fill it with name
-            CharSequence name = editName.getText();
-            if (name == null || name.toString().isEmpty()) {
-                String contactName = ContactsHelper.getContactName(uri, requireActivity().getContentResolver());
-                editName.setText(contactName);
-                viewModel.getEditedPerson().name = contactName;
-            }
 
-            // fill linked contact field
-            editContact.setText(ContactsHelper.getContactName(uri, requireActivity().getContentResolver()));
-            editContactLayout.setHint(R.string.edit_person_hint_linked_contact);
+        if (viewModel.isContactLinkingEnabled().getValue()) {
+            LayerDrawable baseAvatarDrawable = (LayerDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avatar, null);
+            assert baseAvatarDrawable != null;
+            @StringRes int hint;
+            @Nullable String contactName;
+            @Nullable String letter;
 
-            // set avatar
-            Drawable avatar = ContactsHelper.getContactImage(uri);
-            if (avatar == null) {
-                Person person = viewModel.getEditedPerson();
-                @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
-                avatarView.setColorFilter(person.getColor(secondaryColorRGB), PorterDuff.Mode.SRC_ATOP);
-                avatarLetterView.setText(String.valueOf(person.name.charAt(0)).toUpperCase());
+            if (uri == null) {
+                contactName = null;
+                hint = R.string.edit_person_hint_no_linked_contact;
             } else {
-                avatarView.setImageDrawable(avatar);
-                avatarLetterView.setText(null);
+                contactName = contactsHelper.getContactName(uri);
+                hint = R.string.edit_person_hint_linked_contact;
+
+                // if editName is empty, fill it with name
+                CharSequence name = editName.getText();
+                if (name == null || name.toString().isEmpty()) {
+                    editName.setText(contactName);
+                    viewModel.getEditedPerson().name = contactName;
+                }
             }
+
+            @Nullable Bitmap photo = contactsHelper.getContactImage(uri);
+            // this will yield either the photo (if uri != null and a photo is there) or a
+            // generated color based on the person's color index
+            @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
+            LayerDrawable avatarDrawable = contactsHelper.makeAvatarDrawable(
+                    baseAvatarDrawable,
+                    photo,
+                    viewModel.getEditedPerson().getColor(secondaryColorRGB)
+            );
+            // photo will be null if uri is null or there is no photo for the linked contact
+            letter = photo == null
+                            ? String.valueOf(viewModel.getEditedPerson().name.charAt(0)).toUpperCase()
+                            : null;
+
+            // fix tint in avatar_circle_mask.xml.xml not being respected
+            avatarDrawable.findDrawableByLayerId(R.id.avatar_mask).setColorFilter(
+                    Utilities.getAttributeColor(requireContext(), R.attr.colorSurface),
+                    PorterDuff.Mode.SRC_ATOP
+            );
+
+            editContactLayout.setHint(hint);
+            editContact.setText(contactName);
+            avatarView.setImageDrawable(avatarDrawable);
+            avatarLetterView.setText(letter);
         }
         viewModel.setLinkedContactUri(uri);
     }
@@ -257,22 +281,7 @@ public class EditPersonFragment extends DialogFragment {
                 Manifest.permission.READ_CONTACTS) ==
                 PackageManager.PERMISSION_GRANTED) {
             viewModel.setContactLinkingEnabled(true);
-        } /*else if (shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
-            // PROBLEM WAS HERE: THE DIALOG BELOW WAS ONLY SHOWN WHEN THE EDITPERSON DIALOG WAS CLOSED
-            // In an educational UI, explain to the user why your app requires this
-            // permission for a specific feature to behave as expected. In this UI,
-            // include a "cancel" or "no thanks" button that allows the user to
-            // continue using your app without granting the permission.
-            AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireContext());
-            builder.setPositiveButton(R.string.permission_dialog_continue,
-                    (dialog, id) -> requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS));
-            builder.setNegativeButton(R.string.dialog_cancel,
-                    (dialog, id) -> dialog.cancel());
-            builder.setMessage(R.string.permission_dialog_message)
-                    .setTitle(R.string.permission_dialog_title);
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        } */ else {
+        } else {
             // You can directly ask for the permission.
             // The registered ActivityResultCallback gets the result of this request.
             requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS);

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/avatar_color"
+        android:drawable="@color/grey_slate_grey"/>
+    <item
+        android:id="@+id/avatar_bitmap"
+        android:drawable="@android:color/transparent"/>
+    <item
+        android:id="@+id/avatar_mask"
+        android:drawable="@drawable/avatar_circle_mask"/>
+</layer-list>

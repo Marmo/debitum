@@ -13,4 +13,7 @@
     <dimen name="toolbar_elevation">6dp</dimen>
     <dimen name="filterbar_elevation">4dp</dimen>
     <dimen name="header_elevation">4dp</dimen>
+    
+    <dimen name="avatar_size">36dp</dimen>
+    <integer name="avatar_size">36</integer>
 </resources>
