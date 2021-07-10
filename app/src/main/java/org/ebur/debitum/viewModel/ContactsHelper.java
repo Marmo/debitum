@@ -8,7 +8,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -17,21 +16,17 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.database.Person;
 
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
-import java.util.List;
 
 public class ContactsHelper extends AndroidViewModel {
 
     private final String TAG = "ContactsHelper";
 
-    private final MutableLiveData<HashMap<Uri, Contact>> contactCache;
+    private final HashMap<Uri, Contact> contactCache;
 
     public static class Contact {
         @NonNull String name;
@@ -45,62 +40,25 @@ public class ContactsHelper extends AndroidViewModel {
 
     public ContactsHelper(Application application) {
         super(application);
-        contactCache = new MutableLiveData<>(new HashMap<>());
-    }
-
-    public LiveData<HashMap<Uri, Contact>> getContacts() {
-        return contactCache;
+        contactCache = new HashMap<>();
     }
 
     private void cacheContactInfo(@NonNull Uri uri, @NonNull Contact contact) {
-        HashMap<Uri, Contact> cache = contactCache.getValue();
-        if (cache != null) {
-            cache.put(uri, contact);
-            contactCache.setValue(cache);
-        }
-    }
-
-    private void clearContactCache() {
-        HashMap<Uri, Contact> cache = contactCache.getValue();
-        if (cache != null) {
-            cache.clear();
-        } else {
-            cache = new HashMap<>();
-        }
-        contactCache.setValue(cache);
-    }
-    
-    public void refreshContactsCache(List<Person> persons) {
-        clearContactCache();
-        String name;
-        Bitmap photo;
-        for (Person person : persons) {
-            if(person.linkedContactUri != null) {
-                name = getContactName(person.linkedContactUri);
-                if(name == null) {
-                    Log.e(TAG, "Something went wrong getting contact name for "+person.name+" (URI "+person.linkedContactUri+")");
-                    break; //
-                }
-                photo = getContactImage(person.linkedContactUri);
-                cacheContactInfo(person.linkedContactUri, new Contact(name, photo));
-            }
-        }
+        contactCache.put(uri, contact);
     }
 
     private boolean isCached(@Nullable Uri uri) {
-        HashMap<Uri, Contact> cache = contactCache.getValue();
-        if (uri == null || cache == null) {
+        if (uri == null || contactCache == null) {
             return false;
         } else {
-            return cache.containsKey(uri);
+            return contactCache.containsKey(uri);
         }
     }
 
     @Nullable
     private Bitmap getContactImageFromCache(@NonNull Uri uri) {
-        HashMap<Uri, Contact> cache = contactCache.getValue();
-        if (cache != null) {
-            Contact contact = cache.get(uri);
+        if (contactCache != null) {
+            Contact contact = contactCache.get(uri);
             return contact != null ? contact.photo : null;
         } else {
             return null;
@@ -153,29 +111,25 @@ public class ContactsHelper extends AndroidViewModel {
 
     @Nullable
     private String getContactNameFromCache(@NonNull Uri uri) {
-        HashMap<Uri, Contact> cache = contactCache.getValue();
-        if (cache != null) {
-            Contact contact = cache.get(uri);
+        if (contactCache != null) {
+            Contact contact = contactCache.get(uri);
             return contact != null ? contact.name : null;
         } else {
             return null;
         }
     }
 
-    @Nullable
+    @NonNull
     private String getContactNameFromContentProvider(@NonNull Uri uri) {
-        String name;
+        @NonNull String name;
         int index;
-        Cursor cursor = getApplication().getContentResolver()
-                .query(uri, null, null, null, null);
-        try {
+        try (Cursor cursor = getApplication().getContentResolver()
+                .query(uri, null, null, null, null)) {
             if (cursor.moveToFirst()) {
                 index = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                 name = cursor.getString(index);
                 return name;
             }
-        } finally {
-            cursor.close();
         }
         return "";
     }
@@ -188,16 +142,14 @@ public class ContactsHelper extends AndroidViewModel {
         } else {
             // cache contact and return its name
             String name = getContactNameFromContentProvider(uri);
-            if (name != null) {
-                cacheContactInfo(
-                        uri,
-                        new Contact(
-                                name,
-                                getContactImageFromContentProvider(uri)
-                        )
-                );
-            }
-            return name;
+            cacheContactInfo(
+                    uri,
+                    new Contact(
+                            name,
+                            getContactImageFromContentProvider(uri)
+                    )
+            );
+            return name.isEmpty() ? null : name;
         }
     }
 
