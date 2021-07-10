@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -59,6 +60,7 @@ public abstract class AbstractBaseListFragment
     /**
      * @return the Resource-Id of the root layout that should be used to inflate that fragment
      */
+    @LayoutRes
     abstract int getLayout();
 
     /**

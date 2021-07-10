@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.ColorInt;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -48,6 +49,7 @@ public class PersonSumListFragment
     boolean contactLinkingEnabled;
 
     @Override
+    @LayoutRes
     int getLayout() {
         return R.layout.fragment_person_sum_list;
     }

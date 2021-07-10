@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -53,6 +54,7 @@ public class TransactionListFragment
     private Toolbar filterBar;
 
     @Override
+    @LayoutRes
     int getLayout() {
         return R.layout.fragment_transaction_list;
     }
