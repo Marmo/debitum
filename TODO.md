@@ -1,10 +1,11 @@
 ## 1.4.0/11
 - contacts integration (#10)
-    - contact caching
-    - check in personSumListViewHolder if we have permission
+    - check in personSumListViewHolder if we have permission (move contactLinkingEnabled from EditPersonViewModel to contactsHelper!)
+- add showEmptyScreen(boolean show) to AbstractBaseListFragment and use it in observer's onChange in every fragment
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
 - Edit Transaction (item): handle if returned date is set before the date of actual transaction (#24)
+- check if viewModels in AbstractBaseListFragment should really be scoped to activity
 
 ## 1.4.1/12
 - EditPersonFragment: move avatar to left of person name and update it on name change (if letter avatar)

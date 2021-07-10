@@ -45,12 +45,17 @@ public class Person implements Parcelable {
 
     public boolean equals(Person p) {
         if(p != null) {
-            boolean equalId = this.idPerson == p.idPerson;
-            boolean equalNameAndId = equalId && this.name.equals(p.name);
-            return equalNameAndId
-                    && ((this.note == null && p.note == null)
-                        || (this.note!= null && this.note.equals(p.note))
-                       );
+            boolean equal = this.idPerson == p.idPerson;
+            equal = equal && this.name.equals(p.name);
+            equal = equal && (
+                    (this.linkedContactUri == null && p.linkedContactUri == null)
+                            || (this.linkedContactUri != null && this.linkedContactUri.equals(p.linkedContactUri))
+                    );
+            equal = equal && (
+                    (this.note == null && p.note == null)
+                            || (this.note!= null && this.note.equals(p.note))
+            );
+            return equal;
         } else {
             return false;
         }
@@ -95,6 +100,7 @@ public class Person implements Parcelable {
         out.writeInt(idPerson);
         out.writeString(name);
         out.writeString(note);
+        out.writeString(linkedContactUri == null ? null : linkedContactUri.toString());
     }
 
     public static final Parcelable.Creator<Person> CREATOR
@@ -112,6 +118,8 @@ public class Person implements Parcelable {
         idPerson = in.readInt();
         name = in.readString();
         note = in.readString();
+        String uriString = in.readString();
+        linkedContactUri = uriString == null ? null : Uri.parse(uriString);
     }
 
 }
