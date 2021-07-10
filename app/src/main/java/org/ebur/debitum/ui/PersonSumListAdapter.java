@@ -49,7 +49,10 @@ public class PersonSumListAdapter
 
         @Override
         public boolean areContentsTheSame(@NonNull PersonWithAvatar oldItem, @NonNull PersonWithAvatar newItem) {
-            return oldItem.pwt.equals(newItem.pwt);
+            // changes in avatar are ONLY relevant if the contacts permission is granted while the
+            // personSumList is shown, so comparing classes is enough
+            return oldItem.pwt.equals(newItem.pwt)
+                    && oldItem.avatar.getClass().equals(newItem.avatar.getClass());
         }
     }
 

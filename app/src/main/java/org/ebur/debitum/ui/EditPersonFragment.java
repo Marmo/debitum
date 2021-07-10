@@ -1,7 +1,5 @@
 package org.ebur.debitum.ui;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -147,7 +144,7 @@ public class EditPersonFragment extends DialogFragment {
     }
 
     private void subscribeToViewModel() {
-        viewModel.isContactLinkingEnabled().observe(getViewLifecycleOwner(), enabled -> {
+        contactsHelper.isContactLinkingEnabled().observe(getViewLifecycleOwner(), enabled -> {
             editContactLayout.setHelperTextEnabled(!enabled);
             editContactLayout.setEnabled(enabled);
         });
@@ -215,7 +212,7 @@ public class EditPersonFragment extends DialogFragment {
 
     void handleChangedContactUri(@Nullable Uri uri) {
 
-        if (viewModel.isContactLinkingEnabled().getValue()) {
+        if (contactsHelper.isContactLinkingEnabled().getValue()) {
             @StringRes int hint;
             @Nullable String contactName;
             @Nullable String letter;
@@ -261,17 +258,9 @@ public class EditPersonFragment extends DialogFragment {
         // ActivityResultLauncher, as an instance variable.
         ActivityResultLauncher<String> requestPermissionLauncher =
                 registerForActivityResult(new ActivityResultContracts.RequestPermission(),
-                        isGranted -> viewModel.setContactLinkingEnabled(isGranted));
+                        isGranted -> contactsHelper.setContactLinkingEnabled(isGranted));
 
         // check and ask for permission
-        if (ContextCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.READ_CONTACTS) ==
-                PackageManager.PERMISSION_GRANTED) {
-            viewModel.setContactLinkingEnabled(true);
-        } else {
-            // You can directly ask for the permission.
-            // The registered ActivityResultCallback gets the result of this request.
-            requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS);
-        }
+        contactsHelper.checkReadContactsPermission(requestPermissionLauncher);
     }
 }

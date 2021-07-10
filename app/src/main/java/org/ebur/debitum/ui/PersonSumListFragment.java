@@ -10,8 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,6 +32,7 @@ import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.viewModel.ContactsHelper;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
@@ -41,6 +45,7 @@ public class PersonSumListFragment
 
 
     private ContactsHelper contactsHelper;
+    boolean contactLinkingEnabled;
 
     @Override
     int getLayout() {
@@ -58,6 +63,7 @@ public class PersonSumListFragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         contactsHelper = new ViewModelProvider(requireActivity()).get(ContactsHelper.class);
+        checkReadContactsPermission();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -73,28 +79,37 @@ public class PersonSumListFragment
 
     @Override
     protected void subscribeToViewModel() {
-        viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), pwtList -> {
-            updateTotalHeader(
-                    PersonWithTransactions.getSum(pwtList)
-            );
-            @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
-            adapter.submitList(
-                    pwtList.stream().map(pwt -> new PersonSumListAdapter.PersonWithAvatar(
-                            pwt,
-                            contactsHelper.makeAvatarDrawable(
-                                    contactsHelper.getContactImage(pwt.person.linkedContactUri),
-                                    pwt.person.getColor(secondaryColorRGB)
-                            )
-                    )).collect(Collectors.toList()));
-
-            if(pwtList.isEmpty()) {
-                recyclerView.setVisibility(View.GONE);
-                emptyView.setVisibility(View.VISIBLE);
-            } else {
-                recyclerView.setVisibility(View.VISIBLE);
-                emptyView.setVisibility(View.GONE);
-            }
+        contactsHelper.isContactLinkingEnabled().observe(getViewLifecycleOwner(), enabled -> {
+            contactLinkingEnabled = enabled;
+            updateRecyclerView(viewModel.getPersonsWithTransactions().getValue());
         });
+
+        viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), this::updateRecyclerView);
+    }
+
+    private void updateRecyclerView(@Nullable List<PersonWithTransactions> pwtList) {
+        if(pwtList == null) return;
+
+        updateTotalHeader(PersonWithTransactions.getSum(pwtList));
+        @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
+        // create PersonWithAvatar instance for every PersonWithTransactions
+        adapter.submitList(
+                pwtList.stream().map(pwt -> new PersonSumListAdapter.PersonWithAvatar(
+                        pwt,
+                        contactsHelper.makeAvatarDrawable(
+                                contactLinkingEnabled ? contactsHelper.getContactImage(pwt.person.linkedContactUri) : null,
+                                pwt.person.getColor(secondaryColorRGB)
+                        )
+                )).collect(Collectors.toList()));
+
+        // decide if emptyScreen needs to be shown
+        if(pwtList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     // ---------------------------
@@ -167,5 +182,17 @@ public class PersonSumListFragment
 
     public void addPerson() {
         NavHostFragment.findNavController(this).navigate(R.id.action_addPerson);//, args);
+    }
+
+    private void checkReadContactsPermission() {
+        // Register the permissions callback, which handles the user's response to the
+        // system permissions dialog. Save the return value, an instance of
+        // ActivityResultLauncher, as an instance variable.
+        ActivityResultLauncher<String> requestPermissionLauncher =
+                registerForActivityResult(new ActivityResultContracts.RequestPermission(),
+                        isGranted -> contactsHelper.setContactLinkingEnabled(isGranted));
+
+        // check and ask for permission
+        contactsHelper.checkReadContactsPermission(requestPermissionLauncher);
     }
 }
