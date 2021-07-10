@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.view.ViewCompat;
@@ -19,9 +18,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.ebur.debitum.ContactsHelper;
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
@@ -54,7 +51,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
         return new PersonSumListViewHolder(view);
     }
 
-    public void bind(@NonNull PersonWithTransactions pwt, boolean isSelected) {
+    public void bind(@NonNull PersonWithTransactions pwt, Drawable avatar, boolean isSelected) {
         nameView.setText(pwt.person.name);
         sumView.setText(Transaction.getFormattedSum(pwt.transactions, false));
 
@@ -76,7 +73,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
         }
 
         // TODO check if contact linking functionality is enabled
-        ContactsHelper contactsHelper = new ContactsHelper(itemView.getContext());
+        /*ContactsHelper contactsHelper = new ContactsHelper(itemView.getContext());
         // this will yield either the photo (if uri != null and a photo is there) or a
         // generated color based on the person's color index
         @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(itemView.getContext(), R.attr.colorSecondary);
@@ -85,11 +82,13 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
                 person.getColor(secondaryColorRGB)
         );
         // photo will be null if uri is null or there is no photo for the linked contact
-        String letter = avatarDrawable instanceof RoundedBitmapDrawable
+
+         */
+        String letter = avatar instanceof RoundedBitmapDrawable
                         ? null
                         : String.valueOf(person.name.charAt(0)).toUpperCase();
 
-        avatarView.setImageDrawable(avatarDrawable);
+        avatarView.setImageDrawable(avatar);
         avatarLetterView.setText(letter);
 
         ViewCompat.setTransitionName(itemView, person.name);

@@ -32,10 +32,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.transition.MaterialContainerTransform;
 
-import org.ebur.debitum.ContactsHelper;
 import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
+import org.ebur.debitum.viewModel.ContactsHelper;
 import org.ebur.debitum.viewModel.EditPersonViewModel;
 import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 
@@ -88,8 +88,7 @@ public class EditPersonFragment extends DialogFragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
-        // TODO move contactsHelper to shared View model (scope: Activity or navgraph)
-        contactsHelper = new ContactsHelper(requireContext());
+        contactsHelper = new ViewModelProvider(requireActivity()).get(ContactsHelper.class);
 
         View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
 

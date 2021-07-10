@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,12 +11,12 @@ import androidx.recyclerview.widget.ListAdapter;
 import org.ebur.debitum.database.PersonWithTransactions;
 
 public class PersonSumListAdapter
-        extends ListAdapter<PersonWithTransactions, PersonSumListViewHolder>
+        extends ListAdapter<PersonSumListAdapter.PersonWithAvatar, PersonSumListViewHolder>
         implements AbstractBaseListFragment.Adapter {
 
     private SelectionTracker<Long> selectionTracker = null;
 
-    public PersonSumListAdapter(@NonNull DiffUtil.ItemCallback<PersonWithTransactions> diffCallback) {
+    public PersonSumListAdapter(@NonNull DiffUtil.ItemCallback<PersonWithAvatar> diffCallback) {
         super(diffCallback);
         setHasStableIds(true);
     }
@@ -28,27 +29,37 @@ public class PersonSumListAdapter
 
     @Override
     public void onBindViewHolder(@NonNull PersonSumListViewHolder holder, int position) {
-        PersonWithTransactions current = getItem(position);
-        holder.bind(current, selectionTracker.isSelected(getItemId(position)));
+        PersonWithAvatar current = getItem(position);
+        holder.bind(current.pwt, current.avatar, selectionTracker.isSelected(getItemId(position)));
     }
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).person.idPerson;
+        return getItem(position).pwt.person.idPerson;
     }
 
     public void setSelectionTracker(SelectionTracker<Long> selectionTracker) { this.selectionTracker = selectionTracker; }
 
-    static class PersonSumDiff extends DiffUtil.ItemCallback<PersonWithTransactions> {
+    static class PersonSumDiff extends DiffUtil.ItemCallback<PersonWithAvatar> {
 
         @Override
-        public boolean areItemsTheSame(@NonNull PersonWithTransactions oldItem, @NonNull PersonWithTransactions newItem) {
-            return oldItem.person.idPerson == newItem.person.idPerson;
+        public boolean areItemsTheSame(@NonNull PersonWithAvatar oldItem, @NonNull PersonWithAvatar newItem) {
+            return oldItem.pwt.person.idPerson == newItem.pwt.person.idPerson;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull PersonWithTransactions oldItem, @NonNull PersonWithTransactions newItem) {
-            return oldItem.equals(newItem);
+        public boolean areContentsTheSame(@NonNull PersonWithAvatar oldItem, @NonNull PersonWithAvatar newItem) {
+            return oldItem.pwt.equals(newItem.pwt);
+        }
+    }
+
+    public static class PersonWithAvatar {
+        public PersonWithTransactions pwt;
+        public Drawable avatar;
+
+        public PersonWithAvatar(PersonWithTransactions pwt, Drawable avatar) {
+            this.pwt = pwt;
+            this.avatar = avatar;
         }
     }
 }

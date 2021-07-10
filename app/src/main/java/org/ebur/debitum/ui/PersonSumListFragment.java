@@ -3,14 +3,18 @@ package org.ebur.debitum.ui;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.selection.Selection;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -19,18 +23,24 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
+import org.ebur.debitum.viewModel.ContactsHelper;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 public class PersonSumListFragment
         extends AbstractBaseListFragment <
             PersonSumListViewModel,
             PersonSumListAdapter,
             PersonSumListViewHolder,
-            PersonWithTransactions> {
+            PersonSumListAdapter.PersonWithAvatar> {
+
+
+    private ContactsHelper contactsHelper;
 
     @Override
     int getLayout() {
@@ -43,6 +53,12 @@ public class PersonSumListFragment
     @Override
     PersonSumListAdapter getAdapter() {
         return new PersonSumListAdapter(new PersonSumListAdapter.PersonSumDiff());
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        contactsHelper = new ViewModelProvider(requireActivity()).get(ContactsHelper.class);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -61,7 +77,16 @@ public class PersonSumListFragment
             updateTotalHeader(
                     PersonWithTransactions.getSum(pwtList)
             );
-            adapter.submitList(pwtList);
+            @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
+            adapter.submitList(
+                    pwtList.stream().map(pwt -> new PersonSumListAdapter.PersonWithAvatar(
+                            pwt,
+                            contactsHelper.makeAvatarDrawable(
+                                    contactsHelper.getContactImage(pwt.person.linkedContactUri),
+                                    pwt.person.getColor(secondaryColorRGB)
+                            )
+                    )).collect(Collectors.toList()));
+
             if(pwtList.isEmpty()) {
                 recyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
