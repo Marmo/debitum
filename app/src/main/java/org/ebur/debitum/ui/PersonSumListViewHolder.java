@@ -72,18 +72,6 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
                 sumView.setTextColor(sumView.getResources().getColor(R.color.lent_red, null));
         }
 
-        // TODO check if contact linking functionality is enabled
-        /*ContactsHelper contactsHelper = new ContactsHelper(itemView.getContext());
-        // this will yield either the photo (if uri != null and a photo is there) or a
-        // generated color based on the person's color index
-        @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(itemView.getContext(), R.attr.colorSecondary);
-        Drawable avatarDrawable = contactsHelper.makeAvatarDrawable(
-                contactsHelper.getContactImage(person.linkedContactUri),
-                person.getColor(secondaryColorRGB)
-        );
-        // photo will be null if uri is null or there is no photo for the linked contact
-
-         */
         String letter = avatar instanceof RoundedBitmapDrawable
                         ? null
                         : String.valueOf(person.name.charAt(0)).toUpperCase();
