@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
@@ -25,6 +26,7 @@ import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Transition;
 
 import com.google.android.material.transition.MaterialFadeThrough;
 
@@ -78,8 +80,10 @@ public abstract class AbstractBaseListFragment
         super.onCreate(savedInstanceState);
 
         // Transitions
-        setEnterTransition(new MaterialFadeThrough().setDuration(400));
-        setExitTransition(new MaterialFadeThrough().setDuration(400));
+        int duration = getResources().getInteger(R.integer.duration_bottom_nav_transition);
+        Transition transition = new MaterialFadeThrough().setDuration(duration);
+        setEnterTransition(transition);
+        setExitTransition(transition);
     }
 
     @Override
@@ -98,6 +102,22 @@ public abstract class AbstractBaseListFragment
         subscribeToViewModel();
         setHasOptionsMenu(true);
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        postponeEnterTransition();
+        view.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        view.getViewTreeObserver().removeOnPreDrawListener(this);
+                        startPostponedEnterTransition();
+                        return true;
+                    }
+                }
+        );
     }
 
     protected void setupTotalHeader(@NonNull View root) {

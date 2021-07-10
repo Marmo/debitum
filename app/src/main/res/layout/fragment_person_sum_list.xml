@@ -10,11 +10,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:transitionGroup="true"
+    android:transitionName="not needed but transition group is only respected if name set"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
