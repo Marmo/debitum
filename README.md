@@ -46,11 +46,18 @@ Shows only lent items, ordered by date (descending). Items can be marked as retu
 
 You can get a context menu in every list by long-pressing a row. From there you can edit or delete items (also multiple rows can be selected this way).
 
+### Linking Contacts
+In the Edit-Person-Dialog you can link a contact from your phone to each person. To do this, click on the input labelled "no contact linked" and choose a contact. Currently, the only effect is, that the contact's photo (if present) will be shown in the person list. 
+
 ### Backup and restore
 From the Settings Screen you can backup and restore the database (contains all transactions and persons).
 Make sure to move backup files out of the way before uninstalling the app or clearing app data, as currently
 the backup is saved in the app's data folder on external storage, which is deleted upon 
 uninstall/clearing app data.
+
+## Persmissions used
+### READ_CONTACTS
+This is used for linking phone contacts to persons. You can safely deny this permission and use Debitum without linking contacts.
 
 ## Screenshots
 <img alt="People list" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/01_en_light_people.png?raw=true" width="200"/> <img alt="Money" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/02_en_light_money.png?raw=true" width="200"/>
