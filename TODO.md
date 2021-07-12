@@ -1,5 +1,4 @@
 ## 1.4.0/11
-- do not overwrite backups but add counter (how to handle restore when there are multiple files?)
 - Edit Transaction (item): handle if returned date is set before the date of actual transaction (#27)
 - check if viewModels in AbstractBaseListFragment should really be scoped to activity
 - Add other date formats (#17)
