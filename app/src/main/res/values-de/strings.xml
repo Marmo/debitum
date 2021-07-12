@@ -86,6 +86,9 @@
     <string name="edit_transaction_received">bekam</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 Ziffern im Betrag zulässig</string>
     <string name="debt_settlement_money_description">Rückzahlung für \"%1$s\" vom %2$s</string>
+    <string name="edit_transaction_suspicious_return_date_title">Unerwartetes Rückgabedatum</string>
+    <string name="edit_transaction_suspicious_return_date_message">Das ausgewählte Rückgabedatum (%1$s) liegt vor dem Datum der usrprünglichen Transaktion. Willst du dieses Datum verwenden?</string>
+    <string name="edit_transaction_use_suspicious_return_date">Datum verwenden</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Person bearbeiten</string>
