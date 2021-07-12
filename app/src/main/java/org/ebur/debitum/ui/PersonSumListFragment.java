@@ -95,6 +95,7 @@ public class PersonSumListFragment
         updateTotalHeader(PersonWithTransactions.getSum(pwtList));
         @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
         // create PersonWithAvatar instance for every PersonWithTransactions
+        // TODO would be great to determie which avatars need to be recalculated and only submit those
         adapter.submitList(
                 pwtList.stream().map(pwt -> new PersonSumListAdapter.PersonWithAvatar(
                         pwt,
