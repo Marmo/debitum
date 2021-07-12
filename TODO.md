@@ -2,9 +2,11 @@
 - add showEmptyScreen(boolean show) to AbstractBaseListFragment and use it in observer's onChange in every fragment
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
-- Edit Transaction (item): handle if returned date is set before the date of actual transaction (#24)
+- Edit Transaction (item): handle if returned date is set before the date of actual transaction (#27)
 - check if viewModels in AbstractBaseListFragment should really be scoped to activity
 - improve avatar generation (only generate if changed, maybe in adapter oder viewHolder?)
+- Add other date formats (#17)
+
 
 ## 1.4.1/12
 - EditPersonFragment: move avatar to left of person name and update it on name change (if letter avatar)
