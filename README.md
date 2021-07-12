@@ -44,7 +44,7 @@ Shows only monetary transactions, ordered by date (descending). If someone repay
 #### Items
 Shows only lent items, ordered by date (descending). Items can be marked as returned by long-pressing and choosing the "mark item as returned" button. The list can then be filtered for returned/unreturned/all items. 
 
-You can get a context menu in every list by long-pressing a row. From there you can edit or delete items (also multiple rows can be selected this way).
+You can get a context menu in every list by long-pressing a row. From there you can edit or delete items (also multiple rows can be selected this way). In the Person- and the Money-List the sum of all selected rows is displayed in the contextual action bar.
 
 ### Linking Contacts
 In the Edit-Person-Dialog you can link a contact from your phone to each person. To do this, click on the input labelled "no contact linked" and choose a contact. Currently, the only effect is, that the contact's photo (if present) will be shown in the person list. 

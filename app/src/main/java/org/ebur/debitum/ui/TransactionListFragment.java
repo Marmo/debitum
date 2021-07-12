@@ -167,8 +167,27 @@ public class TransactionListFragment
     @Override
     protected boolean prepareActionMode(ActionMode mode, Menu menu) {
         super.prepareActionMode(mode, menu);
+        int nRowsSelected = selectionTracker.getSelection().size();
         // only show returned shortcut when exactly one item is selected
-        menu.findItem(R.id.miReturned).setVisible(selectionTracker.getSelection().size() == 1);
+        menu.findItem(R.id.miReturned).setVisible(nRowsSelected == 1);
+
+        // show sum in subtitle if more than one transaction is selected
+        if(nRowsSelected > 1) {
+            int sum = 0;
+            try {
+                for (long id : selectionTracker.getSelection()) {
+                    sum += viewModel.getTransactionFromDatabase((int) id).amount;
+                }
+            } catch (ExecutionException | InterruptedException e) {
+                Log.e(TAG, e.getMessage());
+            }
+            mode.setSubtitle(getResources().getString(
+                    R.string.actionmode_sum,
+                    Transaction.formatMonetaryAmount(sum)
+            ));
+        } else {
+            mode.setSubtitle(null);
+        }
         return true;
     }
 

@@ -13,6 +13,7 @@
         <item quantity="one">%d ausgewählt</item>
         <item quantity="other">%d ausgewählt</item>
     </plurals>
+    <string name="actionmode_sum">Summe: %1$s</string>
 
     <!-- MainActivity -->
     <string name="fab_content_description">Transaktion erstellen</string>

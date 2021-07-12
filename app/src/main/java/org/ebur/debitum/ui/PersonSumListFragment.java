@@ -3,6 +3,7 @@ package org.ebur.debitum.ui;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +31,7 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
+import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.viewModel.ContactsHelper;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
@@ -130,6 +132,35 @@ public class PersonSumListFragment
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    // -----------
+    // Action Mode
+    // ----------
+
+
+    @Override
+    protected boolean prepareActionMode(ActionMode mode, Menu menu) {
+        super.prepareActionMode(mode, menu);
+
+        // show sum in subtitle if more than one person is selected
+        if(selectionTracker.getSelection().size() > 1) {
+            int sum = adapter.getCurrentList()
+                    .stream()
+                    .filter(personWithAvatar ->
+                            selectionTracker.getSelection().contains((long) personWithAvatar.pwt.person.idPerson)
+                    )
+                    .mapToInt(
+                            personWithAvatar -> Transaction.getSum(personWithAvatar.pwt.transactions))
+                    .sum();
+            mode.setSubtitle(getResources().getString(
+                    R.string.actionmode_sum,
+                    Transaction.formatMonetaryAmount(sum)
+            ));
+        } else {
+            mode.setSubtitle(null);
+        }
+        return true;
     }
 
     protected void onActionModeEdit(int idPerson) {
