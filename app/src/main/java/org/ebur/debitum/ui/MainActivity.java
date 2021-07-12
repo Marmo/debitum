@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
@@ -90,5 +92,16 @@ public class MainActivity extends AppCompatActivity {
             action = R.id.action_global_add_money_transaction;
         }
         nav.navigate(action);
+    }
+
+    // https://github.com/material-components/material-components-android-examples/blob/develop/Reply/app/src/main/java/com/materialstudies/reply/ui/MainActivity.kt
+    @Nullable
+    Fragment getCurrentNavigationFragment() {
+        Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        if(navHostFragment != null) {
+            return navHostFragment.getChildFragmentManager().getFragments().get(0);
+        } else {
+            return null;
+        }
     }
 }
