@@ -38,8 +38,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
-        setEnterTransition(new MaterialFadeThrough().setDuration(400));
-        setExitTransition(new MaterialFadeThrough().setDuration(400));
+        int duration = getResources().getInteger(R.integer.duration_bottom_nav_transition);
+        setEnterTransition(new MaterialFadeThrough().setDuration(duration));
+        setExitTransition(new MaterialFadeThrough().setDuration(duration));
 
         final String PREF_KEY_BACKUP = "backup";
         final String PREF_KEY_RESTORE = "restore";
@@ -104,6 +105,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         // add padding so that nothing is hidden behind the bottom navigation
         getListView().setPadding(0,0,0, getResources().getDimensionPixelSize(R.dimen.bottom_nav_height)+50);
         getListView().setClipToPadding(false);
+
+        getListView().setTransitionGroup(true);
+        getListView().setTransitionName("not needed but transition group is only respected if name set");
     }
 
     // ---------------------
