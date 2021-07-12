@@ -1,5 +1,4 @@
 ## 1.4.0/11
-- add showEmptyScreen(boolean show) to AbstractBaseListFragment and use it in observer's onChange in every fragment
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
 - Edit Transaction (item): handle if returned date is set before the date of actual transaction (#27)

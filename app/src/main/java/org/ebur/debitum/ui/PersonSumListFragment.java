@@ -104,14 +104,11 @@ public class PersonSumListFragment
                         )
                 )).collect(Collectors.toList()));
 
-        // decide if emptyScreen needs to be shown
-        if(pwtList.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
-        }
+
+        // show or hide empty-screen
+        boolean empty = pwtList.isEmpty();
+        recyclerView.setVisibility(empty?View.GONE:View.VISIBLE);
+        emptyView.setVisibility(empty?View.VISIBLE:View.GONE);
     }
 
     // ---------------------------
