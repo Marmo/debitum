@@ -93,6 +93,9 @@
     <string name="error_message_enter_name">Bitte Namen angeben!</string>
     <string name="error_message_name_exists">%1$s existiert bereits, bitte anderen Namen angeben!</string>
     <string name="edit_person_note">Notiz</string>
+    <string name="edit_person_hint_linked_contact">Verknüpfter Kontakt</string>
+    <string name="edit_person_hint_no_linked_contact">Kein Kontakt verknüpft</string>
+    <string name="edit_person_helper_linked_contact">Nicht verfügbar wegen fehlender Berechtigung!</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Einstellungen</string>

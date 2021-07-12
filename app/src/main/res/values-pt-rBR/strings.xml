@@ -93,6 +93,12 @@
     <string name="error_message_enter_name">Por favor, digite um nome!</string>
     <string name="error_message_name_exists">%1$s já existe, por favor, digite um nome diferente!</string>
     <string name="edit_person_note">Anotação</string>
+    <!-- TODO TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
+    <string name="edit_person_hint_linked_contact">linked contact</string>
+    <!-- TODO TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
+    <string name="edit_person_hint_no_linked_contact">No contact linked</string>
+    <!-- TODO TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
+    <string name="edit_person_helper_linked_contact">Unavailable due to missing permission!</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Configurar</string>

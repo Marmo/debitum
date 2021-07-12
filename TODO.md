@@ -1,5 +1,4 @@
 ## 1.4.0/11
-- translate contact linking strings
 - add showEmptyScreen(boolean show) to AbstractBaseListFragment and use it in observer's onChange in every fragment
 - add sum of selected items to subtitle of contextual action bar <-- update readme!!!
 - do not overwrite backups but add counter (how to handle restore when there are multiple files?)
