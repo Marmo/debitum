@@ -13,6 +13,8 @@
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d selecionados</item>
     </plurals>
+    <!-- TODO TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
+    <string name="actionmode_sum">Sum: %1$s</string>
 
     <!-- MainActivity -->
     <string name="fab_content_description">Criar Transação</string>

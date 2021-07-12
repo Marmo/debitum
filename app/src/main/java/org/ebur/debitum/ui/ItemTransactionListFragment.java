@@ -98,6 +98,10 @@ public class ItemTransactionListFragment extends TransactionListFragment {
         totalView.setText(String.format(Locale.getDefault(), "%d", total));
     }
 
+    // ---------------------------
+    // Toolbar Menu event handling
+    // ---------------------------
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_item_transaction_list, menu);
@@ -177,6 +181,10 @@ public class ItemTransactionListFragment extends TransactionListFragment {
                 menu.findItem(R.id.miReturned).setVisible(false);
             }
         }
+
+        // we do not want to show a (nonsense) sum here (which is set by super.perpareActionMode()!)
+        mode.setSubtitle(null);
+
         return true;
     }
 

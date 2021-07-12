@@ -246,7 +246,8 @@ public abstract class AbstractBaseListFragment
         menu.findItem(R.id.miEdit).setVisible(nRowsSelected == 1);
         // only show delete transaction menu item if one or more items are selected
         menu.findItem(R.id.miDelete).setVisible(nRowsSelected >= 1);
-        // hide show mark-returned menu item (feel free to override this method ...)
+        // hide show mark-returned menu item (feel free to override this prepareActionMode to change
+        // this behaviour ...)
         menu.findItem(R.id.miReturned).setVisible(false);
 
         CharSequence title = getResources().getQuantityString(R.plurals.actionmode_selected, nRowsSelected, nRowsSelected);
