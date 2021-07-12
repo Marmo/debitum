@@ -81,8 +81,8 @@
     <string name="edit_transaction_date_dialog_title">Selecione a data</string>
     <string name="edit_transaction_hint_date">Data</string>
     <string name="edit_transaction_hint_returndate">Data da devolução</string>
-    <string name="edit_transaction_gave">Deu</string>
-    <string name="edit_transaction_received">Recebeu</string>
+    <string name="edit_transaction_gave">deu</string>
+    <string name="edit_transaction_received">recebeu</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 dígitos permitidos em valor</string>
     <string name="debt_settlement_money_description">Quitação da dívida para \"%1$s\" de %2$s</string>
 

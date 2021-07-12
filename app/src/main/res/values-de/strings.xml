@@ -81,8 +81,8 @@
     <string name="edit_transaction_date_dialog_title">Datum wählen</string>
     <string name="edit_transaction_hint_date">Datum</string>
     <string name="edit_transaction_hint_returndate">Rückgabedatum</string>
-    <string name="edit_transaction_gave">Gab</string>
-    <string name="edit_transaction_received">Bekam</string>
+    <string name="edit_transaction_gave">gab</string>
+    <string name="edit_transaction_received">bekam</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 Ziffern im Betrag zulässig</string>
     <string name="debt_settlement_money_description">Rückzahlung für \"%1$s\" vom %2$s</string>
 

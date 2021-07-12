@@ -83,8 +83,8 @@
     <string name="edit_transaction_date_dialog_title">Select date</string>
     <string name="edit_transaction_hint_date">Date</string>
     <string name="edit_transaction_hint_returndate">Date returned</string>
-    <string name="edit_transaction_gave">Gave</string>
-    <string name="edit_transaction_received">Received</string>
+    <string name="edit_transaction_gave">gave</string>
+    <string name="edit_transaction_received">received</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed in amount</string>
     <string name="debt_settlement_money_description">Debt settlement for \"%1$s\" from %2$s</string>
 
