@@ -1,6 +1,6 @@
 ## 1.4.0/11
 - Edit Transaction (item): handle if returned date is set before the date of actual transaction (#27)
-  - return date cannot be deleted (was possible in 1.3.3)!!
+  - return date cannot be deleted (was possible in 1.3.3)!! --> this is due to changes in material library 1.3.0-> 1.4.0. need to use custom icon mode
 - check if viewModels in AbstractBaseListFragment should really be scoped to activity
 - Add other date formats (#17)
 
