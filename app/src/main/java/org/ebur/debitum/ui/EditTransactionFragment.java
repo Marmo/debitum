@@ -147,7 +147,7 @@ public class EditTransactionFragment extends DialogFragment {
         editDate.setOnClickListener(view -> showDatePickerDialog(view,
                 viewModel.getTimestamp().getTime(),
                 selection -> {
-                    viewModel.setTimestamp(new Date(selection));
+                    viewModel.setTimestamp(new Date(selection)); // TODO use viewModel's LiveData
                     editDate.setText(Utilities.formatDate(new Date(selection)));
         }));
 
@@ -159,6 +159,10 @@ public class EditTransactionFragment extends DialogFragment {
                 viewModel.getReturnTimestamp() != null ? viewModel.getReturnTimestamp().getTime() : new Date().getTime(),
                 this::onReturnDateSet)
         );
+        editReturnDateLayout.setEndIconOnClickListener(view -> {
+            editReturnDate.setText(null); // TODO use viewModel's LiveData
+            viewModel.setReturnTimestamp(null);
+        });
 
         return root;
     }
