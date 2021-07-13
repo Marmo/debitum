@@ -240,9 +240,10 @@ public class EditPersonFragment extends DialogFragment {
                     contactsHelper.getContactImage(uri),
                     viewModel.getEditedPerson().getColor(secondaryColorRGB)
             );
-            letter = avatarDrawable instanceof RoundedBitmapDrawable
+            String name = editName.getText() == null ? "" : editName.getText().toString(); // TODO use viewModel's LiveData
+            letter = avatarDrawable instanceof RoundedBitmapDrawable || name.isEmpty()
                             ? null
-                            : String.valueOf(viewModel.getEditedPerson().name.charAt(0)).toUpperCase();
+                            : String.valueOf(name.charAt(0)).toUpperCase(); // TODO use viewModel's LiveData
 
             editContactLayout.setHint(hint);
             editContact.setText(contactName);
