@@ -65,7 +65,7 @@ This is used for linking phone contacts to persons. You can safely deny this per
 <img alt="Dark mode" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/51_en_night_money.png?raw=true" width="200"/>
 
 ## Translation
-You are welcome to contribute to [translations](TRANSLATION.md).
+You are welcome to contribute to [translations](TRANSLATION.md) on [Weblate](https://hosted.weblate.org/projects/debitum/).
 
 ## License
 All code in this repository is licensed under the [GNU General Public License v3.0](LICENSE).
