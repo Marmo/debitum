@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General -->
     <string name="error_message_database_access">Fehler beim Datenbankzugriff, bitte erneut versuchen!\n%1$s</string>
@@ -14,7 +15,6 @@
         <item quantity="other">%d ausgewählt</item>
     </plurals>
     <string name="actionmode_sum">Summe: %1$s</string>
-
     <!-- MainActivity -->
     <string name="fab_content_description">Transaktion erstellen</string>
     <string name="bottom_nav_people">@string/title_fragment_person_sum_list</string>
@@ -23,7 +23,6 @@
     <string name="bottom_nav_settings">@string/title_fragment_settings</string>
     <string name="dismiss_filter">Filter verwerfen</string>
     <string name="database_empty">"Du hast noch nichts aufgezeichnet!\nErstelle eine neue Transaktion mit dem \"+\"-Button ganz unten."</string>
-
     <!-- PersonSumListFragment -->
     <string name="title_fragment_person_sum_list">Personen</string>
     <string name="person_sum_list_you_owe">du schuldest</string>
@@ -38,8 +37,7 @@
         <item quantity="one">%d Person löschen?</item>
         <item quantity="other">%d Personen löschen?</item>
     </plurals>
-    <string name="person_sum_list_dialog_delete_text">Das kann nicht rückgängig gemacht werden. Alle Transaktionen der Person werden ebenfalls gelöscht!</string>
-
+    <string name="person_sum_list_dialog_delete_text">Das kann nicht rückgängig gemacht werden. Alle Transaktionen der Person werden ebenfalls gelöscht.</string>
     <!-- TransactionListFragment -->
     <string name="title_fragment_transaction_list_money">Geld</string>
     <string name="title_fragment_transaction_list_items">Dinge</string>
@@ -66,7 +64,6 @@
         <item quantity="other">%d Transaktionen löschen?</item>
     </plurals>
     <string name="transaction_list_dialog_delete_text">Das kann nicht rückgängig gemacht werden.</string>
-
     <!-- EditTransactionFragment -->
     <string name="title_fragment_edit_transaction_create">Transaktion erstellen</string>
     <string name="title_fragment_edit_transaction">Transaktion bearbeiten</string>
@@ -89,7 +86,6 @@
     <string name="edit_transaction_suspicious_return_date_title">Unerwartetes Rückgabedatum</string>
     <string name="edit_transaction_suspicious_return_date_message">Das ausgewählte Rückgabedatum (%1$s) liegt vor dem Datum der usrprünglichen Transaktion. Willst du dieses Datum verwenden?</string>
     <string name="edit_transaction_use_suspicious_return_date">Datum verwenden</string>
-
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Person bearbeiten</string>
     <string name="title_fragment_edit_person_create">Person erstellen</string>
@@ -100,7 +96,6 @@
     <string name="edit_person_hint_linked_contact">Verknüpfter Kontakt</string>
     <string name="edit_person_hint_no_linked_contact">Kein Kontakt verknüpft</string>
     <string name="edit_person_helper_linked_contact">Nicht verfügbar wegen fehlender Berechtigung!</string>
-
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Einstellungen</string>
     <string name="pref_general_header">Allgemein</string>
@@ -108,7 +103,6 @@
     <string name="pref_dismiss_filter_summary_true">zurück zur Personenliste</string>
     <string name="pref_dismiss_filter_summary_false">in der aktuellen Liste bleiben</string>
     <string name="pref_item_returned_filter_title">Standardfilter für Dinge</string>
-
     <string name="pref_maintenance_header">Wartung</string>
     <string name="backup_successful">Datenbank erfolgreich in externen Speicher exportiert</string>
     <string name="backup_failed">Sicherung fehlgeschlagen! %1$s</string>
@@ -122,7 +116,6 @@
         wird. Du musst die Datei an einen sicheren Ort verschieben, wenn du sie später wiederherstellen
         willst!</string>
     <string name="pref_restore_file_not_found">Backup-Datei nicht gefunden</string>
-
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Kurzanleitung</string>
     <string name="pref_github_title">GitHub</string>
@@ -132,6 +125,5 @@
     <string name="restore_confirm_title">Aus Sicherung wiederherstellen</string>
     <string name="pref_version">Version %1$s</string>
     <string name="pref_licenses_title">Drittanbieterlizenzen</string>
-
     <!--3rd party license-->
 </resources>
