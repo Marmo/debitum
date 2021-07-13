@@ -1,2 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="pref_backup_warning">Ha i minnet at mappen databasen kopieres til vil bli slettet nå programmet avinstalleres eller data tømmes. Du må flytte den til en trygg plass før du avinstallerer/tømmer data hvis du ønsker å gjenopprette data senere.</string>
+    <string name="restore_confirm_text">Overskriv all data med det som finnes i sikkerhetskopi\?
+\nProgrammet vil starte på ny etterpå.</string>
+    <string name="pref_restore_file_not_found">Fant ikke sikkerhetskopifil</string>
+    <string name="pref_restore_summary">fra tidligere sikkerhetskopiert «%1$s» i eksternlagring</string>
+    <string name="pref_item_returned_filter_title">Forvalgsfilter for elementsliste</string>
+    <string name="pref_dismiss_filter_summary_false">Forbli i nåværende liste</string>
+    <string name="pref_dismiss_filter_summary_true">Gå tilbake til persongalleri</string>
+    <string name="pref_dismiss_filter_title">Når personfilter forkastes …</string>
+    <string name="edit_person_helper_linked_contact">Utilgjengelig som følge av manglende tilgang.</string>
+    <string name="edit_person_hint_no_linked_contact">Ingen kontakt lenket</string>
+    <string name="edit_person_hint_linked_contact">lenket kontakt</string>
+    <string name="edit_person_note">Notat</string>
+    <string name="error_message_name_exists">%1$s finnes allerede. Skriv inn et annet navn.</string>
+    <string name="edit_transaction_use_suspicious_return_date">bruk dato</string>
+    <string name="edit_transaction_suspicious_return_date_message">Returneringsdatoen du har satt (%1$s) inntreffer før den opprinnelige overføringen. Ønsker du å bruke den datoen\?</string>
+    <string name="edit_transaction_suspicious_return_date_title">Suspekt returneringsdato</string>
+    <string name="debt_settlement_money_description">Gjeldsbetaling for «%1$s» fra %2$s</string>
+    <string name="edit_transaction_hint_returndate">Dato returnert</string>
+    <string name="item_filter">Filtrer etter hvorvidt returnert</string>
+    <string name="header_label">Sum</string>
+    <string name="person_sum_list_dialog_delete_text">Dette kan ikke angres og vil slette deres overføringer også.</string>
+    <string name="database_empty">Ingenting bokført enda.
+\nOpprett en overføring med «+»-knappen nedenfor.</string>
+    <string name="dismiss_filter">forkast filter</string>
+    <string name="actionmode_return_money">Opprett tilbakebetalingsoverføring</string>
+    <string name="actionmode_return_item">Marker som returnert</string>
+    <string name="error_message_database_access">Fikk ikke tilgang til database. Prøv igjen.
+\n%1$s</string>
+    <string name="title_fragment_person_sum_list">Personer</string>
+    <string name="bottom_nav_people">Personer</string>
+    <string name="pref_licenses_title">Tredjepartslisenser</string>
+    <string name="pref_version">Versjon %1$s</string>
+    <string name="restore_confirm_title">Gjenopprett fra sikkerhetskopi</string>
+    <string name="restore_confirm">Overskriv</string>
+    <string name="pref_github_summary">Sjekk kildekoden, rapporter feil og kom med idéer</string>
+    <string name="pref_github_title">GitHub</string>
+    <string name="pref_guide_title">Hurtigveiledning</string>
+    <string name="pref_info_header">Info</string>
+    <string name="pref_backup_summary">til %1$s</string>
+    <string name="pref_restore_title">Gjenopprett database</string>
+    <string name="pref_backup_title">Sikkerhetskopier database</string>
+    <string name="restore_failed">Gjenoppretting mislyktes. %1$s</string>
+    <string name="backup_failed">Sikkerhetskopi mislyktes. %1$s</string>
+    <string name="backup_successful">Database sikkerhetskopiert til eksternlagring</string>
+    <string name="pref_maintenance_header">Vedlikehold</string>
+    <string name="pref_general_header">Generelt</string>
+    <string name="title_fragment_settings">Innstillinger</string>
+    <string name="error_message_enter_name">Skriv inn et navn.</string>
+    <string name="edit_person_name">Navn</string>
+    <string name="title_fragment_edit_person_create">Opprett person</string>
+    <string name="title_fragment_edit_person">Rediger person</string>
+    <string name="edit_transaction_snackbar_max_amount">Maks. 9 siffer tillates i beløp</string>
+    <string name="edit_transaction_received">mottok</string>
+    <string name="edit_transaction_gave">ga</string>
+    <string name="edit_transaction_hint_date">Dato</string>
+    <string name="edit_transaction_date_dialog_title">Velg dato</string>
+    <string name="edit_transaction_wrong_amount_format">Noe gikk galt med beløpsformatet.</string>
+    <string name="edit_transaction_hint_desc_item">Beskrivelse *</string>
+    <string name="edit_transaction_hint_desc">Beskrivelse</string>
+    <string name="edit_transaction_error_enter_description">Angi beskrivelse.</string>
+    <string name="edit_transaction_error_enter_amount">Velg et beløp.</string>
+    <string name="edit_transaction_hint_amount_item">Antall ting *</string>
+    <string name="edit_transaction_hint_amount_money">Beløp *</string>
+    <string name="edit_transaction_error_select_name">Velg en person.</string>
+    <string name="edit_transaction_hint_person">Person *</string>
+    <string name="title_fragment_edit_transaction">Rediger overføring</string>
+    <string name="title_fragment_edit_transaction_create">Opprett overføring</string>
+    <string name="transaction_list_dialog_delete_text">Dette kan ikke angres.</string>
+    <plurals name="transaction_list_dialog_delete_title">
+        <item quantity="one">Slett %d overføring\?</item>
+        <item quantity="other">Slett %d overføringer\?</item>
+    </plurals>
+    <plurals name="transaction_list_snackbar_deleted">
+        <item quantity="one">%d overføring slettet</item>
+        <item quantity="other">%d overføringer slettet</item>
+    </plurals>
+    <string name="item_filter_returned">Vis returnerte</string>
+    <string name="item_filter_unreturned">Vis ureturnerte</string>
+    <string name="item_filter_all">Vis alle</string>
+    <string name="toolbar_edit_person">Rediger person</string>
+    <string name="transaction_list_received">mottok</string>
+    <string name="transaction_list_gave">ga</string>
+    <string name="title_fragment_transaction_list_items">Ting</string>
+    <string name="title_fragment_transaction_list_money">Penger</string>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="one">Slett %d person\?</item>
+        <item quantity="other">Slett %d personer\?</item>
+    </plurals>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="one">%d person slettet</item>
+        <item quantity="other">%d personer slettet</item>
+    </plurals>
+    <string name="toolbar_create_person">Opprett person</string>
+    <string name="person_sum_list_you_lent">du har lånt vekk</string>
+    <string name="person_sum_list_no_debt">ingen gjeld</string>
+    <string name="person_sum_list_you_owe">du skylder</string>
+    <string name="bottom_nav_settings">Innstillinger</string>
+    <string name="bottom_nav_items">Ting</string>
+    <string name="bottom_nav_money">Penger</string>
+    <string name="fab_content_description">Opprett overføring</string>
+    <string name="actionmode_sum">Sum: %1$s</string>
+    <plurals name="actionmode_selected">
+        <item quantity="one">%d valgt</item>
+        <item quantity="other">%d valgte</item>
+    </plurals>
+    <string name="actionmode_delete">Slett</string>
+    <string name="actionmode_edit">Rediger</string>
+    <string name="required_helper_text">* Påkrevd</string>
+    <string name="dialog_cancel">Avbryt</string>
+    <string name="delete_dialog_confirm">Slett</string>
+    <string name="button_label_save">Lagre</string>
+</resources>
