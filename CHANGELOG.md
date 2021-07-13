@@ -4,6 +4,7 @@
 - fixed: transitions between bottom nav destinations
 - update: material and junit library versions
 - new: when selectiong persons or money transactions in the list views, the sum of the selected items is shown in the contextual action bar
+- new: warn when settung a return date before the original transaction's date
 
 # v1.3.3
 - fix: crash when filtering for person without debt or with note (#34)

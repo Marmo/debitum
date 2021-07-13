@@ -87,6 +87,12 @@
     <string name="edit_transaction_received">recebeu</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 dígitos permitidos em valor</string>
     <string name="debt_settlement_money_description">Quitação da dívida para \"%1$s\" de %2$s</string>
+    <!-- TODO TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
+    <string name="edit_transaction_suspicious_return_date_title">Suspicious return date</string>
+    <!-- TODO TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
+    <string name="edit_transaction_suspicious_return_date_message">The return date you set (%1$s) is before the date of the original transaction. Do you want to use that date?</string>
+    <!-- TODO TO BE TRANSLATED - DELETE THIS LINE WHEN DONE!-->
+    <string name="edit_transaction_use_suspicious_return_date">use date</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Editar pessoa</string>

@@ -1,5 +1,4 @@
 ## 1.4.0/11
-- Edit Transaction (item): handle if returned date is set before the date of actual transaction (#27)
 - check if viewModels in AbstractBaseListFragment should really be scoped to activity
 - Add other date formats (#17)
 
@@ -7,6 +6,10 @@
 ## 1.4.1/12
 - EditPersonFragment: move avatar to left of person name and update it on name change (if letter avatar)
 - notify user about deleted contact and clear uri (current behaviour: hint "linked contact" shown but no name and avatar)
+
+## 1.4.x
+- rework EditTransactionViewModel to use a LiveData transaction to save user input, id=-1 indicating a new txn
+- rework EditPersonViewModel to use a LiveData person to save user input, id=-1 indicating a new person
 
 ## 1.5.0/13
 - add scrollbar showing the date/month/year while scrolling the transaction list

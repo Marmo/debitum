@@ -18,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,6 +29,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -145,19 +147,22 @@ public class EditTransactionFragment extends DialogFragment {
         editDate.setOnClickListener(view -> showDatePickerDialog(view,
                 viewModel.getTimestamp().getTime(),
                 selection -> {
-                    viewModel.setTimestamp(new Date(selection));
+                    viewModel.setTimestamp(new Date(selection)); // TODO use viewModel's LiveData
                     editDate.setText(Utilities.formatDate(new Date(selection)));
         }));
 
         editReturnDateLayout = root.findViewById(R.id.edit_returndate);
         editReturnDate = (AutoCompleteTextView) editReturnDateLayout.getEditText();
         assert editReturnDate != null;
-        editReturnDate.setOnClickListener(view -> showDatePickerDialog(view,
+        editReturnDate.setOnClickListener(view -> showDatePickerDialog(
+                view,
                 viewModel.getReturnTimestamp() != null ? viewModel.getReturnTimestamp().getTime() : new Date().getTime(),
-                selection -> {
-                    viewModel.setReturnTimestamp(new Date(selection));
-                    editReturnDate.setText(Utilities.formatDate(new Date(selection)));
-                }));
+                this::onReturnDateSet)
+        );
+        editReturnDateLayout.setEndIconOnClickListener(view -> {
+            editReturnDate.setText(null); // TODO use viewModel's LiveData
+            viewModel.setReturnTimestamp(null);
+        });
 
         return root;
     }
@@ -360,9 +365,9 @@ public class EditTransactionFragment extends DialogFragment {
         NavHostFragment.findNavController(this).navigate(R.id.action_requestNewPerson, null, null, extras);
     }
 
-    // ---------------------------
-    // Date and TimePicker dialogs
-    // ---------------------------
+    // ------------------
+    // Date Picker dialog
+    // ------------------
 
     public void showDatePickerDialog(View v, Long date, MaterialPickerOnPositiveButtonClickListener<Long> listener) {
         MaterialDatePicker<Long> datePicker =
@@ -372,6 +377,28 @@ public class EditTransactionFragment extends DialogFragment {
                         .build();
         datePicker.addOnPositiveButtonClickListener(listener);
         datePicker.show(getParentFragmentManager(), "addTransactionDatePicker");
+    }
+
+    public void onReturnDateSet(Long selection) {
+        if(new Date(selection).before(viewModel.getTimestamp())) {
+            showSuspiciousReturnDateWarning(new Date(selection));
+        } else {
+            viewModel.setReturnTimestamp(new Date(selection));
+            editReturnDate.setText(Utilities.formatDate(new Date(selection))); // TODO use LiveData
+        }
+    }
+
+    public void showSuspiciousReturnDateWarning(Date newReturnDate) {
+        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
+        builder.setPositiveButton(R.string.edit_transaction_use_suspicious_return_date, (dialog, id) -> {
+            viewModel.setReturnTimestamp(newReturnDate);
+            editReturnDate.setText(Utilities.formatDate(newReturnDate)); // TODO use LiveData
+        });
+        builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
+        builder.setMessage(getResources().getString(R.string.edit_transaction_suspicious_return_date_message, Utilities.formatDate(newReturnDate)))
+                .setTitle(R.string.edit_transaction_suspicious_return_date_title);
+
+        builder.create().show();
     }
 
     // ---------------------------------------
@@ -413,7 +440,6 @@ public class EditTransactionFragment extends DialogFragment {
         if (viewModel.isMoneyTransaction()) {
             // add decSep two digits from the right, while adding leading zeros if needed
             // this is accomplished by removing decSep --> converting to int --> dividing by 100 --> converting to local String
-
             formattedAmount = Transaction.formatMonetaryAmount(Integer.parseInt(formattedAmount), Locale.getDefault());
         } else {
             // remove leading 0s

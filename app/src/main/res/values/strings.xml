@@ -88,6 +88,9 @@
     <string name="edit_transaction_received">received</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed in amount</string>
     <string name="debt_settlement_money_description">Debt settlement for \"%1$s\" from %2$s</string>
+    <string name="edit_transaction_suspicious_return_date_title">Suspicious return date</string>
+    <string name="edit_transaction_suspicious_return_date_message">The return date you set (%1$s) is before the date of the original transaction. Do you want to use that date?</string>
+    <string name="edit_transaction_use_suspicious_return_date">use date</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Edit Person</string>
