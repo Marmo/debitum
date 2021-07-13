@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html><body>
+<p>
+    With Debitum you can track all kinds of IOUs, be it money or lent items. This way you will never more forget if your friend already gave you back that book or dispute about how much you owe your colleague for coffee.
+</p>
+<p>
+    There is no online service whatsoever involved, so your data is saved on your device only (as far as this app is concerned).
+</p>
+
+<h3>Usage</h3>
+<h4>Creating transactions</h4>
+<p>
+    To take note of lent money or items, you need to create a transaction using the red floating action button. There you can enter details like amount, description or date and switch between a money- or an item-transaction (use the switch to the right of the amount input field).
+</p>
+
+<h4>transaction lists</h4>
+<p>
+    Via the Bottom Navigation you can choose different views of your transactions:
+</p>
+<h5>People</h5>
+<p>
+    Transactions summarized by person, ordered by last transaction date
+</p>
+<ul>
+    <li>you can tap on a row to filter the money- and items list by that person</li>
+    <li>you can create a new Person from the menu of this screen or using the + button while creating a new transaction</li>
+</ul>
+<h5>Money</h5>
+<p>
+    Shows only monetary transactions, ordered by date (descending). If someone repays a debt to you, you should create a new transaction for this. You can long-tap the initial transaction and select the repay menu item, which will create a matching repay transaction for you. For details why there is no "mark returned" functionality like for items see <a href="https://github.com/Marmo/debitum/issues/9#issuecomment-861314762">here</a>.
+</p>
+<h5>Items</h5>
+<p>
+    Shows only lent items, ordered by date (descending). Items can be marked as returned by long-pressing and choosing the "mark item as returned" button. The list can then be filtered for returned/unreturned/all items.
+</p>
+<p>
+    You can get a context menu in every list by long-pressing a row. From there you can edit or delete items (also multiple rows can be selected this way). In the Person- and the Money-List the sum of all selected rows is displayed in the contextual action bar.
+</p>
+
+<h4>Linking Contacts</h4>
+<p>
+    In the Edit-Person-Dialog you can link a contact from your phone to each person. To do this, click on the input labelled "no contact linked" and choose a contact. Currently, the only effect is, that the contact's photo (if present) will be shown in the person list.
+</p>
+
+<h4>Backup and restore</h4>
+<p>
+    From the Settings Screen you can backup and restore the database (contains all transactions and persons). Make sure to move backup files out of the way before uninstalling the app or clearing app data, as currently the backup is saved in the app's data folder on external storage, which is deleted upon uninstall/clearing app data.
+</p>
+
+<h3>Permissions used</h3>
+<h4>READ_CONTACTS</h4>
+<p>
+    This is used for linking phone contacts to persons. You can safely deny this permission and use Debitum without linking contacts.
+</p>
+</body></html>
