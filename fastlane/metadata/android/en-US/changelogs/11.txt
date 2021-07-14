@@ -1,0 +1,7 @@
+- neu: Personen können im Person-Bearbeiten-Dialog mit Telefon-Kontakten verknüpft werden. Dafür wird die Berechtigung zum Lesen von Kontakten benötigt (die du ohne Probleme ablehnen und Debitum ohne Kontaktverknüpfung nutzen kannst)
+- neu: wenn Personen oder Geld-Transaktionen ausgewählt werden, wird deren Summe in der Kontext-Leiste angezeigt
+- neu: Einstellung für das Datumsformat hinzugefügt
+- neu: Warnung, wenn das Rückgabedatum vor das ursprüngliche Transaktionsdatum gesetzt wird
+- Übersetzungen neu/aktualisiert:
+  - Brasilianisches Portugiesisch ([@mezysinc](https://github.com/mezysinc))
+  - Norwegisches Bokmål ([@comradekingu](https://github.com/comradekingu))
