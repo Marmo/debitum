@@ -41,8 +41,8 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
             // set date text and background/text color
             Resources res = itemView.getResources();
             txnTimestampView.setText(res.getString(R.string.transaction_list_date_given_returned,
-                    Utilities.formatDate(twp.transaction.timestamp),
-                    Utilities.formatDate(twp.transaction.timestampReturned)));
+                    Utilities.formatDate(twp.transaction.timestamp, itemView.getContext()),
+                    Utilities.formatDate(twp.transaction.timestampReturned, itemView.getContext())));
             itemView.setBackgroundColor(ResourcesCompat.getColor(res,
                     R.color.returned_item_background,
                     null));
@@ -52,7 +52,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
             txnNameView.setTextColor(textColor);
             txnGaveReceivedView.setTextColor(textColor);
         } else {
-            txnTimestampView.setText(Utilities.formatDate(twp.transaction.timestamp));
+            txnTimestampView.setText(Utilities.formatDate(twp.transaction.timestamp, itemView.getContext()));
         }
 
         int gaveReceivedString, amountColor;

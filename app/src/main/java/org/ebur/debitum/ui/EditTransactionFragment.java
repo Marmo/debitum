@@ -148,7 +148,7 @@ public class EditTransactionFragment extends DialogFragment {
                 viewModel.getTimestamp().getTime(),
                 selection -> {
                     viewModel.setTimestamp(new Date(selection)); // TODO use viewModel's LiveData
-                    editDate.setText(Utilities.formatDate(new Date(selection)));
+                    editDate.setText(Utilities.formatDate(new Date(selection), requireContext()));
         }));
 
         editReturnDateLayout = root.findViewById(R.id.edit_returndate);
@@ -229,7 +229,7 @@ public class EditTransactionFragment extends DialogFragment {
             editAmount.setText("1");
         }
         viewModel.setTimestamp(new Date());
-        editDate.setText(Utilities.formatDate(viewModel.getTimestamp()));
+        editDate.setText(Utilities.formatDate(viewModel.getTimestamp(), requireContext()));
 
         // preset name, description, amount and direction (if in arguments, i.e. if dialog is called
         // from settle-debt-cab-button
@@ -263,9 +263,9 @@ public class EditTransactionFragment extends DialogFragment {
         editAmount.setText(txn.transaction.getFormattedAmount(false));
         editDescription.setText(txn.transaction.description);
         viewModel.setTimestamp(txn.transaction.timestamp);
-        editDate.setText(Utilities.formatDate(viewModel.getTimestamp()));
+        editDate.setText(Utilities.formatDate(viewModel.getTimestamp(), requireContext()));
         viewModel.setReturnTimestamp(txn.transaction.timestampReturned);
-        editReturnDate.setText(Utilities.formatDate(viewModel.getReturnTimestamp()));
+        editReturnDate.setText(Utilities.formatDate(viewModel.getReturnTimestamp(), requireContext()));
     }
 
     // ---------------------------
@@ -384,7 +384,7 @@ public class EditTransactionFragment extends DialogFragment {
             showSuspiciousReturnDateWarning(new Date(selection));
         } else {
             viewModel.setReturnTimestamp(new Date(selection));
-            editReturnDate.setText(Utilities.formatDate(new Date(selection))); // TODO use LiveData
+            editReturnDate.setText(Utilities.formatDate(new Date(selection), requireContext())); // TODO use LiveData
         }
     }
 
@@ -392,10 +392,13 @@ public class EditTransactionFragment extends DialogFragment {
         AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
         builder.setPositiveButton(R.string.edit_transaction_use_suspicious_return_date, (dialog, id) -> {
             viewModel.setReturnTimestamp(newReturnDate);
-            editReturnDate.setText(Utilities.formatDate(newReturnDate)); // TODO use LiveData
+            editReturnDate.setText(Utilities.formatDate(newReturnDate, requireContext())); // TODO use LiveData
         });
         builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
-        builder.setMessage(getResources().getString(R.string.edit_transaction_suspicious_return_date_message, Utilities.formatDate(newReturnDate)))
+        builder.setMessage(getResources().getString(
+                R.string.edit_transaction_suspicious_return_date_message,
+                Utilities.formatDate(newReturnDate, requireContext())
+        ))
                 .setTitle(R.string.edit_transaction_suspicious_return_date_title);
 
         builder.create().show();

@@ -111,6 +111,13 @@
     <string name="pref_dismiss_filter_summary_true">Return to Person list</string>
     <string name="pref_dismiss_filter_summary_false">Stay in the current list</string>
     <string name="pref_item_returned_filter_title">Item list standard filter</string>
+    <string name="pref_date_format_title">Date format</string>
+    <string name="pref_date_format_systemdefault_short">System default (short)</string>
+    <string name="pref_date_format_systemdefault_short_value" translatable="false">SYSTEM_DEFAULT_S</string>
+    <string name="pref_date_format_systemdefault_medium">System default (medium)</string>
+    <string name="pref_date_format_systemdefault_medium_value" translatable="false">SYSTEM_DEFAULT_M</string>
+    <string name="pref_date_format_systemdefault_long">System default (long)</string>
+    <string name="pref_date_format_systemdefault_long_value" translatable="false">SYSTEM_DEFAULT_L</string>
 
     <string name="pref_maintenance_header">Maintenance</string>
     <string name="backup_successful">Database successfully backed up to external storage</string>

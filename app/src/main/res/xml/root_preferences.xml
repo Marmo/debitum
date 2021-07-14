@@ -8,10 +8,15 @@
             app:defaultValue="true"/>
         <ListPreference
             android:defaultValue="3"
-            android:entries="@array/itemReturnedFilterModes"
+            android:entries="@array/itemReturnedFilterModeEntries"
             android:entryValues="@array/itemReturnedFilterModeValues"
             android:key="item_returned_standard_filter"
             android:title="@string/pref_item_returned_filter_title" />
+        <ListPreference
+            android:defaultValue="yyyy-MM-dd"
+            android:entryValues="@array/dateFormatValues"
+            android:key="date_format"
+            android:title="@string/pref_date_format_title" />
     </PreferenceCategory>
 
     <PreferenceCategory
