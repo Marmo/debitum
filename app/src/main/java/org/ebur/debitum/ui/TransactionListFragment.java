@@ -235,8 +235,13 @@ public class TransactionListFragment
             Transaction txn = viewModel.getTransactionFromDatabase(selectedId);
             Bundle args = new Bundle();
             args.putInt(EditTransactionFragment.ARG_PRESET_AMOUNT, -txn.amount);
-            args.putString(EditTransactionFragment.ARG_PRESET_DESCRIPTION,
-                    getString(R.string.debt_settlement_money_description, txn.description, Utilities.formatDate(txn.timestamp)));
+            args.putString(
+                    EditTransactionFragment.ARG_PRESET_DESCRIPTION,
+                    getString(R.string.debt_settlement_money_description,
+                            txn.description,
+                            Utilities.formatDate(txn.timestamp, requireContext())
+                    )
+            );
             args.putString(EditTransactionFragment.ARG_PRESET_NAME, viewModel.getPersonFromDatabase(txn.idPerson).name);
             NavHostFragment.findNavController(this).navigate(R.id.action_global_editTransaction, args);
         } catch (InterruptedException | ExecutionException e) {

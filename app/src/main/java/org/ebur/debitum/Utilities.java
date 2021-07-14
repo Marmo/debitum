@@ -3,6 +3,7 @@ package org.ebur.debitum;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.Log;
@@ -11,7 +12,11 @@ import android.view.View;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
+
+import org.ebur.debitum.ui.SettingsFragment;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -30,15 +35,37 @@ public abstract class Utilities {
     public static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @Nullable
-    public static String formatDate(@Nullable Date date) {
-        return formatDate(date, DATE_FORMAT);
+    public static String formatDate(@Nullable Date date, @NonNull Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        String dateFormat = pref.getString(SettingsFragment.PREF_KEY_DATE_FORMAT, DATE_FORMAT);
+        String dateFormatSystemDefaultS = context.getResources()
+                .getString(R.string.pref_date_format_systemdefault_short_value);
+        String dateFormatSystemDefaultM = context.getResources()
+                .getString(R.string.pref_date_format_systemdefault_medium_value);
+        String dateFormatSystemDefaultL = context.getResources()
+                .getString(R.string.pref_date_format_systemdefault_long_value);
+
+        if (dateFormat.equals(dateFormatSystemDefaultS)) {
+            // format with system default short value
+            return formatDate(date, java.text.DateFormat.getDateInstance(DateFormat.SHORT));
+        } else if (dateFormat.equals(dateFormatSystemDefaultM)) {
+            return formatDate(date, java.text.DateFormat.getDateInstance(DateFormat.MEDIUM));
+        } else if (dateFormat.equals(dateFormatSystemDefaultL)) {
+            return formatDate(date, java.text.DateFormat.getDateInstance(DateFormat.LONG));
+        } else {
+            // format with value from preference
+            return formatDate(date, dateFormat);
+        }
     }
     @Nullable
     public static String formatDate(@Nullable Date date, String format) {
+        return formatDate(date, new SimpleDateFormat(format, Locale.getDefault()));
+    }
+    @Nullable
+    public static String formatDate(@Nullable Date date, @NonNull DateFormat dateFormat) {
         if (date == null) {
             return null;
         } else {
-            DateFormat dateFormat = new SimpleDateFormat(format, Locale.getDefault());
             // we must not apply any timezone-hour-adding or subtraction here, see #28
             // thus we have to use a timezone with UTC offset 0:00
             dateFormat.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));

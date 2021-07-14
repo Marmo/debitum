@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="itemReturnedFilterModes">
+    <array name="itemReturnedFilterModeEntries">
         <item>@string/item_filter_all</item>
         <item>@string/item_filter_unreturned</item>
         <item>@string/item_filter_returned</item>
@@ -10,5 +10,23 @@
         <item>3</item>
         <item>2</item>
         <item>1</item>
+    </string-array>
+
+    <string-array name="dateFormatValues">
+        <item>yyyy-MM-dd</item>
+        <item>dd-MM-yyyy</item>
+        <item>dd.MM.yyyy</item>
+        <item>dd/MM/yyyy</item>
+        <item>d/M/yy</item>
+        <item>MM/dd/yyyy</item>
+        <item>M/d/yy</item>
+        <item>yy/M/d</item>
+        <item>EEE, dd. MMM yy</item>
+        <item>EEE, dd. MMM yyyy</item>
+        <item>MMMM d,  yyyy</item>
+        <item>dd. MMM yyyy</item>
+        <item>@string/pref_date_format_systemdefault_short_value</item>
+        <item>@string/pref_date_format_systemdefault_medium_value</item>
+        <item>@string/pref_date_format_systemdefault_long_value</item>
     </string-array>
 </resources>

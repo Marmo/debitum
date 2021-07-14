@@ -20,9 +20,11 @@ import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.BuildConfig;
 import org.ebur.debitum.R;
+import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.AppDatabase;
 
 import java.io.File;
+import java.util.Date;
 
 
 public class SettingsFragment extends PreferenceFragmentCompat {
@@ -34,6 +36,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     public final static String PREF_KEY_DISMISS_FILTER_BEHAVIOUR = "dismiss_filter_behaviour";
     public final static String PREF_KEY_ITEM_RETURNED_STANDARD_FILTER = "item_returned_standard_filter";
+    public final static String PREF_KEY_DATE_FORMAT = "date_format";
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -51,14 +54,45 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
         SwitchPreferenceCompat dismissFilterPref = findPreference(PREF_KEY_DISMISS_FILTER_BEHAVIOUR);
-        if(dismissFilterPref != null) {
+        if (dismissFilterPref != null) {
             dismissFilterPref.setSummaryOff(R.string.pref_dismiss_filter_summary_false);
             dismissFilterPref.setSummaryOn(R.string.pref_dismiss_filter_summary_true);
         }
 
-        ListPreference ItemReturnedFilterPref = findPreference(PREF_KEY_ITEM_RETURNED_STANDARD_FILTER);
-        if(ItemReturnedFilterPref != null) {
-            ItemReturnedFilterPref.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
+        ListPreference itemReturnedFilterPref = findPreference(PREF_KEY_ITEM_RETURNED_STANDARD_FILTER);
+        if (itemReturnedFilterPref != null) {
+            itemReturnedFilterPref.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
+        }
+
+        ListPreference dateFormatPref = findPreference(PREF_KEY_DATE_FORMAT);
+        if (dateFormatPref != null) {
+            CharSequence[] values = dateFormatPref.getEntryValues();
+            CharSequence[] entries = new CharSequence[values.length];
+
+            CharSequence systemDefaultSValue = getResources().getString(R.string.pref_date_format_systemdefault_short_value);
+            CharSequence systemDefaultSEntry = getResources().getString(R.string.pref_date_format_systemdefault_short);
+            CharSequence systemDefaultMValue = getResources().getString(R.string.pref_date_format_systemdefault_medium_value);
+            CharSequence systemDefaultMEntry = getResources().getString(R.string.pref_date_format_systemdefault_medium);
+            CharSequence systemDefaultLValue = getResources().getString(R.string.pref_date_format_systemdefault_long_value);
+            CharSequence systemDefaultLEntry = getResources().getString(R.string.pref_date_format_systemdefault_long);
+
+            Date today = new Date();
+
+            for (int i = 0;i< entries.length;i++) {
+                CharSequence value = values[i];
+                if (value.equals(systemDefaultSValue)) {
+                    entries[i] = systemDefaultSEntry;
+                } else if (value.equals(systemDefaultMValue)) {
+                    entries[i] = systemDefaultMEntry;
+                } else if (value.equals(systemDefaultLValue)) {
+                    entries[i] = systemDefaultLEntry;
+                } else {
+                    entries[i] = Utilities.formatDate(today, values[i].toString());
+                }
+            }
+            dateFormatPref.setEntries(entries);
+
+            dateFormatPref.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
         }
 
         Preference backupPref = findPreference(PREF_KEY_BACKUP);

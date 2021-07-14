@@ -1,7 +1,4 @@
 ## 1.4.0/11
-- check if viewModels in AbstractBaseListFragment should really be scoped to activity
-- Add other date formats (#17)
-
 
 ## 1.4.1/12
 - EditPersonFragment: move avatar to left of person name and update it on name change (if letter avatar)
