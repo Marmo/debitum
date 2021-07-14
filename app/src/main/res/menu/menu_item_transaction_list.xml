@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/miFilterReturnedState"
         android:title="@string/item_filter"
         android:icon="@drawable/ic_outline_filter_alt_24_onprimary"
         app:showAsAction="always">
