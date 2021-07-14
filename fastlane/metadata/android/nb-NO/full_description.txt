@@ -6,4 +6,4 @@ Du kan sikkerhetskopiere og gjenopprette databser der personer og overføringer 
 
 Det er ingen nettbaserte tjenester involvert, så din data lagres kun på din enhet (sålangt programmet er involvert).
 
-<i>Nøkkelord: Lån, gjeld, låning</i>
+<i>Nøkkelord: Lån, gjeld, låning, IOU, debt, lend</i>
