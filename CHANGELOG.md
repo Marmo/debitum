@@ -1,10 +1,13 @@
 # v1.4.0
 - new: persons now can have a linked phone contact. Linking is done from the edit person dialog. For this feature the READ_CONTACTS permission is needed (which you can safely deny without breaking Debitum).
-- update Brazilian Portuguese translation ([@mezysinc](https://github.com/mezysinc))
+- updated/new translations:
+  - Brazilian Portuguese ([@mezysinc](https://github.com/mezysinc))
+  - Norwegian Bokmål ([@comradekingu](https://github.com/comradekingu))
 - fixed: transitions between bottom nav destinations
 - update: material and junit library versions
-- new: when selectiong persons or money transactions in the list views, the sum of the selected items is shown in the contextual action bar
-- new: warn when settung a return date before the original transaction's date
+- new: when selecting persons or money transactions in the list views, the sum of the selected items is shown in the contextual action bar
+- new: warn when setting a return date before the original transaction's date
+- new: added preference to set date format
 
 # v1.3.3
 - fix: crash when filtering for person without debt or with note (#34)
