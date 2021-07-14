@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id "com.cookpad.android.plugin.license-tools" version "1.2.6"
+    id "com.cookpad.android.plugin.license-tools" version "1.2.8"
 }
 
 android {
