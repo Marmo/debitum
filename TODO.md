@@ -28,13 +28,13 @@
 
 # release-checklist (1.4.0/11)
 - [x] check github milestone
-- [] update fastlane changelogs (2x)
-- [] update CHANGELOG.md
-- [] update screenshots
-- [] update licenses
+- [x] update fastlane changelogs (2x)
+- [x] update CHANGELOG.md
+- [x] update screenshots
+- [x] update licenses
   - ./gradlew checkLicenses
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage
-- [] check build.gradle version+version code
+- [x] check build.gradle version+version code
 - [] build release (!) apk, rename debitum-x.x.x.apk
 - [] tag release
