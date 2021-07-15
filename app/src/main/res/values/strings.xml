@@ -1,12 +1,12 @@
 <resources>
     <!-- General -->
     <string name="app_name" translatable="false">Debitum</string>
-    <string name="error_message_database_access">Error trying to access database, please try again!\n%1$s</string>
+    <string name="error_message_database_access">Error trying to access database. Please try again.\n%1$s</string>
     <string name="button_label_save">Save</string>
     <string name="delete_dialog_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="required_helper_text">* Required</string>
-    <string name="actionmode_return_item">Mark returned</string>
+    <string name="actionmode_return_item">Mark as returned</string>
     <string name="actionmode_return_money">Create return transaction</string>
     <string name="actionmode_edit">Edit</string>
     <string name="actionmode_delete">Delete</string>
@@ -23,7 +23,7 @@
     <string name="bottom_nav_items">Items</string>
     <string name="bottom_nav_settings">Settings</string>
     <string name="dismiss_filter">dismiss filter</string>
-    <string name="database_empty">"Nothing recorded yet!\nCreate a new Transaction using the \"+\"-Button below."</string>
+    <string name="database_empty">"Nothing recorded yet.\nCreate a new transaction using the \"+\" button below."</string>
 
     <!-- PersonSumListFragment -->
     <string name="title_fragment_person_sum_list">People</string>
@@ -32,14 +32,14 @@
     <string name="person_sum_list_you_lent">you lent</string>
     <string name="toolbar_create_person">Create Person</string>
     <plurals name="person_sum_list_snackbar_deleted">
-        <item quantity="one">%d Person deleted</item>
-        <item quantity="other">%d Persons deleted</item>
+        <item quantity="one">%d person deleted</item>
+        <item quantity="other">%d persons deleted</item>
     </plurals>
     <plurals name="person_sum_list_dialog_delete_title">
-        <item quantity="one">Delete %d Person?</item>
-        <item quantity="other">Delete %d Persons?</item>
+        <item quantity="one">Delete %d person?</item>
+        <item quantity="other">Delete %d persons?</item>
     </plurals>
-    <string name="person_sum_list_dialog_delete_text">This can\'t be undone and will delete all of their transactions, too.</string>
+    <string name="person_sum_list_dialog_delete_text">This can\'t be undone and will delete transactions to and from them too.</string>
 
     <!-- TransactionListFragment -->
     <string name="title_fragment_transaction_list_money">Money</string>
@@ -60,12 +60,12 @@
     <string name="item_filter_unreturned">Show unreturned</string>
     <string name="item_filter_returned">Show returned</string>
     <plurals name="transaction_list_snackbar_deleted">
-        <item quantity="one">%d Transaction deleted</item>
-        <item quantity="other">%d Transactions deleted</item>
+        <item quantity="one">%d transaction deleted</item>
+        <item quantity="other">%d transactions deleted</item>
     </plurals>
     <plurals name="transaction_list_dialog_delete_title">
-        <item quantity="one">Delete %d Transaction?</item>
-        <item quantity="other">Delete %d Transactions?</item>
+        <item quantity="one">Delete %d transaction?</item>
+        <item quantity="other">Delete %d transactions?</item>
     </plurals>
     <string name="transaction_list_dialog_delete_text">This can\'t be undone.</string>
 
@@ -73,44 +73,44 @@
     <string name="title_fragment_edit_transaction_create">Create Transaction</string>
     <string name="title_fragment_edit_transaction">Edit Transaction</string>
     <string name="edit_transaction_hint_person">Person *</string>
-    <string name="edit_transaction_error_select_name">Please select a person!</string>
+    <string name="edit_transaction_error_select_name">Please select a person.</string>
     <string name="edit_transaction_hint_amount_money">Amount *</string>
     <string name="edit_transaction_hint_amount_item">Number of items *</string>
-    <string name="edit_transaction_error_enter_amount">Please enter amount!</string>
-    <string name="edit_transaction_error_enter_description">Please enter description!</string>
+    <string name="edit_transaction_error_enter_amount">Please enter an amount.</string>
+    <string name="edit_transaction_error_enter_description">Please enter a description.</string>
     <string name="edit_transaction_hint_desc">Description</string>
     <string name="edit_transaction_hint_desc_item">Description *</string>
-    <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount format, please check!</string>
+    <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount format.</string>
     <string name="edit_transaction_date_dialog_title">Select date</string>
     <string name="edit_transaction_hint_date">Date</string>
     <string name="edit_transaction_hint_returndate">Date returned</string>
     <string name="edit_transaction_gave">gave</string>
     <string name="edit_transaction_received">received</string>
-    <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed in amount</string>
+    <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed</string>
     <string name="debt_settlement_money_description">Debt settlement for \"%1$s\" from %2$s</string>
     <string name="edit_transaction_suspicious_return_date_title">Suspicious return date</string>
-    <string name="edit_transaction_suspicious_return_date_message">The return date you set (%1$s) is before the date of the original transaction. Do you want to use that date?</string>
+    <string name="edit_transaction_suspicious_return_date_message">The set return date (%1$s) ocurrs before the original transaction. Use that date?</string>
     <string name="edit_transaction_use_suspicious_return_date">use date</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Edit Person</string>
     <string name="title_fragment_edit_person_create">Create Person</string>
     <string name="edit_person_name">Name</string>
-    <string name="error_message_enter_name">Please enter a name!</string>
-    <string name="error_message_name_exists">%1$s already exists, please enter a different name!</string>
+    <string name="error_message_enter_name">Please enter a name.</string>
+    <string name="error_message_name_exists">%1$s already exists. Please enter a different name.</string>
     <string name="edit_person_note">Note</string>
     <string name="edit_person_hint_linked_contact">linked contact</string>
     <string name="edit_person_hint_no_linked_contact">No contact linked</string>
-    <string name="edit_person_helper_linked_contact">Unavailable due to missing permission!</string>
+    <string name="edit_person_helper_linked_contact">Unavailable due to missing permissions.</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>
 
     <string name="pref_general_header">General</string>
     <string name="pref_dismiss_filter_title">When dismissing person filter …</string>
-    <string name="pref_dismiss_filter_summary_true">Return to Person list</string>
+    <string name="pref_dismiss_filter_summary_true">Return to list of people</string>
     <string name="pref_dismiss_filter_summary_false">Stay in the current list</string>
-    <string name="pref_item_returned_filter_title">Item list standard filter</string>
+    <string name="pref_item_returned_filter_title">Standard item-list filter</string>
     <string name="pref_date_format_title">Date format</string>
     <string name="pref_date_format_systemdefault_short">System default (short)</string>
     <string name="pref_date_format_systemdefault_short_value" translatable="false">SYSTEM_DEFAULT_S</string>
@@ -120,30 +120,28 @@
     <string name="pref_date_format_systemdefault_long_value" translatable="false">SYSTEM_DEFAULT_L</string>
 
     <string name="pref_maintenance_header">Maintenance</string>
-    <string name="backup_successful">Database successfully backed up to external storage</string>
-    <string name="backup_failed">Backup failed! %1$s</string>
-    <string name="restore_failed">Restore failed! %1$s</string>
+    <string name="backup_successful">Database backed up to external storage</string>
+    <string name="backup_failed">Backup failed %1$s</string>
+    <string name="restore_failed">Restoration failed. %1$s</string>
     <string name="pref_backup_title">Backup database</string>
     <string name="pref_restore_title">Restore database</string>
     <string name="pref_backup_summary">to %1$s</string>
     <string name="pref_restore_summary">from previously backed up \"%1$s\" in external storage</string>
-    <string name="pref_backup_warning">Be aware that the folder where the database backup is copied
-        to will be deleted when the app is uninstalled or its data is cleared. You have to move it
-        to a safe place before uninstalling/clearing data if you want to restore the data later!</string>
+    <string name="pref_backup_warning">The folder the database backup is copied to will be deleted
+        when the app is uninstalled or its data cleared. Move it to a safe place before
+        uninstalling/clearing data if you want to restore the data later.</string>
     <string name="pref_restore_file_not_found">Backup file not found</string>
 
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Quick Guide</string>
     <string name="pref_github_title">GitHub</string>
-    <string name="pref_github_summary">Study the source code, report issues &amp; ideas</string>
+    <string name="pref_github_summary">Find and improve the source code, report issues and ideas</string>
     <string name="restore_confirm">Overwrite</string>
-    <string name="restore_confirm_text">Really overwrite all existing data with data from Backup?\nApp will be restarted after successful restore.</string>
+    <string name="restore_confirm_text">Overwrite all existing data with data from backup?\nThe app will then be restarted.</string>
     <string name="restore_confirm_title">Restore from Backup</string>
 
     <string name="pref_version">Version %1$s</string>
-    <string name="pref_licenses_title">3rd party licenses</string>
-
-    <!--3rd party license-->
+    <string name="pref_licenses_title">Libre third-party licenses</string>
 
     <!--Transition names-->
     <string name="transition_name_person_filter" translatable="false">TRANSITION_SET_PERSON_FILTER</string>
