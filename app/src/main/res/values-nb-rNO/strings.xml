@@ -112,4 +112,8 @@
     <string name="dialog_cancel">Avbryt</string>
     <string name="delete_dialog_confirm">Slett</string>
     <string name="button_label_save">Lagre</string>
+    <string name="pref_date_format_systemdefault_long">Systemforvalg (langt)</string>
+    <string name="pref_date_format_systemdefault_medium">Systemforvalg (middels)</string>
+    <string name="pref_date_format_systemdefault_short">Systemforvalg (kort)</string>
+    <string name="pref_date_format_title">Datoformat</string>
 </resources>
