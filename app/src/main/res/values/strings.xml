@@ -100,7 +100,7 @@
     <string name="error_message_name_exists">%1$s already exists. Please enter a different name.</string>
     <string name="edit_person_note">Note</string>
     <string name="edit_person_hint_linked_contact">linked contact</string>
-    <string name="edit_person_hint_no_linked_contact">No contact linked</string>
+    <string name="edit_person_hint_no_linked_contact">No linked contact</string>
     <string name="edit_person_helper_linked_contact">Unavailable due to missing permissions.</string>
 
     <!-- SettingsFragment -->
