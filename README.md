@@ -55,7 +55,7 @@ Make sure to move backup files out of the way before uninstalling the app or cle
 the backup is saved in the app's data folder on external storage, which is deleted upon 
 uninstall/clearing app data.
 
-## Persmissions used
+## Permissions
 ### READ_CONTACTS
 This is used for linking phone contacts to persons. You can safely deny this permission and use Debitum without linking contacts.
 
