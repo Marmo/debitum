@@ -8,7 +8,7 @@ Translations
 Contribute
 ----------
 
-Translations are managed with [Weblate](https://hosted.weblate.org/projects/debitum/). Components that ca be translated are the UI Strings, F-Droid's App-Descriptions and the In-App-Guides.
+Translations are managed with [Weblate](https://hosted.weblate.org/engage/debitum/). Components that can be translated are the UI Strings, F-Droid's App-Descriptions and the In-App-Guides.
 
 ## A note on the UI-logic of the edit-transaction-dialog
 
