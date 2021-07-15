@@ -101,7 +101,7 @@
     <string name="edit_person_note">Note</string>
     <string name="edit_person_hint_linked_contact">linked contact</string>
     <string name="edit_person_hint_no_linked_contact">No linked contact</string>
-    <string name="edit_person_helper_linked_contact">Unavailable due to missing permissions.</string>
+    <string name="edit_person_helper_linked_contact">Unavailable due to missing permissions</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>
