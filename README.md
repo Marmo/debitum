@@ -6,6 +6,9 @@
   <a href="https://github.com/marmo/debitum/releases/latest">
     <img src="https://img.shields.io/github/release/marmo/debitum.svg?logo=github" />
   </a>
+  <a href="https://hosted.weblate.org/engage/debitum/">
+    <img src="https://hosted.weblate.org/widgets/debitum/-/svg-badge.svg" alt="Translation status" />
+  </a>
 </p>
 
 With Debitum you can track all kinds of IOUs, be it money or lent items. This way you will never 
@@ -65,7 +68,11 @@ This is used for linking phone contacts to persons. You can safely deny this per
 <img alt="Dark mode" src="/fastlane/metadata/android/en-US/images/phoneScreenshots/51_en_night_money.png?raw=true" width="200"/>
 
 ## Translation
-You are welcome to contribute to [translations](TRANSLATION.md) on [Weblate](https://hosted.weblate.org/projects/debitum/).
+You are welcome to contribute to [translations](TRANSLATION.md).
+
+<a href="https://hosted.weblate.org/engage/debitum/">
+<img src="https://hosted.weblate.org/widgets/debitum/-/287x66-grey.png" alt="Translation status" />
+</a>
 
 ## License
 All code in this repository is licensed under the [GNU General Public License v3.0](LICENSE).
