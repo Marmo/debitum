@@ -1,5 +1,3 @@
-## 1.4.0/11
-
 ## 1.4.1/12
 - EditPersonFragment: move avatar to left of person name and update it on name change (if letter avatar)
 - notify user about deleted contact and clear uri (current behaviour: hint "linked contact" shown but no name and avatar)

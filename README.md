@@ -47,7 +47,7 @@ Shows only lent items, ordered by date (descending). Items can be marked as retu
 You can get a context menu in every list by long-pressing a row. From there you can edit or delete items (also multiple rows can be selected this way). In the Person- and the Money-List the sum of all selected rows is displayed in the contextual action bar.
 
 ### Linking Contacts
-In the Edit-Person-Dialog you can link a contact from your phone to each person. To do this, click on the input labelled "no contact linked" and choose a contact. Currently, the only effect is, that the contact's photo (if present) will be shown in the person list. 
+In the Edit-Person-Dialog you can link a contact from your phone to each person. To do this, click on the input labelled "No linked contact" and choose a contact. Currently, the only effect is, that the contact's photo (if present) will be shown in the person list. 
 
 ### Backup and restore
 From the Settings Screen you can backup and restore the database (contains all transactions and persons).
