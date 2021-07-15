@@ -1,7 +1,7 @@
 <resources>
     <!-- General -->
     <string name="app_name" translatable="false">Debitum</string>
-    <string name="error_message_database_access">Could not access database. Please try again.\n%1$s</string>
+    <string name="error_message_database_access">Error trying to access database. Please try again.\n%1$s</string>
     <string name="button_label_save">Save</string>
     <string name="delete_dialog_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
@@ -80,7 +80,7 @@
     <string name="edit_transaction_error_enter_description">Please enter a description.</string>
     <string name="edit_transaction_hint_desc">Description</string>
     <string name="edit_transaction_hint_desc_item">Description *</string>
-    <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount.</string>
+    <string name="edit_transaction_wrong_amount_format">Something is wrong with your amount format.</string>
     <string name="edit_transaction_date_dialog_title">Select date</string>
     <string name="edit_transaction_hint_date">Date</string>
     <string name="edit_transaction_hint_returndate">Date returned</string>
@@ -101,7 +101,7 @@
     <string name="edit_person_note">Note</string>
     <string name="edit_person_hint_linked_contact">linked contact</string>
     <string name="edit_person_hint_no_linked_contact">No contact linked</string>
-    <string name="edit_person_helper_linked_contact">Grant the required permissions first.</string>
+    <string name="edit_person_helper_linked_contact">Unavailable due to missing permissions.</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>
@@ -142,8 +142,6 @@
 
     <string name="pref_version">Version %1$s</string>
     <string name="pref_licenses_title">Libre third-party licenses</string>
-
-    <!--3rd party license-->
 
     <!--Transition names-->
     <string name="transition_name_person_filter" translatable="false">TRANSITION_SET_PERSON_FILTER</string>
