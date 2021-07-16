@@ -1,9 +1,10 @@
 Translations
 ------------
 
-  * German ([@marmo](https://github.com/marmo), [@VibrantTreeStump](https://github.com/VibrantTreeStump))
+  * German ([@marmo](https://github.com/marmo), [@VibrantTreeStump](https://github.com/VibrantTreeStump), J. Lavoie)
   * Portuguese (Brasil) ([@mezysinc](https://github.com/mezysinc))
   * Norwegian Bokmål ([@comradekingu](https://github.com/comradekingu))
+  * French (J. Lavoie)
 
 Contribute
 ----------
