@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_restore_summary">à partir de « %1$s » précédemment sauvegardé dans un stockage externe</string>
+    <string name="pref_github_title">GitHub</string>
+    <string name="pref_guide_title">Guide rapide</string>
+    <string name="pref_info_header">Infos</string>
+    <string name="pref_licenses_title">Licences tierces libres</string>
+    <string name="restore_confirm_text">Écraser toutes les données existantes avec les données de la sauvegarde \?
+\nL\'application sera alors redémarrée.</string>
+    <string name="restore_confirm">Écraser</string>
+    <string name="title_fragment_edit_transaction">Modifier la transaction</string>
+    <string name="transaction_list_dialog_delete_text">Ceci ne peut pas être annulée.</string>
+    <plurals name="transaction_list_dialog_delete_title">
+        <item quantity="one">Supprimer %d transaction \?</item>
+        <item quantity="other">Supprimer %d transactions \?</item>
+    </plurals>
+    <plurals name="transaction_list_snackbar_deleted">
+        <item quantity="one">%d transaction supprimée</item>
+        <item quantity="other">%d transactions supprimées</item>
+    </plurals>
+    <string name="item_filter_unreturned">Afficher les en attente</string>
+    <string name="item_filter_all">Tout afficher</string>
+    <string name="header_label">Total</string>
+    <string name="toolbar_edit_person">Modifier la personne</string>
+    <string name="transaction_list_received">a reçu</string>
+    <string name="transaction_list_gave">a donné</string>
+    <string name="title_fragment_transaction_list_items">Éléments</string>
+    <string name="title_fragment_transaction_list_money">Argent</string>
+    <string name="person_sum_list_dialog_delete_text">Cette opération ne peut être annulée et supprimera également les transactions à destination et en provenance de ces personnes.</string>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="one">Supprimer %d personne \?</item>
+        <item quantity="other">Supprimer %d personnes \?</item>
+    </plurals>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="one">%d personne supprimée</item>
+        <item quantity="other">%d personnes supprimées</item>
+    </plurals>
+    <string name="toolbar_create_person">Créer une personne</string>
+    <string name="person_sum_list_you_lent">vous avez prêté</string>
+    <string name="person_sum_list_no_debt">aucune dette</string>
+    <string name="person_sum_list_you_owe">vous devez</string>
+    <string name="title_fragment_person_sum_list">Personnes</string>
+    <string name="database_empty">Rien n\'a encore été enregistré.
+\nCréez une nouvelle transaction en utilisant le bouton « + » ci-dessous.</string>
+    <string name="dismiss_filter">rejeter le filtre</string>
+    <string name="bottom_nav_settings">Paramètres</string>
+    <string name="bottom_nav_items">Éléments</string>
+    <string name="bottom_nav_money">Argent</string>
+    <string name="bottom_nav_people">Personnes</string>
+    <string name="fab_content_description">Créer une transaction</string>
+    <string name="actionmode_sum">Somme : %1$s</string>
+    <plurals name="actionmode_selected">
+        <item quantity="one">%d sélectionné</item>
+        <item quantity="other">%d sélectionnés</item>
+    </plurals>
+    <string name="actionmode_delete">Supprimer</string>
+    <string name="actionmode_edit">Modifier</string>
+    <string name="actionmode_return_item">Marquer comme retourné</string>
+    <string name="required_helper_text">* Requis</string>
+    <string name="dialog_cancel">Annuler</string>
+    <string name="delete_dialog_confirm">Supprimer</string>
+    <string name="button_label_save">Enregistrer</string>
+    <string name="error_message_database_access">Erreur lors de l\'accès à la base de données. Veuillez réessayer.
+\n%1$s</string>
+</resources>

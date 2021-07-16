@@ -10,12 +10,12 @@
     <string name="pref_dismiss_filter_summary_true">Gå tilbake til persongalleri</string>
     <string name="pref_dismiss_filter_title">Når personfilter forkastes …</string>
     <string name="edit_person_helper_linked_contact">Utilgjengelig som følge av manglende tilgang.</string>
-    <string name="edit_person_hint_no_linked_contact">Ingen kontakt lenket</string>
+    <string name="edit_person_hint_no_linked_contact">Ingen lenket kontakt</string>
     <string name="edit_person_hint_linked_contact">lenket kontakt</string>
     <string name="edit_person_note">Notat</string>
     <string name="error_message_name_exists">%1$s finnes allerede. Skriv inn et annet navn.</string>
     <string name="edit_transaction_use_suspicious_return_date">bruk dato</string>
-    <string name="edit_transaction_suspicious_return_date_message">Returneringsdatoen du har satt (%1$s) inntreffer før den opprinnelige overføringen. Ønsker du å bruke den datoen\?</string>
+    <string name="edit_transaction_suspicious_return_date_message">Angitt returneringsdato (%1$s) inntreffer før den opprinnelige overføringen. Bruk den datoen\?</string>
     <string name="edit_transaction_suspicious_return_date_title">Suspekt returneringsdato</string>
     <string name="debt_settlement_money_description">Gjeldsbetaling for «%1$s» fra %2$s</string>
     <string name="edit_transaction_hint_returndate">Dato returnert</string>
@@ -31,11 +31,11 @@
 \n%1$s</string>
     <string name="title_fragment_person_sum_list">Personer</string>
     <string name="bottom_nav_people">Personer</string>
-    <string name="pref_licenses_title">Tredjepartslisenser</string>
+    <string name="pref_licenses_title">Frie tredjepartslisenser</string>
     <string name="pref_version">Versjon %1$s</string>
     <string name="restore_confirm_title">Gjenopprett fra sikkerhetskopi</string>
     <string name="restore_confirm">Overskriv</string>
-    <string name="pref_github_summary">Sjekk kildekoden, rapporter feil og kom med idéer</string>
+    <string name="pref_github_summary">Finn og forbedre kildekoden, rapporter feil og kom med idéer</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_guide_title">Hurtigveiledning</string>
     <string name="pref_info_header">Info</string>
@@ -52,12 +52,12 @@
     <string name="edit_person_name">Navn</string>
     <string name="title_fragment_edit_person_create">Opprett person</string>
     <string name="title_fragment_edit_person">Rediger person</string>
-    <string name="edit_transaction_snackbar_max_amount">Maks. 9 siffer tillates i beløp</string>
+    <string name="edit_transaction_snackbar_max_amount">Maks. 9 siffer tillates</string>
     <string name="edit_transaction_received">mottok</string>
     <string name="edit_transaction_gave">ga</string>
     <string name="edit_transaction_hint_date">Dato</string>
     <string name="edit_transaction_date_dialog_title">Velg dato</string>
-    <string name="edit_transaction_wrong_amount_format">Noe gikk galt med beløpsformatet.</string>
+    <string name="edit_transaction_wrong_amount_format">Noe er galt med beløpsformatet.</string>
     <string name="edit_transaction_hint_desc_item">Beskrivelse *</string>
     <string name="edit_transaction_hint_desc">Beskrivelse</string>
     <string name="edit_transaction_error_enter_description">Angi beskrivelse.</string>
