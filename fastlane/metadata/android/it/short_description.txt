@@ -1,1 +1,1 @@
-keep track of lent money and items
+tieni traccia del denaro e degli oggetti prestati
