@@ -10,45 +10,45 @@
 <h3>Benutzung</h3>
 <h4>Anlegen einer Transaktion</h4>
 <p>
-    Um dir geliehenes Geld oder Dinge zu merken, musst du mit der roten Schaltfläche (Mitte unten) eine Transaktion erstellen. Im erscheinenden Dialog kannst du Details wie Betrag, eine Beschreibung oder ein Datum angeben und zwischen Geld- oder Gegenstandstransaktionen umschalten (benutze dazu den Schalter rechts vom Eingabefeld für die Summe/Anzahl).
+    Um dir geliehenes Geld oder Dinge zu merken, erstelle eine Transaktion mit der roten Schaltfläche (Mitte unten). Im erscheinenden Dialog kannst du Details wie Betrag, eine Beschreibung oder ein Datum angeben und zwischen Geld- oder Gegenstandstransaktionen umschalten (benutze dazu den Schalter rechts vom Eingabefeld für die Summe/Anzahl).
 </p>
 
 <h4>Transaktionlisten</h4>
 <p>
-    In der unteren Navigationsleiste kannst du verschiedene Ansichten deiner Transaktionen aufrufen:
+    Wähle verschiedene Ansichten deiner Transaktionen in der unteren Navigationsleiste:
 </p>
 <h5>Personen</h5>
 <p>
     Zeigt die Summe für jede Person, sortiert nach dem Datum der letzten Transaktion.
 </p>
 <ul>
-    <li>du kannst auf eine Zeile tippen, um die Geld- und Dinge-Listen nach dieser Person zu filtern</li>
-    <li>du kannst hier über das Menü oben eine neue Person erstellen (Alternative: die "+"-Schaltfläche im Transaktion-Erzeugen-Dialog)</li>
+    <li>tippe auf eine Zeile, um Geld und Dinge nach dieser Person zu filtern</li>
+    <li>erstelle neue Personen über das Menü oben oder mit der "+"-Schaltfläche beim Erzeugen einer Transaktion</li>
 </ul>
 <h5>Geld</h5>
 <p>
-    Zeigt finanzielle Transaktionen, sortiert nach Datum (absteigend). Wenn jemand dir Geld zurückzahlt, solltest du dafür eine neue Transaktion anlegen. Du kannst dazu lange auf die Erst-Transaktion drücken und den Rückzahlungs-Menüeintrag wählen, um eine passende Rückzahlungs-Transaktion anzulegen. Details dazu, warum es keine "Rückgabe-Funktion" wie für Dinge gibt, siehe <a href="https://github.com/Marmo/debitum/issues/9#issuecomment-861314762">hier (englisch)</a>.
+    Zeigt finanzielle Transaktionen, sortiert nach Datum (absteigend). Um eine Rückzahlung zu erfassen, drücke lange auf die initiale Transaktion und wähle den Rückzahlungs-Menüeintrag. Damit wird eine passende Rückzahlungs-Transaktion erzeugt. Details dazu, warum es keine "Rückgabe-Funktion" wie für Dinge gibt, siehe <a href="https://github.com/Marmo/debitum/issues/9#issuecomment-861314762">hier (englisch)</a>.
 </p>
 <h5>Dinge</h5>
 <p>
-    Zeigt verliehene Gegenstände, sortiert nach Datum (absteigend). Gegenstände können als zurückgegeben markiert werden. Drücke dazu lange auf die Transaktion und wähle den Button "Gegenstand zurückgegeben". Die Liste kann dann anhand des Rückabestatus gefiltert werden.
+    Zeigt verliehene Gegenstände, sortiert nach Datum (absteigend). Um einen Gegenstand als zurückgegeben zu markieren, drücke lange auf ihn und wähle den Button "Gegenstand zurückgegeben". Die Liste kann dann anhand des Rückabestatus gefiltert werden.
 </p>
 <p>
-    In allen Listen kannst du über einen langen Druck auf eine Zeile ein Kontextmenü zum Editieren oder Löschen aufrufen. Du kannst so auch mehrere Zeilen auswählen (und löschen). In der Personen- und der Geld-Liste wird beim Auswählen von Zeilen deren Summe in der Kontextmenü-Leiste angezeigt.
+    In allen Listen kannst du über einen langen Druck auf eine Zeile ein Kontextmenü aufrufen. Editiere, Lösche oder wähle mehrere Zeilen auf diese Weise. In der Personen- und der Geld-Liste wird dort beim Auswählen von Zeilen deren Summe angezeigt.
 </p>
 
 <h4>Verknüpfen von Kontakten</h4>
 <p>
-    Im Dialog zum Bearbeiten von Personen kannst du zu jeder Person einen Kontakt von deinem Telefon verknüpfen. Klicke dazu auf das Eingabefeld mit der Beschriftung "Kein Kontakt verknüpft" und wähle einen Kontakt. Aktuell ist der einzige Effekt, dass in der Personen-Liste das Foto des Kontaktes angezeigt wird (soweit vorhanden).
+    Im Dialog zum Bearbeiten von Personen kannst du zu jeder Person einen Kontakt von deinem Telefon verknüpfen. Klicke dazu auf "Kein Kontakt verknüpft" und wähle einen Kontakt. Aktuell ist der einzige Effekt, dass in der Personen-Liste das Foto des Kontaktes angezeigt wird (soweit vorhanden).
 </p>
 
 <h4>Sichern und Wiederherstellen</h4>
 <p>
-    In den Einstellungen gibt es die Möglichkeit, die Datenbank zu sichern und aus einer Sicherung wiederherzustellen (beinhaltet alle Personen und Transaktionen). Diese muss vor dem Deinstallieren der App oder dem Löschen der Anwendungsdaten an einen anderen Ort verschoben werden, da die Sicherung aktuell im Datenordner der App im externen Speicher abgelegt wird, der bei Deinstallation oder beim Löschen der Anwendungsdaten entfernt wird.
+    In den Einstellungen kann die Datenbank (beinhaltet alle Personen und Transaktionen) gesichert und aus einer Sicherung wiederhergestellt werden. Vor dem Deinstallieren der App (oder dem Löschen der Anwendungsdaten) muss die Sicherung an einen anderen Ort verschoben werden, da diese im Datenordner der App im externen Speicher abgelegt wird. Dieses Verzeichnis wird von Android bei Deinstallation oder beim Löschen der Anwendungsdaten entfernt.
 </p>
 
 <h3>Berechtigungen</h3>
-<h4>READ_CONTACTS (Kontakte lesen)</h4>
+<h4>Kontakte lesen</h4>
 <p>
     Diese Berechtigung wird für das Verknüpfen von Telefon-Kontakten verwendet. Du kannst sie problemlos ablehnen und Debitum verwenden, ohne Kontakte zu verknüpfen.
 </p>
