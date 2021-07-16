@@ -1,0 +1,9 @@
+With Debitum you can track all kinds of IOUs, be it money or lent items. This way you will never more forget if your friend already gave you back that book or dispute about how much you owe your colleague for coffee.
+
+The intended use case is to manage (smaller) personal debts and lent items. To keep things simple, things like interest, deadlines, fees etc. will not be an integral part of the app (though the description could somehow be used for that, but I would generally recommend to use more specialised apps for this).
+
+You can backup and restore the database where persons and transactions are stored.
+
+There is no online service whatsoever involved, so your data is saved on your device only (as far as this app is concerned).
+
+<i>Keywords: IOU, debt, lend</i>
