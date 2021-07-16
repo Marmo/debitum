@@ -1,3 +1,6 @@
+# v1.4.1
+- translations update
+
 # v1.4.0
 - new: persons now can have a linked phone contact. Linking is done from the edit person dialog. For this feature the READ_CONTACTS permission is needed (which you can safely deny without breaking Debitum).
 - updated/new translations:
