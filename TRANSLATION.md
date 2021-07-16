@@ -6,6 +6,11 @@ Translations
   * Norwegian Bokmål ([@comradekingu](https://github.com/comradekingu))
   * French (J. Lavoie)
 
+
+<a href="https://hosted.weblate.org/engage/debitum/">
+<img src="https://hosted.weblate.org/widgets/debitum/-/multi-auto.svg" alt="Translation status" />
+</a>
+
 Contribute
 ----------
 
