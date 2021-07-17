@@ -116,7 +116,7 @@ public abstract class Utilities {
         return color;
     }
 
-    public static String md5Hash(String input) {
+    public static String md5Hash(@NonNull String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(input.getBytes(StandardCharsets.UTF_8));

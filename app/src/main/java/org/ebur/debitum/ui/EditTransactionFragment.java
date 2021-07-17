@@ -34,10 +34,10 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
+import org.ebur.debitum.util.Utilities;
 import org.ebur.debitum.viewModel.EditTransactionViewModel;
 import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;

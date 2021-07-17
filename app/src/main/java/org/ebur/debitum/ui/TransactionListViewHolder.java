@@ -12,8 +12,8 @@ import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.TransactionWithPerson;
+import org.ebur.debitum.util.Utilities;
 
 class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private final TextView txnNameView;

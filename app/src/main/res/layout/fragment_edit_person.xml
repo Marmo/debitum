@@ -1,142 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:transitionName="to_edit_person"
-    tools:context=".ui.EditPersonFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewmodel"
+            type="org.ebur.debitum.viewModel.EditPersonViewModel" />
+    </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:transitionName="to_edit_person"
+        tools:context=".ui.EditPersonFragment">
 
-        <include
-            layout="@layout/toolbar_dialog"/>
-
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_dialog"/>
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                android:layout_marginVertical="@dimen/activity_vertical_margin">
+                android:layout_weight="2">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edit_person_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
-                    android:layout_marginVertical="@dimen/dialog_vertical_spacing"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:hint="@string/edit_person_name"
-                    android:singleLine="true"
-                    android:inputType="text"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:startIconDrawable="@drawable/ic_baseline_person_outline_onsurface_24"
-                    app:startIconContentDescription="Person"
-                    app:endIconMode="clear_text"
-                    app:endIconContentDescription="clear text"
-                    app:errorEnabled="true" >
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edit_person_note"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
-                    android:layout_marginVertical="@dimen/dialog_vertical_spacing"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_person_name"
-                    android:hint="@string/edit_person_note"
-                    android:inputType="text"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:startIconDrawable="@drawable/ic_baseline_notes_24"
-                    app:startIconContentDescription="Person"
-                    app:endIconMode="clear_text"
-                    app:endIconContentDescription="clear text" >
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageView
-                    android:id="@+id/edit_person_avatar"
-                    android:layout_width="@dimen/avatar_size"
-                    android:layout_height="@dimen/avatar_size"
-                    android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_person_linked_contact"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edit_person_linked_contact"
-                    app:srcCompat="@drawable/circle"
-                    tools:ignore="ContentDescription,RtlSymmetry" />
-
-                <TextView
-                    android:id="@+id/edit_person_avatar_text"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    style="@style/ThemeOverlay.Debitum.Avatar"
-                    android:gravity="center"
-                    android:textAlignment="gravity"
-                    android:textAppearance="@style/TextAppearance.Debitum.AvatarLetter"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_person_avatar"
-                    app:layout_constraintEnd_toEndOf="@id/edit_person_avatar"
-                    app:layout_constraintStart_toStartOf="@id/edit_person_avatar"
-                    app:layout_constraintTop_toTopOf="@id/edit_person_avatar"
-                    tools:text="R" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edit_person_linked_contact"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
-                    android:layout_marginVertical="@dimen/dialog_vertical_spacing"
-                    android:hint="@string/edit_person_hint_no_linked_contact"
-                    android:inputType="none"
-                    app:endIconContentDescription="remove link"
-                    app:endIconMode="custom"
-                    app:endIconDrawable="@drawable/ic_baseline_cancel_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/edit_person_avatar"
-                    app:layout_constraintTop_toBottomOf="@id/edit_person_note"
-                    app:startIconContentDescription="Link"
-                    app:startIconDrawable="@drawable/ic_outline_link_24"
-                    app:helperTextEnabled="false"
-                    app:helperText="@string/edit_person_helper_linked_contact">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!--This is needed so that everything can be revealed from behind the keyboard-->
-                <FrameLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    app:layout_constraintTop_toBottomOf="@id/edit_person_linked_contact"
-                    tools:ignore="UselessLeaf" />
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginVertical="@dimen/activity_vertical_margin">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-    </LinearLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/name_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                        android:layout_marginVertical="@dimen/dialog_vertical_spacing"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:hint="@string/edit_person_name"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:startIconDrawable="@drawable/ic_baseline_person_outline_onsurface_24"
+                        app:startIconContentDescription="Person"
+                        app:endIconMode="clear_text"
+                        app:endIconContentDescription="clear text"
+                        app:errorEnabled="true"
+                        app:errorText="@{viewmodel.nameError}">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/name"
+                            android:text="@={viewmodel.getName()}"
+                            app:textIfEmpty="@{viewmodel.contactName}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/note_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                        android:layout_marginVertical="@dimen/dialog_vertical_spacing"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/name_layout"
+                        android:hint="@string/edit_person_note"
+                        android:inputType="text"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:startIconDrawable="@drawable/ic_baseline_notes_24"
+                        app:startIconContentDescription="Person"
+                        app:endIconMode="clear_text"
+                        app:endIconContentDescription="clear text" >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/note"
+                            android:text="@={viewmodel.note}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="@dimen/avatar_size"
+                        android:layout_height="@dimen/avatar_size"
+                        android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                        app:layout_constraintBottom_toBottomOf="@id/linked_contact_layout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/linked_contact_layout"
+                        android:src="@{viewmodel.contactDrawable}"
+                        tools:ignore="ContentDescription,RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/avatar_text"
+                        android:text="@{viewmodel.avatarLetter}"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        style="@style/ThemeOverlay.Debitum.Avatar"
+                        android:gravity="center"
+                        android:textAlignment="gravity"
+                        android:textAppearance="@style/TextAppearance.Debitum.AvatarLetter"
+                        app:layout_constraintBottom_toBottomOf="@id/avatar"
+                        app:layout_constraintEnd_toEndOf="@id/avatar"
+                        app:layout_constraintStart_toStartOf="@id/avatar"
+                        app:layout_constraintTop_toTopOf="@id/avatar"
+                        tools:text="R" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/linked_contact_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dialog_horizontal_spacing"
+                        android:layout_marginVertical="@dimen/dialog_vertical_spacing"
+                        android:hint="@{viewmodel.contactHint}"
+                        android:inputType="none"
+                        app:endIconContentDescription="remove link"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_baseline_cancel_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/avatar"
+                        app:layout_constraintTop_toBottomOf="@id/note_layout"
+                        app:startIconContentDescription="Link"
+                        app:startIconDrawable="@drawable/ic_outline_link_24"
+                        app:helperTextEnabled="false"
+                        app:helperText="@string/edit_person_helper_linked_contact">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/linkedContact"
+                            android:text="@{viewmodel.contactName}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--This is needed so that everything can be revealed from behind the keyboard-->
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        app:layout_constraintTop_toBottomOf="@id/linked_contact_layout"
+                        tools:ignore="UselessLeaf" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

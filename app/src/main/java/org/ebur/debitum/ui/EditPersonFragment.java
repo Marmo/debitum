@@ -1,50 +1,33 @@
 package org.ebur.debitum.ui;
 
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.transition.MaterialContainerTransform;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
-import org.ebur.debitum.database.Person;
-import org.ebur.debitum.viewModel.ContactsHelper;
+import org.ebur.debitum.databinding.FragmentEditPersonBinding;
+import org.ebur.debitum.util.ContactsHelper;
 import org.ebur.debitum.viewModel.EditPersonViewModel;
 import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 
 import java.util.concurrent.ExecutionException;
 
 public class EditPersonFragment extends DialogFragment {
-    // TODO use listeners on input fields to keep viewModel up to date
-    //  and observers to keep input fields up to date. The viewModel
-    //  needs to have single values (name, note, uri, image) of LiveData.
-    //  Then upon saving the viewModel's data (that is always up to date)
-    //  can be directly used.
-    //  Use DataBinding https://developer.android.com/topic/libraries/data-binding/
 
     private final static String TAG = "EditPersonFragment";
 
@@ -52,23 +35,17 @@ public class EditPersonFragment extends DialogFragment {
     public static final String ARG_NEW_PERSON_REQUESTED = "newPersonRequested";
 
     private EditPersonViewModel viewModel;
-    private ContactsHelper contactsHelper;
+
+    FragmentEditPersonBinding binding;
 
     private Toolbar toolbar;
-    private TextInputLayout editNameLayout;
-    private TextInputEditText editName;
-    private TextInputEditText editNote;
-    private TextInputLayout editContactLayout;
-    private TextInputEditText editContact;
-    private ImageView avatarView;
-    private TextView avatarLetterView;
 
     ActivityResultLauncher<Void> getContact = registerForActivityResult(new ActivityResultContracts.PickContact(),
             uri -> {
                 // uri will be null if the user cancels the contact-picking. In that case we
-                // do not want to do anything
+                // do not want to do anything (not even set the contactUri to null!)
                 if (uri != null) {
-                    handleChangedContactUri(uri);
+                    viewModel.setContactUri(uri);
                 }
             });
 
@@ -84,34 +61,28 @@ public class EditPersonFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(EditPersonViewModel.class);
-        contactsHelper = new ViewModelProvider(requireActivity()).get(ContactsHelper.class);
 
-        View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
+        binding = FragmentEditPersonBinding.inflate(inflater, container, false);
+        binding.setViewmodel(new ViewModelProvider(this).get(EditPersonViewModel.class));
+        binding.setLifecycleOwner(this);
 
-        toolbar = root.findViewById(R.id.dialog_toolbar);
-        editNameLayout = root.findViewById(R.id.edit_person_name);
-        editName = (TextInputEditText) editNameLayout.getEditText();
-        assert editName != null;
-        editName.addTextChangedListener(new TextInputLayoutErrorResetter(editNameLayout));
-        TextInputLayout editNoteLayout = root.findViewById(R.id.edit_person_note);
-        editNote = (TextInputEditText) editNoteLayout.getEditText();
-        editContactLayout = root.findViewById(R.id.edit_person_linked_contact);
-        editContact = (TextInputEditText) editContactLayout.getEditText();
-        assert editContact != null;
-        editContact.setOnClickListener(view -> getContact.launch(null));
-        editContactLayout.setEndIconOnClickListener(view -> {
-            handleChangedContactUri(null);
+        viewModel = binding.getViewmodel();
+
+        toolbar = binding.toolbar.findViewById(R.id.dialog_toolbar);
+        binding.linkedContact.setOnClickListener(view -> getContact.launch(null));
+        binding.linkedContactLayout.setEndIconOnClickListener(view -> {
+            viewModel.setContactUri(null);
         });
-        avatarView = root.findViewById(R.id.edit_person_avatar);
-        avatarLetterView = root.findViewById(R.id.edit_person_avatar_text);
 
-        Person editedPerson = requireArguments().getParcelable(ARG_EDITED_PERSON);
-        viewModel.setEditedPerson(editedPerson != null ? editedPerson : new Person(-1));
+        viewModel.setEditedPerson(requireArguments().getParcelable(ARG_EDITED_PERSON));
 
+        // check permission to enable/disable contact linking feature
+        // IMPORTANT: we need to check permission _before_ getting the uri and
+        // calling handleChangedContactUri(), as there we need to know about that permission
+        checkReadContactsPermission();
         subscribeToViewModel();
 
-        return root;
+        return binding.getRoot();
     }
 
     @Override
@@ -122,31 +93,19 @@ public class EditPersonFragment extends DialogFragment {
         toolbar.inflateMenu(R.menu.menu_edit_person);
         toolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
 
-        // check permission to enable/disable contact linking feature
-        // IMPORTANT: we need to check permission _before_ getting the uri and
-        // calling handleChangedContactUri(), as there we need to know about that permission
-        checkReadContactsPermission();
-
-        // we create a new person
-        if(viewModel.isNewPerson()) {
-            toolbar.setTitle(R.string.title_fragment_edit_person_create);
-        }
-        // we edit a person
-        else {
-            toolbar.setTitle(R.string.title_fragment_edit_person);
-            editName.setText(viewModel.getEditedPerson().name);
-            editNote.setText(viewModel.getEditedPerson().note);
-            Uri uri = viewModel.getEditedPerson().linkedContactUri;
-            handleChangedContactUri(uri);
-        }
-
-        editName.requestFocus();
+        binding.name.requestFocus();
     }
 
     private void subscribeToViewModel() {
-        contactsHelper.isContactLinkingEnabled().observe(getViewLifecycleOwner(), enabled -> {
-            editContactLayout.setHelperTextEnabled(!enabled);
-            editContactLayout.setEnabled(enabled);
+        ContactsHelper.isContactLinkingEnabled().observe(getViewLifecycleOwner(), enabled -> {
+            binding.linkedContactLayout.setHelperTextEnabled(!enabled);
+            binding.linkedContactLayout.setEnabled(enabled);
+        });
+        viewModel.isNewPerson().observe(getViewLifecycleOwner(), isNewPerson -> {
+            toolbar.setTitle(
+                    isNewPerson ? R.string.title_fragment_edit_person_create
+                    : R.string.title_fragment_edit_person
+            );
         });
     }
 
@@ -166,91 +125,27 @@ public class EditPersonFragment extends DialogFragment {
     }
 
     public void onSavePersonAction() {
-        Person editedPerson = viewModel.getEditedPerson();
-
-        // check if nameView has contents and get name
-        if(editName.getText() == null || TextUtils.isEmpty(editName.getText())) {
-            editNameLayout.setError(getString(R.string.error_message_enter_name));
-            return;
-        } else {
-            editedPerson.name = editName.getText().toString();
-        }
-
-        // get note
-        assert editNote.getText() != null;
-        editedPerson.note = editNote.getText().toString();
-
         try {
-            if(!editedPerson.name.equals(viewModel.getOriginalName())
-                    && viewModel.personExists(editedPerson.name)) {
-                editNameLayout.setError(getString(R.string.error_message_name_exists, editedPerson.name));
-                return;
-            } else {
-                viewModel.writePersonToDb();
-            }
-
+            viewModel.savePerson();
             // return the new name back to the calling fragment via NewPersonRequestViewModel
             // (currently only EditTransactionFragement uses this)
             // only set name if a new person was requested
             if(requireArguments().getBoolean(ARG_NEW_PERSON_REQUESTED)
-                    && viewModel.isNewPerson()) {
+                    && viewModel.isNewPerson().getValue()) {
                 NavBackStackEntry requester = NavHostFragment.findNavController(this).getPreviousBackStackEntry();
                 if (requester != null) {
                     NewPersonRequestViewModel requestViewModel =
                             new ViewModelProvider(requester).get(NewPersonRequestViewModel.class);
-                    requestViewModel.setNewPersonName(editedPerson.name);
+                    requestViewModel.setNewPersonName(viewModel.getName().getValue());
                 }
             }
 
             NavHostFragment.findNavController(this).navigateUp();
 
         } catch (ExecutionException | InterruptedException e) {
-            String errorMessage = getResources().getString(R.string.error_message_database_access, e.getLocalizedMessage());
+            String errorMessage = getString(R.string.error_message_database_access, e.getLocalizedMessage());
             Log.e(TAG, errorMessage);
         }
-    }
-
-    void handleChangedContactUri(@Nullable Uri uri) {
-
-        if (contactsHelper.isContactLinkingEnabled().getValue()) {
-            @StringRes int hint;
-            @Nullable String contactName;
-            @Nullable String letter;
-            @NonNull Drawable avatarDrawable;
-
-            if (uri == null) {
-                contactName = null;
-                hint = R.string.edit_person_hint_no_linked_contact;
-            } else {
-                contactName = contactsHelper.getContactName(uri);
-                hint = R.string.edit_person_hint_linked_contact;
-
-                // if editName is empty, fill it with name
-                CharSequence name = editName.getText();
-                if (name == null || name.toString().isEmpty()) {
-                    editName.setText(contactName);
-                    viewModel.getEditedPerson().name = contactName;
-                }
-            }
-
-            // this will yield either the photo (if uri != null and a photo is there) or a
-            // generated color based on the person's color index
-            @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
-            avatarDrawable = contactsHelper.makeAvatarDrawable(
-                    contactsHelper.getContactImage(uri),
-                    viewModel.getEditedPerson().getColor(secondaryColorRGB)
-            );
-            String name = editName.getText() == null ? "" : editName.getText().toString(); // TODO use viewModel's LiveData
-            letter = avatarDrawable instanceof RoundedBitmapDrawable || name.isEmpty()
-                            ? null
-                            : String.valueOf(name.charAt(0)).toUpperCase(); // TODO use viewModel's LiveData
-
-            editContactLayout.setHint(hint);
-            editContact.setText(contactName);
-            avatarView.setImageDrawable(avatarDrawable);
-            avatarLetterView.setText(letter);
-        }
-        viewModel.setLinkedContactUri(uri);
     }
 
     private void checkReadContactsPermission() {
@@ -259,9 +154,9 @@ public class EditPersonFragment extends DialogFragment {
         // ActivityResultLauncher, as an instance variable.
         ActivityResultLauncher<String> requestPermissionLauncher =
                 registerForActivityResult(new ActivityResultContracts.RequestPermission(),
-                        isGranted -> contactsHelper.setContactLinkingEnabled(isGranted));
+                        isGranted -> ContactsHelper.setContactLinkingEnabled(isGranted));
 
         // check and ask for permission
-        contactsHelper.checkReadContactsPermission(requestPermissionLauncher);
+        ContactsHelper.checkReadContactsPermission(requestPermissionLauncher, requireContext());
     }
 }

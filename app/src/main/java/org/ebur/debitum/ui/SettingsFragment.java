@@ -20,8 +20,8 @@ import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.BuildConfig;
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.AppDatabase;
+import org.ebur.debitum.util.Utilities;
 
 import java.io.File;
 import java.util.Date;

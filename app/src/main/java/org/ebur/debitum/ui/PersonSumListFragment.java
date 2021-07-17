@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.selection.Selection;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -28,11 +27,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
-import org.ebur.debitum.viewModel.ContactsHelper;
+import org.ebur.debitum.util.ContactsHelper;
+import org.ebur.debitum.util.Utilities;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
 import java.util.List;
@@ -46,8 +45,6 @@ public class PersonSumListFragment
             PersonSumListViewHolder,
             PersonSumListAdapter.PersonWithAvatar> {
 
-
-    private ContactsHelper contactsHelper;
     boolean contactLinkingEnabled;
 
     @Override
@@ -66,7 +63,6 @@ public class PersonSumListFragment
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        contactsHelper = new ViewModelProvider(requireActivity()).get(ContactsHelper.class);
         checkReadContactsPermission();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -83,7 +79,7 @@ public class PersonSumListFragment
 
     @Override
     protected void subscribeToViewModel() {
-        contactsHelper.isContactLinkingEnabled().observe(getViewLifecycleOwner(), enabled -> {
+        ContactsHelper.isContactLinkingEnabled().observe(getViewLifecycleOwner(), enabled -> {
             contactLinkingEnabled = enabled;
             updateRecyclerView(viewModel.getPersonsWithTransactions().getValue());
         });
@@ -101,9 +97,10 @@ public class PersonSumListFragment
         adapter.submitList(
                 pwtList.stream().map(pwt -> new PersonSumListAdapter.PersonWithAvatar(
                         pwt,
-                        contactsHelper.makeAvatarDrawable(
-                                contactLinkingEnabled ? contactsHelper.getContactImage(pwt.person.linkedContactUri) : null,
-                                pwt.person.getColor(secondaryColorRGB)
+                        ContactsHelper.makeAvatarDrawable(
+                                contactLinkingEnabled ? ContactsHelper.getContactImage(pwt.person.linkedContactUri, requireContext()) : null,
+                                pwt.person.getColor(secondaryColorRGB),
+                                requireContext()
                         )
                 )).collect(Collectors.toList()));
 
@@ -221,9 +218,9 @@ public class PersonSumListFragment
         // ActivityResultLauncher, as an instance variable.
         ActivityResultLauncher<String> requestPermissionLauncher =
                 registerForActivityResult(new ActivityResultContracts.RequestPermission(),
-                        isGranted -> contactsHelper.setContactLinkingEnabled(isGranted));
+                        isGranted -> ContactsHelper.setContactLinkingEnabled(isGranted));
 
         // check and ask for permission
-        contactsHelper.checkReadContactsPermission(requestPermissionLauncher);
+        ContactsHelper.checkReadContactsPermission(requestPermissionLauncher, requireContext());
     }
 }

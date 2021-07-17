@@ -11,7 +11,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import org.ebur.debitum.Utilities;
+import org.ebur.debitum.util.Utilities;
 
 @Entity(tableName = "person")
 public class Person implements Parcelable {
@@ -25,8 +25,8 @@ public class Person implements Parcelable {
         this.colorIndex = getColorIndex();
     }
     @Ignore
-    public Person(String name) {
-        this(name, "", null);
+    public Person(@Nullable String name) {
+        this(name == null ? "" : name, "", null);
     }
 
     @Ignore
