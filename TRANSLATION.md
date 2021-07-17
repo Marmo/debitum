@@ -4,7 +4,8 @@ Translations
   * German ([@marmo](https://github.com/marmo), [@VibrantTreeStump](https://github.com/VibrantTreeStump), J. Lavoie)
   * Portuguese (Brasil) ([@mezysinc](https://github.com/mezysinc))
   * Norwegian Bokmål ([@comradekingu](https://github.com/comradekingu))
-  * French (J. Lavoie)
+  * French ([@Edanas](https://hosted.weblate.org/user/Edanas/))
+  * Italian ([@Edanas](https://hosted.weblate.org/user/Edanas/))
 
 
 <a href="https://hosted.weblate.org/engage/debitum/">
