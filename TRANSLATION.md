@@ -1,7 +1,7 @@
 Translations
 ------------
 
-  * German ([@marmo](https://github.com/marmo), [@VibrantTreeStump](https://github.com/VibrantTreeStump), J. Lavoie)
+  * German ([@marmo](https://github.com/marmo), [@VibrantTreeStump](https://github.com/VibrantTreeStump), [@Edanas](https://hosted.weblate.org/user/Edanas/))
   * Portuguese (Brasil) ([@mezysinc](https://github.com/mezysinc))
   * Norwegian Bokmål ([@comradekingu](https://github.com/comradekingu))
   * French ([@Edanas](https://hosted.weblate.org/user/Edanas/))
