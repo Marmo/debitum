@@ -39,12 +39,6 @@ import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 import java.util.concurrent.ExecutionException;
 
 public class EditPersonFragment extends DialogFragment {
-    // TODO use listeners on input fields to keep viewModel up to date
-    //  and observers to keep input fields up to date. The viewModel
-    //  needs to have single values (name, note, uri, image) of LiveData.
-    //  Then upon saving the viewModel's data (that is always up to date)
-    //  can be directly used.
-    //  Use DataBinding https://developer.android.com/topic/libraries/data-binding/
 
     private final static String TAG = "EditPersonFragment";
 
@@ -90,12 +84,24 @@ public class EditPersonFragment extends DialogFragment {
         View root = inflater.inflate(R.layout.fragment_edit_person, container, false);
 
         toolbar = root.findViewById(R.id.dialog_toolbar);
+
+        // Name
         editNameLayout = root.findViewById(R.id.edit_person_name);
         editName = (TextInputEditText) editNameLayout.getEditText();
         assert editName != null;
         editName.addTextChangedListener(new TextInputLayoutErrorResetter(editNameLayout));
+        editName.setOnFocusChangeListener((view, hasFocus) -> {
+            if (!hasFocus) {
+                // trigger avatar refresh
+                handleChangedContactUri(viewModel.getEditedPerson().linkedContactUri);
+            }
+        });
+
+        // Note
         TextInputLayout editNoteLayout = root.findViewById(R.id.edit_person_note);
         editNote = (TextInputEditText) editNoteLayout.getEditText();
+
+        // Contact
         editContactLayout = root.findViewById(R.id.edit_person_linked_contact);
         editContact = (TextInputEditText) editContactLayout.getEditText();
         assert editContact != null;
@@ -240,10 +246,10 @@ public class EditPersonFragment extends DialogFragment {
                     contactsHelper.getContactImage(uri),
                     viewModel.getEditedPerson().getColor(secondaryColorRGB)
             );
-            String name = editName.getText() == null ? "" : editName.getText().toString(); // TODO use viewModel's LiveData
+            String name = editName.getText() == null ? "" : editName.getText().toString();
             letter = avatarDrawable instanceof RoundedBitmapDrawable || name.isEmpty()
                             ? null
-                            : String.valueOf(name.charAt(0)).toUpperCase(); // TODO use viewModel's LiveData
+                            : String.valueOf(name.charAt(0)).toUpperCase();
 
             editContactLayout.setHint(hint);
             editContact.setText(contactName);

@@ -1,16 +1,12 @@
 ## 1.4.1/12
-- EditPersonFragment: move avatar to left of person name and update it on name change (if letter avatar)
 - notify user about deleted contact and clear uri (current behaviour: hint "linked contact" shown but no name and avatar)
-
-## 1.4.x
-- rework EditTransactionViewModel to use a LiveData transaction to save user input, id=-1 indicating a new txn
-- rework EditPersonViewModel to use a LiveData person to save user input, id=-1 indicating a new person
 
 ## 1.5.0/13
 - add scrollbar showing the date/month/year while scrolling the transaction list
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
 
 ## later / unassigned
+- use DataBinding in Edit Dialogs (see branch feature/EditPersonViewModelDataBinding)
 - use RxJava (?)
 - create a way to get from person sum list directly to filtered items list of a person
 - make some intro showing basic functions

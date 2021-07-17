@@ -16,7 +16,7 @@ public class EditPersonViewModel extends AndroidViewModel {
 
     private final PersonRepository repository;
     @NonNull private Person editedPerson;
-    private String originalName;
+    @Nullable private String originalName;
 
     public EditPersonViewModel(Application application) {
         super(application);
@@ -28,12 +28,17 @@ public class EditPersonViewModel extends AndroidViewModel {
 
     @NonNull public Person getEditedPerson() { return editedPerson; }
     // this should only be called once when the edited person is not yet changed
-    public void setEditedPerson(Person editedPerson) {
-        this.editedPerson = editedPerson;
-        this.originalName = editedPerson.name;
+    public void setEditedPerson(@Nullable Person editedPerson) {
+        if (editedPerson == null) {
+            this.editedPerson = new Person(-1);
+            this.originalName = null;
+        } else {
+            this.editedPerson = editedPerson;
+            this.originalName = editedPerson.name;
+        }
     }
 
-    public String getOriginalName() {
+    @Nullable public String getOriginalName() {
         return  originalName;
     }
 
