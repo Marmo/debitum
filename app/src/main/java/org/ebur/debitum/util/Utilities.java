@@ -1,4 +1,4 @@
-package org.ebur.debitum;
+package org.ebur.debitum.util;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
+import org.ebur.debitum.R;
 import org.ebur.debitum.ui.SettingsFragment;
 
 import java.nio.charset.StandardCharsets;

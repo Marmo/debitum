@@ -1,7 +1,7 @@
-package org.ebur.debitum.viewModel;
+package org.ebur.debitum.util;
 
 import android.Manifest;
-import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -19,7 +19,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -28,12 +27,12 @@ import org.ebur.debitum.R;
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 
-public class ContactsHelper extends AndroidViewModel {
+public class ContactsHelper {
 
     private final String TAG = "ContactsHelper";
 
-    private final HashMap<Uri, Contact> contactCache;
-    private final MutableLiveData<Boolean> contactLinkingEnabled;
+    private final static HashMap<Uri, Contact> contactCache = new HashMap<>();
+    private final static MutableLiveData<Boolean> contactLinkingEnabled = new MutableLiveData<>(false);
 
     public static class Contact {
         @NonNull String name;
@@ -45,18 +44,12 @@ public class ContactsHelper extends AndroidViewModel {
         }
     }
 
-    public ContactsHelper(Application application) {
-        super(application);
-        contactCache = new HashMap<>();
-        contactLinkingEnabled = new MutableLiveData<>(false);
-    }
-
-    private void cacheContactInfo(@NonNull Uri uri, @NonNull Contact contact) {
+    private static void cacheContactInfo(@NonNull Uri uri, @NonNull Contact contact) {
         contactCache.put(uri, contact);
     }
 
-    private boolean isCached(@Nullable Uri uri) {
-        if (uri == null || contactCache == null) {
+    private static boolean isCached(@Nullable Uri uri) {
+        if (uri == null) {
             return false;
         } else {
             return contactCache.containsKey(uri);
@@ -64,21 +57,17 @@ public class ContactsHelper extends AndroidViewModel {
     }
 
     @Nullable
-    private Bitmap getContactImageFromCache(@NonNull Uri uri) {
-        if (contactCache != null) {
-            Contact contact = contactCache.get(uri);
-            return contact != null ? contact.photo : null;
-        } else {
-            return null;
-        }
+    private static Bitmap getContactImageFromCache(@NonNull Uri uri) {
+        Contact contact = contactCache.get(uri);
+        return contact != null ? contact.photo : null;
     }
 
     @Nullable
-    private Bitmap getContactImageFromContentProvider(@NonNull Uri uri) {
+    private static Bitmap getContactImageFromContentProvider(@NonNull Uri uri, Context context) {
         Uri photoUri = Uri.withAppendedPath(uri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
         String[] photoProjection = new String[] {ContactsContract.Contacts.Photo.PHOTO};
         Bitmap photo;
-        Cursor cursor = getApplication().getContentResolver()
+        Cursor cursor = context.getContentResolver()
                 .query(photoUri, photoProjection, null, null, null);
         if (cursor == null) {
             return null;
@@ -88,7 +77,7 @@ public class ContactsHelper extends AndroidViewModel {
                 byte[] data = cursor.getBlob(0);
                 if (data != null) {
                     photo = BitmapFactory.decodeStream(new ByteArrayInputStream(data));
-                    int size = getApplication().getResources().getInteger(R.integer.avatar_size);
+                    int size = context.getResources().getInteger(R.integer.avatar_size);
                     return Bitmap.createScaledBitmap(photo, size, size, true);
                 }
             }
@@ -99,17 +88,17 @@ public class ContactsHelper extends AndroidViewModel {
     }
 
     @Nullable
-    public Bitmap getContactImage(@Nullable Uri uri) {
+    public static Bitmap getContactImage(@Nullable Uri uri, Context context) {
         if (uri == null) return null;
         if (isCached(uri)) {
             return getContactImageFromCache(uri);
         } else {
             // cache contact and return its photo
-            Bitmap photo = getContactImageFromContentProvider(uri);
+            Bitmap photo = getContactImageFromContentProvider(uri, context);
             cacheContactInfo(
                     uri,
                     new Contact(
-                            getContactNameFromContentProvider(uri),
+                            getContactNameFromContentProvider(uri, context),
                             photo
                     )
             );
@@ -118,20 +107,16 @@ public class ContactsHelper extends AndroidViewModel {
     }
 
     @Nullable
-    private String getContactNameFromCache(@NonNull Uri uri) {
-        if (contactCache != null) {
-            Contact contact = contactCache.get(uri);
-            return contact != null ? contact.name : null;
-        } else {
-            return null;
-        }
+    private static String getContactNameFromCache(@NonNull Uri uri) {
+        Contact contact = contactCache.get(uri);
+        return contact != null ? contact.name : null;
     }
 
     @NonNull
-    private String getContactNameFromContentProvider(@NonNull Uri uri) {
+    private static String getContactNameFromContentProvider(@NonNull Uri uri, Context context) {
         @NonNull String name;
         int index;
-        try (Cursor cursor = getApplication().getContentResolver()
+        try (Cursor cursor = context.getContentResolver()
                 .query(uri, null, null, null, null)) {
             if (cursor.moveToFirst()) {
                 index = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
@@ -143,18 +128,18 @@ public class ContactsHelper extends AndroidViewModel {
     }
 
     @Nullable
-    public String getContactName(@Nullable Uri uri) {
+    public static String getContactName(@Nullable Uri uri, Context context) {
         if (uri == null) return null;
         if (isCached(uri)) {
             return getContactNameFromCache(uri);
         } else {
             // cache contact and return its name
-            String name = getContactNameFromContentProvider(uri);
+            String name = getContactNameFromContentProvider(uri, context);
             cacheContactInfo(
                     uri,
                     new Contact(
                             name,
-                            getContactImageFromContentProvider(uri)
+                            getContactImageFromContentProvider(uri, context)
                     )
             );
             return name.isEmpty() ? null : name;
@@ -168,26 +153,26 @@ public class ContactsHelper extends AndroidViewModel {
      * @param color color int to use when there is no photo (i.e. photo==null)
      */
     @NonNull
-    public Drawable makeAvatarDrawable(@Nullable Bitmap photo, @ColorInt int color) {
+    public static Drawable makeAvatarDrawable(@Nullable Bitmap photo, @ColorInt int color, Context context) {
         if (photo == null) {
-            Drawable drawable = ResourcesCompat.getDrawable(getApplication().getResources(), R.drawable.circle, null);
+            Drawable drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.circle, null);
             assert drawable != null;
             // min API 29: drawable.mutate().setColorFilter(new BlendModeColorFilter(color, BlendMode.SRC_ATOP));
             drawable.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
             return drawable;
         } else {
-            RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(getApplication().getResources(), photo);
+            RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(context.getResources(), photo);
             drawable.setCircular(true);
             return drawable;
         }
     }
 
 
-    @NonNull public LiveData<Boolean> isContactLinkingEnabled() {
+    @NonNull public static LiveData<Boolean> isContactLinkingEnabled() {
         return contactLinkingEnabled;
     }
 
-    public void setContactLinkingEnabled(boolean enabled) {
+    public static void setContactLinkingEnabled(boolean enabled) {
         contactLinkingEnabled.setValue(enabled);
     }
 
@@ -201,9 +186,9 @@ public class ContactsHelper extends AndroidViewModel {
      *                 registerForActivityResult(new ActivityResultContracts.RequestPermission(),
      *                         isGranted -> contactsHelper.setContactLinkingEnabled(isGranted));</code>
      */
-    public void checkReadContactsPermission(ActivityResultLauncher<String> requestPermissionLauncher) {
+    public static void checkReadContactsPermission(ActivityResultLauncher<String> requestPermissionLauncher, Context context) {
         // check and ask for permission
-        if (ContextCompat.checkSelfPermission(getApplication(),
+        if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.READ_CONTACTS) ==
                 PackageManager.PERMISSION_GRANTED) {
             setContactLinkingEnabled(true);
