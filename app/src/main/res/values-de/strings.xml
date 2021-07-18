@@ -131,4 +131,5 @@
     <string name="pref_date_format_systemdefault_short">Systemstandard (kurz)</string>
     <string name="pref_date_format_title">Datumsformat</string>
     <string name="dialog_gotit">Verstanden</string>
+    <string name="edit_person_contact_deleted">Der verknüpfte Kontakt ist nicht mehr verfügbar. Die Verknüpfung wurde entfernt.</string>
 </resources>
