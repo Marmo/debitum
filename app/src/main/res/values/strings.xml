@@ -103,7 +103,7 @@
     <string name="edit_person_hint_linked_contact">linked contact</string>
     <string name="edit_person_hint_no_linked_contact">No linked contact</string>
     <string name="edit_person_helper_linked_contact">Unavailable due to missing permissions</string>
-    <string name="edit_person_contact_deleted">Previously linked contact unavailable. Link removed.</string>
+    <string name="edit_person_contact_deleted">Previously linked contact is unavailable. Link has been removed.</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>
