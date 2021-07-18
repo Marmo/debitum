@@ -1,5 +1,4 @@
 ## 1.4.1/12
-- notify user about deleted contact and clear uri (current behaviour: hint "linked contact" shown but no name and avatar)
 
 ## 1.5.0/13
 - add scrollbar showing the date/month/year while scrolling the transaction list

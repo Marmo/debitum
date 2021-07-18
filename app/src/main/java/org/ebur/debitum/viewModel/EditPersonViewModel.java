@@ -28,13 +28,13 @@ public class EditPersonViewModel extends AndroidViewModel {
 
     @NonNull public Person getEditedPerson() { return editedPerson; }
     // this should only be called once when the edited person is not yet changed
-    public void setEditedPerson(@Nullable Person editedPerson) {
-        if (editedPerson == null) {
+    public void setEditedPerson(@Nullable Person person) {
+        if (person == null) { // creating a new person
             this.editedPerson = new Person(-1);
             this.originalName = null;
-        } else {
-            this.editedPerson = editedPerson;
-            this.originalName = editedPerson.name;
+        } else { // editing an existing person
+            this.editedPerson = person;
+            this.originalName = person.name;
         }
     }
 

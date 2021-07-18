@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.transition.MaterialContainerTransform;
@@ -106,9 +107,7 @@ public class EditPersonFragment extends DialogFragment {
         editContact = (TextInputEditText) editContactLayout.getEditText();
         assert editContact != null;
         editContact.setOnClickListener(view -> getContact.launch(null));
-        editContactLayout.setEndIconOnClickListener(view -> {
-            handleChangedContactUri(null);
-        });
+        editContactLayout.setEndIconOnClickListener(view -> handleChangedContactUri(null));
         avatarView = root.findViewById(R.id.edit_person_avatar);
         avatarLetterView = root.findViewById(R.id.edit_person_avatar_text);
 
@@ -196,7 +195,7 @@ public class EditPersonFragment extends DialogFragment {
             }
 
             // return the new name back to the calling fragment via NewPersonRequestViewModel
-            // (currently only EditTransactionFragement uses this)
+            // (currently only EditTransactionFragment uses this)
             // only set name if a new person was requested
             if(requireArguments().getBoolean(ARG_NEW_PERSON_REQUESTED)
                     && viewModel.isNewPerson()) {
@@ -218,7 +217,7 @@ public class EditPersonFragment extends DialogFragment {
 
     void handleChangedContactUri(@Nullable Uri uri) {
 
-        if (contactsHelper.isContactLinkingEnabled().getValue()) {
+        if (Boolean.TRUE.equals(contactsHelper.isContactLinkingEnabled().getValue())) {
             @StringRes int hint;
             @Nullable String contactName;
             @Nullable String letter;
@@ -230,6 +229,15 @@ public class EditPersonFragment extends DialogFragment {
             } else {
                 contactName = contactsHelper.getContactName(uri);
                 hint = R.string.edit_person_hint_linked_contact;
+
+                if (contactName == null) {
+                    // contact does not exist (anymore)
+                    handleChangedContactUri(null);
+                    Snackbar.make(requireView(), R.string.edit_person_contact_deleted, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.dialog_gotit, view -> {})
+                            .show();
+                    return;
+                }
 
                 // if editName is empty, fill it with name
                 CharSequence name = editName.getText();
