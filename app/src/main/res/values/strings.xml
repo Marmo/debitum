@@ -5,6 +5,7 @@
     <string name="button_label_save">Save</string>
     <string name="delete_dialog_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_gotit">Got it</string>
     <string name="required_helper_text">* Required</string>
     <string name="actionmode_return_item">Mark as returned</string>
     <string name="actionmode_return_money">Create return transaction</string>
@@ -102,6 +103,7 @@
     <string name="edit_person_hint_linked_contact">linked contact</string>
     <string name="edit_person_hint_no_linked_contact">No linked contact</string>
     <string name="edit_person_helper_linked_contact">Unavailable due to missing permissions</string>
+    <string name="edit_person_contact_deleted">Previously linked contact unavailable. Link removed.</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>

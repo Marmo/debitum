@@ -30,10 +30,11 @@ import java.util.HashMap;
 
 public class ContactsHelper extends AndroidViewModel {
 
+    @SuppressWarnings("unused")
     private final String TAG = "ContactsHelper";
 
-    private final HashMap<Uri, Contact> contactCache;
-    private final MutableLiveData<Boolean> contactLinkingEnabled;
+    @NonNull private final HashMap<Uri, Contact> contactCache;
+    @NonNull private final MutableLiveData<Boolean> contactLinkingEnabled;
 
     public static class Contact {
         @NonNull String name;
@@ -56,7 +57,7 @@ public class ContactsHelper extends AndroidViewModel {
     }
 
     private boolean isCached(@Nullable Uri uri) {
-        if (uri == null || contactCache == null) {
+        if (uri == null) {
             return false;
         } else {
             return contactCache.containsKey(uri);
@@ -65,12 +66,8 @@ public class ContactsHelper extends AndroidViewModel {
 
     @Nullable
     private Bitmap getContactImageFromCache(@NonNull Uri uri) {
-        if (contactCache != null) {
-            Contact contact = contactCache.get(uri);
-            return contact != null ? contact.photo : null;
-        } else {
-            return null;
-        }
+        Contact contact = contactCache.get(uri);
+        return contact != null ? contact.photo : null;
     }
 
     @Nullable
@@ -106,28 +103,21 @@ public class ContactsHelper extends AndroidViewModel {
         } else {
             // cache contact and return its photo
             Bitmap photo = getContactImageFromContentProvider(uri);
-            cacheContactInfo(
-                    uri,
-                    new Contact(
-                            getContactNameFromContentProvider(uri),
-                            photo
-                    )
-            );
+            String name = getContactNameFromContentProvider(uri);
+            if (name != null) {
+                cacheContactInfo(uri, new Contact(name, photo));
+            }
             return photo;
         }
     }
 
     @Nullable
     private String getContactNameFromCache(@NonNull Uri uri) {
-        if (contactCache != null) {
-            Contact contact = contactCache.get(uri);
-            return contact != null ? contact.name : null;
-        } else {
-            return null;
-        }
+        Contact contact = contactCache.get(uri);
+        return contact != null ? contact.name : null;
     }
 
-    @NonNull
+    @Nullable
     private String getContactNameFromContentProvider(@NonNull Uri uri) {
         @NonNull String name;
         int index;
@@ -139,7 +129,7 @@ public class ContactsHelper extends AndroidViewModel {
                 return name;
             }
         }
-        return "";
+        return null;
     }
 
     @Nullable
@@ -149,15 +139,12 @@ public class ContactsHelper extends AndroidViewModel {
             return getContactNameFromCache(uri);
         } else {
             // cache contact and return its name
+            Bitmap photo = getContactImageFromContentProvider(uri);
             String name = getContactNameFromContentProvider(uri);
-            cacheContactInfo(
-                    uri,
-                    new Contact(
-                            name,
-                            getContactImageFromContentProvider(uri)
-                    )
-            );
-            return name.isEmpty() ? null : name;
+            if (name != null) {
+                cacheContactInfo(uri, new Contact(name, photo));
+            }
+            return name == null || name.isEmpty() ? null : name;
         }
     }
 
