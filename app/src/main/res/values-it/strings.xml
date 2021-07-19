@@ -40,7 +40,7 @@
     <string name="title_fragment_edit_person_create">Crea una persona</string>
     <string name="title_fragment_edit_person">Modifica la persona</string>
     <string name="edit_transaction_use_suspicious_return_date">usa la data</string>
-    <string name="edit_transaction_suspicious_return_date_message">La data di restituzione impostata (%1$s) avviene prima della transazione originale. Usare quella data\?</string>
+    <string name="edit_transaction_suspicious_return_date_message">La data di restituzione impostata (%1$s) avviene prima della transazione originale. Usare comunque\?</string>
     <string name="edit_transaction_suspicious_return_date_title">Data di restituzione sospetta</string>
     <string name="debt_settlement_money_description">Liquidazione del debito per «%1$s» da %2$s</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 cifre permesse</string>
@@ -116,4 +116,6 @@
     <string name="button_label_save">Salva</string>
     <string name="error_message_database_access">Errore nel tentativo di accedere alla banca dati. Si prega di riprovare.
 \n%1$s</string>
+    <string name="edit_person_contact_deleted">Il contatto precedentemente collegato non è disponibile. Il collegamento è stato rimosso.</string>
+    <string name="dialog_gotit">Capito</string>
 </resources>
