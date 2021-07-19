@@ -66,7 +66,7 @@
     <string name="pref_backup_summary">dans %1$s</string>
     <string name="pref_date_format_systemdefault_long">Par défaut du système (long)</string>
     <string name="actionmode_return_money">Créer une transaction de restitution</string>
-    <string name="edit_transaction_suspicious_return_date_message">La date de restitution fixée (%1$s) intervient avant la transaction initiale. Utiliser cette date \?</string>
+    <string name="edit_transaction_suspicious_return_date_message">La date de restitution fixée (%1$s) intervient avant la transaction initiale. Utiliser quand même \?</string>
     <string name="edit_transaction_suspicious_return_date_title">Date de restitution suspecte</string>
     <string name="edit_transaction_hint_returndate">Date de restitution</string>
     <string name="item_filter">Filtrer par état de restitution</string>
@@ -116,4 +116,6 @@
     <string name="edit_transaction_hint_amount_money">Montant *</string>
     <string name="edit_transaction_error_select_name">Veuillez sélectionner une personne.</string>
     <string name="edit_transaction_hint_person">Personne *</string>
+    <string name="edit_person_contact_deleted">Le contact précédemment lié est indisponible. Le lien a été retiré.</string>
+    <string name="dialog_gotit">Compris</string>
 </resources>
