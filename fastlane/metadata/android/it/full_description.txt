@@ -1,0 +1,9 @@
+Con Debitum puoi tenere traccia di tutti i tipi di cambiali, che siano soldi o oggetti in prestito. In questo modo non dimenticherai mai più se il tuo amico ti ha già restituito quel libro o quanto devi al tuo collega per il caffè.
+
+Il caso d'uso previsto è quello di gestire (piccoli) debiti personali e oggetti in prestito. Per mantenere le cose semplici, cose come interessi, scadenze, tasse ecc. non saranno parte integrante dell'applicazione (anche se la descrizione potrebbe in qualche modo essere usata per questo, ma in generale raccomanderei di usare applicazioni più specializzate per questo).
+
+È possibile eseguire il backup e il ripristino della banca dati in cui sono memorizzate le persone e le transazioni.
+
+Non c'è nessun servizio in linea coinvolto, quindi i tuoi dati sono salvati solo sul tuo dispositivo (per quanto riguarda questa applicazione).
+
+<i>Parole chiave: prestito, debito, prestare, IOU, debt, lend</i>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_licenses_title">Licenze libere di terze parti</string>
+    <string name="pref_version">Versione %1$s</string>
+    <string name="restore_confirm_title">Ripristina da un backup</string>
+    <string name="restore_confirm_text">Sovrascrivere tutti i dati esistenti con i dati del backup\?
+\nL\'applicazione verrà poi riavviata.</string>
+    <string name="restore_confirm">Sovrascrivi</string>
+    <string name="pref_github_summary">Trova e migliora il codice sorgente, segnala problemi e idee</string>
+    <string name="pref_github_title">GitHub</string>
+    <string name="pref_guide_title">Guida rapida</string>
+    <string name="pref_info_header">Info</string>
+    <string name="pref_restore_file_not_found">File di backup non trovato</string>
+    <string name="pref_backup_warning">La cartella in cui viene copiato il backup della banca dati sarà eliminata quando l\'applicazione viene disinstallata o i suoi dati cancellati. Spostala in un posto sicuro prima di disinstallare/cancellare i dati se vuoi ripristinare i dati in seguito.</string>
+    <string name="pref_restore_summary">da un backup precedente «%1$s» nella memoria esterna</string>
+    <string name="pref_backup_summary">in %1$s</string>
+    <string name="pref_restore_title">Ripristina la banca dati</string>
+    <string name="pref_backup_title">Fai backup della banca dati</string>
+    <string name="restore_failed">Ripristino fallito. %1$s</string>
+    <string name="backup_failed">Backup fallito %1$s</string>
+    <string name="backup_successful">Backup della banca dati su una memoria esterna</string>
+    <string name="pref_maintenance_header">Manutenzione</string>
+    <string name="pref_date_format_systemdefault_long">Predefinito sistema (lungo)</string>
+    <string name="pref_date_format_systemdefault_medium">Predefinito sistema (medio)</string>
+    <string name="pref_date_format_systemdefault_short">Predefinito sistema (breve)</string>
+    <string name="pref_date_format_title">Formato della data</string>
+    <string name="pref_item_returned_filter_title">Filtro standard per le liste di oggetti</string>
+    <string name="pref_dismiss_filter_summary_false">Rimani nella lista attuale</string>
+    <string name="pref_dismiss_filter_summary_true">Torna alla lista delle persone</string>
+    <string name="pref_dismiss_filter_title">Quando si ignora il filtro persona…</string>
+    <string name="pref_general_header">Generale</string>
+    <string name="title_fragment_settings">Impostazioni</string>
+    <string name="edit_person_helper_linked_contact">Non disponibile a causa di permessi mancanti</string>
+    <string name="edit_person_hint_no_linked_contact">Nessun contatto collegato</string>
+    <string name="edit_person_hint_linked_contact">contatto collegato</string>
+    <string name="edit_person_note">Nota</string>
+    <string name="error_message_name_exists">%1$s esiste già. Si prega di inserire un nome diverso.</string>
+    <string name="error_message_enter_name">Si prega di inserire un nome.</string>
+    <string name="edit_person_name">Nome</string>
+    <string name="title_fragment_edit_person_create">Crea una persona</string>
+    <string name="title_fragment_edit_person">Modifica la persona</string>
+    <string name="edit_transaction_use_suspicious_return_date">usa la data</string>
+    <string name="edit_transaction_suspicious_return_date_message">La data di restituzione impostata (%1$s) avviene prima della transazione originale. Usare comunque\?</string>
+    <string name="edit_transaction_suspicious_return_date_title">Data di restituzione sospetta</string>
+    <string name="debt_settlement_money_description">Liquidazione del debito per «%1$s» da %2$s</string>
+    <string name="edit_transaction_snackbar_max_amount">Max. 9 cifre permesse</string>
+    <string name="edit_transaction_received">ha ricevuto</string>
+    <string name="edit_transaction_gave">ha dato</string>
+    <string name="edit_transaction_hint_returndate">Data di restituzione</string>
+    <string name="edit_transaction_hint_date">Data</string>
+    <string name="edit_transaction_date_dialog_title">Seleziona la data</string>
+    <string name="edit_transaction_wrong_amount_format">C\'è qualcosa che non va nel tuo formato dell\'importo.</string>
+    <string name="edit_transaction_hint_desc_item">Descrizione *</string>
+    <string name="edit_transaction_hint_desc">Descrizione</string>
+    <string name="edit_transaction_error_enter_description">Si prega di inserire una descrizione.</string>
+    <string name="edit_transaction_error_enter_amount">Si prega di inserire un importo.</string>
+    <string name="edit_transaction_hint_amount_item">Numero di oggetti *</string>
+    <string name="edit_transaction_hint_amount_money">Importo *</string>
+    <string name="edit_transaction_error_select_name">Si prega di selezionare una persona.</string>
+    <string name="edit_transaction_hint_person">Persona *</string>
+    <string name="title_fragment_edit_transaction">Modifica la transazione</string>
+    <string name="title_fragment_edit_transaction_create">Crea una transazione</string>
+    <string name="transaction_list_dialog_delete_text">Questo non può essere annullato.</string>
+    <plurals name="transaction_list_dialog_delete_title">
+        <item quantity="one">Eliminare %d transazione\?</item>
+        <item quantity="other">Eliminare %d transazioni\?</item>
+    </plurals>
+    <plurals name="transaction_list_snackbar_deleted">
+        <item quantity="one">%d transazione eliminata</item>
+        <item quantity="other">%d transazioni eliminate</item>
+    </plurals>
+    <string name="item_filter_returned">Mostra i restituiti</string>
+    <string name="item_filter_unreturned">Mostra i non restituiti</string>
+    <string name="item_filter_all">Mostra tutto</string>
+    <string name="item_filter">Filtra per stato di restituzione</string>
+    <string name="header_label">Totale</string>
+    <string name="toolbar_edit_person">Modifica la persona</string>
+    <string name="transaction_list_received">ha ricevuto</string>
+    <string name="transaction_list_gave">ha dato</string>
+    <string name="title_fragment_transaction_list_items">Oggetti</string>
+    <string name="title_fragment_transaction_list_money">Soldi</string>
+    <string name="person_sum_list_dialog_delete_text">Questo non può essere annullato e eliminerà anche le transazioni per e da queste persone.</string>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="one">Eliminare %d persona\?</item>
+        <item quantity="other">Eliminare %d persone\?</item>
+    </plurals>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="one">%d persona eliminata</item>
+        <item quantity="other">%d persone eliminate</item>
+    </plurals>
+    <string name="toolbar_create_person">Crea una persona</string>
+    <string name="person_sum_list_you_lent">hai prestato</string>
+    <string name="person_sum_list_no_debt">nessun debito</string>
+    <string name="person_sum_list_you_owe">devi</string>
+    <string name="title_fragment_person_sum_list">Persone</string>
+    <string name="database_empty">Non c\'è ancora nulla di registrato.
+\nCrea una nuova transazione usando il pulsante + qui sotto.</string>
+    <string name="dismiss_filter">elimina il filtro</string>
+    <string name="bottom_nav_settings">Impostazioni</string>
+    <string name="bottom_nav_items">Oggetti</string>
+    <string name="bottom_nav_money">Soldi</string>
+    <string name="bottom_nav_people">Persone</string>
+    <string name="fab_content_description">Crea una transazione</string>
+    <string name="actionmode_sum">Somma: %1$s</string>
+    <plurals name="actionmode_selected">
+        <item quantity="one">%d selezionato</item>
+        <item quantity="other">%d selezionati</item>
+    </plurals>
+    <string name="actionmode_delete">Elimina</string>
+    <string name="actionmode_edit">Modifica</string>
+    <string name="actionmode_return_money">Crea una transazione di restituzione</string>
+    <string name="actionmode_return_item">Segna come restituito</string>
+    <string name="required_helper_text">* obbligatorio</string>
+    <string name="dialog_cancel">Annulla</string>
+    <string name="delete_dialog_confirm">Elimina</string>
+    <string name="button_label_save">Salva</string>
+    <string name="error_message_database_access">Errore nel tentativo di accedere alla banca dati. Si prega di riprovare.
+\n%1$s</string>
+    <string name="edit_person_contact_deleted">Il contatto precedentemente collegato non è disponibile. Il collegamento è stato rimosso.</string>
+    <string name="dialog_gotit">Capito</string>
+</resources>

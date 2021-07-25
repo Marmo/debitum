@@ -24,7 +24,7 @@
     <string name="bottom_nav_settings">@string/title_fragment_settings</string>
     <string name="dismiss_filter">Filter verwerfen</string>
     <string name="database_empty">Du hast noch nichts aufgezeichnet.
-\nErstelle eine neue Transaktion mit der \"+\"-Schaltfläche ganz unten.</string>
+\nErstelle eine neue Transaktion mit der +-Schaltfläche ganz unten.</string>
     <!-- PersonSumListFragment -->
     <string name="title_fragment_person_sum_list">Personen</string>
     <string name="person_sum_list_you_owe">du schuldest</string>
@@ -84,9 +84,9 @@
     <string name="edit_transaction_gave">gab</string>
     <string name="edit_transaction_received">bekam</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 Ziffern zulässig</string>
-    <string name="debt_settlement_money_description">Rückzahlung für \"%1$s\" vom %2$s</string>
+    <string name="debt_settlement_money_description">Rückzahlung für „%1$s“ vom %2$s</string>
     <string name="edit_transaction_suspicious_return_date_title">Unerwartetes Rückgabedatum</string>
-    <string name="edit_transaction_suspicious_return_date_message">Das ausgewählte Rückgabedatum (%1$s) liegt vor dem Datum der usrprünglichen Transaktion. Willst du dieses Datum verwenden\?</string>
+    <string name="edit_transaction_suspicious_return_date_message">Das ausgewählte Rückgabedatum (%1$s) liegt vor dem Datum der usrprünglichen Transaktion. Trotzdem verwenden\?</string>
     <string name="edit_transaction_use_suspicious_return_date">Datum verwenden</string>
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Person bearbeiten</string>
@@ -130,4 +130,6 @@
     <string name="pref_date_format_systemdefault_medium">Systemstandard (mittel)</string>
     <string name="pref_date_format_systemdefault_short">Systemstandard (kurz)</string>
     <string name="pref_date_format_title">Datumsformat</string>
+    <string name="dialog_gotit">Verstanden</string>
+    <string name="edit_person_contact_deleted">Der verknüpfte Kontakt ist nicht mehr verfügbar. Die Verknüpfung wurde entfernt.</string>
 </resources>

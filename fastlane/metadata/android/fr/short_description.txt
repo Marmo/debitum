@@ -1,1 +1,1 @@
-keep track of lent money and items
+gardez la trace de l'argent et des objets prêtés
