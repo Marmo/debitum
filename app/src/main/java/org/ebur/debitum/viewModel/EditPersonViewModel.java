@@ -12,14 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.Observable;
+import androidx.databinding.PropertyChangeRegistry;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.ebur.debitum.BR;
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonRepository;
@@ -28,112 +29,133 @@ import org.ebur.debitum.util.Utilities;
 
 import java.util.concurrent.ExecutionException;
 
-public class EditPersonViewModel extends AndroidViewModel {
+public class EditPersonViewModel extends AndroidViewModel implements Observable {
+
+    private PropertyChangeRegistry callbacks = new PropertyChangeRegistry();
 
     private final PersonRepository repository;
-    @NonNull private final MutableLiveData<Integer> id;
-    @NonNull private final MutableLiveData<String> name;
-    @NonNull private final MutableLiveData<String> note;
-    @NonNull private final MutableLiveData<Uri> contactUri;
-    @NonNull private final MutableLiveData<CharSequence> nameError;
-    private String originalName;
+    @Nullable private Integer id;
+    @Nullable private String name;
+    @Nullable private String note;
+    @Nullable private Uri contactUri;
+    @Nullable private CharSequence nameError;
+    @Nullable private String originalName;
 
     public EditPersonViewModel(Application application) {
         super(application);
         repository = new PersonRepository(application);
-        id = new MutableLiveData<>(null);
-        name = new MutableLiveData<>(null);
-        note = new MutableLiveData<>(null);
-        contactUri = new MutableLiveData<>(null);
-        nameError = new MutableLiveData<>(null);
+        id = null;
+        name = null;
+        note = null;
+        contactUri = null;
+        nameError = null;
         originalName = null;
     }
 
-    @NonNull public LiveData<Integer> getID() {
+    @Nullable public Integer getID() {
         return id;
     }
     public void setId(@Nullable Integer id) {
-        this.id.setValue(id);
+        if (!Utilities.equal(this.id, id)) {
+            this.id = id;
+        }
     }
-    @NonNull public LiveData<Boolean> isNewPerson() {
-        return Transformations.map(id, id -> id == null);
+    public boolean isNewPerson() {
+        return id == null;
     }
 
-    @NonNull public MutableLiveData<String> getName() {
+    @Bindable
+    @Nullable public String getName() {
         return name;
     }
     public void setName(@Nullable String name) {
-        this.name.setValue(name);
-        // this should only be called once when the edited person is not yet changed
-        if (originalName == null) {
-            this.originalName = name;
-        }
-        // refresh avatar
-        setContactUri(contactUri.getValue());
-        // reset error message
-        if (name != null && !name.isEmpty()) {
-            setNameError(null);
+        if (!Utilities.equal(this.name, name)) {
+            this.name = name;
+            notifyPropertyChanged(BR.name);
+            notifyPropertyChanged(BR.avatarLetter);
+
+            if (originalName == null) {
+                this.originalName = name;
+            }
+            // refresh avatar
+            setContactUri(contactUri);
+
+            // reset error message
+            if (name != null && !name.isEmpty()) {
+                setNameError(null);
+                notifyPropertyChanged(BR.nameError);
+            }
         }
     }
 
-    @NonNull public MutableLiveData<String> getNote() {
+    @Bindable
+    @Nullable public String getNote() {
         return note;
     }
     public void setNote(@Nullable String note) {
-        this.note.setValue(note);
+        if (!Utilities.equal(this.note, note)) {
+            this.note = note;
+            notifyPropertyChanged(BR.note);
+        }
     }
 
     public void setContactUri(@Nullable Uri uri) {
-        contactUri.setValue(uri);
+        if (Utilities.equal(contactUri, uri)) {
+            this.contactUri = uri;
+            notifyPropertyChanged(BR.contactName);
+            notifyPropertyChanged(BR.contactDrawable);
+            notifyPropertyChanged(BR.avatarLetter);
+            notifyPropertyChanged(BR.contactHint);
+        }
     }
 
-    @NonNull public LiveData<String> getContactName() {
-        return Transformations.map(contactUri, uri -> {
-            return uri == null ? null : ContactsHelper.getContactName(uri, getApplication());
-        });
+    @Bindable
+    @Nullable public String getContactName() {
+        return contactUri == null ? null : ContactsHelper.getContactName(contactUri, getApplication());
     }
 
-    @NonNull public LiveData<Drawable> getContactDrawable() {
-        return Transformations.map(contactUri, uri -> {
-            // this will yield either the photo (if uri != null and a photo is there) or a
-            // generated color based on the person's color index
-            @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(getApplication(), R.attr.colorSecondary);
-            return ContactsHelper.makeAvatarDrawable(
-                    ContactsHelper.getContactImage(uri, getApplication()),
-                    new Person(name.getValue()).getColor(secondaryColorRGB),
-                    getApplication()
-            );
-        });
+    @Bindable
+    @NonNull public Drawable getContactDrawable() {
+        // this will yield either the photo (if uri != null and a photo is there) or a
+        // generated color based on the person's color index
+        @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(getApplication(), R.attr.colorSecondary);
+        return ContactsHelper.makeAvatarDrawable(
+                ContactsHelper.getContactImage(contactUri, getApplication()),
+                new Person(name).getColor(secondaryColorRGB),
+                getApplication()
+        );
     }
 
-    @NonNull public LiveData<CharSequence> getAvatarLetter() {
+    @Bindable
+    @Nullable public CharSequence getAvatarLetter() {
         // null if we have a photo, else name's first char in upper case
-        return Transformations.map(name, name -> {
-            if (getContactDrawable().getValue() instanceof RoundedBitmapDrawable
-                    || name == null || name.isEmpty()) {
-                return null;
-            } else {
-                return String.valueOf(name.charAt(0)).toUpperCase();
-            }
-        });
+        if (getContactDrawable() instanceof RoundedBitmapDrawable
+                || name == null || name.isEmpty()) {
+            return null;
+        } else {
+            return String.valueOf(name.charAt(0)).toUpperCase();
+        }
     }
 
-    @NonNull public LiveData<CharSequence> getContactHint() {
-        return Transformations.map(contactUri, uri -> {
-           @StringRes int hint =
-                   uri == null ? R.string.edit_person_hint_no_linked_contact
-                   : R.string.edit_person_hint_linked_contact;
-           return getApplication().getResources().getString(hint);
-        });
+    @Bindable
+    @NonNull public CharSequence getContactHint() {
+       @StringRes int hint =
+               contactUri == null ? R.string.edit_person_hint_no_linked_contact
+               : R.string.edit_person_hint_linked_contact;
+       return getApplication().getResources().getString(hint);
     }
 
-    @NonNull public LiveData<CharSequence> getNameError() {
+    @Bindable
+    @Nullable public CharSequence getNameError() {
         return nameError;
     }
     public void setNameError(@Nullable CharSequence text) {
-        nameError.setValue(text);
+        if(!Utilities.equal(nameError, text)) {
+            nameError = text;
+        }
     }
 
+    @Nullable
     public String getOriginalName() {
         return  originalName;
     }
@@ -147,20 +169,22 @@ public class EditPersonViewModel extends AndroidViewModel {
         setContactUri(noone?null:person.linkedContactUri);
     }
 
-    public boolean personExists(String name) throws ExecutionException, InterruptedException { return repository.exists(name); }
+    public boolean personExists(String name) throws ExecutionException, InterruptedException {
+        return repository.exists(name);
+    }
     public void writePersonToDb() {
-        if (isNewPerson().getValue()) addPerson();
+        if (isNewPerson()) addPerson();
         else updatePerson();
     }
 
     private Person assemblePerson() {
         Person person = new Person(
-                name.getValue(),
-                note.getValue(),
-                contactUri.getValue()
+                name,
+                note,
+                contactUri
         );
-        if (!isNewPerson().getValue()) {
-            person.idPerson = id.getValue();
+        if (!isNewPerson()) {
+            person.idPerson = id;
         }
         return person;
     }
@@ -172,7 +196,6 @@ public class EditPersonViewModel extends AndroidViewModel {
     }
 
     public void savePerson() throws ExecutionException, InterruptedException{
-        String name = this.name.getValue();
         Resources res = getApplication().getResources();
         // check if nameView has contents and get name
         if(name == null || TextUtils.isEmpty(name)) {
@@ -201,6 +224,36 @@ public class EditPersonViewModel extends AndroidViewModel {
     @BindingAdapter("app:errorText")
     public static void setErrorText(@NonNull TextInputLayout textInputLayout, @Nullable CharSequence errorText) {
         textInputLayout.setError(errorText);
+    }
+
+    @Override
+    public void addOnPropertyChangedCallback(
+            @NonNull Observable.OnPropertyChangedCallback callback) {
+        callbacks.add(callback);
+    }
+
+    @Override
+    public void removeOnPropertyChangedCallback(
+            @NonNull Observable.OnPropertyChangedCallback callback) {
+        callbacks.remove(callback);
+    }
+
+    /**
+     * Notifies observers that all properties of this instance have changed.
+     */
+    void notifyChange() {
+        callbacks.notifyCallbacks(this, 0, null);
+    }
+
+    /**
+     * Notifies observers that a specific property has changed. The getter for the
+     * property that changes should be marked with the @Bindable annotation to
+     * generate a field in the BR class to be used as the fieldId parameter.
+     *
+     * @param fieldId The generated BR id for the Bindable field.
+     */
+    void notifyPropertyChanged(int fieldId) {
+        callbacks.notifyCallbacks(this, fieldId, null);
     }
 
     // TODO use this in the layout

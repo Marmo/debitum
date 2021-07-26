@@ -93,6 +93,11 @@ public class EditPersonFragment extends DialogFragment {
         toolbar.inflateMenu(R.menu.menu_edit_person);
         toolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
 
+        toolbar.setTitle(
+                viewModel.isNewPerson() ? R.string.title_fragment_edit_person_create
+                        : R.string.title_fragment_edit_person
+        );
+
         binding.name.requestFocus();
     }
 
@@ -100,12 +105,6 @@ public class EditPersonFragment extends DialogFragment {
         ContactsHelper.isContactLinkingEnabled().observe(getViewLifecycleOwner(), enabled -> {
             binding.linkedContactLayout.setHelperTextEnabled(!enabled);
             binding.linkedContactLayout.setEnabled(enabled);
-        });
-        viewModel.isNewPerson().observe(getViewLifecycleOwner(), isNewPerson -> {
-            toolbar.setTitle(
-                    isNewPerson ? R.string.title_fragment_edit_person_create
-                    : R.string.title_fragment_edit_person
-            );
         });
     }
 
@@ -131,12 +130,12 @@ public class EditPersonFragment extends DialogFragment {
             // (currently only EditTransactionFragement uses this)
             // only set name if a new person was requested
             if(requireArguments().getBoolean(ARG_NEW_PERSON_REQUESTED)
-                    && viewModel.isNewPerson().getValue()) {
+                    && viewModel.isNewPerson()) {
                 NavBackStackEntry requester = NavHostFragment.findNavController(this).getPreviousBackStackEntry();
                 if (requester != null) {
                     NewPersonRequestViewModel requestViewModel =
                             new ViewModelProvider(requester).get(NewPersonRequestViewModel.class);
-                    requestViewModel.setNewPersonName(viewModel.getName().getValue());
+                    requestViewModel.setNewPersonName(viewModel.getName());
                 }
             }
 

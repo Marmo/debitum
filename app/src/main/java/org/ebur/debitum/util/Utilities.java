@@ -79,6 +79,10 @@ public abstract class Utilities {
         return nf.parse(localizedAmountString).doubleValue();
     }
 
+    public static boolean equal(@Nullable Object one, @Nullable Object other) {
+        return (one == null && other == null) || (one != null && one.equals(other));
+    }
+
     /**
      *
      * @param degrees how many degrees the hue of baseColor shall be shifted
