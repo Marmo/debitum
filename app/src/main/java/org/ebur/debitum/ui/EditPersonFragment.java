@@ -93,6 +93,8 @@ public class EditPersonFragment extends DialogFragment {
         editName.addTextChangedListener(new TextInputLayoutErrorResetter(editNameLayout));
         editName.setOnFocusChangeListener((view, hasFocus) -> {
             if (!hasFocus) {
+                viewModel.getEditedPerson().name = editName.getText() == null ? "" : editName.getText().toString();
+                viewModel.getEditedPerson().calcuateColorIndex();
                 // trigger avatar refresh
                 handleChangedContactUri(viewModel.getEditedPerson().linkedContactUri);
             }
@@ -254,7 +256,7 @@ public class EditPersonFragment extends DialogFragment {
                     contactsHelper.getContactImage(uri),
                     viewModel.getEditedPerson().getColor(secondaryColorRGB)
             );
-            String name = editName.getText() == null ? "" : editName.getText().toString();
+            String name = viewModel.getEditedPerson().name;
             letter = avatarDrawable instanceof RoundedBitmapDrawable || name.isEmpty()
                             ? null
                             : String.valueOf(name.charAt(0)).toUpperCase();
