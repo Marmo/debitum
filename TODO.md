@@ -1,5 +1,3 @@
-## 1.4.1/12
-
 ## 1.5.0/13
 - add scrollbar showing the date/month/year while scrolling the transaction list
 - use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
@@ -19,7 +17,7 @@
 
 
 
-# release-checklist (1.4.0/11)
+# release-checklist (1.4.1/12)
 - [x] check github milestone
 - [x] update fastlane changelogs (2x)
 - [x] update CHANGELOG.md

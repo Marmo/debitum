@@ -1,7 +1,8 @@
 # v1.4.1
-- translations update
+- translations update (new: french, italian by [@Edanas](https://hosted.weblate.org/user/Edanas/))
 - new: avatar always reflects name in edit person dialog
 - new: notification when editing a person linked to a deleted contact
+- fixed: rounding errors for certain amounts (#54)
 
 # v1.4.0
 - new: persons now can have a linked phone contact. Linking is done from the edit person dialog. For this feature the READ_CONTACTS permission is needed (which you can safely deny without breaking Debitum).

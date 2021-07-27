@@ -1,0 +1,14 @@
+v1.4.1
+- new: avatar always reflects name in edit person dialog
+- new: notification when editing a person linked to a deleted contact
+- translations update (new: french and italian by [@Edanas](https://hosted.weblate.org/user/Edanas/))
+- fixed: rounding errors for certain amounts
+
+v1.4.0
+- new: persons now can have a linked phone contact. Linking is done from the edit person dialog. For this feature the READ_CONTACTS permission is needed (which you can safely deny without breaking Debitum).
+- new: when selecting persons or money transactions in the list views, the sum of the selected items is shown in the contextual action bar
+- new: warn when setting a return date before the original transaction's date
+- new: added preference to set date format
+- updated/new translations:
+  - Brazilian Portuguese ([@mezysinc](https://github.com/mezysinc))
+  - Norwegian Bokmål ([@comradekingu](https://github.com/comradekingu))
