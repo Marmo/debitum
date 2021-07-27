@@ -112,7 +112,7 @@ public class EditTransactionFragment extends DialogFragment {
             // new transaction --> look for preset type
             type = requireArguments().getInt(ARG_PRESET_TYPE, Transaction.TYPE_MONEY);
         } else if (!viewModel.getTransaction().transaction.isMonetary) {
-            // exisitng item transaction, ignore preset
+            // existing item transaction, ignore preset
             type = Transaction.TYPE_ITEM;
         } else {
             // existing money transaction
@@ -307,7 +307,7 @@ public class EditTransactionFragment extends DialogFragment {
             if (isMonetary) factor *= 100;
             int amount;
             try {
-                amount = (int) (factor * Utilities.parseAmount(editAmount.getText().toString()));
+                amount = Utilities.nextInt(factor * Utilities.parseAmount(editAmount.getText().toString()));
             } catch (ParseException e) {
                 Toast.makeText(requireActivity(), R.string.edit_transaction_wrong_amount_format, Toast.LENGTH_SHORT).show();
                 return;

@@ -18,6 +18,8 @@ import androidx.preference.PreferenceManager;
 
 import org.ebur.debitum.ui.SettingsFragment;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -76,6 +78,12 @@ public abstract class Utilities {
     public static double parseAmount(String localizedAmountString) throws ParseException {
         NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
         return nf.parse(localizedAmountString).doubleValue();
+    }
+
+    public static int nextInt(double d) {
+        return new BigDecimal(Double.toString(d))
+                .setScale(0, RoundingMode.HALF_UP)
+                .intValue();
     }
 
     /**
