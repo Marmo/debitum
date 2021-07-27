@@ -26,7 +26,7 @@ public class PersonWithTransactionsTest {
             Transaction t1 = new Transaction(i);
             Transaction t2 = new Transaction(i+11);
             t1.amount = i; t1.isMonetary = true; // sum of all amounts will be 1+2+..+10 = 5*11 = 55
-            t2.amount = 2*i*(-1)^i; t2.isMonetary = false; // number of items will be 2+4+..+20 = 5*22 = 110
+            t2.amount =  2*i*(int)Math.pow(-1,i); t2.isMonetary = false; // number of items will be 2+4+..+20 = 5*22 = 110
             pwtList.add(new PersonWithTransactions(tester, t1, t2));
         }
     }
