@@ -112,7 +112,7 @@
     <string name="pref_backup_title">Datenbank sichern</string>
     <string name="pref_restore_title">Datenbank wiederherstellen</string>
     <string name="pref_backup_summary">nach %1$s</string>
-    <string name="pref_restore_summary">von früher gesicherter „%1$s“ im externen Speicher</string>
+    <string name="pref_restore_summary">aus einer zuvor gesicherten Datenbank</string>
     <string name="pref_backup_warning">Bitte beachte, dass das Verzeichnis, in das die Sicherung abgelegt wird, beim Deinstallieren oder dem Löschen der Anwendungsdaten ebenfalls entfernt wird. Du musst die Datei an einen sicheren Ort verschieben, wenn du sie später wiederherstellen willst!</string>
     <string name="pref_restore_file_not_found">Sicherungsdatei nicht gefunden</string>
     <string name="pref_info_header">Info</string>
