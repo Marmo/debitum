@@ -1,6 +1,7 @@
 ## 1.5.0/13
 - add scrollbar showing the date/month/year while scrolling the transaction list
-- use ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT intent to get source/destination for restore/backup (see https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java)
+- images for transactions (#21)
+- preset from selection (#40)
 
 ## later / unassigned
 - use DataBinding in Edit Dialogs (see branch feature/EditPersonViewModelDataBinding)
