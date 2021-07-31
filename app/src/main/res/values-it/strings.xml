@@ -12,7 +12,7 @@
     <string name="pref_info_header">Info</string>
     <string name="pref_restore_file_not_found">File di backup non trovato</string>
     <string name="pref_backup_warning">La cartella in cui viene copiato il backup della banca dati sarà eliminata quando l\'applicazione viene disinstallata o i suoi dati cancellati. Spostala in un posto sicuro prima di disinstallare/cancellare i dati se vuoi ripristinare i dati in seguito.</string>
-    <string name="pref_restore_summary">da un backup precedente «%1$s» nella memoria esterna</string>
+    <string name="pref_restore_summary">da una banca dati di cui si è fatto il backup in precedenza</string>
     <string name="pref_backup_summary">in %1$s</string>
     <string name="pref_restore_title">Ripristina la banca dati</string>
     <string name="pref_backup_title">Fai backup della banca dati</string>
