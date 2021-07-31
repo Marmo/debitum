@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,28 +34,32 @@ import java.util.Locale;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "SettingsFragment";
 
-    //private final String BACKUP_FILENAME = "debitum_backup.db";
     private final String BACKUP_SUBDIR = "backup";
 
     public final static String PREF_KEY_DISMISS_FILTER_BEHAVIOUR = "dismiss_filter_behaviour";
     public final static String PREF_KEY_ITEM_RETURNED_STANDARD_FILTER = "item_returned_standard_filter";
     public final static String PREF_KEY_DATE_FORMAT = "date_format";
 
-    private final ActivityResultLauncher<String[]> restoreLauncher = registerForActivityResult(new ActivityResultContracts.OpenDocument(), uri -> {
-        AppDatabase.restoreDatabase(uri, (success, message) -> {
-            if (!success) {
-                Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
-                        getString(R.string.restore_failed, message),
-                        7000)
-                        .show();
-            } else {
-                restartApp();
-            }
-
-        });
-    });
+    private final ActivityResultLauncher<String[]> restoreLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.OpenDocument(),
+                    uri -> {
+                        if (uri != null) {
+                            AppDatabase.restoreDatabase(uri, (success, message) -> {
+                                if (success) {
+                                    restartApp();
+                                } else {
+                                    Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
+                                            getString(R.string.restore_failed, message),
+                                            7000)
+                                            .show();
+                                }
+                            });
+                        }
+                    });
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -195,6 +200,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         builder.setPositiveButton(R.string.restore_confirm, (dialog, id) -> {
             String[] mimetypes = {"application/x-sqlite3", "application/octet-stream"};
             restoreLauncher.launch(mimetypes);
+            //restartApp();
         });
         builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
 
@@ -206,7 +212,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void restartApp() {
-        NavUtils.navigateUpTo(requireActivity(), new Intent(getContext(), MainActivity.class));
-        startActivity(requireActivity().getIntent());
+        Context context = requireContext();
+        String packageName = context.getPackageName();
+        Intent restartIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        restartIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        context.startActivity(restartIntent);
+        NavUtils.navigateUpTo(requireActivity(), new Intent(context, MainActivity.class));
     }
 }
