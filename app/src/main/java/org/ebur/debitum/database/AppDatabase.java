@@ -1,7 +1,11 @@
 package org.ebur.debitum.database;
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -34,6 +38,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static File dbFile;
     private static String backupFileNotFoundMessage;
+    private Context context;
 
     // create an ExecutorService with a fixed thread pool that will be used to run database operations asynchronously on a background thread
     private static final int NUMBER_OF_THREADS = 4;
@@ -76,6 +81,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             .setJournalMode(JournalMode.TRUNCATE) // to make export easier, might have negative implications on write performance
                             .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                             .build();
+                    INSTANCE.context = context;
                 }
             }
         }
@@ -88,48 +94,82 @@ public abstract class AppDatabase extends RoomDatabase {
     // ---------------------
     // Backup and restore DB
     // ---------------------
-    private static void backupOrRestoreDatabase(boolean backup, String filename, String path, OnBackupRestoreFinishListener onBackupRestoreFinishListener) {
-            boolean success = false;
-            String message = "";
-            File backupFile = new File(path, filename);
+    public static void backupDatabase(@NonNull String filename, @NonNull String path, @Nullable OnBackupRestoreFinishListener onBackupRestoreFinishListener){
+        boolean success = false;
+        String message = "";
+        File backupFile = new File(path, filename);
 
-            try {
-                if(backup) {
-                    // create backup dir if it not yet exists
-                    if(backupFile.getParentFile() != null
-                            && (backupFile.getParentFile().exists()
-                                || backupFile.getParentFile().mkdirs())) {
-                        copyFile(dbFile, backupFile);
-                        success = true;
-                    }
-                }
-                else {
-                    if(backupFile.exists()) {
-                        copyFile(backupFile, dbFile);
-                        success = true;
-                    } else {
-                        message = backupFileNotFoundMessage;
-                    }
-                }
-            } catch (IOException e) {
-                message = e.getMessage();
-            } finally {
-                if(onBackupRestoreFinishListener != null)
-                    onBackupRestoreFinishListener.onFinished(success, message);
+        try {
+            // create backup dir if it not yet exists
+            if(backupFile.getParentFile() != null
+                    && (backupFile.getParentFile().exists()
+                    || backupFile.getParentFile().mkdirs())) {
+                copyFile(dbFile, backupFile);
+                success = true;
             }
+        } catch (IOException e) {
+            message = e.getMessage();
+        } finally {
+            if(onBackupRestoreFinishListener != null)
+                onBackupRestoreFinishListener.onFinished(success, message);
+        }
     }
 
-    public static void backupDatabase(String filename, String path, OnBackupRestoreFinishListener onBackupRestoreFinishListener){
-        backupOrRestoreDatabase(true, filename, path, onBackupRestoreFinishListener);
+    public static void restoreDatabase(@NonNull String filename, @NonNull String path, @Nullable OnBackupRestoreFinishListener onBackupRestoreFinishListener) {
+        // TODO check if uri points to valid debitum database
+        boolean success = false;
+        String message = "";
+        File backupFile = new File(path, filename);
+
+        try {
+            if(backupFile.exists()) {
+                copyFile(backupFile, dbFile);
+                success = true;
+            } else {
+                message = backupFileNotFoundMessage;
+            }
+        } catch (IOException e) {
+            message = e.getMessage();
+        } finally {
+            if(onBackupRestoreFinishListener != null)
+                onBackupRestoreFinishListener.onFinished(success, message);
+        }
     }
 
-    public static void restoreDatabase(String filename, String path, OnBackupRestoreFinishListener onBackupRestoreFinishListener) {
-        backupOrRestoreDatabase(false, filename, path, onBackupRestoreFinishListener);
+    public static void restoreDatabase(@NonNull Uri uri, @Nullable OnBackupRestoreFinishListener onBackupRestoreFinishListener) {
+        // TODO check if uri points to valid debitum database
+        boolean success = false;
+        String message = "";
+
+        try {
+            if(true) { // TODO check if uri is valid
+                copyFile(uri, dbFile);
+                success = true;
+            } else {
+                message = backupFileNotFoundMessage;
+            }
+        } catch (IOException e) {
+            message = e.getMessage();
+        } finally {
+            if(onBackupRestoreFinishListener != null)
+                onBackupRestoreFinishListener.onFinished(success, message);
+        }
     }
 
+    // TODO cleanup duplicate code in copy methods
     private static void copyFile(File source, File dest) throws IOException {
         // try-with-resources
         try (FileChannel sourceChannel = new FileInputStream(source).getChannel();
+             FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
+            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+        }
+    }
+
+    private static void copyFile(Uri source, File dest) throws IOException {
+        // try-with-resources
+        try (ParcelFileDescriptor pfdSource = INSTANCE.context.getContentResolver().
+                openFileDescriptor(source, "r");
+             FileChannel sourceChannel = new FileInputStream(pfdSource.getFileDescriptor()).getChannel();
              FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
             destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
         }

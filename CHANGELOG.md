@@ -1,3 +1,7 @@
+# v1.5.0
+- use file picker when restoring database
+- backups with date appended (not overwritten anymore)
+
 # v1.4.1
 - translations update (new: french, italian by [@Edanas](https://hosted.weblate.org/user/Edanas/))
 - new: avatar always reflects name in edit person dialog
