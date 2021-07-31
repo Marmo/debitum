@@ -1,9 +1,12 @@
 package org.ebur.debitum.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -24,19 +27,39 @@ import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.AppDatabase;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "SettingsFragment";
 
-    private final String BACKUP_FILENAME = "debitum_backup.db";
     private final String BACKUP_SUBDIR = "backup";
 
     public final static String PREF_KEY_DISMISS_FILTER_BEHAVIOUR = "dismiss_filter_behaviour";
     public final static String PREF_KEY_ITEM_RETURNED_STANDARD_FILTER = "item_returned_standard_filter";
     public final static String PREF_KEY_DATE_FORMAT = "date_format";
+
+    private final ActivityResultLauncher<String[]> restoreLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.OpenDocument(),
+                    uri -> {
+                        if (uri != null) {
+                            AppDatabase.restoreDatabase(uri, (success, message) -> {
+                                if (success) {
+                                    restartApp();
+                                } else {
+                                    Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
+                                            getString(R.string.restore_failed, message),
+                                            7000)
+                                            .show();
+                                }
+                            });
+                        }
+                    });
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -105,7 +128,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
         Preference restorePref = findPreference(PREF_KEY_RESTORE);
         if(restorePref!=null) {
-            restorePref.setSummary(getString(R.string.pref_restore_summary, BACKUP_FILENAME));
+            restorePref.setSummary(getString(R.string.pref_restore_summary));
             restorePref.setOnPreferenceClickListener(preference -> {
                 restore();
                 return true;
@@ -149,8 +172,19 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     // ---------------------
 
     private void backup() {
+        // assemble filename
+        Calendar today = Calendar.getInstance();
+        int year = today.get(Calendar.YEAR);
+        int month = today.get(Calendar.MONTH) + 1;
+        int day = today.get(Calendar.DAY_OF_MONTH);
+        int hour = today.get(Calendar.HOUR_OF_DAY);
+        int minute = today.get(Calendar.MINUTE);
+        int second = today.get(Calendar.SECOND);
+        String filename = String.format(Locale.getDefault(), "debitum-backup-%04d-%02d-%02dT%02d_%02d_%02d.db", year, month, day, hour, minute, second);
+
         String path = requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
-        AppDatabase.backupDatabase(BACKUP_FILENAME, path, (success, message) -> {
+
+        AppDatabase.backupDatabase(filename, path, (success, message) -> {
             String info;
             if (success) {info = getString(R.string.backup_successful);}
             else info = getString(R.string.backup_failed, message);
@@ -164,18 +198,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void restore() {
         AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
         builder.setPositiveButton(R.string.restore_confirm, (dialog, id) -> {
-            String path = requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
-            AppDatabase.restoreDatabase(BACKUP_FILENAME, path, (success, message) -> {
-                if (!success) {
-                    Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
-                            getString(R.string.restore_failed, message),
-                            7000)
-                            .show();
-                } else {
-                    restartApp();
-                }
-
-            });
+            String[] mimetypes = {"application/x-sqlite3", "application/octet-stream"};
+            restoreLauncher.launch(mimetypes);
+            //restartApp();
         });
         builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
 
@@ -187,7 +212,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void restartApp() {
-        NavUtils.navigateUpTo(requireActivity(), new Intent(getContext(), MainActivity.class));
-        startActivity(requireActivity().getIntent());
+        Context context = requireContext();
+        String packageName = context.getPackageName();
+        Intent restartIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        restartIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        context.startActivity(restartIntent);
+        NavUtils.navigateUpTo(requireActivity(), new Intent(context, MainActivity.class));
     }
 }
