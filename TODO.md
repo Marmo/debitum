@@ -4,6 +4,7 @@
 - use selected person or transaction as preset when creating a new transaction (#40)
 
 ## later / unassigned
+- swipe entry to mark as returned or delete
 - use DataBinding in Edit Dialogs (see branch feature/EditPersonViewModelDataBinding)
 - use RxJava (?)
 - create a way to get from person sum list directly to filtered items list of a person
