@@ -1,7 +1,6 @@
 ## 1.5.0/13
 - add scrollbar showing the date/month/year while scrolling the transaction list
 - images for transactions (#21)
-- use selected person or transaction as preset when creating a new transaction (#40)
 
 ## later / unassigned
 - swipe entry to mark as returned or delete

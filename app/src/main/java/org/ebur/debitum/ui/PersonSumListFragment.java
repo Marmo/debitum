@@ -226,4 +226,29 @@ public class PersonSumListFragment
         // check and ask for permission
         contactsHelper.checkReadContactsPermission(requestPermissionLauncher);
     }
+
+    //----------------------------------------------------------
+    // generate presets for MainActivity::onAddTransactionAction
+    //----------------------------------------------------------
+
+    @Override
+    @Nullable
+    public Bundle getPresetsFromSelection() {
+        if (selectionTracker.getSelection().size() != 1) {
+            return null;
+        } else {
+            Bundle presets = new Bundle();
+            int selectedId = selectionTracker.getSelection().iterator().next().intValue();
+            selectionTracker.clearSelection(); // nothing should be selected when returning from EditTransactionFragment
+            Person selectedPerson;
+            try {
+                selectedPerson = viewModel.getPersonById(selectedId);
+            } catch (InterruptedException | ExecutionException e) {
+                Log.e(TAG, String.format("person with id %d could not be found in the database", selectedId));
+                return null;
+            }
+            presets.putString(EditTransactionFragment.ARG_PRESET_NAME, selectedPerson.name);
+            return presets;
+        }
+    }
 }

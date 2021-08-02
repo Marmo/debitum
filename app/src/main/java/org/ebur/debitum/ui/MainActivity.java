@@ -21,14 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.ebur.debitum.R;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 public class MainActivity extends AppCompatActivity {
-
-    private final ArrayList<Integer> DESTINATIONS_WITH_PERSON_FILTER = Stream.of(R.id.money_dest, R.id.item_dest)
-            .collect(Collectors.toCollection(ArrayList::new));
 
     private NavController nav;
     BottomNavigationView bottomNav;
@@ -91,7 +84,15 @@ public class MainActivity extends AppCompatActivity {
         } else {
             action = R.id.action_global_add_money_transaction;
         }
-        nav.navigate(action);
+
+        Bundle presets;
+        Fragment current = getCurrentNavigationFragment();
+        if (current instanceof AbstractBaseListFragment) {
+            presets = ((AbstractBaseListFragment<?,?,?,?>) current).getPresetsFromSelection();
+        } else {
+            presets = null;
+        }
+        nav.navigate(action, presets);
     }
 
     // https://github.com/material-components/material-components-android-examples/blob/develop/Reply/app/src/main/java/com/materialstudies/reply/ui/MainActivity.kt

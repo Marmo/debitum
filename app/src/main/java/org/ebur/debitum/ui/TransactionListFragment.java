@@ -280,4 +280,39 @@ public class TransactionListFragment
 
         filterBar.setVisibility(View.GONE);
     }
+
+    //----------------------------------------------------------
+    // generate presets for MainActivity::onAddTransactionAction
+    //----------------------------------------------------------
+
+    @Override
+    @Nullable
+    public Bundle getPresetsFromSelection() {
+        if (selectionTracker.getSelection().size() != 1) {
+            return null;
+        } else {
+            Bundle presets = new Bundle();
+            int selectedId = selectionTracker.getSelection().iterator().next().intValue();
+            selectionTracker.clearSelection(); // nothing should be selected when returning from EditTransactionFragment
+            Transaction transaction;
+            Person person;
+            try {
+                transaction = viewModel.getTransactionFromDatabase(selectedId);
+                person = viewModel.getPersonFromDatabase(transaction.idPerson);
+            } catch (InterruptedException | ExecutionException e) {
+                Log.e(TAG, String.format("transaction with id %d (or its person) could not be found in the database", selectedId));
+                return null;
+            }
+            presets.putString(EditTransactionFragment.ARG_PRESET_NAME, person.name);
+            presets.putInt(EditTransactionFragment.ARG_PRESET_AMOUNT, transaction.amount);
+            presets.putInt(EditTransactionFragment.ARG_PRESET_TYPE,
+                    transaction.isMonetary?Transaction.TYPE_MONEY:Transaction.TYPE_ITEM);
+            presets.putString(EditTransactionFragment.ARG_PRESET_DESCRIPTION, transaction.description);
+            presets.putLong(EditTransactionFragment.ARG_PRESET_DATE, transaction.timestamp.getTime());
+            if (!transaction.isMonetary) {
+                presets.putLong(EditTransactionFragment.ARG_PRESET_RETURNDATE, transaction.timestampReturned.getTime());
+            }
+            return presets;
+        }
+    }
 }
