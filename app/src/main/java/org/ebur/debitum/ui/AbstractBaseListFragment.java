@@ -75,6 +75,20 @@ public abstract class AbstractBaseListFragment
      */
     abstract TAdapter getAdapter();
 
+    /**
+     * @return a bundle of preset arguments to be passed to EditTransactionFragment when creating a
+     * new transaction. If none or more than one rows are selected, this method should generally
+     * return null (but probably also other solutions could make sense). The arguments should be one
+     * or more of the constants defined and consumed in EditTransactionFragment:
+     * EditTransactionFragment.ARG_PRESET_TYPE
+     * EditTransactionFragment.ARG_PRESET_NAME
+     * EditTransactionFragment.ARG_PRESET_AMOUNT
+     * EditTransactionFragment.ARG_PRESET_DESCRIPTION
+     * EditTransactionFragment.ARG_PRESET_DATE
+     * EditTransactionFragment.ARG_PRESET_RETURNDATE
+     */
+    @Nullable abstract Bundle getPresetsFromSelection();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

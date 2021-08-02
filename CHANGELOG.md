@@ -1,6 +1,7 @@
 # v1.5.0
 - use file picker when restoring database
 - backups with date appended (not overwritten anymore)
+- when creating a new transaction and exactly one row is selected, its contents is used as preset (#40)
 
 # v1.4.1
 - translations update (new: french, italian by [@Edanas](https://hosted.weblate.org/user/Edanas/))

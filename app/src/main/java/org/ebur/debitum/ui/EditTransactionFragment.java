@@ -57,6 +57,8 @@ public class EditTransactionFragment extends DialogFragment {
     public static final String ARG_PRESET_NAME = "presetName";
     public static final String ARG_PRESET_AMOUNT = "presetAmount";
     public static final String ARG_PRESET_DESCRIPTION = "presetDescription";
+    public static final String ARG_PRESET_DATE = "presetDate";
+    public static final String ARG_PRESET_RETURNDATE = "presetReturndate";
 
     private EditTransactionViewModel viewModel;
     private PersonFilterViewModel personFilterViewModel;
@@ -231,23 +233,7 @@ public class EditTransactionFragment extends DialogFragment {
         viewModel.setTimestamp(new Date());
         editDate.setText(Utilities.formatDate(viewModel.getTimestamp(), requireContext()));
 
-        // preset name, description, amount and direction (if in arguments, i.e. if dialog is called
-        // from settle-debt-cab-button
-        // TODO: move all those presets to viewModel (presetIdTransaction, presetType, preset...)
-        int presetAmount = requireArguments().getInt(ARG_PRESET_AMOUNT);
-        if (presetAmount!=0) { // amount > 0 means person gave to user --> gave radio must be checked
-            editAmount.setText(Transaction.formatMonetaryAmount(Math.abs(presetAmount)));
-            gaveRadio.setChecked(presetAmount>0);
-        }
-        String presetDescription = requireArguments().getString(ARG_PRESET_DESCRIPTION);
-        if (presetDescription != null) {
-            editDescription.setText(presetDescription);
-        }
-
-        String presetName = requireArguments().getString(ARG_PRESET_NAME);
-        if (presetName != null) {
-            spinnerName.setText(presetName, false); // IMPORTANT: filter=false, else the dropdown will be filtered to the selected name
-        }
+        evaluatePresets();
     }
 
     private void fillViewsEditTransaction() {
@@ -266,6 +252,41 @@ public class EditTransactionFragment extends DialogFragment {
         editDate.setText(Utilities.formatDate(viewModel.getTimestamp(), requireContext()));
         viewModel.setReturnTimestamp(txn.transaction.timestampReturned);
         editReturnDate.setText(Utilities.formatDate(viewModel.getReturnTimestamp(), requireContext()));
+    }
+
+    /**
+     * preset all fields and respective viewModel members if in arguments, i.e. if dialog is called
+     * from settle-debt-cab-button or has presets set from selection (getPresetsFromSelection)
+     */
+    private void evaluatePresets() {
+        // TODO: move all those presets to viewModel (presetIdTransaction, presetType, preset...)
+        int presetAmount = requireArguments().getInt(ARG_PRESET_AMOUNT, 0);
+        if (presetAmount != 0) { // amount > 0 means person gave to user --> gave radio must be checked
+            editAmount.setText(Transaction.formatMonetaryAmount(Math.abs(presetAmount)));
+            gaveRadio.setChecked(presetAmount>0);
+        }
+
+        String presetDescription = requireArguments().getString(ARG_PRESET_DESCRIPTION, null);
+        if (presetDescription != null) {
+            editDescription.setText(presetDescription);
+        }
+
+        String presetName = requireArguments().getString(ARG_PRESET_NAME, null);
+        if (presetName != null) {
+            spinnerName.setText(presetName, false); // IMPORTANT: filter=false, else the dropdown will be filtered to the selected name
+        }
+
+        long presetDate = requireArguments().getLong(ARG_PRESET_DATE, Long.MIN_VALUE);
+        if (presetDate != Long.MIN_VALUE) {
+            viewModel.setTimestamp(new Date(presetDate));
+            editDate.setText(Utilities.formatDate(viewModel.getTimestamp(), requireContext()));
+        }
+
+        long presetReturndate = requireArguments().getLong(ARG_PRESET_RETURNDATE, Long.MIN_VALUE);
+        if (presetReturndate != Long.MIN_VALUE) {
+            viewModel.setReturnTimestamp(new Date(presetReturndate));
+            editDate.setText(Utilities.formatDate(viewModel.getReturnTimestamp(), requireContext()));
+        }
     }
 
     // ---------------------------
@@ -369,7 +390,9 @@ public class EditTransactionFragment extends DialogFragment {
     // Date Picker dialog
     // ------------------
 
-    public void showDatePickerDialog(View v, Long date, MaterialPickerOnPositiveButtonClickListener<Long> listener) {
+    public void showDatePickerDialog(@SuppressWarnings("unused") View v,
+                                     Long date,
+                                     MaterialPickerOnPositiveButtonClickListener<Long> listener) {
         MaterialDatePicker<Long> datePicker =
                 MaterialDatePicker.Builder.datePicker()
                         .setTitleText(R.string.edit_transaction_date_dialog_title)
