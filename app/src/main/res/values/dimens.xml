@@ -17,5 +17,7 @@
     <dimen name="avatar_size">36dp</dimen>
     <integer name="avatar_size">36</integer>
 
+    <dimen name="transaction_image_height">128dp</dimen>
+
     <integer name="duration_bottom_nav_transition">400</integer>
 </resources>
