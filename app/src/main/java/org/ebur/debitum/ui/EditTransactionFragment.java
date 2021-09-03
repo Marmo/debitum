@@ -1,6 +1,7 @@
 package org.ebur.debitum.ui;
 
 import android.graphics.drawable.TransitionDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -26,6 +27,8 @@ import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -42,11 +45,13 @@ import org.ebur.debitum.viewModel.EditTransactionViewModel;
 import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 
+import java.io.File;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Pattern;
 
 // https://medium.com/alexander-schaefer/implementing-the-new-material-design-full-screen-dialog-for-android-e9dcc712cb38
 public class EditTransactionFragment extends DialogFragment {
@@ -76,6 +81,8 @@ public class EditTransactionFragment extends DialogFragment {
     private AutoCompleteTextView editDate;
     private TextInputLayout editReturnDateLayout;
     private AutoCompleteTextView editReturnDate;
+    private RecyclerView imageRecyclerView;
+    private EditTransactionImageAdapter imageAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -166,6 +173,8 @@ public class EditTransactionFragment extends DialogFragment {
             viewModel.setReturnTimestamp(null);
         });
 
+        setupRecyclerView(root);
+
         return root;
     }
 
@@ -189,6 +198,34 @@ public class EditTransactionFragment extends DialogFragment {
         } else {
             editDescription.requestFocus();
             editReturnDateLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setupRecyclerView(@NonNull View root) {
+        imageRecyclerView = root.findViewById(R.id.images);
+        imageAdapter = new EditTransactionImageAdapter(new EditTransactionImageAdapter.Diff());
+        imageRecyclerView.setAdapter(imageAdapter);
+        imageRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
+        // get image uris
+        // viewModel.getTransaction() will be null for new transactions
+        if (viewModel.getTransaction() != null) {
+            String subpath = "transaction-images/" + String.valueOf(viewModel.getTransaction().transaction.idTransaction);
+            File dir = new File(requireContext().getFilesDir(), subpath);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            // list files
+            File[] files = dir.listFiles((file, s) -> Pattern
+                    .compile("^\\d+\\.((jpg)|(png))$", Pattern.CASE_INSENSITIVE)
+                    .matcher(s)
+                    .find());
+            // get uris and set viewModel's LiveData
+            if (files != null) {
+                for (File file : files) {
+                    viewModel.addImageUri(Uri.fromFile(file));
+                }
+            }
         }
     }
 

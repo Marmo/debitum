@@ -93,6 +93,7 @@
     <string name="edit_transaction_suspicious_return_date_message">The set return date (%1$s) occurs before the original transaction. Use anyway?</string>
     <string name="edit_transaction_use_suspicious_return_date">use date</string>
     <string name="edit_transaction_image_delete_desc">delete image</string>
+    <string name="edit_transaction_placeholder_title">add image</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Edit Person</string>
