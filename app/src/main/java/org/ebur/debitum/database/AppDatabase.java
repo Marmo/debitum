@@ -2,7 +2,6 @@ package org.ebur.debitum.database;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.ParcelFileDescriptor;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,12 +13,10 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.Utilities;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -104,7 +101,7 @@ public abstract class AppDatabase extends RoomDatabase {
             if(backupFile.getParentFile() != null
                     && (backupFile.getParentFile().exists()
                     || backupFile.getParentFile().mkdirs())) {
-                copyFile(dbFile, backupFile);
+                Utilities.copyFile(dbFile, backupFile);
                 success = true;
             }
         } catch (IOException e) {
@@ -123,7 +120,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         try {
             if(backupFile.exists()) {
-                copyFile(backupFile, dbFile);
+                Utilities.copyFile(backupFile, dbFile);
                 success = true;
             } else {
                 message = backupFileNotFoundMessage;
@@ -143,7 +140,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         try {
             if(true) { // TODO check if uri is valid
-                copyFile(uri, dbFile);
+                Utilities.copyFile(uri, dbFile, INSTANCE.context.getContentResolver());
                 success = true;
             } else {
                 message = backupFileNotFoundMessage;
@@ -153,25 +150,6 @@ public abstract class AppDatabase extends RoomDatabase {
         } finally {
             if(onBackupRestoreFinishListener != null)
                 onBackupRestoreFinishListener.onFinished(success, message);
-        }
-    }
-
-    // TODO cleanup duplicate code in copy methods
-    private static void copyFile(File source, File dest) throws IOException {
-        // try-with-resources
-        try (FileChannel sourceChannel = new FileInputStream(source).getChannel();
-             FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
-            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
-        }
-    }
-
-    private static void copyFile(Uri source, File dest) throws IOException {
-        // try-with-resources
-        try (ParcelFileDescriptor pfdSource = INSTANCE.context.getContentResolver().
-                openFileDescriptor(source, "r");
-             FileChannel sourceChannel = new FileInputStream(pfdSource.getFileDescriptor()).getChannel();
-             FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
-            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
         }
     }
 

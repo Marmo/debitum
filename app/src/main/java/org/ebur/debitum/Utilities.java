@@ -2,10 +2,13 @@ package org.ebur.debitum;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -18,8 +21,13 @@ import androidx.preference.PreferenceManager;
 
 import org.ebur.debitum.ui.SettingsFragment;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -176,5 +184,23 @@ public abstract class Utilities {
                 .translationY(translationY)
                 .setDuration(duration)
                 .setListener(listener);
+    }
+
+    // TODO cleanup duplicate code in copy methods
+    public static void copyFile(File source, File dest) throws IOException {
+        // try-with-resources
+        try (FileChannel sourceChannel = new FileInputStream(source).getChannel();
+             FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
+            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+        }
+    }
+
+    public static void copyFile(Uri source, File dest, ContentResolver resolver) throws IOException {
+        // try-with-resources
+        try (ParcelFileDescriptor pfdSource = resolver.openFileDescriptor(source, "r");
+             FileChannel sourceChannel = new FileInputStream(pfdSource.getFileDescriptor()).getChannel();
+             FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
+            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+        }
     }
 }
