@@ -28,7 +28,7 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
     private final ImageView imgView;
     private final ImageView deleteBtnView;
     private final String placeholderTitle;
-    private final Drawable placeolderDrawable;
+    private final Drawable placeholderDrawable;
 
     private EditTransactionImageViewHolder(View itemView) {
         super(itemView);
@@ -38,7 +38,7 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
 
         Context context = itemView.getContext();
         placeholderTitle = context.getString(R.string.edit_transaction_placeholder_title);
-        placeolderDrawable = AppCompatResources.getDrawable(context, R.drawable.ic_baseline_add_photo_64);
+        placeholderDrawable = AppCompatResources.getDrawable(context, R.drawable.ic_baseline_add_photo_64);
     }
 
     public void bind(@Nullable Uri imageUri) {
@@ -54,7 +54,7 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
                 showImage(imageUri);
             });
         } else {
-            imgView.setImageDrawable(placeolderDrawable);
+            imgView.setImageDrawable(placeholderDrawable);
             imgNameView.setText(placeholderTitle);
             imgView.setOnClickListener(view -> {
                 addImage();
@@ -92,6 +92,8 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
 
     private void addImage() {
         // TODO, possibly pass this OnClickListener to bind()
+        // start file picker
+        // add image uri to viewModel
     }
 
     private void deleteImage(@Nullable Uri uri) {
@@ -105,7 +107,7 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
 
     static EditTransactionImageViewHolder create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_transaction_list, parent, false);
+                .inflate(R.layout.item_image_list, parent, false);
         return new EditTransactionImageViewHolder(view);
     }
 

@@ -27,10 +27,10 @@ public class EditTransactionImageAdapter
         holder.bind(current);
     }
 
-    @Override
+    /*@Override
     public long getItemId(int position) {
         return getItem(position).hashCode();
-    }
+    }*/
 
     static class Diff extends DiffUtil.ItemCallback<Uri> {
 

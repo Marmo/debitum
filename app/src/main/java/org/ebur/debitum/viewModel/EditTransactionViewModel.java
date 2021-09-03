@@ -28,7 +28,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
     private int transactionType;
     private Date timestamp;
     private Date returnTimestamp;
-    private MutableLiveData<List<Uri>> imageUris;
+    private final MutableLiveData<List<Uri>> imageUris;
 
 
     public EditTransactionViewModel(Application application) {
@@ -75,12 +75,16 @@ public class EditTransactionViewModel extends AndroidViewModel {
     public void delete(Transaction transaction) { transactionRepository.delete(transaction); }
 
     public LiveData<List<Uri>> getImageUris() {return imageUris;}
-    public void removeImage(@NonNull Uri uri) {
+    public void deleteImage(@NonNull Uri uri) {
         List<Uri> uris = imageUris.getValue();
         if (uris != null) {
             uris.remove(uri);
             imageUris.setValue(uris);
+            // TODO delete image file
         }
+    }
+    public void clearImageList() {
+        imageUris.setValue(new ArrayList<>());
     }
     public void addImageUri(@NonNull Uri uri) {
         List<Uri> uris = imageUris.getValue();

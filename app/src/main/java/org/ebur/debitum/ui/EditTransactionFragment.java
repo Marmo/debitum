@@ -48,6 +48,7 @@ import org.ebur.debitum.viewModel.PersonFilterViewModel;
 import java.io.File;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -174,6 +175,7 @@ public class EditTransactionFragment extends DialogFragment {
         });
 
         setupRecyclerView(root);
+        subscribeToViewModel();
 
         return root;
     }
@@ -222,11 +224,24 @@ public class EditTransactionFragment extends DialogFragment {
                     .find());
             // get uris and set viewModel's LiveData
             if (files != null) {
+                viewModel.clearImageList();
+                // give the adapter an empty list, even if LiveData is not changed and observer callback is not triggered
+                //if (files.length == 0) updateAdapterList(new ArrayList<>());
                 for (File file : files) {
                     viewModel.addImageUri(Uri.fromFile(file));
                 }
+
             }
         }
+    }
+
+    private void subscribeToViewModel() {
+        viewModel.getImageUris().observe(getViewLifecycleOwner(), this::updateAdapterList);
+    }
+
+    private void updateAdapterList(List<Uri> uris) {
+        uris.add(null); // the null uri makes the viewHolder display the "add image" placeholder
+        imageAdapter.submitList(uris);
     }
 
     private void setupSpinnerName() {

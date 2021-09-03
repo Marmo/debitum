@@ -1,6 +1,8 @@
 ## 1.5.0/13
 - add scrollbar showing the date/month/year while scrolling the transaction list
 - images for transactions (#21)
+  - delete images when deleting txn (also when deleting person!)
+  - backup and restore images
 
 ## later / unassigned
 - swipe entry to mark as returned or delete
