@@ -1,19 +1,20 @@
 package org.ebur.debitum.viewModel;
 
 import android.app.Application;
-import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import org.ebur.debitum.database.ImageRepository;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonRepository;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionRepository;
 import org.ebur.debitum.database.TransactionWithPerson;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,19 +24,21 @@ public class EditTransactionViewModel extends AndroidViewModel {
 
     private final PersonRepository personRepository;
     private final TransactionRepository transactionRepository;
+    private final ImageRepository imageRepository;
     private TransactionWithPerson transaction;
     // maintained separately from transaction for new transactions (transaction = null)
     private int transactionType;
     private Date timestamp;
     private Date returnTimestamp;
-    private final MutableLiveData<List<Uri>> imageUris;
+    private final MutableLiveData<List<String>> imageFilenames;
 
 
     public EditTransactionViewModel(Application application) {
         super(application);
         personRepository = new PersonRepository(application);
         transactionRepository = new TransactionRepository(application);
-        imageUris = new MutableLiveData<>();
+        imageRepository = new ImageRepository(application);
+        imageFilenames = new MutableLiveData<>();
     }
 
     public List<Person> getPersons() throws ExecutionException, InterruptedException { return  personRepository.getAllPersonsNonLive(); }
@@ -70,27 +73,54 @@ public class EditTransactionViewModel extends AndroidViewModel {
     public Date getReturnTimestamp() { return this.returnTimestamp; }
 
     public TransactionWithPerson getTransactionFromDatabase(int idTransaction) throws ExecutionException, InterruptedException { return transactionRepository.getTransaction(idTransaction); }
-    public void insert(Transaction transaction) { transactionRepository.insert(transaction); }
+    public Long insert(Transaction transaction) { return transactionRepository.insert(transaction); }
     public void update(Transaction transaction) { transactionRepository.update(transaction); }
     public void delete(Transaction transaction) { transactionRepository.delete(transaction); }
 
-    public LiveData<List<Uri>> getImageUris() {return imageUris;}
-    public void deleteImage(@NonNull Uri uri) {
-        List<Uri> uris = imageUris.getValue();
-        if (uris != null) {
-            uris.remove(uri);
-            imageUris.setValue(uris);
-            // TODO delete image file
+    public LiveData<List<String>> getImageFilenames() {return imageFilenames;}
+    public void loadImageFilenamesFromDb() {
+        if (transaction != null) {
+            imageFilenames.setValue(imageRepository.getImageFilenames(transaction.transaction.idTransaction));
         }
     }
-    public void clearImageList() {
-        imageUris.setValue(new ArrayList<>());
+    public void addImageLink(@NonNull String filename) {
+        List<String> images = imageFilenames.getValue();
+        if (images == null) {
+            images = new ArrayList<>();
+        }
+        images.add(filename);
     }
-    public void addImageUri(@NonNull Uri uri) {
-        List<Uri> uris = imageUris.getValue();
-        if (uris == null) uris = new ArrayList<>();
-        uris.add(uri);
-        imageUris.setValue(uris);
+    public void deleteImageLink(@NonNull String filename) {
+        List<String> images = imageFilenames.getValue();
+        if (images != null) {
+            images.remove(filename);
+        }
     }
 
+    public void deleteOrphanedImageFiles(File imageBasedir) {
+        List<String> filenamesDb = imageRepository.getAllImageFilenames();
+        String[] filenamesDir = imageBasedir.list();
+        assert filenamesDir != null;
+        for (String filenameDir:filenamesDir) {
+            if (!filenamesDb.contains(filenameDir)) {
+                File orphanedImageFile = new File(imageBasedir, filenameDir);
+                orphanedImageFile.delete();
+            }
+        }
+    }
+
+    public void synchronizeDbWithViewModel(File imageBasedir) {
+        synchronizeDbWithViewModel(imageBasedir, transaction.transaction.idTransaction);
+    }
+    public void synchronizeDbWithViewModel(File imageBasedir, int idTransaction) {
+        // add all image links to db
+        if (imageFilenames.getValue() != null) {
+            for (String filename : imageFilenames.getValue()) {
+                // TODO what if transaction is new and has no id?
+                imageRepository.insert(filename, idTransaction);
+            }
+        }
+        // then remove all images from the filesystem, that are not linked to any transaction
+        deleteOrphanedImageFiles(imageBasedir);
+    }
 }

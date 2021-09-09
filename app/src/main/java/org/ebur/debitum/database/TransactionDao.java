@@ -36,7 +36,7 @@ public interface TransactionDao {
     void update(Transaction transaction);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Transaction transaction);
+    long insert(Transaction transaction);
 
     @Delete
     int delete(Transaction transaction);

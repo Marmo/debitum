@@ -35,6 +35,8 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -201,6 +203,42 @@ public abstract class Utilities {
              FileChannel sourceChannel = new FileInputStream(pfdSource.getFileDescriptor()).getChannel();
              FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
             destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+        }
+    }
+
+    // inserts infix before the last "." character of filename
+    public static String insertInfixBeforeExt(@NonNull String filename, @NonNull String infix) {
+        return filename.substring(0, filename.lastIndexOf("."))
+                + infix + filename.substring(filename.lastIndexOf("."));
+    }
+
+    /**
+     *
+     * @param dir directory in which to look for images
+     * @return for all files in dir whose name represents a 8 digit hex value, the maximum is
+     * determined and max + 1 as 8 digit hex value returned
+     */
+    @NonNull
+    public static String getNextImageFilename(@NonNull File dir) {
+        if (dir.exists()) {
+            // create sorted list of all files whose names represent 8-digit hex numbers
+            // and find its maximum
+            String[] dirlist = dir.list();
+            if (dirlist == null) {
+                return "00000001";
+            } else {
+                String maxFilename =  new ArrayList<String>(Arrays.asList(dirlist))
+                        .stream()
+                        .filter(s -> s.matches("^[0123456789abcdef]{8}\\.[^.]+$")) // only consider 8-digit-hex representations
+                        .map(s -> s.replaceAll("\\.[^.]+$", "")) // remove extension
+                        .max(String::compareTo)
+                        .orElse("00000000");
+                Long num = Long.parseLong(maxFilename, 16) + 1;
+                return String.format(Locale.getDefault(), "%04x", num);
+            }
+        } else {
+            dir.mkdirs();
+            return "00000000";
         }
     }
 }

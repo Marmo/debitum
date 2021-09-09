@@ -3,7 +3,6 @@ package org.ebur.debitum.ui;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -12,16 +11,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
 
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
     private final TextView imgNameView;
@@ -29,29 +27,34 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
     private final ImageView deleteBtnView;
     private final String placeholderTitle;
     private final Drawable placeholderDrawable;
+    private final ActivityResultLauncher<String> addImageLauncher;
+    private final DeleteImageCallback deleteCallback;
 
-    private EditTransactionImageViewHolder(View itemView) {
+    private EditTransactionImageViewHolder(View itemView, ActivityResultLauncher<String> addImageLauncher, DeleteImageCallback deleteCallback) {
         super(itemView);
         imgNameView = itemView.findViewById(R.id.image_title);
         imgView = itemView.findViewById(R.id.image);
         deleteBtnView = itemView.findViewById(R.id.button_delete);
+
+        this.addImageLauncher = addImageLauncher;
+        this.deleteCallback = deleteCallback;
 
         Context context = itemView.getContext();
         placeholderTitle = context.getString(R.string.edit_transaction_placeholder_title);
         placeholderDrawable = AppCompatResources.getDrawable(context, R.drawable.ic_baseline_add_photo_64);
     }
 
-    public void bind(@Nullable Uri imageUri) {
+    public void bind(@Nullable File imageFile) {
 
-        if (imageUri != null) {
-            imgView.setImageBitmap(BitmapFactory.decodeFile(imageUri.getPath()));
-            imgNameView.setText(imageUri.getLastPathSegment());
+        if (imageFile != null) {
+            imgView.setImageURI(Uri.fromFile(imageFile));
+            imgNameView.setText(imageFile.getName());
             deleteBtnView.setVisibility(View.VISIBLE);
             deleteBtnView.setOnClickListener(view -> {
-                deleteImage(imageUri);
+                deleteImage(imageFile);
             });
             imgView.setOnClickListener(view -> {
-                showImage(imageUri);
+                showImage(imageFile);
             });
         } else {
             imgView.setImageDrawable(placeholderDrawable);
@@ -63,25 +66,11 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    @Nullable
-    private File getImageFile(@Nullable Uri uri) {
-        if (uri != null && uri.getScheme().equals("file")) {
-            try {
-                URI fileUri = new URI(uri.toString());
-                return new File(fileUri);
-            } catch (URISyntaxException ignored) {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
-
-    private void showImage(Uri uri) {
-        if (uri != null) {
+    private void showImage(@Nullable File file) {
+        if (file != null) {
             Context context = imgView.getContext();
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(uri);
+            intent.setData(Uri.fromFile(file));
             try {
                 context.startActivity(intent);
             } catch (ActivityNotFoundException e) {
@@ -91,37 +80,25 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void addImage() {
-        // TODO, possibly pass this OnClickListener to bind()
         // start file picker
-        // add image uri to viewModel
+        String mimetype = "image/*";
+        addImageLauncher.launch(mimetype);
     }
 
-    private void deleteImage(@Nullable Uri uri) {
-        @Nullable File file = getImageFile(uri);
-        if (file != null) {
-            // TODO ask for confirmation
-            boolean deleted = file.delete();
-            // TODO update RecyclerView/Adapter's list
-        }
+    private void deleteImage(@NonNull File file) {
+         deleteCallback.onDelete(file);
     }
 
-    static EditTransactionImageViewHolder create(ViewGroup parent) {
+    static EditTransactionImageViewHolder create(ViewGroup parent,
+                                                 ActivityResultLauncher<String> addImageLauncher,
+                                                 DeleteImageCallback deleteCallback) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_image_list, parent, false);
-        return new EditTransactionImageViewHolder(view);
+        return new EditTransactionImageViewHolder(view, addImageLauncher, deleteCallback);
     }
 
-    // anonymous implementation of androidx.recyclerview.selection.ItemDetailsLookup.ItemDetails
-    //     https://proandroiddev.com/a-guide-to-recyclerview-selection-3ed9f2381504?gi=ee4affe1b9d3
-    //     https://developer.android.com/reference/androidx/recyclerview/selection/package-summary
-    ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
-        return new ItemDetailsLookup.ItemDetails<Long>() {
-            @Override
-            public int getPosition() { return getAdapterPosition(); }
-
-            @Override
-            public Long getSelectionKey() { return getItemId(); }
-        };
+    public interface DeleteImageCallback {
+        void onDelete(@NonNull File imagefile);
     }
 }
 
