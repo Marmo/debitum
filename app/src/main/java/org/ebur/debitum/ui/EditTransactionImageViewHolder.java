@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -74,7 +75,10 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
             try {
                 context.startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                // TODO make Toast telling that no app to open image could be found
+                Toast.makeText(itemView.getContext(),
+                        itemView.getResources().getString(R.string.edit_transaction_image_error_app_not_found),
+                        Toast.LENGTH_SHORT)
+                        .show();
             }
         }
     }

@@ -95,6 +95,7 @@
     <string name="edit_transaction_image_delete_desc">delete image</string>
     <string name="edit_transaction_image_add_title">add image</string>
     <string name="edit_transaction_image_error_copying">Copying image to app directory failed. %1$s</string>
+    <string name="edit_transaction_image_error_app_not_found">No app to show an image found on your device.</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Edit Person</string>
