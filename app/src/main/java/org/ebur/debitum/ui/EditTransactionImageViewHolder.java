@@ -40,7 +40,7 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
         this.deleteCallback = deleteCallback;
 
         Context context = itemView.getContext();
-        placeholderTitle = context.getString(R.string.edit_transaction_placeholder_title);
+        placeholderTitle = context.getString(R.string.edit_transaction_image_add_title);
         placeholderDrawable = AppCompatResources.getDrawable(context, R.drawable.ic_baseline_add_photo_64);
     }
 

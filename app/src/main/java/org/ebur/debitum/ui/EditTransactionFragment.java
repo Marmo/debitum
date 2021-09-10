@@ -103,11 +103,11 @@ public class EditTransactionFragment extends DialogFragment {
                                 Utilities.copyFile(uri,
                                         destFile,
                                         requireContext().getContentResolver());
+                                viewModel.addImageLink(destFile.getName());
                             } catch (IOException e) {
-                                // TODO snackbar with error msg
+                                Toast.makeText(requireContext(), getString(R.string.edit_transaction_image_error_copying, e.getMessage()), Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
                             }
-                            viewModel.addImageLink(destFile.getName());
                         }
                     });
 
