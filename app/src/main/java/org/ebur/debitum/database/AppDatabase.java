@@ -70,7 +70,7 @@ public abstract class AppDatabase extends RoomDatabase {
     static final Migration MIGRATION_4_5 = new Migration(4, 5) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("CREATE TABLE image (id_image INTEGER PRIMARY KEY, id_transaction INTEGER, filename TEXT)");
+            database.execSQL("CREATE TABLE image (id_transaction INTEGER NOT NULL, filename TEXT NOT NULL, PRIMARY KEY (id_transaction, filename) ON CONFLICT IGNORE)");
         }
     };
 
