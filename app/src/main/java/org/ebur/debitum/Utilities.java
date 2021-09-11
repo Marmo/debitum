@@ -224,7 +224,7 @@ public abstract class Utilities {
             // create sorted list of all files whose names represent 8-digit hex numbers
             // and find its maximum
             String[] dirlist = dir.list();
-            if (dirlist == null) {
+            if (dirlist == null || dirlist.length == 0) {
                 return "00000001";
             } else {
                 String maxFilename =  new ArrayList<String>(Arrays.asList(dirlist))
