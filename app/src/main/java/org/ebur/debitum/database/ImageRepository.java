@@ -24,7 +24,13 @@ public class ImageRepository {
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     public List<String> getAllImageFilenames() {
-        return imageDao.getAllImageFilenames();
+        Future<List<String>> future = AppDatabase.databaseTaskExecutor.submit(imageDao::getAllImageFilenames);
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Nullable
