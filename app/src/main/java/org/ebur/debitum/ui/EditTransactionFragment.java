@@ -240,7 +240,7 @@ public class EditTransactionFragment extends DialogFragment {
     private void setupRecyclerView(@NonNull View root) {
         imageRecyclerView = root.findViewById(R.id.images);
         imageAdapter = new EditTransactionImageAdapter(new EditTransactionImageAdapter.Diff(), addImageLauncher, imagefile -> {
-            viewModel.deleteImageLink(imagefile.getName());
+            viewModel.deleteImageLink(imagefile.getName()); // the actual file will be deleted by deleteOrphanedImageFiles on save/dismiss
         });
         imageRecyclerView.setAdapter(imageAdapter);
         imageRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));

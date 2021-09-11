@@ -95,6 +95,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
         List<String> images = imageFilenames.getValue();
         if (images != null) {
             images.remove(filename);
+            imageFilenames.setValue(images);
         }
     }
 
@@ -117,7 +118,6 @@ public class EditTransactionViewModel extends AndroidViewModel {
         // add all image links to db
         if (imageFilenames.getValue() != null) {
             for (String filename : imageFilenames.getValue()) {
-                // TODO what if transaction is new and has no id?
                 imageRepository.insert(filename, idTransaction);
             }
         }
