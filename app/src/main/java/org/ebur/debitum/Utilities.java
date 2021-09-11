@@ -6,9 +6,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -240,5 +242,15 @@ public abstract class Utilities {
             dir.mkdirs();
             return "00000000";
         }
+    }
+
+    @NonNull
+    public static String getFileExtension(@NonNull Uri uri, @NonNull ContentResolver resolver) {
+        Cursor cursor = resolver.query(uri, null, null, null, null);
+        int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        cursor.moveToFirst();
+        String filename = cursor.getString(nameIndex);
+        cursor.close();
+        return filename.replaceAll(".*\\.", "");
     }
 }

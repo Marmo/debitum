@@ -89,6 +89,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
             images = new ArrayList<>();
         }
         images.add(filename);
+        imageFilenames.setValue(images);
     }
     public void deleteImageLink(@NonNull String filename) {
         List<String> images = imageFilenames.getValue();

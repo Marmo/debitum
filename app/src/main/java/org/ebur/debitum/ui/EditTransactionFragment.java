@@ -96,7 +96,9 @@ public class EditTransactionFragment extends DialogFragment {
                     uri -> {
                         if (uri != null) { // uri is null when the picker was cancelled
                             File dir = getImageDir();
-                            String filename = Utilities.getNextImageFilename(dir);
+                            String filename = Utilities.getNextImageFilename(dir)
+                                    + "."
+                                    + Utilities.getFileExtension(uri, requireContext().getContentResolver());
                             File destFile = new File(dir, filename);
                             // copy image to txn dir
                             try {
@@ -599,6 +601,6 @@ public class EditTransactionFragment extends DialogFragment {
     }
 
     private File getImageDir() {
-        return new File(requireContext().getFilesDir(), IMAGE_SUBDIR);
+        return new File(requireContext().getExternalFilesDir(null), IMAGE_SUBDIR);
     }
 }
