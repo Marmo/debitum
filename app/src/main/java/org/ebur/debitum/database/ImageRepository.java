@@ -2,7 +2,11 @@ package org.ebur.debitum.database;
 
 import android.app.Application;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class ImageRepository {
 
@@ -23,8 +27,15 @@ public class ImageRepository {
         return imageDao.getAllImageFilenames();
     }
 
+    @Nullable
     public List<String> getImageFilenames(int idTransaction) {
-        return imageDao.getImageFilenames(idTransaction);
+        Future<List<String>> future = AppDatabase.databaseTaskExecutor.submit(() -> imageDao.getImageFilenames(idTransaction));
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void insert(String filename, int idTransaction) {
