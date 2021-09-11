@@ -234,7 +234,7 @@ public abstract class Utilities {
                         .max(String::compareTo)
                         .orElse("00000000");
                 Long num = Long.parseLong(maxFilename, 16) + 1;
-                return String.format(Locale.getDefault(), "%04x", num);
+                return String.format(Locale.getDefault(), "%08x", num);
             }
         } else {
             dir.mkdirs();
