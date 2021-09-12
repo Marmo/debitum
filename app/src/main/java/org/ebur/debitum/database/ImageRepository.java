@@ -55,4 +55,10 @@ public class ImageRepository {
             imageDao.update(image);
         });
     }
+
+    public void deleteAll(int idTransaction) {
+        AppDatabase.databaseTaskExecutor.execute(() -> {
+            imageDao.deleteAllImagesOfTransaction(idTransaction);
+        });
+    }
 }
