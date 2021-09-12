@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
@@ -71,7 +72,10 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
         if (file != null) {
             Context context = imgView.getContext();
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.fromFile(file));
+            // using the file:// uri directly would cause a android.os.FileUriExposedException
+            Uri contentUri = FileProvider.getUriForFile(context, "org.ebur.debitum.fileprovider", file);
+            intent.setData(contentUri);
+            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             try {
                 context.startActivity(intent);
             } catch (ActivityNotFoundException e) {
@@ -101,6 +105,7 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
         return new EditTransactionImageViewHolder(view, addImageLauncher, deleteCallback);
     }
 
+    // this must be passed by the fragment using the adapter/viewHolder to handle image deletion
     public interface DeleteImageCallback {
         void onDelete(@NonNull File imagefile);
     }

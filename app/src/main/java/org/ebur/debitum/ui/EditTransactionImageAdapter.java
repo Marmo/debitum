@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.util.Arrays;
 
 public class EditTransactionImageAdapter
         extends ListAdapter<File, EditTransactionImageViewHolder> {
@@ -21,7 +23,7 @@ public class EditTransactionImageAdapter
         super(diffCallback);
         this.addImageLauncher = addImageLauncher;
         this.deleteCallback = deleteCallback;
-        setHasStableIds(true);
+        //setHasStableIds(true);
     }
 
     @NonNull
@@ -45,12 +47,32 @@ public class EditTransactionImageAdapter
 
         @Override
         public boolean areItemsTheSame(@NonNull File oldItem, @NonNull File newItem) {
-            return oldItem.compareTo(newItem) == 0;
+            return oldItem.getName().equals(newItem.getName());
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull File oldItem, @NonNull File newItem) {
-            return oldItem.compareTo(newItem) == 0;
+            return compareFiles(oldItem, newItem);
+        }
+
+        // from https://stackoverflow.com/questions/38527245/how-to-compare-two-java-io-file-programmatically
+        public boolean compareFiles(@NonNull File file1, @NonNull File file2) {
+            if(file1.length() != file2.length()) {
+                return false;
+            }
+            byte[] buffer1 = new byte[1024];
+            byte[] buffer2 = new byte[1024];
+            try {
+                FileInputStream fileInputStream1 = new FileInputStream(file1);
+                FileInputStream fileInputStream2 = new FileInputStream(file2);
+                while (fileInputStream1.read(buffer1) != -1) {
+                    if (fileInputStream2.read(buffer2) != -1 && !Arrays.equals(buffer1, buffer2))
+                        return false;
+                }
+                return true;
+            } catch (Exception ignore) {
+                return false;
+            }
         }
     }
 }

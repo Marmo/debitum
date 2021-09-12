@@ -115,7 +115,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
         synchronizeDbWithViewModel(imageBasedir, transaction.transaction.idTransaction);
     }
     public void synchronizeDbWithViewModel(File imageBasedir, int idTransaction) {
-        // add all image links to db
+        // add all image links from viewmModel to db
         if (imageFilenames.getValue() != null) {
             for (String filename : imageFilenames.getValue()) {
                 imageRepository.insert(filename, idTransaction);
