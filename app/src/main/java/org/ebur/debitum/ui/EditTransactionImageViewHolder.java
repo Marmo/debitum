@@ -75,7 +75,7 @@ class EditTransactionImageViewHolder extends RecyclerView.ViewHolder {
             // using the file:// uri directly would cause a android.os.FileUriExposedException
             Uri contentUri = FileProvider.getUriForFile(context, "org.ebur.debitum.fileprovider", file);
             intent.setData(contentUri);
-            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
             try {
                 context.startActivity(intent);
             } catch (ActivityNotFoundException e) {
