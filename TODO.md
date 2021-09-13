@@ -2,13 +2,6 @@
 - add scrollbar showing the date/month/year while scrolling the transaction list
 - images for transactions (#21)
   - backup and restore images
-  - new concept (to get rid of filename infixes)
-    - save image filenames in database (not uris, for this could be problematic when migrating db to new device)
-    - save all images in one folder (not per txn id)
-    - rename incoming images (number/uid)
-      - create method "getNextImageNumber"
-    - unlink images on delete, add new filename on add
-    - check all images and delete orphaned ones on cancel/dismiss dialog and on save txn (and on deleting txns and persons from list views)
 
 ## later / unassigned
 - swipe entry to mark as returned or delete
