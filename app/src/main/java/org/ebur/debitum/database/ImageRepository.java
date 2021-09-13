@@ -50,15 +50,19 @@ public class ImageRepository {
         });
     }
 
-    public void update(Image image) {
-        AppDatabase.databaseTaskExecutor.execute(() -> {
-            imageDao.update(image);
-        });
-    }
-
     public void deleteAll(int idTransaction) {
         AppDatabase.databaseTaskExecutor.execute(() -> {
             imageDao.deleteAllImagesOfTransaction(idTransaction);
         });
+    }
+
+    public boolean update(int idTransaction, @Nullable List<String> filenames) {
+        Future<Boolean> future = AppDatabase.databaseTaskExecutor.submit(() -> imageDao.update(idTransaction, filenames));
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
