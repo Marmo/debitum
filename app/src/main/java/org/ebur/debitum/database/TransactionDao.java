@@ -11,12 +11,12 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface TransactionDao {
+public abstract class TransactionDao {
 
     // get all transactions
     @androidx.room.Transaction
     @Query("select txn.* from txn where is_monetary = :isMonetary order by timestamp desc")
-    LiveData<List<TransactionWithPerson>> getAllTransactions(boolean isMonetary);
+    abstract LiveData<List<TransactionWithPerson>> getAllTransactions(boolean isMonetary);
 
     // get all persons with at least one transaction and a list of all of their transactions
     @androidx.room.Transaction
@@ -25,23 +25,32 @@ public interface TransactionDao {
             "from person join txn on person.id_person = txn.id_person " +
             "group by person.id_person, person.name, person.note " +
             "order by max(txn.timestamp) desc")
-    LiveData<List<PersonWithTransactions>> getAllPersonsWithTransactions();
+    abstract LiveData<List<PersonWithTransactions>> getAllPersonsWithTransactions();
 
     // get a single transaction by id
     @androidx.room.Transaction
     @Query("select txn.* from txn where id_transaction = :idTransaction")
-    TransactionWithPerson getTransaction(int idTransaction);
+    abstract TransactionWithPerson getTransaction(int idTransaction);
 
     @Update
-    void update(Transaction transaction);
+    abstract void update(Transaction transaction);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Transaction transaction);
+    abstract long insert(Transaction transaction);
 
     @Delete
-    int delete(Transaction transaction);
+    abstract int deleteTransaction(Transaction transaction);
 
-    @Query("delete from txn")
-    void deleteAll();
+    @Query("delete from image where id_transaction = :idTransaction")
+    abstract void deleteTransactionsImages(int idTransaction);
+
+    // delete a transaction and all of its image links
+    // note: there is no need to delete the image files here, as they are deleted upon the next
+    // dismissed or saved transaction, when EditTransactionViewModel::deleteOrphanedImageFiles
+    @androidx.room.Transaction
+    int delete(Transaction transaction) {
+        deleteTransactionsImages(transaction.idTransaction);
+        return deleteTransaction(transaction);
+    }
 }
 

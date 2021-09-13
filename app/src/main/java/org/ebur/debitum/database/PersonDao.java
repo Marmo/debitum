@@ -34,16 +34,23 @@ public abstract class PersonDao {
     @Update
     abstract void update(Person person);
 
+    @Query("delete from image " +
+            "where id_transaction in (select id_transaction from txn where id_person = :idPerson)")
+    abstract void deleteImagesOfPerson(int idPerson);
+
     @Query("delete from txn where id_person = :idPerson")
     abstract void deleteTransactionsOfPerson(int idPerson);
 
     @Query("delete from person where id_person = :idPerson;")
     abstract void deletePerson(int idPerson);
 
-    // delete a Person and all of their transactions
+    // delete a Person and all of their transactions and image links
+    // note: there is no need to delete the image files here, as they are deleted upon the next
+    // dismissed or saved transaction, when EditTransactionViewModel::deleteOrphanedImageFiles
     @Transaction
     void delete(Person person) {
         int id = person.idPerson;
+        deleteImagesOfPerson(id);
         deleteTransactionsOfPerson(id);
         deletePerson(id);
     }
