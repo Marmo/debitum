@@ -40,8 +40,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 public abstract class Utilities {
     public static final String TAG = "Utilities";
@@ -252,5 +256,85 @@ public abstract class Utilities {
         String filename = cursor.getString(nameIndex);
         cursor.close();
         return filename.replaceAll(".*\\.", "");
+    }
+
+    // https://www.baeldung.com/java-compress-and-uncompress
+    public static void zip(List<File> source, File dest) throws IOException {
+        assert dest.isFile();
+        assert dest.canWrite();
+        FileOutputStream fos = new FileOutputStream(dest);
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        for (File fileToZip : source) {
+            FileInputStream fis = new FileInputStream(fileToZip);
+            ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+            zipOut.putNextEntry(zipEntry);
+
+            byte[] bytes = new byte[1024];
+            int length;
+            while((length = fis.read(bytes)) >= 0) {
+                zipOut.write(bytes, 0, length);
+            }
+            fis.close();
+        }
+        zipOut.close();
+        fos.close();
+    }
+
+    // https://www.baeldung.com/java-compress-and-uncompress
+    public static void unzip(File source, File dest) throws IOException {
+        assert source.isFile();
+        assert dest.isDirectory();
+        assert source.canRead();
+        assert dest.canWrite();
+        byte[] buffer = new byte[1024];
+        ZipInputStream zis = new ZipInputStream(new FileInputStream(source));
+        ZipEntry zipEntry = zis.getNextEntry();
+        while (zipEntry != null) {
+            File newFile = newFile(dest, zipEntry);
+            if (zipEntry.isDirectory()) {
+                if (!newFile.isDirectory() && !newFile.mkdirs()) {
+                    throw new IOException("Failed to create directory " + newFile);
+                }
+            } else {
+                // fix for Windows-created archives
+                File parent = newFile.getParentFile();
+                if (parent == null || !parent.isDirectory() && !parent.mkdirs()) {
+                    throw new IOException("Failed to create directory " + parent);
+                }
+
+                // write file content
+                FileOutputStream fos = new FileOutputStream(newFile);
+                int length;
+                while ((length = zis.read(buffer)) > 0) {
+                    fos.write(buffer, 0, length);
+                }
+                fos.close();
+            }
+            zipEntry = zis.getNextEntry();
+        }
+        zis.closeEntry();
+        zis.close();
+    }
+
+    /**
+     * Creates a new File object and guards against writing files to the file system outside of the
+     * target folder. This vulnerability is called Zip Slip and you can read more about it here:
+     * https://snyk.io/research/zip-slip-vulnerability.
+     * @param destinationDir directory where the new file should be created
+     * @param zipEntry zipEntry that contains the file to be created
+     * @return the file object if everything is fine (file to be created is inside the target directory)
+     * @throws IOException
+     */
+    private static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
+        File destFile = new File(destinationDir, zipEntry.getName());
+
+        String destDirPath = destinationDir.getCanonicalPath();
+        String destFilePath = destFile.getCanonicalPath();
+
+        if (!destFilePath.startsWith(destDirPath + File.separator)) {
+            throw new IOException("Entry is outside of the target dir: " + zipEntry.getName());
+        }
+
+        return destFile;
     }
 }
