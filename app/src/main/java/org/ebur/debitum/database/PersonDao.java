@@ -47,7 +47,4 @@ public abstract class PersonDao {
         deleteTransactionsOfPerson(id);
         deletePerson(id);
     }
-
-    @Query("delete from person")
-    abstract void deleteAll();
 }
