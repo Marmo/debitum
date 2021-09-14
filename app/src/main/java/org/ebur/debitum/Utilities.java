@@ -260,8 +260,8 @@ public abstract class Utilities {
 
     // https://www.baeldung.com/java-compress-and-uncompress
     public static void zip(List<File> source, File dest) throws IOException {
-        assert dest.isFile();
-        assert dest.canWrite();
+        assert !dest.exists();
+        assert dest.getParentFile() != null && dest.getParentFile().canWrite();
         FileOutputStream fos = new FileOutputStream(dest);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
         for (File fileToZip : source) {
@@ -286,8 +286,19 @@ public abstract class Utilities {
         assert dest.isDirectory();
         assert source.canRead();
         assert dest.canWrite();
-        byte[] buffer = new byte[1024];
         ZipInputStream zis = new ZipInputStream(new FileInputStream(source));
+        unzip(zis, dest);
+    }
+
+    public static void unzip(Uri source, File dest, Context context) throws IOException {
+        assert dest.isDirectory();
+        assert dest.canWrite();
+        ZipInputStream zis = new ZipInputStream(context.getContentResolver().openInputStream(source));
+        unzip(zis, dest);
+    }
+
+    public static void unzip(ZipInputStream zis, File dest) throws IOException {
+        byte[] buffer = new byte[1024];
         ZipEntry zipEntry = zis.getNextEntry();
         while (zipEntry != null) {
             File newFile = newFile(dest, zipEntry);

@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.content.Context;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -245,10 +246,9 @@ public class EditTransactionFragment extends DialogFragment {
         imageRecyclerView.setAdapter(imageAdapter);
         imageRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
-        // only load images for existing txns
-        if (!viewModel.isNewTransaction()) {
-            viewModel.loadImageFilenamesFromDb();
-        }
+        // load images for existing txns
+        // (for new ones this will set the viewModel's LiveData to an empty list)
+        viewModel.loadImageFilenamesFromDb();
     }
 
     private void subscribeToViewModel() {
@@ -600,7 +600,14 @@ public class EditTransactionFragment extends DialogFragment {
         }
     }
 
+    @NonNull
     private File getImageDir() {
-        return new File(requireContext().getExternalFilesDir(null), IMAGE_SUBDIR);
+        return getImageDir(requireContext());
+    }
+
+    // static version for use in SettingsFragment
+    @NonNull
+    public static File getImageDir(@NonNull Context context) {
+        return new File(context.getExternalFilesDir(null), IMAGE_SUBDIR);
     }
 }

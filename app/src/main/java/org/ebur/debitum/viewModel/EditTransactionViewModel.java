@@ -16,6 +16,7 @@ import org.ebur.debitum.database.TransactionWithPerson;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -81,6 +82,8 @@ public class EditTransactionViewModel extends AndroidViewModel {
     public void loadImageFilenamesFromDb() {
         if (transaction != null) {
             imageFilenames.setValue(imageRepository.getImageFilenames(transaction.transaction.idTransaction));
+        } else {
+            imageFilenames.setValue(new ArrayList<>());
         }
     }
     public void addImageLink(@NonNull String filename) {
@@ -111,6 +114,16 @@ public class EditTransactionViewModel extends AndroidViewModel {
         }
     }
 
+    public void deleteBrokenImageLinks(File imageBasedir) {
+        File[] files = imageBasedir.listFiles();
+        // files would be null, if this imageBasedir does not denote a directory, or if an I/O error
+        // occurs. In this case deleting image links is skipped. Thus some possibly broken image
+        // links stay in the database, which is a purely internal nuisance.
+        if (files != null) {
+            imageRepository.deleteBrokenImageLinks(Arrays.asList(files));
+        }
+    }
+
     public void synchronizeDbWithViewModel(File imageBasedir) {
         synchronizeDbWithViewModel(imageBasedir, transaction.transaction.idTransaction);
     }
@@ -119,5 +132,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
         imageRepository.update(idTransaction, imageFilenames.getValue());
         // then remove all images from the filesystem, that are not linked to any transaction
         deleteOrphanedImageFiles(imageBasedir);
+        // remove all image links from the db that have no matching image file
+        deleteBrokenImageLinks(imageBasedir);
     }
 }

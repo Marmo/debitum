@@ -37,4 +37,7 @@ public abstract class ImageDao {
 
     @Query("delete from image where id_transaction = :idTransaction")
     abstract void deleteAllImagesOfTransaction(int idTransaction);
+
+    @Query("delete from image where filename not in (:existingFiles)")
+    public abstract void deleteBrokenImageLinks(List<String> existingFiles);
 }

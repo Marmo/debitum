@@ -2,11 +2,14 @@ package org.ebur.debitum.database;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 public class ImageRepository {
 
@@ -50,9 +53,13 @@ public class ImageRepository {
         });
     }
 
-    public void deleteAll(int idTransaction) {
+    public void deleteBrokenImageLinks(@NonNull List<File> existingFiles) {
+        List<String> existingFilenames = existingFiles
+                .stream()
+                .map(File::getName)
+                .collect(Collectors.toList());
         AppDatabase.databaseTaskExecutor.execute(() -> {
-            imageDao.deleteAllImagesOfTransaction(idTransaction);
+            imageDao.deleteBrokenImageLinks(existingFilenames);
         });
     }
 

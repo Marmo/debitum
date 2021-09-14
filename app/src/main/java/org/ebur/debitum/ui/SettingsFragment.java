@@ -2,6 +2,7 @@ package org.ebur.debitum.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -27,8 +28,12 @@ import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.AppDatabase;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -42,22 +47,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public final static String PREF_KEY_DISMISS_FILTER_BEHAVIOUR = "dismiss_filter_behaviour";
     public final static String PREF_KEY_ITEM_RETURNED_STANDARD_FILTER = "item_returned_standard_filter";
     public final static String PREF_KEY_DATE_FORMAT = "date_format";
+    public final static String FILENAME_DB = "debitum.db";
 
     private final ActivityResultLauncher<String[]> restoreLauncher =
             registerForActivityResult(
                     new ActivityResultContracts.OpenDocument(),
                     uri -> {
                         if (uri != null) {
-                            AppDatabase.restoreDatabase(uri, (success, message) -> {
-                                if (success) {
-                                    restartApp();
-                                } else {
-                                    Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
-                                            getString(R.string.restore_failed, message),
-                                            7000)
-                                            .show();
-                                }
-                            });
+                            restore(uri);
                         }
                     });
 
@@ -130,7 +127,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if(restorePref!=null) {
             restorePref.setSummary(getString(R.string.pref_restore_summary));
             restorePref.setOnPreferenceClickListener(preference -> {
-                restore();
+                startRestore();
                 return true;
             });
         }
@@ -180,27 +177,54 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         int hour = today.get(Calendar.HOUR_OF_DAY);
         int minute = today.get(Calendar.MINUTE);
         int second = today.get(Calendar.SECOND);
-        String filename = String.format(Locale.getDefault(), "debitum-backup-%04d-%02d-%02dT%02d_%02d_%02d.db", year, month, day, hour, minute, second);
+        String filenameZip = String.format(Locale.getDefault(), "debitum-backup-%04d-%02d-%02dT%02d_%02d_%02d.zip", year, month, day, hour, minute, second);
 
         String path = requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
 
-        AppDatabase.backupDatabase(filename, path, (success, message) -> {
+        AppDatabase.backupDatabase(FILENAME_DB, path, (successDb, messageDb) -> {
+            File zipFile = new File(path, filenameZip);
+            File dbFile = new File(path, FILENAME_DB);
+            File imagesDir = EditTransactionFragment.getImageDir(requireContext());
             String info;
-            if (success) {info = getString(R.string.backup_successful);}
-            else info = getString(R.string.backup_failed, message);
-            Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
-                    info,
-                    7000)
-                    .show();
+            boolean successImg;
+
+            List<File> filesToZip = new ArrayList<>();
+            filesToZip.add(dbFile);
+            if (imagesDir.listFiles() != null) { filesToZip.addAll(Arrays.asList(imagesDir.listFiles()));}
+
+            if (successDb) {
+                info = getString(R.string.backup_successful);
+                try {
+                    Utilities.zip(filesToZip, zipFile);
+                    successImg = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    successImg = false;
+                    info = getString(R.string.backup_failed, e.getMessage());
+                    finishBackup(info, dbFile);
+                }
+            } else {
+                info = getString(R.string.backup_failed, messageDb);
+            }
+            finishBackup(info, dbFile);
         });
     }
 
-    private void restore() {
+    private void finishBackup(@NonNull String info, @NonNull File dbFile) {
+        // show snackbar
+        Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
+                info,
+                7000)
+                .show();
+        // cleanup temporary db file
+        dbFile.delete();
+    }
+
+    private void startRestore() {
         AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
         builder.setPositiveButton(R.string.restore_confirm, (dialog, id) -> {
-            String[] mimetypes = {"application/x-sqlite3", "application/octet-stream"};
+            String[] mimetypes = {"application/zip"};
             restoreLauncher.launch(mimetypes);
-            //restartApp();
         });
         builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> dialog.cancel());
 
@@ -209,6 +233,62 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         AlertDialog dialog = builder.create();
 
         dialog.show();
+    }
+
+    private void restore(Uri uriZip) {
+        File imageDir = EditTransactionFragment.getImageDir(requireContext());
+        File tmpDir = new File(imageDir, "restore/");
+        File dbFile = new File(tmpDir, FILENAME_DB);
+        try {
+            // create tmpDir
+            if (!tmpDir.mkdirs() || !tmpDir.canWrite()) {
+                // TODO abort with error
+                tmpDir.delete();
+            }
+            // unzip file to tmpDir
+            Utilities.unzip(uriZip, tmpDir, requireContext());
+
+            // note: only the db file is checked here. Any orphaned files will
+            // be deleted when the EditTransaction Dialog is closed the next time
+            if (!dbFile.exists() | !dbFile.canRead()) {
+                // TODO abort with error
+                tmpDir.delete();
+            }
+            // restore database
+            AppDatabase.restoreDatabase(Uri.fromFile(dbFile), (success, message) -> {
+                if (success) {
+                    // delete dbFile so that it is not copied to imagesDir afterwards
+                    dbFile.delete();
+                    // copy images to imageDir
+                    // Note: there is no (urgent) need for cleaning the image directory before
+                    // copying the restored files there, because any excess images will be deleted
+                    // when the next time the EditTRansaction dialog is closed (save/dismiss)
+                    for (File file:tmpDir.listFiles()) {
+                        try {
+                            Utilities.copyFile(file, new File(imageDir, file.getName()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            // TODO issue a warning to the user that not all images could be restored
+                        }
+                    }
+                    tmpDir.delete();
+                    restartApp();
+                } else {
+                    tmpDir.delete();
+                    Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
+                            getString(R.string.restore_failed, message),
+                            7000)
+                            .show();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            tmpDir.delete();
+            Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
+                    getString(R.string.restore_failed, e.getMessage()),
+                    7000)
+                    .show();
+        }
     }
 
     private void restartApp() {
