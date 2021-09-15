@@ -1,3 +1,7 @@
+# v1.6.0
+- transactions can have images attached
+- backups are now a zip file containing the database and all attached images
+
 # v1.5.0
 - use file picker when restoring database
 - backups with date appended (not overwritten anymore)
