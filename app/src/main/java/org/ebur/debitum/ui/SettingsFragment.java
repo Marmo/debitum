@@ -242,8 +242,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         try {
             // create tmpDir
             if (!tmpDir.mkdirs() || !tmpDir.canWrite()) {
-                // TODO abort with error
+                // abort with error message
+                String info = getString(R.string.restore_failed_tmpdir, tmpDir.getAbsolutePath());
+                showSnackbar(getString(R.string.restore_failed, info));
                 Utilities.deleteDir(tmpDir);
+                return;
             }
             // unzip file to tmpDir
             Utilities.unzip(uriZip, tmpDir, requireContext());
@@ -251,43 +254,43 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             // note: only the db file is checked here. Any orphaned files will
             // be deleted when the EditTransaction Dialog is closed the next time
             if (!dbFile.exists() | !dbFile.canRead()) {
-                // TODO abort with error
+                // abort with error message
+                String info = getString(R.string.restore_failed_dbFileMissing);
+                showSnackbar(getString(R.string.restore_failed, info));
                 Utilities.deleteDir(tmpDir);
+                return;
             }
+
             // restore database
             AppDatabase.restoreDatabase(Uri.fromFile(dbFile), (success, message) -> {
                 if (success) {
                     // delete dbFile so that it is not copied to imagesDir afterwards
                     dbFile.delete();
+
                     // copy images to imageDir
                     // Note: there is no (urgent) need for cleaning the image directory before
                     // copying the restored files there, because any excess images will be deleted
-                    // when the next time the EditTRansaction dialog is closed (save/dismiss)
+                    // when the EditTRansaction dialog is closed (save/dismiss) the next time
                     for (File file:tmpDir.listFiles()) {
                         try {
                             Utilities.copyFile(file, new File(imageDir, file.getName()));
                         } catch (IOException e) {
+                            // show warning and continue with next file
                             e.printStackTrace();
-                            // TODO issue a warning to the user that not all images could be restored
+                            showSnackbar(getString(R.string.restore_not_all_images_restored, e.getMessage()));
                         }
                     }
                     Utilities.deleteDir(tmpDir);
                     restartApp();
                 } else {
                     Utilities.deleteDir(tmpDir);
-                    Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
-                            getString(R.string.restore_failed, message),
-                            7000)
-                            .show();
+                    showSnackbar(getString(R.string.restore_failed, message));
                 }
             });
         } catch (IOException e) {
             e.printStackTrace();
             Utilities.deleteDir(tmpDir);
-            Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
-                    getString(R.string.restore_failed, e.getMessage()),
-                    7000)
-                    .show();
+            showSnackbar(getString(R.string.restore_failed, e.getMessage()));
         }
     }
 
@@ -299,5 +302,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         context.startActivity(restartIntent);
         NavUtils.navigateUpTo(requireActivity(), new Intent(context, MainActivity.class));
+    }
+
+    private void showSnackbar(String message) {
+        Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
+                message,
+                7000)
+                .show();
     }
 }
