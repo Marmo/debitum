@@ -243,7 +243,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             // create tmpDir
             if (!tmpDir.mkdirs() || !tmpDir.canWrite()) {
                 // TODO abort with error
-                tmpDir.delete();
+                Utilities.deleteDir(tmpDir);
             }
             // unzip file to tmpDir
             Utilities.unzip(uriZip, tmpDir, requireContext());
@@ -252,7 +252,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             // be deleted when the EditTransaction Dialog is closed the next time
             if (!dbFile.exists() | !dbFile.canRead()) {
                 // TODO abort with error
-                tmpDir.delete();
+                Utilities.deleteDir(tmpDir);
             }
             // restore database
             AppDatabase.restoreDatabase(Uri.fromFile(dbFile), (success, message) -> {
@@ -271,10 +271,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                             // TODO issue a warning to the user that not all images could be restored
                         }
                     }
-                    tmpDir.delete();
+                    Utilities.deleteDir(tmpDir);
                     restartApp();
                 } else {
-                    tmpDir.delete();
+                    Utilities.deleteDir(tmpDir);
                     Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
                             getString(R.string.restore_failed, message),
                             7000)
@@ -283,7 +283,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         } catch (IOException e) {
             e.printStackTrace();
-            tmpDir.delete();
+            Utilities.deleteDir(tmpDir);
             Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
                     getString(R.string.restore_failed, e.getMessage()),
                     7000)
