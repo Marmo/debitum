@@ -278,8 +278,12 @@ public abstract class Utilities {
 
     // https://www.baeldung.com/java-compress-and-uncompress
     public static void zip(List<File> source, File dest) throws IOException {
-        assert !dest.exists();
-        assert dest.getParentFile() != null && dest.getParentFile().canWrite();
+        // check preconditions
+        if (dest.exists())
+            throw new IOException("Target file already exists.");
+        if (dest.getParentFile() != null && !dest.getParentFile().canWrite())
+            throw new IOException("Target file's parent directory cannot be written into.");
+
         FileOutputStream fos = new FileOutputStream(dest);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
         for (File fileToZip : source) {
@@ -300,17 +304,27 @@ public abstract class Utilities {
 
     // https://www.baeldung.com/java-compress-and-uncompress
     public static void unzip(File source, File dest) throws IOException {
-        assert source.isFile();
-        assert dest.isDirectory();
-        assert source.canRead();
-        assert dest.canWrite();
+        // check preconditions
+        if (!source.isFile())
+            throw new IOException("The File instance to unzip does not denote a file.");
+        if (!dest.isDirectory())
+            throw new IOException("The File instance to unzip into does not denote a directory.");
+        if (!source.canRead())
+            throw new IOException("The file to unzip cannot be read.");
+        if (!dest.canWrite())
+            throw new IOException("The directory to unzip into cannot be written into.");
+
         ZipInputStream zis = new ZipInputStream(new FileInputStream(source));
         unzip(zis, dest);
     }
 
     public static void unzip(Uri source, File dest, Context context) throws IOException {
-        assert dest.isDirectory();
-        assert dest.canWrite();
+        // check preconditions
+        if (!dest.isDirectory())
+            throw new IOException("The File instance to unzip into does not denote a directory.");
+        if (!dest.canWrite())
+            throw new IOException("The directory to unzip into cannot be written into.");
+
         ZipInputStream zis = new ZipInputStream(context.getContentResolver().openInputStream(source));
         unzip(zis, dest);
     }
