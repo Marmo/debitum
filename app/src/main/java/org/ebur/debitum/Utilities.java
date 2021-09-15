@@ -194,7 +194,6 @@ public abstract class Utilities {
                 .setListener(listener);
     }
 
-    // TODO cleanup duplicate code in copy methods
     public static void copyFile(File source, File dest) throws IOException {
         // try-with-resources
         try (FileChannel sourceChannel = new FileInputStream(source).getChannel();
@@ -212,15 +211,34 @@ public abstract class Utilities {
         }
     }
 
-    // inserts infix before the last "." character of filename
-    public static String insertInfixBeforeExt(@NonNull String filename, @NonNull String infix) {
-        return filename.substring(0, filename.lastIndexOf("."))
-                + infix + filename.substring(filename.lastIndexOf("."));
+    /**
+     * Deletes a directory, recursively deleting its contents if it is not empty
+     * @param dir directory to be deleted
+     * @return true if the directory was deleted successfully (i.e. all of its contents was
+     * deleted, too), false otherwise
+     */
+    public static boolean deleteDir(@Nullable File dir) {
+        if (dir == null || !dir.exists()) return false;
+        File[] children = dir.listFiles();
+        if (children == null) return false;
+
+        // delete all children
+        for (File child:children) {
+            if (child.isDirectory()) {
+                deleteDir(child);
+            } else if (child.isFile()) {
+                child.delete();
+            }
+        }
+        // finally delete the now-empty dir
+        // Note: there is no need to evaluate the success of the internal delete calls, as
+        // dir.delete() will return false if one or more files/directories failed to be deleted
+        return dir.delete();
     }
 
     /**
      *
-     * @param dir directory in which to look for images
+     * @param dir directory in which to look for existing images
      * @return for all files in dir whose name represents a 8 digit hex value, the maximum is
      * determined and max + 1 as 8 digit hex value returned
      */
