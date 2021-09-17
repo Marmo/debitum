@@ -1,6 +1,4 @@
-<resources
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!--Top level DayNight theme to be used in AndroidManifest.xml-->
     <style name="Theme.Debitum" parent="Base.Theme.Debitum"/>
     <!--Base custom theme which will be shared between both light and dark theme variants-->
@@ -49,5 +47,7 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">?attr/colorSurface</item>
         <item name="android:actionMenuTextColor">?attr/colorOnPrimary</item>
+        <item name="android:actionModeCloseDrawable">@drawable/ic_baseline_close_onprimary_24</item>
+        <item name="android:windowActionModeOverlay">true</item>
     </style>
 </resources>

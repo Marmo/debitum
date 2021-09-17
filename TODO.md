@@ -1,6 +1,7 @@
 ## 1.5.0/13
 - add scrollbar showing the date/month/year while scrolling the transaction list
 - images for transactions (#21)
+  - replace delete btn with long-click popup menu
 
 ## later / unassigned
 - swipe entry to mark as returned or delete

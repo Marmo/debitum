@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_add_photo_64.xml" value="0.18888888888888888" />
-        <entry key="app/src/main/res/layout/fragment_edit_transaction.xml" value="0.1413934426229508" />
-        <entry key="app/src/main/res/layout/item_image_list.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/fragment_edit_transaction.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/item_image_list.xml" value="0.66" />
+        <entry key="app/src/main/res/menu/menu_edit_transaction_image.xml" value="0.17673611111111112" />
       </map>
     </option>
   </component>

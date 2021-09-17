@@ -89,13 +89,16 @@
     <string name="edit_transaction_received">received</string>
     <string name="edit_transaction_snackbar_max_amount">Max. 9 digits allowed</string>
     <string name="debt_settlement_money_description">Debt settlement for \"%1$s\" from %2$s</string>
+
     <string name="edit_transaction_suspicious_return_date_title">Suspicious return date</string>
     <string name="edit_transaction_suspicious_return_date_message">The set return date (%1$s) occurs before the original transaction. Use anyway?</string>
     <string name="edit_transaction_use_suspicious_return_date">use date</string>
+
     <string name="edit_transaction_image_delete_desc">delete image</string>
     <string name="edit_transaction_image_add_title">add image</string>
     <string name="edit_transaction_image_error_copying">Copying image to app directory failed. %1$s</string>
     <string name="edit_transaction_image_error_app_not_found">No app to show an image found on your device.</string>
+    <string name="edit_transaction_actionmode_title">Image selected</string>
 
     <!-- EditPersonFragment -->
     <string name="title_fragment_edit_person">Edit Person</string>

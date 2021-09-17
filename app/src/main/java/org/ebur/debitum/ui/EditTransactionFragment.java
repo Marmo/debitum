@@ -244,7 +244,7 @@ public class EditTransactionFragment extends DialogFragment {
             viewModel.deleteImageLink(imagefile.getName()); // the actual file will be deleted by deleteOrphanedImageFiles on save/dismiss
         });
         imageRecyclerView.setAdapter(imageAdapter);
-        imageRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        imageRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         // load images for existing txns
         // (for new ones this will set the viewModel's LiveData to an empty list)
