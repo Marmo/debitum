@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pref_restore_summary">à partir d\'une base de données précédemment sauvegardée</string>
+    <string name="pref_restore_summary">à partir du fichier zip de sauvegarde précédemment créé</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_guide_title">Guide rapide</string>
     <string name="pref_info_header">Infos</string>
@@ -77,12 +77,12 @@
     <string name="pref_version">Version %1$s</string>
     <string name="restore_confirm_title">Restaurer à partir d\'une sauvegarde</string>
     <string name="pref_restore_file_not_found">Fichier de sauvegarde introuvable</string>
-    <string name="pref_backup_warning">Le dossier dans lequel la sauvegarde de la base de données est copiée sera supprimé lorsque l\'application sera désinstallée ou que ses données seront effacées. Déplacez-le dans un endroit sûr avant de désinstaller/effacer les données si vous voulez restaurer les données plus tard.</string>
-    <string name="pref_restore_title">Restaurer la base de données</string>
-    <string name="pref_backup_title">Sauvegarder la base de données</string>
+    <string name="pref_backup_warning">Le dossier dans lequel le zip de sauvegarde est copié sera supprimé lorsque l\'application sera désinstallée ou que ses données seront effacées. Déplacez-le dans un endroit sûr avant de désinstaller/effacer les données si vous voulez restaurer la sauvegarde plus tard.</string>
+    <string name="pref_restore_title">Restaurer les données</string>
+    <string name="pref_backup_title">Sauvegarder les données</string>
     <string name="restore_failed">La restauration a échoué. %1$s</string>
     <string name="backup_failed">La sauvegarde a échoué %1$s</string>
-    <string name="backup_successful">Base de données sauvegardée sur un support externe</string>
+    <string name="backup_successful">Données sauvegardées sur un support externe</string>
     <string name="pref_maintenance_header">Maintenance</string>
     <string name="pref_date_format_systemdefault_medium">Par défaut du système (moyen)</string>
     <string name="pref_date_format_systemdefault_short">Par défaut du système (court)</string>
@@ -118,4 +118,12 @@
     <string name="edit_transaction_hint_person">Personne *</string>
     <string name="edit_person_contact_deleted">Le contact précédemment lié est indisponible. Le lien a été retiré.</string>
     <string name="dialog_gotit">Compris</string>
+    <string name="restore_failed_tmpdir">Impossible de créer ou d\'écrire dans le répertoire temporaire %1$s</string>
+    <string name="restore_failed_dbFileMissing">Le fichier de sauvegarde de la base de données « debitum.db » est manquant ou illisible.</string>
+    <string name="restore_not_all_images_restored">Attention : toutes les images du zip de sauvegarde n\'ont pas pu être restaurées. %1$s</string>
+    <string name="edit_transaction_actionmode_title">Image sélectionnée</string>
+    <string name="edit_transaction_image_error_app_not_found">Aucune application pour afficher une image trouvée sur votre appareil.</string>
+    <string name="edit_transaction_image_error_copying">La copie de l\'image dans le répertoire de l\'application a échoué. %1$s</string>
+    <string name="edit_transaction_image_add_title">ajouter une image</string>
+    <string name="edit_transaction_image_delete_desc">supprimer l\'image</string>
 </resources>
