@@ -106,13 +106,13 @@
     <string name="pref_dismiss_filter_summary_false">in der aktuellen Liste bleiben</string>
     <string name="pref_item_returned_filter_title">Standardfilter für Dinge</string>
     <string name="pref_maintenance_header">Wartung</string>
-    <string name="backup_successful">Datenbank in externen Speicher exportiert</string>
+    <string name="backup_successful">Daten in externen Speicher exportiert</string>
     <string name="backup_failed">Sicherung fehlgeschlagen! %1$s</string>
     <string name="restore_failed">Wiederherstellung fehlgeschlagen! %1$s</string>
-    <string name="pref_backup_title">Datenbank sichern</string>
-    <string name="pref_restore_title">Datenbank wiederherstellen</string>
+    <string name="pref_backup_title">Daten sichern</string>
+    <string name="pref_restore_title">Daten wiederherstellen</string>
     <string name="pref_backup_summary">nach %1$s</string>
-    <string name="pref_restore_summary">von früher gesicherter „%1$s“ im externen Speicher</string>
+    <string name="pref_restore_summary">aus einer zuvor gesicherten Zip-Datei</string>
     <string name="pref_backup_warning">Bitte beachte, dass das Verzeichnis, in das die Sicherung abgelegt wird, beim Deinstallieren oder dem Löschen der Anwendungsdaten ebenfalls entfernt wird. Du musst die Datei an einen sicheren Ort verschieben, wenn du sie später wiederherstellen willst!</string>
     <string name="pref_restore_file_not_found">Sicherungsdatei nicht gefunden</string>
     <string name="pref_info_header">Info</string>
@@ -132,4 +132,12 @@
     <string name="pref_date_format_title">Datumsformat</string>
     <string name="dialog_gotit">Verstanden</string>
     <string name="edit_person_contact_deleted">Der verknüpfte Kontakt ist nicht mehr verfügbar. Die Verknüpfung wurde entfernt.</string>
+    <string name="restore_failed_tmpdir">Konnte kein temporäres Verzeichnis anlegen oder nicht hineinschreiben. %1$s</string>
+    <string name="restore_failed_dbFileMissing">Datenbank-Sicherungsdatei \'debitum.db\' fehlt oder ist nicht lesbar.</string>
+    <string name="restore_not_all_images_restored">Achtung: es konnten nicht alle Bilder aus der Sicherungs-Zip wiederhergestellt werden. %1$s</string>
+    <string name="edit_transaction_actionmode_title">Bild ausgewählt</string>
+    <string name="edit_transaction_image_error_app_not_found">Auf deinem Gerät konnte keine App zum Öffnen von Bildern gefunden werden.</string>
+    <string name="edit_transaction_image_error_copying">Das Bild konnte nicht ins Anwendungsverzeichnis kopiert werden! %1$s</string>
+    <string name="edit_transaction_image_add_title">Bild hinzufügen</string>
+    <string name="edit_transaction_image_delete_desc">Bild löschen</string>
 </resources>
