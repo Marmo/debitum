@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.content.Context;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
@@ -26,6 +29,8 @@ import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -42,8 +47,12 @@ import org.ebur.debitum.viewModel.EditTransactionViewModel;
 import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -59,6 +68,8 @@ public class EditTransactionFragment extends DialogFragment {
     public static final String ARG_PRESET_DESCRIPTION = "presetDescription";
     public static final String ARG_PRESET_DATE = "presetDate";
     public static final String ARG_PRESET_RETURNDATE = "presetReturndate";
+
+    private final static String IMAGE_SUBDIR = "transaction-images";
 
     private EditTransactionViewModel viewModel;
     private PersonFilterViewModel personFilterViewModel;
@@ -76,6 +87,32 @@ public class EditTransactionFragment extends DialogFragment {
     private AutoCompleteTextView editDate;
     private TextInputLayout editReturnDateLayout;
     private AutoCompleteTextView editReturnDate;
+    private RecyclerView imageRecyclerView;
+    private EditTransactionImageAdapter imageAdapter;
+
+    // launcher for picking a new image file
+    protected final ActivityResultLauncher<String> addImageLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.GetContent(),
+                    uri -> {
+                        if (uri != null) { // uri is null when the picker was cancelled
+                            File dir = getImageDir();
+                            String filename = Utilities.getNextImageFilename(dir)
+                                    + "."
+                                    + Utilities.getFileExtension(uri, requireContext().getContentResolver());
+                            File destFile = new File(dir, filename);
+                            // copy image to txn dir
+                            try {
+                                Utilities.copyFile(uri,
+                                        destFile,
+                                        requireContext().getContentResolver());
+                                viewModel.addImageLink(destFile.getName());
+                            } catch (IOException e) {
+                                Toast.makeText(requireContext(), getString(R.string.edit_transaction_image_error_copying, e.getMessage()), Toast.LENGTH_LONG).show();
+                                e.printStackTrace();
+                            }
+                        }
+                    });
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -166,6 +203,9 @@ public class EditTransactionFragment extends DialogFragment {
             viewModel.setReturnTimestamp(null);
         });
 
+        setupRecyclerView(root);
+        subscribeToViewModel();
+
         return root;
     }
 
@@ -190,6 +230,45 @@ public class EditTransactionFragment extends DialogFragment {
             editDescription.requestFocus();
             editReturnDateLayout.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void dismiss() {
+        viewModel.deleteOrphanedImageFiles(getImageDir());
+        super.dismiss();
+    }
+
+    private void setupRecyclerView(@NonNull View root) {
+        imageRecyclerView = root.findViewById(R.id.images);
+        imageAdapter = new EditTransactionImageAdapter(new EditTransactionImageAdapter.Diff(), addImageLauncher, imagefile -> {
+            viewModel.deleteImageLink(imagefile.getName()); // the actual file will be deleted by deleteOrphanedImageFiles on save/dismiss
+        });
+        imageRecyclerView.setAdapter(imageAdapter);
+        imageRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+        // load images for existing txns
+        // (for new ones this will set the viewModel's LiveData to an empty list)
+        viewModel.loadImageFilenamesFromDb();
+    }
+
+    private void subscribeToViewModel() {
+        viewModel.getImageFilenames().observe(getViewLifecycleOwner(), this::updateAdapterList);
+    }
+
+    private void updateAdapterList(List<String> filenames) {
+        List<File> images = new ArrayList<>();
+        File imagedir = getImageDir();
+        if (!imagedir.exists()) {
+            imagedir.mkdirs();
+        }
+        for (String filename:filenames) {
+            File file = new File(imagedir, filename);
+            if (file.exists() && file.canRead()) {
+                images.add(file);
+            }
+        }
+        images.add(null); // the null element makes the viewHolder display the "add image" placeholder
+        imageAdapter.submitList(images);
     }
 
     private void setupSpinnerName() {
@@ -358,10 +437,18 @@ public class EditTransactionFragment extends DialogFragment {
             }
 
             // update database
-            if (viewModel.isNewTransaction()) viewModel.insert(transaction);
-            else if (!viewModel.isNewTransaction()) {
+            if (viewModel.isNewTransaction()) {
+                Long id = viewModel.insert(transaction);
+                if (id != null) {
+                    viewModel.synchronizeDbWithViewModel(getImageDir(), id.intValue());
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.error_message_database_access, ""), Toast.LENGTH_LONG).show();
+                    return; //do not close dialog, since nothing was saved
+                }
+            } else if (!viewModel.isNewTransaction()) {
                 transaction.idTransaction = viewModel.getTransaction().transaction.idTransaction;
                 viewModel.update(transaction);
+                viewModel.synchronizeDbWithViewModel(getImageDir());
             }
 
             NavHostFragment.findNavController(this).navigateUp();
@@ -511,5 +598,16 @@ public class EditTransactionFragment extends DialogFragment {
         if(!s.isEmpty()) {
             editAmount.setText(formatArbitraryDecimalInput(s));
         }
+    }
+
+    @NonNull
+    private File getImageDir() {
+        return getImageDir(requireContext());
+    }
+
+    // static version for use in SettingsFragment
+    @NonNull
+    public static File getImageDir(@NonNull Context context) {
+        return new File(context.getExternalFilesDir(null), IMAGE_SUBDIR);
     }
 }

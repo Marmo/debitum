@@ -2,7 +2,6 @@ package org.ebur.debitum.database;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.ParcelFileDescriptor;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,24 +13,23 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.Utilities;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(
-        entities = {Transaction.class, Person.class},
-        version = 4,
+        entities = {Transaction.class, Person.class, Image.class},
+        version = 5,
         exportSchema = true
 )
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract TransactionDao transactionDao();
     public abstract PersonDao personDao();
+    public abstract ImageDao imageDao();
 
     // define a singleton AppDatabase to prevent having multiple instances of the database opened at the same time
     private static volatile AppDatabase INSTANCE;
@@ -69,6 +67,13 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
+    static final Migration MIGRATION_4_5 = new Migration(4, 5) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE image (id_transaction INTEGER NOT NULL, filename TEXT NOT NULL, PRIMARY KEY (id_transaction, filename) ON CONFLICT IGNORE)");
+        }
+    };
+
     /* returns the singleton. It'll create the database the first time it's accessed, using Room's
      * database builder to create a RoomDatabase object
      */
@@ -79,7 +84,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "transaction_database")
                             .setJournalMode(JournalMode.TRUNCATE) // to make export easier, might have negative implications on write performance
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
                             .build();
                     INSTANCE.context = context;
                 }
@@ -104,7 +109,7 @@ public abstract class AppDatabase extends RoomDatabase {
             if(backupFile.getParentFile() != null
                     && (backupFile.getParentFile().exists()
                     || backupFile.getParentFile().mkdirs())) {
-                copyFile(dbFile, backupFile);
+                Utilities.copyFile(dbFile, backupFile);
                 success = true;
             }
         } catch (IOException e) {
@@ -123,7 +128,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         try {
             if(backupFile.exists()) {
-                copyFile(backupFile, dbFile);
+                Utilities.copyFile(backupFile, dbFile);
                 success = true;
             } else {
                 message = backupFileNotFoundMessage;
@@ -143,7 +148,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         try {
             if(true) { // TODO check if uri is valid
-                copyFile(uri, dbFile);
+                Utilities.copyFile(uri, dbFile, INSTANCE.context.getContentResolver());
                 success = true;
             } else {
                 message = backupFileNotFoundMessage;
@@ -153,25 +158,6 @@ public abstract class AppDatabase extends RoomDatabase {
         } finally {
             if(onBackupRestoreFinishListener != null)
                 onBackupRestoreFinishListener.onFinished(success, message);
-        }
-    }
-
-    // TODO cleanup duplicate code in copy methods
-    private static void copyFile(File source, File dest) throws IOException {
-        // try-with-resources
-        try (FileChannel sourceChannel = new FileInputStream(source).getChannel();
-             FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
-            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
-        }
-    }
-
-    private static void copyFile(Uri source, File dest) throws IOException {
-        // try-with-resources
-        try (ParcelFileDescriptor pfdSource = INSTANCE.context.getContentResolver().
-                openFileDescriptor(source, "r");
-             FileChannel sourceChannel = new FileInputStream(pfdSource.getFileDescriptor()).getChannel();
-             FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
-            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
         }
     }
 

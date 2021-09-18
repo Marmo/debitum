@@ -15,7 +15,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/miDelete"
-        android:icon="@drawable/ic_baseline_delete_outline_24"
+        android:icon="@drawable/ic_baseline_delete_onsurface_24"
         android:title="@string/actionmode_delete"
         app:showAsAction="ifRoom" />
 </menu>

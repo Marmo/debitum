@@ -21,9 +21,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                android:layout_marginVertical="@dimen/activity_vertical_margin">
+                android:layout_height="0dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/spinner_name"
@@ -201,6 +199,17 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/images"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dialog_vertical_spacing"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_returndate"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_image_list"/>
+
                 <androidx.constraintlayout.widget.Barrier
                     android:id="@+id/barrier_buttons"
                     android:layout_width="wrap_content"
@@ -211,6 +220,7 @@
 
                 <!--This is needed so that everything can be revealed from behind the keyboard-->
                 <FrameLayout
+                    android:id="@+id/frameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     app:layout_constraintTop_toBottomOf="@id/edit_returndate"

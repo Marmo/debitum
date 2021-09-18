@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/miDeleteImage"
+        android:title="@string/edit_transaction_image_delete_desc"
+        android:icon="@drawable/ic_baseline_delete_onsurface_24"/>
+</menu>
