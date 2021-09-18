@@ -1,7 +1,10 @@
-## 1.5.0/13
+## 1.5.1/14
+- rearrange packages
+  - split Utilities (file, image, ...)
+  - group ui elements of fragments (fragment, adapter, viewHolder) in separate packages
+  
+## 1.6.0/15
 - add scrollbar showing the date/month/year while scrolling the transaction list
-- images for transactions (#21)
-  - replace delete btn with long-click popup menu
 
 ## later / unassigned
 - swipe entry to mark as returned or delete
@@ -19,7 +22,7 @@
 
 
 
-# release-checklist (1.4.1/12)
+# release-checklist (1.5.0/13)
 - [x] check github milestone
 - [x] update fastlane changelogs (2x)
 - [x] update CHANGELOG.md

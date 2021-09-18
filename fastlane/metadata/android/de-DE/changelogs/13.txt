@@ -1,0 +1,7 @@
+v1.5.0
+- Transaktionen können Bilder als Anhönge erhalten
+- wenn beim Erstellen einer Transaktion genau eine Transaktion ausgewählt ist, wird deren Inhalt als Vorlage verwendet
+- die Datei zur Wiederherstellung kann vom Nutzer ausgewählt werden
+- Sicherungsdateien werden anhand des Datums benannt (nicht mehr überschrieben)
+- Sicherungen sind nun eine Zip-Datei, die die Datenbank und alle Bild-Anhänge beinhaltet
+- Übersetzungen aktualisiert
