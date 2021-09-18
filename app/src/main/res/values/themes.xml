@@ -35,7 +35,7 @@
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.Debitum.AlertDialog</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
         <item name="actionModeStyle">@style/Widget.Debitum.ActionMode</item>
-        <item name="actionModeCloseDrawable">@drawable/ic_baseline_close_control_24</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_baseline_close_onsurface_24</item>
         <item name="windowActionModeOverlay">true</item>
     </style>
 
@@ -47,7 +47,7 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">?attr/colorSurface</item>
         <item name="android:actionMenuTextColor">?attr/colorOnPrimary</item>
-        <item name="android:actionModeCloseDrawable">@drawable/ic_baseline_close_onprimary_24</item>
+        <item name="android:actionModeCloseDrawable">@drawable/ic_baseline_close_onsurface_24</item>
         <item name="android:windowActionModeOverlay">true</item>
     </style>
 </resources>

@@ -7,6 +7,8 @@
         <entry key="app/src/main/res/drawable/ic_baseline_close_control_24.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_baseline_close_onprimary_24.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_baseline_close_onsecondary_24.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/ic_baseline_close_onsurface_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_onSurface_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/fragment_edit_transaction.xml" value="0.21" />
         <entry key="app/src/main/res/layout/item_image_list.xml" value="0.66" />

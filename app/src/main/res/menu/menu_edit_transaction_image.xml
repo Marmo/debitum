@@ -3,5 +3,5 @@
 
     <item android:id="@+id/miDeleteImage"
         android:title="@string/edit_transaction_image_delete_desc"
-        android:icon="@drawable/ic_baseline_delete_outline_24"/>
+        android:icon="@drawable/ic_baseline_delete_onsurface_24"/>
 </menu>
