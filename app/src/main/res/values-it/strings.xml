@@ -11,14 +11,14 @@
     <string name="pref_guide_title">Guida rapida</string>
     <string name="pref_info_header">Info</string>
     <string name="pref_restore_file_not_found">File di backup non trovato</string>
-    <string name="pref_backup_warning">La cartella in cui viene copiato il backup della banca dati sarà eliminata quando l\'applicazione viene disinstallata o i suoi dati cancellati. Spostala in un posto sicuro prima di disinstallare/cancellare i dati se vuoi ripristinare i dati in seguito.</string>
-    <string name="pref_restore_summary">da una banca dati di cui si è fatto il backup in precedenza</string>
+    <string name="pref_backup_warning">La cartella in cui viene copiato lo zip di backup sarà eliminata quando l\'applicazione viene disinstallata o i suoi dati eliminati. Spostala in un posto sicuro prima di disinstallare/eliminare i dati se vuoi ripristinare il backup in seguito.</string>
+    <string name="pref_restore_summary">dal file zip di backup creato in precedenza</string>
     <string name="pref_backup_summary">in %1$s</string>
-    <string name="pref_restore_title">Ripristina la banca dati</string>
-    <string name="pref_backup_title">Fai backup della banca dati</string>
+    <string name="pref_restore_title">Ripristina i dati</string>
+    <string name="pref_backup_title">Fai il backup dei dati</string>
     <string name="restore_failed">Ripristino fallito. %1$s</string>
     <string name="backup_failed">Backup fallito %1$s</string>
-    <string name="backup_successful">Backup della banca dati su una memoria esterna</string>
+    <string name="backup_successful">Backup dei dati su una memoria esterna</string>
     <string name="pref_maintenance_header">Manutenzione</string>
     <string name="pref_date_format_systemdefault_long">Predefinito sistema (lungo)</string>
     <string name="pref_date_format_systemdefault_medium">Predefinito sistema (medio)</string>
@@ -118,4 +118,12 @@
 \n%1$s</string>
     <string name="edit_person_contact_deleted">Il contatto precedentemente collegato non è disponibile. Il collegamento è stato rimosso.</string>
     <string name="dialog_gotit">Capito</string>
+    <string name="restore_failed_tmpdir">Impossibile creare o scrivere nella directory temporanea %1$s</string>
+    <string name="restore_failed_dbFileMissing">Il file di backup della banca dati «debitum.db» è mancante o illeggibile.</string>
+    <string name="restore_not_all_images_restored">Attenzione: non tutte le immagini dello zip di backup possono essere ripristinate. %1$s</string>
+    <string name="edit_transaction_actionmode_title">Immagine selezionata</string>
+    <string name="edit_transaction_image_error_app_not_found">Nessuna app per mostrare un\'immagine trovata sul tuo dispositivo.</string>
+    <string name="edit_transaction_image_error_copying">Copia dell\'immagine nella directory dell\'applicazione fallita. %1$s</string>
+    <string name="edit_transaction_image_add_title">aggiungi un\'immagine</string>
+    <string name="edit_transaction_image_delete_desc">elimina l\'immagine</string>
 </resources>
