@@ -21,7 +21,7 @@
         </activity>
         <!-- https://developer.android.com/reference/androidx/core/content/FileProvider -->
         <provider
-            android:authorities="org.ebur.debitum.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
