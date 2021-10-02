@@ -24,8 +24,9 @@ import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.BuildConfig;
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.AppDatabase;
+import org.ebur.debitum.util.FileUtils;
+import org.ebur.debitum.util.Utilities;
 
 import java.io.File;
 import java.io.IOException;
@@ -195,7 +196,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             if (successDb) {
                 info = getString(R.string.backup_successful);
                 try {
-                    Utilities.zip(filesToZip, zipFile);
+                    FileUtils.zip(filesToZip, zipFile);
                     successImg = true;
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -245,11 +246,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 // abort with error message
                 String info = getString(R.string.restore_failed_tmpdir, tmpDir.getAbsolutePath());
                 showSnackbar(getString(R.string.restore_failed, info));
-                Utilities.deleteDir(tmpDir);
+                FileUtils.deleteDir(tmpDir);
                 return;
             }
             // unzip file to tmpDir
-            Utilities.unzip(uriZip, tmpDir, requireContext());
+            FileUtils.unzip(uriZip, tmpDir, requireContext());
 
             // note: only the db file is checked here. Any orphaned files will
             // be deleted when the EditTransaction Dialog is closed the next time
@@ -257,7 +258,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 // abort with error message
                 String info = getString(R.string.restore_failed_dbFileMissing);
                 showSnackbar(getString(R.string.restore_failed, info));
-                Utilities.deleteDir(tmpDir);
+                FileUtils.deleteDir(tmpDir);
                 return;
             }
 
@@ -273,23 +274,23 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     // when the EditTRansaction dialog is closed (save/dismiss) the next time
                     for (File file:tmpDir.listFiles()) {
                         try {
-                            Utilities.copyFile(file, new File(imageDir, file.getName()));
+                            FileUtils.copyFile(file, new File(imageDir, file.getName()));
                         } catch (IOException e) {
                             // show warning and continue with next file
                             e.printStackTrace();
                             showSnackbar(getString(R.string.restore_not_all_images_restored, e.getMessage()));
                         }
                     }
-                    Utilities.deleteDir(tmpDir);
+                    FileUtils.deleteDir(tmpDir);
                     restartApp();
                 } else {
-                    Utilities.deleteDir(tmpDir);
+                    FileUtils.deleteDir(tmpDir);
                     showSnackbar(getString(R.string.restore_failed, message));
                 }
             });
         } catch (IOException e) {
             e.printStackTrace();
-            Utilities.deleteDir(tmpDir);
+            FileUtils.deleteDir(tmpDir);
             showSnackbar(getString(R.string.restore_failed, e.getMessage()));
         }
     }

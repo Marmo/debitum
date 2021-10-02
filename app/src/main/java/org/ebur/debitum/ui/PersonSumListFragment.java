@@ -28,10 +28,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
+import org.ebur.debitum.util.ColorUtils;
 import org.ebur.debitum.viewModel.ContactsHelper;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
@@ -95,7 +95,7 @@ public class PersonSumListFragment
         if(pwtList == null) return;
 
         updateTotalHeader(PersonWithTransactions.getSum(pwtList));
-        @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
+        @ColorInt int secondaryColorRGB = ColorUtils.getAttributeColor(requireContext(), R.attr.colorSecondary);
         // create PersonWithAvatar instance for every PersonWithTransactions
         // TODO would be great to determie which avatars need to be recalculated and only submit those
         adapter.submitList(

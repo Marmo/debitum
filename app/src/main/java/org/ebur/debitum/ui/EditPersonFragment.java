@@ -31,8 +31,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.transition.MaterialContainerTransform;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
+import org.ebur.debitum.util.ColorUtils;
 import org.ebur.debitum.viewModel.ContactsHelper;
 import org.ebur.debitum.viewModel.EditPersonViewModel;
 import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
@@ -251,7 +251,7 @@ public class EditPersonFragment extends DialogFragment {
 
             // this will yield either the photo (if uri != null and a photo is there) or a
             // generated color based on the person's color index
-            @ColorInt int secondaryColorRGB = Utilities.getAttributeColor(requireContext(), R.attr.colorSecondary);
+            @ColorInt int secondaryColorRGB = ColorUtils.getAttributeColor(requireContext(), R.attr.colorSecondary);
             avatarDrawable = contactsHelper.makeAvatarDrawable(
                     contactsHelper.getContactImage(uri),
                     viewModel.getEditedPerson().getColor(secondaryColorRGB)

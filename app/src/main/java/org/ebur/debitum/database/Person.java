@@ -11,7 +11,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import org.ebur.debitum.Utilities;
+import org.ebur.debitum.util.ColorUtils;
 
 @Entity(tableName = "person")
 public class Person implements Parcelable {
@@ -72,7 +72,7 @@ public class Person implements Parcelable {
     }
 
     public void calcuateColorIndex() {
-        String md5String = Utilities.md5Hash(name);
+        String md5String = ColorUtils.md5Hash(name);
         assert md5String != null;
         colorIndex = Math.abs(md5String.hashCode()%NR_OF_COLORS);
     }
@@ -85,7 +85,7 @@ public class Person implements Parcelable {
      **/
     @ColorInt
     public int getColor(@ColorInt int baseColor) {
-        return Utilities.changeHue(colorIndex*360f/NR_OF_COLORS, baseColor);
+        return ColorUtils.changeHue(colorIndex*360f/NR_OF_COLORS, baseColor);
     }
 
     // -------------------------

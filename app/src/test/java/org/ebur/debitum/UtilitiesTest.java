@@ -1,10 +1,11 @@
 package org.ebur.debitum;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import org.ebur.debitum.util.Utilities;
+import org.junit.Before;
+import org.junit.Test;
 
 public class UtilitiesTest {
 

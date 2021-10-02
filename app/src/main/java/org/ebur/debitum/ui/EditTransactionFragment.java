@@ -39,10 +39,11 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
+import org.ebur.debitum.util.FileUtils;
+import org.ebur.debitum.util.Utilities;
 import org.ebur.debitum.viewModel.EditTransactionViewModel;
 import org.ebur.debitum.viewModel.NewPersonRequestViewModel;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
@@ -97,13 +98,13 @@ public class EditTransactionFragment extends DialogFragment {
                     uri -> {
                         if (uri != null) { // uri is null when the picker was cancelled
                             File dir = getImageDir();
-                            String filename = Utilities.getNextImageFilename(dir)
+                            String filename = FileUtils.getNextImageFilename(dir)
                                     + "."
-                                    + Utilities.getFileExtension(uri, requireContext().getContentResolver());
+                                    + FileUtils.getFileExtension(uri, requireContext().getContentResolver());
                             File destFile = new File(dir, filename);
                             // copy image to txn dir
                             try {
-                                Utilities.copyFile(uri,
+                                FileUtils.copyFile(uri,
                                         destFile,
                                         requireContext().getContentResolver());
                                 viewModel.addImageLink(destFile.getName());

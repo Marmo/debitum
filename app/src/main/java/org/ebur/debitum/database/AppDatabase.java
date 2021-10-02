@@ -13,7 +13,7 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import org.ebur.debitum.R;
-import org.ebur.debitum.Utilities;
+import org.ebur.debitum.util.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -109,7 +109,7 @@ public abstract class AppDatabase extends RoomDatabase {
             if(backupFile.getParentFile() != null
                     && (backupFile.getParentFile().exists()
                     || backupFile.getParentFile().mkdirs())) {
-                Utilities.copyFile(dbFile, backupFile);
+                FileUtils.copyFile(dbFile, backupFile);
                 success = true;
             }
         } catch (IOException e) {
@@ -128,7 +128,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         try {
             if(backupFile.exists()) {
-                Utilities.copyFile(backupFile, dbFile);
+                FileUtils.copyFile(backupFile, dbFile);
                 success = true;
             } else {
                 message = backupFileNotFoundMessage;
@@ -148,7 +148,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         try {
             if(true) { // TODO check if uri is valid
-                Utilities.copyFile(uri, dbFile, INSTANCE.context.getContentResolver());
+                FileUtils.copyFile(uri, dbFile, INSTANCE.context.getContentResolver());
                 success = true;
             } else {
                 message = backupFileNotFoundMessage;
