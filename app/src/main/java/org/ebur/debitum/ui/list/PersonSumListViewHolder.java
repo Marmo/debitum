@@ -1,4 +1,4 @@
-package org.ebur.debitum.ui;
+package org.ebur.debitum.ui.list;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

@@ -25,6 +25,7 @@ import com.google.android.material.transition.MaterialFadeThrough;
 import org.ebur.debitum.BuildConfig;
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.AppDatabase;
+import org.ebur.debitum.ui.edit_transaction.EditTransactionFragment;
 import org.ebur.debitum.util.FileUtils;
 import org.ebur.debitum.util.Utilities;
 

@@ -1,7 +1,4 @@
 ## 1.5.1/14
-- rearrange packages
-  - split Utilities (file, image, ...)
-  - group ui elements of fragments (fragment, adapter, viewHolder) in separate packages
   
 ## 1.6.0/15
 - add scrollbar showing the date/month/year while scrolling the transaction list

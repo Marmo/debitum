@@ -1,4 +1,4 @@
-package org.ebur.debitum.ui;
+package org.ebur.debitum.ui.list;
 
 import android.view.ViewGroup;
 

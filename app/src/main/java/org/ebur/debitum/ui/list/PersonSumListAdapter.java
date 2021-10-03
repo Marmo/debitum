@@ -1,5 +1,6 @@
-package org.ebur.debitum.ui;
+package org.ebur.debitum.ui.list;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 
@@ -47,6 +48,7 @@ public class PersonSumListAdapter
             return oldItem.pwt.person.idPerson == newItem.pwt.person.idPerson;
         }
 
+        @SuppressLint("DiffUtilEquals")
         @Override
         public boolean areContentsTheSame(@NonNull PersonWithAvatar oldItem, @NonNull PersonWithAvatar newItem) {
             // changes in avatar are ONLY relevant if the contacts permission is granted while the

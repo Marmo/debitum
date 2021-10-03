@@ -1,4 +1,4 @@
-package org.ebur.debitum.ui;
+package org.ebur.debitum.ui.list;
 
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
@@ -31,6 +31,8 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
+import org.ebur.debitum.ui.EditPersonFragment;
+import org.ebur.debitum.ui.edit_transaction.EditTransactionFragment;
 import org.ebur.debitum.util.ColorUtils;
 import org.ebur.debitum.viewModel.ContactsHelper;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;

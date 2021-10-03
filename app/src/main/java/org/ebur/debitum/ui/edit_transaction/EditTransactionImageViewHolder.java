@@ -1,4 +1,4 @@
-package org.ebur.debitum.ui;
+package org.ebur.debitum.ui.edit_transaction;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;

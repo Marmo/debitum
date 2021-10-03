@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/people_dest"
-        android:name="org.ebur.debitum.ui.PersonSumListFragment"
+        android:name="org.ebur.debitum.ui.list.PersonSumListFragment"
         android:label="@string/title_fragment_person_sum_list"
         tools:layout="@layout/fragment_person_sum_list">
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/money_dest"
-        android:name="org.ebur.debitum.ui.TransactionListFragment"
+        android:name="org.ebur.debitum.ui.list.TransactionListFragment"
         android:label="@string/title_fragment_transaction_list_money"
         tools:layout="@layout/fragment_transaction_list">
         <argument
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/item_dest"
-        android:name="org.ebur.debitum.ui.ItemTransactionListFragment"
+        android:name="org.ebur.debitum.ui.list.ItemTransactionListFragment"
         android:label="@string/title_fragment_transaction_list_items"
         tools:layout="@layout/fragment_transaction_list" >
         <argument
@@ -64,7 +64,7 @@
     </dialog>
     <dialog
         android:id="@+id/editTransaction_dest"
-        android:name="org.ebur.debitum.ui.EditTransactionFragment"
+        android:name="org.ebur.debitum.ui.edit_transaction.EditTransactionFragment"
         android:label="@string/title_fragment_edit_transaction"
         tools:layout="@layout/fragment_edit_transaction" >
         <argument

@@ -1,4 +1,4 @@
-package org.ebur.debitum.ui;
+package org.ebur.debitum.ui.list;
 
 import android.os.Bundle;
 import android.view.ActionMode;
@@ -87,7 +87,7 @@ public abstract class AbstractBaseListFragment
      * EditTransactionFragment.ARG_PRESET_DATE
      * EditTransactionFragment.ARG_PRESET_RETURNDATE
      */
-    @Nullable abstract Bundle getPresetsFromSelection();
+    @Nullable public abstract Bundle getPresetsFromSelection();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

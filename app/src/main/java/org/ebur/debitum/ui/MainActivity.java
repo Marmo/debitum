@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.ebur.debitum.R;
+import org.ebur.debitum.ui.list.AbstractBaseListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package org.ebur.debitum.ui;
+package org.ebur.debitum.ui.list;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +31,9 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
+import org.ebur.debitum.ui.EditPersonFragment;
+import org.ebur.debitum.ui.SettingsFragment;
+import org.ebur.debitum.ui.edit_transaction.EditTransactionFragment;
 import org.ebur.debitum.util.Utilities;
 import org.ebur.debitum.viewModel.PersonFilterViewModel;
 import org.ebur.debitum.viewModel.TransactionListViewModel;

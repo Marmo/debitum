@@ -1,4 +1,4 @@
-package org.ebur.debitum.ui;
+package org.ebur.debitum.ui.edit_transaction;
 
 import android.content.Context;
 import android.graphics.drawable.TransitionDrawable;
@@ -42,6 +42,7 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
+import org.ebur.debitum.ui.TextInputLayoutErrorResetter;
 import org.ebur.debitum.util.FileUtils;
 import org.ebur.debitum.util.Utilities;
 import org.ebur.debitum.viewModel.EditTransactionViewModel;

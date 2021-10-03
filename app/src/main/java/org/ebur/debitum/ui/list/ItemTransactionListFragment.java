@@ -1,4 +1,4 @@
-package org.ebur.debitum.ui;
+package org.ebur.debitum.ui.list;
 
 
 import android.content.SharedPreferences;
@@ -23,6 +23,7 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.database.TransactionWithPerson;
+import org.ebur.debitum.ui.SettingsFragment;
 import org.ebur.debitum.viewModel.ItemReturnedFilterViewModel;
 
 import java.util.List;
