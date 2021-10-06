@@ -113,14 +113,14 @@
     <string name="pref_dismiss_filter_summary_false">Permanecer na lista atual</string>
     <string name="pref_item_returned_filter_title">Filtro padrão da lista de itens</string>
     <string name="pref_maintenance_header">Manutenção</string>
-    <string name="backup_successful">A base de dados foi salva no armazenamento</string>
+    <string name="backup_successful">Os dados foram salvos no armazenamento externo</string>
     <string name="backup_failed">O Backup falhou %1$s</string>
     <string name="restore_failed">A restauração falhou. %1$s</string>
-    <string name="pref_backup_title">Fazer um Backup da base de dados</string>
-    <string name="pref_restore_title">Restaurar a base de dados</string>
+    <string name="pref_backup_title">Dados da cópia de segurança</string>
+    <string name="pref_restore_title">Restaurar dados</string>
     <string name="pref_backup_summary">para %1$s</string>
-    <string name="pref_restore_summary">de arquivo \"%1$s\" no armazenamento</string>
-    <string name="pref_backup_warning">A pasta onde o Backup com a base de dados é salvo será excluída se o App for desinstalado ou dados dele forem excluídos. Guardá-lo num lugar seguro (se quiser usá-los no futuro) antes de desinstalar/excluir seus dados.</string>
+    <string name="pref_restore_summary">do arquivo zip da cópia de segurança criado anteriormente</string>
+    <string name="pref_backup_warning">A pasta para a qual o zip da cópia de segurança é copiado será excluída quando o aplicativo for desinstalado ou seus dados forem apagados. Mova-o para um local seguro antes de desinstalar/limpar dados se você desejar restaurar o backup mais tarde.</string>
     <string name="pref_restore_file_not_found">Arquivo do Backup não encontrado</string>
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Guia Prático</string>
@@ -139,4 +139,12 @@
     <string name="pref_date_format_title">Formato da data</string>
     <string name="edit_person_contact_deleted">O contato previamente vinculado não está disponível. O link foi removido.</string>
     <string name="dialog_gotit">Entendi</string>
+    <string name="edit_transaction_actionmode_title">Imagem selecionada</string>
+    <string name="edit_transaction_image_error_app_not_found">Nenhum aplicativo para mostrar a imagem foi encontrado em seu dispositivo.</string>
+    <string name="restore_not_all_images_restored">Aviso: nem todas as imagems do zip da cópia de segurança puderam ser restauradas. %1$s</string>
+    <string name="edit_transaction_image_delete_desc">deletar imagem</string>
+    <string name="edit_transaction_image_add_title">adicionar imagem</string>
+    <string name="edit_transaction_image_error_copying">A cópia da imagem para o diretório do aplicativo falhou. %1$s</string>
+    <string name="restore_failed_tmpdir">Não foi possível criar ou escrever para um diretório tempoprário %1$s</string>
+    <string name="restore_failed_dbFileMissing">A cópia de segurança do banco de dados \'debitum.db\' não foi encontrada ou está ilegível.</string>
 </resources>
