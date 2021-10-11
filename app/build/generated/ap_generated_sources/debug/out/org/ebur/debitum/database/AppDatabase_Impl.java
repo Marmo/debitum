@@ -131,7 +131,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         final TableInfo _infoImage = new TableInfo("image", _columnsImage, _foreignKeysImage, _indicesImage);
         final TableInfo _existingImage = TableInfo.read(_db, "image");
         if (! _infoImage.equals(_existingImage)) {
-          return new RoomOpenHelper.ValidationResult(false, "image(org.ebur.debitum.database.ColorUtils).\n"
+          return new RoomOpenHelper.ValidationResult(false, "image(org.ebur.debitum.database.Image).\n"
                   + " Expected:\n" + _infoImage + "\n"
                   + " Found:\n" + _existingImage);
         }
