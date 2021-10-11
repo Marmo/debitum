@@ -1,3 +1,8 @@
+# v1.5.1
+- translations update
+- internal refactoring
+- fix duplicate file provider authority when having debug and release build installed in parallel (#62) 
+
 # v1.5.0
 - transactions can have images attached (#21)
 - when creating a new transaction and exactly one row is selected, its contents is used as preset (#40)

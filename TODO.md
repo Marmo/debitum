@@ -1,5 +1,3 @@
-## 1.5.1/14
-  
 ## 1.6.0/15
 - add scrollbar showing the date/month/year while scrolling the transaction list
 
@@ -19,7 +17,7 @@
 
 
 
-# release-checklist (1.5.0/13)
+# release-checklist (1.5.1/14)
 - [x] check github milestone
 - [x] update fastlane changelogs (2x)
 - [x] update CHANGELOG.md
@@ -29,5 +27,5 @@
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage
 - [x] check build.gradle version+version code
-- [] build release (!) apk, rename debitum-x.x.x.apk
-- [] tag release
+- [x] build release (!) apk, rename debitum-x.x.x.apk
+- [x] tag release
