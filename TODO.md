@@ -1,5 +1,5 @@
-## 1.6.0/15
-- add scrollbar showing the date/month/year while scrolling the transaction list
+## 1.7.0/??
+- add scrollbar showing the date/month/year while scrolling the transaction list OR add bar that shows the date and total debt up to the topmost visible transaction
 
 ## later / unassigned
 - swipe entry to mark as returned or delete
