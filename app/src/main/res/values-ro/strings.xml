@@ -1,2 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="pref_maintenance_header">Întreținere</string>
+    <string name="button_label_save">Salvați</string>
+    <string name="delete_dialog_confirm">Ștergeți</string>
+    <string name="dialog_cancel">Anulați</string>
+    <string name="dialog_gotit">Am înțeles</string>
+    <string name="error_message_database_access">Eroare în încercarea de a accesa baza de date. Vă rugăm să încercați din nou.
+\n%1$s</string>
+    <string name="required_helper_text">* Necesar</string>
+    <string name="actionmode_return_money">Creați tranzacția de returnare</string>
+    <string name="actionmode_edit">Editați</string>
+    <string name="actionmode_delete">Ștergeți</string>
+    <plurals name="actionmode_selected">
+        <item quantity="one">%d selectat</item>
+        <item quantity="few">%d selectate</item>
+        <item quantity="other">%d de selectat</item>
+    </plurals>
+    <string name="actionmode_sum">Sumă: %1$s</string>
+    <string name="fab_content_description">Creați o tranzacție</string>
+    <string name="bottom_nav_people">Oameni</string>
+    <string name="bottom_nav_money">Bani</string>
+    <string name="bottom_nav_items">Elemente</string>
+    <string name="bottom_nav_settings">Setări</string>
+    <string name="database_empty">Încă nu s-a înregistrat nimic.
+\nCreați o nouă tranzacție utilizând butonul \"+\" de mai jos.</string>
+    <string name="title_fragment_person_sum_list">Oameni</string>
+    <string name="person_sum_list_you_owe">ești dator</string>
+    <string name="person_sum_list_no_debt">fără datorii</string>
+    <string name="person_sum_list_you_lent">ai împrumutat</string>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="one">Ștergeți %d persoană\?</item>
+        <item quantity="few">Ștergeți %d persoane\?</item>
+        <item quantity="other">Ștergeți %d de persoane\?</item>
+    </plurals>
+    <string name="title_fragment_transaction_list_money">Bani</string>
+    <string name="title_fragment_transaction_list_items">Elemente</string>
+    <string name="transaction_list_gave">a dat</string>
+    <string name="transaction_list_received">primit</string>
+    <string name="toolbar_edit_person">Editează persoana</string>
+    <string name="header_label">Total</string>
+    <string name="item_filter_all">Arată tot</string>
+    <string name="item_filter_unreturned">Arată nereturnat</string>
+    <string name="item_filter_returned">Arată returnat</string>
+    <plurals name="transaction_list_dialog_delete_title">
+        <item quantity="one">Ștergeți tranzacția %d\?</item>
+        <item quantity="few">Ștergeți %d tranzacții\?</item>
+        <item quantity="other">Ștergeți %d de tranzacții\?</item>
+    </plurals>
+    <string name="transaction_list_dialog_delete_text">Acest lucru nu poate fi anulat.</string>
+    <string name="title_fragment_edit_transaction_create">Creați o tranzacție</string>
+    <string name="edit_transaction_hint_amount_money">Sumă *</string>
+    <string name="edit_transaction_hint_amount_item">Număr de elemente *</string>
+    <string name="edit_transaction_error_enter_amount">Vă rugăm să introduceți o sumă.</string>
+    <string name="edit_transaction_hint_desc">Descriere</string>
+    <string name="edit_transaction_wrong_amount_format">Ceva nu este în regulă cu formatul sumei tale.</string>
+    <string name="edit_transaction_gave">a dat</string>
+    <string name="edit_transaction_received">primit</string>
+    <string name="edit_transaction_snackbar_max_amount">Max. 9 cifre permise</string>
+    <string name="edit_transaction_suspicious_return_date_message">Data de returnare stabilită (%1$s) este anterioară tranzacției inițiale. Se utilizează oricum\?</string>
+    <string name="edit_transaction_use_suspicious_return_date">data utilizării</string>
+    <string name="edit_transaction_image_delete_desc">șterge imaginea</string>
+    <string name="edit_transaction_image_add_title">adăugați o imagine</string>
+    <string name="edit_transaction_image_error_app_not_found">Nicio aplicație pentru a afișa o imagine găsită pe dispozitiv.</string>
+    <string name="edit_transaction_actionmode_title">Imagine selectată</string>
+    <string name="title_fragment_edit_person">Editare persoană</string>
+    <string name="edit_person_name">Nume</string>
+    <string name="error_message_name_exists">%1$s există deja. Vă rugăm să introduceți un alt nume.</string>
+    <string name="edit_person_note">Notă</string>
+    <string name="edit_person_hint_linked_contact">contact asociat</string>
+    <string name="edit_person_hint_no_linked_contact">Niciun contact asociat</string>
+    <string name="edit_person_helper_linked_contact">Indisponibil din cauza permisiunilor lipsă</string>
+    <string name="title_fragment_settings">Setări</string>
+    <string name="pref_dismiss_filter_summary_true">Înapoi la lista de persoane</string>
+    <string name="pref_item_returned_filter_title">Filtru standard pentru lista de articole</string>
+    <string name="pref_date_format_title">Formatul datei</string>
+    <string name="pref_date_format_systemdefault_short">Sistem implicit (scurt)</string>
+    <string name="pref_date_format_systemdefault_long">Valoarea implicită a sistemului (lung)</string>
+    <string name="backup_failed">Backup eșuat %1$s</string>
+    <string name="restore_failed">Restaurarea a eșuat. %1$s</string>
+    <string name="restore_failed_tmpdir">Nu s-a putut crea sau scrie în directorul temporar %1$s</string>
+    <string name="pref_backup_title">Datele de rezervă</string>
+    <string name="pref_restore_title">Restaurați datele</string>
+    <string name="pref_backup_summary">la %1$s</string>
+    <string name="pref_restore_summary">din fișierul zip de backup creat anterior</string>
+    <string name="pref_info_header">Informații</string>
+    <string name="pref_guide_title">Ghid rapid</string>
+    <string name="pref_github_title">GitHub</string>
+    <string name="pref_github_summary">Găsiți și îmbunătățiți codul sursă, raportați probleme și idei</string>
+    <string name="restore_confirm">Suprascrieți</string>
+    <string name="restore_confirm_text">Suprascrieți toate datele existente cu datele din copia de rezervă\?
+\nAplicația va fi apoi repornită.</string>
+    <string name="restore_confirm_title">Restaurarea din copie de rezervă</string>
+    <string name="pref_version">Versiunea %1$s</string>
+    <string name="pref_licenses_title">Licențe libere pentru terți</string>
+    <string name="actionmode_return_item">Marcați ca fiind returnat</string>
+    <string name="dismiss_filter">respingeți filtrul</string>
+    <string name="person_sum_list_dialog_delete_text">Acest lucru nu poate fi anulat și va șterge și tranzacțiile către și dinspre acestea.</string>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="one">%d persoană ștearsă</item>
+        <item quantity="few">%d persoane șterse</item>
+        <item quantity="other">%d de persoane șterse</item>
+    </plurals>
+    <string name="toolbar_create_person">Creați o persoană</string>
+    <string name="item_filter">Filtrați după starea returnată</string>
+    <plurals name="transaction_list_snackbar_deleted">
+        <item quantity="one">%d tranzacție ștearsă</item>
+        <item quantity="few">%d tranzacții șterse</item>
+        <item quantity="other">%d de tranzacții șterse</item>
+    </plurals>
+    <string name="edit_transaction_date_dialog_title">Selectați data</string>
+    <string name="edit_transaction_hint_date">Data</string>
+    <string name="edit_transaction_hint_returndate">Data returnării</string>
+    <string name="edit_transaction_suspicious_return_date_title">Dată de returnare suspectă</string>
+    <string name="title_fragment_edit_transaction">Editarea tranzacției</string>
+    <string name="edit_transaction_error_select_name">Vă rugăm să selectați o persoană.</string>
+    <string name="debt_settlement_money_description">Decontarea datoriei pentru \"%1$s\" de la %2$s</string>
+    <string name="edit_transaction_hint_person">Persoană *</string>
+    <string name="edit_transaction_hint_desc_item">Descriere</string>
+    <string name="edit_transaction_error_enter_description">Vă rugăm să introduceți o descriere.</string>
+    <string name="error_message_enter_name">Vă rugăm să introduceți un nume.</string>
+    <string name="edit_transaction_image_error_copying">Copierea imaginii în directorul aplicației a eșuat. %1$s</string>
+    <string name="pref_backup_warning">Dosarul în care este copiat fișierul zip de rezervă va fi șters atunci când aplicația este dezinstalată sau când datele sale sunt șterse. Mutați-l într-un loc sigur înainte de dezinstalare/ștergerea datelor, dacă doriți să restaurați copia de rezervă mai târziu.</string>
+    <string name="edit_person_contact_deleted">Persoana de contact legată anterior nu este disponibilă. Legătura a fost eliminată.</string>
+    <string name="pref_dismiss_filter_title">La respingerea filtrului de persoană …</string>
+    <string name="pref_date_format_systemdefault_medium">Sistem implicit (mediu)</string>
+    <string name="title_fragment_edit_person_create">Creați persoana</string>
+    <string name="pref_general_header">General</string>
+    <string name="restore_not_all_images_restored">Avertisment: nu toate imaginile din fișierul zip de rezervă pot fi restaurate. %1$s</string>
+    <string name="pref_restore_file_not_found">Fișierul de backup nu a fost găsit</string>
+    <string name="backup_successful">Copie de rezervă a datelor pe o unitate de stocare externă</string>
+    <string name="restore_failed_dbFileMissing">Fișierul de backup al bazei de date \'debitum.db\' lipsește sau este ilizibil.</string>
+    <string name="pref_dismiss_filter_summary_false">Rămâneți în lista curentă</string>
+</resources>
