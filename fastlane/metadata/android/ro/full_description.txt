@@ -1,9 +1,9 @@
-With Debitum you can track all kinds of IOUs, be it money or lent items. This way you will never more forget if your friend already gave you back that book or dispute about how much you owe your colleague for coffee.
+Cu Debitum puteți urmări toate tipurile de IOU, fie că este vorba de bani sau de obiecte împrumutate. În acest fel nu veți mai uita niciodată dacă prietenul vostru v-a dat deja înapoi acea carte sau vă veți certa cu privire la cât îi datorați colegului vostru pentru cafea.
 
-The intended use case is to manage (smaller) personal debts and lent items. To keep things simple, things like interest, deadlines, fees etc. will not be an integral part of the app (though the description could somehow be used for that, but I would generally recommend to use more specialised apps for this).
+Cazul de utilizare vizat este gestionarea datoriilor personale (mai mici) și a obiectelor împrumutate. Pentru a păstra lucrurile simple, lucruri precum dobânzile, termenele, comisioanele etc. nu vor fi parte integrantă a aplicației (deși descrierea ar putea fi cumva folosită în acest scop, dar, în general, aș recomanda să folosiți aplicații mai specializate pentru acest lucru).
 
-You can backup and restore the database where persons and transactions are stored.
+Puteți face copii de rezervă și restaura baza de date în care sunt stocate persoanele și tranzacțiile.
 
-There is no online service whatsoever involved, so your data is saved on your device only (as far as this app is concerned).
+Nu este implicat niciun fel de serviciu online, astfel încât datele dumneavoastră sunt salvate doar pe dispozitivul dumneavoastră (în ceea ce privește această aplicație).
 
-<i>Keywords: IOU, debt, lend</i>
+&lt;Cuvinte cheie: IOU, datorie, împrumut&lt;/i&gt;
