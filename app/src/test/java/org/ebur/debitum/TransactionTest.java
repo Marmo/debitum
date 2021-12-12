@@ -77,17 +77,17 @@ public class TransactionTest {
 
     // nr of decimals tests
     @Test
-    public void getFormattedAmount_positive_signed_Monetary() {
+    public void getFormattedAmount_positive_signed_Monetary_0dec() {
         String formattedAmount = tMon1.getFormattedAmount(true, 0, locale);
         assertThat(formattedAmount, is("1234"));
     }
     @Test
-    public void getFormattedAmount_positive_signed_Monetary() {
+    public void getFormattedAmount_positive_signed_Monetary_1dec() {
         String formattedAmount = tMon1.getFormattedAmount(true, 1, locale);
         assertThat(formattedAmount, is("123.4"));
     }
     @Test
-    public void getFormattedAmount_positive_signed_Monetary() {
+    public void getFormattedAmount_positive_signed_Monetary_3dec() {
         String formattedAmount = tMon1.getFormattedAmount(true, 3, locale);
         assertThat(formattedAmount, is("1.234"));
     }
