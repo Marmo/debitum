@@ -57,11 +57,11 @@ public class Transaction {
     /*
      * returns the amount formatted as a string, depending on isMonetary
      */
-    public String getFormattedAmount() { return this.getFormattedAmount(true); }
-    public String getFormattedAmount(boolean signed) { return getFormattedAmount(signed, Locale.getDefault()); }
-    public String getFormattedAmount(boolean signed, Locale locale) {
+    public String getFormattedAmount(int decimals) { return this.getFormattedAmount(true, decimals); }
+    public String getFormattedAmount(boolean signed, int decimals) { return getFormattedAmount(signed, decimals, Locale.getDefault()); }
+    public String getFormattedAmount(boolean signed, int decimals, Locale locale) {
         int value = signed ? this.amount : Math.abs(this.amount);
-        if (isMonetary) return Transaction.formatMonetaryAmount(value, locale);
+        if (isMonetary) return Transaction.formatMonetaryAmount(value, decimals, locale);
         else            return Integer.toString(value);
     }
 
@@ -90,18 +90,25 @@ public class Transaction {
     // --------------------
 
     /**
-     * @param amount Amount to be formatted in cents (1/100 of main currency)
-     * @return Returns a properly formatted Amount (2 decimal places, decimal separator from default locale)
+     * @param amount Amount to be formatted with fractions of main currency
+     * @return Returns a properly formatted Amount (0-3 decimal places, decimal separator from default locale)
      */
-    public static String formatMonetaryAmount(int amount) { return formatMonetaryAmount(amount, Locale.getDefault()); }
+    public static String formatMonetaryAmount(int amount, int decimals) { return formatMonetaryAmount(amount, decimals, Locale.getDefault()); }
 
     /**
-     * @param amount Amount to be formatted in cents (1/100 of main currency)
+     * @param amount Amount to be formatted in fractions (1/1, 1/10, 1/100 or 1/1000 of main currency depending on setting)
      * @param locale Locale to format the String representation of the amount with
-     * @return Returns a properly formatted Amount (2 decimal places, decimal separator from locale)
+     * @return Returns a properly formatted Amount (0-3 decimal places, decimal separator from locale)
      */
-    public static String formatMonetaryAmount(int amount, Locale locale) {
-        return String.format(locale,"%.2f", amount/100.0);
+    public static String formatMonetaryAmount(int amount, int decimals, Locale locale) {
+        if(decimals < 0 || decimals > 3) {
+            throw new IllegalArgumentException("decimals must be an integer between 0 and 3");
+        }
+        return String.format(
+                locale,
+                "%."+decimals+"f",
+                amount/Math.pow(10.0, decimals)
+        );
     }
 
     /**
@@ -134,8 +141,8 @@ public class Transaction {
      * @return sum formatted as a String (e.g. 10.05 for amount=1005)
       */
     // signed controls if absolute value or true sum is used
-    public static String getFormattedSum(List<Transaction> transactions, boolean signed) {
-        return Transaction.formatMonetaryAmount(Transaction.getSum(transactions, signed));
+    public static String getFormattedSum(List<Transaction> transactions, boolean signed, int decimals) {
+        return Transaction.formatMonetaryAmount(Transaction.getSum(transactions, signed), decimals);
     }
 
 

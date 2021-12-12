@@ -116,6 +116,11 @@
     <string name="title_fragment_settings">Settings</string>
 
     <string name="pref_general_header">General</string>
+
+    <string name="pref_nr_decimals_zero">0</string>
+    <string name="pref_nr_decimals_one">1</string>
+    <string name="pref_nr_decimals_two">2</string>
+    <string name="pref_nr_decimals_three">3</string>
     <string name="pref_dismiss_filter_title">When dismissing person filter …</string>
     <string name="pref_dismiss_filter_summary_true">Return to list of people</string>
     <string name="pref_dismiss_filter_summary_false">Stay in the current list</string>

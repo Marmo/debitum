@@ -34,6 +34,7 @@ import org.ebur.debitum.database.Transaction;
 import org.ebur.debitum.ui.EditPersonFragment;
 import org.ebur.debitum.ui.edit_transaction.EditTransactionFragment;
 import org.ebur.debitum.util.ColorUtils;
+import org.ebur.debitum.util.Utilities;
 import org.ebur.debitum.viewModel.ContactsHelper;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
@@ -157,7 +158,7 @@ public class PersonSumListFragment
                     .sum();
             mode.setSubtitle(getResources().getString(
                     R.string.actionmode_sum,
-                    Transaction.formatMonetaryAmount(sum)
+                    Transaction.formatMonetaryAmount(sum, Utilities.getNrOfDecimals(requireContext()))
             ));
         } else {
             mode.setSubtitle(null);

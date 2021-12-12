@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="itemReturnedFilterModeEntries">
+    <array name="nr_of_decimals_entries">
+        <item>@string/pref_nr_decimals_zero</item>
+        <item>@string/pref_nr_decimals_one</item>
+        <item>@string/pref_nr_decimals_two</item>
+        <item>@string/pref_nr_decimals_three</item>
+    </array>
+    <string-array name="nr_of_decimals_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <array name="item_returned_filter_mode_entries">
         <item>@string/item_filter_all</item>
         <item>@string/item_filter_unreturned</item>
         <item>@string/item_filter_returned</item>
     </array>
     <!--has to be in sync with the constants in ItemReturnedFilterViewModel-->
-    <string-array name="itemReturnedFilterModeValues">
+    <string-array name="item_returned_filter_mode_values">
         <item>3</item>
         <item>2</item>
         <item>1</item>
     </string-array>
 
-    <string-array name="dateFormatValues">
+    <string-array name="date_format_values">
         <item>yyyy-MM-dd</item>
         <item>dd-MM-yyyy</item>
         <item>dd.MM.yyyy</item>

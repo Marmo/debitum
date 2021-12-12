@@ -36,7 +36,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
     public void bind(TransactionWithPerson twp, boolean isSelected) {
         txnNameView.setText(twp.person.name);
         txnDescriptionView.setText(twp.transaction.description);
-        txnAmountView.setText(twp.transaction.getFormattedAmount(false));
+        txnAmountView.setText(twp.transaction.getFormattedAmount(false, Utilities.getNrOfDecimals(itemView.getContext())));
         if (twp.transaction.isReturned()) {
             // set date text and background/text color
             Resources res = itemView.getResources();

@@ -28,6 +28,11 @@ public abstract class Utilities {
 
     public static final String DATE_FORMAT = "yyyy-MM-dd";
 
+    public static int getNrOfDecimals(@NonNull Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        return Integer.parseInt(pref.getString(SettingsFragment.PREF_KEY_DECIMALS, "2"));
+    }
+
     @Nullable
     public static String formatDate(@Nullable Date date, @NonNull Context context) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);

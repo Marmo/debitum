@@ -22,6 +22,7 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
+import org.ebur.debitum.util.Utilities;
 
 class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private final View itemView;
@@ -53,7 +54,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
 
     public void bind(@NonNull PersonWithTransactions pwt, Drawable avatar, boolean isSelected) {
         nameView.setText(pwt.person.name);
-        sumView.setText(Transaction.getFormattedSum(pwt.transactions, false));
+        sumView.setText(Transaction.getFormattedSum(pwt.transactions, false, Utilities.getNrOfDecimals(itemView.getContext())));
 
         person = pwt.person;
 
