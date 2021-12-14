@@ -119,8 +119,27 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
 
         ListPreference decimalsPref = findPreference(PREF_KEY_DECIMALS);
-        if (itemReturnedFilterPref != null) {
+        if (decimalsPref != null) {
             decimalsPref.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
+            decimalsPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                // generally the strategy is to keep the existing amounts
+                // example: old setting: 2 decimals -> new setting: 1 decimal
+                // |    old amount      |      new amount    |
+                // | internal | display | internal | display |
+                // |----------|---------|----------|---------|
+                // |  1000    | 10.00   |   100    | 10.00   |
+                // |  12345   | 123.45  |  1235    | 123.5   |
+                int newInt = Integer.parseInt((String)newValue);
+                int oldInt = Integer.parseInt(((ListPreference)preference).getValue());
+                if (newInt < oldInt) {
+                    // we need to warn the user about possible data loss ONLY if we *decrease* the
+                    // number of decimals
+                    showChangeDecimalsDialog();
+                } else if (oldInt < newInt) {
+                    // TODO iterate over all txns multiplying by 10^(newInt-oldInt)
+                }
+                return true;
+            });
         }
 
         Preference backupPref = findPreference(PREF_KEY_BACKUP);
@@ -132,7 +151,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
         Preference restorePref = findPreference(PREF_KEY_RESTORE);
-        if(restorePref!=null) {
+        if (restorePref!=null) {
             restorePref.setSummary(getString(R.string.pref_restore_summary));
             restorePref.setOnPreferenceClickListener(preference -> {
                 startRestore();
@@ -170,6 +189,24 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         getListView().setTransitionGroup(true);
         getListView().setTransitionName("not needed but transition group is only respected if name set");
+    }
+
+    private void showChangeDecimalsDialog() {
+        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
+        builder.setPositiveButton(R.string.decrease_decimals_dialog_confirm, (dialog, id) -> {
+            // TODO iterate over every *MONETARY* transaction, divide its amount by 10^(oldInt-newInt)
+            //      and round to 0 decimals. Probably define a method in Transaction to do this
+        });
+        builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> {
+            // TODO reset the setting to oldInt
+            dialog.cancel();
+        });
+
+        builder.setMessage(getString(R.string.decrease_decimals_dialog_text))
+                .setTitle(R.string.decrease_decimals_dialog_title);
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
     }
 
     // ---------------------
