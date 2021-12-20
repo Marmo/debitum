@@ -123,7 +123,7 @@
     <string name="pref_nr_decimals_three">3</string>
     <string name="decrease_decimals_dialog_confirm">Decrease nr of decimals</string>
     <string name="decrease_decimals_dialog_title">Warning</string>
-    <string name="decrease_decimals_dialog_text">Decreasing the number of decimals can cause transaction amounts being rounded. This cannot be undone by changing the setting back to the prevoius value.</string>
+    <string name="decrease_decimals_dialog_text">Decreasing the number of decimals can cause transaction amounts to be rounded. This loss of information cannot be undone by changing the setting back to the prevoius value.</string>
     <string name="pref_dismiss_filter_title">When dismissing person filter …</string>
     <string name="pref_dismiss_filter_summary_true">Return to list of people</string>
     <string name="pref_dismiss_filter_summary_false">Stay in the current list</string>

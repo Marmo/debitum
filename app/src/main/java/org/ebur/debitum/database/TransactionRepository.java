@@ -72,5 +72,11 @@ public class TransactionRepository {
         Future<TransactionWithPerson> future = AppDatabase.databaseTaskExecutor.submit( () -> transactionDao.getTransaction(idTransaction));
         return future.get();
     }
+
+    public void changeTransactionDecimals(int shift) {
+        AppDatabase.databaseTaskExecutor.execute(() -> {
+            transactionDao.changeDecimals(shift);
+        });
+    }
 }
 

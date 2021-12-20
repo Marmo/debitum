@@ -2,6 +2,7 @@ package org.ebur.debitum.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NavUtils;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -28,6 +31,7 @@ import org.ebur.debitum.database.AppDatabase;
 import org.ebur.debitum.ui.edit_transaction.EditTransactionFragment;
 import org.ebur.debitum.util.FileUtils;
 import org.ebur.debitum.util.Utilities;
+import org.ebur.debitum.viewModel.SettingsViewModel;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,6 +56,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public final static String PREF_KEY_DECIMALS = "decimals";
     public final static String FILENAME_DB = "debitum.db";
 
+    private SettingsViewModel viewModel;
+
     private final ActivityResultLauncher<String[]> restoreLauncher =
             registerForActivityResult(
                     new ActivityResultContracts.OpenDocument(),
@@ -74,6 +80,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final String PREF_KEY_LICENSES = "licenses";
         final String PREF_KEY_VERSION = "version";
 
+        viewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
         SwitchPreferenceCompat dismissFilterPref = findPreference(PREF_KEY_DISMISS_FILTER_BEHAVIOUR);
@@ -127,16 +134,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 // |    old amount      |      new amount    |
                 // | internal | display | internal | display |
                 // |----------|---------|----------|---------|
-                // |  1000    | 10.00   |   100    | 10.00   |
+                // |  1000    | 10.00   |   100    |  10.0   |
                 // |  12345   | 123.45  |  1235    | 123.5   |
                 int newInt = Integer.parseInt((String)newValue);
                 int oldInt = Integer.parseInt(((ListPreference)preference).getValue());
                 if (newInt < oldInt) {
                     // we need to warn the user about possible data loss ONLY if we *decrease* the
                     // number of decimals
-                    showChangeDecimalsDialog();
+                    showChangeDecimalsDialog(newInt, oldInt);
                 } else if (oldInt < newInt) {
-                    // TODO iterate over all txns multiplying by 10^(newInt-oldInt)
+                    viewModel.changeTransactionDecimals(newInt-oldInt); // old=2, new=1 -> shift = -1
                 }
                 return true;
             });
@@ -188,17 +195,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         getListView().setClipToPadding(false);
 
         getListView().setTransitionGroup(true);
-        getListView().setTransitionName("not needed but transition group is only respected if name set");
+        getListView().setTransitionName("not needed but transition group is only respected if name is set");
     }
 
-    private void showChangeDecimalsDialog() {
+    private void showChangeDecimalsDialog(int newNrOfDecimals, int oldNrOfDecimals) {
         AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
         builder.setPositiveButton(R.string.decrease_decimals_dialog_confirm, (dialog, id) -> {
-            // TODO iterate over every *MONETARY* transaction, divide its amount by 10^(oldInt-newInt)
-            //      and round to 0 decimals. Probably define a method in Transaction to do this
+            viewModel.changeTransactionDecimals(newNrOfDecimals-oldNrOfDecimals); // old=2, new=1 -> shift = -1
         });
         builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> {
-            // TODO reset the setting to oldInt
+            // reset setting to old value
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireContext());
+            pref.edit().putString(PREF_KEY_DECIMALS, String.valueOf(oldNrOfDecimals)).apply();
             dialog.cancel();
         });
 
