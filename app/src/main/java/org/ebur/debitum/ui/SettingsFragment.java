@@ -34,6 +34,8 @@ import org.ebur.debitum.util.Utilities;
 import org.ebur.debitum.viewModel.SettingsViewModel;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +43,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 
 public class SettingsFragment extends PreferenceFragmentCompat {
@@ -55,6 +58,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public final static String PREF_KEY_DATE_FORMAT = "date_format";
     public final static String PREF_KEY_DECIMALS = "decimals";
     public final static String FILENAME_DB = "debitum.db";
+    public final static String FILENAME_PREFS = "debitum-preferences.xml";
 
     private SettingsViewModel viewModel;
 
@@ -237,40 +241,51 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         AppDatabase.backupDatabase(FILENAME_DB, path, (successDb, messageDb) -> {
             File zipFile = new File(path, filenameZip);
             File dbFile = new File(path, FILENAME_DB);
+            File prefsFile = new File(path, FILENAME_PREFS);
             File imagesDir = EditTransactionFragment.getImageDir(requireContext());
             String info;
-            boolean successImg;
 
             List<File> filesToZip = new ArrayList<>();
             filesToZip.add(dbFile);
+            filesToZip.add(prefsFile);
             if (imagesDir.listFiles() != null) { filesToZip.addAll(Arrays.asList(imagesDir.listFiles()));}
 
             if (successDb) {
                 info = getString(R.string.backup_successful);
                 try {
+                    exportPreferences(prefsFile);
                     FileUtils.zip(filesToZip, zipFile);
-                    successImg = true;
                 } catch (IOException e) {
                     e.printStackTrace();
-                    successImg = false;
                     info = getString(R.string.backup_failed, e.getMessage());
-                    finishBackup(info, dbFile);
+                    finishBackup(info, dbFile, prefsFile);
                 }
             } else {
                 info = getString(R.string.backup_failed, messageDb);
             }
-            finishBackup(info, dbFile);
+            finishBackup(info, dbFile, prefsFile);
         });
     }
 
-    private void finishBackup(@NonNull String info, @NonNull File dbFile) {
+    // stores the app's preferences as a java properties file
+    private void exportPreferences(@NonNull File prefsFile) throws IOException {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        Properties props = new Properties();
+        props.putAll(prefs.getAll());
+        FileOutputStream out = new FileOutputStream(prefsFile);
+        props.storeToXML(out, "");
+        out.close();
+    }
+
+    private void finishBackup(@NonNull String info, @NonNull File dbFile, @NonNull File prefsFile) {
         // show snackbar
         Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
                 info,
                 7000)
                 .show();
-        // cleanup temporary db file
+        // cleanup temporary db file and prefs file
         dbFile.delete();
+        prefsFile.delete();
     }
 
     private void startRestore() {
@@ -292,6 +307,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         File imageDir = EditTransactionFragment.getImageDir(requireContext());
         File tmpDir = new File(imageDir, "restore/");
         File dbFile = new File(tmpDir, FILENAME_DB);
+        File prefsFile = new File(tmpDir, FILENAME_PREFS);
         try {
             // create tmpDir
             if (!tmpDir.mkdirs() || !tmpDir.canWrite()) {
@@ -313,6 +329,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 FileUtils.deleteDir(tmpDir);
                 return;
             }
+            // TODO: the properties file's existence is currently unchecked, if it is missing the
+            //    app's default values will be used. This possibly leads to wrong amounts due to
+            //    different decimals settings
 
             // restore database
             AppDatabase.restoreDatabase(Uri.fromFile(dbFile), (success, message) -> {
@@ -320,10 +339,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     // delete dbFile so that it is not copied to imagesDir afterwards
                     dbFile.delete();
 
+                    //import preferences
+                    try {
+                        importPreferences(prefsFile);
+                    } catch (IOException e) {
+                        // show warning and continue with next file
+                        e.printStackTrace();
+                        showSnackbar(getString(R.string.restore_preferences_not_restored, e.getMessage()));
+                    }
+                    // delete prefsFile so that it is not copied to imagesDir afterwards
+                    prefsFile.delete();
+
                     // copy images to imageDir
                     // Note: there is no (urgent) need for cleaning the image directory before
                     // copying the restored files there, because any excess images will be deleted
-                    // when the EditTRansaction dialog is closed (save/dismiss) the next time
+                    // when the EditTransaction dialog is closed (save/dismiss) the next time
                     for (File file:tmpDir.listFiles()) {
                         try {
                             FileUtils.copyFile(file, new File(imageDir, file.getName()));
@@ -344,6 +374,20 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             e.printStackTrace();
             FileUtils.deleteDir(tmpDir);
             showSnackbar(getString(R.string.restore_failed, e.getMessage()));
+        }
+    }
+
+    // loads the app's preferences from a java properties file
+    private void importPreferences(@NonNull File prefsFile) throws IOException {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        Properties props = new Properties();
+        FileInputStream in = new FileInputStream(prefsFile);
+        props.loadFromXML(in);
+        in.close();
+        for(Object keyObj:props.keySet()) {
+            String key = keyObj.toString();
+            String value = props.getProperty(key);
+            prefs.edit().putString(key, value).apply();
         }
     }
 
