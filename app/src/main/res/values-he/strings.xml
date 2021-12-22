@@ -136,4 +136,13 @@
     <string name="button_label_save">שמירה</string>
     <string name="error_message_database_access">שגיאה בניסיון גישה למסד הנתונים, נא לנסות שוב.
 \n%1$s</string>
+    <string name="pref_nr_decimals_zero">0</string>
+    <string name="pref_nr_decimals_one">1</string>
+    <string name="decrease_decimals_dialog_confirm">הקטנה של כמות הספרות אחרי הנקודה</string>
+    <string name="decrease_decimals_dialog_title">אזהרה</string>
+    <string name="pref_nr_decimals_title">מספר הספרות אחרי הנקודה</string>
+    <string name="pref_nr_decimals_two">2</string>
+    <string name="pref_nr_decimals_three">3</string>
+    <string name="decrease_decimals_dialog_text">הקטנת מספר הספרות אחרי הנקודה עלולה להוביל לעיגול סכומים. אובדן מידע זה לא ישוחזר על ידי שינוי בחזרה לערך הקודם.</string>
+    <string name="restore_preferences_not_restored">אזהרה: אי אפשר לשחזר את העדפות היישומון. נא לבדוק את הסכומים שלך! %1$s</string>
 </resources>
