@@ -329,9 +329,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 FileUtils.deleteDir(tmpDir);
                 return;
             }
-            // TODO: the properties file's existence is currently unchecked, if it is missing the
-            //    app's default values will be used. This possibly leads to wrong amounts due to
-            //    different decimals settings
 
             // restore database
             AppDatabase.restoreDatabase(Uri.fromFile(dbFile), (success, message) -> {
