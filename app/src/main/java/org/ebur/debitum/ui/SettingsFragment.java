@@ -340,13 +340,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     dbFile.delete();
 
                     //import preferences
-                    try {
-                        importPreferences(prefsFile);
-                    } catch (IOException e) {
-                        // show warning and continue with next file
-                        e.printStackTrace();
-                        showSnackbar(getString(R.string.restore_preferences_not_restored, e.getMessage()));
-                    }
+                    importPreferences(prefsFile);
                     // delete prefsFile so that it is not copied to imagesDir afterwards
                     prefsFile.delete();
 
@@ -378,17 +372,37 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     // loads the app's preferences from a java properties file
-    private void importPreferences(@NonNull File prefsFile) throws IOException {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+    private void importPreferences(@NonNull File prefsFile) {
         Properties props = new Properties();
-        FileInputStream in = new FileInputStream(prefsFile);
-        props.loadFromXML(in);
-        in.close();
+
+        if (!prefsFile.exists()) {
+            // assume we are restoring from old backup without preferences. Then the amounts have
+            // 2 decimals (there was not setting for decimals when backups did not contain preferences)
+            // this prevents importing from old backups while having decimals set to something other
+            // than 2 and ending up with wrong amounts
+            props.put(PREF_KEY_DECIMALS, "2");
+        } else {
+            // get preferences from props xml
+            try {
+                FileInputStream in = new FileInputStream(prefsFile);
+                props.loadFromXML(in);
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                showSnackbar(getString(R.string.restore_preferences_not_restored, e.getMessage()));
+            }
+        }
+        // update app preferences from props
+        SharedPreferences.Editor editor = PreferenceManager
+                .getDefaultSharedPreferences(requireContext())
+                .edit();
+
         for(Object keyObj:props.keySet()) {
             String key = keyObj.toString();
             String value = props.getProperty(key);
-            prefs.edit().putString(key, value).apply();
+            editor.putString(key, value);
         }
+        editor.apply();
     }
 
     private void restartApp() {
