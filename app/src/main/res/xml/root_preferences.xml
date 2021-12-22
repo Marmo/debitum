@@ -11,7 +11,7 @@
             android:entries="@array/nr_of_decimals_entries"
             android:entryValues="@array/nr_of_decimals_values"
             android:key="decimals"
-            android:title="Nr of decimals"
+            android:title="@string/pref_nr_decimals_title"
             android:defaultValue="2"/>
         <SwitchPreferenceCompat
             app:key="dismiss_filter_behaviour"

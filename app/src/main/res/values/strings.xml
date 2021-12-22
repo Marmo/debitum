@@ -117,6 +117,7 @@
 
     <string name="pref_general_header">General</string>
 
+    <string name="pref_nr_decimals_title">Nr of decimals</string>
     <string name="pref_nr_decimals_zero">0</string>
     <string name="pref_nr_decimals_one">1</string>
     <string name="pref_nr_decimals_two">2</string>
