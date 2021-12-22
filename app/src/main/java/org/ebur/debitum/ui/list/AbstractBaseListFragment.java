@@ -32,6 +32,7 @@ import com.google.android.material.transition.MaterialFadeThrough;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.Transaction;
+import org.ebur.debitum.util.Utilities;
 
 
 /**
@@ -140,7 +141,7 @@ public abstract class AbstractBaseListFragment
     }
     protected void updateTotalHeader(int total) {
         TextView totalView = requireView().findViewById(R.id.header_total);
-        totalView.setText(Transaction.formatMonetaryAmount(total));
+        totalView.setText(Transaction.formatMonetaryAmount(total, Utilities.getNrOfDecimals(requireContext())));
         int totalColor = total>0 ? R.color.owe_green : R.color.lent_red;
         totalView.setTextColor(totalView.getResources().getColor(totalColor, null));
     }

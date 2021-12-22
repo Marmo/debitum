@@ -186,7 +186,7 @@ public class TransactionListFragment
             }
             mode.setSubtitle(getResources().getString(
                     R.string.actionmode_sum,
-                    Transaction.formatMonetaryAmount(sum)
+                    Transaction.formatMonetaryAmount(sum, Utilities.getNrOfDecimals(requireContext()))
             ));
         } else {
             mode.setSubtitle(null);

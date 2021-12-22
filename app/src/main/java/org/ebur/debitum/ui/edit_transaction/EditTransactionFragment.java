@@ -327,7 +327,7 @@ public class EditTransactionFragment extends DialogFragment {
         // IMPORTANT: set switchIsMonetaryView _before_ setting amount, because on setting amount the
         // AmountTextWatcher::afterTextChanged is called, and within this method isMonetary is needed to apply correct formatting!
         switchIsMonetary.setChecked(txn.transaction.isMonetary);
-        editAmount.setText(txn.transaction.getFormattedAmount(false));
+        editAmount.setText(txn.transaction.getFormattedAmount(false, Utilities.getNrOfDecimals(requireContext())));
         editDescription.setText(txn.transaction.description);
         viewModel.setTimestamp(txn.transaction.timestamp);
         editDate.setText(Utilities.formatDate(viewModel.getTimestamp(), requireContext()));
@@ -343,7 +343,7 @@ public class EditTransactionFragment extends DialogFragment {
         // TODO: move all those presets to viewModel (presetIdTransaction, presetType, preset...)
         int presetAmount = requireArguments().getInt(ARG_PRESET_AMOUNT, 0);
         if (presetAmount != 0) { // amount > 0 means person gave to user --> gave radio must be checked
-            editAmount.setText(Transaction.formatMonetaryAmount(Math.abs(presetAmount)));
+            editAmount.setText(Transaction.formatMonetaryAmount(Math.abs(presetAmount), Utilities.getNrOfDecimals(requireContext())));
             gaveRadio.setChecked(presetAmount>0);
         }
 
@@ -555,7 +555,11 @@ public class EditTransactionFragment extends DialogFragment {
         if (viewModel.isMoneyTransaction()) {
             // add decSep two digits from the right, while adding leading zeros if needed
             // this is accomplished by removing decSep --> converting to int --> dividing by 100 --> converting to local String
-            formattedAmount = Transaction.formatMonetaryAmount(Integer.parseInt(formattedAmount), Locale.getDefault());
+            formattedAmount = Transaction.formatMonetaryAmount(
+                    Integer.parseInt(formattedAmount),
+                    Utilities.getNrOfDecimals(requireContext()),
+                    Locale.getDefault()
+            );
         } else {
             // remove leading 0s
             formattedAmount = formattedAmount.replaceFirst("^0+","");

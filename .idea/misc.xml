@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/layout/fragment_edit_transaction.xml" value="0.21" />
         <entry key="app/src/main/res/layout/item_image_list.xml" value="0.66" />
         <entry key="app/src/main/res/menu/menu_edit_transaction_image.xml" value="0.17673611111111112" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.14275956284153005" />
       </map>
     </option>
   </component>
