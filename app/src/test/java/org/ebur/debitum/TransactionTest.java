@@ -1,14 +1,14 @@
 package org.ebur.debitum;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import org.ebur.debitum.database.Transaction;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
 import java.util.Locale;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TransactionTest {
     private Transaction tMon1, tMon2, tMon3, tMon4, tThing1;
@@ -29,50 +29,67 @@ public class TransactionTest {
 
     @Test
     public void getFormattedAmount_positive_signed_Monetary() {
-        String formattedAmount = tMon1.getFormattedAmount(true, locale);
+        String formattedAmount = tMon1.getFormattedAmount(true, 2, locale);
         assertThat(formattedAmount, is("12.34"));
     }
 
     @Test
     public void getFormattedAmount_positive_unsigned_Monetary() {
-        String formattedAmount = tMon1.getFormattedAmount(false, locale);
+        String formattedAmount = tMon1.getFormattedAmount(false, 2, locale);
         assertThat(formattedAmount, is("12.34"));
     }
 
     @Test
     public void getFormattedAmount_negative_signed_Monetary() {
-        String formattedAmount = tMon2.getFormattedAmount(true, locale);
+        String formattedAmount = tMon2.getFormattedAmount(true, 2, locale);
         assertThat(formattedAmount, is("-12.34"));
     }
 
     @Test
     public void getFormattedAmount_negative_unsigned_Monetary() {
-        String formattedAmount = tMon2.getFormattedAmount(false, locale);
+        String formattedAmount = tMon2.getFormattedAmount(false, 2, locale);
         assertThat(formattedAmount, is("12.34"));
     }
 
     @Test
     public void getFormattedAmount_negative_signed_Thing() {
-        String formattedAmount = tThing1.getFormattedAmount(true, locale);
+        String formattedAmount = tThing1.getFormattedAmount(true, 2, locale);
         assertThat(formattedAmount, is("-1234"));
     }
 
     @Test
     public void getFormattedAmount_negative_unsigned_Thing() {
-        String formattedAmount = tThing1.getFormattedAmount(false, locale);
+        String formattedAmount = tThing1.getFormattedAmount(false, 2, locale);
         assertThat(formattedAmount, is("1234"));
     }
 
     @Test
     public void getFormattedAmount_positive_signed_MonetarySmall() {
-        String formattedAmount = tMon3.getFormattedAmount(true, locale);
+        String formattedAmount = tMon3.getFormattedAmount(true, 2, locale);
         assertThat(formattedAmount, is("0.01"));
     }
 
     @Test
     public void getFormattedAmount_positive_unsigned_MonetarySmall() {
-        String formattedAmount = tMon3.getFormattedAmount(false, locale);
+        String formattedAmount = tMon3.getFormattedAmount(false, 2, locale);
         assertThat(formattedAmount, is("0.01"));
+    }
+
+    // nr of decimals tests
+    @Test
+    public void getFormattedAmount_positive_signed_Monetary_0dec() {
+        String formattedAmount = tMon1.getFormattedAmount(true, 0, locale);
+        assertThat(formattedAmount, is("1234"));
+    }
+    @Test
+    public void getFormattedAmount_positive_signed_Monetary_1dec() {
+        String formattedAmount = tMon1.getFormattedAmount(true, 1, locale);
+        assertThat(formattedAmount, is("123.4"));
+    }
+    @Test
+    public void getFormattedAmount_positive_signed_Monetary_3dec() {
+        String formattedAmount = tMon1.getFormattedAmount(true, 3, locale);
+        assertThat(formattedAmount, is("1.234"));
     }
 
     @Test

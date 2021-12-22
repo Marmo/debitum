@@ -2,6 +2,7 @@ package org.ebur.debitum.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NavUtils;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -28,8 +31,11 @@ import org.ebur.debitum.database.AppDatabase;
 import org.ebur.debitum.ui.edit_transaction.EditTransactionFragment;
 import org.ebur.debitum.util.FileUtils;
 import org.ebur.debitum.util.Utilities;
+import org.ebur.debitum.viewModel.SettingsViewModel;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +43,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 
 public class SettingsFragment extends PreferenceFragmentCompat {
@@ -49,7 +56,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public final static String PREF_KEY_DISMISS_FILTER_BEHAVIOUR = "dismiss_filter_behaviour";
     public final static String PREF_KEY_ITEM_RETURNED_STANDARD_FILTER = "item_returned_standard_filter";
     public final static String PREF_KEY_DATE_FORMAT = "date_format";
+    public final static String PREF_KEY_DECIMALS = "decimals";
     public final static String FILENAME_DB = "debitum.db";
+    public final static String FILENAME_PREFS = "debitum-preferences.xml";
+
+    private SettingsViewModel viewModel;
 
     private final ActivityResultLauncher<String[]> restoreLauncher =
             registerForActivityResult(
@@ -73,6 +84,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final String PREF_KEY_LICENSES = "licenses";
         final String PREF_KEY_VERSION = "version";
 
+        viewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
         SwitchPreferenceCompat dismissFilterPref = findPreference(PREF_KEY_DISMISS_FILTER_BEHAVIOUR);
@@ -117,6 +129,30 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             dateFormatPref.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
         }
 
+        ListPreference decimalsPref = findPreference(PREF_KEY_DECIMALS);
+        if (decimalsPref != null) {
+            decimalsPref.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
+            decimalsPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                // generally the strategy is to keep the existing amounts
+                // example: old setting: 2 decimals -> new setting: 1 decimal
+                // |    old amount      |      new amount    |
+                // | internal | display | internal | display |
+                // |----------|---------|----------|---------|
+                // |  1000    | 10.00   |   100    |  10.0   |
+                // |  12345   | 123.45  |  1235    | 123.5   |
+                int newInt = Integer.parseInt((String)newValue);
+                int oldInt = Integer.parseInt(((ListPreference)preference).getValue());
+                if (newInt < oldInt) {
+                    // we need to warn the user about possible data loss ONLY if we *decrease* the
+                    // number of decimals
+                    showChangeDecimalsDialog(newInt, oldInt);
+                } else if (oldInt < newInt) {
+                    viewModel.changeTransactionDecimals(newInt-oldInt); // old=2, new=1 -> shift = -1
+                }
+                return true;
+            });
+        }
+
         Preference backupPref = findPreference(PREF_KEY_BACKUP);
         if (backupPref!=null) {
             backupPref.setSummary(getString(R.string.pref_backup_summary, requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR));
@@ -126,7 +162,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
         Preference restorePref = findPreference(PREF_KEY_RESTORE);
-        if(restorePref!=null) {
+        if (restorePref!=null) {
             restorePref.setSummary(getString(R.string.pref_restore_summary));
             restorePref.setOnPreferenceClickListener(preference -> {
                 startRestore();
@@ -163,7 +199,26 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         getListView().setClipToPadding(false);
 
         getListView().setTransitionGroup(true);
-        getListView().setTransitionName("not needed but transition group is only respected if name set");
+        getListView().setTransitionName("not needed but transition group is only respected if name is set");
+    }
+
+    private void showChangeDecimalsDialog(int newNrOfDecimals, int oldNrOfDecimals) {
+        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
+        builder.setPositiveButton(R.string.decrease_decimals_dialog_confirm, (dialog, id) -> {
+            viewModel.changeTransactionDecimals(newNrOfDecimals-oldNrOfDecimals); // old=2, new=1 -> shift = -1
+        });
+        builder.setNegativeButton(R.string.dialog_cancel, (dialog, id) -> {
+            // reset setting to old value
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireContext());
+            pref.edit().putString(PREF_KEY_DECIMALS, String.valueOf(oldNrOfDecimals)).apply();
+            dialog.cancel();
+        });
+
+        builder.setMessage(getString(R.string.decrease_decimals_dialog_text))
+                .setTitle(R.string.decrease_decimals_dialog_title);
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
     }
 
     // ---------------------
@@ -186,40 +241,51 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         AppDatabase.backupDatabase(FILENAME_DB, path, (successDb, messageDb) -> {
             File zipFile = new File(path, filenameZip);
             File dbFile = new File(path, FILENAME_DB);
+            File prefsFile = new File(path, FILENAME_PREFS);
             File imagesDir = EditTransactionFragment.getImageDir(requireContext());
             String info;
-            boolean successImg;
 
             List<File> filesToZip = new ArrayList<>();
             filesToZip.add(dbFile);
+            filesToZip.add(prefsFile);
             if (imagesDir.listFiles() != null) { filesToZip.addAll(Arrays.asList(imagesDir.listFiles()));}
 
             if (successDb) {
                 info = getString(R.string.backup_successful);
                 try {
+                    exportPreferences(prefsFile);
                     FileUtils.zip(filesToZip, zipFile);
-                    successImg = true;
                 } catch (IOException e) {
                     e.printStackTrace();
-                    successImg = false;
                     info = getString(R.string.backup_failed, e.getMessage());
-                    finishBackup(info, dbFile);
+                    finishBackup(info, dbFile, prefsFile);
                 }
             } else {
                 info = getString(R.string.backup_failed, messageDb);
             }
-            finishBackup(info, dbFile);
+            finishBackup(info, dbFile, prefsFile);
         });
     }
 
-    private void finishBackup(@NonNull String info, @NonNull File dbFile) {
+    // stores the app's preferences as a java properties file
+    private void exportPreferences(@NonNull File prefsFile) throws IOException {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        Properties props = new Properties();
+        props.putAll(prefs.getAll());
+        FileOutputStream out = new FileOutputStream(prefsFile);
+        props.storeToXML(out, "");
+        out.close();
+    }
+
+    private void finishBackup(@NonNull String info, @NonNull File dbFile, @NonNull File prefsFile) {
         // show snackbar
         Snackbar.make(requireActivity().findViewById(R.id.nav_host_fragment),
                 info,
                 7000)
                 .show();
-        // cleanup temporary db file
+        // cleanup temporary db file and prefs file
         dbFile.delete();
+        prefsFile.delete();
     }
 
     private void startRestore() {
@@ -241,6 +307,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         File imageDir = EditTransactionFragment.getImageDir(requireContext());
         File tmpDir = new File(imageDir, "restore/");
         File dbFile = new File(tmpDir, FILENAME_DB);
+        File prefsFile = new File(tmpDir, FILENAME_PREFS);
         try {
             // create tmpDir
             if (!tmpDir.mkdirs() || !tmpDir.canWrite()) {
@@ -269,10 +336,15 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     // delete dbFile so that it is not copied to imagesDir afterwards
                     dbFile.delete();
 
+                    //import preferences
+                    importPreferences(prefsFile);
+                    // delete prefsFile so that it is not copied to imagesDir afterwards
+                    prefsFile.delete();
+
                     // copy images to imageDir
                     // Note: there is no (urgent) need for cleaning the image directory before
                     // copying the restored files there, because any excess images will be deleted
-                    // when the EditTRansaction dialog is closed (save/dismiss) the next time
+                    // when the EditTransaction dialog is closed (save/dismiss) the next time
                     for (File file:tmpDir.listFiles()) {
                         try {
                             FileUtils.copyFile(file, new File(imageDir, file.getName()));
@@ -294,6 +366,40 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             FileUtils.deleteDir(tmpDir);
             showSnackbar(getString(R.string.restore_failed, e.getMessage()));
         }
+    }
+
+    // loads the app's preferences from a java properties file
+    private void importPreferences(@NonNull File prefsFile) {
+        Properties props = new Properties();
+
+        if (!prefsFile.exists()) {
+            // assume we are restoring from old backup without preferences. Then the amounts have
+            // 2 decimals (there was not setting for decimals when backups did not contain preferences)
+            // this prevents importing from old backups while having decimals set to something other
+            // than 2 and ending up with wrong amounts
+            props.put(PREF_KEY_DECIMALS, "2");
+        } else {
+            // get preferences from props xml
+            try {
+                FileInputStream in = new FileInputStream(prefsFile);
+                props.loadFromXML(in);
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                showSnackbar(getString(R.string.restore_preferences_not_restored, e.getMessage()));
+            }
+        }
+        // update app preferences from props
+        SharedPreferences.Editor editor = PreferenceManager
+                .getDefaultSharedPreferences(requireContext())
+                .edit();
+
+        for(Object keyObj:props.keySet()) {
+            String key = keyObj.toString();
+            String value = props.getProperty(key);
+            editor.putString(key, value);
+        }
+        editor.apply();
     }
 
     private void restartApp() {
