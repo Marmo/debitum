@@ -140,4 +140,13 @@
     <string name="edit_transaction_image_error_copying">Das Bild konnte nicht ins Anwendungsverzeichnis kopiert werden! %1$s</string>
     <string name="edit_transaction_image_add_title">Bild hinzufügen</string>
     <string name="edit_transaction_image_delete_desc">Bild löschen</string>
+    <string name="pref_nr_decimals_title">Anzahl Nachkommastellen</string>
+    <string name="pref_nr_decimals_two">2</string>
+    <string name="pref_nr_decimals_three">3</string>
+    <string name="decrease_decimals_dialog_confirm">Anzahl Nachkommastellen verringern</string>
+    <string name="decrease_decimals_dialog_title">Warnung</string>
+    <string name="decrease_decimals_dialog_text">Die Beträge von Transaktionen werden möglicherweise gerundet, wenn Nachkommastellen entfallen. Dieser Informationsverlust kann nicht rückgängig gemacht werden, indem die Einstellung auf den vorherigen Wert zurückgesetzt wird.</string>
+    <string name="pref_nr_decimals_zero">0</string>
+    <string name="pref_nr_decimals_one">1</string>
+    <string name="restore_preferences_not_restored">Warnung: die App-Einstellungen konnten nicht wiederhergestellt werden. Prüfe deine Beträge! %1$s</string>
 </resources>
