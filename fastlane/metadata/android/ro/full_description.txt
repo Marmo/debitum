@@ -1,0 +1,9 @@
+Cu Debitum puteți urmări toate tipurile de IOU, fie că este vorba de bani sau de obiecte împrumutate. În acest fel nu veți mai uita niciodată dacă prietenul vostru v-a dat deja înapoi acea carte sau vă veți certa cu privire la cât îi datorați colegului vostru pentru cafea.
+
+Cazul de utilizare vizat este gestionarea datoriilor personale (mai mici) și a obiectelor împrumutate. Pentru a păstra lucrurile simple, lucruri precum dobânzile, termenele, comisioanele etc. nu vor fi parte integrantă a aplicației (deși descrierea ar putea fi cumva folosită în acest scop, dar, în general, aș recomanda să folosiți aplicații mai specializate pentru acest lucru).
+
+Puteți face copii de rezervă și restaura baza de date în care sunt stocate persoanele și tranzacțiile.
+
+Nu este implicat niciun fel de serviciu online, astfel încât datele dumneavoastră sunt salvate doar pe dispozitivul dumneavoastră (în ceea ce privește această aplicație).
+
+&lt;Cuvinte cheie: IOU, datorie, împrumut&lt;/i&gt;
