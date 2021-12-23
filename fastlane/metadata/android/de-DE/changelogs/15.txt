@@ -1,0 +1,4 @@
+v1.6.0
+- neu: Einstellung für Anzahl Nachkommastellen
+- Neue Übersetzungen: Rumänisch (von [Simona Iacob](https://hosted.weblate.org/user/s@zp1.net/)), Persisch (von [Radmehr Ebrahimi](https://hosted.weblate.org/user/Radovski/) )
+- Aktualisierte Übersetzungen

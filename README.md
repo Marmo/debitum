@@ -44,7 +44,7 @@ The UI is inspired by [UOme](https://play.google.com/store/apps/details?id=cz.kn
 - filter the items list for returned/unreturned/all items.
 - link persons to phone contacts
 
-- backup and restore all app data and attached images
+- backup and restore all app data, settings and attached images
 
 ## Permissions
 ### READ_CONTACTS

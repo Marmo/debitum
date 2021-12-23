@@ -1,3 +1,8 @@
+# v1.6.0
+- new: setting for number of decimals
+- new languages: Romanian (thx [Simona Iacob](https://hosted.weblate.org/user/s@zp1.net/)), Persian (thx [Radmehr Ebrahimi](https://hosted.weblate.org/user/Radovski/) )
+- translations update
+
 # v1.5.1
 - translations update
 - internal refactoring
