@@ -143,4 +143,7 @@
     <string name="pref_nr_decimals_zero">0</string>
     <string name="pref_nr_decimals_one">1</string>
     <string name="restore_preferences_not_restored">Warnung: die App-Einstellungen konnten nicht wiederhergestellt werden. Prüfe deine Beträge! %1$s</string>
+    <string name="header_desc_items_returned">Dinge zurückgegeben</string>
+    <string name="header_desc_items_lent">Dinge ver-/entliehen</string>
+    <string name="header_desc_items_all">Dinge</string>
 </resources>

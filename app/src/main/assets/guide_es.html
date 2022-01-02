@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><body>
+<p>
+    Con Debitum es posible llevar un registro de toda clase de préstamos, sean dinero o cosas. De esta manera nunca olvidará si un amigo le devolvió un libro o evitará una disputa por los cafés que le deba a un colega.
+</p>
+<p>
+    La apliación no usa datos vía internet, por lo que toda la información es guardada solamente en su dispositivo.
+</p>
+
+<h3>Uso</h3>
+<h4>Creando transacciones</h4>
+<p>
+    Para registrar préstamos de dinero o cosas, cree una transacción usando el botón rojo. Aparecerá un diálogo donde puede ingresar el nombre de la persona, monto y descripción pudiendo elegir entre dinero o cosas prestadas (use el botón a la derecha de 'Monto').
+</p>
+
+<h4>Listas de transacciones</h4>
+<p>
+    Escoja una lista de transacciones abajo:
+</p>
+<h5>Personas</h5>
+<p>
+    Resumen de transacciones por persona, ordenadas por fecha desde la última transacción
+</p>
+<ul>
+    <li>Toque una fila para filtrar dinero o cosas relativas a esa persona</li>
+    <li>Cree personas desde el menú (arriba a la derecha) o con el botón "+" cuando agregue una nueva transacción</li>
+</ul>
+<h5>Dinero</h5>
+<p>
+    Muestra solamente transacciones de Dinero por fecha (descendiente). Para crear una devolución parcial o total, toque sostenidamente la transaccion inicial y elija devolución desde el menú (icono [100]). Esto creará una transacción de devolución relacionada con el préstamo inicial. Para detalles del porqué en Dinero no hay una opción de "marcar devuelto" como la hay para Cosas, ver <a href="https://github.com/Marmo/debitum/issues/9#issuecomment-861314762">here</a>.
+</p>
+<h5>Cosas</h5>
+<p>
+    Muestra sólo las Cosas prestadas por fecha (descendiente). Para registrar una cosa como devuelta, toque sostenidamente la transacción inicial y elija arriba "marcar como devuelto" (icono de "tiquet"). La lista puede ser filtrada como devueltas, sin devolver, o todas las cosas.
+</p>
+<p>
+    Toque sostenidamente cualquier fila de transacción para seleccionarla y ver arriba su menú contextual, también puede seleccionar múltiples filas. Edite o borre transacciones desde el menú contextual. En las listas Persona y Dinero se muestran la suma de todas las transacciones.
+</p>
+<p>
+    Para crear una copia de una transacción existente o usarla como base de otra, selecciónela y toque el botón "+". La nueva transacción contendrá los mismos datos de la transacción preexistente.
+</p>
+
+<h4>Enlazando Contactos</h4>
+<p>
+    El diálogo "Editar Persona" permite enlazar sus contactos telefónicos con Personas. Toque en "Contacto no enlazado" y escoja el contacto correspondiente. El único efecto de esta acción es mostrar la foto del contacto telefonico en la lista de "Personas" de la aplicación.
+</p>
+
+<h4>Respadar y restaurar</h4>
+<p>
+    Respalde y restaure la base de datos (transacciones y personas) desde los ajustes. Asegúrese de mover el archivo de respaldo a otro sitio antes de desinstalar la aplicación (o borrar los datos de la aplicación). La base de datos de la aplicación (transacciones y personas) se guarda en la carpeta de datos de la aplicación, la cual es borrada al desintalar la aplicación.
+</p>
+
+<h3>Permisos</h3>
+<h4>Leer contactos</h4>
+<p>
+    Se usa para enlazar Contactos telefónicos a Personas. Si lo desea, usted puede denegar este permiso sin riesgos y usar Debitum sin enlazar sus contactos.
+</p>
+</body></html>
