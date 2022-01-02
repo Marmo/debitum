@@ -25,6 +25,13 @@
         <item>1</item>
     </string-array>
 
+    <!--ordering needs to match the constants in ItemReturnedFilterViewModel-->
+    <string-array name="header_desc_items">
+        <item>@string/header_desc_items_returned</item>
+        <item>@string/header_desc_items_lent</item>
+        <item>@string/header_desc_items_all</item>
+    </string-array>
+
     <string-array name="date_format_values">
         <item>yyyy-MM-dd</item>
         <item>dd-MM-yyyy</item>

@@ -47,12 +47,6 @@
     <string name="transaction_list_received">bekam</string>
     <string name="toolbar_edit_person">Person bearbeiten</string>
     <string name="header_label">Summe</string>
-    <!-- these will appear in the totals header like "8 items lent"-->
-    <string-array name="header_desc_items">
-        <item>Dinge zurückgegeben</item>
-        <item>Dinge ver-/entliehen</item>
-        <item>Dinge</item>
-    </string-array>
     <string name="item_filter">Filter Rückgabestatus</string>
     <string name="item_filter_all">Alle anzeigen</string>
     <string name="item_filter_unreturned">Ausstehende anzeigen</string>

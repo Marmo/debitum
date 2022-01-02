@@ -50,12 +50,12 @@
     <string translatable="false" name="transaction_list_date_given_returned">%1$s\u2013%2$s</string>
     <string name="toolbar_edit_person">Edit Person</string>
     <string name="header_label">Total</string>
-    <!-- these will appear in the totals header like "8 items lent"-->
-    <string-array name="header_desc_items">
-        <item>items returned</item>
-        <item>items lent</item>
-        <item>items</item>
-    </string-array>
+    <!-- this will appear in the totals header like "8 items returned"-->
+    <string name="header_desc_items_returned">items returned</string>
+    <!-- this will appear in the totals header like "8 items lent"-->
+    <string name="header_desc_items_lent">items lent</string>
+    <!-- this will appear in the totals header like "8 items"-->
+    <string name="header_desc_items_all">items</string>
     <string name="item_filter">Filter by returned state</string>
     <string name="item_filter_all">Show all</string>
     <string name="item_filter_unreturned">Show unreturned</string>
