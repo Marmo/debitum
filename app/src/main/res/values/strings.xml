@@ -52,8 +52,8 @@
     <string name="header_label">Total</string>
     <!-- these will appear in the totals header like "8 items lent"-->
     <string-array name="header_desc_items">
-        <item>items lent</item>
         <item>items returned</item>
+        <item>items lent</item>
         <item>items</item>
     </string-array>
     <string name="item_filter">Filter by returned state</string>

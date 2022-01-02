@@ -50,8 +50,8 @@
     <string name="header_label">Total</string>
     <!-- these will appear in the totals header like "8 items lent"-->
     <string-array name="header_desc_items">
-        <item>itens emprestados</item>
         <item>itens devolvidos</item>
+        <item>itens emprestados</item>
         <item>itens</item>
     </string-array>
     <string name="item_filter">Filtrar por status dos itens</string>
