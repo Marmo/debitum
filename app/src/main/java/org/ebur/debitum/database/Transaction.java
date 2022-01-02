@@ -106,7 +106,7 @@ public class Transaction {
         }
         return String.format(
                 locale,
-                "%."+decimals+"f",
+                "%,."+decimals+"f",
                 amount/Math.pow(10.0, decimals)
         );
     }
