@@ -49,8 +49,8 @@
     <string name="header_label">Summe</string>
     <!-- these will appear in the totals header like "8 items lent"-->
     <string-array name="header_desc_items">
-        <item>Dinge ver-/entliehen</item>
         <item>Dinge zurückgegeben</item>
+        <item>Dinge ver-/entliehen</item>
         <item>Dinge</item>
     </string-array>
     <string name="item_filter">Filter Rückgabestatus</string>
