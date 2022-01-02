@@ -141,4 +141,7 @@
     <string name="edit_transaction_image_error_copying">A cópia da imagem para o diretório do aplicativo falhou. %1$s</string>
     <string name="restore_failed_tmpdir">Não foi possível criar ou escrever para um diretório tempoprário %1$s</string>
     <string name="restore_failed_dbFileMissing">A cópia de segurança do banco de dados \'debitum.db\' não foi encontrada ou está ilegível.</string>
+    <string name="header_desc_items_returned">itens devolvidos</string>
+    <string name="header_desc_items_all">itens</string>
+    <string name="header_desc_items_lent">itens emprestados</string>
 </resources>
