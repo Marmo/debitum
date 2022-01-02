@@ -1,6 +1,11 @@
+# v1.6.1
+- fixed: wrong label in items header bar when filtered by returned status
+- show thousands separator in monetary amounts
+- new language: Spanish (thx [Fernando Ossandon](https://hosted.weblate.org/user/ferossan/))
+
 # v1.6.0
 - new: setting for number of decimals
-- new languages: Romanian (thx [Simona Iacob](https://hosted.weblate.org/user/s@zp1.net/)), Persian (thx [Radmehr Ebrahimi](https://hosted.weblate.org/user/Radovski/) )
+- new languages: Romanian (thx [Simona Iacob](https://hosted.weblate.org/user/s@zp1.net/)), Persian (thx [Radmehr Ebrahimi](https://hosted.weblate.org/user/Radovski/))
 - translations update
 
 # v1.5.1
