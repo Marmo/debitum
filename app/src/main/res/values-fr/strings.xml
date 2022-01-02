@@ -134,5 +134,8 @@
     <string name="pref_nr_decimals_zero">0</string>
     <string name="pref_nr_decimals_three">3</string>
     <string name="decrease_decimals_dialog_title">Avertissement</string>
-    <string name="decrease_decimals_dialog_confirm">Diminution du nombre de décimales</string>
+    <string name="decrease_decimals_dialog_confirm">Diminuer le nombre de décimales</string>
+    <string name="header_desc_items_returned">objets rendus</string>
+    <string name="header_desc_items_lent">objets prêtés</string>
+    <string name="header_desc_items_all">objets</string>
 </resources>
