@@ -17,9 +17,9 @@
 
 
 
-# release-checklist (1.6.0/15)
+# release-checklist (1.6.1/16)
 - [x] check github milestone
-- [x] update fastlane changelogs (2x)
+- [x] update fastlane changelog
 - [x] update CHANGELOG.md
 - [x] update screenshots
 - [x] update licenses
