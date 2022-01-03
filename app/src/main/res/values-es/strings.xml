@@ -135,4 +135,7 @@
     <string name="pref_info_header">Información</string>
     <string name="pref_guide_title">Guía Rápida</string>
     <string name="pref_github_title">GitHub</string>
+    <string name="header_desc_items_returned">cosas devueltas</string>
+    <string name="header_desc_items_lent">cosas prestadas</string>
+    <string name="header_desc_items_all">cosas</string>
 </resources>

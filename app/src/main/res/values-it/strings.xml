@@ -126,4 +126,16 @@
     <string name="edit_transaction_image_error_copying">Copia dell\'immagine nella directory dell\'applicazione fallita. %1$s</string>
     <string name="edit_transaction_image_add_title">aggiungi un\'immagine</string>
     <string name="edit_transaction_image_delete_desc">elimina l\'immagine</string>
+    <string name="header_desc_items_all">oggetti</string>
+    <string name="header_desc_items_lent">oggetti prestati</string>
+    <string name="decrease_decimals_dialog_title">Avvertimento</string>
+    <string name="restore_preferences_not_restored">Attenzione: non è stato possibile ripristinare le preferenze dell\'applicazione. Controlla i tuoi importi! %1$s</string>
+    <string name="header_desc_items_returned">oggetti restituiti</string>
+    <string name="decrease_decimals_dialog_confirm">Diminuisci il numero di decimali</string>
+    <string name="decrease_decimals_dialog_text">La diminuzione del numero di decimali può causare l\'arrotondamento degli importi delle transazioni. Questa perdita di informazioni non può essere annullata riportando l\'impostazione al valore precedente.</string>
+    <string name="pref_nr_decimals_title">Numero di decimali</string>
+    <string name="pref_nr_decimals_zero">0</string>
+    <string name="pref_nr_decimals_one">1</string>
+    <string name="pref_nr_decimals_two">2</string>
+    <string name="pref_nr_decimals_three">3</string>
 </resources>
