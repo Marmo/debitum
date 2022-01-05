@@ -20,15 +20,15 @@
     <string name="bottom_nav_settings">Ajustes</string>
     <string name="dismiss_filter">sin filtro</string>
     <string name="title_fragment_person_sum_list">Personas</string>
-    <string name="person_sum_list_you_owe">tu debes</string>
-    <string name="person_sum_list_you_lent">tu prestaste</string>
+    <string name="person_sum_list_you_owe">tu le debes</string>
+    <string name="person_sum_list_you_lent">tu le prestaste</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d persona borrada</item>
         <item quantity="other">%d personas borradas</item>
     </plurals>
     <string name="person_sum_list_dialog_delete_text">Esto no puede deshacerse y eliminará todas las transacciones también.</string>
     <string name="title_fragment_transaction_list_money">Dinero</string>
-    <string name="transaction_list_gave">devolvió</string>
+    <string name="transaction_list_gave">entregó</string>
     <string name="transaction_list_received">recibió</string>
     <string name="toolbar_edit_person">Editar Persona</string>
     <string name="header_label">Total</string>
@@ -51,12 +51,12 @@
     <string name="edit_transaction_wrong_amount_format">Algo está mal con el formato del monto.</string>
     <string name="edit_transaction_hint_returndate">Fecha de devolución</string>
     <string name="edit_transaction_snackbar_max_amount">Máx. se permiten 9 dígitos</string>
-    <string name="debt_settlement_money_description">Deuda compensada a \"%1$s\" de %2$s</string>
+    <string name="debt_settlement_money_description">Por deuda de \"%1$s\" con fecha %2$s</string>
     <string name="edit_transaction_suspicious_return_date_title">Fecha estimada de devolución</string>
     <string name="edit_transaction_suspicious_return_date_message">La fecha de devolución (%1$s) es anterior a la fecha de la transacción original. ¿Usarla igualmente\?</string>
     <string name="edit_transaction_use_suspicious_return_date">usar fecha</string>
     <string name="edit_transaction_received">recibió</string>
-    <string name="edit_transaction_gave">devolvió</string>
+    <string name="edit_transaction_gave">entregó</string>
     <string name="edit_transaction_image_add_title">agregar imagen</string>
     <string name="edit_transaction_image_error_app_not_found">No se encontró una aplicación para ver imagenes en su dispositivo.</string>
     <string name="edit_transaction_actionmode_title">Imagen seleccionada</string>
