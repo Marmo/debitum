@@ -406,7 +406,10 @@ public class EditTransactionFragment extends DialogFragment {
 
             // parse amount
             // user is expected to enter something like "10.05"(€/$/...) and we want to store 1005 (format is enforced by AmountTextWatcher)
-            if (isMonetary) factor *= 100;
+            // OR                                       "10"                                  10
+            // OR                                       "10.1"                                101
+            // OR                                       "10.050"                              10050
+            if (isMonetary) factor *= Double.valueOf(Math.pow(10, Utilities.getNrOfDecimals(requireContext()))).intValue();
             int amount;
             try {
                 amount = Utilities.nextInt(factor * Utilities.parseAmount(editAmount.getText().toString()));
