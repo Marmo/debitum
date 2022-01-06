@@ -11,8 +11,8 @@ android {
         applicationId "org.ebur.debitum"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 16
-        versionName "1.6.1"
+        versionCode 17
+        versionName "1.6.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
