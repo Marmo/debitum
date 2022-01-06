@@ -1,3 +1,7 @@
+# v1.6.2
+- fixed: wrong amounts saved when not using 2 decimals setting (#79)
+- fixed: amounts multiplied with 10 or 100 when changing decimals setting immediately after cancelling such a change (#80)
+
 # v1.6.1
 - fixed: wrong label in items header bar when filtered by returned status
 - show thousands separator in monetary amounts
