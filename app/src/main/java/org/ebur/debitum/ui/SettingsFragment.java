@@ -212,6 +212,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireContext());
             pref.edit().putString(PREF_KEY_DECIMALS, String.valueOf(oldNrOfDecimals)).apply();
             dialog.cancel();
+            // reopen settings fragment, as else the setting will visually remain at the new value,
+            // even though the change was cancelled.
+            // Somehow this also affects the oldValue when subsequently changing the setting again, see
+            // https://github.com/Marmo/debitum/issues/80, LEADING TO WRONG AMOUNTS!
+            NavHostFragment.findNavController(this).navigate(R.id.settings_dest);
         });
 
         builder.setMessage(getString(R.string.decrease_decimals_dialog_text))
