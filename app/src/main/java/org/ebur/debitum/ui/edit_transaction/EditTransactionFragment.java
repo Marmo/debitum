@@ -409,7 +409,7 @@ public class EditTransactionFragment extends DialogFragment {
             // OR                                       "10"                                  10
             // OR                                       "10.1"                                101
             // OR                                       "10.050"                              10050
-            if (isMonetary) factor *= Math.pow(10, Utilities.getNrOfDecimals(requireContext()));
+            if (isMonetary) factor *= Double.valueOf(Math.pow(10, Utilities.getNrOfDecimals(requireContext()))).intValue();
             int amount;
             try {
                 amount = Utilities.nextInt(factor * Utilities.parseAmount(editAmount.getText().toString()));
