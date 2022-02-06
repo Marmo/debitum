@@ -547,7 +547,7 @@ public class EditTransactionFragment extends DialogFragment {
 
         String formattedAmount;
         // remove all decimal separators (this the final result for non-monetaries, where only integers are allowed)
-        formattedAmount = input.replaceAll("[.,]", "");
+        formattedAmount = input.replaceAll("[^0-9]", "");
 
         // check if input is short enough to be parsed as integer later
         if(formattedAmount.length()>9) { // we might be above 2^32=4.294.967.296 and later want to make an int of this String
