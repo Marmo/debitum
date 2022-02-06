@@ -1,3 +1,7 @@
+# v1.6.3
+- fixed: crash when entering amounts > 999 in locales with space as grouping char
+- translations update
+
 # v1.6.2
 - fixed: wrong amounts saved when not using 2 decimals setting (#79)
 - fixed: amounts multiplied with 10 or 100 when changing decimals setting immediately after cancelling such a change (#80)
