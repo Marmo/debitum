@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "org.ebur.debitum"
         minSdkVersion 24
-        targetSdkVersion 30
-        versionCode 18
-        versionName "1.6.3"
+        targetSdkVersion 31
+        versionCode 19
+        versionName "1.6.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -43,10 +43,12 @@ android {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.preference:preference:1.2.0'
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion"
+    // fix duplicate class error https://stackoverflow.com/questions/69817925/problem-duplicate-class-androidx-lifecycle-viewmodel-found-in-modules
+    //implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$rootProject.lifecycleVersion"
