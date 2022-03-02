@@ -1,3 +1,9 @@
+# v1.6.4
+- fixed: quick guides not shown in localized versions
+- upgrade Android Gradle Plugin from 7.0.4 to 7.1.0
+- translations update
+- new language: Czech ([Vladan Kudláč](https://hosted.weblate.org/user/kudlav/))
+
 # v1.6.3
 - fixed: crash when entering amounts > 999 in locales with space as grouping char
 - translations update
