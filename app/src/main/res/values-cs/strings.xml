@@ -47,4 +47,43 @@
     <string name="title_fragment_edit_transaction">Upravit transakci</string>
     <string name="button_label_save">Uložit</string>
     <string name="delete_dialog_confirm">Smazat</string>
+    <string name="actionmode_delete">Smazat</string>
+    <string name="fab_content_description">Vytvořit transakci</string>
+    <string name="item_filter">Filtrovat dle stavu vrácení</string>
+    <string name="dialog_cancel">Zrušit</string>
+    <string name="dialog_gotit">Chápu</string>
+    <string name="required_helper_text">* Povinné</string>
+    <string name="actionmode_return_item">Označit jako vrácené</string>
+    <string name="actionmode_return_money">Vytvořit vratku</string>
+    <string name="actionmode_edit">Upravit</string>
+    <string name="error_message_database_access">Při pokusu o přístup k databázi došlo k chybě. Zkuste to prosím znovu.
+\n%1$s</string>
+    <plurals name="actionmode_selected">
+        <item quantity="one">%d položka</item>
+        <item quantity="few">%d položek</item>
+        <item quantity="other">%d položky</item>
+    </plurals>
+    <string name="actionmode_sum">Součet: %1$s</string>
+    <string name="database_empty">Žádné záznamy.
+\nVytvořte novou transakci pomocí tlačítka „+“ níže.</string>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="one">%d osoba smazána</item>
+        <item quantity="few">%d osob smazáno</item>
+        <item quantity="other">%d osoby smazány</item>
+    </plurals>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="one">Smazat %d osobu\?</item>
+        <item quantity="few">Smazat %d osob\?</item>
+        <item quantity="other">Smazat %d osoby\?</item>
+    </plurals>
+    <string name="person_sum_list_dialog_delete_text">Tuto akci nelze vrátit zpět. Transakce spojené s osobou budou rovněž smazány.</string>
+    <string name="toolbar_edit_person">Upravit osobu</string>
+    <string name="header_desc_items_returned">předmětů vráceno</string>
+    <string name="header_desc_items_lent">předmětů půjčeno</string>
+    <string name="header_desc_items_all">předmětů</string>
+    <plurals name="transaction_list_snackbar_deleted">
+        <item quantity="one">%d transakce smazána</item>
+        <item quantity="few">%d transakcí smazáno</item>
+        <item quantity="other">%d transakce smazány</item>
+    </plurals>
 </resources>
