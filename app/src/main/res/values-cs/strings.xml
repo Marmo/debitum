@@ -45,4 +45,6 @@
     <string name="title_fragment_transaction_list_money">Peníze</string>
     <string name="item_filter_returned">Zobrazit vrácené</string>
     <string name="title_fragment_edit_transaction">Upravit transakci</string>
+    <string name="button_label_save">Uložit</string>
+    <string name="delete_dialog_confirm">Smazat</string>
 </resources>
