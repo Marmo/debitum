@@ -10,8 +10,8 @@
     <string name="person_sum_list_you_lent">půjčili jste</string>
     <string name="toolbar_create_person">Vytvořit osobu</string>
     <string name="title_fragment_transaction_list_items">Předměty</string>
-    <string name="transaction_list_gave">dal</string>
-    <string name="transaction_list_received">obdržel</string>
+    <string name="transaction_list_gave">dává</string>
+    <string name="transaction_list_received">obdrží</string>
     <string name="header_label">Celkem</string>
     <string name="item_filter_all">Zobrazit vše</string>
     <string name="item_filter_unreturned">Zobrazit nevrácené</string>
@@ -20,7 +20,7 @@
     <string name="edit_transaction_hint_person">Osoba *</string>
     <string name="edit_transaction_error_select_name">Prosím zvolte osobu.</string>
     <string name="edit_transaction_hint_amount_money">Částka *</string>
-    <string name="edit_transaction_hint_amount_item">Počet věcí *</string>
+    <string name="edit_transaction_hint_amount_item">Počet předmětů *</string>
     <string name="edit_transaction_error_enter_amount">Prosím zadejte částku.</string>
     <string name="edit_transaction_error_enter_description">Prosím zadejte popis.</string>
     <string name="edit_transaction_hint_desc">Popis</string>
@@ -28,8 +28,8 @@
     <string name="edit_transaction_date_dialog_title">Zvolte datum</string>
     <string name="edit_transaction_hint_date">Datum</string>
     <string name="edit_transaction_hint_returndate">Datum vrácení</string>
-    <string name="edit_transaction_gave">dal</string>
-    <string name="edit_transaction_received">obdržel</string>
+    <string name="edit_transaction_gave">dává</string>
+    <string name="edit_transaction_received">obdrží</string>
     <string name="edit_transaction_image_add_title">přidat fotku</string>
     <string name="edit_transaction_image_delete_desc">smazat fotku</string>
     <string name="title_fragment_edit_person">Upravit osobu</string>
@@ -86,4 +86,35 @@
         <item quantity="few">%d transakcí smazáno</item>
         <item quantity="other">%d transakce smazány</item>
     </plurals>
+    <plurals name="transaction_list_dialog_delete_title">
+        <item quantity="one">Smazat %d transakci\?</item>
+        <item quantity="few">Smazat %d transakcí\?</item>
+        <item quantity="other">Smazat %d transakcí\?</item>
+    </plurals>
+    <string name="pref_nr_decimals_title">Počet desetinných míst</string>
+    <string name="pref_nr_decimals_two">2</string>
+    <string name="decrease_decimals_dialog_confirm">Snížit počet desetinných míst</string>
+    <string name="pref_nr_decimals_one">1</string>
+    <string name="pref_nr_decimals_three">3</string>
+    <string name="decrease_decimals_dialog_title">Varování</string>
+    <string name="edit_transaction_wrong_amount_format">Něco je špatně s vaším formátem částky.</string>
+    <string name="edit_transaction_snackbar_max_amount">Povoleno max. 9 číslic</string>
+    <string name="debt_settlement_money_description">Vyrovnání dluhu za „%1$s“ od %2$s</string>
+    <string name="edit_transaction_suspicious_return_date_title">Podezřelé datum vrácení</string>
+    <string name="edit_transaction_suspicious_return_date_message">Nastavené datum vrácení (%1$s) je před datem transakce. Přesto použít\?</string>
+    <string name="edit_transaction_use_suspicious_return_date">použít datum</string>
+    <string name="edit_transaction_image_error_copying">Kopírování fotky do adresáře aplikace se nezdařilo. %1$s</string>
+    <string name="edit_transaction_image_error_app_not_found">Na vašem zařízení nebyla nalezena žádná aplikace pro zobrazení fotky.</string>
+    <string name="edit_transaction_actionmode_title">Fotografie vybrána</string>
+    <string name="pref_general_header">Obecné</string>
+    <string name="pref_nr_decimals_zero">0</string>
+    <string name="decrease_decimals_dialog_text">Snížení počtu desetinných míst může způsobit zaokrouhlení částek transakce. Tuto ztrátu informace nelze vzít zpět nastavením na předchozí hodnotu.</string>
+    <string name="pref_date_format_title">Formát data</string>
+    <string name="pref_date_format_systemdefault_short">Systémový (krátký)</string>
+    <string name="pref_date_format_systemdefault_medium">Systémový (střední)</string>
+    <string name="pref_date_format_systemdefault_long">Systémový (dlouhý)</string>
+    <string name="pref_maintenance_header">Údržba</string>
+    <string name="backup_successful">Data zálohována na externí úložiště</string>
+    <string name="backup_failed">Zálohování selhalo %1$s</string>
+    <string name="restore_failed">Obnova selhala %1$s</string>
 </resources>
