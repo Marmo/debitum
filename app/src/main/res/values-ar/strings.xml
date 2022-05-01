@@ -54,4 +54,36 @@
     <string name="header_label">الإجمالي</string>
     <string name="header_desc_items_lent">عناصر معارة</string>
     <string name="title_fragment_edit_transaction">حرّر المعاملة</string>
+    <string name="actionmode_return_item">علّمه كمعاد</string>
+    <string name="actionmode_return_money">أنشئ معاملة استعادة</string>
+    <plurals name="actionmode_selected">
+        <item quantity="zero">لم تختر</item>
+        <item quantity="one">واحد مختار</item>
+        <item quantity="two">اثنان مختاران</item>
+        <item quantity="few">%d مختارة</item>
+        <item quantity="many">%d مختارة</item>
+        <item quantity="other">%d مختارة</item>
+    </plurals>
+    <string name="database_empty">لم يُسجل شيء بعد.
+\nأنشئ معاملة باستخدام زر \"+\".</string>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="zero">لم تختر شخصًا</item>
+        <item quantity="one">أتريد حذف شخص واحد؟</item>
+        <item quantity="two">أتريد حذف شخصين؟</item>
+        <item quantity="few">أتريد حذف %d أشخاص؟</item>
+        <item quantity="many">أتريد حذف %d شخص؟</item>
+        <item quantity="other">أتريد حذف %d شخص؟</item>
+    </plurals>
+    <string name="item_filter">رشّح حسب الحالة</string>
+    <string name="edit_transaction_hint_amount_money">الكمية *</string>
+    <string name="edit_transaction_error_enter_amount">رجاءً أدخل الكمية.</string>
+    <string name="edit_transaction_wrong_amount_format">خطب في نسق الكمية.</string>
+    <string name="edit_transaction_gave">معطاة</string>
+    <string name="edit_transaction_received">مستلمة</string>
+    <string name="edit_transaction_snackbar_max_amount">أقصى حدّ هو عدد ذو 9 منازل</string>
+    <string name="edit_transaction_suspicious_return_date_title">تاريخ الاستعادة مشبوه</string>
+    <string name="edit_transaction_use_suspicious_return_date">استخدم تاريخ</string>
+    <string name="edit_transaction_image_delete_desc">احذف الصورة</string>
+    <string name="edit_transaction_image_add_title">أضف صورة</string>
+    <string name="edit_transaction_image_error_copying">فشل نسخ الصورة لدليل التطبيق. %1$s</string>
 </resources>
