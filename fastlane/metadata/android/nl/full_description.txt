@@ -1,9 +1,9 @@
-With Debitum you can track all kinds of IOUs, be it money or lent items. This way you will never more forget if your friend already gave you back that book or dispute about how much you owe your colleague for coffee.
+Met Debitum kunt u allerlei IOU's volgen, of het nu geld of uitgeleende artikelen zijn. Zo vergeet je nooit meer of je vriend je dat boek al heeft teruggegeven of dat je twijfelt over hoeveel je je collega schuldig bent voor de koffie.
 
-The intended use case is to manage (smaller) personal debts and lent items. To keep things simple, things like interest, deadlines, fees etc. will not be an integral part of the app (though the description could somehow be used for that, but I would generally recommend to use more specialised apps for this).
+De toepasbaarheid van Debitum is het beheren van (kleinere) persoonlijke schulden en uitgeleende artikelen. Om het simpel te houden zullen zaken zoals rente, deadlines, vergoedingen enz. geen onderdeel van de app zijn (hoewel de beschrijving daar op de een of andere manier wel voor gebruikt zou kunnen worden, zouden we over het algemeen aanraden om hiervoor meer gespecialiseerde apps te gebruiken).
 
-You can backup and restore the database where persons and transactions are stored.
+Je kunt een back-up maken van de database waarin personen en transacties zijn opgeslagen en deze herstellen.
 
-There is no online service whatsoever involved, so your data is saved on your device only (as far as this app is concerned).
+Er is geen enkele online dienst bij betrokken, je gegevens worden dus enkel op je apparaat zelf bewaard (voor zover het deze app betreft).
 
-<i>Keywords: IOU, debt, lend</i>
+<i>Keywords: IOU, debt, lend, schuld, geleend, teruggeven, uitgeleend</i>
