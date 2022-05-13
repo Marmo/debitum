@@ -1,6 +1,7 @@
 package org.ebur.debitum.ui.list;
 
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,15 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.TransactionWithPerson;
+import org.ebur.debitum.ui.edit_transaction.EditTransactionFragment;
 import org.ebur.debitum.util.Utilities;
 
 class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -21,6 +26,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
     private final TextView txnAmountView;
     private final TextView txnGaveReceivedView;
     private final TextView txnTimestampView;
+    private int idTransaction;
 
     private TransactionListViewHolder(View itemView) {
         super(itemView);
@@ -34,6 +40,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
     }
 
     public void bind(TransactionWithPerson twp, boolean isSelected) {
+        idTransaction = twp.transaction.idTransaction;
         txnNameView.setText(twp.person.name);
         txnDescriptionView.setText(twp.transaction.description);
         txnAmountView.setText(twp.transaction.getFormattedAmount(false, Utilities.getNrOfDecimals(itemView.getContext())));
@@ -98,8 +105,15 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
 
     // without having an onClickListener the view will not get the pressed state when clicked
     // and thus won't reflect the backgroundTint change from list_item_bg_selector.xml
+    // so even when no on click actions was needed, an empty onClick method would be mandatory
     @Override
     public void onClick(View v) {
+        // navigate to edit txn dialog
+        Bundle args = new Bundle();
+        args.putInt(EditTransactionFragment.ARG_ID_TRANSACTION, idTransaction);
+
+        NavController navController = NavHostFragment.findNavController(FragmentManager.findFragment(v));
+        navController.navigate(R.id.action_global_editTransaction, args);
     }
 }
 
