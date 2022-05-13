@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_message_database_access">خطأ في النفاذ لقاعدة البيانات.أعد المحاولة.
+\n%1$s</string>
+    <string name="dialog_cancel">ألغِ</string>
+    <string name="button_label_save">احفظ</string>
+    <string name="delete_dialog_confirm">احذف</string>
+    <string name="required_helper_text">* مطلوب</string>
+    <string name="actionmode_delete">احذف</string>
+    <string name="actionmode_sum">المجموع: %1$s</string>
+    <string name="bottom_nav_people">الأشخاص</string>
+    <string name="bottom_nav_money">المال</string>
+    <string name="bottom_nav_items">العناصر</string>
+    <string name="dismiss_filter">أزل المرشّح</string>
+    <string name="title_fragment_person_sum_list">الأشخاص</string>
+    <string name="person_sum_list_no_debt">لا ديون</string>
+    <string name="person_sum_list_you_lent">أقرضت</string>
+    <string name="person_sum_list_you_owe">اقترضت</string>
+    <string name="transaction_list_gave">مقدمة</string>
+    <string name="transaction_list_received">مستلمة</string>
+    <string name="toolbar_edit_person">حرّر الشخص</string>
+    <string name="header_desc_items_returned">عناصر معادة</string>
+    <string name="item_filter_all">أظهر الكل</string>
+    <string name="item_filter_returned">أظهر المستعادة</string>
+    <string name="edit_transaction_hint_person">شخص *</string>
+    <string name="edit_transaction_error_select_name">رجاءً اختر شخصًا.</string>
+    <string name="edit_transaction_hint_amount_item">عدد العناصر *</string>
+    <string name="edit_transaction_hint_desc_item">الوصف *</string>
+    <string name="dialog_gotit">فهمتُ</string>
+    <string name="actionmode_edit">حرّر</string>
+    <string name="fab_content_description">أنشئ معاملة</string>
+    <string name="bottom_nav_settings">الإعدادات</string>
+    <string name="edit_transaction_error_enter_description">رجاءً أدخل وصفًا.</string>
+    <string name="item_filter_unreturned">أظهر غير المعادة</string>
+    <string name="toolbar_create_person">أنشئ شخصًا</string>
+    <string name="transaction_list_dialog_delete_text">لا يمكن نقضه.</string>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="zero">لم يُحذف أي شخص</item>
+        <item quantity="one">حُذف شخص واحد</item>
+        <item quantity="two">حُذف شخصان</item>
+        <item quantity="few">حُذف %d أشخاص</item>
+        <item quantity="many">حُذف %d شخصًا</item>
+        <item quantity="other">حُذف %d شخص</item>
+    </plurals>
+    <string name="title_fragment_edit_transaction_create">أنشئ معاملة</string>
+    <string name="edit_transaction_date_dialog_title">اختر التاريخ</string>
+    <string name="edit_transaction_hint_date">التاريخ</string>
+    <string name="edit_transaction_hint_returndate">تاريخ الإعادة</string>
+    <string name="person_sum_list_dialog_delete_text">هذه العملية غير قابلة للنقض وستحذف جميع المعاملات.</string>
+    <string name="title_fragment_transaction_list_money">المال</string>
+    <string name="title_fragment_transaction_list_items">العناصر</string>
+    <string name="header_desc_items_all">عناصر</string>
+    <string name="edit_transaction_hint_desc">الوصف</string>
+    <string name="header_label">الإجمالي</string>
+    <string name="header_desc_items_lent">عناصر معارة</string>
+    <string name="title_fragment_edit_transaction">حرّر المعاملة</string>
+    <string name="actionmode_return_item">علّمه كمعاد</string>
+    <string name="actionmode_return_money">أنشئ معاملة استعادة</string>
+    <plurals name="actionmode_selected">
+        <item quantity="zero">لم تختر</item>
+        <item quantity="one">واحد مختار</item>
+        <item quantity="two">اثنان مختاران</item>
+        <item quantity="few">%d مختارة</item>
+        <item quantity="many">%d مختارة</item>
+        <item quantity="other">%d مختارة</item>
+    </plurals>
+    <string name="database_empty">لم يُسجل شيء بعد.
+\nأنشئ معاملة باستخدام زر \"+\".</string>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="zero">لم تختر شخصًا</item>
+        <item quantity="one">أتريد حذف شخص واحد؟</item>
+        <item quantity="two">أتريد حذف شخصين؟</item>
+        <item quantity="few">أتريد حذف %d أشخاص؟</item>
+        <item quantity="many">أتريد حذف %d شخص؟</item>
+        <item quantity="other">أتريد حذف %d شخص؟</item>
+    </plurals>
+    <string name="item_filter">رشّح حسب الحالة</string>
+    <string name="edit_transaction_hint_amount_money">الكمية *</string>
+    <string name="edit_transaction_error_enter_amount">رجاءً أدخل الكمية.</string>
+    <string name="edit_transaction_wrong_amount_format">خطب في نسق الكمية.</string>
+    <string name="edit_transaction_gave">معطاة</string>
+    <string name="edit_transaction_received">مستلمة</string>
+    <string name="edit_transaction_snackbar_max_amount">أقصى حدّ هو عدد ذو 9 منازل</string>
+    <string name="edit_transaction_suspicious_return_date_title">تاريخ الاستعادة مشبوه</string>
+    <string name="edit_transaction_use_suspicious_return_date">استخدم تاريخ</string>
+    <string name="edit_transaction_image_delete_desc">احذف الصورة</string>
+    <string name="edit_transaction_image_add_title">أضف صورة</string>
+    <string name="edit_transaction_image_error_copying">فشل نسخ الصورة لدليل التطبيق. %1$s</string>
+</resources>
