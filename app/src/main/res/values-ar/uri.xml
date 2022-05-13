@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_uri">file:///android_asset/guide_ar.html</string>
+</resources>
