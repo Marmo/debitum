@@ -136,6 +136,9 @@
     <string name="pref_date_format_systemdefault_medium_value" translatable="false">SYSTEM_DEFAULT_M</string>
     <string name="pref_date_format_systemdefault_long">System default (long)</string>
     <string name="pref_date_format_systemdefault_long_value" translatable="false">SYSTEM_DEFAULT_L</string>
+    <string name="pref_invert_colors_title">Invert owe/lent colors</string>
+    <string name="pref_invert_colors_summary_off">owe: green, lent: red</string>
+    <string name="pref_invert_colors_summary_on">owe: red, lent: green</string>
 
     <string name="pref_maintenance_header">Maintenance</string>
     <string name="backup_successful">Data backed up to external storage</string>

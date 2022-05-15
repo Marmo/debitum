@@ -7,6 +7,11 @@
             android:entryValues="@array/date_format_values"
             android:key="date_format"
             android:title="@string/pref_date_format_title" />
+        <SwitchPreferenceCompat
+            app:key="invert_colors"
+            app:title="@string/pref_invert_colors_title"
+            app:defaultValue="false"
+            />
         <ListPreference
             android:entries="@array/nr_of_decimals_entries"
             android:entryValues="@array/nr_of_decimals_values"

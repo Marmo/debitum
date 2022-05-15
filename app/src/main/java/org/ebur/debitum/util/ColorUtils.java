@@ -1,12 +1,18 @@
 package org.ebur.debitum.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.util.Log;
 import android.util.TypedValue;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
+
+import org.ebur.debitum.R;
+import org.ebur.debitum.ui.SettingsFragment;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -67,5 +73,29 @@ public abstract class ColorUtils {
         } catch (NoSuchAlgorithmException ignore) {
             return null;
         }
+    }
+
+    /**
+     * @param context: Context to retrieve the setting+color from
+     * @return the color, that should be used to color owed amounts (i.e. txn amount > 0)
+     */
+    @ColorInt
+    public static int getOweColor(@NonNull Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean invertColors = pref.getBoolean(SettingsFragment.PREF_KEY_INVERT_COLORS, false);
+        int colorRes = invertColors ? R.color.lent_red : R.color.owe_green;
+        return context.getResources().getColor(colorRes, null);
+    }
+
+    /**
+     * @param context: Context to retrieve the setting+color from
+     * @return the color, that should be used to color lent amounts (i.e. txn amount < 0)
+     */
+    @ColorInt
+    public static int getLentColor(@NonNull Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean invertColors = pref.getBoolean(SettingsFragment.PREF_KEY_INVERT_COLORS, false);
+        int colorRes = invertColors ? R.color.owe_green : R.color.lent_red;
+        return context.getResources().getColor(colorRes, null);
     }
 }

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.ebur.debitum.R;
 import org.ebur.debitum.database.TransactionWithPerson;
 import org.ebur.debitum.ui.edit_transaction.EditTransactionFragment;
+import org.ebur.debitum.util.ColorUtils;
 import org.ebur.debitum.util.Utilities;
 
 class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -62,23 +63,24 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
             txnTimestampView.setText(Utilities.formatDate(twp.transaction.timestamp, itemView.getContext()));
         }
 
-        int gaveReceivedString, amountColor;
+        int gaveReceivedString;
+        @ColorInt int amountColor;
         int sign = Integer.compare(twp.transaction.amount, 0);
         switch (sign) {
             case -1:
                 gaveReceivedString = R.string.transaction_list_received;
-                amountColor = R.color.lent_red;
+                amountColor = ColorUtils.getLentColor(txnAmountView.getContext());
                 break;
             case 0:
             case 1:
                 gaveReceivedString = R.string.transaction_list_gave;
-                amountColor = R.color.owe_green;
+                amountColor = ColorUtils.getOweColor(txnAmountView.getContext());
                 break;
             default:
                 throw new IllegalStateException("Unexpected value (sign): " + sign);
         }
         txnGaveReceivedView.setText(gaveReceivedString);
-        txnAmountView.setTextColor(txnAmountView.getResources().getColor(amountColor, null));
+        txnAmountView.setTextColor(amountColor);
 
         // selection state
         itemView.setActivated(isSelected);

@@ -22,6 +22,7 @@ import org.ebur.debitum.R;
 import org.ebur.debitum.database.Person;
 import org.ebur.debitum.database.PersonWithTransactions;
 import org.ebur.debitum.database.Transaction;
+import org.ebur.debitum.util.ColorUtils;
 import org.ebur.debitum.util.Utilities;
 
 class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -62,7 +63,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
         switch(sign) {
             case 1:
                 oweLentLabelView.setText(R.string.person_sum_list_you_owe);
-                sumView.setTextColor(sumView.getResources().getColor(R.color.owe_green, null));
+                sumView.setTextColor(ColorUtils.getOweColor(sumView.getContext()));
                 break;
             case 0:
                 oweLentLabelView.setText(R.string.person_sum_list_no_debt);
@@ -70,7 +71,7 @@ class PersonSumListViewHolder extends RecyclerView.ViewHolder implements View.On
                 break;
             case -1:
                 oweLentLabelView.setText(R.string.person_sum_list_you_lent);
-                sumView.setTextColor(sumView.getResources().getColor(R.color.lent_red, null));
+                sumView.setTextColor(ColorUtils.getLentColor(sumView.getContext()));
         }
 
         String letter = avatar instanceof RoundedBitmapDrawable

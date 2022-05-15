@@ -57,6 +57,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public final static String PREF_KEY_ITEM_RETURNED_STANDARD_FILTER = "item_returned_standard_filter";
     public final static String PREF_KEY_DATE_FORMAT = "date_format";
     public final static String PREF_KEY_DECIMALS = "decimals";
+    public final static String PREF_KEY_INVERT_COLORS = "invert_colors";
+
     public final static String FILENAME_DB = "debitum.db";
     public final static String FILENAME_PREFS = "debitum-preferences.xml";
 
@@ -91,6 +93,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (dismissFilterPref != null) {
             dismissFilterPref.setSummaryOff(R.string.pref_dismiss_filter_summary_false);
             dismissFilterPref.setSummaryOn(R.string.pref_dismiss_filter_summary_true);
+        }
+
+        SwitchPreferenceCompat invertColorsPref = findPreference(PREF_KEY_INVERT_COLORS);
+        if (invertColorsPref != null) {
+            invertColorsPref.setSummaryOff(R.string.pref_invert_colors_summary_off);
+            invertColorsPref.setSummaryOn(R.string.pref_invert_colors_summary_on);
         }
 
         ListPreference itemReturnedFilterPref = findPreference(PREF_KEY_ITEM_RETURNED_STANDARD_FILTER);
