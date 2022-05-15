@@ -148,4 +148,7 @@
     <string name="header_desc_items_returned">פריטים הוחזרו</string>
     <string name="header_desc_items_all">פריטים</string>
     <string name="header_desc_items_lent">פריטים הושאלו</string>
+    <string name="pref_invert_colors_title">היפוך צבעי חוב/זכות</string>
+    <string name="pref_invert_colors_summary_off">חוב: ירוק, זכות: אדום</string>
+    <string name="pref_invert_colors_summary_on">חוב: אדום, זכות: ירוק</string>
 </resources>
