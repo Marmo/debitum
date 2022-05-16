@@ -1,3 +1,9 @@
+# v1.6.5
+- new: option to reverse owe/lent colors
+- new: enter edit transaction screen with single tap on transaction
+- new: icon in transaction list, indicating if the transaction has images attached (note: for transactions with existing images, this icon will only show up after the next save)
+- translations update
+
 # v1.6.4
 - fixed: quick guides not shown in localized versions
 - upgrade Android Gradle Plugin from 7.0.4 to 7.1.0

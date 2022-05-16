@@ -1,10 +1,7 @@
-## 1.7.0/??
-- add scrollbar showing the date/month/year while scrolling the transaction list OR add bar that shows the date and total debt up to the topmost visible transaction
-
 ## later / unassigned
+- add scrollbar showing the date/month/year while scrolling the transaction list OR add bar that shows the date and total debt up to the topmost visible transaction
 - swipe entry to mark as returned or delete
 - use DataBinding in Edit Dialogs (see branch feature/EditPersonViewModelDataBinding)
-- use RxJava (?)
 - create a way to get from person sum list directly to filtered items list of a person
 - make some intro showing basic functions
 
@@ -17,7 +14,7 @@
 
 
 
-# release-checklist (1.6.4/19)
+# release-checklist (1.6.5/20)
 - [x] check github milestone
 - [x] update fastlane changelog
 - [x] update CHANGELOG.md
@@ -27,5 +24,6 @@
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage
 - [x] check build.gradle version+version code
+- [x] pull latest translations
 - [] build release (!) apk, rename debitum-x.x.x.apk
 - [] tag release
