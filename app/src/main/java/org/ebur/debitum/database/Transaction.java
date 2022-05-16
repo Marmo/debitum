@@ -40,6 +40,7 @@ public class Transaction {
         this.timestamp = timestamp;
         this.isMonetary = isMonetary;
         this.timestampReturned = null;
+        this.hasImages = false;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -53,6 +54,7 @@ public class Transaction {
     @ColumnInfo(name = "is_monetary") public boolean isMonetary; // True for money, false for things
     @ColumnInfo(name = "timestamp") public Date timestamp;  // timestamp when the transaction took place
     @ColumnInfo(name = "timestamp_returned") public Date timestampReturned;  // timestamp when the item was returned
+    @ColumnInfo(name = "has_images") public boolean hasImages; // if this txn has images (needed for icon in transaction list)
 
     /*
      * returns the amount formatted as a string, depending on isMonetary
@@ -74,15 +76,17 @@ public class Transaction {
     }
 
     public boolean equals(Transaction t) {
-        boolean id = this.idTransaction == t.idTransaction;
-        boolean desc = this.description.equals(t.description);
-        boolean amnt = this.amount == t.amount;
-        boolean isMon = this.isMonetary == t.isMonetary;
-        boolean idpers = this.idPerson == t.idPerson;
-        boolean timestmp = this.timestamp.equals(t.timestamp);
-        boolean timestmpReturned = (!this.isReturned() && !t.isReturned())
-                || (this.isReturned() && this.timestampReturned.equals(t.timestampReturned));
-        return amnt && desc && timestmp && isMon && id && idpers && timestmpReturned;
+        return
+                this.idTransaction == t.idTransaction &&
+                this.description.equals(t.description) &&
+                this.amount == t.amount &&
+                this.isMonetary == t.isMonetary &&
+                this.idPerson == t.idPerson &&
+                this.timestamp.equals(t.timestamp) &&
+                ((!this.isReturned() && !t.isReturned()) ||
+                    (this.isReturned() && this.timestampReturned.equals(t.timestampReturned))
+                ) &&
+                this.hasImages == t.hasImages;
     }
 
     //---------------------
@@ -123,7 +127,9 @@ public class Transaction {
 
         return signed ? sum : Math.abs(sum);
     }
-    public static int getSum(List<Transaction> transactions) { return Transaction.getSum(transactions,true); }
+    public static int getSum(List<Transaction> transactions) {
+        return Transaction.getSum(transactions,true);
+    }
 
     /**
      * @param transactions List of [Transaction]s for which the number of lent items shall be calculated

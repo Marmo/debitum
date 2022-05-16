@@ -33,6 +33,16 @@
         app:layout_constraintTop_toBottomOf="@id/list_item_name"
         tools:text="RECEIVED" />
 
+    <ImageView
+        android:id="@+id/list_item_image_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toStartOf="@id/list_item_description"
+        app:layout_constraintStart_toStartOf="@id/list_item_name"
+        app:layout_constraintTop_toBottomOf="@id/list_item_gave_received"
+        app:srcCompat="@drawable/ic_outline_image_24" />
     <TextView
         android:id="@+id/list_item_description"
         style="@style/TextAppearance.Debitum.ListDescription"
@@ -40,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         app:layout_constraintEnd_toStartOf="@id/barrierNameToAmount"
-        app:layout_constraintStart_toStartOf="@id/list_item_name"
+        app:layout_constraintStart_toEndOf="@id/list_item_image_icon"
         app:layout_constraintTop_toBottomOf="@id/list_item_gave_received"
         tools:text="Stamps" />
 

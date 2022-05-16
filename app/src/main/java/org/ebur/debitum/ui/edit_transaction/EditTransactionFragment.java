@@ -433,6 +433,11 @@ public class EditTransactionFragment extends DialogFragment {
                     isMonetary,
                     editDescription.getText().toString(),
                     viewModel.getTimestamp());
+
+            // record if txn has images
+            transaction.hasImages = viewModel.hasImages();
+
+            // update returned date for item txns
             if (viewModel.isItemTransaction()) {
                 // check if return date is empty (could have been cleared by endIcon click which
                 // stays unnoticed by the view model)

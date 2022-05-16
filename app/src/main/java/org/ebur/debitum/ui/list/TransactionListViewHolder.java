@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -27,6 +28,8 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
     private final TextView txnAmountView;
     private final TextView txnGaveReceivedView;
     private final TextView txnTimestampView;
+    private final ImageView txnHasImagesView;
+
     private int idTransaction;
 
     private TransactionListViewHolder(View itemView) {
@@ -36,6 +39,7 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         txnAmountView = itemView.findViewById(R.id.list_item_amount);
         txnGaveReceivedView = itemView.findViewById(R.id.list_item_gave_received);
         txnTimestampView = itemView.findViewById(R.id.list_item_timestamp);
+        txnHasImagesView = itemView.findViewById(R.id.list_item_image_icon);
 
         itemView.setOnClickListener(this);
     }
@@ -81,6 +85,12 @@ class TransactionListViewHolder extends RecyclerView.ViewHolder implements View.
         }
         txnGaveReceivedView.setText(gaveReceivedString);
         txnAmountView.setTextColor(amountColor);
+
+        if (twp.transaction.hasImages) {
+            txnHasImagesView.setVisibility(View.VISIBLE);
+        } else {
+            txnHasImagesView.setVisibility(View.GONE);
+        }
 
         // selection state
         itemView.setActivated(isSelected);

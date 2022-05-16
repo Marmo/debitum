@@ -35,15 +35,15 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(5) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(6) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `txn` (`id_transaction` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `amount` INTEGER NOT NULL, `id_person` INTEGER NOT NULL, `description` TEXT, `is_monetary` INTEGER NOT NULL, `timestamp` INTEGER, `timestamp_returned` INTEGER, FOREIGN KEY(`id_person`) REFERENCES `person`(`id_person`) ON UPDATE NO ACTION ON DELETE NO ACTION )");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `txn` (`id_transaction` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `amount` INTEGER NOT NULL, `id_person` INTEGER NOT NULL, `description` TEXT, `is_monetary` INTEGER NOT NULL, `timestamp` INTEGER, `timestamp_returned` INTEGER, `has_images` INTEGER NOT NULL, FOREIGN KEY(`id_person`) REFERENCES `person`(`id_person`) ON UPDATE NO ACTION ON DELETE NO ACTION )");
         _db.execSQL("CREATE INDEX IF NOT EXISTS `index_txn_id_person` ON `txn` (`id_person`)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS `person` (`id_person` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `note` TEXT, `linked_contact_uri` TEXT)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS `image` (`id_transaction` INTEGER NOT NULL, `filename` TEXT NOT NULL, PRIMARY KEY(`id_transaction`, `filename`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5461cc14ef7179fe0aac281f4e83feb7')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '226bdcef58bad58309a92571f15789d2')");
       }
 
       @Override
@@ -90,7 +90,7 @@ public final class AppDatabase_Impl extends AppDatabase {
 
       @Override
       protected RoomOpenHelper.ValidationResult onValidateSchema(SupportSQLiteDatabase _db) {
-        final HashMap<String, TableInfo.Column> _columnsTxn = new HashMap<String, TableInfo.Column>(7);
+        final HashMap<String, TableInfo.Column> _columnsTxn = new HashMap<String, TableInfo.Column>(8);
         _columnsTxn.put("id_transaction", new TableInfo.Column("id_transaction", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTxn.put("amount", new TableInfo.Column("amount", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTxn.put("id_person", new TableInfo.Column("id_person", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -98,6 +98,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         _columnsTxn.put("is_monetary", new TableInfo.Column("is_monetary", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTxn.put("timestamp", new TableInfo.Column("timestamp", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTxn.put("timestamp_returned", new TableInfo.Column("timestamp_returned", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTxn.put("has_images", new TableInfo.Column("has_images", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysTxn = new HashSet<TableInfo.ForeignKey>(1);
         _foreignKeysTxn.add(new TableInfo.ForeignKey("person", "NO ACTION", "NO ACTION",Arrays.asList("id_person"), Arrays.asList("id_person")));
         final HashSet<TableInfo.Index> _indicesTxn = new HashSet<TableInfo.Index>(1);
@@ -137,7 +138,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "5461cc14ef7179fe0aac281f4e83feb7", "76139f8dad5237fe0a994ae69e29cf36");
+    }, "226bdcef58bad58309a92571f15789d2", "56662a61e348f2bd7476e38f0e46e903");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)

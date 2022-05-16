@@ -86,6 +86,9 @@ public class EditTransactionViewModel extends AndroidViewModel {
             imageFilenames.setValue(new ArrayList<>());
         }
     }
+    public boolean hasImages() {
+        return imageFilenames.getValue() != null && !imageFilenames.getValue().isEmpty();
+    }
     public void addImageLink(@NonNull String filename) {
         List<String> images = imageFilenames.getValue();
         if (images == null) {
@@ -94,6 +97,7 @@ public class EditTransactionViewModel extends AndroidViewModel {
         images.add(filename);
         imageFilenames.setValue(images);
     }
+
     public void deleteImageLink(@NonNull String filename) {
         List<String> images = imageFilenames.getValue();
         if (images != null) {
