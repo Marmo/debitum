@@ -146,4 +146,7 @@
     <string name="header_desc_items_returned">Dinge zurückgegeben</string>
     <string name="header_desc_items_lent">Dinge ver-/entliehen</string>
     <string name="header_desc_items_all">Dinge</string>
+    <string name="pref_invert_colors_summary_off">geliehen: grün, verliehen: rot</string>
+    <string name="pref_invert_colors_title">Ver-/Geliehen-Farben tauschen</string>
+    <string name="pref_invert_colors_summary_on">geliehen: rot, verliehen: grün</string>
 </resources>
