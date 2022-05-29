@@ -213,4 +213,21 @@ public abstract class FileUtils {
 
         return destFile;
     }
+
+    // copies backup file from original location to one decided via SAF picker
+    public static void copyZip(File originalFile, Uri destUri, Context context) throws IOException {
+        ParcelFileDescriptor pfd = context.getContentResolver().openFileDescriptor(destUri, "w");
+        FileOutputStream destFos = new FileOutputStream(pfd.getFileDescriptor());
+        FileInputStream originalFis = new FileInputStream(originalFile);
+        FileChannel originalChannel = originalFis.getChannel();
+        FileChannel destChannel = destFos.getChannel();
+
+        originalChannel.transferTo(0, originalChannel.size(), destChannel);
+
+        destChannel.close();
+        originalChannel.close();
+        destFos.close();
+        originalFis.close();
+        pfd.close();
+    }
 }
