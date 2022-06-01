@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -165,7 +166,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (backupPref!=null) {
             backupPref.setSummary(getString(R.string.pref_backup_summary, requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR));
             backupPref.setOnPreferenceClickListener(preference -> {
-                backup();
+                createBackup();
                 return true;
             });
         }
@@ -238,7 +239,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     // Backup and restore DB
     // ---------------------
 
-    private void backup() {
+    private void backup(Uri destUri) {
         // assemble filename
         Calendar today = Calendar.getInstance();
         int year = today.get(Calendar.YEAR);
@@ -268,6 +269,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 try {
                     exportPreferences(prefsFile);
                     FileUtils.zip(filesToZip, zipFile);
+                    FileUtils.copyZip(zipFile, destUri, requireContext());
                 } catch (IOException e) {
                     e.printStackTrace();
                     info = getString(R.string.backup_failed, e.getMessage());
@@ -431,4 +433,24 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 7000)
                 .show();
     }
+
+    // handle SAF file picker here
+    private void createBackup() {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("application/zip");
+        intent.putExtra(Intent.EXTRA_TITLE, "debitum-backup.zip");
+        backupARL.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> backupARL = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    Uri destUri = data.getData();
+                    backup(destUri);
+                }
+            }
+    );
 }
