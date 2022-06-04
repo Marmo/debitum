@@ -105,9 +105,7 @@
     <string name="restore_failed">Wiederherstellung fehlgeschlagen! %1$s</string>
     <string name="pref_backup_title">Daten sichern</string>
     <string name="pref_restore_title">Daten wiederherstellen</string>
-    <string name="pref_backup_summary">nach %1$s</string>
     <string name="pref_restore_summary">aus einer zuvor gesicherten Zip-Datei</string>
-    <string name="pref_backup_warning">Bitte beachte, dass das Verzeichnis, in das die Sicherung abgelegt wird, beim Deinstallieren oder dem Löschen der Anwendungsdaten ebenfalls entfernt wird. Du musst die Datei an einen sicheren Ort verschieben, wenn du sie später wiederherstellen willst!</string>
     <string name="pref_restore_file_not_found">Sicherungsdatei nicht gefunden</string>
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Kurzanleitung</string>

@@ -52,8 +52,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @SuppressWarnings("unused")
     private static final String TAG = "SettingsFragment";
 
-    private final String BACKUP_SUBDIR = "backup";
-
     public final static String PREF_KEY_DISMISS_FILTER_BEHAVIOUR = "dismiss_filter_behaviour";
     public final static String PREF_KEY_ITEM_RETURNED_STANDARD_FILTER = "item_returned_standard_filter";
     public final static String PREF_KEY_DATE_FORMAT = "date_format";
@@ -164,7 +162,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         Preference backupPref = findPreference(PREF_KEY_BACKUP);
         if (backupPref!=null) {
-            backupPref.setSummary(getString(R.string.pref_backup_summary, requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR));
             backupPref.setOnPreferenceClickListener(preference -> {
                 startBackup();
                 return true;
@@ -274,6 +271,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     // perform actual backup
     private void backup(Uri destUri) {
 
+        String BACKUP_SUBDIR = "backup";
         String path = requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
 
         AppDatabase.backupDatabase(FILENAME_DB, path, (successDb, messageDb) -> {

@@ -141,7 +141,7 @@
     <string name="pref_invert_colors_summary_on">owe: red, lent: green</string>
 
     <string name="pref_maintenance_header">Maintenance</string>
-    <string name="backup_successful">Data backed up to external storage</string>
+    <string name="backup_successful">Data backed up to chosen location</string>
     <string name="backup_failed">Backup failed %1$s</string>
     <string name="restore_failed">Restoration failed. %1$s</string>
     <string name="restore_not_all_images_restored">Warning: not all images from the backup zip could be restored. %1$s</string>
@@ -150,11 +150,7 @@
     <string name="restore_failed_tmpdir">Could not create or write into temporary directory %1$s</string>
     <string name="pref_backup_title">Backup data</string>
     <string name="pref_restore_title">Restore data</string>
-    <string name="pref_backup_summary">to %1$s</string>
     <string name="pref_restore_summary">from previously created backup zip file</string>
-    <string name="pref_backup_warning">The folder the backup zip is copied to will be deleted
-        when the app is uninstalled or its data cleared. Move it to a safe place before
-        uninstalling/clearing data if you want to restore the backup later.</string>
     <string name="pref_restore_file_not_found">Backup file not found</string>
 
     <string name="pref_info_header">Info</string>

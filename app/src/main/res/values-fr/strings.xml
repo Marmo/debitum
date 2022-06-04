@@ -63,7 +63,6 @@
     <string name="error_message_database_access">Erreur lors de l\'accès à la base de données. Veuillez réessayer.
 \n%1$s</string>
     <string name="pref_github_summary">Trouver et améliorer le code source, signaler des problèmes et des idées</string>
-    <string name="pref_backup_summary">dans %1$s</string>
     <string name="pref_date_format_systemdefault_long">Par défaut du système (long)</string>
     <string name="actionmode_return_money">Créer une transaction de restitution</string>
     <string name="edit_transaction_suspicious_return_date_message">La date de restitution fixée (%1$s) intervient avant la transaction initiale. Utiliser quand même \?</string>
@@ -77,7 +76,6 @@
     <string name="pref_version">Version %1$s</string>
     <string name="restore_confirm_title">Restaurer à partir d\'une sauvegarde</string>
     <string name="pref_restore_file_not_found">Fichier de sauvegarde introuvable</string>
-    <string name="pref_backup_warning">Le dossier dans lequel le zip de sauvegarde est copié sera supprimé lorsque l\'application sera désinstallée ou que ses données seront effacées. Déplacez-le dans un endroit sûr avant de désinstaller/effacer les données si vous voulez restaurer la sauvegarde plus tard.</string>
     <string name="pref_restore_title">Restaurer les données</string>
     <string name="pref_backup_title">Sauvegarder les données</string>
     <string name="restore_failed">La restauration a échoué. %1$s</string>

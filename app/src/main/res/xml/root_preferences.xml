@@ -35,17 +35,12 @@
 
         <Preference
             app:key="backup"
-            app:title="@string/pref_backup_title"
-            app:summary="@string/pref_backup_summary" />
+            app:title="@string/pref_backup_title" />
 
         <Preference
             app:key="restore"
             app:title="@string/pref_restore_title"
             app:summary="@string/pref_restore_summary" />
-
-        <Preference
-            app:icon="@drawable/ic_round_warning_amber_24"
-            app:summary="@string/pref_backup_warning" />
 
     </PreferenceCategory>
 

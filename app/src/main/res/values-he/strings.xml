@@ -11,10 +11,8 @@
     <string name="pref_guide_title">מדריך מקוצר</string>
     <string name="pref_info_header">פרטים</string>
     <string name="pref_restore_file_not_found">קובץ הגיבוי לא נמצא</string>
-    <string name="pref_backup_warning">התיקייה שאליה מועתק קובץ הגיבוי ב־zip תימחק עם הסרת היישומון או עם פינוי הזיכרון שלו. יש להעביר אותו למקום בטוח בטרם הסרת היישומון/פינוי הנתונים לטובת שחזור הגיבוי בהמשך.</string>
     <string name="pref_dismiss_filter_title">כשמתעלמים ממסנן אנשים…</string>
     <string name="pref_restore_summary">מקובץ גיבוי ב־zip שנוצר בעבר</string>
-    <string name="pref_backup_summary">אל %1$s</string>
     <string name="pref_restore_title">שחזור נתונים</string>
     <string name="pref_backup_title">גיבוי נתונים</string>
     <string name="restore_failed_tmpdir">לא ניתן ליצור או לכתוב לתיקייה הזמנית %1$s</string>
