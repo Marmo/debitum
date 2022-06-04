@@ -77,7 +77,7 @@
     <string name="pref_dismiss_filter_title">Eliminando el filtro de personas …</string>
     <string name="pref_dismiss_filter_summary_true">Vuelve al listado de personas</string>
     <string name="pref_date_format_title">Formato de fecha</string>
-    <string name="backup_successful">Datos respaldados en almacenaje externo</string>
+    <string name="backup_successful">Datos respaldados en lugar seleccionado</string>
     <string name="restore_failed">La recuperación falló. %1$s</string>
     <string name="restore_preferences_not_restored">Advertencia: las preferencias de la aplicación podrían no recuperarse. ¡Revise sus datos! %1$s</string>
     <string name="restore_failed_dbFileMissing">La base de datos de respaldo \'debitum.db\' no se encuentra o es ilegible.</string>
@@ -136,4 +136,7 @@
     <string name="header_desc_items_returned">cosas devueltas</string>
     <string name="header_desc_items_lent">cosas prestadas</string>
     <string name="header_desc_items_all">cosas</string>
+    <string name="pref_invert_colors_title">Invertir colores debido/prestado</string>
+    <string name="pref_invert_colors_summary_off">debido: verde, prestado: rojo</string>
+    <string name="pref_invert_colors_summary_on">debido: rojo, prestado: verde</string>
 </resources>
