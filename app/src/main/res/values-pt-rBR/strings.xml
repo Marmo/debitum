@@ -112,9 +112,7 @@
     <string name="restore_failed">A restauração falhou. %1$s</string>
     <string name="pref_backup_title">Dados da cópia de segurança</string>
     <string name="pref_restore_title">Restaurar dados</string>
-    <string name="pref_backup_summary">para %1$s</string>
     <string name="pref_restore_summary">do arquivo zip da cópia de segurança criado anteriormente</string>
-    <string name="pref_backup_warning">A pasta para a qual o zip da cópia de segurança é copiado será excluída quando o aplicativo for desinstalado ou seus dados forem apagados. Mova-o para um local seguro antes de desinstalar/limpar dados se você desejar restaurar o backup mais tarde.</string>
     <string name="pref_restore_file_not_found">Arquivo do Backup não encontrado</string>
     <string name="pref_info_header">Info</string>
     <string name="pref_guide_title">Guia Prático</string>

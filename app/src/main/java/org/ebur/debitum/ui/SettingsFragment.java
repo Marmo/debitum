@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,8 +51,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SettingsFragment";
-
-    private final String BACKUP_SUBDIR = "backup";
 
     public final static String PREF_KEY_DISMISS_FILTER_BEHAVIOUR = "dismiss_filter_behaviour";
     public final static String PREF_KEY_ITEM_RETURNED_STANDARD_FILTER = "item_returned_standard_filter";
@@ -163,9 +162,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         Preference backupPref = findPreference(PREF_KEY_BACKUP);
         if (backupPref!=null) {
-            backupPref.setSummary(getString(R.string.pref_backup_summary, requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR));
             backupPref.setOnPreferenceClickListener(preference -> {
-                backup();
+                startBackup();
                 return true;
             });
         }
@@ -238,21 +236,45 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     // Backup and restore DB
     // ---------------------
 
-    private void backup() {
-        // assemble filename
+    // handle SAF file picker for backup
+    private void startBackup() {
+        // assemble filename preset
         Calendar today = Calendar.getInstance();
-        int year = today.get(Calendar.YEAR);
-        int month = today.get(Calendar.MONTH) + 1;
-        int day = today.get(Calendar.DAY_OF_MONTH);
-        int hour = today.get(Calendar.HOUR_OF_DAY);
-        int minute = today.get(Calendar.MINUTE);
-        int second = today.get(Calendar.SECOND);
-        String filenameZip = String.format(Locale.getDefault(), "debitum-backup-%04d-%02d-%02dT%02d_%02d_%02d.zip", year, month, day, hour, minute, second);
+        String filenameZip = String.format(Locale.getDefault(),
+                "debitum-backup-%04d-%02d-%02dT%02d_%02d_%02d.zip",
+                today.get(Calendar.YEAR),
+                today.get(Calendar.MONTH) + 1,
+                today.get(Calendar.DAY_OF_MONTH),
+                today.get(Calendar.HOUR_OF_DAY),
+                today.get(Calendar.MINUTE),
+                today.get(Calendar.SECOND)
+        );
 
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("application/zip");
+        intent.putExtra(Intent.EXTRA_TITLE, filenameZip);
+        backupARL.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> backupARL = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    Uri destUri = data.getData();
+                    backup(destUri);
+                }
+            }
+    );
+
+    // perform actual backup
+    private void backup(Uri destUri) {
+
+        String BACKUP_SUBDIR = "backup";
         String path = requireContext().getExternalFilesDir(null).getAbsolutePath() + File.separator + BACKUP_SUBDIR;
 
         AppDatabase.backupDatabase(FILENAME_DB, path, (successDb, messageDb) -> {
-            File zipFile = new File(path, filenameZip);
             File dbFile = new File(path, FILENAME_DB);
             File prefsFile = new File(path, FILENAME_PREFS);
             File imagesDir = EditTransactionFragment.getImageDir(requireContext());
@@ -267,11 +289,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 info = getString(R.string.backup_successful);
                 try {
                     exportPreferences(prefsFile);
-                    FileUtils.zip(filesToZip, zipFile);
+                    FileUtils.zip(filesToZip, destUri, requireContext());
                 } catch (IOException e) {
                     e.printStackTrace();
                     info = getString(R.string.backup_failed, e.getMessage());
-                    finishBackup(info, dbFile, prefsFile);
                 }
             } else {
                 info = getString(R.string.backup_failed, messageDb);

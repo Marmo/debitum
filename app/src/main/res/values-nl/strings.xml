@@ -112,7 +112,6 @@
     <string name="restore_confirm_title">Herstel uit Back-up</string>
     <string name="pref_version">Versie %1$s</string>
     <string name="pref_licenses_title">Vrije licenties van derden</string>
-    <string name="pref_backup_warning">De map waarnaar de back-up zip naar wordt gekopieerd, wordt verwijderd wanneer de app zelf verwijderd wordt of wanneer de gegevens ervan worden gewist. Verplaats de back-up zip naar een veilige plaats voordat u gegevens verwijdert/wist als je de back-up later nog wilt kunnen herstellen.</string>
     <string name="button_label_save">Opslaan</string>
     <string name="required_helper_text">* Vereist</string>
     <string name="database_empty">Nog niets opgenomen.
@@ -135,7 +134,6 @@
     <string name="pref_nr_decimals_one">1</string>
     <string name="pref_dismiss_filter_summary_true">Keer terug naar de lijst met personen</string>
     <string name="pref_restore_title">Herstel gegevens</string>
-    <string name="pref_backup_summary">naar %1$s</string>
     <string name="error_message_database_access">Fout bij het openen van de database. Probeer het opnieuw.
 \n%1$s</string>
 </resources>

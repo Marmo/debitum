@@ -109,15 +109,21 @@ public abstract class FileUtils {
         return filename.replaceAll(".*\\.", "");
     }
 
-    // https://www.baeldung.com/java-compress-and-uncompress
-    public static void zip(List<File> source, File dest) throws IOException {
+    /*public static void zip(List<File> source, File dest) throws IOException {
         // check preconditions
         if (dest.exists())
             throw new IOException("Target file already exists.");
         if (dest.getParentFile() != null && !dest.getParentFile().canWrite())
             throw new IOException("Target file's parent directory cannot be written into.");
 
-        FileOutputStream fos = new FileOutputStream(dest);
+        zipInternal(source, dest);
+    }*/
+
+    public static void zip(List<File> source, Uri destUri, @NonNull Context context) throws IOException {
+        // https://www.baeldung.com/java-compress-and-uncompress
+        ParcelFileDescriptor pfd = context.getContentResolver().openFileDescriptor(destUri, "w");
+        FileOutputStream fos = new FileOutputStream(pfd.getFileDescriptor());
+
         ZipOutputStream zipOut = new ZipOutputStream(fos);
         for (File fileToZip : source) {
             FileInputStream fis = new FileInputStream(fileToZip);
@@ -133,6 +139,7 @@ public abstract class FileUtils {
         }
         zipOut.close();
         fos.close();
+        pfd.close();
     }
 
     // https://www.baeldung.com/java-compress-and-uncompress
@@ -213,4 +220,21 @@ public abstract class FileUtils {
 
         return destFile;
     }
+
+    // copies backup file from original location to one decided via SAF picker
+    /*public static void copyZip(File originalFile, Uri destUri, Context context) throws IOException {
+        ParcelFileDescriptor pfd = context.getContentResolver().openFileDescriptor(destUri, "w");
+        FileOutputStream destFos = new FileOutputStream(pfd.getFileDescriptor());
+        FileInputStream originalFis = new FileInputStream(originalFile);
+        FileChannel originalChannel = originalFis.getChannel();
+        FileChannel destChannel = destFos.getChannel();
+
+        originalChannel.transferTo(0, originalChannel.size(), destChannel);
+
+        destChannel.close();
+        originalChannel.close();
+        destFos.close();
+        originalFis.close();
+        pfd.close();
+    }*/
 }

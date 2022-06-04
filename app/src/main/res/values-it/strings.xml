@@ -11,9 +11,7 @@
     <string name="pref_guide_title">Guida rapida</string>
     <string name="pref_info_header">Info</string>
     <string name="pref_restore_file_not_found">File di backup non trovato</string>
-    <string name="pref_backup_warning">La cartella in cui viene copiato lo zip di backup sarà eliminata quando l\'applicazione viene disinstallata o i suoi dati eliminati. Spostala in un posto sicuro prima di disinstallare/eliminare i dati se vuoi ripristinare il backup in seguito.</string>
     <string name="pref_restore_summary">dal file zip di backup creato in precedenza</string>
-    <string name="pref_backup_summary">in %1$s</string>
     <string name="pref_restore_title">Ripristina i dati</string>
     <string name="pref_backup_title">Fai il backup dei dati</string>
     <string name="restore_failed">Ripristino fallito. %1$s</string>

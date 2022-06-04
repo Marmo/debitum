@@ -82,7 +82,6 @@
     <string name="restore_preferences_not_restored">Advertencia: las preferencias de la aplicación podrían no recuperarse. ¡Revise sus datos! %1$s</string>
     <string name="restore_failed_dbFileMissing">La base de datos de respaldo \'debitum.db\' no se encuentra o es ilegible.</string>
     <string name="restore_failed_tmpdir">No es posible crear o escribir en el directorio temporal %1$s</string>
-    <string name="pref_backup_summary">a %1$s</string>
     <string name="pref_restore_title">Recuperar datos</string>
     <string name="pref_restore_summary">de respaldo zip previamente creado</string>
     <string name="pref_restore_file_not_found">Archivo de respaldo no encontrado</string>
@@ -131,7 +130,6 @@
     <string name="backup_failed">El respaldo falló %1$s</string>
     <string name="restore_not_all_images_restored">Advertencia: no todas las imagenes del respaldo podrían recuperarse. %1$s</string>
     <string name="pref_backup_title">Respaldar datos</string>
-    <string name="pref_backup_warning">La carpeta donde se guarda el respaldo zip será borrada cuando se desinstale la aplicación o se vacíen sus datos. Mueva el respaldo a otro lugar antes de desinstalar o vaciar los datos de la aplicación si desea recuperarlo después.</string>
     <string name="pref_info_header">Información</string>
     <string name="pref_guide_title">Guía Rápida</string>
     <string name="pref_github_title">GitHub</string>
