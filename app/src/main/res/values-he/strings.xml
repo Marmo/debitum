@@ -20,7 +20,7 @@
     <string name="restore_not_all_images_restored">אזהרה: לא כל התמונות מה־zip של הגיבוי ניתנות לשחזור. %1$s</string>
     <string name="restore_failed">השחזור נכשל. %1$s</string>
     <string name="backup_failed">הגיבוי נכשל %1$s</string>
-    <string name="backup_successful">הנתונים מגובים לאחסון חיצוני</string>
+    <string name="backup_successful">הנתונים מגובים למיקום נבחר</string>
     <string name="pref_maintenance_header">תחזוקה</string>
     <string name="pref_date_format_systemdefault_long">בררת המחדל של המערכת (ארוך)</string>
     <string name="pref_date_format_systemdefault_medium">בררת המחדל של המערכת (בינוני)</string>
