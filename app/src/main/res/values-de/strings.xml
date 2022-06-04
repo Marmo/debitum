@@ -100,7 +100,7 @@
     <string name="pref_dismiss_filter_summary_false">in der aktuellen Liste bleiben</string>
     <string name="pref_item_returned_filter_title">Standardfilter für Dinge</string>
     <string name="pref_maintenance_header">Wartung</string>
-    <string name="backup_successful">Daten in externen Speicher exportiert</string>
+    <string name="backup_successful">Daten an ausgewählten Ort exportiert</string>
     <string name="backup_failed">Sicherung fehlgeschlagen! %1$s</string>
     <string name="restore_failed">Wiederherstellung fehlgeschlagen! %1$s</string>
     <string name="pref_backup_title">Daten sichern</string>
