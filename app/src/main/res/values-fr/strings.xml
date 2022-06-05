@@ -80,7 +80,7 @@
     <string name="pref_backup_title">Sauvegarder les données</string>
     <string name="restore_failed">La restauration a échoué. %1$s</string>
     <string name="backup_failed">La sauvegarde a échoué %1$s</string>
-    <string name="backup_successful">Données sauvegardées sur un support externe</string>
+    <string name="backup_successful">Sauvegarde des données à l\'endroit choisi</string>
     <string name="pref_maintenance_header">Maintenance</string>
     <string name="pref_date_format_systemdefault_medium">Par défaut du système (moyen)</string>
     <string name="pref_date_format_systemdefault_short">Par défaut du système (court)</string>
