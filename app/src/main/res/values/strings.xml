@@ -154,7 +154,7 @@
     <string name="pref_restore_file_not_found">Backup file not found</string>
 
     <string name="pref_info_header">Info</string>
-    <string name="pref_guide_title">Quick Guide</string>
+    <string name="pref_faq_title">Frequently Asked Questions</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Find and improve the source code, report issues and ideas</string>
     <string name="restore_confirm">Overwrite</string>

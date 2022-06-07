@@ -81,7 +81,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         final String PREF_KEY_BACKUP = "backup";
         final String PREF_KEY_RESTORE = "restore";
-        final String PREF_KEY_GUIDE = "guide";
         final String PREF_KEY_LICENSES = "licenses";
         final String PREF_KEY_VERSION = "version";
 
@@ -172,13 +171,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             restorePref.setSummary(getString(R.string.pref_restore_summary));
             restorePref.setOnPreferenceClickListener(preference -> {
                 startRestore();
-                return true;
-            });
-        }
-        Preference guidePref = findPreference(PREF_KEY_GUIDE);
-        if (guidePref!=null) {
-            guidePref.setOnPreferenceClickListener(preference -> {
-                NavHostFragment.findNavController(this).navigate(R.id.action_settings_to_guide);
                 return true;
             });
         }
