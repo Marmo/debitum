@@ -108,7 +108,7 @@
     <string name="pref_restore_summary">aus einer zuvor gesicherten Zip-Datei</string>
     <string name="pref_restore_file_not_found">Sicherungsdatei nicht gefunden</string>
     <string name="pref_info_header">Info</string>
-    <string name="pref_guide_title">Kurzanleitung</string>
+    <string name="pref_faq_title">Kurzanleitung</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Quellcode ansehen und verbessern, Fehler und Ideen melden</string>
     <string name="restore_confirm">Ersetzen</string>

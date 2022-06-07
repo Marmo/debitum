@@ -2,7 +2,7 @@
 <resources>
     <string name="pref_restore_summary">à partir du fichier zip de sauvegarde précédemment créé</string>
     <string name="pref_github_title">GitHub</string>
-    <string name="pref_guide_title">Guide rapide</string>
+    <string name="pref_faq_title">Guide rapide</string>
     <string name="pref_info_header">Infos</string>
     <string name="pref_licenses_title">Licences tierces libres</string>
     <string name="restore_confirm_text">Écraser toutes les données existantes avec les données de la sauvegarde \?

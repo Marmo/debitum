@@ -115,7 +115,7 @@
     <string name="pref_restore_summary">do arquivo zip da cópia de segurança criado anteriormente</string>
     <string name="pref_restore_file_not_found">Arquivo do Backup não encontrado</string>
     <string name="pref_info_header">Info</string>
-    <string name="pref_guide_title">Guia Prático</string>
+    <string name="pref_faq_title">Guia Prático</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Verifique o código-fonte, relate os problemas e sugira novas idéias</string>
     <string name="restore_confirm">Substituir</string>

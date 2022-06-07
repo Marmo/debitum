@@ -48,8 +48,13 @@
         app:title="@string/pref_info_header">
 
         <Preference
-            app:key="guide"
-            app:title="@string/pref_guide_title" />
+            app:key="faq"
+            app:title="@string/pref_faq_title">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/Marmo/debitum/blob/master/FAQ.md" />
+
+        </Preference>
 
         <Preference
             app:key="github"
