@@ -56,6 +56,10 @@ public class Transaction {
     @ColumnInfo(name = "timestamp_returned") public Date timestampReturned;  // timestamp when the item was returned
     @ColumnInfo(name = "has_images") public boolean hasImages; // if this txn has images (needed for icon in transaction list)
 
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
     /*
      * returns the amount formatted as a string, depending on isMonetary
      */
