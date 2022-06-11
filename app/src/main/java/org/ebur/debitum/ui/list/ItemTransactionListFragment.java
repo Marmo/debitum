@@ -77,13 +77,11 @@ public class ItemTransactionListFragment extends TransactionListFragment {
             listForAdapter = filter(listForAdapter, filterMode != null ? filterMode : 0);
             updateTotalHeader(TransactionWithPerson.getNumberOfItems(listForAdapter));
             adapter.submitList(listForAdapter);
-            if (transactions.isEmpty()) {
-                recyclerView.setVisibility(View.GONE);
-                emptyView.setVisibility(View.VISIBLE);
-            } else {
-                recyclerView.setVisibility(View.VISIBLE);
-                emptyView.setVisibility(View.GONE);
-            }
+
+            // show or hide empty screen
+            boolean empty = transactions.isEmpty();
+            recyclerView.setVisibility(empty ? View.GONE : View.VISIBLE);
+            emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
         }
     }
 
