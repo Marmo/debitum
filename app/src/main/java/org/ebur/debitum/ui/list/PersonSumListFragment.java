@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.ColorInt;
+import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,7 @@ import org.ebur.debitum.util.Utilities;
 import org.ebur.debitum.viewModel.ContactsHelper;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -52,6 +54,7 @@ public class PersonSumListFragment
 
     private ContactsHelper contactsHelper;
     boolean contactLinkingEnabled;
+    private Menu menu;
 
     @Override
     @LayoutRes
@@ -92,6 +95,10 @@ public class PersonSumListFragment
         });
 
         viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), this::updateRecyclerView);
+        viewModel.getOrder().observe(getViewLifecycleOwner(), order -> {
+            setOrderRadioButtonsCheckedStatus(order);
+            updateRecyclerView(viewModel.getPersonsWithTransactions().getValue());
+        });
     }
 
     private void updateRecyclerView(@Nullable List<PersonWithTransactions> pwtList) {
@@ -99,10 +106,32 @@ public class PersonSumListFragment
 
         updateTotalHeader(PersonWithTransactions.getSum(pwtList));
         @ColorInt int secondaryColorRGB = ColorUtils.getAttributeColor(requireContext(), R.attr.colorSecondary);
+
+        // prepare sorting
+            int by = viewModel.getOrderBy();
+        boolean asc = viewModel.isOrderAscending();
+        Comparator<PersonWithTransactions> comparator;
+        switch (by) {
+            case PersonSumListViewModel.ORDER_NAME:
+                comparator = Comparator.comparing(PersonWithTransactions::getName);
+                break;
+            case PersonSumListViewModel.ORDER_DATE:
+                comparator = Comparator.comparing(PersonWithTransactions::getLastTxnTimestamp);
+                break;
+            case PersonSumListViewModel.ORDER_AMOUNT:
+                comparator = Comparator.comparing(PersonWithTransactions::getSum);
+                break;
+            default:
+                comparator = Comparator.comparing(PersonWithTransactions::getLastTxnTimestamp);
+        }
+
         // create PersonWithAvatar instance for every PersonWithTransactions
-        // TODO would be great to determie which avatars need to be recalculated and only submit those
+        // and apply ordering
+        // TODO would be great to determine, which avatars need to be recalculated and only submit those
         adapter.submitList(
-                pwtList.stream().map(pwt -> new PersonSumListAdapter.PersonWithAvatar(
+                pwtList.stream()
+                        .sorted(asc ? comparator : comparator.reversed())
+                        .map(pwt -> new PersonSumListAdapter.PersonWithAvatar(
                         pwt,
                         contactsHelper.makeAvatarDrawable(
                                 contactLinkingEnabled ? contactsHelper.getContactImage(pwt.person.linkedContactUri) : null,
@@ -124,16 +153,64 @@ public class PersonSumListFragment
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_person_sum_list, menu);
+        this.menu = menu;
+        Integer order = viewModel.getOrder().getValue();
+        setOrderRadioButtonsCheckedStatus(order != null ? order : 0);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id==R.id.miAddPerson) {
+        if (id==R.id.miAddPerson) {
             addPerson();
+            return true;
+        } else if (id==R.id.miOrderByNameAsc) {
+            viewModel.setOrder(PersonSumListViewModel.ORDER_NAME, true);
+            return true;
+        } else if (id==R.id.miOrderByNameDesc) {
+            viewModel.setOrder(PersonSumListViewModel.ORDER_NAME, false);
+            return true;
+        } else if (id==R.id.miOrderByDateAsc) {
+            viewModel.setOrder(PersonSumListViewModel.ORDER_DATE, true);
+            return true;
+        } else if (id==R.id.miOrderByDateDesc) {
+            viewModel.setOrder(PersonSumListViewModel.ORDER_DATE, false);
+            return true;
+        } else if (id==R.id.miOrderByAmntAsc) {
+            viewModel.setOrder(PersonSumListViewModel.ORDER_AMOUNT, true);
+            return true;
+        } else if (id==R.id.miOrderByAmntDesc) {
+            viewModel.setOrder(PersonSumListViewModel.ORDER_AMOUNT, false);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setOrderRadioButtonsCheckedStatus(int order) {
+        if (menu != null) {
+            // CAUTION: if android:checkableBehavior="single"
+            // (MenuItemImpl.mFlags & MenuItemImpl.EXCLUSIVE != 0), setChecked does not care about
+            // the value passed but sets the item for that setChecked is called as checked and the
+            // others in the group unchecked!
+            @IdRes int menuItemResId;
+            boolean asc = viewModel.isOrderAscending();
+            int by = viewModel.getOrderBy();
+            switch (by) {
+                case PersonSumListViewModel.ORDER_NAME:
+                    menuItemResId = asc ? R.id.miOrderByNameAsc : R.id.miOrderByNameDesc;
+                    break;
+                case PersonSumListViewModel.ORDER_DATE:
+                    menuItemResId = asc ? R.id.miOrderByDateAsc : R.id.miOrderByDateDesc;
+                    break;
+                case PersonSumListViewModel.ORDER_AMOUNT:
+                    menuItemResId = asc ? R.id.miOrderByAmntAsc : R.id.miOrderByAmntDesc;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown order by value: "+by);
+            }
+            // could also pass false here, as setChecked does not care in exclusive mode!
+            menu.findItem(menuItemResId).setChecked(true);
         }
     }
 

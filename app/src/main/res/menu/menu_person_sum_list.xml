@@ -7,4 +7,43 @@
         android:icon="@drawable/ic_baseline_person_add_24"
         android:title="@string/toolbar_create_person"
         app:showAsAction="always"/>
+    <item
+        android:title="@string/toolbar_sort"
+        android:icon="@drawable/ic_outline_filter_alt_24_onprimary"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single" >
+                <item
+                    android:id="@+id/miOrderByNameAsc"
+                    android:icon="@drawable/ic_outline_local_offer_24_controlnormal"
+                    android:title="Name ascendng"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByNameDesc"
+                    android:icon="@drawable/ic_outline_local_offer_24_controlnormal"
+                    android:title="Name decendng"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByDateAsc"
+                    android:icon="@drawable/ic_outline_local_offer_24_controlnormal"
+                    android:title="Date ascendng"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByDateDesc"
+                    android:icon="@drawable/ic_outline_local_offer_24_controlnormal"
+                    android:title="Date decendng"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByAmntAsc"
+                    android:icon="@drawable/ic_outline_local_offer_24_controlnormal"
+                    android:title="Amount ascendng"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByAmntDesc"
+                    android:icon="@drawable/ic_outline_local_offer_24_controlnormal"
+                    android:title="Amount decendng"
+                    app:showAsAction="never" />
+            </group>
+        </menu>
+    </item>
 </menu>
