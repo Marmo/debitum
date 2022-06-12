@@ -43,7 +43,8 @@ public class ItemTransactionListFragment extends TransactionListFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // get and set standard item returned state filter mode
-        returnedFilterViewModel = new ViewModelProvider(this).get(ItemReturnedFilterViewModel.class);
+        // view model scoped to activity to make setting persistent across screens
+        returnedFilterViewModel = new ViewModelProvider(requireActivity()).get(ItemReturnedFilterViewModel.class);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         int standardFilterMode =
                 Integer.parseInt(
