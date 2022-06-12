@@ -37,6 +37,7 @@ import org.ebur.debitum.ui.edit_transaction.EditTransactionFragment;
 import org.ebur.debitum.util.ColorUtils;
 import org.ebur.debitum.util.Utilities;
 import org.ebur.debitum.viewModel.ContactsHelper;
+import org.ebur.debitum.viewModel.ListOrderViewModel;
 import org.ebur.debitum.viewModel.PersonSumListViewModel;
 
 import java.util.Comparator;
@@ -52,6 +53,7 @@ public class PersonSumListFragment
             PersonSumListAdapter.PersonWithAvatar> {
 
 
+    private ListOrderViewModel orderViewModel;
     private ContactsHelper contactsHelper;
     boolean contactLinkingEnabled;
     private Menu menu;
@@ -73,6 +75,8 @@ public class PersonSumListFragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         contactsHelper = new ViewModelProvider(requireActivity()).get(ContactsHelper.class);
+        // scoped to activity to make setting persistent across screens
+        orderViewModel = new ViewModelProvider(requireActivity()).get(ListOrderViewModel.class);
         checkReadContactsPermission();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -95,7 +99,7 @@ public class PersonSumListFragment
         });
 
         viewModel.getPersonsWithTransactions().observe(getViewLifecycleOwner(), this::updateRecyclerView);
-        viewModel.getOrder().observe(getViewLifecycleOwner(), order -> {
+        orderViewModel.getOrder().observe(getViewLifecycleOwner(), order -> {
             setOrderRadioButtonsCheckedStatus(order);
             updateRecyclerView(viewModel.getPersonsWithTransactions().getValue());
         });
@@ -108,17 +112,17 @@ public class PersonSumListFragment
         @ColorInt int secondaryColorRGB = ColorUtils.getAttributeColor(requireContext(), R.attr.colorSecondary);
 
         // prepare sorting
-            int by = viewModel.getOrderBy();
-        boolean asc = viewModel.isOrderAscending();
+            int by = orderViewModel.getOrderBy();
+        boolean asc = orderViewModel.isOrderAscending();
         Comparator<PersonWithTransactions> comparator;
         switch (by) {
-            case PersonSumListViewModel.ORDER_NAME:
+            case ListOrderViewModel.ORDER_NAME:
                 comparator = Comparator.comparing(PersonWithTransactions::getName);
                 break;
-            case PersonSumListViewModel.ORDER_DATE:
+            case ListOrderViewModel.ORDER_DATE:
                 comparator = Comparator.comparing(PersonWithTransactions::getLastTxnTimestamp);
                 break;
-            case PersonSumListViewModel.ORDER_AMOUNT:
+            case ListOrderViewModel.ORDER_AMOUNT:
                 comparator = Comparator.comparing(PersonWithTransactions::getSum);
                 break;
             default:
@@ -154,7 +158,7 @@ public class PersonSumListFragment
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_person_sum_list, menu);
         this.menu = menu;
-        Integer order = viewModel.getOrder().getValue();
+        Integer order = orderViewModel.getOrder().getValue();
         setOrderRadioButtonsCheckedStatus(order != null ? order : 0);
     }
 
@@ -165,22 +169,22 @@ public class PersonSumListFragment
             addPerson();
             return true;
         } else if (id==R.id.miOrderByNameAsc) {
-            viewModel.setOrder(PersonSumListViewModel.ORDER_NAME, true);
+            orderViewModel.setOrder(ListOrderViewModel.ORDER_NAME, true);
             return true;
         } else if (id==R.id.miOrderByNameDesc) {
-            viewModel.setOrder(PersonSumListViewModel.ORDER_NAME, false);
+            orderViewModel.setOrder(ListOrderViewModel.ORDER_NAME, false);
             return true;
         } else if (id==R.id.miOrderByDateAsc) {
-            viewModel.setOrder(PersonSumListViewModel.ORDER_DATE, true);
+            orderViewModel.setOrder(ListOrderViewModel.ORDER_DATE, true);
             return true;
         } else if (id==R.id.miOrderByDateDesc) {
-            viewModel.setOrder(PersonSumListViewModel.ORDER_DATE, false);
+            orderViewModel.setOrder(ListOrderViewModel.ORDER_DATE, false);
             return true;
         } else if (id==R.id.miOrderByAmntAsc) {
-            viewModel.setOrder(PersonSumListViewModel.ORDER_AMOUNT, true);
+            orderViewModel.setOrder(ListOrderViewModel.ORDER_AMOUNT, true);
             return true;
         } else if (id==R.id.miOrderByAmntDesc) {
-            viewModel.setOrder(PersonSumListViewModel.ORDER_AMOUNT, false);
+            orderViewModel.setOrder(ListOrderViewModel.ORDER_AMOUNT, false);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -194,16 +198,16 @@ public class PersonSumListFragment
             // the value passed but sets the item for that setChecked is called as checked and the
             // others in the group unchecked!
             @IdRes int menuItemResId;
-            boolean asc = viewModel.isOrderAscending();
-            int by = viewModel.getOrderBy();
+            boolean asc = orderViewModel.isOrderAscending();
+            int by = orderViewModel.getOrderBy();
             switch (by) {
-                case PersonSumListViewModel.ORDER_NAME:
+                case ListOrderViewModel.ORDER_NAME:
                     menuItemResId = asc ? R.id.miOrderByNameAsc : R.id.miOrderByNameDesc;
                     break;
-                case PersonSumListViewModel.ORDER_DATE:
+                case ListOrderViewModel.ORDER_DATE:
                     menuItemResId = asc ? R.id.miOrderByDateAsc : R.id.miOrderByDateDesc;
                     break;
-                case PersonSumListViewModel.ORDER_AMOUNT:
+                case ListOrderViewModel.ORDER_AMOUNT:
                     menuItemResId = asc ? R.id.miOrderByAmntAsc : R.id.miOrderByAmntDesc;
                     break;
                 default:
