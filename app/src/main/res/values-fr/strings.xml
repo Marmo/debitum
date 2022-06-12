@@ -139,4 +139,11 @@
     <string name="pref_invert_colors_title">Inverser les couleurs dû/prêté</string>
     <string name="pref_invert_colors_summary_on">dû : rouge, prêtée : vert</string>
     <string name="pref_invert_colors_summary_off">dû : vert, prêté : rouge</string>
+    <string name="toolbar_sort_date_asc">Date (croissant)</string>
+    <string name="toolbar_sort_amount_asc">Vous devez le moins</string>
+    <string name="toolbar_sort_amount_desc">Vous devez le plus</string>
+    <string name="toolbar_sort_name_asc">Nom (croissant)</string>
+    <string name="toolbar_sort">Trier par</string>
+    <string name="toolbar_sort_name_desc">Nom (décroissant)</string>
+    <string name="toolbar_sort_date_desc">Date (décroissant)</string>
 </resources>
