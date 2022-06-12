@@ -149,4 +149,11 @@
     <string name="pref_invert_colors_title">היפוך צבעי חוב/זכות</string>
     <string name="pref_invert_colors_summary_off">חוב: ירוק, זכות: אדום</string>
     <string name="pref_invert_colors_summary_on">חוב: אדום, זכות: ירוק</string>
+    <string name="toolbar_sort_name_asc">שם (עולה)</string>
+    <string name="toolbar_sort_name_desc">שם (יורד)</string>
+    <string name="toolbar_sort_date_asc">תאריך (עולה)</string>
+    <string name="toolbar_sort_date_desc">תאריך (יורד)</string>
+    <string name="toolbar_sort">סידור לפי</string>
+    <string name="toolbar_sort_amount_desc">החוב שלך הוא לכל היותר</string>
+    <string name="toolbar_sort_amount_asc">החוב שלך הוא לפחות</string>
 </resources>
