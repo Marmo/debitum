@@ -45,6 +45,7 @@
                         android:id="@+id/spinner_name_editText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@null"
                         android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -169,6 +170,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:background="@null"
                         android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -195,6 +199,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:background="@null"
                         android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
