@@ -147,4 +147,11 @@
     <string name="pref_invert_colors_summary_off">geliehen: grün, verliehen: rot</string>
     <string name="pref_invert_colors_title">Ver-/Geliehen-Farben tauschen</string>
     <string name="pref_invert_colors_summary_on">geliehen: rot, verliehen: grün</string>
+    <string name="toolbar_sort">Sortieren nach</string>
+    <string name="toolbar_sort_name_asc">Name (aufsteigend)</string>
+    <string name="toolbar_sort_name_desc">Name (absteigend)</string>
+    <string name="toolbar_sort_date_asc">Datum (aufsteigend)</string>
+    <string name="toolbar_sort_date_desc">Datum (absteigend)</string>
+    <string name="toolbar_sort_amount_desc">Du schuldest viel</string>
+    <string name="toolbar_sort_amount_asc">Du schuldest wenig</string>
 </resources>
