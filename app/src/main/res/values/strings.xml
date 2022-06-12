@@ -32,6 +32,13 @@
     <string name="person_sum_list_no_debt">no debt</string>
     <string name="person_sum_list_you_lent">you lent</string>
     <string name="toolbar_create_person">Create Person</string>
+    <string name="toolbar_sort">Order By</string>
+    <string name="toolbar_sort_name_asc">Name (ascending)</string>
+    <string name="toolbar_sort_name_desc">Name (descending)</string>
+    <string name="toolbar_sort_date_asc">Date (ascending)</string>
+    <string name="toolbar_sort_date_desc">Date (descending)</string>
+    <string name="toolbar_sort_amount_asc">You owe least</string>
+    <string name="toolbar_sort_amount_desc">You owe most</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d person deleted</item>
         <item quantity="other">%d persons deleted</item>
@@ -154,7 +161,7 @@
     <string name="pref_restore_file_not_found">Backup file not found</string>
 
     <string name="pref_info_header">Info</string>
-    <string name="pref_guide_title">Quick Guide</string>
+    <string name="pref_faq_title">Frequently Asked Questions</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Find and improve the source code, report issues and ideas</string>
     <string name="restore_confirm">Overwrite</string>

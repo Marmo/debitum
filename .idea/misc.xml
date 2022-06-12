@@ -10,12 +10,22 @@
         <entry key="app/src/main/res/drawable/ic_baseline_close_onsurface_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_onSurface_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_person_outline_onsurface_24.xml" value="0.212" />
+        <entry key="app/src/main/res/drawable/ic_baseline_sort_24.xml" value="0.222" />
+        <entry key="app/src/main/res/drawable/ic_baseline_sort_by_alpha_24.xml" value="0.222" />
+        <entry key="app/src/main/res/drawable/ic_baseline_sort_by_alpha_desc_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_outline_filter_alt_24_onprimary.xml" value="0.222" />
         <entry key="app/src/main/res/drawable/ic_outline_image_24.xml" value="0.212" />
+        <entry key="app/src/main/res/drawable/ic_outline_sort_amount_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_outline_sort_amount_desc_24.xml" value="0.222" />
+        <entry key="app/src/main/res/drawable/ic_outline_sort_by_date_24.xml" value="0.222" />
+        <entry key="app/src/main/res/drawable/ic_outline_sort_by_date_desc_24.xml" value="0.222" />
         <entry key="app/src/main/res/layout/fragment_edit_transaction.xml" value="0.21" />
         <entry key="app/src/main/res/layout/item_image_list.xml" value="0.66" />
         <entry key="app/src/main/res/layout/item_transaction_list.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_edit_transaction_image.xml" value="0.17673611111111112" />
+        <entry key="app/src/main/res/menu/menu_item_transaction_list.xml" value="0.1857638888888889" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.14275956284153005" />
       </map>
     </option>

@@ -5,6 +5,8 @@ import androidx.room.Relation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,6 +28,11 @@ public class PersonWithTransactions {
         this.transactions.addAll(Arrays.asList(transaction));
     }
 
+    // needed for Comparator in PersonSumListFragment (sorting)
+    public String getName() {
+        return this.person.name;
+    }
+
     public boolean equals(PersonWithTransactions pwt) {
         boolean person, sum;
         person = pwt.person.equals(this.person);
@@ -45,6 +52,10 @@ public class PersonWithTransactions {
      */
     public int getNumberOfItems() {
         return Transaction.getNumberOfItems(this.transactions);
+    }
+
+    public Date getLastTxnTimestamp() {
+        return transactions.stream().max(Comparator.comparing(Transaction::getTimestamp)).get().timestamp;
     }
 
     /**

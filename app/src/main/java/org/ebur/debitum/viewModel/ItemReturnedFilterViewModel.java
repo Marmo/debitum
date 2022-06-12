@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 public class ItemReturnedFilterViewModel extends AndroidViewModel {
 
+    public static final int FILTER_UNDEF = 0;
     public static final int FILTER_ALL = 0b11;
     public static final int FILTER_UNRETURNED = 0b10;
     public static final int FILTER_RETURNED = 0b01;
@@ -17,7 +18,7 @@ public class ItemReturnedFilterViewModel extends AndroidViewModel {
 
     public ItemReturnedFilterViewModel(@NonNull Application application) {
         super(application);
-        filterMode = new MutableLiveData<>(FILTER_UNRETURNED);
+        filterMode = new MutableLiveData<>(FILTER_UNDEF);
     }
 
     public void setFilterMode(int mode) {

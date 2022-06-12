@@ -36,7 +36,7 @@
     <string name="restore_confirm">Overskriv</string>
     <string name="pref_github_summary">Finn og forbedre kildekoden, rapporter feil og kom med idéer</string>
     <string name="pref_github_title">GitHub</string>
-    <string name="pref_guide_title">Hurtigveiledning</string>
+    <string name="pref_faq_title">Hurtigveiledning</string>
     <string name="pref_info_header">Info</string>
     <string name="pref_restore_title">Gjenopprett database</string>
     <string name="pref_backup_title">Sikkerhetskopier database</string>

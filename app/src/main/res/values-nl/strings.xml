@@ -103,7 +103,7 @@
     <string name="pref_restore_summary">van eerder gemaakt back-up zip bestand</string>
     <string name="pref_restore_file_not_found">Back-up bestand niet gevonden</string>
     <string name="pref_info_header">Informatie</string>
-    <string name="pref_guide_title">Snelle Handleiding</string>
+    <string name="pref_faq_title">Snelle Handleiding</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Vind en verbeter de broncode, meld problemen en ideeën</string>
     <string name="restore_confirm">Overschrijf</string>

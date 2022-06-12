@@ -131,7 +131,7 @@
     <string name="restore_not_all_images_restored">Advertencia: no todas las imagenes del respaldo podrían recuperarse. %1$s</string>
     <string name="pref_backup_title">Respaldar datos</string>
     <string name="pref_info_header">Información</string>
-    <string name="pref_guide_title">Guía Rápida</string>
+    <string name="pref_faq_title">Guía Rápida</string>
     <string name="pref_github_title">GitHub</string>
     <string name="header_desc_items_returned">cosas devueltas</string>
     <string name="header_desc_items_lent">cosas prestadas</string>

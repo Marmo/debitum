@@ -7,4 +7,43 @@
         android:icon="@drawable/ic_baseline_person_add_24"
         android:title="@string/toolbar_create_person"
         app:showAsAction="always"/>
+    <item
+        android:title="@string/toolbar_sort"
+        android:icon="@drawable/ic_baseline_sort_24"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single" >
+                <item
+                    android:id="@+id/miOrderByNameAsc"
+                    android:icon="@drawable/ic_baseline_sort_by_alpha_24"
+                    android:title="@string/toolbar_sort_name_asc"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByNameDesc"
+                    android:icon="@drawable/ic_baseline_sort_by_alpha_desc_24"
+                    android:title="@string/toolbar_sort_name_desc"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByDateAsc"
+                    android:icon="@drawable/ic_outline_sort_by_date_24"
+                    android:title="@string/toolbar_sort_date_asc"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByDateDesc"
+                    android:icon="@drawable/ic_outline_sort_by_date_desc_24"
+                    android:title="@string/toolbar_sort_date_desc"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByAmntAsc"
+                    android:icon="@drawable/ic_outline_sort_amount_24"
+                    android:title="@string/toolbar_sort_amount_asc"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/miOrderByAmntDesc"
+                    android:icon="@drawable/ic_outline_sort_amount_desc_24"
+                    android:title="@string/toolbar_sort_amount_desc"
+                    app:showAsAction="never" />
+            </group>
+        </menu>
+    </item>
 </menu>

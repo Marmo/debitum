@@ -42,15 +42,19 @@ public class ItemTransactionListFragment extends TransactionListFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // get and set standard item returned state filter mode
-        returnedFilterViewModel = new ViewModelProvider(this).get(ItemReturnedFilterViewModel.class);
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireActivity());
-        int standardFilterMode =
-                Integer.parseInt(
-                        pref.getString(SettingsFragment.PREF_KEY_ITEM_RETURNED_STANDARD_FILTER,
-                                Integer.toString(ItemReturnedFilterViewModel.FILTER_ALL)
-                        ));
-        returnedFilterViewModel.setFilterMode(standardFilterMode);
+        // view model scoped to activity to make setting persistent across screens
+        returnedFilterViewModel = new ViewModelProvider(requireActivity()).get(ItemReturnedFilterViewModel.class);
+
+        // set standard item returned state filter mode if filter mode is yet undefined
+        if (returnedFilterViewModel.getFilterMode().getValue() == ItemReturnedFilterViewModel.FILTER_UNDEF) {
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+            int standardFilterMode =
+                    Integer.parseInt(
+                            pref.getString(SettingsFragment.PREF_KEY_ITEM_RETURNED_STANDARD_FILTER,
+                                    Integer.toString(ItemReturnedFilterViewModel.FILTER_ALL)
+                            ));
+            returnedFilterViewModel.setFilterMode(standardFilterMode);
+        }
 
         View root = super.onCreateView(inflater, container, savedInstanceState);
         assert root != null;
@@ -77,13 +81,11 @@ public class ItemTransactionListFragment extends TransactionListFragment {
             listForAdapter = filter(listForAdapter, filterMode != null ? filterMode : 0);
             updateTotalHeader(TransactionWithPerson.getNumberOfItems(listForAdapter));
             adapter.submitList(listForAdapter);
-            if (transactions.isEmpty()) {
-                recyclerView.setVisibility(View.GONE);
-                emptyView.setVisibility(View.VISIBLE);
-            } else {
-                recyclerView.setVisibility(View.VISIBLE);
-                emptyView.setVisibility(View.GONE);
-            }
+
+            // show or hide empty screen
+            boolean empty = transactions.isEmpty();
+            recyclerView.setVisibility(empty ? View.GONE : View.VISIBLE);
+            emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
         }
     }
 
