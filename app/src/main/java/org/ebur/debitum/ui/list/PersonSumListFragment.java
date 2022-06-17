@@ -214,7 +214,11 @@ public class PersonSumListFragment
                     throw new IllegalArgumentException("Unknown order by value: "+by);
             }
             // could also pass false here, as setChecked does not care in exclusive mode!
-            menu.findItem(menuItemResId).setChecked(true);
+            MenuItem item = menu.findItem(menuItemResId);
+            // checking for null, because when coming back to this activity by pressing the system
+            // back button, onCreateOptionsMenu will be called after the first call of
+            // setOrderRadioButtonsCheckedStatus and item is still null then (would cause crash)
+            if (item!=null) item.setChecked(true);
         }
     }
 
