@@ -50,4 +50,12 @@
         <item name="android:actionModeCloseDrawable">@drawable/ic_baseline_close_onsurface_24</item>
         <item name="android:windowActionModeOverlay">true</item>
     </style>
+
+    <style name="Theme.Debitum.FloatingDialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+        <item name="android:actionMenuTextColor">?attr/colorOnPrimary</item>
+        <item name="android:actionModeCloseDrawable">@drawable/ic_baseline_close_onsurface_24</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
 </resources>

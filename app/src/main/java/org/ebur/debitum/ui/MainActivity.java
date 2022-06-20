@@ -1,6 +1,7 @@
 
 package org.ebur.debitum.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,10 +16,12 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.ebur.debitum.BuildConfig;
 import org.ebur.debitum.R;
 import org.ebur.debitum.ui.list.AbstractBaseListFragment;
 
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
         setupBottomNavigation();
         setupFAB();
+
+        showWhatsNewPopup();
     }
 
     private void setupToolbar() {
@@ -74,6 +79,25 @@ public class MainActivity extends AppCompatActivity {
     private void setupBottomNavigation() {
         bottomNav = findViewById(R.id.bottom_navigation);
         NavigationUI.setupWithNavController(bottomNav, nav);
+    }
+
+    private void showWhatsNewPopup() {
+        // get current app version
+        int currentVersion = BuildConfig.VERSION_CODE;
+        // get version, the popup was already shown for
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        int seenVersion = pref.getInt(SettingsFragment.PREF_KEY_CHANGELOG, 0);
+
+        if (currentVersion > seenVersion) {
+            NavHostFragment
+                    .findNavController(getCurrentNavigationFragment())
+                    .navigate(R.id.action_global_changelog);
+
+            // save current version in preferences
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putInt(SettingsFragment.PREF_KEY_CHANGELOG, currentVersion);
+            editor.apply();
+        }
     }
 
     private void onAddTransactionAction(View fab) {
