@@ -156,4 +156,5 @@
     <string name="toolbar_sort">סידור לפי</string>
     <string name="toolbar_sort_amount_desc">החוב שלך הוא לכל היותר</string>
     <string name="toolbar_sort_amount_asc">החוב שלך הוא לפחות</string>
+    <string name="pref_changelog_title">יומן שינויים</string>
 </resources>
