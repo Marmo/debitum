@@ -1,3 +1,12 @@
+# v1.7.0
+- new: people list can be sorted by date, sum, name
+- new: backup location pickable (thanks [@rikhwanto](https://github.com/rikhwanto))
+- new: changelog shown on first launch after update (also accessible from settings)
+- changed: in-app guides replaced with link to FAQ on Github
+- fixed: position of date labels in edit transaction screen
+- fixed: crash when entering "," in amount
+- translations update
+
 # v1.6.5
 - new: option to reverse owe/lent colors
 - new: enter edit transaction screen with single tap on transaction
