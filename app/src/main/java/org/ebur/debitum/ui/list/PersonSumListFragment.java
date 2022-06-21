@@ -216,8 +216,8 @@ public class PersonSumListFragment
             // could also pass false here, as setChecked does not care in exclusive mode!
             MenuItem item = menu.findItem(menuItemResId);
             // checking for null, because when coming back to this activity by pressing the system
-            // back button, onCreateOptionsMenu will be called after the first call of
-            // setOrderRadioButtonsCheckedStatus and item is still null then (would cause crash)
+            // back button, onCreateOptionsMenu will be called only after the first call of
+            // setOrderRadioButtonsCheckedStatus and thus item is still null then (would cause crash)
             if (item!=null) item.setChecked(true);
         }
     }
