@@ -57,6 +57,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public final static String PREF_KEY_DATE_FORMAT = "date_format";
     public final static String PREF_KEY_DECIMALS = "decimals";
     public final static String PREF_KEY_INVERT_COLORS = "invert_colors";
+    public final static String PREF_KEY_CHANGELOG = "changelogSeenVersion";
 
     public final static String FILENAME_DB = "debitum.db";
     public final static String FILENAME_PREFS = "debitum-preferences.xml";
@@ -176,15 +177,23 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
 
         Preference licensesPref = findPreference(PREF_KEY_LICENSES);
-        if(licensesPref!=null) {
+        if (licensesPref!=null) {
             licensesPref.setOnPreferenceClickListener(preference -> {
                 NavHostFragment.findNavController(this).navigate(R.id.action_settings_to_licenses);
                 return true;
             });
         }
 
+        Preference changelogPref = findPreference(PREF_KEY_CHANGELOG);
+        if (changelogPref != null) {
+            changelogPref.setOnPreferenceClickListener(preference -> {
+                NavHostFragment.findNavController(this).navigate(R.id.action_global_changelog);
+                return true;
+            });
+        }
+
         Preference versionPref = findPreference(PREF_KEY_VERSION);
-        if(versionPref!=null) {
+        if (versionPref!=null) {
             versionPref.setSummary(getString(R.string.pref_version, BuildConfig.VERSION_NAME));
         }
     }

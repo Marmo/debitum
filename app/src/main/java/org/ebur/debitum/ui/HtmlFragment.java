@@ -20,12 +20,13 @@ import org.ebur.debitum.R;
 public class HtmlFragment extends DialogFragment {
 
     private final String ARG_HTML_FILE_URI = "html_asset_uri";
-            //"file:///android_asset/licenses.html";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FullScreenDialog);
+        //setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FullScreenDialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FloatingDialog);
+        setStyle(DialogFragment.STYLE_NORMAL, 0);
     }
 
     @Override

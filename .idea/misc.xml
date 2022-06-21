@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/drawable/ic_outline_sort_by_date_24.xml" value="0.222" />
         <entry key="app/src/main/res/drawable/ic_outline_sort_by_date_desc_24.xml" value="0.222" />
         <entry key="app/src/main/res/layout/fragment_edit_transaction.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/fragment_html.xml" value="0.14207650273224043" />
         <entry key="app/src/main/res/layout/item_image_list.xml" value="0.66" />
         <entry key="app/src/main/res/layout/item_transaction_list.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_edit_transaction_image.xml" value="0.17673611111111112" />

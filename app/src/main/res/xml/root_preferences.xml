@@ -68,6 +68,9 @@
         <Preference
             app:key="licenses"
             app:title="@string/pref_licenses_title" />
+        <Preference
+            app:key="changelogSeenVersion"
+            app:title="@string/pref_changelog_title" />
         <PreferenceCategory
             app:key="version"
             app:summary="@string/pref_version" />
