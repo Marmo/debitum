@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		h1 {
+			overflow: hidden;
+			text-align: center;
+			color: #9c1901;
+			font-size: 24px;
+		}
+		h1:before,
+		h1:after {
+			background-color: #718792;
+			content: "";
+			display: inline-block;
+			height: 1px;
+			position: relative;
+			vertical-align: middle;
+			width: 50%;
+		}
+		h1:before {
+			right: 0.5em;
+			margin-left: -50%;
+		}
+		h1:after {
+			left: 0.5em;
+			margin-right: -50%;
+		}
+		ul {
+			list-style-type: '–  ';
+			margin-bottom: 30px;
+			padding-left: 20px;
+		}
+
+   </style>
+</head>
+
+<body>
+<h1 id="v1-6-6">v1.6.6</h1>
+<ul><li> todo</li></ul>
+<h1 id="v1-6-5">v1.6.5</h1>
+<ul>
+	<li>new: option to reverse owe/lent colors</li>
+	<li>new: enter edit transaction screen with single tap on transaction</li>
+	<li>new: icon in transaction list, indicating if the transaction has images attached (note: for transactions with existing images, this icon will only show up after the next save)</li>
+	<li>translations update</li>
+</ul>
+<h1 id="v1-6-4">v1.6.4</h1>
+<ul>
+	<li>fixed: quick guides not shown in localized versions</li>
+	<li>upgrade Android Gradle Plugin from 7.0.4 to 7.1.0</li>
+	<li>translations update</li>
+	<li>new language: Czech (<a href="https://hosted.weblate.org/user/kudlav/">Vladan Kudláč</a>)</li>
+</ul>
+<h1 id="v1-6-3">v1.6.3</h1>
+<ul>
+	<li>fixed: crash when entering amounts &gt; 999 in locales with space as grouping char</li>
+	<li>translations update</li>
+</ul>
+<h1 id="v1-6-2">v1.6.2</h1>
+<ul>
+	<li>fixed: wrong amounts saved when not using 2 decimals setting (#79)</li>
+	<li>fixed: amounts multiplied with 10 or 100 when changing decimals setting immediately after cancelling such a change (#80)</li>
+</ul>
+<h1 id="v1-6-1">v1.6.1</h1>
+<ul>
+	<li>fixed: wrong label in items header bar when filtered by returned status</li>
+	<li>show thousands separator in monetary amounts</li>
+	<li>new language: Spanish (<a href="https://hosted.weblate.org/user/ferossan/">Fernando Ossandon</a>)</li>
+</ul>
+<h1 id="v1-6-0">v1.6.0</h1>
+<ul>
+	<li>new: setting for number of decimals</li>
+	<li>new languages: Romanian (<a href="https://hosted.weblate.org/user/s@zp1.net/">Simona Iacob</a>), Persian (<a href="https://hosted.weblate.org/user/Radovski/">Radmehr Ebrahimi</a>)</li>
+	<li>translations update</li>
+</ul>
+<h1 id="v1-5-1">v1.5.1</h1>
+<ul>
+	<li>translations update</li>
+	<li>internal refactoring</li>
+	<li>fix duplicate file provider authority when having debug and release build installed in parallel (#62) </li>
+</ul>
+<h1 id="v1-5-0">v1.5.0</h1>
+<ul>
+	<li>transactions can have images attached (#21)</li>
+	<li>when creating a new transaction and exactly one row is selected, its contents is used as preset (#40)</li>
+	<li>use file picker when restoring database</li>
+	<li>backup files with date appended (not overwritten anymore)</li>
+	<li>backups are now a zip file containing the database and all attached images</li>
+	<li>translations update</li>
+</ul>
+<h1 id="v1-4-1">v1.4.1</h1>
+<ul>
+	<li>translations update (new: french, italian by <a href="https://hosted.weblate.org/user/Edanas/">@Edanas</a>)</li>
+	<li>new: avatar always reflects name in edit person dialog</li>
+	<li>new: notification when editing a person linked to a deleted contact</li>
+	<li>fixed: rounding errors for certain amounts (#54)</li>
+</ul>
+<h1 id="v1-4-0">v1.4.0</h1>
+<ul>
+	<li>new: persons now can have a linked phone contact. Linking is done from the edit person dialog. For this feature the READ_CONTACTS permission is needed (which you can safely deny without breaking Debitum).</li>
+	<li>updated/new translations:<ul>
+		<li>Brazilian Portuguese (<a href="https://github.com/mezysinc">@mezysinc</a>)</li>
+		<li>Norwegian Bokmål (<a href="https://github.com/comradekingu">@comradekingu</a>)</li>
+	</ul>
+	</li>
+	<li>fixed: transitions between bottom nav destinations</li>
+	<li>update: material and junit library versions</li>
+	<li>new: when selecting persons or money transactions in the list views, the sum of the selected items is shown in the contextual action bar</li>
+	<li>new: warn when setting a return date before the original transaction&#39;s date</li>
+	<li>new: added preference to set date format</li>
+</ul>
+<h1 id="v1-3-3">v1.3.3</h1>
+<ul>
+	<li>fix: crash when filtering for person without debt or with note (#34)</li>
+</ul>
+<h1 id="v1-3-2">v1.3.2</h1>
+<ul>
+	<li>add: animation for showing/hiding item-returned input</li>
+	<li>add: separate hint for repaying money</li>
+	<li>add: note about how to handle repaid money to guide </li>
+</ul>
+<h1 id="v1-3-1">v1.3.1</h1>
+<ul>
+	<li>fix: EditTransactionFragment: Amount format correctly changed upon switching between item and money (#29)</li>
+	<li>fix: New Transaction not hidden behind header bar anymore (#2)</li>
+</ul>
+<h1 id="v1-3-0">v1.3.0</h1>
+<ul>
+	<li>add: add return shortcut to money list (contextual action bar)</li>
+	<li>change: make EditTransaction/Person dialogs scrollable so that everything can be revealed from behind the soft-keyboard</li>
+	<li>fix: no more one-day-offset from selected date in timezones with negative UTC/GMT offset</li>
+	<li>refactor: make EditTransaction&#39;s boolean arg &quot;newItem&quot; --&gt;  integer &quot;presetType&quot; (nav graph, Dialog)</li>
+</ul>
+<h1 id="v1-2-2">v1.2.2</h1>
+<ul>
+	<li>fix: contextual action bar is now finished upon list change (could have crashed the app)</li>
+	<li>fix: mark-returned-icon in the contextual action bar is now hidden when the selected item is already returned</li>
+	<li>change: use MD5 for calculating a color from a person&#39;s name for better distribution of colors</li>
+	<li>change: make &quot;add person&quot; button in edit transaction dialog stand out a little more</li>
+</ul>
+<h1 id="v1-2-1">v1.2.1</h1>
+<ul>
+	<li>add: setting to define standard filter for items list (all/unreturned/returned)</li>
+	<li>change: guide is now displayed in fullscreen dialog</li>
+	<li>fix: crash when trying to edit item&#39;s return date</li>
+</ul>
+<h1 id="v1-2-0">v1.2.0</h1>
+<ul>
+	<li>add: the generic gray person-icon in the person list is now a colored name-based icon</li>
+	<li>add: brazilian portuguese translation (<a href="https://github.com/mezysinc">@mezysinc</a>)</li>
+	<li>add: items can be marked as returned, the date is recorded and the item list can be filtered for returned/unreturned items </li>
+	<li>change: F-Droid metadata is now using better supported fastlane structure</li>
+</ul>
+<h1 id="v1-1-0">v1.1.0</h1>
+<ul>
+	<li>add: list with third party licenses in settings</li>
+	<li>add: persons can have a note that is displayed in the filter bar</li>
+	<li>change: use contextual action bar for displaying edit/delete menu items when selecting rows</li>
+	<li>change: edit person button in filtered transaction list is now in filter bar instead of top toolbar</li>
+	<li>change: amount is initially set to 1 for new item transactions</li>
+	<li>change: focus is set to appropriate input fields in edit dialogs</li>
+	<li>change: use cradle for floating action button (add transaction button)</li>
+	<li>change: brighter icon foreground color (aztec-&gt;fjord)</li>
+	<li>fix: error messages in edit transaction dialog are cleared now when something is entered</li>
+	<li>refactor: moved all common code from the two list fragments (Transaction + PersonSum) to a new abstract superclass AbstractBaseListFragment</li>
+	<li>refactor: move dialog toolbar to separate included layout</li>
+</ul>
+<h1 id="v1-0-1">v1.0.1</h1>
+<ul>
+	<li>add version info in settings</li>
+	<li>add note on deletion of backup files upon uninstall in settings</li>
+	<li>fix snackbars in People-List appearing in the wrong place</li>
+	<li>fix date picker in edit transaction screen needing two clicks to appear</li>
+	<li>add specific error message when trying to restore from backup and backup file was not found</li>
+</ul>
+<h1 id="v1-0-0">v1.0.0</h1>
+<ul>
+	<li>initial release</li>
+</ul>
+
+</body></html>
