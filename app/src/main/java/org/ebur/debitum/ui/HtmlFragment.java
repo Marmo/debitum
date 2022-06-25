@@ -1,5 +1,6 @@
 package org.ebur.debitum.ui;
 
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.webkit.WebSettingsCompat;
+import androidx.webkit.WebViewFeature;
 
 import org.ebur.debitum.R;
 
@@ -26,7 +29,7 @@ public class HtmlFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         //setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FullScreenDialog);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Debitum_FloatingDialog);
-        setStyle(DialogFragment.STYLE_NORMAL, 0);
+        //setStyle(DialogFragment.STYLE_NORMAL, 0);
     }
 
     @Override
@@ -55,6 +58,20 @@ public class HtmlFragment extends DialogFragment {
         if (args != null && args.containsKey(ARG_HTML_FILE_URI)) {
             Resources res = getResources();
             WebView htmlView = root.findViewById(R.id.html_view);
+            // set light or dark mode depending on current system setting
+            // https://developer.android.com/guide/webapps/dark-theme#java
+            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+                switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+                    case Configuration.UI_MODE_NIGHT_YES:
+                        WebSettingsCompat.setForceDark(htmlView.getSettings(), WebSettingsCompat.FORCE_DARK_ON);
+                        break;
+                    case Configuration.UI_MODE_NIGHT_NO:
+                    case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                        WebSettingsCompat.setForceDark(htmlView.getSettings(), WebSettingsCompat.FORCE_DARK_OFF);
+                        break;
+                }
+            }
+
             htmlView.getSettings().setJavaScriptEnabled(false);
             htmlView.loadUrl(res.getString(args.getInt(ARG_HTML_FILE_URI)));
         }

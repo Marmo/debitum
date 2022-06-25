@@ -62,6 +62,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
+    implementation "androidx.webkit:webkit:1.4.0"
 
     // Testing
     testImplementation "junit:junit:$rootProject.junitVersion"
