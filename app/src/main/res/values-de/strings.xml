@@ -100,7 +100,7 @@
     <string name="pref_dismiss_filter_summary_false">in der aktuellen Liste bleiben</string>
     <string name="pref_item_returned_filter_title">Standardfilter für Dinge</string>
     <string name="pref_maintenance_header">Wartung</string>
-    <string name="backup_successful">Daten in externen Speicher exportiert</string>
+    <string name="backup_successful">Daten an ausgewählten Ort exportiert</string>
     <string name="backup_failed">Sicherung fehlgeschlagen! %1$s</string>
     <string name="restore_failed">Wiederherstellung fehlgeschlagen! %1$s</string>
     <string name="pref_backup_title">Daten sichern</string>
@@ -108,7 +108,7 @@
     <string name="pref_restore_summary">aus einer zuvor gesicherten Zip-Datei</string>
     <string name="pref_restore_file_not_found">Sicherungsdatei nicht gefunden</string>
     <string name="pref_info_header">Info</string>
-    <string name="pref_faq_title">Kurzanleitung</string>
+    <string name="pref_faq_title">Häufige Fragen</string>
     <string name="pref_github_title">GitHub</string>
     <string name="pref_github_summary">Quellcode ansehen und verbessern, Fehler und Ideen melden</string>
     <string name="restore_confirm">Ersetzen</string>
@@ -147,4 +147,11 @@
     <string name="pref_invert_colors_summary_off">geliehen: grün, verliehen: rot</string>
     <string name="pref_invert_colors_title">Ver-/Geliehen-Farben tauschen</string>
     <string name="pref_invert_colors_summary_on">geliehen: rot, verliehen: grün</string>
+    <string name="toolbar_sort">Sortieren nach</string>
+    <string name="toolbar_sort_name_asc">Name (aufsteigend)</string>
+    <string name="toolbar_sort_name_desc">Name (absteigend)</string>
+    <string name="toolbar_sort_date_asc">Datum (aufsteigend)</string>
+    <string name="toolbar_sort_date_desc">Datum (absteigend)</string>
+    <string name="toolbar_sort_amount_desc">Du schuldest viel</string>
+    <string name="toolbar_sort_amount_asc">Du schuldest wenig</string>
 </resources>

@@ -126,7 +126,7 @@
     <string name="pref_general_header">General</string>
     <string name="restore_not_all_images_restored">Avertisment: nu toate imaginile din fișierul zip de rezervă pot fi restaurate. %1$s</string>
     <string name="pref_restore_file_not_found">Fișierul de backup nu a fost găsit</string>
-    <string name="backup_successful">Copie de rezervă a datelor pe o unitate de stocare externă</string>
+    <string name="backup_successful">Copie de rezervă a datelor în locația aleasă</string>
     <string name="restore_failed_dbFileMissing">Fișierul de backup al bazei de date \'debitum.db\' lipsește sau este ilizibil.</string>
     <string name="pref_dismiss_filter_summary_false">Rămâneți în lista curentă</string>
     <string name="header_desc_items_returned">elemente returnate</string>
@@ -141,4 +141,7 @@
     <string name="decrease_decimals_dialog_title">Avertisment</string>
     <string name="decrease_decimals_dialog_text">Diminuarea numărului de zecimale poate face ca sumele tranzacțiilor să fie rotunjite. Această pierdere de informații nu poate fi anulată prin schimbarea setării la valoarea anterioară.</string>
     <string name="restore_preferences_not_restored">Avertisment: preferințele aplicației nu au putut fi restaurate. Verificați sumele!. %1$s</string>
+    <string name="pref_invert_colors_title">Inversarea culorilor dator/împrumutat</string>
+    <string name="pref_invert_colors_summary_off">datorez: verde, împrumut: rosu</string>
+    <string name="pref_invert_colors_summary_on">datorez: rosu, împrumut: verde</string>
 </resources>

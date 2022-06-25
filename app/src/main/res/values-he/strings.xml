@@ -20,7 +20,7 @@
     <string name="restore_not_all_images_restored">אזהרה: לא כל התמונות מה־zip של הגיבוי ניתנות לשחזור. %1$s</string>
     <string name="restore_failed">השחזור נכשל. %1$s</string>
     <string name="backup_failed">הגיבוי נכשל %1$s</string>
-    <string name="backup_successful">הנתונים מגובים לאחסון חיצוני</string>
+    <string name="backup_successful">הנתונים מגובים למיקום נבחר</string>
     <string name="pref_maintenance_header">תחזוקה</string>
     <string name="pref_date_format_systemdefault_long">בררת המחדל של המערכת (ארוך)</string>
     <string name="pref_date_format_systemdefault_medium">בררת המחדל של המערכת (בינוני)</string>
@@ -149,4 +149,12 @@
     <string name="pref_invert_colors_title">היפוך צבעי חוב/זכות</string>
     <string name="pref_invert_colors_summary_off">חוב: ירוק, זכות: אדום</string>
     <string name="pref_invert_colors_summary_on">חוב: אדום, זכות: ירוק</string>
+    <string name="toolbar_sort_name_asc">שם (עולה)</string>
+    <string name="toolbar_sort_name_desc">שם (יורד)</string>
+    <string name="toolbar_sort_date_asc">תאריך (עולה)</string>
+    <string name="toolbar_sort_date_desc">תאריך (יורד)</string>
+    <string name="toolbar_sort">סידור לפי</string>
+    <string name="toolbar_sort_amount_desc">החוב שלך הוא לכל היותר</string>
+    <string name="toolbar_sort_amount_asc">החוב שלך הוא לפחות</string>
+    <string name="pref_changelog_title">יומן שינויים</string>
 </resources>

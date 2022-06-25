@@ -18,7 +18,7 @@
     <string name="title_fragment_person_sum_list">Personen</string>
     <string name="person_sum_list_you_owe">je bent verschuldigd</string>
     <string name="person_sum_list_no_debt">geen schuld</string>
-    <string name="person_sum_list_you_lent">jij leende</string>
+    <string name="person_sum_list_you_lent">jij leende uit</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d persoon verwijderd</item>
         <item quantity="other">%d personen verwijderd</item>
@@ -91,7 +91,7 @@
     <string name="pref_date_format_systemdefault_medium">Systeem standaard (gemiddeld)</string>
     <string name="pref_date_format_systemdefault_long">Systeem standaard (lang)</string>
     <string name="pref_maintenance_header">Onderhoud</string>
-    <string name="backup_successful">Gegevens back-uppen naar externe opslag</string>
+    <string name="backup_successful">Gegevens back-uppen naar gekozen locatie</string>
     <string name="restore_failed">Herstellen is mislukt. %1$s</string>
     <string name="backup_failed">Back-up is mislukt %1$s</string>
     <string name="restore_not_all_images_restored">Waarschuwing: niet alle afbeeldingen uit de back-up zip konden worden hersteld. %1$s</string>
@@ -136,4 +136,7 @@
     <string name="pref_restore_title">Herstel gegevens</string>
     <string name="error_message_database_access">Fout bij het openen van de database. Probeer het opnieuw.
 \n%1$s</string>
+    <string name="pref_invert_colors_title">Verwissel verschuldigd/uitgeleend kleuren</string>
+    <string name="pref_invert_colors_summary_on">verschuldigd: rood, uitgeleend: groen</string>
+    <string name="pref_invert_colors_summary_off">verschuldigd: groen, uitgeleend: rood</string>
 </resources>
