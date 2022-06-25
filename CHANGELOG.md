@@ -6,6 +6,7 @@
 - fixed: position of date labels in edit transaction screen
 - fixed: crash when entering "," in amount
 - translations update
+- library update
 
 # v1.6.5
 - new: option to reverse owe/lent colors
