@@ -17,14 +17,15 @@
 
 # release-checklist (1.7.0/21)
 - [x] check github milestone
-- [] update fastlane changelog
-- [] update CHANGELOG.md
-- [] update screenshots
-- [] update licenses
+- [x] update fastlane changelog
+- [x] update CHANGELOG.md
+- [x] update changelog.html
+- [-] update screenshots
+- [x] update licenses
   - ./gradlew checkLicenses
   - ./gradlew updateLicenses
   - ./gradlew generateLicensePage
-- [] check build.gradle version+version code
-- [] pull latest translations
-- [] build release (!) apk, rename debitum-x.x.x.apk
-- [] tag release
+- [x] check build.gradle version+version code
+- [x] pull latest translations
+- [x] build release (!) apk, rename debitum-x.x.x.apk
+- [x] tag release
