@@ -6,3 +6,4 @@
 - fixed: position of date labels in edit transaction screen
 - fixed: crash when entering "," in amount
 - translations update
+- library+gradle update
