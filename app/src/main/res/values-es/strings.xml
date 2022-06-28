@@ -139,4 +139,12 @@
     <string name="pref_invert_colors_title">Invertir colores debido/prestado</string>
     <string name="pref_invert_colors_summary_off">debido: verde, prestado: rojo</string>
     <string name="pref_invert_colors_summary_on">debido: rojo, prestado: verde</string>
+    <string name="pref_changelog_title">Registro de cambios</string>
+    <string name="toolbar_sort">Ordenar por</string>
+    <string name="toolbar_sort_name_asc">Nombre (ascendente)</string>
+    <string name="toolbar_sort_name_desc">Nombre (descendente)</string>
+    <string name="toolbar_sort_date_asc">Fecha (ascendente)</string>
+    <string name="toolbar_sort_date_desc">Fecha (descendente)</string>
+    <string name="toolbar_sort_amount_asc">Debes menos</string>
+    <string name="toolbar_sort_amount_desc">Debes más</string>
 </resources>
