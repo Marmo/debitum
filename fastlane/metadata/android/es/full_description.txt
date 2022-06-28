@@ -1,9 +1,9 @@
-Con Debitum puedes llevar la cuenta de todo tipo de deudas, sean dinero u objetos prestados. De esta forma nunca más olvidarás si tu amigo ya te dio ese libro ni discutirás sobre cuánto le debes a tu colega por el café.
+With Debitum you can track all kinds of IOUs, be it money or lent items. This way you will never more forget if your friend already gave you back that book or dispute about how much you owe your colleague for coffee.
 
-The intended use case is to manage (smaller) personal debts and lent items. To keep things simple, things like interest, deadlines, fees etc. will not be an integral part of the app (though the description could somehow be used for that, but I would generally recommend to use more specialised apps for this).
+La utilidad deseada es poder administrar (pequeñas) deudas personales y objetos prestados. Para mantenerlo simple, cosas como intereses, fechas tope y tasas etc. no serán parte de la aplicación base (aunque la descripción se podría usar de alguna manera para eso, aunque generalmente recomendaría utilizar otras aplicaciones más especializadas para ello).
 
-You can backup and restore the database where persons and transactions are stored.
+Puedes hacer una copia de seguridad de la base de datos y restaurarla donde se almacenan las personas y transacciones.
 
-There is no online service whatsoever involved, so your data is saved on your device only (as far as this app is concerned).
+No hay ningún servicio online implicado, por lo que tus datos estarán almacenados únicamente en tu dispositivo (en lo que a la aplicación respecta).
 
-<i>Keywords: IOU, debt, lend</i>
+<i>Keywords: IOU, debt, lend,deuda,préstamo,prestar,deber</i>
