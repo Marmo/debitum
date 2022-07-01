@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "org.ebur.debitum"
         minSdkVersion 24
-        targetSdkVersion 31
-        versionCode 21
-        versionName "1.7.0"
+        targetSdkVersion 32
+        versionCode 22
+        versionName "1.7.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

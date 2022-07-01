@@ -1,3 +1,7 @@
+# v1.7.1
+- fixed: crash when creating new transaction with presets (return transaction or when a existing one is selected)
+- library update
+
 # v1.7.0
 - new: people list can be sorted by date, sum, name
 - new: backup location pickable (thanks [@rikhwanto](https://github.com/rikhwanto))
