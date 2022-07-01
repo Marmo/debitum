@@ -69,7 +69,8 @@
         tools:layout="@layout/fragment_edit_transaction" >
         <argument
             android:name="idTransaction"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="-1"/>
         <action
             android:id="@+id/action_requestNewPerson"
             app:destination="@id/editPerson_dest" >
