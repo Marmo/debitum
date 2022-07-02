@@ -1,0 +1,3 @@
+- adăugare: setare pentru definirea unui filtru standard pentru lista de articole (toate/nereturnate/returnate)
+- modificare: ghidul este acum afișat în dialogul pe ecran complet
+- corecție: accident la încercarea de a edita data de returnare a articolului's

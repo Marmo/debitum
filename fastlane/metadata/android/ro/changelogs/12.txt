@@ -1,0 +1,5 @@
+v1.4.1
+- nou: Avatarul reflectă întotdeauna numele în dialogul de editare a persoanei
+- nou: notificare la editarea unei persoane legate de un contact șters
+- actualizare traduceri (nou: franceză și italiană de către [@Edanas](https://hosted.weblate.org/user/Edanas/))
+- corectat: erori de rotunjire pentru anumite sume

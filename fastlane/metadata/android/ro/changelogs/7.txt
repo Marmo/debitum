@@ -1,0 +1,3 @@
+- add: adaugă scurtătura de returnare la lista de bani (bara de acțiuni contextuale)
+- modificare: faceți ca dialogurile EditTransaction/Person să fie derulabile, astfel încât să se poată descoperi totul din spatele tastaturii soft.
+- corecție: nu mai există decalaj de o zi față de data selectată în fusurile orare cu decalaj UTC/GMT negativ

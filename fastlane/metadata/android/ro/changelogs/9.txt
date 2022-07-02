@@ -1,0 +1,3 @@
+- adăugare: animație pentru afișarea/ ascunderea intrărilor returnate de elemente
+- adăugare: indiciu separat pentru rambursarea banilor
+- adăugare: notă în ghid despre cum să se trateze banii rambursați

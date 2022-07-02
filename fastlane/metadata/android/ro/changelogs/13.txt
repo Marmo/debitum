@@ -1,0 +1,7 @@
+v1.5.0
+- tranzacțiile pot avea imagini atașate
+- atunci când se creează o nouă tranzacție și este selectat exact un rând, conținutul acestuia este utilizat ca preset
+- se utilizează selectorul de fișiere atunci când se restaurează baza de date
+- fișiere de backup cu data adăugată (nu se mai suprascriu)
+- copiile de rezervă sunt acum un fișier zip care conține baza de date și toate imaginile atașate
+- actualizare traduceri

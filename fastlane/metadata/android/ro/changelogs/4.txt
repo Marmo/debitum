@@ -1,0 +1,3 @@
+- adăugare: pictograma generică gri a persoanei din lista de persoane este acum o pictogramă colorată bazată pe nume
+- adăugare: traducere în portugheză braziliană ([@mezysinc](https://github.com/mezysinc))
+- adăugare: articolele pot fi marcate ca fiind returnate, data este înregistrată și lista de articole poate fi filtrată pentru articole returnate/nereturnate

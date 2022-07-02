@@ -1,0 +1,1 @@
+- corecție: eroare la filtrarea pentru persoane fără datorii sau cu note (#34)

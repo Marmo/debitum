@@ -1,0 +1,5 @@
+- adăugați informații despre versiune în setări
+- se adaugă o notă privind ștergerea fișierelor de backup la dezinstalare în setări
+- corectarea barelor de gustări din People-List care apar într-un loc greșit
+- corectarea selectorului de date din ecranul de editare a tranzacției care necesită două clicuri pentru a apărea
+- adăugarea unui mesaj de eroare specific atunci când se încearcă restaurarea de la o copie de rezervă și nu a fost găsit fișierul de rezervă

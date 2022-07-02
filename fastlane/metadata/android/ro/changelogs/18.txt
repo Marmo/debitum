@@ -1,0 +1,3 @@
+# v1.6.3
+- fix: accident la introducerea sumelor > 999 în localități cu spațiu ca și caracter de grupare
+- actualizare transöations

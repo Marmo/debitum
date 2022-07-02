@@ -1,0 +1,4 @@
+# v1.6.4
+- fix: ghiduri rapide nu sunt afișate în versiunile localizate
+- actualizare traduceri
+- limbă nouă: Cehă (@kudlav)
