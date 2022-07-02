@@ -1,0 +1,7 @@
+- new: persons can have a linked phone contact. Linking is done from the edit person dialog.
+- new: when selecting persons or money transactions, the sum of the selected items is shown in the contextual action bar
+- new: preference to set date format
+- new: warn when setting a return date before the original transaction's date
+- updated/new translations:
+  - Brazilian Portuguese ([@mezysinc](https://github.com/mezysinc))
+  - Norwegian Bokmål ([@comradekingu](https://github.com/comradekingu))

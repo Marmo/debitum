@@ -1,0 +1,5 @@
+v1.4.1
+- new: avatar always reflects name in edit person dialog
+- new: notification when editing a person linked to a deleted contact
+- translations update (new: french and italian by [@Edanas](https://hosted.weblate.org/user/Edanas/))
+- fixed: rounding errors for certain amounts

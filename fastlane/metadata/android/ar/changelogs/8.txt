@@ -1,0 +1,2 @@
+- fix: Edit transaction dialog: amount format is now correctly changed upon switching between item and money (#29)
+- fix: New Transaction not hidden behind header bar anymore (#2)

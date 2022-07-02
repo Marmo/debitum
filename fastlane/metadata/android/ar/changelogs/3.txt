@@ -1,0 +1,7 @@
+- add: list with third party licenses in settings
+- add: persons can have a note that is displayed in the filter bar
+- change: use contextual action bar for displaying edit/delete menu items when selecting rows
+- change: move edit person button to filter bar
+- change: set initial amount and focus in edit dialogs
+- change: redesign bottom navigation
+- fix: error messages in edit transaction dialog are cleared now when something is entered

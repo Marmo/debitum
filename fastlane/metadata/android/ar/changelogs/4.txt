@@ -1,0 +1,3 @@
+- add: the generic gray person-icon in the person list is now a colored name-based icon
+- add: brazilian portuguese translation ([@mezysinc](https://github.com/mezysinc))
+- add: items can be marked as returned, the date is recorded and the item list can be filtered for returned/unreturned items

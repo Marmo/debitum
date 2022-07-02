@@ -1,0 +1,3 @@
+- add: animation for showing/hiding item-returned input
+- add: separate hint for repaying money
+- add: note about how to handle repaid money to guide

@@ -1,0 +1,7 @@
+v1.5.0
+- transactions can have images attached
+- when creating a new transaction and exactly one row is selected, its contents is used as preset
+- use file picker when restoring database
+- backup files with date appended (not overwritten anymore)
+- backups are now a zip file containing the database and all attached images
+- translations update
