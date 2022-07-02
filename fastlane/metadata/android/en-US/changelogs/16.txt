@@ -2,8 +2,3 @@
 - fixed: wrong label in items header bar when filtered by returned status
 - show thousands separator in monetary amounts
 - new language: Spanish (@ferossan)
-
-# v1.6.0
-- new: setting for number of decimals
-- new languages: Romanian (@simonaiacob), Persian (@Radovski)
-- translations update
