@@ -1,3 +1,0 @@
-# v1.6.3
-- fixed: crash when entering amounts > 999 in locales with space as grouping char
-- transöations update

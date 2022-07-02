@@ -1,3 +1,0 @@
-v1.5.1
-- translations update
-- internal refactoring

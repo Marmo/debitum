@@ -1,3 +1,0 @@
-# v1.6.2
-- fixed: wrong amounts saved when not using 2 decimals setting
-- fixed: amounts multiplied with 10 or 100 when changing decimals setting immediately after cancelling such a change

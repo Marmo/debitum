@@ -1,4 +1,0 @@
-# v1.6.1
-- fixed: wrong label in items header bar when filtered by returned status
-- show thousands separator in monetary amounts
-- new language: Spanish (@ferossan)
