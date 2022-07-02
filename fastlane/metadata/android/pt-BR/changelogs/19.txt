@@ -1,0 +1,4 @@
+# v1.6.4
+- fixo: guias rápidos não mostrados em versões localizadas
+- actualização das traduções
+- nova língua: Checo (@kudlav)

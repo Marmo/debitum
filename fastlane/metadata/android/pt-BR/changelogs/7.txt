@@ -1,0 +1,3 @@
+- adicionar: adicionar atalho de retorno à lista de dinheiro (barra de acção contextual)
+- alterar: tornar EditTransaction/Person Dialogs rolável para que tudo possa ser revelado por trás do painel de teclas
+- correcção: não mais um dia de compensação a partir da data seleccionada em fusos horários com compensação UTC/GMT negativa

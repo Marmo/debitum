@@ -1,0 +1,3 @@
+v1.5.1
+- actualização das traduções
+- refactoring interno

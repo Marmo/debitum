@@ -1,0 +1,5 @@
+# v1.6.5
+- novo: opção para reverter as cores a dever/emprestado
+- novo: entrar editar ecrã de transacção com um toque na transacção
+- novo: ícone na lista de transacções, indicando se a transacção tem imagens anexadas (nota: para transacções com imagens existentes, este ícone só aparecerá após a próxima gravação)
+- actualização das traduções

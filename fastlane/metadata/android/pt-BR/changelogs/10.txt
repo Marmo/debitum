@@ -1,0 +1,1 @@
+- reparo: crash ao filtrar para pessoa sem dívidas ou com nota (#34)

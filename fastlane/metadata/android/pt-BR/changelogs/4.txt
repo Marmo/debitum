@@ -1,0 +1,3 @@
+- adicionar: o ícone genérico cinzento de pessoa na lista de pessoas é agora um ícone colorido baseado no nome
+- adicionar: tradução em português do Brasil ([@mezysinc](https://github.com/mezysinc))
+- adicionar: os artigos podem ser marcados como devolvidos, a data é registada e a lista de artigos pode ser filtrada para artigos devolvidos/devolvidos

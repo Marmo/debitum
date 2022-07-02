@@ -1,0 +1,3 @@
+- adicionar: ajuste para definir filtro padrão para lista de itens (todos/devolvidos/retornados)
+- alteração: o guia é agora apresentado em diálogo em ecrã inteiro
+- correcção: crash ao tentar editar item's data de devolução

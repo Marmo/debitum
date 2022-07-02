@@ -1,0 +1,3 @@
+# v1.6.2
+- fixo: montantes errados guardados quando não se utilizam 2 casas decimais
+- fixo: montantes multiplicados por 10 ou 100 ao alterar a definição das casas decimais imediatamente após o cancelamento de tal alteração

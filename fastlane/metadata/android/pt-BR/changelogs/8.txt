@@ -1,0 +1,2 @@
+- reparar: Editar diálogo de transacção: o formato do montante é agora correctamente alterado ao mudar entre item e dinheiro (#29)
+- reparar: Nova Transacção não mais escondida atrás da barra de cabeçalho (#2)
