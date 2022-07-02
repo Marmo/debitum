@@ -1,4 +1,0 @@
-# v1.6.4
-- fixed: quick guides not shown in localized versions
-- translations update
-- new language: Czech (@kudlav)
