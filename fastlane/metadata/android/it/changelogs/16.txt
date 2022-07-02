@@ -1,0 +1,4 @@
+# v1.6.1
+- corretto: etichetta errata nella barra delle intestazioni degli articoli quando vengono filtrati in base allo stato restituito
+- mostra il separatore delle migliaia negli importi monetari
+- nuova lingua: Spagnolo (@ferossan)

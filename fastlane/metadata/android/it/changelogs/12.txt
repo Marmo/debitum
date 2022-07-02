@@ -1,0 +1,5 @@
+v1.4.1
+- nuovo: l'avatar riflette sempre il nome nella finestra di dialogo di modifica della persona
+- nuovo: notifica quando si modifica una persona collegata a un contatto cancellato
+- aggiornamento delle traduzioni (nuove: francese e italiano di [@Edanas](https://hosted.weblate.org/user/Edanas/))
+- corretto: errori di arrotondamento per alcuni importi

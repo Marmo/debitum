@@ -1,0 +1,3 @@
+- aggiunta: l'icona generica grigia della persona nell'elenco delle persone è ora un'icona colorata basata sul nome
+- aggiunta: traduzione in portoghese brasiliano ([@mezysinc](https://github.com/mezysinc))
+- aggiunta: gli articoli possono essere contrassegnati come restituiti, la data viene registrata e l'elenco degli articoli può essere filtrato per gli articoli restituiti/non restituiti

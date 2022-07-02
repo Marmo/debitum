@@ -1,0 +1,2 @@
+- correzione: Finestra di dialogo Modifica transazione: il formato dell'importo viene ora modificato correttamente quando si passa da oggetto a denaro (#29).
+- correzione: Nuova transazione non più nascosta dietro la barra di intestazione (#2)

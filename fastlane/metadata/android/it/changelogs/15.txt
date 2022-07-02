@@ -1,0 +1,4 @@
+v1.6.0
+- nuovo: impostazione del numero di decimali
+- nuove lingue: Rumeno (grazie a [Simona Iacob](https://hosted.weblate.org/user/s@zp1.net/)), Persiano (grazie a [Radmehr Ebrahimi](https://hosted.weblate.org/user/Radovski/))
+- aggiornamento delle traduzioni

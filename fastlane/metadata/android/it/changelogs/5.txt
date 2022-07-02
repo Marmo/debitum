@@ -1,0 +1,3 @@
+- aggiunta: impostazione per definire un filtro standard per l'elenco degli articoli (tutti/non restituiti/ritirati)
+- modifica: la guida viene ora visualizzata nella finestra di dialogo a schermo intero
+- correzione: arresto anomalo quando si tenta di modificare la data di restituzione degli articoli'e

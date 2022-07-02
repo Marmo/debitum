@@ -1,0 +1,3 @@
+# v1.6.2
+- corretto: importi errati salvati quando non si utilizzava l'impostazione 2 decimali
+- corretto: importi moltiplicati per 10 o 100 quando si modificava l'impostazione dei decimali subito dopo aver annullato tale modifica

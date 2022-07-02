@@ -1,0 +1,7 @@
+v1.5.0
+- le transazioni possono avere immagini allegate
+- quando si crea una nuova transazione e viene selezionata esattamente una riga, il suo contenuto viene usato come preimpostato
+- utilizzare il selezionatore di file durante il ripristino del database
+- file di backup con data aggiunta (non più sovrascritti)
+- i backup sono ora un file zip contenente il database e tutte le immagini allegate
+- aggiornamento delle traduzioni
