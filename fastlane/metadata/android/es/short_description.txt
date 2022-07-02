@@ -1,1 +1,1 @@
-Mantenga un registro de préstamos de dinero y cosas
+Lleva la cuenta de dinero y objetos prestados

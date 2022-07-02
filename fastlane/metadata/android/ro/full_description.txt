@@ -6,4 +6,4 @@ Puteți face copii de rezervă și restaura baza de date în care sunt stocate p
 
 Nu este implicat niciun fel de serviciu online, astfel încât datele dumneavoastră sunt salvate doar pe dispozitivul dumneavoastră (în ceea ce privește această aplicație).
 
-&lt;Cuvinte cheie: IOU, datorie, împrumut&lt;/i&gt;
+&lt;Cuvinte cheie: IOU, debt, lend, datorie, împrumut&lt;/i&gt;
