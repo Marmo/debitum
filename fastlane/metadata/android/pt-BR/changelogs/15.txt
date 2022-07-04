@@ -1,0 +1,4 @@
+v1.6.0
+- novo: definição do número de decimais
+- novas línguas: Romeno (thx [Simona Iacob](_COPY19@zp1.net/)), Persa (thx [Radmehr Ebrahimi](https://hosted.weblate.org/user/Radovski/) )
+- actualização das traduções

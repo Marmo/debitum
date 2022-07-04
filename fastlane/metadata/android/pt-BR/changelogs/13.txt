@@ -1,0 +1,7 @@
+v1.5.0
+- as transacções podem ter imagens anexadas
+- quando se cria uma nova transacção e se selecciona exactamente uma linha, o seu conteúdo é utilizado como predefinido
+- utilizar o seletor de arquivos ao restaurar a base de dados
+- ficheiros de backup com data anexada (já não sobrescritos)
+- as cópias de segurança são agora um ficheiro zip contendo a base de dados e todas as imagens anexadas
+- actualização das traduções

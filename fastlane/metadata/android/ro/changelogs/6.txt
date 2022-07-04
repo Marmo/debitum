@@ -1,0 +1,4 @@
+- corecție: bara de acțiune contextuală este acum terminată la schimbarea listei (ar fi putut bloca aplicația)
+- corect: pictograma "mark-returned-icon" din bara de acțiuni contextuale este acum ascunsă atunci când elementul selectat este deja returnat
+- modificare: utilizarea MD5 pentru calcularea unei culori din numele unei persoane's pentru o mai bună distribuție a culorilor
+- modificare: face ca butonul "add person" din dialogul de editare a tranzacției să iasă puțin mai mult în evidență

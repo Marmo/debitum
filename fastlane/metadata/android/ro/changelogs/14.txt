@@ -1,0 +1,3 @@
+v1.5.1
+- actualizare traduceri
+- refactorizare internă

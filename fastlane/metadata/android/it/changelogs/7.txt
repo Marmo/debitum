@@ -1,0 +1,3 @@
+- aggiungi: aggiungi la scorciatoia per il ritorno all'elenco dei soldi (barra delle azioni contestuali)
+- modifica: rendere scrollabili le finestre di dialogo EditTransaction/Person, in modo da poter scoprire tutto da dietro la soft-keyboard
+- correzione: non c'è più lo scostamento di un giorno dalla data selezionata nei fusi orari con offset UTC/GMT negativo

@@ -1,0 +1,5 @@
+# v1.6.5
+- nuovo: opzione per invertire i colori di debito/prestito
+- nuovo: possibilità di accedere alla schermata di modifica delle transazioni con un solo tocco sulla transazione
+- nuovo: icona nell'elenco delle transazioni, che indica se la transazione ha immagini allegate (nota: per le transazioni con immagini esistenti, questa icona apparirà solo dopo il successivo salvataggio)
+- aggiornamento delle traduzioni

@@ -1,0 +1,2 @@
+- reparați: Dialogul de editare a tranzacției: formatul sumei este acum corect schimbat la trecerea de la articol la bani (#29)
+- se repară: Noua tranzacție nu mai este ascunsă în spatele barei de antet (#2)

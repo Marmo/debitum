@@ -1,0 +1,5 @@
+v1.4.1
+- novo: avatar reflecte sempre o nome no diálogo de pessoa editora
+- novo: notificação ao editar uma pessoa ligada a um contacto eliminado
+- actualização das traduções (novo: francês e italiano por [@Edanas](https://hosted.weblate.org/user/Edanas/))
+- corrigido: erros de arredondamento para determinados montantes

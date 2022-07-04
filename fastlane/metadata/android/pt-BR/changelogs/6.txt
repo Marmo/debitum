@@ -1,0 +1,4 @@
+- correcção: a barra de acção contextual está agora terminada com a alteração da lista (poderia ter crashado a aplicação)
+- correcção: o ícone de marca-retorno na barra de acção contextual é agora escondido quando o item seleccionado já é devolvido
+- alteração: utilizar MD5 para calcular uma cor a partir do nome de uma pessoa's para uma melhor distribuição das cores
+- mudar: make "adicionar pessoa" botão em diálogo editar transacção destaca-se um pouco mais

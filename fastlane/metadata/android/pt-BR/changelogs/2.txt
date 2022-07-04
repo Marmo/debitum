@@ -1,0 +1,5 @@
+- adicionar informação da versão em definições
+- adicionar nota sobre a eliminação de ficheiros de cópia de segurança após a desinstalação em definições
+- consertar snackbars em People-List aparecendo no lugar errado
+- fixador de data no ecrã de transacção de edição, necessitando de dois cliques para aparecer
+- adicionar mensagem de erro específica ao tentar restaurar a partir de cópia de segurança e o ficheiro de cópia de segurança não foi encontrado

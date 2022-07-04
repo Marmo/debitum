@@ -1,0 +1,3 @@
+# v1.7.1
+- fixo: crash ao criar uma nova transacção com predefinições (transacção de retorno ou quando é seleccionada uma já existente)
+- actualização da biblioteca

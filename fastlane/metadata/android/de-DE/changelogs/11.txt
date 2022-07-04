@@ -1,7 +1,7 @@
-- new: persons now can have a linked phone contact. Linking is done from the edit person dialog. For this feature the READ_CONTACTS permission is needed (which you can safely deny without breaking Debitum).
-- new: when selecting persons or money transactions in the list views, the sum of the selected items is shown in the contextual action bar
-- new: added preference to set date format
-- new: warn when setting a return date before the original transaction's date
-- updated/new translations:
-  - Brazilian Portuguese ([@mezysinc](https://github.com/mezysinc))
-  - Norwegian Bokmål ([@comradekingu](https://github.com/comradekingu))
+- neu: Personen können im Person-Bearbeiten-Dialog mit Telefon-Kontakten verknüpft werden. Dafür wird die Berechtigung zum Lesen von Kontakten benötigt (die du ohne Probleme ablehnen und Debitum ohne Kontaktverknüpfung nutzen kannst)
+- neu: wenn Personen oder Geld-Transaktionen ausgewählt werden, wird deren Summe in der Kontext-Leiste angezeigt
+- neu: Einstellung für das Datumsformat hinzugefügt
+- neu: Warnung, wenn das Rückgabedatum vor das ursprüngliche Transaktionsdatum gesetzt wird
+- Übersetzungen neu/aktualisiert:
+  - Brasilianisches Portugiesisch ([@mezysinc](https://github.com/mezysinc))
+  - Norwegisches Bokmål ([@comradekingu](https://github.com/comradekingu))

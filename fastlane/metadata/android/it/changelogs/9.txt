@@ -1,0 +1,3 @@
+- aggiunta: animazione per mostrare/nascondere l'input di un oggetto restituito
+- aggiungere: suggerimento separato per la restituzione del denaro
+- aggiungere: nota su come gestire il denaro restituito alla guida

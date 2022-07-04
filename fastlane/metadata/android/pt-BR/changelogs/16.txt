@@ -1,0 +1,4 @@
+# v1.6.1
+- fixo: etiqueta errada na barra de cabeçalho dos itens quando filtrados pelo estado devolvido
+- mostrar milhares de separadores em montantes monetários
+- nova língua: Espanhol (@ferossan)

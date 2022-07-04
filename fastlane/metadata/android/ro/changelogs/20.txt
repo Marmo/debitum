@@ -1,0 +1,5 @@
+# v1.6.5
+- nou: opțiunea de a inversa culorile datorate/luate
+- nou: intrarea în ecranul de editare a tranzacției cu o singură atingere pe tranzacție
+- nou: pictogramă în lista de tranzacții, care indică dacă tranzacția are imagini atașate (notă: pentru tranzacțiile cu imagini existente, această pictogramă va apărea doar după următoarea salvare)
+- actualizare traduceri

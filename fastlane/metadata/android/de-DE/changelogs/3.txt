@@ -1,8 +1,6 @@
-- neu: Liste von Drittanbieterlizenzen in den Einstellungen
+- neu: Liste von Drittanbieterlizenzen in Einstellungen
 - neu: zu Personen kann eine Notiz hinterlegt werden, die in der Filterleiste angezeigt wird
 - geändert: separate Leiste zum Editieren/Löschen von Transaktionen bzw. Personen ausgewählter Zeilen
-- geändert: Schaltfläche zum Editieren einer Person ist jetzt in der Filterleiste anstatt in der Titelleiste
-- geändert: bei neuen Gegenstands-Transaktionen wird die Anzahl mit 1 vorbelegt
-- geändert: der Fokus beim Öffnen der Bearbeiten-Dialoge wird auf passende Eingabefelder gesetzt
-- geändert: die Neue-Transaktion-Schaltfläche ist jetzt in der Navigationsleiste eingebettet
-- behoben: Fehlermeldungen im Dialog zum bearbeiten von Transaktionen werden nun ausgeblendet, wenn etwas eingegeben wird
+- geändert: Schaltfläche zum Editieren einer Person in der Filterleiste anstatt in der Titelleiste
+- geändert: bei neuen Gegenstands-Transaktionen Anzahl mit 1 vorbelegt
+- geändert: Fokus beim Öffnen der Bearbeiten-Dialoge auf passende Eingabefelder

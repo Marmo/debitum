@@ -1,0 +1,4 @@
+# v1.6.1
+- corectat: etichetă greșită în bara de antet a elementelor atunci când este filtrată după starea returnată
+- afișarea separatorului de mii în sumele monetare
+- limbă nouă: Spaniolă (@ferossan)
