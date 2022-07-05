@@ -1,2 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="button_label_save">保存</string>
+    <string name="delete_dialog_confirm">删除</string>
+    <string name="dialog_cancel">清除</string>
+    <string name="required_helper_text">* 必填</string>
+    <string name="actionmode_return_item">标记为已还</string>
+    <string name="error_message_database_access">尝试访问数据库时发生错误, 请重试。
+\n%1$s</string>
+    <string name="actionmode_edit">编辑</string>
+    <string name="actionmode_delete">删除</string>
+    <string name="toolbar_sort_name_asc">姓名(升序)</string>
+    <string name="fab_content_description">创建交易</string>
+    <string name="person_sum_list_you_owe">我的负债</string>
+    <string name="person_sum_list_you_lent">我的债权</string>
+    <string name="toolbar_create_person">创建人员</string>
+    <string name="toolbar_sort">排序方式</string>
+    <string name="toolbar_sort_name_desc">姓名(降序)</string>
+    <string name="toolbar_sort_date_asc">日期 (升序)</string>
+    <string name="toolbar_sort_date_desc">日期 (降序)</string>
+    <plurals name="person_sum_list_snackbar_deleted">
+        <item quantity="other">%d 已删除</item>
+    </plurals>
+    <string name="bottom_nav_people">个人</string>
+    <string name="bottom_nav_money">债务</string>
+    <string name="bottom_nav_items">项目</string>
+    <string name="bottom_nav_settings">设置</string>
+    <string name="dismiss_filter">取消筛选</string>
+    <string name="database_empty">没有记录。
+\n使用下方的“+”创建新记录。</string>
+    <string name="title_fragment_person_sum_list">个人</string>
+    <string name="person_sum_list_no_debt">没有债务</string>
+    <string name="toolbar_sort_amount_asc">我欠最少</string>
+    <string name="toolbar_sort_amount_desc">我欠最多</string>
+    <plurals name="person_sum_list_dialog_delete_title">
+        <item quantity="other">删除 %d ？</item>
+    </plurals>
+    <string name="person_sum_list_dialog_delete_text">操作无法撤消，并且将删除关联交易。</string>
+    <string name="header_label">总额</string>
+    <string name="header_desc_items_returned">项目重置</string>
+    <string name="header_desc_items_lent">我的债权</string>
+    <string name="item_filter">按还款状态筛选</string>
+    <string name="item_filter_all">全部显示</string>
+    <string name="item_filter_unreturned">未还款</string>
+    <string name="edit_transaction_error_select_name">请选择人员。</string>
+    <string name="edit_transaction_hint_desc">说明</string>
+    <string name="pref_restore_summary">从之前创建的备份 zip 文件</string>
+    <string name="pref_changelog_title">更新日志</string>
+    <string name="pref_licenses_title">Libre 第三方许可证</string>
+    <string name="pref_version">版本号 %1$s</string>
+    <string name="pref_restore_file_not_found">备份文件未找到</string>
+    <string name="pref_faq_title">常见问题解答</string>
+    <string name="pref_github_title">Github</string>
+    <string name="pref_github_summary">查找并改进源代码,反馈问题和想法</string>
+    <string name="restore_confirm_text">用备份数据覆盖所有现有数据？
+\n应用程序将重新启动。</string>
+    <string name="restore_confirm_title">从备份中恢复</string>
+    <string name="pref_backup_title">数据备份</string>
+    <string name="pref_restore_title">数据导入</string>
+    <string name="item_filter_returned">已还款</string>
+</resources>
