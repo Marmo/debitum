@@ -51,8 +51,8 @@
     <string name="title_fragment_edit_person_create">Opprett person</string>
     <string name="title_fragment_edit_person">Rediger person</string>
     <string name="edit_transaction_snackbar_max_amount">Maks. 9 siffer tillates</string>
-    <string name="edit_transaction_received">mottok</string>
-    <string name="edit_transaction_gave">ga</string>
+    <string name="edit_transaction_received">Mottok</string>
+    <string name="edit_transaction_gave">Ga</string>
     <string name="edit_transaction_hint_date">Dato</string>
     <string name="edit_transaction_date_dialog_title">Velg dato</string>
     <string name="edit_transaction_wrong_amount_format">Noe er galt med beløpsformatet.</string>

@@ -72,17 +72,17 @@
                     app:layout_constraintTop_toBottomOf="@id/spinner_name">
 
                     <RadioButton
-                        android:id="@+id/radioButton_received"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/edit_transaction_received" />
-
-                    <RadioButton
                         android:id="@+id/radioButton_gave"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:text="@string/edit_transaction_gave" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton_received"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_transaction_received" />
 
                 </RadioGroup>
 
