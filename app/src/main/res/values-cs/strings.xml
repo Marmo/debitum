@@ -117,4 +117,14 @@
     <string name="backup_successful">Data zálohována na externí úložiště</string>
     <string name="backup_failed">Zálohování selhalo %1$s</string>
     <string name="restore_failed">Obnova selhala %1$s</string>
+    <string name="pref_invert_colors_summary_on">dlužíte: červená, půjčujete: zelená</string>
+    <string name="toolbar_sort">Řadit podle</string>
+    <string name="toolbar_sort_name_asc">Jméno (vzestupně)</string>
+    <string name="pref_invert_colors_title">Obrátit barvu dlužíte / půjčili jste</string>
+    <string name="pref_invert_colors_summary_off">dlužíte: zelená, půjčujete: červená</string>
+    <string name="toolbar_sort_amount_asc">Dlužíte nejméně</string>
+    <string name="toolbar_sort_name_desc">Jméno (sestupně)</string>
+    <string name="toolbar_sort_amount_desc">Dlužíte nejvíce</string>
+    <string name="toolbar_sort_date_asc">Datum (vzestupně)</string>
+    <string name="toolbar_sort_date_desc">Datum (sestupně)</string>
 </resources>
