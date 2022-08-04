@@ -144,4 +144,12 @@
     <string name="pref_invert_colors_title">Inversarea culorilor dator/împrumutat</string>
     <string name="pref_invert_colors_summary_off">datorez: verde, împrumut: rosu</string>
     <string name="pref_invert_colors_summary_on">datorez: rosu, împrumut: verde</string>
+    <string name="pref_changelog_title">Jurnal de modificări</string>
+    <string name="toolbar_sort">Comandă prin</string>
+    <string name="toolbar_sort_name_asc">Nume (crescător)</string>
+    <string name="toolbar_sort_name_desc">Nume (descrescător)</string>
+    <string name="toolbar_sort_date_asc">Data (crescător)</string>
+    <string name="toolbar_sort_date_desc">Data (descrescător)</string>
+    <string name="toolbar_sort_amount_asc">Datorezi cel puțin</string>
+    <string name="toolbar_sort_amount_desc">Datorezi cele mai multe</string>
 </resources>
