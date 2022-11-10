@@ -98,8 +98,8 @@
     <string name="pref_backup_title">Резервное копирование данных</string>
     <string name="pref_restore_file_not_found">Файл резервной копии не найден</string>
     <string name="pref_dismiss_filter_title">При закрытии фильтра людей…</string>
-    <string name="pref_invert_colors_summary_off">должен: зеленый, долг: красный</string>
-    <string name="pref_invert_colors_summary_on">должен: красный, долг: зеленый</string>
+    <string name="pref_invert_colors_summary_off">должен: зеленый, одолжил: красный</string>
+    <string name="pref_invert_colors_summary_on">должен: красный, одолжил: зеленый</string>
     <string name="restore_confirm_text">Переписать все существующие данные данными из резервной копии\?
 \nПриложение будет перезапущено.</string>
     <string name="error_message_database_access">Ошибка при попытке доступа к базе данных. Пожалуйста, попробуйте еще раз.
