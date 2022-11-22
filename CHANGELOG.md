@@ -1,3 +1,6 @@
+# v1.7.2
+- translations update
+
 # v1.7.1
 - fixed: crash when creating new transaction with presets (return transaction or when a existing one is selected)
 - library update
