@@ -11,6 +11,7 @@
     <string name="actionmode_delete">Borrar</string>
     <plurals name="actionmode_selected">
         <item quantity="one">%d seleccionado</item>
+        <item quantity="many">%d seleccionados</item>
         <item quantity="other">%d seleccionados</item>
     </plurals>
     <string name="actionmode_sum">Suma: %1$s</string>
@@ -23,8 +24,9 @@
     <string name="person_sum_list_you_owe">tu le debes</string>
     <string name="person_sum_list_you_lent">tu le prestaste</string>
     <plurals name="person_sum_list_snackbar_deleted">
-        <item quantity="one">%d persona borrada</item>
-        <item quantity="other">%d personas borradas</item>
+        <item quantity="one">%d persona eliminada</item>
+        <item quantity="many">%d personas eliminadas</item>
+        <item quantity="other">%d personas eliminadas</item>
     </plurals>
     <string name="person_sum_list_dialog_delete_text">Esto no puede deshacerse y eliminará todas las transacciones también.</string>
     <string name="title_fragment_transaction_list_money">Dinero</string>
@@ -37,6 +39,7 @@
     <string name="item_filter_returned">Mostrar devueltos</string>
     <plurals name="transaction_list_dialog_delete_title">
         <item quantity="one">¿Borrar %d transacción\?</item>
+        <item quantity="many">¿Borrar %d transacciones\?</item>
         <item quantity="other">¿Borrar %d transacciones\?</item>
     </plurals>
     <string name="transaction_list_dialog_delete_text">Esto no puede deshacerse.</string>
@@ -100,8 +103,9 @@
 \nCree una nueva transacción usando el botón \"+\" abajo.</string>
     <string name="toolbar_create_person">Crear Persona</string>
     <plurals name="person_sum_list_dialog_delete_title">
-        <item quantity="one">¿Borrar %d persona\?</item>
-        <item quantity="other">¿Borrar %d personas\?</item>
+        <item quantity="one">¿Borrar a %d persona\?</item>
+        <item quantity="many">¿Borrar a %d personas\?</item>
+        <item quantity="other">¿Borrar a %d personas\?</item>
     </plurals>
     <string name="title_fragment_transaction_list_items">Cosas</string>
     <string name="pref_maintenance_header">Respaldos</string>
@@ -110,6 +114,7 @@
     <string name="pref_nr_decimals_title">Nro. de decimales</string>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d transacción borrada</item>
+        <item quantity="many">%d transacciones borradas</item>
         <item quantity="other">%d transacciones borradas</item>
     </plurals>
     <string name="edit_transaction_hint_date">Fecha</string>
