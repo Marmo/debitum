@@ -16,7 +16,7 @@
     <string name="pref_backup_title">Fai il backup dei dati</string>
     <string name="restore_failed">Ripristino fallito. %1$s</string>
     <string name="backup_failed">Backup fallito %1$s</string>
-    <string name="backup_successful">Backup dei dati su una memoria esterna</string>
+    <string name="backup_successful">Backup dei dati in un luogo prescelto</string>
     <string name="pref_maintenance_header">Manutenzione</string>
     <string name="pref_date_format_systemdefault_long">Predefinito sistema (lungo)</string>
     <string name="pref_date_format_systemdefault_medium">Predefinito sistema (medio)</string>
@@ -136,4 +136,11 @@
     <string name="pref_nr_decimals_one">1</string>
     <string name="pref_nr_decimals_two">2</string>
     <string name="pref_nr_decimals_three">3</string>
+    <string name="toolbar_sort_name_asc">Nome (ascendente)</string>
+    <string name="toolbar_sort_name_desc">Nome (discendente)</string>
+    <string name="toolbar_sort_date_asc">Data (ascendente)</string>
+    <string name="toolbar_sort_amount_asc">Devi il meno</string>
+    <string name="toolbar_sort_amount_desc">Devi il più</string>
+    <string name="toolbar_sort_date_desc">Data (decrescente)</string>
+    <string name="toolbar_sort">Ordina per</string>
 </resources>
