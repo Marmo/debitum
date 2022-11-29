@@ -12,10 +12,12 @@
     <string name="transaction_list_dialog_delete_text">Ceci ne peut pas être annulée.</string>
     <plurals name="transaction_list_dialog_delete_title">
         <item quantity="one">Supprimer %d transaction \?</item>
+        <item quantity="many">Supprimer %d transactions \?</item>
         <item quantity="other">Supprimer %d transactions \?</item>
     </plurals>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d transaction supprimée</item>
+        <item quantity="many">%d transactions supprimées</item>
         <item quantity="other">%d transactions supprimées</item>
     </plurals>
     <string name="item_filter_unreturned">Afficher les non rendus</string>
@@ -29,10 +31,12 @@
     <string name="person_sum_list_dialog_delete_text">Cette opération ne peut être annulée et supprimera également les transactions à destination et en provenance de ces personnes.</string>
     <plurals name="person_sum_list_dialog_delete_title">
         <item quantity="one">Supprimer %d personne \?</item>
+        <item quantity="many">Supprimer %d personnes \?</item>
         <item quantity="other">Supprimer %d personnes \?</item>
     </plurals>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d personne supprimée</item>
+        <item quantity="many">%d personnes supprimées</item>
         <item quantity="other">%d personnes supprimées</item>
     </plurals>
     <string name="toolbar_create_person">Créer une personne</string>
@@ -51,6 +55,7 @@
     <string name="actionmode_sum">Somme : %1$s</string>
     <plurals name="actionmode_selected">
         <item quantity="one">%d sélectionné</item>
+        <item quantity="many">%d sélectionnés</item>
         <item quantity="other">%d sélectionnés</item>
     </plurals>
     <string name="actionmode_delete">Supprimer</string>
