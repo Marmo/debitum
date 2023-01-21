@@ -61,8 +61,8 @@
     <string name="edit_transaction_date_dialog_title">Selecteer datum</string>
     <string name="edit_transaction_hint_date">Datum</string>
     <string name="edit_transaction_hint_returndate">Datum teruggegeven</string>
-    <string name="edit_transaction_gave">gaf</string>
-    <string name="edit_transaction_received">teruggekregen</string>
+    <string name="edit_transaction_gave">Gaf</string>
+    <string name="edit_transaction_received">Teruggekregen</string>
     <string name="debt_settlement_money_description">Schuldenregeling voor \"%1$s\" van %2$s</string>
     <string name="edit_transaction_use_suspicious_return_date">gebruik datum</string>
     <string name="edit_transaction_image_delete_desc">verwijder afbeelding</string>
