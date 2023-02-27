@@ -107,7 +107,7 @@
     <string name="pref_dismiss_filter_summary_false">Permanecer na lista atual</string>
     <string name="pref_item_returned_filter_title">Filtro padrão da lista de itens</string>
     <string name="pref_maintenance_header">Manutenção</string>
-    <string name="backup_successful">Os dados foram salvos no armazenamento externo</string>
+    <string name="backup_successful">Os dados foram salvos no local escolhido</string>
     <string name="backup_failed">O Backup falhou %1$s</string>
     <string name="restore_failed">A restauração falhou. %1$s</string>
     <string name="pref_backup_title">Dados da cópia de segurança</string>
@@ -142,4 +142,11 @@
     <string name="header_desc_items_returned">itens devolvidos</string>
     <string name="header_desc_items_all">itens</string>
     <string name="header_desc_items_lent">itens emprestados</string>
+    <string name="pref_changelog_title">Histórico de mudanças</string>
+    <string name="toolbar_sort">Ordenar por</string>
+    <string name="toolbar_sort_name_asc">Nome (crescente)</string>
+    <string name="toolbar_sort_name_desc">Nome (decrescente)</string>
+    <string name="toolbar_sort_date_asc">Data (crescente)</string>
+    <string name="toolbar_sort_date_desc">Data (decrescente)</string>
+    <string name="decrease_decimals_dialog_title">Alerta</string>
 </resources>
