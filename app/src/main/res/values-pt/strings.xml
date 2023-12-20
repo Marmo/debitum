@@ -22,29 +22,29 @@
     <string name="actionmode_return_money">Criar transação de devolução</string>
     <plurals name="actionmode_selected">
         <item quantity="one">%d selecionado</item>
-        <item quantity="many"></item>
+        <item quantity="many"/>
         <item quantity="other">%d selecionados</item>
     </plurals>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d pessoa apagada</item>
-        <item quantity="many"></item>
+        <item quantity="many"/>
         <item quantity="other">%d pessoas apagadas</item>
     </plurals>
     <plurals name="person_sum_list_dialog_delete_title">
         <item quantity="one">Apagar %d pessoa\?</item>
-        <item quantity="many"></item>
+        <item quantity="many"/>
         <item quantity="other">Apagar %d pessoas\?</item>
     </plurals>
     <string name="transaction_list_gave">deu</string>
     <string name="item_filter_all">Mostrar tudo</string>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d transação apagada</item>
-        <item quantity="many"></item>
+        <item quantity="many"/>
         <item quantity="other">%d transações apagadas</item>
     </plurals>
     <plurals name="transaction_list_dialog_delete_title">
         <item quantity="one">Apagar %d transação\?</item>
-        <item quantity="many"></item>
+        <item quantity="many"/>
         <item quantity="other">Apagar %d transações\?</item>
     </plurals>
     <string name="edit_transaction_gave">deu</string>
@@ -150,4 +150,6 @@
     <string name="pref_version">Versão %1$s</string>
     <string name="pref_licenses_title">Licenças livres de terceiros</string>
     <string name="restore_preferences_not_restored">Aviso: as preferências da app não puderam ser restauradas. Verifique os seus valores!. %1$s</string>
+    <string name="toolbar_sort_amount_desc">Deve pelo menos</string>
+    <string name="toolbar_sort_amount_asc">Deve pelo menos</string>
 </resources>
