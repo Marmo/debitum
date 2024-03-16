@@ -136,7 +136,7 @@
     <string name="pref_restore_title">Herstel gegevens</string>
     <string name="error_message_database_access">Fout bij het openen van de database. Probeer het opnieuw.
 \n%1$s</string>
-    <string name="pref_invert_colors_title">Verwissel schuld/geleend kleuren</string>
+    <string name="pref_invert_colors_title">Verschuldigde/uitgeleende kleuren omkeren</string>
     <string name="pref_invert_colors_summary_on">schuld: rood, geleend: groen</string>
     <string name="pref_invert_colors_summary_off">schuld: groen, geleend: rood</string>
     <string name="pref_changelog_title">Wijzigingen</string>
