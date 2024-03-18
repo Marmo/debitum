@@ -3,7 +3,7 @@
     <string name="restore_confirm_text">Overskriv all data med det som finnes i sikkerhetskopi\?
 \nProgrammet vil starte på ny etterpå.</string>
     <string name="pref_restore_file_not_found">Fant ikke sikkerhetskopifil</string>
-    <string name="pref_restore_summary">fra tidligere sikkerhetskopiert «%1$s» i eksternlagring</string>
+    <string name="pref_restore_summary">fra tidligere opprettet sikkerhetskopi-fil (ZIP)</string>
     <string name="pref_item_returned_filter_title">Forvalgsfilter for elementsliste</string>
     <string name="pref_dismiss_filter_summary_false">Forbli i nåværende liste</string>
     <string name="pref_dismiss_filter_summary_true">Gå tilbake til persongalleri</string>

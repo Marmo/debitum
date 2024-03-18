@@ -86,4 +86,9 @@
     <string name="edit_transaction_image_delete_desc">احذف الصورة</string>
     <string name="edit_transaction_image_add_title">أضف صورة</string>
     <string name="edit_transaction_image_error_copying">فشل نسخ الصورة لدليل التطبيق. %1$s</string>
+    <string name="toolbar_sort_name_desc">الاسم (تنازلي)</string>
+    <string name="toolbar_sort_date_asc">التاريخ (تصاعدي)</string>
+    <string name="toolbar_sort">ترتيب حسب</string>
+    <string name="toolbar_sort_name_asc">الاسم (تصاعدي)</string>
+    <string name="toolbar_sort_date_desc">التاريخ (تنازلي)</string>
 </resources>

@@ -18,7 +18,7 @@
     <string name="title_fragment_person_sum_list">Personen</string>
     <string name="person_sum_list_you_owe">je bent verschuldigd</string>
     <string name="person_sum_list_no_debt">geen schuld</string>
-    <string name="person_sum_list_you_lent">jij leende uit</string>
+    <string name="person_sum_list_you_lent">jij leende</string>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d persoon verwijderd</item>
         <item quantity="other">%d personen verwijderd</item>
@@ -36,7 +36,7 @@
     <string name="dismiss_filter">filter sluiten</string>
     <string name="toolbar_create_person">Persoon aanmaken</string>
     <string name="header_desc_items_returned">voorwerpen teruggegeven</string>
-    <string name="header_desc_items_lent">voorwerpen uitgeleend</string>
+    <string name="header_desc_items_lent">voorwerpen geleend</string>
     <string name="actionmode_return_money">Teruggeef transactie maken</string>
     <string name="item_filter">Filter op teruggekregen status</string>
     <string name="item_filter_unreturned">Toon niet-teruggekregen</string>
@@ -62,7 +62,7 @@
     <string name="edit_transaction_hint_date">Datum</string>
     <string name="edit_transaction_hint_returndate">Datum teruggegeven</string>
     <string name="edit_transaction_gave">gaf</string>
-    <string name="edit_transaction_received">teruggekregen</string>
+    <string name="edit_transaction_received">kreeg</string>
     <string name="debt_settlement_money_description">Schuldenregeling voor \"%1$s\" van %2$s</string>
     <string name="edit_transaction_use_suspicious_return_date">gebruik datum</string>
     <string name="edit_transaction_image_delete_desc">verwijder afbeelding</string>
@@ -136,7 +136,15 @@
     <string name="pref_restore_title">Herstel gegevens</string>
     <string name="error_message_database_access">Fout bij het openen van de database. Probeer het opnieuw.
 \n%1$s</string>
-    <string name="pref_invert_colors_title">Verwissel verschuldigd/uitgeleend kleuren</string>
-    <string name="pref_invert_colors_summary_on">verschuldigd: rood, uitgeleend: groen</string>
-    <string name="pref_invert_colors_summary_off">verschuldigd: groen, uitgeleend: rood</string>
+    <string name="pref_invert_colors_title">Verschuldigde/uitgeleende kleuren omkeren</string>
+    <string name="pref_invert_colors_summary_on">schuld: rood, geleend: groen</string>
+    <string name="pref_invert_colors_summary_off">schuld: groen, geleend: rood</string>
+    <string name="pref_changelog_title">Wijzigingen</string>
+    <string name="toolbar_sort">Sorteer op</string>
+    <string name="toolbar_sort_name_desc">Naam (aflopend)</string>
+    <string name="toolbar_sort_date_asc">Datum (oplopend)</string>
+    <string name="toolbar_sort_date_desc">Datum (aflopend)</string>
+    <string name="toolbar_sort_amount_desc">Je bent het meeste verschuldigd</string>
+    <string name="toolbar_sort_name_asc">Naam (oplopend)</string>
+    <string name="toolbar_sort_amount_asc">Je bent het minst verschuldigd</string>
 </resources>

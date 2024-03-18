@@ -1,0 +1,2 @@
+# v1.7.2
+- atualização de traduções

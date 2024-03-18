@@ -2,20 +2,22 @@
 <resources>
     <string name="pref_restore_summary">à partir du fichier zip de sauvegarde précédemment créé</string>
     <string name="pref_github_title">GitHub</string>
-    <string name="pref_faq_title">Guide rapide</string>
+    <string name="pref_faq_title">Foire aux questions</string>
     <string name="pref_info_header">Infos</string>
     <string name="pref_licenses_title">Licences tierces libres</string>
-    <string name="restore_confirm_text">Écraser toutes les données existantes avec les données de la sauvegarde \?
-\nL\'application sera alors redémarrée.</string>
+    <string name="restore_confirm_text">Écraser toutes les données existantes avec les données de la sauvegarde \?
+\nL’appli sera alors redémarrée.</string>
     <string name="restore_confirm">Écraser</string>
     <string name="title_fragment_edit_transaction">Modifier la transaction</string>
     <string name="transaction_list_dialog_delete_text">Ceci ne peut pas être annulée.</string>
     <plurals name="transaction_list_dialog_delete_title">
         <item quantity="one">Supprimer %d transaction \?</item>
+        <item quantity="many">Supprimer %d transactions \?</item>
         <item quantity="other">Supprimer %d transactions \?</item>
     </plurals>
     <plurals name="transaction_list_snackbar_deleted">
         <item quantity="one">%d transaction supprimée</item>
+        <item quantity="many">%d transactions supprimées</item>
         <item quantity="other">%d transactions supprimées</item>
     </plurals>
     <string name="item_filter_unreturned">Afficher les non rendus</string>
@@ -29,10 +31,12 @@
     <string name="person_sum_list_dialog_delete_text">Cette opération ne peut être annulée et supprimera également les transactions à destination et en provenance de ces personnes.</string>
     <plurals name="person_sum_list_dialog_delete_title">
         <item quantity="one">Supprimer %d personne \?</item>
+        <item quantity="many">Supprimer %d personnes \?</item>
         <item quantity="other">Supprimer %d personnes \?</item>
     </plurals>
     <plurals name="person_sum_list_snackbar_deleted">
         <item quantity="one">%d personne supprimée</item>
+        <item quantity="many">%d personnes supprimées</item>
         <item quantity="other">%d personnes supprimées</item>
     </plurals>
     <string name="toolbar_create_person">Créer une personne</string>
@@ -40,8 +44,8 @@
     <string name="person_sum_list_no_debt">aucune dette</string>
     <string name="person_sum_list_you_owe">vous devez</string>
     <string name="title_fragment_person_sum_list">Personnes</string>
-    <string name="database_empty">Rien n\'a encore été enregistré.
-\nCréez une nouvelle transaction en utilisant le bouton « + » ci-dessous.</string>
+    <string name="database_empty">Rien n’a encore été enregistré.
+\nCréez une nouvelle transaction en utilisant le bouton « + » ci-dessous.</string>
     <string name="dismiss_filter">effacer le filtre</string>
     <string name="bottom_nav_settings">Paramètres</string>
     <string name="bottom_nav_items">Objets</string>
@@ -51,6 +55,7 @@
     <string name="actionmode_sum">Somme : %1$s</string>
     <plurals name="actionmode_selected">
         <item quantity="one">%d sélectionné</item>
+        <item quantity="many">%d sélectionnés</item>
         <item quantity="other">%d sélectionnés</item>
     </plurals>
     <string name="actionmode_delete">Supprimer</string>
@@ -60,7 +65,7 @@
     <string name="dialog_cancel">Annuler</string>
     <string name="delete_dialog_confirm">Supprimer</string>
     <string name="button_label_save">Enregistrer</string>
-    <string name="error_message_database_access">Erreur lors de l\'accès à la base de données. Veuillez réessayer.
+    <string name="error_message_database_access">Erreur lors de l’accès à la base de données. Veuillez réessayer.
 \n%1$s</string>
     <string name="pref_github_summary">Trouver et améliorer le code source, signaler des problèmes et des idées</string>
     <string name="pref_date_format_systemdefault_long">Par défaut du système (long)</string>
@@ -70,17 +75,17 @@
     <string name="edit_transaction_hint_returndate">Date de restitution</string>
     <string name="item_filter">Filtrer par état de restitution</string>
     <string name="item_filter_returned">Afficher les rendus</string>
-    <string name="pref_item_returned_filter_title">Filtre standard pour les listes d\'objets</string>
-    <string name="edit_transaction_hint_amount_item">Nombre d\'objets *</string>
+    <string name="pref_item_returned_filter_title">Filtre standard pour les listes d’objets</string>
+    <string name="edit_transaction_hint_amount_item">Nombre d’objets *</string>
     <string name="title_fragment_edit_transaction_create">Créer une transaction</string>
     <string name="pref_version">Version %1$s</string>
-    <string name="restore_confirm_title">Restaurer à partir d\'une sauvegarde</string>
+    <string name="restore_confirm_title">Restaurer à partir d’une sauvegarde</string>
     <string name="pref_restore_file_not_found">Fichier de sauvegarde introuvable</string>
     <string name="pref_restore_title">Restaurer les données</string>
     <string name="pref_backup_title">Sauvegarder les données</string>
     <string name="restore_failed">La restauration a échoué. %1$s</string>
     <string name="backup_failed">La sauvegarde a échoué %1$s</string>
-    <string name="backup_successful">Sauvegarde des données à l\'endroit choisi</string>
+    <string name="backup_successful">Sauvegarde des données à l’emplacement choisi</string>
     <string name="pref_maintenance_header">Maintenance</string>
     <string name="pref_date_format_systemdefault_medium">Par défaut du système (moyen)</string>
     <string name="pref_date_format_systemdefault_short">Par défaut du système (court)</string>
@@ -90,7 +95,7 @@
     <string name="pref_dismiss_filter_title">Quand on rejette le filtre de personne…</string>
     <string name="pref_general_header">Général</string>
     <string name="title_fragment_settings">Paramètres</string>
-    <string name="edit_person_helper_linked_contact">Indisponible en raison d\'autorisations manquantes</string>
+    <string name="edit_person_helper_linked_contact">Indisponible en raison de permissions manquantes</string>
     <string name="edit_person_hint_no_linked_contact">Aucun contact lié</string>
     <string name="edit_person_hint_linked_contact">contact lié</string>
     <string name="edit_person_note">Note</string>
@@ -116,17 +121,17 @@
     <string name="edit_transaction_hint_person">Personne *</string>
     <string name="edit_person_contact_deleted">Le contact précédemment lié est indisponible. Le lien a été retiré.</string>
     <string name="dialog_gotit">Compris</string>
-    <string name="restore_failed_tmpdir">Impossible de créer ou d\'écrire dans le répertoire temporaire %1$s</string>
-    <string name="restore_failed_dbFileMissing">Le fichier de sauvegarde de la base de données « debitum.db » est manquant ou illisible.</string>
-    <string name="restore_not_all_images_restored">Attention : toutes les images du zip de sauvegarde n\'ont pas pu être restaurées. %1$s</string>
+    <string name="restore_failed_tmpdir">Impossible de créer ou d’écrire dans le répertoire temporaire %1$s</string>
+    <string name="restore_failed_dbFileMissing">Le fichier de sauvegarde de la base de données « debitum.db » est manquant ou illisible.</string>
+    <string name="restore_not_all_images_restored">Attention : toutes les images de l’archive de sauvegarde n’ont pas pu être restaurées. %1$s</string>
     <string name="edit_transaction_actionmode_title">Image sélectionnée</string>
     <string name="edit_transaction_image_error_app_not_found">Aucune application pour afficher une image trouvée sur votre appareil.</string>
-    <string name="edit_transaction_image_error_copying">La copie de l\'image dans le répertoire de l\'application a échoué. %1$s</string>
+    <string name="edit_transaction_image_error_copying">La copie de l’image dans le répertoire de l’application a échoué. %1$s</string>
     <string name="edit_transaction_image_add_title">ajouter une image</string>
-    <string name="edit_transaction_image_delete_desc">supprimer l\'image</string>
-    <string name="restore_preferences_not_restored">Attention : les préférences de l\'application n\'ont pas pu être restaurées. Vérifiez vos montants… %1$s</string>
+    <string name="edit_transaction_image_delete_desc">supprimer l’image</string>
+    <string name="restore_preferences_not_restored">Attention : les préférences de l’application n’ont pas pu être restaurées. Vérifiez vos montants ! %1$s</string>
     <string name="pref_nr_decimals_two">2</string>
-    <string name="decrease_decimals_dialog_text">En diminuant le nombre de décimales, les montants des transactions peuvent être arrondis. Cette perte d\'information ne peut être annulée en remettant le paramètre à sa valeur précédente.</string>
+    <string name="decrease_decimals_dialog_text">En diminuant le nombre de décimales, les montants des transactions peuvent être arrondis. Cette perte d’information ne peut être annulée en remettant le paramètre à sa valeur précédente.</string>
     <string name="pref_nr_decimals_title">Nombre de décimales</string>
     <string name="pref_nr_decimals_one">1</string>
     <string name="pref_nr_decimals_zero">0</string>
